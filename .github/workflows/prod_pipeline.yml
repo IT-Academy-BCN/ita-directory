@@ -1,0 +1,34 @@
+name: PRODUCTION FONTEND ITA DIRECTORY
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Install Packages
+      run: npm install
+
+    - name: Build page
+      run: npm run build
+      env:
+        CI: false
+
+    - name: Deploy build folder via SCP
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        strip_components: 1
+        source: "build/*"
+        target: "/var/www/ita/frontend/html"
+        
