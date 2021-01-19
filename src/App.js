@@ -11,6 +11,8 @@ import Login from "screens/UserFlow/Login";
 import Registration from "screens/UserFlow/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
+import loquesea from "components/units/AsyncButton";
+
 const App = () => {
 	return (
 		<Switch>
@@ -21,8 +23,6 @@ const App = () => {
 
 			{/* Caregiver */}
 			<ProtectedRoute exact path="/" component={Home} />
-
-			<ProtectedRoute path="/chat" component={Chat} />
 			<ProtectedRoute component={Page404} />
 		</Switch>
 	);
