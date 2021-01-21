@@ -5,9 +5,9 @@ import "assets/css/normalize.css";
 import App from "./App";
 import axios from "axios";
 
-// if (localStorage.getItem("itacademy")) {
-// 	setAuthorizationToken(localStorage.getItem("itacademy"));
-// }
+if (localStorage.getItem("itacademy")) {
+	setAuthorizationToken(localStorage.getItem("itacademy"));
+}
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
