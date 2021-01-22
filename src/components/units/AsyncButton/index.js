@@ -71,9 +71,3 @@ AsyncButton.propTypes = {
 };
 
 export default AsyncButton;
-
-//PREGUNTA: del porque ${className está solo dentro de className}
-//PREGUNTA: si traigo el icono de fontAwesome desde App(), me da error. Solo puedo hacerlo desde index.js
-
-// error: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-// style: PropTypes.string.isRequired

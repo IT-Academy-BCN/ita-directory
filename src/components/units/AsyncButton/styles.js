@@ -31,7 +31,6 @@ const StyledButton = styled.button`
 			animation: rotation 0.8s ease-in-out infinite;
 		}
 	}
-
 	@keyframes rotation {
 		from {
 			transform: rotate(0deg);
@@ -43,32 +42,3 @@ const StyledButton = styled.button`
 `;
 
 export default StyledButton;
-
-// export const Rotate = keyframes`
-// 	from {
-// 		transform: rotate(0deg);
-// 	}
-
-// 	to {
-// 		transform: rotate(360deg);
-// 	}
-// `;
-
-//TAREAS
-//.not-allowed {cursor: not-allowed;}
-// como etado de curso y disabled que afecte a las propiedas visuale sy se incopore un icono
-// usar en react Native usar font awesome --> usar esta librería, usar iconos y animarlos
-
-//LEARNING HOW TO PASS PROPS IN STYLED COMPONENTS
-// opacity: ${props => (props.disabled ? '0.57' : '1')};
-// opacity: ${({disabled}) => (disabled ? '0.57' : '1')};
-
-// opacity: ${({disabled}) => (disabled ? "0.57" : "1")};
-// cursor: ${({disabled}) => (disabled ? "not-allowed" : "pointer")};
-
-// TRYING NESTED BASED ON PROPS
-// ${({disabled}) => disabled &&
-// css`
-// 	opacity: '0.57';
-// 	cursor: 'not-allowed';
-// `}

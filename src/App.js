@@ -13,6 +13,10 @@ import ProtectedRoute from "components/composed/ProtectedRoute";
 // import Registration from "screens/UserFlow/Registration";
 // import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
+//Input
+import Input from "components/units/Input/Input";
+/* import axios from "axios"; */
+
 const App = () => {
 	//Handle disabled
 	const [animatedState, setAnimatedState] = useState(false);
