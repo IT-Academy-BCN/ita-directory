@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 export const refresh = () => {
 	window.location.reload();
@@ -14,10 +14,10 @@ export const logout = () => {
 	return;
 };
 
-const login = (data) => {
-	try {
-		const response;
-	} catch (err) {
-		console.log(err);
-	}
-};
+// const login = (data) => {
+// 	try {
+// 		const response;
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };
