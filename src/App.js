@@ -1,4 +1,5 @@
 import React from "react";
+// import Footer from "components/Footer/Footer";
 // import AsyncButton from "components/units/AsyncButton";
 // import {faEye} from "@fortawesome/free-solid-svg-icons";
 /* import {Route, Switch} from "react-router-dom";
@@ -22,6 +23,7 @@ const App = () => {
 	return (
 		<>
 			<Login />
+			{/* <Footer /> */}
 		</>
 		// <Switch>
 		// {/* Userflow */}
