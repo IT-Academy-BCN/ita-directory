@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import AsyncButton from "components/units/AsyncButton/AsyncButton";
-// import {faSpinner} from "@fortawesome/free-solid-svg-icons";
-import {Route, Switch} from "react-router-dom";
+import React from "react";
+// import AsyncButton from "components/units/AsyncButton";
+// import {faEye} from "@fortawesome/free-solid-svg-icons";
+/* import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 
 // Pages
@@ -16,38 +16,12 @@ import ProtectedRoute from "components/composed/ProtectedRoute";
 //Input
 import Input from "components/units/Input/Input";
 /* import axios from "axios"; */
+import Login from "screens/UserFlow/Login/Login";
 
 const App = () => {
-	//Handle disabled
-	const [animatedState, setAnimatedState] = useState(false);
-	const [disabled, setIsDisabled] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-
-	const handleClick = () => {
-		setAnimatedState(true);
-		setIsDisabled(true);
-		setIsLoading(true);
-		setTimeout(() => {
-			setAnimatedState(false);
-			setIsDisabled(false);
-			setIsLoading(false);
-		}, 5000);
-	};
-
 	return (
 		<>
-			<AsyncButton
-				text="Acceder"
-				loadingText="Accediendo"
-				iconPosition="left"
-				type="submit"
-				className="blueGradient"
-				textStyles={{marginLeft: 10}}
-				onClick={handleClick}
-				isLoading={isLoading}
-				animated={animatedState}
-				disabled={disabled}
-			/>
+			<Login />
 		</>
 		// <Switch>
 		// {/* Userflow */}
@@ -64,3 +38,14 @@ const App = () => {
 };
 
 export default App;
+
+/* const handleDisabled = async () => {
+        //Mi Funcion puede ser set time out, axios, fetch o try and catch
+	 setIsDisabled(true)
+		try{
+			await axios.get("mi-url", {params: {hola: "adios"}})
+			setIsDisabled(false)
+		} catch (error) {
+			setIsDisabled(false)
+			console.log(error)
+		} */
