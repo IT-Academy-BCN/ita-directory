@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {logout} from "utils";
-
+// import React, {useState} from "react";
+// import {logout} from "utils";
+import React from "react";
 // Styles
 import Colors from "theme/Colors";
 
@@ -15,6 +15,8 @@ const Login = () => {
 		<div style={{backgroundColor: Colors.mainColor}}>
 			Pantalla de Login para {nombreUsuario}
 		</div>
+
+
 	);
 };
 

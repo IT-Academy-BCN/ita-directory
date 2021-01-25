@@ -1,9 +1,12 @@
 import React from "react";
-import {faSpinner} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 
-// Styles
-import {ButtonWrapper} from "./styles";
+//styles
+import StyledButton from "./styles";
+
+//icons
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 
 const AsyncButton = ({
 	type,
@@ -28,20 +31,43 @@ const AsyncButton = ({
 	};
 
 	return (
-		<ButtonWrapper
-			onClick={handleClick}
+		<StyledButton
 			type={type}
 			disabled={disabled}
+			onClick={handleClick}
 			className={`${className} ${animated ? "animated" : ""} ${disabled ? "disabled" : ""}`}
-			style={{...buttonStyles}} // Spread operator javascript
+			style={{...buttonStyles}}
 		>
-			{iconPosition === "left" && (
-				<FontAwesomeIcon icon={isLoading ? faSpinner : icon} style={{...iconStyles}} />
-			)}
+			{iconPosition === "left" &&
+				(isLoading ? (
+					<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />
+				) : icon ? (
+					<FontAwesomeIcon icon={icon} style={{...iconStyles}} />
+				) : null)}
 			<span style={{...textStyles}}>{isLoading ? loadingText : text}</span>
-			{iconPosition === "right" && <FontAwesomeIcon icon={icon} style={{...iconStyles}} />}
-		</ButtonWrapper>
+			{iconPosition === "right" &&
+				(isLoading ? (
+					<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />
+				) : icon ? (
+					<FontAwesomeIcon icon={icon} style={{...iconStyles}} />
+				) : null)}
+		</StyledButton>
 	);
+};
+
+AsyncButton.propTypes = {
+	type: PropTypes.string.isRequired,
+	text: PropTypes.string,
+	loadingText: PropTypes.string,
+	isLoading: PropTypes.bool,
+	onClick: PropTypes.func.isRequired,
+	iconPosition: PropTypes.string,
+	className: PropTypes.string,
+	buttonStyles: PropTypes.string,
+	textStyles: PropTypes.object,
+	iconStyles: PropTypes.string,
+	animated: PropTypes.bool,
+	disabled: PropTypes.bool,
 };
 
 export default AsyncButton;
