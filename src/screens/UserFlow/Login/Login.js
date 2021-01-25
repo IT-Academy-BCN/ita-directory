@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Input from "components/units/Input/Input";
- 
+
 // regular expression(=re) validation of email & password
 const validateEmail = (email) => {
 	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,16 +48,13 @@ const Login = () => {
 	console.log(isEmailError);
 	console.log(isPassError);
 
-
 	const handleFocus = () => {
 		console.log("He pinchado dentro");
 	};
 
 	const handleBlur = () => {
 		console.log("He pinchado fuera");
-		};
 	};
-
 	return (
 		<div>
 			<form>
@@ -93,6 +90,7 @@ const Login = () => {
 			</form>
 		</div>
 	);
+};
 
 export default Login;
 

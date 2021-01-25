@@ -24,9 +24,7 @@ export default App;
 
 
 // PUT ROUTING SOMEWHERE ELSE
-//
 /* import axios from "axios"; */
-
 // import AsyncButton from "components/units/AsyncButton/AsyncButton";
 		// import {faEye} from "@fortawesome/free-solid-svg-icons";
 		/* import {Route, Switch} from "react-router-dom";
@@ -79,7 +77,7 @@ export default App;
 	// const id = (1); 
 
 	//RETURN
-		{
+		
 			/* <Input
 				type="text"
 				value={value}
@@ -136,4 +134,4 @@ export default App;
 				animated={animatedState}
 				disabled={disabled}
 			/> */
-		}
+	
