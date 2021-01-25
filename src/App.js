@@ -5,36 +5,35 @@ import React from "react";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 
 // Pages
-import Home from "screens/Home";
-import Page404 from "screens/404";
+// import Home from "screens/Home";
+// import Page404 from "screens/404";
 
 // Userflow
-import Login from "screens/UserFlow/Login";
-import Registration from "screens/UserFlow/Registration";
-import RecoverPassword from "screens/UserFlow/RecoverPassword";
-
-import loquesea from "components/units/AsyncButton"; */
+// import Login from "screens/UserFlow/Login";
+// import Registration from "screens/UserFlow/Registration";
+// import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
 //Input
-
+import Input from "components/units/Input/Input";
 /* import axios from "axios"; */
 import Login from "screens/UserFlow/Login/Login";
 
 const App = () => {
 	return (
-		<div>
+		<>
 			<Login />
-		</div>
-		/* 	<Switch>
-			Userflow
-			<Route exact path="/login" component={Login} />
-			<Route exact path="/registration" component={Registration} />
-			<Route exact path="/recover-password/:hash" component={RecoverPassword} />
+		</>
+		// <Switch>
+		// {/* Userflow */}
 
-			Caregiver 
-			<ProtectedRoute exact path="/" component={Home} />
-			<ProtectedRoute component={Page404} />
-		</Switch> */
+		// {/* <Route exact path="/login" component={Login} /> */}
+		// {/* <Route exact path="/registration" component={Registration} /> */}
+		// {/* <Route exact path="/recover-password/:hash" component={RecoverPassword} /> */}
+
+		// {/* Caregiver */}
+		// {/* <ProtectedRoute exact path="/" component={Home} /> */}
+		// {/* <ProtectedRoute component={Page404} /> */}
+		// </Switch>
 	);
 };
 
