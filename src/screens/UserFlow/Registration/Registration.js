@@ -1,21 +1,22 @@
-import React, {Component} from "react";
+import React, { Component } from 'react'
 
 export class Registration extends Component {
-	constructor(props) {
-		super(props);
+  constructor (props) {
+    super(props)
 
-		this.state = {
-			nombreUsuario: "",
-			email: "",
-		};
-	}
+    this.state = {
+      nombreUsuario: '',
+      email: ''
+    }
+  }
 
-	changeName() {
-		this.setState({nombreUsuario: "Kevin"});
-	}
-	render() {
-		return <div></div>;
-	}
+  changeName () {
+    this.setState({ nombreUsuario: 'Kevin' })
+  }
+
+  render () {
+    return <div />
+  }
 }
 
-export default Registration;
+export default Registration
