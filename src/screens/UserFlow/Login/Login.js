@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Input from 'components/units/Input/Input'
 import AsyncButton from 'components/units/AsyncButton/AsyncButton'
-import StyledForm from './styles'
+import { StyledError, StyledForm } from './styles'
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/
@@ -19,8 +19,11 @@ const authenticateUser = (email, password) => {
   else console.log('the user is incorrect')
 }
 
+const initialState = { email: '', password: '' }
+
 const Login = (onLogin) => {
-  const [error, setError] = useState()
+  const [state, setState] = useState(initialState)
+  const [error, setError] = useState('')
   const [animatedState, setAnimatedState] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -38,21 +41,19 @@ const Login = (onLogin) => {
 
   // value - handleChange
   const [isEmailError, setIsEmailError] = useState(false)
-  const [emailValue, setEmailValue] = useState('')
   const [isPassError, setIsPassError] = useState(false)
-  const [passValue, setPassValue] = useState('')
 
   const handleInputOnChange = (e) => {
     const val = e.target.value
     const isEmail = validateEmail(val)
-    setEmailValue(val)
+    setState(val)
     setIsEmailError(!isEmail)
   }
 
   const handleInputPassOnChange = (e) => {
     const valPass = e.target.value
     const isPass = validatePassword(valPass)
-    setPassValue(valPass)
+    setState(valPass)
     setIsPassError(!isPass)
   }
 
@@ -67,7 +68,7 @@ const Login = (onLogin) => {
   const handleSubmit = event => {
     event.preventDefault()
 
-    let { email, password } = event.target
+    let { email, password } = event.target.value
 
     email = email.value
     password = password.value
@@ -88,7 +89,7 @@ const Login = (onLogin) => {
       <Input
         type='email'
         placeholder='Introduce tu email'
-        value={emailValue}
+        value={state.email}
         onChange={handleInputOnChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -100,7 +101,7 @@ const Login = (onLogin) => {
       <Input
         type='password'
         placeholder='Introduce tu contraseña'
-        value={passValue}
+        value={state.password}
         onChange={handleInputPassOnChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -109,6 +110,11 @@ const Login = (onLogin) => {
         error={isPassError}
         disabled={disabled}
       />
+      {error && (
+        <StyledError>
+          <p>{error}</p>
+        </StyledError>
+      )}
       <AsyncButton
         text='Acceder'
         loadingText='Accediendo'

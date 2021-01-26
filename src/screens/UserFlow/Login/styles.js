@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import Colors from 'theme/Colors'
 
-const StyledForm = styled.form`
+export const StyledForm = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,5 +16,8 @@ const StyledForm = styled.form`
     width: 22rem;
     height: 14rem;
 `
-
-export default StyledForm
+export const StyledError = styled.div`
+  color: ${Colors.redColor}
+  font-weight: 800;
+  margin: 0 0 40px 0;
+`
