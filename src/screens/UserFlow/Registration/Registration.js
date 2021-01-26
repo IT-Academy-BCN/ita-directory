@@ -10,13 +10,12 @@ export class Registration extends Component {
     }
   }
 
-  changeName () {
-    this.setState({ nombreUsuario: 'Kevin' })
-  }
-
-  render () {
-    return <div />
-  }
+	changeName() {
+		this.setState({nombreUsuario: "Kevin"});
+	}
+	render() {
+		return <div>Aquí va la info de registration</div>;
+	}
 }
 
 export default Registration
