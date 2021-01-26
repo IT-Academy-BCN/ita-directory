@@ -10,6 +10,8 @@ import { Route, Switch } from 'react-router-dom'
 
 // Userflow
 import Login from 'screens/UserFlow/Login/Login'
+import Footer from 'components/layout/Footer/Footer'
+
 // import Registration from "screens/UserFlow/Registration";
 // import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
@@ -26,6 +28,7 @@ const App = () => {
   return (
     <>
       <Login onLogin={handleLogin} />
+      <Footer />
       {/* Userflow */}
       {/* <Route exact path="/login" component={Login} /> */}
 
