@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 
 export const refresh = () => {
@@ -12,3 +13,11 @@ export const logout = () => {
   localStorage.removeItem('itacademy')
   refresh()
 }
+
+// const login = (data) => {
+// 	try {
+// 		const response;
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// };

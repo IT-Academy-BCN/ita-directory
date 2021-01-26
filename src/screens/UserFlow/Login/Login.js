@@ -19,6 +19,7 @@ const authenticateUser = (email, password) => {
   else console.log('the user is incorrect')
 }
 
+
 const initialState = { email: '', password: '' }
 
 const Login = (onLogin) => {

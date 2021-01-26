@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import { Route, Switch } from 'react-router-dom'
-// import StyledLoogin from './styles'
 
+import React, { useState } from 'react'
+import Header from "components/layout/Header/Header";
+// import AsyncButton from "components/units/AsyncButton";
+// import {faEye} from "@fortawesome/free-solid-svg-icons";
+import {Route, Switch} from "react-router-dom";
 // import ProtectedRoute from "components/composed/ProtectedRoute";
 
 // Pages
@@ -10,33 +12,37 @@ import { Route, Switch } from 'react-router-dom'
 
 // Userflow
 import Login from 'screens/UserFlow/Login/Login'
-// import Registration from "screens/UserFlow/Registration";
+import Registration from "screens/UserFlow/Registration/Registration";
 // import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
-// import loquesea from "components/units/AsyncButton";
+//Input
+// import Input from "components/units/Input/Input";
+/* import axios from "axios"; */
 
 const App = () => {
-  const [view, setView] = useState('')
+   const [view, setView] = useState('')
   const [token, setToken] = useState()
 
   const handleLogin = (token) => {
     setToken(token)
     setView('home')
   }
-  return (
-    <>
-      <Login onLogin={handleLogin} />
-      {/* Userflow */}
-      {/* <Route exact path="/login" component={Login} /> */}
+	return (
+		<>
+			<Header />
+			<Switch>
+				Userflow
+				<Route exact path="/login">
+        <Login onLogin={handleLogin} />
+        </Route>
+				<Route exact path="/registration" component={Registration} />
+				{/* <Route exact path="/recover-password/:hash" component={RecoverPassword} /> */}
+				{/* Caregiver */}
+				{/* <ProtectedRoute exact path="/" component={Home} /> */}
+				{/* <ProtectedRoute component={Page404} /> */}
+			</Switch>
+		</>
+	);
+};
 
-      {/* <Route exact path="/registration" component={Registration} /> */}
-      {/* <Route exact path="/recover-password/:hash" component={RecoverPassword} /> */}
-
-      {/* Caregiver */}
-      {/* <ProtectedRoute exact path="/" component={Home} /> */}
-      {/* <ProtectedRoute component={Page404} /> */}
-    </>
-  )
-}
-
-export default App
+export default App;
