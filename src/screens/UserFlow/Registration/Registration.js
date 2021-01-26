@@ -14,7 +14,7 @@ export class Registration extends Component {
 		this.setState({nombreUsuario: "Kevin"});
 	}
 	render() {
-		return <div></div>;
+		return <div>Aquí va la info de registration</div>;
 	}
 }
 
