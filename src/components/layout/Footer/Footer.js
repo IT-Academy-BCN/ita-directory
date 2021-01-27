@@ -1,21 +1,23 @@
-import React from "react";
-import StyledFooter from "./styles";
+import React from 'react'
+import { Anchor, Copyright, Rights, Information, Legal, Logo, LogoText, StyledFooter } from './styles'
 
-const Footer = ({logo, text2, text3}) => {
-	return (
-		<StyledFooter>
-			<div className="logo">LOGO EMPRESA</div>
-			<div className="information">
-				<div className="copyright"> ©miempresa.com </div>
-				<div className="rights"> Todos los derechos reservados.</div>
-				<div className="legal">
-					<a href="https://www.google.com/">Aviso Legal -</a>
-					<a href="https://www.google.com/">Privacidad -</a>
-					<a href="https://www.google.com/"> Cookies</a>
-				</div>
-			</div>
-		</StyledFooter>
-	);
-};
+const Footer = () => {
+  return (
+    <StyledFooter>
+      <Logo>
+        <LogoText>LOGO EMPRESA </LogoText>
+      </Logo>
+      <Information>
+        <Copyright> ©miempresa.com </Copyright>
+        <Rights> Todos los derechos reservados.</Rights>
+        <Legal>
+          <Anchor href='https://www.google.com/'>Aviso Legal</Anchor>
+          <Anchor href='https://www.google.com/'>Privacidad</Anchor>
+          <Anchor href='https://www.google.com/'> Cookies</Anchor>
+        </Legal>
+      </Information>
+    </StyledFooter>
+  )
+}
 
-export default Footer;
+export default Footer

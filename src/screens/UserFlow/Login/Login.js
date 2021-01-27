@@ -1,99 +1,137 @@
-import React, {useState} from "react";
-// import {logout} from "utils";
+import React, { useState } from 'react'
+import Input from 'components/units/Input/Input'
+import AsyncButton from 'components/units/AsyncButton/AsyncButton'
+import { StyledError, StyledForm } from './styles'
+import Body from 'components/layout/Body/Body'
 
-// components
-import Input from "components/units/Input/Input";
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/
 
-const validateEmail = (email) => {
-	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(String(email).toLowerCase());
-};
+const validateEmail = (email) => EMAIL_REGEX.test((email).toLowerCase())
+const validatePassword = (password) => PASSWORD_REGEX.test(password)
 
-//checks 1 letter, 1 number, length greater than 3.
-const validatePassword = (password) => {
-	var re = /[a-z]\d|\d[a-z]/i;
-	return re.test(password) && password.length > 3;
-};
+const users = [{
+  email: 'juan@mail.com',
+  password: 'Juan1992'
+}]
 
-const Login = () => {
-	//Button
-	const [disabled, setDisabled] = useState(false);
-	const handleClick = () => {
-		setDisabled(true);
-		setTimeout(() => {
-			setDisabled(false);
-		}, 5000);
-	};
+const authenticateUser = (email, password) => {
+  if (users.email === email && users.password === password) console.log('the user is correct')
+  else console.log('the user is incorrect')
+}
 
-	// value - handleChange
-	const [isEmailError, setIsEmailError] = useState(false);
-	const [emailValue, setEmailValue] = useState("");
-	const [isPassError, setIsPassError] = useState(false);
-	const [passValue, setPassValue] = useState("");
+const initialState = { email: '', password: '' }
 
-	console.log(`value:  ${emailValue}`);
-	console.log(`value:  ${passValue}`);
+const Login = (onLogin) => {
+  const [state, setState] = useState(initialState)
+  const [error, setError] = useState('')
+  const [animatedState, setAnimatedState] = useState(false)
+  const [disabled, setIsDisabled] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
-	const handleInputOnChange = (e) => {
-		const val = e.target.value;
-		const isEmail = validateEmail(val);
-		setEmailValue(val);
-		setIsEmailError(!isEmail);
-	};
+  const handleClick = () => {
+    setAnimatedState(true)
+    setIsDisabled(true)
+    setIsLoading(true)
+    setTimeout(() => {
+      setAnimatedState(false)
+      setIsDisabled(false)
+      setIsLoading(false)
+    }, 5000)
+  }
 
-	const handleInputPassOnChange = (e) => {
-		const valPass = e.target.value;
-		const isPass = validatePassword(valPass);
-		setPassValue(valPass);
-		setIsPassError(!isPass);
-	};
+  // value - handleChange
+  const [isEmailError, setIsEmailError] = useState(false)
+  const [isPassError, setIsPassError] = useState(false)
 
-	console.log(isEmailError);
-	console.log(isPassError);
+  const handleInputOnChange = (e) => {
+    const val = e.target.value
+    const isEmail = validateEmail(val)
+    setState(val)
+    setIsEmailError(!isEmail)
+  }
 
-	const handleFocus = () => {
-		console.log("He pinchado dentro");
-	};
+  const handleInputPassOnChange = (e) => {
+    const valPass = e.target.value
+    const isPass = validatePassword(valPass)
+    setState(valPass)
+    setIsPassError(!isPass)
+  }
 
-	const handleBlur = () => {
-		console.log("He pinchado fuera");
-	};
+  const handleFocus = () => {
+    console.log('He pinchado dentro')
+  }
 
-	return (
-		<div>
-			<form>
-				<label htmlFor="emailName"></label>
-				<Input
-					type="email"
-					placeholder="Introduce tu email"
-					value={emailValue}
-					onChange={handleInputOnChange}
-					onFocus={handleFocus}
-					onBlur={handleBlur}
-					id="emailName"
-					name="emailName"
-					error={isEmailError}
-					disabled={disabled}
-				/>
-				<br></br>
-				<label htmlFor="passName"></label>
-				<Input
-					type="password"
-					placeholder="Introduce tu contraseña"
-					value={passValue}
-					onChange={handleInputPassOnChange}
-					onFocus={handleFocus}
-					onBlur={handleBlur}
-					id="passName"
-					name="passName"
-					error={isPassError}
-					disabled={disabled}
-				/>
-				<br></br>
-				<button onClick={handleClick}>Submit</button>
-			</form>
-		</div>
-	);
-};
+  const handleBlur = () => {
+    console.log('He pinchado fuera')
+  }
 
-export default Login;
+  const handleSubmit = event => {
+    event.preventDefault()
+
+    let { email, password } = event.target.value
+
+    email = email.value
+    password = password.value
+
+    try {
+      authenticateUser(email, password, (error, token) => {
+        if (error) return setError(error.message)
+
+        onLogin(token)
+      })
+    } catch ({ message }) {
+      setError(message)
+    }
+  }
+
+  return (
+    <Body>
+      <StyledForm onSubmit={handleSubmit}>
+        <Input
+          type='email'
+          placeholder='Introduce tu email'
+          value={state.email}
+          onChange={handleInputOnChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          id='emailName'
+          name='emailName'
+          error={isEmailError}
+          disabled={disabled}
+        />
+        <Input
+          type='password'
+          placeholder='Introduce tu contraseña'
+          value={state.password}
+          onChange={handleInputPassOnChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          id='passName'
+          name='passName'
+          error={isPassError}
+          disabled={disabled}
+        />
+        {error && (
+          <StyledError>
+            <p>{error}</p>
+          </StyledError>
+        )}
+        <AsyncButton
+          text='Acceder'
+          loadingText='Accediendo'
+          iconPosition='left'
+          type='submit'
+          className='blueGradient'
+          textStyles={{ marginLeft: 10 }}
+          onClick={handleClick}
+          isLoading={isLoading}
+          animated={animatedState}
+          disabled={disabled}
+        />
+      </StyledForm>
+    </Body>
+  )
+}
+
+export default Login
