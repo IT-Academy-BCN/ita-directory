@@ -1,17 +1,12 @@
 import React from 'react'
-import { Logo, Routes, StyledHeader } from './styles'
-import { Link } from 'react-router-dom'
+import { Logo, StyledHeader } from './styles'
 
 const Header = ({ title }) => {
   return (
     <div>
       <Logo> Mi Empresa</Logo>
       <StyledHeader>
-        <Routes>
-          <Link to='/login'>Login</Link>
-          <Link to='/registration'>Registration</Link>
-          <h1>{title}</h1>
-        </Routes>
+        <h1>{title}</h1>
       </StyledHeader>
     </div>
   )

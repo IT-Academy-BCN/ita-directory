@@ -2,17 +2,14 @@ import styled from 'styled-components'
 // import Colors from "theme/Colors";
 
 export const StyledFooter = styled.footer`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr;
-	gap: 0px 0px;
+	display: flex;
+
 	position: absolute;
 	bottom: 0;
 	padding: 2rem;
 	width: 100%;
 	border-top: 1px solid #707070;
 	opacity: 1;
-	align: center;
 
 `
 
