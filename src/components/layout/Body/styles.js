@@ -7,7 +7,7 @@ export const StyledBody = styled.div`
     background-size: cover;
 `
 
-export const Childrens = styled.section`
+export const Childrens = styled.div`
     display: flex;
     justify-content: center;
     padding-top: 3.5rem
