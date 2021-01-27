@@ -1,21 +1,18 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import Body from 'components/layout/Body/Body'
 
-export class Registration extends Component {
-  constructor (props) {
-    super(props)
+const Registration = (props) => {
+  const [userName, setUsername] = useState('')
+  const [email, setEmail] = useState()
 
-    this.state = {
-      nombreUsuario: '',
-      email: ''
-    }
+  const changeName = () => {
+    setUsername('Kevin')
   }
-
-	changeName() {
-		this.setState({nombreUsuario: "Kevin"});
-	}
-	render() {
-		return <div>Aquí va la info de registration</div>;
-	}
+  return (
+    <Body>
+      <div>Aquí va la info de registrada de:{userName}</div>
+    </Body>
+  )
 }
 
 export default Registration

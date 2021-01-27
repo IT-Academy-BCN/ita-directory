@@ -1,5 +1,5 @@
-
 import axios from 'axios'
+
 
 export const refresh = () => {
   window.location.reload()
@@ -10,9 +10,11 @@ export const redirectHome = () => {
 }
 
 export const logout = () => {
+
   localStorage.removeItem('itacademy')
   refresh()
 }
+
 
 // const login = (data) => {
 // 	try {
