@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
-
+// import {faEye} from "@fortawesome/free-solid-svg-icons";
 // COMENTARIOS
 // 1. MOVER HANDLE LOGIN A LA RUTA
 // 2. EN LOGIN MOSTRAR MENSJAES DE VALIDACIÓN MIENTRAS SE VALIDA (EMAIL Y PASSWORD)
@@ -15,7 +15,7 @@ import ProtectedRoute from "components/composed/ProtectedRoute";
 import Home from "screens/Home/Home";
 
 // Userflow
-import Login from "screens/UserFlow/Login/Login";
+import Login from 'screens/UserFlow/Login/Login'
 import Registration from "screens/UserFlow/Registration/Registration";
 // import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
@@ -27,10 +27,10 @@ const App = () => {
 		setToken(token);
 		setView("home");
 	};
+  
 	return (
 		<>
 			<Switch>
-				{/* Content */}
 				<ProtectedRoute exact path="/" component={Home} />
 
 				<Route exact path="/login" component={Login}>
