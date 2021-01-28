@@ -36,6 +36,7 @@ const Input = ({
 			onFocus={onFocus}
 			onBlur={onBlur}
 			disabled={disabled}
+			size={size}
 			id={id}
 			name={name}
 			minLength={minlength}
@@ -52,6 +53,7 @@ Input.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
+	size: PropTypes.number,
 	textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	labelStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -60,8 +62,7 @@ Input.propTypes = {
 	name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	minlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	maxlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	size: PropTypes.number,
-	disabled: PropTypes.bool, //string?
+	disabled: PropTypes.string, //bool
 	errorText: PropTypes.string,
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	error: PropTypes.bool,

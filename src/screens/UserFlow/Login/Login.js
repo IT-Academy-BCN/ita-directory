@@ -92,6 +92,12 @@ const Login = (onLogin, onGoToRegister) => {
 					onChange={(e) => handleEmailChange(e.target.value)}
 					// onFocus={handleFocus}
 					// onBlur={handleBlur}
+					size={20}
+					inputStyles={{
+						padding: 10,
+						marginBottom: 5,
+						marginTop: 5,
+					}}
 					id="emailName"
 					name="emailName"
 					error={isEmailError}

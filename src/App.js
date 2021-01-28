@@ -3,7 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 // import {faEye} from "@fortawesome/free-solid-svg-icons";
 // COMENTARIOS
-// 1. FOOTER NO DEBE SER WIDTH 100%
+// X1. FOOTER NO DEBE SER WIDTH 100%
 // 2. DAR PADDING AL INPUT
 // 3. PONER VALIDACIONES DEBAJO DE LOS INPUTS CONFORME SE ESCRIBE CON INDICACIONES
 // 4. EL LOGIN DEBE GESTIONARSE EN LA PÁGINA DE LOGIN
