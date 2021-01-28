@@ -35,11 +35,11 @@ const Input = ({
 			onChange={onChange}
 			onFocus={onFocus}
 			onBlur={onBlur}
-			className={`${className} ${error ? "error" : ""}`} //improve error
+			disabled={disabled}
 			id={id}
 			name={name}
-			disabled={disabled}
 			minLength={minlength}
+			className={`${className} ${error ? "error" : ""} ${disabled ? "disabled" : ""}`} //improve error
 		/>
 		// add error styling
 	);
@@ -61,7 +61,7 @@ Input.propTypes = {
 	minlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	maxlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	size: PropTypes.number,
-	disabled: PropTypes.bool,
+	disabled: PropTypes.bool, //string?
 	errorText: PropTypes.string,
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	error: PropTypes.bool,
