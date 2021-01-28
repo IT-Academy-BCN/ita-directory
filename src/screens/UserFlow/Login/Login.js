@@ -32,7 +32,7 @@ const authenticateUser = (email, password) => {
 
 };
 
-const Login = (onLogin, onGoToRegister) => {
+const Login = ({onLogin}) => {
 	const [error, setError] = useState("");
 	const [view, setView] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
