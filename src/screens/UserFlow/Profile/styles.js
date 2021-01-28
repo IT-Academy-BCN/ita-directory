@@ -16,14 +16,14 @@ export const StyledFormProfile = styled.form`
 	height: 20rem;
 `;
 
-export const StyledPhotoSpace = styled.div`
+export const StyledPhotoWrapper = styled.div`
 	display: flex;
 `;
 
-export const StyledInputsSpace = styled.div`
+export const StyledInputsWrapper = styled.div`
 	display: flex;
 `;
 
-export const StyledSaveSpace = styled.div`
+export const StyledSaveWrapper = styled.div`
 	display: flex;
 `;

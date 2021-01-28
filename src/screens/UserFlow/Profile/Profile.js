@@ -2,13 +2,18 @@ import React from "react";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
 import Input from "components/units/Input/Input";
-import {StyledFormProfile, StyledPhotoSpace, StyledInputsSpace, StyledSaveSpace} from "./styles";
+import {
+	StyledFormProfile,
+	StyledPhotoWrapper,
+	StyledInputsWrapper,
+	StyledSaveWrapper,
+} from "./styles";
 
 const Profile = () => {
 	return (
 		<Body>
 			<StyledFormProfile>
-				<StyledPhotoSpace>
+				<StyledPhotoWrapper>
 					<AsyncButton
 						text="Subir"
 						loadingText="Subiendo"
@@ -18,16 +23,16 @@ const Profile = () => {
 						isLoading={false}
 						// disabled={disabled}
 					/>
-				</StyledPhotoSpace>
-				<StyledInputsSpace>
+				</StyledPhotoWrapper>
+				<StyledInputsWrapper>
 					<Input />
 					<Input />
-				</StyledInputsSpace>
-				<StyledInputsSpace>
+				</StyledInputsWrapper>
+				<StyledInputsWrapper>
 					<Input />
 					<Input />
-				</StyledInputsSpace>
-				<StyledSaveSpace>
+				</StyledInputsWrapper>
+				<StyledSaveWrapper>
 					<AsyncButton
 						text="Guardar"
 						loadingText="Guardando"
@@ -37,7 +42,7 @@ const Profile = () => {
 						isLoading={false}
 						// disabled={disabled}
 					/>
-				</StyledSaveSpace>
+				</StyledSaveWrapper>
 			</StyledFormProfile>
 		</Body>
 	);
