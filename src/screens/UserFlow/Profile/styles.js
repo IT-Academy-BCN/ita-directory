@@ -10,8 +10,8 @@ export const StyledFormProfile = styled.form`
 	border-radius: 6px;
 	opacity: 1;
 	padding: 4rem;
-	width: 40rem;
-	height: 35rem;
+	width: 50rem;
+	height: 42rem;
 	color: #4a4a4a;
 `;
 
@@ -19,7 +19,7 @@ export const StyledPhotoWrapper = styled.div`
 	display: flex;
 	margin-bottom: 2rem;
 	border-bottom: 1px solid #4a4a4a;
-	padding-bottom: 2rem;
+	padding-bottom: 3rem;
 
 	p {
 		margin-top: 0rem;
@@ -29,7 +29,7 @@ export const ImageWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 10rem;
+	width: 15rem;
 `;
 
 export const StyleUploadPhotoWrapper = styled.div`
@@ -46,9 +46,11 @@ export const StyledInputsWrapper = styled.div`
 export const StyledSaveWrapper = styled.div`
 	display: flex;
 	justify-content: flex-start;
+	margin-top: 1rem;
 `;
 
 export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: column;
+	margin-right: 4.5rem;
 `;

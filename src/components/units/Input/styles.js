@@ -19,10 +19,6 @@ const StyledInput = styled.input`
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
-
-	&.profile {
-		width: 15rem;
-	}
 `;
 
 export default StyledInput;
