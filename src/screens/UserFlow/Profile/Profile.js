@@ -5,8 +5,11 @@ import Input from "components/units/Input/Input";
 import {
 	StyledFormProfile,
 	StyledPhotoWrapper,
+	StyleUploadPhotoWrapper,
 	StyledInputsWrapper,
 	StyledSaveWrapper,
+	ImageWrapper,
+	StyledLabel,
 } from "./styles";
 
 const Profile = () => {
@@ -14,23 +17,51 @@ const Profile = () => {
 		<Body>
 			<StyledFormProfile>
 				<StyledPhotoWrapper>
-					<AsyncButton
-						text="Subir"
-						loadingText="Subiendo"
-						type="submit"
-						className="blueGradient"
-						// onClick={handleClick}
-						isLoading={false}
-						// disabled={disabled}
-					/>
+					<ImageWrapper>
+						{/* <img /> */}
+						<p>Hola como estas</p>
+					</ImageWrapper>
+					<StyleUploadPhotoWrapper>
+						<p>Fotografía de perfil</p>
+						<p>
+							Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato
+							.JPG, .JPEG, .PNG, y .GIF.
+						</p>
+						<AsyncButton
+							text="Subir"
+							loadingText="Subiendo"
+							type="submit"
+							className="blueGradientProfile"
+							// onClick={handleClick}
+							isLoading={false}
+							// disabled={disabled}
+						/>
+					</StyleUploadPhotoWrapper>
 				</StyledPhotoWrapper>
 				<StyledInputsWrapper>
-					<Input />
-					<Input />
+					<StyledLabel>
+						<label>Nombre de usuario</label>
+						<Input className="profile" />
+						<p>El nombre de usuario no se puede modificar</p>
+					</StyledLabel>
+					<StyledLabel>
+						<label>Email</label>
+						<Input className="profile" />
+						<p>
+							El email no se puede modificar. Ponte en contacto si necesitas
+							actualizarlo.
+						</p>
+					</StyledLabel>
 				</StyledInputsWrapper>
 				<StyledInputsWrapper>
-					<Input />
-					<Input />
+					<StyledLabel>
+						<label>Nueva Constraseña</label>
+						<Input className="profile" />
+					</StyledLabel>
+					<StyledLabel>
+						<label>Confirmar Constraseña</label>
+						<Input className="profile" />
+					</StyledLabel>
 				</StyledInputsWrapper>
 				<StyledSaveWrapper>
 					<AsyncButton

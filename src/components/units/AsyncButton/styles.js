@@ -20,11 +20,19 @@ const StyledButton = styled.button`
 			padding-box;
 		color: ${Colors.white};
 	}
+	&.blueGradientProfile {
+		background: transparent
+			linear-gradient(98deg, ${Colors.lightBlue} 0%, ${Colors.darkBlue} 100%) 0% 0% no-repeat
+			padding-box;
+		color: ${Colors.white};
+		width: 7rem;
+	}
 	&.greenGradient {
 		background: transparent
 			linear-gradient(98deg, ${Colors.lightGreen} 0%, ${Colors.darkGreen} 100%) 0% 0%
 			no-repeat padding-box;
 		color: ${Colors.white};
+		width: 9rem;
 	}
 	&.disabled {
 		cursor: not-allowed;
