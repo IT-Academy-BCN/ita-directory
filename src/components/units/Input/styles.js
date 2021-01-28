@@ -30,12 +30,5 @@ const StyledInput = styled.input`
 	}
 `;
 
-// X add input state messages: error, disabled, success
-// x check input con el diseño
-// top: 301px;
-// left: 492px;
-// width: 100%;
-// height: 40px;
-// outline: none;
 
 export default StyledInput;

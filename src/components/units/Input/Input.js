@@ -9,9 +9,11 @@ const Input = ({
 	onChange,
 	onFocus,
 	onBlur,
+	divStyles,
+	labelText,
+	labelStyles,
 	textStyles,
 	inputStyles,
-	labelStyles,
 	className,
 	id,
 	name,
@@ -26,23 +28,27 @@ const Input = ({
 	minLength,
 }) => {
 	return (
-		//add div styling
-		// add labeltext
-		<StyledInput
-			type={type}
-			placeholder={placeholder}
-			value={value}
-			onChange={onChange}
-			onFocus={onFocus}
-			onBlur={onBlur}
-			disabled={disabled}
-			size={size}
-			id={id}
-			name={name}
-			minLength={minlength}
-			className={`${className} ${error ? "error" : ""} ${disabled ? "disabled" : ""}`} //improve error
-		/>
-		// add error styling
+		<div style={{...divStyles}}>
+			<label htmlFor={name} style={{...labelStyles}} id={id}>
+				{labelText}
+			</label>
+			<StyledInput
+				type={type}
+				placeholder={placeholder}
+				value={value}
+				onChange={onChange}
+				onFocus={onFocus}
+				onBlur={onBlur}
+				divStyles={divStyles}
+				disabled={disabled}
+				size={size}
+				id={id}
+				name={name}
+				minLength={minlength}
+				className={`${className} ${error ? "error" : ""} ${disabled ? "disabled" : ""}`}
+			/>
+			// add error styling
+		</div>
 	);
 };
 
@@ -53,6 +59,7 @@ Input.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
+	divStyles: PropTypes.object,
 	size: PropTypes.number,
 	textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -62,10 +69,12 @@ Input.propTypes = {
 	name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	minlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	maxlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	disabled: PropTypes.string, //bool
+	disabled: PropTypes.bool,
 	errorText: PropTypes.string,
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	error: PropTypes.bool,
 };
 
 export default Input;
+
+//check input props

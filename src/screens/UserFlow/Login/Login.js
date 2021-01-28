@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
 import {StyleRedirect, StyledError, StyledForm} from "./styles";
-
 import Body from "components/layout/Body/Body";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -12,7 +11,7 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
-const users = [
+const USERS = [
 	{
 		email: "juan@mail.com",
 		password: "Juan1992",
@@ -20,8 +19,20 @@ const users = [
 ];
 
 const authenticateUser = (email, password) => {
-	if (users.email === email && users.password === password) console.log("the user is correct");
-	else console.log("the user is incorrect");
+	// if (users.email === email && users.password === password) console.log("the user is correct");
+	// else console.log("the user is incorrect");
+	let authenticated = false;
+	for (let i = 0; i < USERS.length; i++) {
+		const user = USERS[i];
+		if (user.email === email && user.password === password) {
+			authenticated = true;
+		}
+	}
+	if (authenticated) {
+		console.log("HEMOS ENCONTRADO AL USUARIO");
+	} else {
+		console.error("NO EXISTE, NO HEMOS ENCONTRADO AL USUARIO");
+	}
 };
 
 const Login = (onLogin, onGoToRegister) => {
@@ -89,15 +100,15 @@ const Login = (onLogin, onGoToRegister) => {
 					type="email"
 					placeholder="email@mail.com"
 					value={email}
-					onChange={(e) => handleEmailChange(e.target.value)}
-					// onFocus={handleFocus}
-					// onBlur={handleBlur}
 					size={20}
 					inputStyles={{
-						padding: 10,
+						paddingleft: 10,
 						marginBottom: 5,
 						marginTop: 5,
 					}}
+					onChange={(e) => handleEmailChange(e.target.value)}
+					// onFocus={handleFocus}
+					// onBlur={handleBlur}
 					id="emailName"
 					name="emailName"
 					error={isEmailError}
