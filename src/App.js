@@ -3,19 +3,18 @@ import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 // import {faEye} from "@fortawesome/free-solid-svg-icons";
 // COMENTARIOS
-// 1. MOVER HANDLE LOGIN A LA RUTA
-// 2. EN LOGIN MOSTRAR MENSJAES DE VALIDACIÓN MIENTRAS SE VALIDA (EMAIL Y PASSWORD)
-// 3. EN LOGIN AÑADIR ENLACE A REGISTRATE AQUÍ DEBAJO DE BOTÓN ACCEDER
-// 3.1 MODIFICAR HEADER Y DEJAR EL TÍTULO
-// 4. FORMULARIO CENTRADO
-// 5. VERSIÓN MÓVIL USAR MEDIAQUERIES EN EL FOOTER
+// 1. FOOTER NO DEBE SER WIDTH 100%
+// 2. DAR PADDING AL INPUT
+// 3. PONER VALIDACIONES DEBAJO DE LOS INPUTS CONFORME SE ESCRIBE CON INDICACIONES
+// 4. EL LOGIN DEBE GESTIONARSE EN LA PÁGINA DE LOGIN
+// 5. METER LÓGICA HANDLECLICK a HANDLESUBMIT...
 // 6. PONER TOKEN EN LOCALSTORAGE CON KEY itacademy.
 
 // Content
 import Home from "screens/Home/Home";
 
 // Userflow
-import Login from 'screens/UserFlow/Login/Login'
+import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
 // import RecoverPassword from "screens/UserFlow/RecoverPassword";
 
@@ -27,7 +26,7 @@ const App = () => {
 		setToken(token);
 		setView("home");
 	};
-  
+
 	return (
 		<>
 			<Switch>
