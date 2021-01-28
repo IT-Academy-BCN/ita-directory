@@ -130,6 +130,9 @@ const Login = (onLogin, onGoToRegister) => {
 				<StyleRedirect>
 					No tienes cuenta? <Link to="/register"> Registrate</Link>
 				</StyleRedirect>
+				<StyleRedirect>
+					<Link to="/profile">Edit Profile</Link>
+				</StyleRedirect>
 			</StyledForm>
 		</Body>
 	);

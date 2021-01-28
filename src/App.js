@@ -16,7 +16,7 @@ import Home from "screens/Home/Home";
 // Userflow
 import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
-// import RecoverPassword from "screens/UserFlow/RecoverPassword";
+import Profile from "screens/UserFlow/Profile/Profile";
 
 const App = () => {
 	const [view, setView] = useState("");
@@ -36,7 +36,7 @@ const App = () => {
 					<Login onLogin={handleLogin} />
 				</Route>
 				<Route exact path="/register" component={Registration} />
-				{/* <Route exact path="/recover-password/:hash" component={RecoverPassword} /> */}
+				<Route exact path="/profile" component={Profile} />
 
 				{/* <ProtectedRoute component={Page404} /> */}
 			</Switch>
