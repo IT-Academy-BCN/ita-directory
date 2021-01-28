@@ -30,7 +30,8 @@ const Input = ({
 	return (
 		<div style={{...divStyles}}>
 			<label htmlFor={name} style={{...labelStyles}} id={id}>
-				{labelText}
+        {"introduce un email valido"}
+        {labelText}
 			</label>
 			<StyledInput
 				type={type}

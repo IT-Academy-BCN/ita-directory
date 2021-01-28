@@ -29,9 +29,9 @@ const authenticateUser = (email, password) => {
 		}
 	}
 	if (authenticated) {
-		console.log("HEMOS ENCONTRADO AL USUARIO");
+		console.log("hemos encontrado al usuario");
 	} else {
-		console.error("NO EXISTE, NO HEMOS ENCONTRADO AL USUARIO");
+		console.error("NO hemos encontrado al usuario. El usuario NO EXISTE");
 	}
 };
 

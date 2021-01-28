@@ -9,6 +9,9 @@ const StyledInput = styled.input`
 	border-radius: 6px;
 	margin: 0.4rem 0 0.4rem 0;
 	opacity: 1;
+	padding-left: 10px;
+	// marginBottom: 5,
+	// marginTop: 5,
 	outline: none;
 	border: 1px solid #dddddd;
 	text-align: left;
@@ -29,6 +32,5 @@ const StyledInput = styled.input`
 		border: 2px solid "#dddddd";
 	}
 `;
-
 
 export default StyledInput;
