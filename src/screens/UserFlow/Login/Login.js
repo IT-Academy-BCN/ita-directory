@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
-import {StyleRedirect, StyledError, StyledForm} from "./styles";
+import {Container, Form, StyleRedirect, StyledError} from "./styles";
 
 import Body from "components/layout/Body/Body";
 
@@ -20,8 +20,16 @@ const users = [
 ];
 
 const authenticateUser = (email, password) => {
-	if (users.email === email && users.password === password) console.log("the user is correct");
-	else console.log("the user is incorrect");
+	let authenticated = false;
+	for (let i = 0; i < users.length; i++) {
+		const user = users[i];
+		if (user.email === email && user.password === password) {
+			authenticated = true;
+		}
+	}
+	if (authenticated) console.log("the user is correct");
+	else console.error("the user is incorrect");
+
 };
 
 const Login = (onLogin, onGoToRegister) => {
@@ -42,7 +50,6 @@ const Login = (onLogin, onGoToRegister) => {
 		}, 5000);
 	};
 
-	// value - handleChange
 	const [isEmailError, setIsEmailError] = useState(false);
 	const [isPassError, setIsPassError] = useState(false);
 
@@ -66,7 +73,6 @@ const Login = (onLogin, onGoToRegister) => {
 		console.log("He pinchado fuera");
 	};
 
-	// DATOS FORMULARIO
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const handleSubmit = (event) => {
@@ -82,57 +88,63 @@ const Login = (onLogin, onGoToRegister) => {
 		}
 	};
 
-	return (
-		<Body title="Acceso">
-			<StyledForm onSubmit={handleSubmit}>
+  return (
+    <Body title="Acceso">
+      <Container onSubmit={handleSubmit}>
+        <Form>
+			<div>
+				<label>Email</label>
 				<Input
 					type="email"
-					placeholder="email@mail.com"
+					placeholder="Itroduce tu email"
 					value={email}
 					onChange={(e) => handleEmailChange(e.target.value)}
-					// onFocus={handleFocus}
-					// onBlur={handleBlur}
 					id="emailName"
 					name="emailName"
 					error={isEmailError}
+					errorText="Enter a valid email address..."
 					disabled={disabled}
 				/>
+			</div>
+			<div>
+				<label>Password</label>
 				<Input
 					type="password"
 					placeholder="Introduce tu contraseña"
 					value={password}
 					onChange={(e) => handlePasswordChange(e.target.value)}
-					// onFocus={handleFocus}
-					// onBlur={handleBlur}
 					id="passName"
 					name="passName"
 					error={isPassError}
+					errorText="The password to contain more than 6 characters and a uppercase letter"
 					disabled={disabled}
 					minLength={6}
 				/>
-				{error && (
-					<StyledError>
-						<p>{error}</p>
-					</StyledError>
-				)}
-				<AsyncButton
-					text="Acceder"
-					loadingText="Accediendo"
-					iconPosition="left"
-					type="submit"
-					className="blueGradient"
-					textStyles={{marginLeft: 10}}
-					// onClick={handleClick}
-					isLoading={isLoading}
-					animated={animatedState}
-					disabled={disabled}
-				/>
-				<StyleRedirect>
-					No tienes cuenta? <Link to="/register"> Registrate</Link>
-				</StyleRedirect>
-			</StyledForm>
-		</Body>
-	);
+			</div>
+			{error && (
+				<StyledError>
+					<p>{error}</p>
+				</StyledError>
+			)}
+			<AsyncButton
+				text="Acceder"
+				loadingText="Accediendo"
+				iconPosition="left"
+				type="submit"
+				className="blueGradient"
+				textStyles={{marginLeft: 10}}
+				// onClick={handleClick}
+				isLoading={isLoading}
+				animated={animatedState}
+				disabled={disabled}
+			/>
+			<StyleRedirect>
+				No tienes cuenta? <Link to="/register"> Registrate</Link>
+			</StyleRedirect>
+        </Form>
+      </Container>
+    </Body>
+  );
 };
 
 export default Login;

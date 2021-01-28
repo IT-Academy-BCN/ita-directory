@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     letter-spacing: 0px;
     width: 18.6rem;
     height: 2.6rem;
-    margin:  0.3rem 0 0.3rem 0;
+    margin:  0.5rem 0 0 0;
     text-align: center;
     &.blueGradient {
         background: transparent

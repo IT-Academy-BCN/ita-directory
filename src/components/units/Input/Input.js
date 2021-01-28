@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import StyledInput from './styles'
+import { StyledError, StyledInput } from './styles'
 
 const Input = ({
   type,
@@ -26,19 +26,22 @@ const Input = ({
   minLength
 }) => {
   return (
-    <StyledInput
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      className={`${className} ${error ? 'error' : ''}`}
-      id={id}
-      name={name}
-      disabled={disabled}
-      minLength={minlength}
-    />
+    <div>
+      <StyledInput
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        className={`${className} ${error ? 'error' : ''}`}
+        id={id}
+        name={name}
+        disabled={disabled}
+        minLength={minlength}
+      />
+      <StyledError dangerouslySetInnerHTML={{ __html: error ? errorText : null }} />
+    </div>
   )
 }
 
@@ -59,7 +62,7 @@ Input.propTypes = {
   maxlength: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   size: PropTypes.number,
   disabled: PropTypes.bool,
-  errorText: PropTypes.string,
+  errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   error: PropTypes.bool
 }
