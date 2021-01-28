@@ -39,17 +39,6 @@ const Login = ({onLogin}) => {
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const handleClick = () => {
-		setAnimatedState(true);
-		setIsDisabled(true);
-		setIsLoading(true);
-		setTimeout(() => {
-			setAnimatedState(false);
-			setIsDisabled(false);
-			setIsLoading(false);
-		}, 5000);
-	};
-
 	const [isEmailError, setIsEmailError] = useState(false);
 	const [isPassError, setIsPassError] = useState(false);
 
@@ -65,18 +54,18 @@ const Login = ({onLogin}) => {
 		setIsPassError(!isPass);
 	};
 
-	const handleFocus = () => {
-		console.log("He pinchado dentro");
-	};
-
-	const handleBlur = () => {
-		console.log("He pinchado fuera");
-	};
-
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		setAnimatedState(true);
+		setIsDisabled(true);
+		setIsLoading(true);
+		setTimeout(() => {
+			setAnimatedState(false);
+			setIsDisabled(false);
+			setIsLoading(false);
+		}, 2000);
 
 		try {
 			authenticateUser(email, password, (error, token) => {
@@ -133,7 +122,6 @@ const Login = ({onLogin}) => {
 				type="submit"
 				className="blueGradient"
 				textStyles={{marginLeft: 10}}
-				// onClick={handleClick}
 				isLoading={isLoading}
 				animated={animatedState}
 				disabled={disabled}
