@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Input from 'components/units/Input/Input'
 import AsyncButton from 'components/units/AsyncButton/AsyncButton'
-import { StyledError, StyledForm } from './styles'
+import {StyleRedirect, StyledError, StyledForm } from './styles'
 
 import Body from 'components/layout/Body/Body'
 
@@ -24,9 +25,10 @@ const authenticateUser = (email, password) => {
 
 const initialState = { email: '', password: '' }
 
-const Login = (onLogin) => {
+const Login = (onLogin, onGoToRegister) => {
   const [state, setState] = useState(initialState)
   const [error, setError] = useState('')
+  const [view, setView] = useState('')
   const [animatedState, setAnimatedState] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -88,11 +90,11 @@ const Login = (onLogin) => {
   }
 
   return (
-    <Body>
+    <Body title='Acceso'>
       <StyledForm onSubmit={handleSubmit}>
         <Input
           type='email'
-          placeholder='Introduce tu email'
+          placeholder='email@mail.com'
           value={state.email}
           onChange={handleInputOnChange}
           onFocus={handleFocus}
@@ -113,6 +115,7 @@ const Login = (onLogin) => {
           name='passName'
           error={isPassError}
           disabled={disabled}
+          minLength={6}
         />
         {error && (
           <StyledError>
@@ -131,6 +134,9 @@ const Login = (onLogin) => {
           animated={animatedState}
           disabled={disabled}
         />
+        <StyleRedirect>
+          No tienes cuenta? <Link to='/register'> Registrate</Link>
+        </StyleRedirect>
       </StyledForm>
     </Body>
   )

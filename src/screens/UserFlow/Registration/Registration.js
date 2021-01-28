@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Body from 'components/layout/Body/Body'
 
 const Registration = (props) => {
@@ -11,6 +12,7 @@ const Registration = (props) => {
   return (
     <Body>
       <div>Aquí va la info de registrada de:{userName}</div>
+      <Link to='/login'>tienes una cuenta? Inicia sesion</Link>
     </Body>
   )
 }

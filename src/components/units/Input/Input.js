@@ -22,7 +22,8 @@ const Input = ({
   errorText,
   errorStyles,
   error,
-  disabled
+  disabled,
+  minLength
 }) => {
   return (
     <StyledInput
@@ -36,6 +37,7 @@ const Input = ({
       id={id}
       name={name}
       disabled={disabled}
+      minLength={minlength}
     />
   )
 }

@@ -14,10 +14,22 @@ export const StyledForm = styled.form`
     padding: 1rem;
     margin: 1rem;
     width: 22rem;
-    height: 14rem;
+    height: 16rem;
 `
 export const StyledError = styled.div`
   color: ${Colors.redColor}
   font-weight: 800;
   margin: 0 0 40px 0;
+`
+
+export const StyleRedirect = styled.div`
+  padding:  1rem 0 0 0 ;
+
+  & > a {
+    text-decoration: none;
+    color: #7d868b;
+  }
+  & > a:hover {
+    color: blue;
+  }
 `
