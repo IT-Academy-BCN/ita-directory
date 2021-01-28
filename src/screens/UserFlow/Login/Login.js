@@ -90,8 +90,8 @@ const Login = (onLogin, onGoToRegister) => {
 
   return (
     <Body title="Acceso">
-      <Container onSubmit={handleSubmit}>
-        <Form>
+      <Container>
+        <Form onSubmit={handleSubmit}>
 			<div>
 				<label>Email</label>
 				<Input
