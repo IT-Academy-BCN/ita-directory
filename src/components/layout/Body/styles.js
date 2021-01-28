@@ -4,7 +4,9 @@ export const StyledBody = styled.div`
 	margin: 0;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 100%;
+	min-height: 100vh;
+	width: 100vw;
 `;
 
 export const Childrens = styled.div`

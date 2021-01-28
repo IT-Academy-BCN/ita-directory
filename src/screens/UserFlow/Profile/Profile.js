@@ -2,6 +2,7 @@ import React from "react";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
 import Input from "components/units/Input/Input";
+
 import {
 	StyledFormProfile,
 	StyledPhotoWrapper,
