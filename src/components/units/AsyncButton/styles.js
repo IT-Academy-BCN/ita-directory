@@ -43,7 +43,6 @@ const StyledButton = styled.button`
             transform: rotate(360deg);
         }
     }
-`
 	box-shadow: 0px 2px 4px #00000029;
 	border: none;
 	border-radius: 6px;

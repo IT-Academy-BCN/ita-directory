@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 // import {faEye} from "@fortawesome/free-solid-svg-icons";
-// COMENTARIOS
-// 5. METER LÓGICA HANDLECLICK a HANDLESUBMIT...
-// 6. PONER TOKEN EN LOCALSTORAGE CON KEY itacademy.
+// 1. FOOTER DEJAR HUECO ENTRE LINEA Y FOOTER
+// 2. FOOTER ALIENAR ELEMENTOS AL COMIENZO Y AL FINAL
+// 3. FALTA NOTIFICACIÓN
 
 import Home from "screens/Home/Home";
 

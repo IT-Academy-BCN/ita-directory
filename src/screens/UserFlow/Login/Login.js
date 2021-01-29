@@ -25,6 +25,7 @@ const authenticateUser = (email, password) => {
 		const user = users[i];
 		if (user.email === email && user.password === password) {
 			authenticated = true;
+			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
 		}
 	}
 	if (authenticated) console.log("the user is correct");
