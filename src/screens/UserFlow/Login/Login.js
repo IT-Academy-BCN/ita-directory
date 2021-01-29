@@ -75,7 +75,6 @@ const Login = ({onLogin}) => {
 			setError(message);
 		}
 	};
-
 	return (
 		<Body title="Acceso">
 			<Container>

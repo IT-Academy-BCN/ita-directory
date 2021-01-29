@@ -26,19 +26,13 @@ const AsyncButton = ({
 			className={`${className} ${animated ? "animated" : ""} ${disabled ? "disabled" : ""}`}
 			style={{...buttonStyles}}
 		>
-			{iconPosition === "left" &&
-				(isLoading ? (
-					<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />
-				) : icon ? (
-					<FontAwesomeIcon icon={icon} style={{...iconStyles}} />
-				) : null)}
+			{iconPosition === "left" && (isLoading ? (
+				<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />) : icon ? ( 
+				<FontAwesomeIcon icon={icon} style={{...iconStyles}} />) : null)}
 			<span style={{...textStyles}}>{isLoading ? loadingText : text}</span>
-			{iconPosition === "right" &&
-				(isLoading ? (
-					<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />
-				) : icon ? (
-					<FontAwesomeIcon icon={icon} style={{...iconStyles}} />
-				) : null)}
+            {iconPosition === "right" && (isLoading ? (
+				<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />) : icon ? (
+				<FontAwesomeIcon icon={icon} style={{...iconStyles}} />) : null)}
 		</StyledButton>
 	);
 };
