@@ -21,7 +21,7 @@ const Profile = () => {
 		"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg"
 	);
 
-	const handleClick = (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		console.log("profile clicked");
 		setImage(profilePicture);
@@ -29,7 +29,7 @@ const Profile = () => {
 
 	return (
 		<Body title="Editar perfil">
-			<StyledFormProfile>
+			<StyledFormProfile onSubmit={handleSubmit}>
 				<StyledPhotoWrapper>
 					<ImageWrapper>
 						<img src={image} alt={"Foto"} width="200" />
@@ -43,9 +43,8 @@ const Profile = () => {
 						<AsyncButton
 							text="Subir"
 							loadingText="Subiendo"
-							type="button"
+							type="submit"
 							className="blueGradientProfile"
-							onClick={handleClick}
 							isLoading={false}
 							// disabled={disabled}
 						/>
