@@ -16,10 +16,16 @@ const StyledButton = styled.button`
     text-align: center;
     &.blueGradient {
         background: transparent
-            linear-gradient(98deg, ${Colors.lightBlue} 0%, ${Colors.darkBlue} 100%) 0% 0% no-repeat
-            padding-box;
+        linear-gradient(98deg, ${Colors.lightBlue} 0%, ${Colors.darkBlue} 100%) 0% 0% no-repeat;
+        padding-box;
         color: ${Colors.white};
-    }
+    };
+     &.orangeGradient {
+        background: transparent
+        linear-gradient(98deg, ${Colors.lightOrange} 0%, ${Colors.darkOrange} 100%) 0% 0% no-repeat;
+        padding-box;
+        color: ${Colors.white};
+    };
     &.disabled {
         cursor: not-allowed;
         opacity: 0.57;
