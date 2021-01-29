@@ -1,8 +1,9 @@
 import React from 'react'
+import { Checkbox, Anchor, Label }from "./styles"
 
 const PrivacyPolicy = () => {
     return(        
-        <div  className="required checkbox">
+        <Checkbox>
             <div className="checker" id="privacy">
                 <input
                 type="checkbox"
@@ -11,11 +12,11 @@ const PrivacyPolicy = () => {
                 name="privacy"
                 autocomplete="off"
                 />
-                <label for="privacyInput">
-                <a href="#">Acepto politica de Privacidad</a>
-                </label>
+                <Label for="privacyInput">
+                Acepto <Anchor href="#"> politica de Privacidad</Anchor>
+                </Label>
             </div>
-        </div>
+        </Checkbox>
     )
 }
 

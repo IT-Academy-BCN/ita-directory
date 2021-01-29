@@ -90,7 +90,7 @@ const Register = (props) => {
        <Body title="Registro">
       <Container>
         <Form onSubmit={handleSubmit}>
-			<div>
+			<div className="classInput">
 				<label>Email</label>
 				<Input
 					type="email"
@@ -104,7 +104,7 @@ const Register = (props) => {
 					disabled={disabled}
 				/>
 			</div>
-			<div>
+			<div className="classInput">
 				<label>Password</label>
 				<Input
 					type="password"
@@ -119,6 +119,7 @@ const Register = (props) => {
           minLength={6}
 				/>
 			</div>
+      <PrivacyPolicy/>
 			{error && (
 				<StyledError>
 					<p>{error}</p>
@@ -136,7 +137,7 @@ const Register = (props) => {
 				disabled={disabled}
 			/>
 			<StyleRedirect>
-				tienes una cuenta? <Link to='/login'>Inicia sesion</Link>
+				tienes una cuenta? <Link to='/login'>Inicia sesión</Link>
 			</StyleRedirect>
         </Form>
       </Container>

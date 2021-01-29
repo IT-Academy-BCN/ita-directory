@@ -2,22 +2,23 @@ import styled from 'styled-components'
 import Colors from 'theme/Colors'
 
 export const Container = styled.div`
-  display: flex;
-  justify-content: center;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
   overflow: hidden;
   max-width: 22rem;
-  height: 21rem;
   margin: 1rem;
 `
 
 export const Form = styled.form`
-  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.19rem;
   
-  & > div{
+  & > .classInput{
     margin-bottom: 1.69rem;
     position: relative;
 
@@ -41,9 +42,9 @@ export const StyleRedirect = styled.div`
 
   & > a {
     text-decoration: none;
-    color: #7d868b;
-  }
-  & > a:hover {
-    color: blue;
+    color: ${Colors.darkOrange};
+}
+& > a:hover {
+    color: ${Colors.darkBlue};
   }
 `
