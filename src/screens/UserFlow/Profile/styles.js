@@ -11,7 +11,7 @@ export const StyledFormProfile = styled.form`
 	opacity: 1;
 	padding: 4rem;
 	width: 50rem;
-	height: 42rem;
+	height: 40rem;
 	color: #4a4a4a;
 `;
 
@@ -53,4 +53,10 @@ export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: column;
 	margin-right: 4.5rem;
+	margin-top: 1rem;
+
+	p {
+		margin-top: 0;
+		font-style: italic;
+	}
 `;

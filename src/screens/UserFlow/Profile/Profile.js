@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
 import Input from "components/units/Input/Input";
@@ -13,14 +13,26 @@ import {
 	StyledLabel,
 } from "./styles";
 
+const profilePicture =
+	"https://imagenes.20minutos.es/files/article_amp/uploads/2018/05/17/Aragorn01.jpg";
+
 const Profile = () => {
+	const [image, setImage] = useState(
+		"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg"
+	);
+
+	const handleClick = (event) => {
+		event.preventDefault();
+		console.log("profile clicked");
+		setImage(profilePicture);
+	};
+
 	return (
-		<Body>
+		<Body title="Editar perfil">
 			<StyledFormProfile>
 				<StyledPhotoWrapper>
 					<ImageWrapper>
-						{/* <img /> */}
-						<p>Hola como estas</p>
+						<img src={image} alt={"Foto"} width="200" />
 					</ImageWrapper>
 					<StyleUploadPhotoWrapper>
 						<p>Fotografía de perfil</p>
@@ -31,9 +43,9 @@ const Profile = () => {
 						<AsyncButton
 							text="Subir"
 							loadingText="Subiendo"
-							type="submit"
+							type="button"
 							className="blueGradientProfile"
-							// onClick={handleClick}
+							onClick={handleClick}
 							isLoading={false}
 							// disabled={disabled}
 						/>
@@ -42,12 +54,12 @@ const Profile = () => {
 				<StyledInputsWrapper>
 					<StyledLabel>
 						<label>Nombre de usuario</label>
-						<Input className="profile" />
+						<Input className="profile" placeholder="Introducir nombre de usuario" />
 						<p>El nombre de usuario no se puede modificar</p>
 					</StyledLabel>
 					<StyledLabel>
 						<label>Email</label>
-						<Input className="profile" />
+						<Input className="profile" placeholder="Introducir email" />
 						<p>
 							El email no se puede modificar. Ponte en contacto si necesitas
 							actualizarlo.
@@ -57,11 +69,11 @@ const Profile = () => {
 				<StyledInputsWrapper>
 					<StyledLabel>
 						<label>Nueva Constraseña</label>
-						<Input className="profile" />
+						<Input className="profile" placeholder="Introducir contraseña" />
 					</StyledLabel>
 					<StyledLabel>
 						<label>Confirmar Constraseña</label>
-						<Input className="profile" />
+						<Input className="profile" placeholder="Confirma tu contraseña" />
 					</StyledLabel>
 				</StyledInputsWrapper>
 				<StyledSaveWrapper>
