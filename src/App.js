@@ -10,7 +10,7 @@ import Home from "screens/Home/Home";
 
 import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
-// import RecoverPassword from "screens/UserFlow/RecoverPassword";
+import Profile from "screens/UserFlow/Profile/Profile";
 
 const App = () => {
 	return (
@@ -19,7 +19,7 @@ const App = () => {
 				<ProtectedRoute exact path="/" component={Home} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
-				{/* <Route exact path="/recover-password/:hash" component={RecoverPassword} /> */}
+				<Route exact path="/profile" component={Profile} />
 
 				{/* <ProtectedRoute component={Page404} /> */}
 			</Switch>

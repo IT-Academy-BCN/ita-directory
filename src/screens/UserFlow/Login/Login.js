@@ -29,7 +29,6 @@ const authenticateUser = (email, password) => {
 	}
 	if (authenticated) console.log("the user is correct");
 	else console.error("the user is incorrect");
-
 };
 
 const Login = ({onLogin}) => {
@@ -77,62 +76,62 @@ const Login = ({onLogin}) => {
 		}
 	};
 
-  return (
-    <Body title="Acceso">
-      <Container>
-        <Form onSubmit={handleSubmit}>
-			<div>
-				<label>Email</label>
-				<Input
-					type="email"
-					placeholder="Itroduce tu email"
-					value={email}
-					onChange={(e) => handleEmailChange(e.target.value)}
-					id="emailName"
-					name="emailName"
-					error={isEmailError}
-					errorText="Enter a valid email address..."
-					disabled={disabled}
-				/>
-			</div>
-			<div>
-				<label>Password</label>
-				<Input
-					type="password"
-					placeholder="Introduce tu contraseña"
-					value={password}
-					onChange={(e) => handlePasswordChange(e.target.value)}
-					id="passName"
-					name="passName"
-					error={isPassError}
-					errorText="The password to contain more than 6 characters and a uppercase letter"
-					disabled={disabled}
-					minLength={6}
-				/>
-			</div>
-			{error && (
-				<StyledError>
-					<p>{error}</p>
-				</StyledError>
-			)}
-			<AsyncButton
-				text="Acceder"
-				loadingText="Accediendo"
-				iconPosition="left"
-				type="submit"
-				className="blueGradient"
-				textStyles={{marginLeft: 10}}
-				isLoading={isLoading}
-				animated={animatedState}
-				disabled={disabled}
-			/>
-			<StyleRedirect>
-				No tienes cuenta? <Link to="/register"> Registrate</Link>
-			</StyleRedirect>
-        </Form>
-      </Container>
-    </Body>
-  );
+	return (
+		<Body title="Acceso">
+			<Container>
+				<Form onSubmit={handleSubmit}>
+					<div>
+						<label>Email</label>
+						<Input
+							type="email"
+							placeholder="Introduce tu email"
+							value={email}
+							onChange={(e) => handleEmailChange(e.target.value)}
+							id="emailName"
+							name="emailName"
+							error={isEmailError}
+							errorText="Enter a valid email address..."
+							disabled={disabled}
+						/>
+					</div>
+					<div>
+						<label>Password</label>
+						<Input
+							type="password"
+							placeholder="Introduce tu contraseña"
+							value={password}
+							onChange={(e) => handlePasswordChange(e.target.value)}
+							id="passName"
+							name="passName"
+							error={isPassError}
+							errorText="The password to contain more than 6 characters and a uppercase letter"
+							disabled={disabled}
+							minLength={6}
+						/>
+					</div>
+					{error && (
+						<StyledError>
+							<p>{error}</p>
+						</StyledError>
+					)}
+					<AsyncButton
+						text="Acceder"
+						loadingText="Accediendo"
+						iconPosition="left"
+						type="submit"
+						className="blueGradient"
+						textStyles={{marginLeft: 10}}
+						isLoading={isLoading}
+						animated={animatedState}
+						disabled={disabled}
+					/>
+					<StyleRedirect>
+						No tienes cuenta? <Link to="/register"> Registrate</Link>
+					</StyleRedirect>
+				</Form>
+			</Container>
+		</Body>
+	);
 };
 
 export default Login;

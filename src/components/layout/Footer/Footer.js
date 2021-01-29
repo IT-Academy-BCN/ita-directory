@@ -5,6 +5,7 @@ import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from 
 const Footer = () => {
 	return (
 		<StyledFooter>
+
 			<Logo> LOGO EMPRESA </Logo>
 			<Information>
 				<Copyright> ©miempresa.com </Copyright>
