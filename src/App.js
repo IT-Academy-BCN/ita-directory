@@ -4,7 +4,6 @@ import ProtectedRoute from "components/composed/ProtectedRoute";
 // import {faEye} from "@fortawesome/free-solid-svg-icons";
 // 1. FOOTER DEJAR HUECO ENTRE LINEA Y FOOTER
 // 2. FOOTER ALIENAR ELEMENTOS AL COMIENZO Y AL FINAL
-// 3. FALTA NOTIFICACIÓN
 
 import Home from "screens/Home/Home";
 
