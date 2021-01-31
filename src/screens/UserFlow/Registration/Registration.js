@@ -125,7 +125,7 @@ const Register = ({retrieveUser}) => {
             disabled={disabled}
           />
           <StyleRedirect>
-            tienes una cuenta? <Link to='/login'>Inicia sesión</Link>
+            Tienes una cuenta? <Link to='/login'>Inicia sesión</Link>
           </StyleRedirect>
         </Form>
       </Container>
