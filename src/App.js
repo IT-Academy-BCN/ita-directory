@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
+
 // import {faEye} from "@fortawesome/free-solid-svg-icons";
 // COMENTARIOS
 // 1. FOOTER NO DEBE SER WIDTH 100%
@@ -16,7 +17,7 @@ import Home from "screens/Home/Home";
 // Userflow
 import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
-// import RecoverPassword from "screens/UserFlow/RecoverPassword";
+import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 
 const App = () => {
 	const [view, setView] = useState("");
@@ -31,13 +32,11 @@ const App = () => {
 		<>
 			<Switch>
 				<ProtectedRoute exact path="/" component={Home} />
-
 				<Route exact path="/login" component={Login}>
 					<Login onLogin={handleLogin} />
 				</Route>
 				<Route exact path="/register" component={Registration} />
-				{/* <Route exact path="/recover-password/:hash" component={RecoverPassword} /> */}
-
+				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				{/* <ProtectedRoute component={Page404} /> */}
 			</Switch>
 		</>

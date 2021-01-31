@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
 import {StyleRedirect, StyledError, StyledForm} from "./styles";
-
 import Body from "components/layout/Body/Body";
+import ForgotPassword from "components/units/ForgotPassword/ForgotPassword";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
@@ -110,6 +110,7 @@ const Login = (onLogin, onGoToRegister) => {
 					disabled={disabled}
 					minLength={6}
 				/>
+				<ForgotPassword />
 				{error && (
 					<StyledError>
 						<p>{error}</p>
