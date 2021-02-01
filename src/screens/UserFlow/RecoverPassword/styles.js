@@ -24,7 +24,8 @@ export const StyledForm = styled.form`
 
 		& > label {
 			display: inline-block;
-			margin-bottom: 5px;
+			margin: 0.7rem;
+			font: normal normal normal 14px/22px Helvetica Neue;
 		}
 	}
 `;

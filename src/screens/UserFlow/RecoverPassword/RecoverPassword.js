@@ -38,18 +38,11 @@ const RecoverPassword = ({retrieveUser}) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [isEmailError, setIsEmailError] = useState(false);
-	const [isPassError, setIsPassError] = useState(false);
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
 		const isEmail = validateEmail(value);
 		setIsEmailError(!isEmail);
-	};
-
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		const isPass = validatePassword(value);
-		setIsPassError(!isPass);
 	};
 
 	const [email, setEmail] = useState("");
