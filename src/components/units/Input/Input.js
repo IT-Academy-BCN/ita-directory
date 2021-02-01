@@ -40,7 +40,10 @@ const Input = ({
 				disabled={disabled}
 				minLength={minlength}
 			/>
-			<StyledError dangerouslySetInnerHTML={{__html: error ? errorText : null}} />
+			<StyledError
+				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+				className={className}
+			/>
 		</div>
 	);
 };

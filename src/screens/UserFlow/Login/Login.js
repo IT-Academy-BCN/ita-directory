@@ -75,7 +75,7 @@ const Login = ({onLogin}) => {
 		}
 	};
 	return (
-		<Body title="Acceso">
+		<Body title="Acceso" isLoggedIn={false}>
 			<Container>
 				<Form onSubmit={handleSubmit}>
 					<div className="classInput">
