@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/AsyncButton/AsyncButton";
-import {Container, Form, StyleRedirect, StyledError} from "./styles";
-
+import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./styles";
 import Body from "components/layout/Body/Body";
-import ForgotPassword from "components/units/ForgotPassword/ForgotPassword";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
@@ -80,7 +78,7 @@ const Login = ({onLogin}) => {
 		<Body title="Acceso">
 			<Container>
 				<Form onSubmit={handleSubmit}>
-					<div>
+					<div className="classInput">
 						<label>Email</label>
 						<Input
 							type="email"
@@ -94,7 +92,7 @@ const Login = ({onLogin}) => {
 							disabled={disabled}
 						/>
 					</div>
-					<div>
+					<div  className="classInput">
 						<label>Password</label>
 						<Input
 							type="password"
@@ -109,6 +107,11 @@ const Login = ({onLogin}) => {
 							minLength={6}
 						/>
 					</div>
+					<ChangePassword>
+						<Label htmlFor="forgotpassword">
+							<Link to="/recover-password/:hash">Has olvidado tu contraseña?</Link>
+						</Label>
+					</ChangePassword>
 					{error && (
 						<StyledError>
 							<p>{error}</p>

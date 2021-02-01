@@ -43,7 +43,9 @@ export const StyleRedirect = styled.div`
 	& > a {
 		text-decoration: none;
 		color: ${Colors.darkOrange};
-	}
+		margin: 0 0 0 0.2rem;
+	};
+
 	& > a:hover {
 		color: ${Colors.darkBlue};
 	}

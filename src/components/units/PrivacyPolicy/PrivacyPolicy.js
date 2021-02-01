@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
 		<Checkbox>
 			<input type="checkbox" id="check" value="0" required name="privacy" />
 			<Label>
-				Acepto <Anchor href="#"> politica de Privacidad</Anchor>
+				Acepto<Anchor href="#">politica de Privacidad</Anchor>
 			</Label>
 		</Checkbox>
 	);

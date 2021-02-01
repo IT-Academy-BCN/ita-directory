@@ -4,8 +4,11 @@ import AsyncButton from "components/units/AsyncButton/AsyncButton";
 import {Container, StyledForm, StyledError} from "./styles";
 import Body from "components/layout/Body/Body";
 
-const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
+
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
+const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
 const users = [
 	{
@@ -14,32 +17,51 @@ const users = [
 	},
 ];
 
-const email = "";
-// const label = "";
-// const initialState = {email: "", error: ""};
-
-const authenticateUser = () => {
-	if (email === users.email) {
-		console.log("the user is correct. You will receive an email to change your password.");
-	} else if (email === !users.email) {
-		console.log("the user is incorrect. Please try again.");
+const updateUser = (email, password) => {
+	const newUsers = [];
+	for (let i = 0; i < users.length; i++) {
+		const user = users[i];
+		if (user.email === email) console.error("this user already exists");
+		else {
+			newUsers.push(email, password);
+			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
+			console.log(`The user ${email} has been successfully registered`);
+		}
 	}
 };
+// const authenticateUser = () => {
+// 	if (email === users.email) {
+// 		console.log("the user is correct. You will receive an email to change your password.");
+// 	} else if (email === !users.email) {
+// 		console.log("the user is incorrect. Please try again.");
+// 	}
+// };
 
-const RecoverPassword = () => {
-	const [email, setEmail] = useState("");
+const RecoverPassword = ({retrieveUser}) => {
 	const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [setState] = useState();
 
-	setEmail("");
+	const [isEmailError, setIsEmailError] = useState(false);
+	const [isPassError, setIsPassError] = useState(false);
 
-	// const checkEmail = () => {
-	// };
+	const handleEmailChange = (value) => {
+		setEmail(value);
+		const isEmail = validateEmail(value);
+		setIsEmailError(!isEmail);
+	};
 
-	const handleClick = () => {
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+		const isPass = validatePassword(value);
+		setIsPassError(!isPass);
+	};
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const handleSubmit = (event) => {
+		event.preventDefault();
 		setAnimatedState(true);
 		setIsDisabled(true);
 		setIsLoading(true);
@@ -47,66 +69,58 @@ const RecoverPassword = () => {
 			setAnimatedState(false);
 			setIsDisabled(false);
 			setIsLoading(false);
-		}, 5000);
+		}, 2000);
+
+		try {
+			updateUser(email, password, (error, token) => {
+				if (error) return setError(error.message);
+				retrieveUser(token);
+			});
+		} catch ({message}) {
+			setError(message);
+		}
 	};
 
-	// value - handleChange
-	const [isEmailError, setIsEmailError] = useState(false);
-
-	const handleInputOnChange = (e) => {
-		const val = e.target.value;
-		const isEmail = validateEmail(val);
-		setState(val);
-		setIsEmailError(!isEmail);
-	};
-
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		let {email} = event.target.value;
-		email = email.value;
-	};
-
-	return (
-		<Body title="Cambiar contraseña">
-			<Container>
-				<StyledForm onSubmit={handleSubmit}>
-					<div className="classInput">
-						{/* <Label htmlFor="forgetpassword">
-							<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce
-							tu email y te enviaremos una nueva por correo.
-						</Label> */}
-						<Input
-							type="email"
-							placeholder="Introduce tu email"
-							value={email}
-							onChange={handleInputOnChange}
-							id="emailName"
-							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address..."
-							disabled={disabled}
-						/>
-					</div>
-					{error && (
-						<StyledError>
-							<p>{error}</p>
-						</StyledError>
-					)}
-					<AsyncButton
-						text="Enviar"
-						loadingText="Enviando"
-						iconPosition="left"
-						type="submit"
-						className="orangeGradient"
-						textStyles={{marginLeft: 10}}
-						isLoading={isLoading}
-						animated={animatedState}
-						disabled={disabled}
-					/>
-				</StyledForm>
-			</Container>
-		</Body>
-	);
+  return (
+    <Body title="Cambiar contraseña">
+      <Container>
+        <StyledForm onSubmit={handleSubmit}>
+          <div className="classInput"> 
+            <label htmlFor="forgetpassword">
+              <strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu email y te enviaremos una nueva por correo.
+            </label>
+            <Input
+              type="email"
+              placeholder="Introduce tu email"
+              value={email}
+              onChange={(e) => handleEmailChange(e.target.value)}
+              id="emailName"
+              name="emailName"
+              error={isEmailError}
+              errorText="Enter a valid email address..."
+              disabled={disabled}
+            />
+          </div>
+          {error && (
+            <StyledError>
+              <p>{error}</p>
+            </StyledError>
+          )}
+          <AsyncButton
+            text="Enviar"
+            loadingText="Enviando"
+            iconPosition="left"
+            type="submit"
+            className="orangeGradient"
+            textStyles={{marginLeft: 10}}
+            isLoading={isLoading}
+            animated={animatedState}
+            disabled={disabled}
+          />
+        </StyledForm>
+      </Container>
+    </Body>
+  );
 };
 
 export default RecoverPassword;
