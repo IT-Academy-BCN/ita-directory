@@ -13,136 +13,124 @@ const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
 const users = [
-	{
-		email: "",
-		password: "",
-	},
+  {
+    email: "juan@mail.com",
+    password: "Juan1992",
+  }
 ];
 
-const authenticateUser = (email, password) => {
-	if (users.email === email && users.password === password)
-		console.log("this user already exists");
-	else console.log("new user registered");
+const registerUser = (email, password) => {
+  const newUsers = []
+  for (let i = 0; i < users.length; i++) {
+    const user = users[i];
+    if (user.email === email) console.error("this user already exists")
+    else {
+      newUsers.push(email, password)
+      localStorage.setItem("itacademy", "HE ENTRADO!!!!");
+      console.log(`The user ${email} has been successfully registered`);
+    }
+  }
 };
 
-const initialState = {email: "", password: ""};
-
-const Register = (props) => {
-	const [userName, setUsername] = useState("");
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
-	const [animatedState, setAnimatedState] = useState(false);
-	const [disabled, setIsDisabled] = useState(false);
+const Register = ({retrieveUser}) => {
+  const [error, setError] = useState("");
+  const [animatedState, setAnimatedState] = useState(false);
+  const [disabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [state, setState] = useState()
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isPassError, setIsPassError] = useState(false);
 
-	const changeName = () => {
-		setUsername("Kevin");
-	};
+  const handleEmailChange = (value) => {
+    setEmail(value);
+    const isEmail = validateEmail(value);
+    setIsEmailError(!isEmail);
+  };
 
-	const handleClick = () => {
-		setAnimatedState(true);
-		setIsDisabled(true);
-		setIsLoading(true);
-		setTimeout(() => {
-			setAnimatedState(false);
-			setIsDisabled(false);
-			setIsLoading(false);
-		}, 5000);
-	};
+  const handlePasswordChange = (value) => {
+    setPassword(value);
+    const isPass = validatePassword(value);
+    setIsPassError(!isPass);
+  };
 
-	// value - handleChange
-	const [isEmailError, setIsEmailError] = useState(false);
-	const [isPassError, setIsPassError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-	const handleInputOnChange = (e) => {
-		const val = e.target.value;
-		const isEmail = validateEmail(val);
-		setState(val);
-		setIsEmailError(!isEmail);
-	};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setAnimatedState(true);
+    setIsDisabled(true);
+    setIsLoading(true);
+    setTimeout(() => {
+      setAnimatedState(false);
+      setIsDisabled(false);
+      setIsLoading(false);
+    }, 2000);
 
-	const handleInputPassOnChange = (e) => {
-		const valPass = e.target.value;
-		const isPass = validatePassword(valPass);
-		setState(valPass);
-		setIsPassError(!isPass);
-	};
+    try {
+      registerUser(email, password, (error, token) => {
+        if (error) return setError(error.message);
+        retrieveUser(token);
+      });
+    } catch ({message}) {
+      setError(message);
+    }
+  };
 
-
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-
-		let {email, password} = event.target.value;
-
-		email = email.value;
-		password = password.value;
-
-		const token = await authenticateUser({email, password, error});
-		{
-			if (error) return setError(error.message);
-		}
-		localStorage.setItem("ItAcademy", token); //DUDA
-	};
-
-	return (
-       <Body title="Registro">
+  return (
+    <Body title="Registro">
       <Container>
         <Form onSubmit={handleSubmit}>
-			<div className="classInput">
-				<label>Email</label>
-				<Input
-					type="email"
-					placeholder="Introduce tu email"
-					value={email}
-					onChange={handleInputOnChange}
-					id="emailName"
-					name="emailName"
-          error={isEmailError}
-          errorText="Enter a valid email address..."
-					disabled={disabled}
-				/>
-			</div>
-			<div className="classInput">
-				<label>Password</label>
-				<Input
-					type="password"
-					placeholder="Introduce tu contraseña"
-					value={password}
-					onChange={handleInputPassOnChange}
-					id="passName"
-					name="passName"
-          error={isPassError}
-          errorText="The password to contain more than 6 characters and a uppercase letter"
-          disabled={disabled}
-          minLength={6}
-				/>
-			</div>
-      <PrivacyPolicy/>
-			{error && (
-				<StyledError>
-					<p>{error}</p>
-				</StyledError>
-			)}
-			<AsyncButton
-				text="Registrame"
-				loadingText="Registrando"
-				iconPosition="left"
-				type="submit"
-				className="orangeGradient"
-				textStyles={{marginLeft: 10}}
-				isLoading={isLoading}
-				animated={animatedState}
-				disabled={disabled}
-			/>
-			<StyleRedirect>
-				tienes una cuenta? <Link to='/login'>Inicia sesión</Link>
-			</StyleRedirect>
+          <div className="classInput">
+            <label>Email</label>
+            <Input
+              type="email"
+              placeholder="Introduce tu email"
+              value={email}
+              onChange={(e) => handleEmailChange(e.target.value)}
+              id="emailName"
+              name="emailName"
+              error={isEmailError}
+              errorText="Enter a valid email address..."
+              disabled={disabled}
+            />
+          </div>
+          <div className="classInput">
+            <label>Password</label>
+            <Input
+              type="password"
+              placeholder="Introduce tu contraseña"
+              value={password}
+              onChange={(e) => handlePasswordChange(e.target.value)}
+              id="passName"
+              name="passName"
+              error={isPassError}
+              errorText="The password to contain more than 6 characters and a uppercase letter"
+              disabled={disabled}
+              minLength={6}
+            />
+          </div>
+          <PrivacyPolicy/>
+          {error && (
+            <StyledError><p>{error}</p></StyledError>
+          )}
+          <AsyncButton
+            text="Registrame"
+            loadingText="Registrando"
+            iconPosition="left"
+            type="submit"
+            className="orangeGradient"
+            textStyles={{marginLeft: 10}}
+            isLoading={isLoading}
+            animated={animatedState}
+            disabled={disabled}
+          />
+          <StyleRedirect>
+            Tienes una cuenta? <Link to='/login'>Inicia sesión</Link>
+          </StyleRedirect>
         </Form>
       </Container>
     </Body>
-	);
+  );
 };
 
 export default Register;
