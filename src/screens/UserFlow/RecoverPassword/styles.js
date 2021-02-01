@@ -33,11 +33,8 @@ export const StyledForm = styled.form`
 
 		& > label {
 			display: inline-block;
-			margin-bottom: 5px;
-			text-align: left;
+			margin: 0.7rem;
 			font: normal normal normal 14px/22px Helvetica Neue;
-			letter-spacing: 0px;
-			color: #2b2b2b;
 		}
 	}
 `;
