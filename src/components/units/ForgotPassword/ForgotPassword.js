@@ -4,7 +4,7 @@ import {Label, Anchor} from "./styles";
 const ForgotPassword = () => {
 	return (
 		<div className="changepassword" id="changepassword">
-			<Label for="forgotpassword">
+			<Label htmlFor="forgotpassword">
 				<Anchor href="#">Has olvidado tu contraseña?</Anchor>
 			</Label>
 		</div>

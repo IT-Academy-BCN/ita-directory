@@ -25,12 +25,10 @@ export const StyledForm = styled.form`
 		& > label {
 			display: inline-block;
 			margin-bottom: 5px;
-        }
-        
-    }
+		}
+	}
 `;
 
-      
 export const StyledError = styled.div`
   color: ${Colors.redColor}
   font-weight: 800;

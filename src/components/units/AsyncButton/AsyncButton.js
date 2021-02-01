@@ -9,7 +9,6 @@ const AsyncButton = ({
 	text,
 	loadingText,
 	isLoading,
-	onClick,
 	disabled,
 	icon,
 	iconPosition,
@@ -19,20 +18,10 @@ const AsyncButton = ({
 	iconStyles,
 	animated,
 }) => {
-	const handleClick = () => {
-		if (disabled) {
-			return;
-		}
-		if (onClick) {
-			onClick();
-		}
-	};
-
 	return (
 		<StyledButton
 			type={type}
 			disabled={disabled}
-			onClick={handleClick}
 			className={`${className} ${animated ? "animated" : ""} ${disabled ? "disabled" : ""}`}
 			style={{...buttonStyles}}
 		>
@@ -58,7 +47,6 @@ AsyncButton.propTypes = {
 	text: PropTypes.string,
 	loadingText: PropTypes.string,
 	isLoading: PropTypes.bool,
-	onClick: PropTypes.func.isRequired,
 	iconPosition: PropTypes.string,
 	className: PropTypes.string,
 	buttonStyles: PropTypes.string,
