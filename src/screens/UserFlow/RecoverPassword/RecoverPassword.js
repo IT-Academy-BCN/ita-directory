@@ -79,7 +79,7 @@ const RecoverPassword = ({retrieveUser}) => {
 						</label>
 						<Input
 							type="email"
-							placeholder="Introduce tu email"
+							placeholder="email"
 							value={email}
 							onChange={(e) => handleEmailChange(e.target.value)}
 							id="emailName"
