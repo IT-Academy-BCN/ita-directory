@@ -20,9 +20,10 @@ export const Form = styled.form`
 	padding: 2.19rem;
 
 	& > .classInput {
+		padding-top: 2rem;
 		margin-bottom: 1.69rem;
 		position: relative;
-		
+
 		& > label {
 			display: inline-block;
 			margin-bottom: 5px;
@@ -32,16 +33,16 @@ export const Form = styled.form`
 
 export const ChangePassword = styled.div`
 	display: inline-block;
-	padding: 0 0 0.5rem 0
-`
+	padding: 0 0 0.5rem 0;
+`;
 export const Label = styled.label`
 	display: inline-block;
 	& > a {
 		color: ${Colors.redColor};
 		text-decoration: none;
-	&:hover {
-		color: blue;
-	}
+		&:hover {
+			color: blue;
+		}
 	}
 `;
 
@@ -60,7 +61,7 @@ export const StyleRedirect = styled.div`
 		text-decoration: none;
 		color: #7d868b;
 		margin: 0 0 0 0.2rem;
-	};
+	}
 
 	& > a:hover {
 		color: blue;

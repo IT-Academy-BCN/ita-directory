@@ -8,6 +8,7 @@ export const Container = styled.div`
 	box-shadow: 0px 3px 6px #00000029;
 	overflow: hidden;
 	max-width: 22rem;
+	height: 22.7rem;
 	margin: 1rem;
 `;
 
@@ -21,10 +22,22 @@ export const StyledForm = styled.form`
 	& > .classInput {
 		margin-bottom: 1.69rem;
 		position: relative;
+		background: #ffffff 0% 0% no-repeat padding-box;
+		border-radius: 6px;
+		opacity: 1;
+		text-align: left;
+		font: normal normal normal 16px/32px Helvetica Neue;
+		letter-spacing: 0px;
+		color: #7d868b;
+		opacity: 1;
 
 		& > label {
 			display: inline-block;
 			margin-bottom: 5px;
+			text-align: left;
+			font: normal normal normal 14px/22px Helvetica Neue;
+			letter-spacing: 0px;
+			color: #2b2b2b;
 		}
 	}
 `;
