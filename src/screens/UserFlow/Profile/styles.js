@@ -51,12 +51,12 @@ export const StyleUploadPhotoWrapper = styled.div`
 export const StyledInputsWrapper = styled.div`
 	display: flex;
 	margin-top: 1rem;
+	margin-bottom: 2rem;
 `;
 
 export const StyledSaveWrapper = styled.div`
 	display: flex;
 	justify-content: flex-start;
-	margin-top: 1rem;
 	margin-bottom: 3rem;
 `;
 

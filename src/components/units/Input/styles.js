@@ -21,4 +21,8 @@ export const StyledError = styled.small`
 	position: absolute;
 	left: 0;
 	visibility: visible;
+
+	&.errorProfile {
+		position: static;
+	}
 `;

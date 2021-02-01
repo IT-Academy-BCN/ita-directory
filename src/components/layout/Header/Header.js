@@ -26,7 +26,7 @@ const Header = ({isLoggedIn, title}) => {
 		return (
 			<header>
 				<StyledHeaderTop className={`logged`}>
-					<Logo>Logo Empresa</Logo>
+					<Logo className={`logged`}>Logo Empresa</Logo>
 					<StyledMiPerfil>
 						<StyledButton onClick={handleClick}>
 							<StyledImg src={profilePicture} alt="profile" />
