@@ -21,21 +21,15 @@ const updateUser = (email, password) => {
 	const newUsers = [];
 	for (let i = 0; i < users.length; i++) {
 		const user = users[i];
-		if (user.email === email) console.error("the user is incorrect. Please try again.");
-		else {
+		if (user.email === email) {
 			newUsers.push(email, password);
 			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
 			console.log("The user is correct. You will receive an email to change your password.");
+		} else {
+			console.error("the user is incorrect. Please try again.");
 		}
 	}
 };
-// const authenticateUser = () => {
-// 	if (email === users.email) {
-// 		console.log("");
-// 	} else if (email === !users.email) {
-// 		console.log("");
-// 	}
-// };
 
 const RecoverPassword = ({retrieveUser}) => {
 	const [error, setError] = useState("");
@@ -81,46 +75,47 @@ const RecoverPassword = ({retrieveUser}) => {
 		}
 	};
 
-  return (
-    <Body title="Cambiar contraseña">
-      <Container>
-        <StyledForm onSubmit={handleSubmit}>
-          <div className="classInput"> 
-            <label htmlFor="forgetpassword">
-              <strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu email y te enviaremos una nueva por correo.
-            </label>
-            <Input
-              type="email"
-              placeholder="Introduce tu email"
-              value={email}
-              onChange={(e) => handleEmailChange(e.target.value)}
-              id="emailName"
-              name="emailName"
-              error={isEmailError}
-              errorText="Enter a valid email address..."
-              disabled={disabled}
-            />
-          </div>
-          {error && (
-            <StyledError>
-              <p>{error}</p>
-            </StyledError>
-          )}
-          <AsyncButton
-            text="Enviar"
-            loadingText="Enviando"
-            iconPosition="left"
-            type="submit"
-            className="orangeGradient"
-            textStyles={{marginLeft: 10}}
-            isLoading={isLoading}
-            animated={animatedState}
-            disabled={disabled}
-          />
-        </StyledForm>
-      </Container>
-    </Body>
-  );
+	return (
+		<Body title="Cambiar contraseña">
+			<Container>
+				<StyledForm onSubmit={handleSubmit}>
+					<div className="classInput">
+						<label htmlFor="forgetpassword">
+							<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce
+							tu email y te enviaremos una nueva por correo.
+						</label>
+						<Input
+							type="email"
+							placeholder="Introduce tu email"
+							value={email}
+							onChange={(e) => handleEmailChange(e.target.value)}
+							id="emailName"
+							name="emailName"
+							error={isEmailError}
+							errorText="Enter a valid email address..."
+							disabled={disabled}
+						/>
+					</div>
+					{error && (
+						<StyledError>
+							<p>{error}</p>
+						</StyledError>
+					)}
+					<AsyncButton
+						text="Enviar"
+						loadingText="Enviando"
+						iconPosition="left"
+						type="submit"
+						className="orangeGradient"
+						textStyles={{marginLeft: 10}}
+						isLoading={isLoading}
+						animated={animatedState}
+						disabled={disabled}
+					/>
+				</StyledForm>
+			</Container>
+		</Body>
+	);
 };
 
 export default RecoverPassword;
