@@ -20,7 +20,6 @@ export const Form = styled.form`
 	padding: 2.19rem;
 
 	& > .classInput {
-		padding-top: 2rem;
 		margin-bottom: 1.69rem;
 		position: relative;
 

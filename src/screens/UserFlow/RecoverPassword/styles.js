@@ -8,7 +8,6 @@ export const Container = styled.div`
 	box-shadow: 0px 3px 6px #00000029;
 	overflow: hidden;
 	max-width: 22rem;
-	height: 22.7rem;
 	margin: 1rem;
 `;
 
@@ -20,7 +19,7 @@ export const StyledForm = styled.form`
 	padding: 2.19rem;
 
 	& > .classInput {
-		margin-bottom: 1.69rem;
+		margin-bottom: 0.9rem;
 		position: relative;
 		background: #ffffff 0% 0% no-repeat padding-box;
 		border-radius: 6px;
@@ -33,7 +32,7 @@ export const StyledForm = styled.form`
 
 		& > label {
 			display: inline-block;
-			margin: 0.7rem;
+			margin: 0.8rem;
 			font: normal normal normal 14px/22px Helvetica Neue;
 		}
 	}
