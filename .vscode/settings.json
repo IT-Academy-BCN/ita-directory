@@ -8,7 +8,7 @@
     },
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
     "extensions.ignoreRecommendations": true,
-    "files.autoSave": "afterDelay",
+    // "files.autoSave": "afterDelay",
     "typescript.tsc.autoDetect": "off",
     "npm.autoDetect": "off",
     "debug.allowBreakpointsEverywhere": true,
