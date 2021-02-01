@@ -21,19 +21,19 @@ const updateUser = (email, password) => {
 	const newUsers = [];
 	for (let i = 0; i < users.length; i++) {
 		const user = users[i];
-		if (user.email === email) console.error("this user already exists");
+		if (user.email === email) console.error("the user is incorrect. Please try again.");
 		else {
 			newUsers.push(email, password);
 			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
-			console.log(`The user ${email} has been successfully registered`);
+			console.log("The user is correct. You will receive an email to change your password.");
 		}
 	}
 };
 // const authenticateUser = () => {
 // 	if (email === users.email) {
-// 		console.log("the user is correct. You will receive an email to change your password.");
+// 		console.log("");
 // 	} else if (email === !users.email) {
-// 		console.log("the user is incorrect. Please try again.");
+// 		console.log("");
 // 	}
 // };
 
