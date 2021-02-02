@@ -11,7 +11,7 @@ export const Container = styled.div`
 	margin: 1rem;
 `;
 
-export const Form = styled.form`
+export const StyledForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -19,12 +19,21 @@ export const Form = styled.form`
 	padding: 2.19rem;
 
 	& > .classInput {
-		margin-bottom: 1.69rem;
+		margin-bottom: 0.9rem;
 		position: relative;
+		background: #ffffff 0% 0% no-repeat padding-box;
+		border-radius: 6px;
+		opacity: 1;
+		text-align: left;
+		font: normal normal normal 16px/32px Helvetica Neue;
+		letter-spacing: 0px;
+		color: #7d868b;
+		opacity: 1;
 
 		& > label {
 			display: inline-block;
-			margin-bottom: 5px;
+			margin: 0.8rem;
+			font: normal normal normal 14px/22px Helvetica Neue;
 		}
 	}
 `;
@@ -33,20 +42,4 @@ export const StyledError = styled.div`
   color: ${Colors.redColor}
   font-weight: 800;
   margin: 0 0 40px 0;
-`;
-
-export const StyleRedirect = styled.div`
-	display: flex;
-	justify-content: center;
-	padding: 1rem 0 0 0;
-
-	& > a {
-		text-decoration: none;
-		color: ${Colors.darkOrange};
-		margin: 0 0 0 0.2rem;
-	};
-
-	& > a:hover {
-		color: ${Colors.darkBlue};
-	}
 `;

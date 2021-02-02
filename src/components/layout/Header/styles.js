@@ -40,6 +40,10 @@ export const Logo = styled.div`
 	letter-spacing: 0px;
 	text-transform: uppercase;
 	opacity: 1;
+
+	&.logged {
+		justify-content: left;
+	}
 `;
 
 export const StyledHeaderTop = styled.div`
