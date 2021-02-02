@@ -1,32 +1,33 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	padding-left: 30px;
+	padding-right: 30px;
+
+	hr {
+		width: 100%;
+		display: block;
+		height: 1px;
+		background-color: black;
+	}
+`;
+
 export const StyledFooter = styled.footer`
-	@media only screen and (min-width: 1020px) {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		padding: 2px 15vw;
-		border-top: 2px solid #707070;
-		margin: 15vw;
-		margin-bottom: 3rem;
-		margin-top: 1rem;
-	}
-	@media only screen and (max-width: 1019px) {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		padding: 2px 15vw;
-		border-top: 2px solid #707070;
-		margin: 15vw;
-		margin-bottom: 2rem;
-		margin-top: 1rem;
-	}
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 1.5rem;
+
 	@media only screen and (max-width: 468px) {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		border-top: 2px solid #707070;
 		margin: 1rem;
 	}
 `;
@@ -63,6 +64,7 @@ export const Logo = styled.div`
 `;
 
 export const Information = styled.div`
+	text-align: right;
 	@media only screen and (min-width: 1020px) {
 		text-align: right;
 		font: normal normal normal 16px Helvetica Neue;
