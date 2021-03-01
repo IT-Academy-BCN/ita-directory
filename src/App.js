@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router-dom";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 
 import Home from "screens/Home/Home";
+import Button from "components/units/Button/Button";
 
 import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
