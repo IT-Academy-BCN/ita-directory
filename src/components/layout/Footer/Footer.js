@@ -1,6 +1,8 @@
 import React from "react";
-import {Wrapper, Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./styles";
-// import Colors from "theme/Colors";
+
+// Styles
+import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./styles";
+import {Wrapper} from "theme/GlobalStyles";
 
 const Footer = () => {
 	return (
@@ -9,8 +11,8 @@ const Footer = () => {
 			<StyledFooter>
 				<Logo>LOGO EMPRESA</Logo>
 				<Information>
-					<Copyright> ©miempresa.com </Copyright>
-					<Rights> Todos los derechos reservados.</Rights>
+					<Copyright>©miempresa.com</Copyright>
+					<Rights>Todos los derechos reservados.</Rights>
 					<Legal>
 						<Anchor href="#">AvisoLegal</Anchor>
 						<Anchor href="#">Privacidad</Anchor>

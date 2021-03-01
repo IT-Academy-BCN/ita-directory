@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Input from "components/units/Input/Input";
-import AsyncButton from "components/units/AsyncButton/AsyncButton";
-import {Container, StyledForm, StyledError} from "./styles";
+import AsyncButton from "components/units/Button/Button";
+import {Container, StyledForm, StyledError} from "./RecoverPassword.styles";
 import Body from "components/layout/Body/Body";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

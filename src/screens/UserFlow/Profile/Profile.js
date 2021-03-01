@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
-import AsyncButton from "components/units/AsyncButton/AsyncButton";
+import AsyncButton from "components/units/Button/Button";
 import Input from "components/units/Input/Input";
 import {
 	StyledFormProfile,
@@ -12,7 +12,7 @@ import {
 	StyledLabel,
 	StyledBodyWrapper,
 	StyledError,
-} from "./styles";
+} from "./Profile.styles";
 
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 const validatePassword = (password) => PASSWORD_REGEX.test(password);

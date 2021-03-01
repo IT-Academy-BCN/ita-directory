@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
-import AsyncButton from "components/units/AsyncButton/AsyncButton";
-import {Container, Form, StyleRedirect, StyledError} from "./styles";
+import AsyncButton from "components/units/Button/Button";
+import {Container, Form, StyleRedirect, StyledError} from "./Registration.styles";
 import PrivacyPolicy from "components/units/PrivacyPolicy/PrivacyPolicy";
 import Body from "components/layout/Body/Body";
 
