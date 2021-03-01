@@ -6,7 +6,7 @@ import {Childrens, StyledBody} from "./styles";
 const Body = ({children, title, isLoggedIn}) => {
 	return (
 		<StyledBody>
-			<Header title={titles} isLoggedIn={isLosadggedIn} />
+			<Header title={titles} isLoggedIn={isLoggedIn} />
 			<Childrens>{children}</Childrens>
 			<Footer />
 		</StyledBody>
