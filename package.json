@@ -54,14 +54,11 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npx lint-staged"
+			"pre-commit": "lint-staged"
 		}
 	},
 	"lint-staged": {
-		"*.js": [
-			"./node_modules/.bin/eslint --max-warnings=0",
-			"prettier --write",
-			"git add"
-		]
+		"*.js": "eslint --cache --fix",
+		"*.{js,css,md}": "prettier --write"
 	}
 }
