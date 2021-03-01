@@ -20,7 +20,8 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
-		"dev": "env FAST_REFRESH=false react-scripts start"
+		"dev": "env FAST_REFRESH=false react-scripts start",
+		"postinstall": "husky isntall"
 	},
 	"eslintConfig": {
 		"extends": [
