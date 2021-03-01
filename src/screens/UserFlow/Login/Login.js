@@ -125,7 +125,7 @@ const Login = ({onLogin}) => {
 						className="blueGradient"
 						textStyles={{marginLeft: 10}}
 						isLoading={isLoading}
-						animated={animatedState}
+						animated="yes"
 						disabled={disabled}
 					/>
 					<StyleRedirect>

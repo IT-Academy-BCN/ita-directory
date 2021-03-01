@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import StyledButton from "./styles";
 
-const AsyncButton = ({
+const Button = ({
 	type,
 	text,
 	loadingText,
@@ -42,7 +42,7 @@ const AsyncButton = ({
 	);
 };
 
-AsyncButton.propTypes = {
+Button.propTypes = {
 	type: PropTypes.string.isRequired,
 	text: PropTypes.string,
 	loadingText: PropTypes.string,
@@ -56,4 +56,4 @@ AsyncButton.propTypes = {
 	disabled: PropTypes.bool,
 };
 
-export default AsyncButton;
+export default Button;
