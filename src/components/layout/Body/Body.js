@@ -8,7 +8,7 @@ dasdsssa;
 const Body = ({children, title, isLoggedIn}) => {
 	return (
 		<StyledBody>
-			<Header title={tit lsades} isLoggedIn={isLoggedIn} />
+			<Header title={titlsades} isLoggedIn={isLoggedIn} />
 			<Childrens>{children}</Childrens>
 			<Footer />
 		</StyledBody>
