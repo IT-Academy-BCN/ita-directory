@@ -18,10 +18,14 @@ const profilePicture =
 
 const Header = ({isLoggedIn, title}) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [testing, setTesting] = useState(false)
+    useEffect(() => {
+        const tryThis = true;
+    }, [])
 	const handleClick = () => {
 		console.log("profile clicked");
 		setDropdownVisible(!dropdownVisible);
-	};
+	
 	if (isLoggedIn) {
 		return (
 			<header>
