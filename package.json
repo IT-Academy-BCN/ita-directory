@@ -24,12 +24,6 @@
 		"postinstall": "husky install",
 		"prepare": "husky install"
 	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
 	"browserslist": {
 		"production": [
 			">0.2%",
@@ -54,15 +48,11 @@
 		"lint-staged": "^10.5.4",
 		"prettier": "^2.2.1"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
 	"lint-staged": {
 		"*.js": [
+			"eslint --cache --fix",
 			"./node_modules/.bin/eslint --max-warnings=0",
-			"prettier --write",
+			"./node_modules/.bin/prettier --write",
 			"git add"
 		]
 	}
