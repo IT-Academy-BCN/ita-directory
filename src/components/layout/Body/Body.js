@@ -3,7 +3,7 @@ import Header from "components/layout/Header/Header";
 import Footer from "components/layout/Footer/Footer";
 import {Childrens, StyledBody} from "./styles";
 
-dasdas;
+dasda;
 
 const Body = ({children, title, isLoggedIn}) => {
 	return (
