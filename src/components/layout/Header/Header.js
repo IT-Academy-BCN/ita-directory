@@ -11,7 +11,7 @@ import {
 	StyledLogo,
 	StyledText,
 	StyledUl,
-} from "./styles";
+} from "./Header.styles";
 
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
