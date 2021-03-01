@@ -16,9 +16,8 @@ const AsyncButton = ({
 	buttonStyles,
 	textStyles,
 	iconStyles,
-	animated
+	animated,
 }) => {
-
 	return (
 		<StyledButton
 			type={type}
@@ -26,13 +25,19 @@ const AsyncButton = ({
 			className={`${className} ${animated ? "animated" : ""} ${disabled ? "disabled" : ""}`}
 			style={{...buttonStyles}}
 		>
-			{iconPosition === "left" && (isLoading ? (
-				<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />) : icon ? ( 
-				<FontAwesomeIcon icon={icon} style={{...iconStyles}} />) : null)}
+			{iconPosition === "left" &&
+				(isLoading ? (
+					<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />
+				) : icon ? (
+					<FontAwesomeIcon icon={icon} style={{...iconStyles}} />
+				) : null)}
 			<span style={{...textStyles}}>{isLoading ? loadingText : text}</span>
-            {iconPosition === "right" && (isLoading ? (
-				<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />) : icon ? (
-				<FontAwesomeIcon icon={icon} style={{...iconStyles}} />) : null)}
+			{iconPosition === "right" &&
+				(isLoading ? (
+					<FontAwesomeIcon icon={faSpinner} style={{...iconStyles}} />
+				) : icon ? (
+					<FontAwesomeIcon icon={icon} style={{...iconStyles}} />
+				) : null)}
 		</StyledButton>
 	);
 };
@@ -48,7 +53,7 @@ AsyncButton.propTypes = {
 	textStyles: PropTypes.object,
 	iconStyles: PropTypes.string,
 	animated: PropTypes.bool,
-	disabled: PropTypes.bool
+	disabled: PropTypes.bool,
 };
 
 export default AsyncButton;

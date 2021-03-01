@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
+import {Container, StyledForm, StyledError} from "./RecoverPassword.styles";
 import Body from "components/layout/Body/Body";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -18,38 +17,32 @@ const users = [
 	},
 ];
 
-const authenticateUser = (email, password) => {
-	let authenticated = false;
+const updateUser = (email, password) => {
+	const newUsers = [];
 	for (let i = 0; i < users.length; i++) {
 		const user = users[i];
-		if (user.email === email && user.password === password) {
-			authenticated = true;
+		if (user.email === email) {
+			newUsers.push(email, password);
 			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
+			console.log("The user is correct. You will receive an email to change your password.");
+		} else {
+			console.error("the user is incorrect. Please try again.");
 		}
 	}
-	if (authenticated) console.log("the user is correct");
-	else console.error("the user is incorrect");
 };
 
-const Login = ({onLogin}) => {
+const RecoverPassword = ({retrieveUser}) => {
 	const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const [isEmailError, setIsEmailError] = useState(false);
-	const [isPassError, setIsPassError] = useState(false);
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
 		const isEmail = validateEmail(value);
 		setIsEmailError(!isEmail);
-	};
-
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		const isPass = validatePassword(value);
-		setIsPassError(!isPass);
 	};
 
 	const [email, setEmail] = useState("");
@@ -66,23 +59,27 @@ const Login = ({onLogin}) => {
 		}, 2000);
 
 		try {
-			authenticateUser(email, password, (error, token) => {
+			updateUser(email, password, (error, token) => {
 				if (error) return setError(error.message);
-				onLogin(token);
+				retrieveUser(token);
 			});
 		} catch ({message}) {
 			setError(message);
 		}
 	};
+
 	return (
-		<Body title="Acceso" isLoggedIn={false}>
+		<Body title="Cambiar contraseña">
 			<Container>
-				<Form onSubmit={handleSubmit}>
+				<StyledForm onSubmit={handleSubmit}>
 					<div className="classInput">
-						<label>Email</label>
+						<label htmlFor="forgetpassword">
+							<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce
+							tu email y te enviaremos una nueva por correo.
+						</label>
 						<Input
 							type="email"
-							placeholder="Introduce tu email"
+							placeholder="email"
 							value={email}
 							onChange={(e) => handleEmailChange(e.target.value)}
 							id="emailName"
@@ -92,49 +89,26 @@ const Login = ({onLogin}) => {
 							disabled={disabled}
 						/>
 					</div>
-					<div className="classInput">
-						<label>Password</label>
-						<Input
-							type="password"
-							placeholder="Introduce tu contraseña"
-							value={password}
-							onChange={(e) => handlePasswordChange(e.target.value)}
-							id="passName"
-							name="passName"
-							error={isPassError}
-							errorText="The password to contain more than 6 characters and a uppercase letter"
-							disabled={disabled}
-							minLength={6}
-						/>
-					</div>
-					<ChangePassword>
-						<Label htmlFor="forgotpassword">
-							<Link to="/recover-password/:hash">Has olvidado tu contraseña?</Link>
-						</Label>
-					</ChangePassword>
 					{error && (
 						<StyledError>
 							<p>{error}</p>
 						</StyledError>
 					)}
 					<AsyncButton
-						text="Acceder"
-						loadingText="Accediendo"
+						text="Enviar"
+						loadingText="Enviando"
 						iconPosition="left"
 						type="submit"
-						className="blueGradient"
+						className="orangeGradient"
 						textStyles={{marginLeft: 10}}
 						isLoading={isLoading}
 						animated={animatedState}
 						disabled={disabled}
 					/>
-					<StyleRedirect>
-						No tienes cuenta? <Link to="/register"> Registrate</Link>
-					</StyleRedirect>
-				</Form>
+				</StyledForm>
 			</Container>
 		</Body>
 	);
 };
 
-export default Login;
+export default RecoverPassword;
