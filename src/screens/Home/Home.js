@@ -1,18 +1,22 @@
 import React, {useState, useEffect} from "react";
+import InputNumber from '../../components/units/InputNumber/InputNumber';
 
 const Home = () => {
-	// Contador
-	const [loading, setLoading] = useState(true);
-	const [data, setData] = useState([]);
 
-	useEffect(() => {
-		fetch("https://miapi.com/datos-grafica").then((resp) => {
-			setData(resp);
-			setLoading(false);
-		});
-	}, []);
+	const [inputNumberValue, setInputNumberValue] = useState();
 
-	return <>{loading ? <div>CARGANDO</div> : <div data={data}>Mis datos a mostrar</div>}</>;
+	const handleInputNumberChange = (e) => {
+		setInputNumberValue(e.target.value);
+	}
+
+	return(
+		<div>
+			<InputNumber
+			value={inputNumberValue}
+			onChange={handleInputNumberChange}
+			/>
+		</div>
+	);
 };
 
 export default Home;
