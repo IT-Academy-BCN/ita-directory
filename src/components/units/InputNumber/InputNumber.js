@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput, StyledIcon} from "./stylesInputNumber";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {StyledError, StyledInput, StyledContainer, StyledIcon} from "./stylesInputNumber";
 
 const InputNumber = ({
 	placeholder,
@@ -21,11 +22,12 @@ const InputNumber = ({
 	errorStyles,
 	error,
 	disabled,
-    step
+    step,
+	icon,
 }) => {
     return(
-        <div>
-			<StyledIcon />
+        <StyledContainer class="container">
+			<StyledIcon class="icon"><FontAwesomeIcon icon={ icon}/></StyledIcon>
             <StyledInput
 				type="number"
 				placeholder={placeholder}
@@ -40,14 +42,12 @@ const InputNumber = ({
 				min={min}
                 max={max}
                 step={step}
-				
-			/>
+				/>
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				className={className}
 			/>
-		
-        </div>
+        </StyledContainer>
     );
 }
 
