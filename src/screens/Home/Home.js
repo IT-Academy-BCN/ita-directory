@@ -1,7 +1,10 @@
 import React, {useState} from "react";
 import InputNumber from '../../components/units/InputNumber/InputNumber';
+import { faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
-const Home = () => {
+const Home = ({
+	icon,
+}) => {
 
 	const [inputNumberValue1, setInputNumberValue1] = useState("");
 	const handleInputNumberChange1 = e => setInputNumberValue1(e.target.value);	
@@ -15,7 +18,8 @@ const Home = () => {
 			<InputNumber
 			value={inputNumberValue1}
 			onChange={handleInputNumberChange1}
-			errorText="Only digits allowed..."					
+			errorText="Only digits allowed..."	
+			icon={faEuroSign}				
 			/>
 
 		<InputNumber
@@ -23,6 +27,7 @@ const Home = () => {
 			onChange={handleInputNumberChange2}
 			errorText="Enter a valid number..."		
 			strictMode={false}
+			icon={faEuroSign}
 			/>
 		</form>
 	);

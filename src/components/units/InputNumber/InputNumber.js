@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput, StyledIcon} from "./stylesInputNumber";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {StyledError, StyledInput, StyledContainer, StyledIcon} from "./stylesInputNumber";
 
 const InputNumber = ({
 	placeholder,
@@ -21,7 +22,8 @@ const InputNumber = ({
 	errorText,
 	errorStyles,		
 	disabled,
-	step
+    step,
+	icon,
 }) => {
 
 	const [isInvalid, setIsInvalid] = useState(false);
@@ -59,8 +61,9 @@ const InputNumber = ({
 	}
 
     return(
-        <div>
-			<StyledIcon />
+		<div>
+        <StyledContainer class="container">
+			<StyledIcon class="icon"><FontAwesomeIcon icon={ icon}/></StyledIcon>
             <StyledInput
 				type={strictMode? "number" : "text"}
 				placeholder={placeholder}
@@ -78,12 +81,12 @@ const InputNumber = ({
                 step="1"
 				
 			/>
-			<StyledError
+        </StyledContainer>
+		<StyledError
 				dangerouslySetInnerHTML={{__html: isInvalid ? errorText: null}}
 				className={className}
 			/>
-		
-        </div>
+		</div>
     );
 }
 
