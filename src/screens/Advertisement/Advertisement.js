@@ -21,7 +21,7 @@ const Advertisement = () => {
 	  ];
 
 	  
-	return <Body title="Anuncio"><Gallery images={images}/></Body>;
+	return <Body title="Anuncio"><Gallery images={images} width={925} height={230}/></Body>;
 };
 
 export default Advertisement;
