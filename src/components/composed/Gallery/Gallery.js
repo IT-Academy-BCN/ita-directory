@@ -1,29 +1,20 @@
 import React from "react";
 import ImageGallery from 'react-image-gallery';
-import { adImage1, adImage2, adImage3 } from "assets/images"
-import {StyledImage} from "./Gallery.styles.js"
+import { adImage1, adImage2, adImage3, adThumbnail1, adThumbnail2, adThumbnail3 } from "assets/images";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-const renderImage = (isThumbnail, src) => {
-  return (
-    <StyledImage src={src} thumbnail={isThumbnail}/>
-  )
-}
 const images = [
   {
     original: adImage1,
-    renderThumbInner: () => renderImage(true, adImage1),
-    renderItem: () => renderImage(false, adImage1)
+    thumbnail: adThumbnail1
   },
   {
     original: adImage2,
-    renderThumbInner: () => renderImage(true, adImage2),
-    renderItem: () => renderImage(false, adImage2)
+    thumbnail: adThumbnail2
   },
   {
     original: adImage3,
-    renderThumbInner: () => renderImage(true, adImage3),
-    renderItem: () => renderImage(false, adImage3)
+    thumbnail: adThumbnail3
   },
 ];
 
