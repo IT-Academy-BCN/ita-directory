@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {StyledError, StyledInput, StyledIcon} from "./stylesInputNumber";
 
@@ -14,36 +14,72 @@ const InputNumber = ({
 	className,
 	id,
 	name,
-	min,
+	min = -90,
 	max,
+	strictMode = true,
 	size,
 	errorText,
-	errorStyles,
-	error,
+	errorStyles,		
 	disabled,
-    step
+	step
 }) => {
+
+	const [isInvalid, setIsInvalid] = useState(false);
+
+	const handleOnChange = e => {
+		if (!strictMode) {
+			validateIsInteger(e.target.value);
+		}
+		onChange(e);		
+	}
+
+	const validateIsInteger = val => {
+		console.log(val);
+		const regex = /^[0-9]+$/;
+		setIsInvalid(!(val === '' || regex.test(val)));
+	}
+
+
+	const validateStrictMode = e => {
+		const val = e.keyCode;
+		console.log(val);
+		if (val) {
+			const validKeyCodes = [8, 13, 35, 36, 37, 38, 39, 40, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]; //controls for all digits, canc, enter, backspace and arrows		
+			const regex = /^[0-9]+$/;
+			setIsInvalid((!validKeyCodes.includes(val) || !regex.test(value)));
+		}
+		else {
+			setIsInvalid(false);
+		}
+	}
+
+	const handleBlur = e => {
+		console.log("on blur");
+		validateIsInteger(value);
+	}
+
     return(
         <div>
 			<StyledIcon />
             <StyledInput
-				type="number"
+				type={strictMode? "number" : "text"}
 				placeholder={placeholder}
 				value={value}
-				onChange={onChange}
+				onChange={handleOnChange}
+				onBlur={handleBlur}
+				onKeyUp={strictMode? validateStrictMode: null}
 				onFocus={onFocus}
-				onBlur={onBlur}
-				className={`${className} ${error ? "error" : ""}`}
+				className={`${className} ${isInvalid ? "error" : ""}`}
 				id={id}
 				name={name}
 				disabled={disabled}
 				min={min}
                 max={max}
-                step={step}
+                step="1"
 				
 			/>
 			<StyledError
-				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+				dangerouslySetInnerHTML={{__html: isInvalid ? errorText: null}}
 				className={className}
 			/>
 		
@@ -69,8 +105,9 @@ InputNumber.propTypes = {
 	disabled: PropTypes.bool,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	error: PropTypes.bool,
+	strictMode: PropTypes.bool,
     step: PropTypes.number,
 };
+
 
 export default InputNumber;
