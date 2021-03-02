@@ -7,7 +7,7 @@ const Gallery = ({
   images, 
   width=800, 
   height=256, 
-  showFullscreenButton=false, 
+  showFullscreenButton=true, 
   showBullets=false,
   showPlayButton=false,
   showNav=false,
@@ -36,6 +36,7 @@ const Gallery = ({
           slideDuration={slideDuration}
           slideInterval={slideInterval}
           startIndex={startIndex}
+          useBrowserFullscreen={false}
         />
       </Container>
     );
