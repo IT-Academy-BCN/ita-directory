@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput} from "../Input/styles";
+import {StyledError, StyledInput, StyledIcon} from "./stylesInputNumber";
 
 const InputNumber = ({
 	placeholder,
@@ -25,6 +25,7 @@ const InputNumber = ({
 }) => {
     return(
         <div>
+			<StyledIcon />
             <StyledInput
 				type="number"
 				placeholder={placeholder}
@@ -39,11 +40,13 @@ const InputNumber = ({
 				min={min}
                 max={max}
                 step={step}
+				
 			/>
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				className={className}
 			/>
+		
         </div>
     );
 }
