@@ -5,8 +5,6 @@ import {Container} from "./Gallery.styles.js"
 
 const Gallery = ({
   images, 
-  width=800, 
-  height=256, 
   showFullscreenButton=true, 
   showBullets=false,
   showPlayButton=false,
@@ -21,7 +19,7 @@ const Gallery = ({
   startIndex=0
 }) => {
 		return (
-      <Container width={width} height={height}>
+      <Container>
         <ImageGallery 
           items={images} 
           showFullscreenButton={showFullscreenButton} 
