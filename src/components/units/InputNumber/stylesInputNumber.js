@@ -40,12 +40,17 @@ export const StyledInput = styled.input`
 	&[type="number"] {
 		-moz-appearance: textfield;
 	}
+	&.error {
+		border: 1px solid ${Colors.redColor};
+		color: #7d868b;
+	}
 `;
 
 export const StyledError = styled.small`
 	color: #e74c3c;
-	position: absolute;
+	position: relative;
 	left: 0;
+	top: 0;
 	visibility: visible;
 
 	&.errorProfile {
