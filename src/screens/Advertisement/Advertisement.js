@@ -8,15 +8,21 @@ const Advertisement = () => {
 	const images = [
 		{
 		  original: adImage1,
-		  thumbnail: adThumbnail1
+		  thumbnail: adThumbnail1,
+		  originalAlt: "Bedroom",
+		  thumbnailAlt: "Bedroom"
 		},
 		{
 		  original: adImage2,
-		  thumbnail: adThumbnail2
+		  thumbnail: adThumbnail2,
+		  originalAlt:"Bedroom2",
+		  thumbnailAlt:"Bedroom2",
 		},
 		{
 		  original: adImage3,
-		  thumbnail: adThumbnail3
+		  thumbnail: adThumbnail3,
+		  originalAlt: "Casa piscina",
+		  thumbnailAlt: "Casa piscina"
 		},
 	  ];
 
