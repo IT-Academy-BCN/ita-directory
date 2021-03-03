@@ -23,6 +23,8 @@ export const StyledFooter = styled.footer`
 	flex-direction: row;
 	justify-content: space-between;
 	margin-top: 1.5rem;
+	border-top: 1px solid ${Colors.lightGrey};
+	width: 100%;
 
 	@media only screen and (max-width: 468px) {
 		display: flex;
