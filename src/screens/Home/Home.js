@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import InputNumber from "../../components/units/InputNumber/InputNumber";
 import {faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
-const Home = ({icon, label}) => {
+const Home = () => {
 	const [inputNumberValue, setInputNumberValue] = useState("");
 	const handleInputNumberChange = (e) => setInputNumberValue(e.target.value);
 

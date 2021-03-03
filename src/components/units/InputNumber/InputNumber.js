@@ -52,7 +52,7 @@ const InputNumber = ({
 	return (
 		<React.Fragment>
 			<StyledMainContainer>
-				<StyledLabel htmlFor="label">{label}</StyledLabel>
+				<StyledLabel htmlFor={id}>{label}</StyledLabel>
 				<StyledContainerInputError>
 					<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
 						<StyledIcon>

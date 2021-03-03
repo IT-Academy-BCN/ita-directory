@@ -68,7 +68,7 @@ export const StyledError = styled.small`
 export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: row;
-	padding-right: 45px;
+	padding: 3px 45px 0 0 ;
 	color: grey;
 `;
 
