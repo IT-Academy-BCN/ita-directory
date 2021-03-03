@@ -16,7 +16,7 @@ export const StyledContainer = styled.div`
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
-	&:focus-within input{
+	&:focus-within {
 		outline: 0 none;
 	}
 `;
@@ -36,13 +36,23 @@ export const StyledInput = styled.input`
 	font-size: 14px;
 	color: #393939;
 	padding: 0.75rem;
-	::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
- 	}
+	::-webkit-outer-spin-button,
+	::-webkit-inner-spin-button 
+	{
+		-webkit-appearance: none;
+		margin: 0;
+	}
 	&[type="number"] {
 		-moz-appearance: textfield;
 	}
+	&:focus-within {
+		outline: 0 none;
+		border: none;
+	}
+	&.error {
+		border: none;
+		outline: 0 none;
+	} 
 `;
 
 export const StyledError = styled.small`
@@ -50,7 +60,6 @@ export const StyledError = styled.small`
 	left: 0;
 	top: 0;
 	visibility: visible;
-
 	&.errorProfile {
 		position: static;
 	}
@@ -59,19 +68,15 @@ export const StyledError = styled.small`
 export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: row;
-	align-items: center;
-	padding-right: 25px;
+	padding-right: 45px;
 	color: grey;
 `;
 
-export const StyledLabelContainer = styled.div`
+export const StyledMainContainer = styled.div`
 	display: flex;
 `;
 
-export const StyledEmptyLabel = styled.label`
+export const StyledContainerInputError = styled.div`
 	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding-right: 25px;
-	color: transparent;
+	flex-direction: column;
 `;

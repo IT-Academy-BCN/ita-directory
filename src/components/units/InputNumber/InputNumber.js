@@ -7,8 +7,8 @@ import {
 	StyledContainer,
 	StyledIcon,
 	StyledLabel,
-	StyledLabelContainer,
-	StyledEmptyLabel,
+	StyledMainContainer,
+	StyledContainerInputError,
 } from "./stylesInputNumber";
 
 const InputNumber = ({
@@ -23,11 +23,10 @@ const InputNumber = ({
 	className,
 	id,
 	name,
-	min = -90,
+	min,
 	max,
-	strictMode = true,
 	size,
-	errorText,
+	errorText = "Tiene que ser un número válido o no puede estar vacío",
 	errorStyles,
 	disabled,
 	step,
@@ -36,89 +35,56 @@ const InputNumber = ({
 }) => {
 	const [isInvalid, setIsInvalid] = useState(false);
 
+	/*warning on behavior of input type number:
+	target value is passed as empty string if the number is not interpreted as valid 
+	by the browser (e.g. when "+", "-" are typed) and onChange event is not fired. 
+	Consider this when managing validation on parent components!
+	*/
+
 	const handleOnChange = (e) => {
-		if (!strictMode) {
-			validateIsInteger(e.target.value);
-		}
+		const val = e.target.value;
+		const regex = /^\d+$/;
+		console.log("change_" + e.target.value);
+		setIsInvalid(val === "" || !regex.test(val) ? true : false);
 		onChange(e);
-	};
-
-	const validateIsInteger = (val) => {
-		console.log(val);
-		const regex = /^[0-9]+$/;
-		setIsInvalid(!(val === "" || regex.test(val)));
-	};
-
-	const validateStrictMode = (e) => {
-		const val = e.keyCode;
-		console.log(val);
-		if (val) {
-			const validKeyCodes = [
-				8,
-				13,
-				35,
-				36,
-				37,
-				38,
-				39,
-				40,
-				46,
-				48,
-				49,
-				50,
-				51,
-				52,
-				53,
-				54,
-				55,
-				56,
-				57,
-			]; //controls for all digits, canc, enter, backspace and arrows
-			const regex = /^[0-9]+$/;
-			setIsInvalid(!validKeyCodes.includes(val) || !regex.test(value));
-		} else {
-			setIsInvalid(false);
-		}
-	};
-
-	const handleBlur = (e) => {
-		console.log("on blur");
-		validateIsInteger(value);
 	};
 
 	return (
 		<React.Fragment>
-			<StyledLabelContainer>
+			<StyledMainContainer>
 				<StyledLabel htmlFor="label">{label}</StyledLabel>
-				<StyledContainer className="container" className={`${className} ${isInvalid ? "error" : ""}`}>
-					<StyledIcon>
-						<FontAwesomeIcon icon={icon} />
-					</StyledIcon>
-					<StyledInput
-						type={strictMode ? "number" : "text"}
-						placeholder={placeholder}
-						value={value}
-						onChange={handleOnChange}
-						onBlur={handleBlur}
-						onKeyUp={strictMode ? validateStrictMode : null}
-						onFocus={onFocus}
-						className={`${className} ${isInvalid ? "error" : ""}`}
-						id={id}
-						name={name}
-						disabled={disabled}
-						min={min}
-						max={max}
-						step="1"
+				<StyledContainerInputError>
+					<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
+						<StyledIcon>
+							<FontAwesomeIcon icon={icon} />
+						</StyledIcon>
+						<StyledInput
+							type="number"
+							placeholder={placeholder}
+							value={value}
+							onChange={handleOnChange}
+							onFocus={onFocus}
+							onBlur={onBlur}
+							className={`${className} ${isInvalid ? "error" : ""}`}
+							id={id}
+							name={name}
+							min={min}
+							max={max}
+							disabled={disabled}
+							step={step}
+							textStyles={textStyles}
+							inputStyles={inputStyles}
+							labelStyles={labelStyles}
+							size={size}
+							errorStyles={errorStyles}
+						/>
+					</StyledContainer>
+					<StyledError
+						dangerouslySetInnerHTML={{__html: isInvalid ? errorText : null}}
+						className={className}
 					/>
-				</StyledContainer>
-			</StyledLabelContainer>
-			<StyledLabelContainer>
-				<StyledEmptyLabel htmlFor="emptyLabel">{label}</StyledEmptyLabel>
-				<StyledError
-					dangerouslySetInnerHTML={{__html: isInvalid ? errorText : null}}
-					className={className}
-				/>
-			</StyledLabelContainer>
+				</StyledContainerInputError>
+			</StyledMainContainer>
 		</React.Fragment>
 	);
 };
@@ -141,7 +107,6 @@ InputNumber.propTypes = {
 	disabled: PropTypes.bool,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	strictMode: PropTypes.bool,
 	step: PropTypes.number,
 };
 
