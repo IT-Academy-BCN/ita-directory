@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
-import SimplifiedButton from "components/units/SimplifiedButton/SimplifiedButton";
+import Button from "components/units/Button/Button";
 import {Link} from "react-router-dom";
 import {StyledAd, StyledUl, StyledLi, StyledTitle, StyledText} from "./Ad.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -108,8 +108,10 @@ const Ad = () => {
 					<Link to="/">
 						{" "}
 						{/* //contacto */}
-						<SimplifiedButton
+						<Button
+							buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
 							text="Contacto"
+							className="blueGradient"
 							loadingText="Cargando"
 							type="submit"
 							isLoading={isLoading}
