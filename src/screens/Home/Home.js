@@ -4,6 +4,7 @@ import { faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
 const Home = ({
 	icon,
+	label
 }) => {
 
 	const [inputNumberValue1, setInputNumberValue1] = useState("");
@@ -19,7 +20,8 @@ const Home = ({
 			value={inputNumberValue1}
 			onChange={handleInputNumberChange1}
 			errorText="Only digits allowed..."	
-			icon={faEuroSign}				
+			icon={faEuroSign}
+			label={"Price"}				
 			/>
 
 		<InputNumber
@@ -28,6 +30,7 @@ const Home = ({
 			errorText="Enter a valid number..."		
 			strictMode={false}
 			icon={faEuroSign}
+			label={"Price"}	
 			/>
 		</form>
 	);
