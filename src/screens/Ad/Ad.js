@@ -5,7 +5,15 @@ import {Link} from "react-router-dom";
 import {StyledAd, StyledUl, StyledLi, StyledTitle, StyledText} from "./Ad.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-import Advertisement from "screens/Advertisement/Advertisement";
+import Gallery from "components/composed/Gallery/Gallery";
+import {
+	adImage1,
+	adImage2,
+	adImage3,
+	adThumbnail1,
+	adThumbnail2,
+	adThumbnail3,
+} from "assets/images";
 
 const Ad = () => {
 	const [disabled, setIsDisabled] = useState(false);
@@ -21,12 +29,32 @@ const Ad = () => {
 			console.log("finalizado");
 		}, 2000);
 	};
+	const images = [
+		{
+			original: adImage1,
+			thumbnail: adThumbnail1,
+			originalAlt: "Bedroom",
+			thumbnailAlt: "Bedroom",
+		},
+		{
+			original: adImage2,
+			thumbnail: adThumbnail2,
+			originalAlt: "Bedroom2",
+			thumbnailAlt: "Bedroom2",
+		},
+		{
+			original: adImage3,
+			thumbnail: adThumbnail3,
+			originalAlt: "Casa piscina",
+			thumbnailAlt: "Casa piscina",
+		},
+	];
 
 	return (
 		<>
 			<Body title="Anuncio">
 				<StyledAd>
-					<Advertisement />
+					<Gallery images={images} />
 					<div>
 						<div>
 							<StyledUl>
