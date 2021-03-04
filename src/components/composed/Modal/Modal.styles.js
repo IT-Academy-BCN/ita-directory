@@ -17,7 +17,7 @@ export const ModalBlock = styled.div`
 `;
 
 export const ModalOverlay = styled.a`
-	background: rgba(247, 248, 249, 0.75);
+	background: rgba(0, 0, 0, 0.75);
 	bottom: 0;
 	cursor: default;
 	display: block;
