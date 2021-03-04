@@ -95,36 +95,45 @@ export const StyledDropdown = styled.div`
 	padding: 0;
 	z-index: 1;
 	text-align: center;
-	background: #ffffff 0% 0% no-repeat padding-box;
+	background: transparent 0% 0% no-repeat padding-box;
 	border: 1px solid #dddddd;
 	border-radius: 10px;
 	opacity: 1;
+	background-color: ;
 `;
 
 export const StyledUl = styled.ul`
 	list-style-type: none;
 	padding: 0px;
-	margin: 0px;
+	margin-top: 10px;
 	position: absolute;
 	box-shadow: 0px 4px 10px #00000029;
+	background: transparent;
+	border-radius: 6px;
 `;
 
 export const StyledLi = styled.li`
 	border: 1px solid #dddd;
-	padding-top: 10px;
 	align-items: center;
 	text-align: center;
-	min-height: 2.5rem;
 	min-width: 6rem;
 	width: 120px;
-	line-height: 100%;
-
 	display: block;
 	background-color: white;
 	position: relative;
-
-	top: 20px;
 	z-index: 2;
+	line-height: 2.5rem;
+	border-bottom: 0;
+
+	&:first-child {
+		border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+	}
+
+	&:last-child {
+		border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
+	}
 `;
 
 export const StyledButton = styled.button`
