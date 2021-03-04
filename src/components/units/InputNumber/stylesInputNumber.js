@@ -37,8 +37,7 @@ export const StyledInput = styled.input`
 	color: #393939;
 	padding: 0.75rem;
 	::-webkit-outer-spin-button,
-	::-webkit-inner-spin-button 
-	{
+	::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
@@ -52,7 +51,7 @@ export const StyledInput = styled.input`
 	&.error {
 		border: none;
 		outline: 0 none;
-	} 
+	}
 `;
 
 export const StyledError = styled.small`
@@ -68,7 +67,7 @@ export const StyledError = styled.small`
 export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: row;
-	padding: 3px 45px 0 0 ;
+	padding: 3px 45px 0 0;
 	color: grey;
 `;
 
