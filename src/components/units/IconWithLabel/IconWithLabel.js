@@ -1,0 +1,14 @@
+import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {StyledIconWithLabel, StyledLabel} from "./IconWithLabel.styles";
+
+const IconWithLabel = ({icon, text}) => {
+	return (
+		<StyledIconWithLabel>
+			<FontAwesomeIcon icon={icon} />
+			<StyledLabel>{text}</StyledLabel>
+		</StyledIconWithLabel>
+	);
+};
+
+export default IconWithLabel;
