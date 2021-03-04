@@ -22,4 +22,9 @@ export const Childrens = styled.div`
 	&.profile {
 		padding-top: 1rem;
 	}
+
+	.createNewAd {
+		padding-left: 15vw;
+		padding-right: 15vw;
+	}
 `;

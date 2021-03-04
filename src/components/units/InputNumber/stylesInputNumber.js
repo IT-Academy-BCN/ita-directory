@@ -19,6 +19,9 @@ export const StyledContainer = styled.div`
 	&:focus-within {
 		outline: 0 none;
 	}
+	&:focus {
+		outline: inherit;
+	}
 `;
 
 export const StyledIcon = styled.div`
@@ -68,7 +71,7 @@ export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: row;
 	padding: 3px 45px 0 0;
-	color: grey;
+	color: #999999;
 `;
 
 export const StyledMainContainer = styled.div`

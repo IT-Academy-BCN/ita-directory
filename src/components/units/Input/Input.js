@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput} from "./styles";
+import {StyledError, StyledInput, StyledLabel} from "./styles";
 
 const Input = ({
 	type,
@@ -24,9 +24,11 @@ const Input = ({
 	error,
 	disabled,
 	minLength,
+	label,
 }) => {
 	return (
 		<div>
+			<StyledLabel htmlFor={id}>{label}</StyledLabel>
 			<StyledInput
 				type={type}
 				placeholder={placeholder}
