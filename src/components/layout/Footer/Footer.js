@@ -14,8 +14,7 @@ const Footer = () => {
 					<Copyright>©miempresa.com</Copyright>
 					<Rights>Todos los derechos reservados.</Rights>
 					<Legal>
-						<Anchor href="#">AvisoLegal</Anchor>
-						<Anchor href="#">Privacidad</Anchor>
+						<Anchor href="#">Aviso Legal</Anchor>-<Anchor href="#">Privacidad</Anchor>-
 						<Anchor href="#">Cookies</Anchor>
 					</Legal>
 				</Information>

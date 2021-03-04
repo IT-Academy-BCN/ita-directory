@@ -1,18 +1,22 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
+import InputNumber from "../../components/units/InputNumber/InputNumber";
+import {faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-	// Contador
-	const [loading, setLoading] = useState(true);
-	const [data, setData] = useState([]);
+	const [inputNumberValue, setInputNumberValue] = useState("");
+	const handleInputNumberChange = (e) => setInputNumberValue(e.target.value);
 
-	useEffect(() => {
-		fetch("https://miapi.com/datos-grafica").then((resp) => {
-			setData(resp);
-			setLoading(false);
-		});
-	}, []);
-
-	return <>{loading ? <div>CARGANDO</div> : <div data={data}>Mis datos a mostrar</div>}</>;
+	return (
+		<form>
+			<InputNumber
+				value={inputNumberValue}
+				onChange={handleInputNumberChange}
+				errorText="only valid numbers allowed"
+				icon={faEuroSign}
+				label={"Price"}
+			/>
+		</form>
+	);
 };
 
 export default Home;
