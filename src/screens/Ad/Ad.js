@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
+import Map from "components/composed/Map/Map";
 import {Link} from "react-router-dom";
 import {StyledAd, StyledUl, StyledTitle, StyledText, StyledBottomDiv} from "./Ad.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
@@ -84,6 +85,7 @@ const Ad = ({icon}) => {
 							</p>
 						</StyledText>
 
+						<Map />
 						<Link to="/">
 							{" "}
 							{/* //contacto */}
