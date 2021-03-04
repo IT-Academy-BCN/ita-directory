@@ -17,7 +17,7 @@ const CreateNewAd = () => {
 			<Body title="Publicar anuncio" isLoggedIn={true}>
 				<Wrapper>
 					<form>
-						<Input label={"Título"} />
+						<Input label={"Título"} inputContainerClassName="createNewAd" />
 						<Input label={"Descripción"} />
 						<Input label={"Ciudad"} icon={faMapMarkerAlt} />
 						<InputNumber

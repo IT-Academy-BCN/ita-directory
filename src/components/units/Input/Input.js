@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput, StyledLabel} from "./styles";
+import {StyledError, StyledInput, StyledLabel, StyledContainer} from "./styles";
 
 const Input = ({
 	type,
@@ -25,9 +25,10 @@ const Input = ({
 	disabled,
 	minLength,
 	label,
+	inputContainerClassName,
 }) => {
 	return (
-		<div>
+		<StyledContainer className={inputContainerClassName}>
 			<StyledLabel htmlFor={id}>{label}</StyledLabel>
 			<StyledInput
 				type={type}
@@ -46,7 +47,7 @@ const Input = ({
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				className={className}
 			/>
-		</div>
+		</StyledContainer>
 	);
 };
 
@@ -70,6 +71,7 @@ Input.propTypes = {
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	error: PropTypes.bool,
+	inputContainerClassName: PropTypes.string,
 };
 
 export default Input;

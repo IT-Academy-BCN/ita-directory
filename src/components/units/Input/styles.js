@@ -33,3 +33,9 @@ export const StyledLabel = styled.label`
 	padding: 3px 45px 0 0;
 	color: #999999;
 `;
+
+export const StyledContainer = styled.div`
+	&.createNewAd {
+		display: flex;
+	}
+`;
