@@ -8,7 +8,6 @@ import {
 	StyledLi,
 	StyledButton,
 	StyledMiPerfil,
-	StyledLogo,
 	StyledText,
 	StyledUl,
 } from "./Header.styles";
@@ -38,6 +37,8 @@ const Header = ({isLoggedIn, title}) => {
 							<StyledDropdown>
 								<StyledUl>
 									<StyledLi>Editar perfil</StyledLi>
+									<StyledLi>Mis Anuncios</StyledLi>
+									<StyledLi>Publicar Anuncio</StyledLi>
 									<StyledLi>Cerrar sesión</StyledLi>
 								</StyledUl>
 							</StyledDropdown>
