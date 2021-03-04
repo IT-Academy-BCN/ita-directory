@@ -18,8 +18,12 @@ const CreateNewAd = () => {
 				<Wrapper>
 					<form>
 						<Input label={"Título"} inputContainerClassName="createNewAd" />
-						<Input label={"Descripción"} />
-						<Input label={"Ciudad"} icon={faMapMarkerAlt} />
+						<Input label={"Descripción"} inputContainerClassName="createNewAd" />
+						<Input
+							label={"Ciudad"}
+							icon={faMapMarkerAlt}
+							inputContainerClassName="createNewAd"
+						/>
 						<InputNumber
 							label={"Habitaciones"}
 							icon={faBed}

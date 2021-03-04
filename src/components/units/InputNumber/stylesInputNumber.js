@@ -7,25 +7,24 @@ export const StyledContainer = styled.div`
 	align-items: center;
 	flex-wrap: nowrap;
 	border-radius: 5px;
-	border: 1px solid grey;
+	border: 1px solid #dddddd;
 	width: 18.6rem;
 	height: 2.6rem;
 	padding: 5px;
-	border-radius: 5px;
 	&.error {
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
 	&:focus-within {
 		outline: 0 none;
-		border: 2px solid #000;
+		border: 3px solid #000;
 	}
 `;
 
 export const StyledIcon = styled.div`
 	display: flex;
 	margin-right: 6px;
-	color: grey;
+	color: #999999;
 `;
 
 export const StyledInput = styled.input`
