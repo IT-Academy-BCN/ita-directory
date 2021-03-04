@@ -18,9 +18,7 @@ export const StyledContainer = styled.div`
 	}
 	&:focus-within {
 		outline: 0 none;
-	}
-	&:focus {
-		outline: inherit;
+		border: 2px solid #000;
 	}
 `;
 
