@@ -19,12 +19,10 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 					<ModalContainer>
 						<ModalHeader>
 							<ModalTitle>{title}</ModalTitle>
+							<ModalClose onClick={() => hideModal()}>X</ModalClose>
 						</ModalHeader>
 						<ModalBody>{children}</ModalBody>
-						<ModalFooter>
-							<ModalClose onClick={() => hideModal()}>X Cancelar </ModalClose>
-							{footer}
-						</ModalFooter>
+						<ModalFooter>{footer}</ModalFooter>
 					</ModalContainer>
 				</ModalBlock>
 			)}
