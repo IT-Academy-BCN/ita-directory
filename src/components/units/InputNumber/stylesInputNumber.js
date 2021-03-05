@@ -20,7 +20,6 @@ export const StyledContainer = styled.div`
 		border: 3px solid #000;
 	}
 	&.styleInputCreateNewAd {
-		margin-bottom: 15px;
 		border: 1px solid #707070;
 	}
 `;
@@ -63,6 +62,7 @@ export const StyledError = styled.small`
 	left: 0;
 	top: 0;
 	visibility: visible;
+	margin-bottom: 15px;
 	&.errorProfile {
 		position: static;
 	}

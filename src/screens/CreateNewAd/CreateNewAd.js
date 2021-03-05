@@ -70,7 +70,6 @@ const CreateNewAd = () => {
 								value={numericValue}
 							/>
 						))}
-
 						<Button
 							buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 							text="Enviar"
