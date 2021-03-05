@@ -1,7 +1,15 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
-import {StyledAd, StyledUl, StyledTitle, StyledText, StyledBottomDiv} from "./Ad.styles";
+import {
+	StyledAd,
+	StyledUl,
+	StyledTitle,
+	StyledText,
+	StyledBottomDiv,
+	StyledStreet,
+	StyledItems,
+} from "./Ad.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
@@ -14,6 +22,11 @@ import {
 	adThumbnail3,
 } from "assets/images";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
+// import 'leaflet/dist/leaflet.css';
+// import { MapContainer, TileLayer } from 'react-leaflet';
+import "components/composed/Map/Map.css";
+import Map from "components/composed/Map/Map";
+// import Styles from "styled-components";
 
 const LIST_ICONS = [
 	{name: "Madrid", icon: faMapMarkerAlt},
@@ -55,7 +68,11 @@ const Ad = ({icon}) => {
 					<StyledBottomDiv>
 						<StyledUl>
 							{LIST_ICONS.map((el, index) => {
-								return <IconWithLabel key={index} icon={el.icon} text={el.name} />;
+								return (
+									<StyledItems>
+										<IconWithLabel key={index} icon={el.icon} text={el.name} />
+									</StyledItems>
+								);
 							})}
 						</StyledUl>
 						<StyledText>
@@ -71,8 +88,21 @@ const Ad = ({icon}) => {
 								eget condimentum congue.
 							</p>
 						</StyledText>
+						<Map />
+						<StyledStreet>
+							<p>
+								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
+							</p>
+						</StyledStreet>
 						<Button
-							buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
+							//buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
+							buttonStyles={{
+								width: "7.5rem",
+								fontsize: "12px",
+								height: "2.2rem",
+								marginTop: "0rem",
+								marginLeft: "6%",
+							}}
 							text="Contacto"
 							className="blueGradient"
 							type="button"

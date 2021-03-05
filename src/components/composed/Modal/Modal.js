@@ -9,6 +9,7 @@ import {
 	ModalOverlay,
 	ModalTitle,
 } from "./Modal.styles";
+import PropTypes from "prop-types";
 
 const Modal = ({title, footer, children, active, hideModal}) => {
 	return (
@@ -19,16 +20,31 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 					<ModalContainer>
 						<ModalHeader>
 							<ModalTitle>{title}</ModalTitle>
+							<ModalClose onClick={() => hideModal()}>X</ModalClose>
 						</ModalHeader>
 						<ModalBody>{children}</ModalBody>
-						<ModalFooter>
-							<ModalClose onClick={() => hideModal()}>X Cancelar </ModalClose>
-							{footer}
-						</ModalFooter>
+						<ModalFooter>{footer}</ModalFooter>
 					</ModalContainer>
 				</ModalBlock>
 			)}
 		</Fragment>
 	);
 };
+
+Modal.propTypes = {
+	title: PropTypes.string,
+	footer: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+		PropTypes.string,
+	]),
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+		PropTypes.string,
+	]).isRequired,
+	active: PropTypes.bool.isRequired,
+	hideModal: PropTypes.func.isRequired,
+};
+
 export default Modal;

@@ -57,12 +57,13 @@ export const StyledHeaderTop = styled.div`
 `;
 
 export const StyledMiPerfil = styled.div`
-	position: relative;
+	position: realtive;
 	display: inline-block;
 `;
 
 export const StyledLogo = styled.div`
 	text-align: left;
+	max-width: 50%;
 	font: normal normal normal 18px Korb-Bold;
 	letter-spacing: 0px;
 	color: #005593;
@@ -110,20 +111,23 @@ export const StyledUl = styled.ul`
 	box-shadow: 0px 4px 10px #00000029;
 	background: transparent;
 	border-radius: 6px;
+	right: 0;
 `;
 
 export const StyledLi = styled.li`
 	border: 1px solid #dddd;
 	align-items: center;
-	text-align: center;
+	text-align: left;
+	padding-left: 15px;
 	min-width: 6rem;
-	width: 120px;
+	width: 150px;
 	display: block;
 	background-color: white;
 	position: relative;
 	z-index: 2;
 	line-height: 2.5rem;
 	border-bottom: 0;
+	right: 0;
 
 	&:first-child {
 		border-top-right-radius: 6px;
