@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
-import {Link} from "react-router-dom";
 import {StyledAd, StyledUl, StyledTitle, StyledText, StyledBottomDiv} from "./Ad.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
+import ContactModal from "components/composed/ContactModal/ContactModal.js";
 import {
 	adImage1,
 	adImage2,
@@ -24,19 +24,7 @@ const LIST_ICONS = [
 ];
 
 const Ad = ({icon}) => {
-	const [disabled, setIsDisabled] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-	const handleClick = (e) => {
-		e.preventDefault();
-		setIsDisabled(true);
-		setIsLoading(true);
-		console.log("cargando");
-		setTimeout(() => {
-			setIsDisabled(false);
-			setIsLoading(false);
-			console.log("finalizado");
-		}, 3000);
-	};
+	const [active, setActive] = useState(false);
 	const images = [
 		{
 			original: adImage1,
@@ -83,21 +71,14 @@ const Ad = ({icon}) => {
 								eget condimentum congue.
 							</p>
 						</StyledText>
-
-						<Link to="/">
-							{" "}
-							{/* //contacto */}
-							<Button
-								buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
-								text="Contacto"
-								className="blueGradient"
-								loadingText="Cargando"
-								type="submit"
-								isLoading={isLoading}
-								disabled={disabled}
-								onClick={handleClick}
-							/>
-						</Link>
+						<Button
+							buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
+							text="Contacto"
+							className="blueGradient"
+							type="button"
+							onClick={() => setActive(true)}
+						/>
+						<ContactModal active={active} hideModal={() => setActive(false)} />
 					</StyledBottomDiv>
 				</StyledAd>
 			</Body>
