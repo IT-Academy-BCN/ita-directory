@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
 
 export const StyledHeader = styled.header`
 	display: flex;
@@ -95,10 +94,10 @@ export const StyledDropdown = styled.div`
 	position: absolute;
 	padding: 0;
 	z-index: 1;
-	text: center;
+	text-align: center;
 	background: #ffffff 0% 0% no-repeat padding-box;
 	border: 1px solid #dddddd;
-	border-radius: 6px 6px 0px 0px;
+	border-radius: 10px;
 	opacity: 1;
 `;
 
@@ -107,6 +106,7 @@ export const StyledUl = styled.ul`
 	padding: 0px;
 	margin: 0px;
 	position: absolute;
+	box-shadow: 0px 4px 10px #00000029;
 `;
 
 export const StyledLi = styled.li`
@@ -116,6 +116,7 @@ export const StyledLi = styled.li`
 	text-align: center;
 	min-height: 2.5rem;
 	min-width: 6rem;
+	width: 120px;
 	line-height: 100%;
 
 	display: block;
@@ -136,5 +137,6 @@ export const StyledButton = styled.button`
 	border-radius: 10px;
 	opacity: 1;
 	min-width: 6rem;
+	width: 120px;
 	height: 50px;
 `;

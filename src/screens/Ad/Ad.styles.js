@@ -2,6 +2,9 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const StyledAd = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	@media only screen and (min-width: 1020px) {
 		display: flex;
 		flex-direction: column;
