@@ -19,7 +19,12 @@ export const StyledInput = styled.input`
 		width: 475px;
 		height: 142px;
 	}
+	&.styleInputCreateNewAd {
+		margin-bottom: 10px;
+		border: 1px solid #707070;
+	}
 `;
+
 export const StyledError = styled.small`
 	color: #e74c3c;
 	position: absolute;

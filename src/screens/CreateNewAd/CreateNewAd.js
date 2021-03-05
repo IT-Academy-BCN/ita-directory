@@ -17,40 +17,49 @@ const CreateNewAd = () => {
 			<Body title="Publicar anuncio" isLoggedIn={true}>
 				<Wrapper>
 					<form>
-						<Input label={"Título"} inputContainerClassName="createNewAd" />
+						<Input
+							label={"Título"}
+							inputContainerClassName="createNewAd"
+							className="styleInputCreateNewAd"
+						/>
 						<Input
 							label={"Descripción"}
-							className="styleInput"
+							className="styleInput styleInputCreateNewAd"
 							inputContainerClassName="createNewAd"
 						/>
 						<Input
 							label={"Ciudad"}
 							icon={faMapMarkerAlt}
 							inputContainerClassName="createNewAd"
+							className="styleInputCreateNewAd"
 						/>
 						<InputNumber
 							label={"Habitaciones"}
 							icon={faBed}
 							onChange={handleChangeNumeric}
 							value={numericValue}
+							className="styleInputCreateNewAd"
 						/>
 						<InputNumber
 							label={"Precio"}
 							icon={faEuroSign}
 							onChange={handleChangeNumeric}
 							value={numericValue}
+							className="styleInputCreateNewAd"
 						/>
 						<InputNumber
 							label={"M2"}
 							icon={faHome}
 							onChange={handleChangeNumeric}
 							value={numericValue}
+							className="styleInputCreateNewAd"
 						/>
 						<InputNumber
 							label={"Baños"}
 							icon={faBath}
 							onChange={handleChangeNumeric}
 							value={numericValue}
+							className="styleInputCreateNewAd"
 						/>
 						<Button
 							buttonStyles={{width: "7.25rem", height: "2.125rem"}}

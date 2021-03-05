@@ -19,6 +19,10 @@ export const StyledContainer = styled.div`
 		outline: 0 none;
 		border: 3px solid #000;
 	}
+	&.styleInputCreateNewAd {
+		margin-bottom: 10px;
+		border: 1px solid #707070;
+	}
 `;
 
 export const StyledIcon = styled.div`
