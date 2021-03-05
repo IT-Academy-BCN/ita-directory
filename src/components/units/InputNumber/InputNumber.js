@@ -44,7 +44,6 @@ const InputNumber = ({
 	const handleOnChange = (e) => {
 		const val = e.target.value;
 		const regex = /^\d+$/;
-		console.log("change_" + e.target.value);
 		setIsInvalid(val === "" || !regex.test(val) ? true : false);
 		onChange(e);
 	};
