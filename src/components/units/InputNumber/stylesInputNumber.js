@@ -20,7 +20,7 @@ export const StyledContainer = styled.div`
 		border: 3px solid #000;
 	}
 	&.styleInputCreateNewAd {
-		margin-bottom: 10px;
+		margin-bottom: 15px;
 		border: 1px solid #707070;
 	}
 `;

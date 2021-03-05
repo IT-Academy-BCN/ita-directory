@@ -20,7 +20,11 @@ export const StyledInput = styled.input`
 		height: 142px;
 	}
 	&.styleInputCreateNewAd {
-		margin-bottom: 10px;
+		margin-bottom: 28px;
+		border: 1px solid #707070;
+	}
+	&.styleInputCreateNewAd2 {
+		margin-bottom: 15px;
 		border: 1px solid #707070;
 	}
 `;

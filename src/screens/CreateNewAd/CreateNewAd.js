@@ -31,7 +31,7 @@ const CreateNewAd = () => {
 							label={"Ciudad"}
 							icon={faMapMarkerAlt}
 							inputContainerClassName="createNewAd"
-							className="styleInputCreateNewAd"
+							className="styleInputCreateNewAd2"
 						/>
 						<InputNumber
 							label={"Habitaciones"}
