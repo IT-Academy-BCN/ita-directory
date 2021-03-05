@@ -6,4 +6,7 @@ export const Wrapper = styled.div`
 	width: 100%;
 	padding-left: 15vw;
 	padding-right: 15vw;
+	label {
+		flex-basis: 150px;
+	}
 `;
