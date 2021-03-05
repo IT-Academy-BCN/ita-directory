@@ -40,7 +40,7 @@ export const ModalClose = styled.a`
 export const ModalContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	max-height: 75vh;
+	max-height: 90vh;
 	max-width: 850px;
 	min-width: 50%;
 	padding: 0 1.5rem;
