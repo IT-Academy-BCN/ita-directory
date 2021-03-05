@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput} from "./styles";
+import {StyledError, StyledInput, StyledTextArea} from "./styles";
 
 const Input = ({
 	type,
@@ -27,19 +27,34 @@ const Input = ({
 }) => {
 	return (
 		<div>
-			<StyledInput
-				type={type}
-				placeholder={placeholder}
-				value={value}
-				onChange={onChange}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				className={`${className} ${error ? "error" : ""}`}
-				id={id}
-				name={name}
-				disabled={disabled}
-				minLength={minlength}
-			/>
+			{type === "textarea" ? (
+				<StyledTextArea
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					className={`${className} ${error ? "error" : ""}`}
+					id={id}
+					name={name}
+					disabled={disabled}
+					minLength={minlength}
+				/>
+			) : (
+				<StyledInput
+					type={type}
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					className={`${className} ${error ? "error" : ""}`}
+					id={id}
+					name={name}
+					disabled={disabled}
+					minLength={minlength}
+				/>
+			)}
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				className={className}
