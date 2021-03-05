@@ -8,5 +8,6 @@ export const Wrapper = styled.div`
 	padding-right: 15vw;
 	label {
 		flex-basis: 150px;
+		color: #707070;
 	}
 `;
