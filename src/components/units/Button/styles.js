@@ -41,7 +41,7 @@ const StyledButton = styled.button`
 		width: 9rem;
 	}
     &.darkBlue {
-		width: auto;
+		width: 7rem;
         background: ${Colors.darkBlue};
         color: ${Colors.white};
         margin: 10px;
