@@ -15,6 +15,10 @@ export const StyledInput = styled.input`
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
+	&.styleInput {
+		width: 475px;
+		height: 142px;
+	}
 `;
 export const StyledError = styled.small`
 	color: #e74c3c;
