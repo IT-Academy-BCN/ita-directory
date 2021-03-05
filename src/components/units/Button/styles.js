@@ -40,6 +40,16 @@ const StyledButton = styled.button`
 		color: ${Colors.white};
 		width: 9rem;
 	}
+    &.darkBlue {
+		width: auto;
+        background: ${Colors.darkBlue};
+        color: ${Colors.white};
+        margin: 10px;
+        padding: 5px 10px;
+        border: 2px solid ${Colors.darkBlue};
+        border-radius: 3px;
+        cursor: pointer;
+	}
     &.disabled {
         cursor: not-allowed;
         opacity: 0.57;
