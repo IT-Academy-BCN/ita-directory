@@ -1,22 +1,34 @@
 import React from "react";
-import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
-import {StyledMap} from "./Map.styles";
-const Map = () => {
+// import data from "../assets/data.json";
+// import Styles from "components/composed/Map/Map.styles";
+import "leaflet/dist/leaflet.css";
+import {MapContainer, TileLayer, Marker} from "react-leaflet";
+// import styled from "styled-components";
+import "./Map.css";
+import L from "leaflet";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+	iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
+	iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
+	shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
+});
+
+const marker = {lat: 41.3879, lng: 2.16992};
+function Map() {
 	return (
-		<StyledMap>
-			<MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+		<div className="Map">
+			<MapContainer className="Map-container" center={marker} zoom={17}>
 				<TileLayer
-					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+					url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
 				/>
-				<Marker position={[51.505, -0.09]}>
-					<Popup>
-						A pretty CSS3 popup. <br /> Easily customizable.
-					</Popup>
-				</Marker>
+
+				<Marker position={[marker.lat, marker.lng]}></Marker>
 			</MapContainer>
-		</StyledMap>
+		</div>
 	);
-};
+}
 
 export default Map;
