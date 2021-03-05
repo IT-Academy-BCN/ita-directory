@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
+import {fadeIn} from "react-animations";
 import Colors from "theme/Colors";
 
 export const ModalBlock = styled.div`
@@ -43,7 +44,7 @@ export const ModalContainer = styled.div`
 	max-width: 850px;
 	min-width: 50%;
 	padding: 0 1.5rem;
-	animation: slide-down 0.2s ease 1;
+	animation: ${keyframes`${fadeIn}`} 2s;
 	z-index: 1;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
