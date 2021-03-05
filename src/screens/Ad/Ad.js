@@ -25,7 +25,7 @@ import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 // import 'leaflet/dist/leaflet.css';
 // import { MapContainer, TileLayer } from 'react-leaflet';
 import "components/composed/Map/Map.css";
-//import Map from "components/composed/Map/Map";
+import Map from "components/composed/Map/Map";
 // import Styles from "styled-components";
 
 const LIST_ICONS = [
@@ -88,7 +88,7 @@ const Ad = ({icon}) => {
 								eget condimentum congue.
 							</p>
 						</StyledText>
-						{/* <Map /> */}
+						<Map />
 						<StyledStreet>
 							<p>
 								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
