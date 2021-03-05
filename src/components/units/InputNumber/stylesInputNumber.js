@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const StyledMainContainer = styled.div`
+	display: flex;
+	@media screen and (max-width: 600px) {
+		flex-direction: column;
+	}
+`;
+
+export const StyledContainerInputError = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 export const StyledContainer = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -28,6 +40,7 @@ export const StyledIcon = styled.div`
 	display: flex;
 	margin-right: 6px;
 	color: #999999;
+	flex-basis: 20px;
 `;
 
 export const StyledInput = styled.input`
@@ -73,13 +86,4 @@ export const StyledLabel = styled.label`
 	flex-direction: row;
 	padding: 3px 45px 0 0;
 	color: #999999;
-`;
-
-export const StyledMainContainer = styled.div`
-	display: flex;
-`;
-
-export const StyledContainerInputError = styled.div`
-	display: flex;
-	flex-direction: column;
 `;

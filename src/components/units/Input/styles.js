@@ -18,6 +18,12 @@ export const StyledInput = styled.input`
 	&.styleInput {
 		width: 475px;
 		height: 142px;
+		@media screen and (max-width: 600px) {
+			width: 430px;
+		}
+		@media screen and (max-width: 900px) {
+			width: 390px;
+		}
 	}
 	&.styleInputCreateNewAd {
 		margin-bottom: 28px;
@@ -50,5 +56,8 @@ export const StyledLabel = styled.label`
 export const StyledContainer = styled.div`
 	&.createNewAd {
 		display: flex;
+		@media screen and (max-width: 600px) {
+			flex-direction: column;
+		}
 	}
 `;
