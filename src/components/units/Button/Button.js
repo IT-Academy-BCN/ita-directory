@@ -17,6 +17,7 @@ const Button = ({
 	textStyles,
 	iconStyles,
 	animated,
+	onClick,
 }) => {
 	return (
 		<StyledButton
@@ -24,6 +25,7 @@ const Button = ({
 			disabled={disabled}
 			className={`${className} ${animated ? "animated" : ""} ${disabled ? "disabled" : ""}`}
 			style={{...buttonStyles}}
+			onClick={onClick}
 		>
 			{iconPosition === "left" &&
 				(isLoading ? (
@@ -49,11 +51,12 @@ Button.propTypes = {
 	isLoading: PropTypes.bool,
 	iconPosition: PropTypes.string,
 	className: PropTypes.string,
-	buttonStyles: PropTypes.string,
+	buttonStyles: PropTypes.object,
 	textStyles: PropTypes.object,
 	iconStyles: PropTypes.string,
 	animated: PropTypes.bool,
 	disabled: PropTypes.bool,
+	onClick: PropTypes.func,
 };
 
 export default Button;
