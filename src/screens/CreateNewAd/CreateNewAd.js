@@ -7,7 +7,7 @@ import {Wrapper} from "./CreateNewAd.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 
 const CreateNewAd = () => {
-	const [form, setForm] = useState({
+	const emptyForm = {
 		title: "",
 		description: "",
 		city: "",
@@ -15,7 +15,9 @@ const CreateNewAd = () => {
 		price: "",
 		squareM: "",
 		bathrooms: "",
-	});
+	};
+	const [form, setForm] = useState(emptyForm);
+	const [submittedData, setSubmittedData] = useState("");
 
 	const handleChange = (e) => {
 		const {name, value} = e.target;
@@ -23,6 +25,12 @@ const CreateNewAd = () => {
 			...form,
 			[name]: value,
 		});
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setSubmittedData(JSON.stringify(form, 0, 2));
+		setForm(emptyForm);
 	};
 
 	const inputComponentData = [
@@ -85,17 +93,16 @@ const CreateNewAd = () => {
 		<>
 			<Body title="Publicar anuncio" isLoggedIn={true}>
 				<Wrapper>
-					<form>
+					<form onSubmit={handleSubmit}>
 						{inputComponentData.map((el, i) => {
-							const inputName = el.name;
 							const Component = el.Component;
 							return (
 								<Component
 									key={i}
 									type={el.type}
 									label={el.label}
-									name={inputName}
-									value={form.inputName}
+									name={el.name}
+									value={form[el.name]}
 									onChange={handleChange}
 									className={el.inputClassName}
 									icon={el.icon}
@@ -106,10 +113,16 @@ const CreateNewAd = () => {
 						<Button
 							buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 							text="Enviar"
-							type="submit"
+							type="normal"
 							className="blueGradient"
 						/>
 					</form>
+					{submittedData && (
+						<div>
+							<p>The following data was submitted:</p>
+							<pre>{submittedData}</pre>
+						</div>
+					)}
 				</Wrapper>
 			</Body>
 		</>
