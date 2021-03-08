@@ -32,6 +32,7 @@ const InputNumber = ({
 	step,
 	icon,
 	label,
+	required,
 }) => {
 	const [isInvalid, setIsInvalid] = useState(false);
 
@@ -76,6 +77,7 @@ const InputNumber = ({
 							labelStyles={labelStyles}
 							size={size}
 							errorStyles={errorStyles}
+							required={required}
 						/>
 					</StyledContainer>
 					<StyledError
@@ -107,6 +109,7 @@ InputNumber.propTypes = {
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	step: PropTypes.number,
+	required: PropTypes.bool,
 };
 
 export default InputNumber;

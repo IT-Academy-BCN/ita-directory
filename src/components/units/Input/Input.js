@@ -26,6 +26,7 @@ const Input = ({
 	minLength,
 	label,
 	inputContainerClassName,
+	required,
 }) => {
 	return (
 		<StyledContainer className={inputContainerClassName}>
@@ -42,6 +43,7 @@ const Input = ({
 				name={name}
 				disabled={disabled}
 				minLength={minlength}
+				required={required}
 			/>
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
@@ -72,6 +74,7 @@ Input.propTypes = {
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	error: PropTypes.bool,
 	inputContainerClassName: PropTypes.string,
+	required: PropTypes.bool,
 };
 
 export default Input;

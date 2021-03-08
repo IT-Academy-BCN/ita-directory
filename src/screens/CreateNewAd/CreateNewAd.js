@@ -39,6 +39,7 @@ const CreateNewAd = () => {
 			type: "text",
 			label: "Título",
 			name: "title",
+			required: true,
 			inputClassName: "styleInputCreateNewAd",
 			inputContainerClassName: "createNewAd",
 		},
@@ -55,6 +56,7 @@ const CreateNewAd = () => {
 			type: "text",
 			label: "Ciudad",
 			name: "city",
+			required: true,
 			inputClassName: "styleInputCreateNewAd2",
 			inputContainerClassName: "createNewAd",
 			icon: faMapMarkerAlt,
@@ -70,6 +72,7 @@ const CreateNewAd = () => {
 			Component: InputNumber,
 			label: "Precio",
 			name: "price",
+			required: true,
 			inputClassName: "styleInputCreateNewAd",
 			icon: faEuroSign,
 		},
@@ -77,6 +80,7 @@ const CreateNewAd = () => {
 			Component: InputNumber,
 			label: "M\u00B2",
 			name: "squareM",
+			required: "Y",
 			inputClassName: "styleInputCreateNewAd",
 			icon: faHome,
 		},
@@ -102,6 +106,7 @@ const CreateNewAd = () => {
 									type={el.type}
 									label={el.label}
 									name={el.name}
+									required={el.required}
 									value={form[el.name]}
 									onChange={handleChange}
 									className={el.inputClassName}
