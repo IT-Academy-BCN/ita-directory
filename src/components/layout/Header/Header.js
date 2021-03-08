@@ -22,6 +22,12 @@ const Header = ({isLoggedIn, title}) => {
 		console.log("profile clicked");
 		setDropdownVisible(!dropdownVisible);
 	};
+
+	const handleClickTwo = (e) => {
+		console.log(e.getBoundingClientRect());
+		const rec = e.getBoundingClientRect();
+		console.loge(rec` rec`);
+	};
 	if (isLoggedIn) {
 		return (
 			<header>
@@ -33,7 +39,7 @@ const Header = ({isLoggedIn, title}) => {
 							<StyledText>Mi perfil</StyledText>
 						</StyledButton>
 						{dropdownVisible ? (
-							<StyledDropdown>
+							<StyledDropdown ref={handleClickTwo}>
 								<StyledUl>
 									<StyledLi>Editar perfil</StyledLi>
 									<StyledLi>Mis Anuncios</StyledLi>
