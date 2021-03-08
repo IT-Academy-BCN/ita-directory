@@ -4,7 +4,7 @@
    ========================================================================== */
 
 /**
- * 1. Correct the line height in all browsers.
+ * 1. Corrsect the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
@@ -350,4 +350,20 @@ template {
 
 [hidden] {
   display: none;
+}
+
+/**
+ * Add fonts
+ */
+@font-face {
+  font-family: "Korb-Bold";
+  src: local("Korb-Bold"),
+    url("../fonts/Korb/KorbBold.otf") format("opentype");
+
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("HelveticaNeue"),
+  url("../fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf") format("truetype");
 }
