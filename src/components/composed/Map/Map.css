@@ -1,7 +1,7 @@
 .Map {
 	width: 95%;
 	height: 200px;
-	margin-left: 6%;
+	
 	padding: 0;
 	z-index: -1;
 }
