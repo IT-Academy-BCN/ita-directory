@@ -32,7 +32,6 @@ const Header = ({isLoggedIn, title}) => {
 							<StyledImg src={profilePicture} alt="profile" />
 							<StyledText>Mi perfil</StyledText>
 						</StyledButton>
-
 						{dropdownVisible ? (
 							<StyledDropdown>
 								<StyledUl>
