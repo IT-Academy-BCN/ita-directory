@@ -29,10 +29,7 @@ export const StyledContainer = styled.div`
 	}
 	&:focus-within {
 		outline: 0 none;
-		border: 3px solid #000;
-	}
-	&.styleInputCreateNewAd {
-		border: 1px solid #707070;
+		border: 3px solid #000 !important;
 	}
 `;
 

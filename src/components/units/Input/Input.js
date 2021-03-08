@@ -1,6 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledError, StyledInput, StyledLabel, StyledContainer} from "./styles";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+	StyledError,
+	StyledInput,
+	StyledLabel,
+	StyledContainer,
+	StyledIconInput,
+	StyledIcon,
+	StyledContainerInputError,
+} from "./styles";
 
 const Input = ({
 	type,
@@ -27,29 +36,69 @@ const Input = ({
 	label,
 	inputContainerClassName,
 	required,
+	icon,
 }) => {
+	const hasIcon = icon ? true : false;
+
 	return (
-		<StyledContainer className={inputContainerClassName}>
-			<StyledLabel htmlFor={id}>{label}</StyledLabel>
-			<StyledInput
-				type={type}
-				placeholder={placeholder}
-				value={value}
-				onChange={onChange}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				className={`${className} ${error ? "error" : ""}`}
-				id={id}
-				name={name}
-				disabled={disabled}
-				minLength={minlength}
-				required={required}
-			/>
-			<StyledError
-				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-				className={className}
-			/>
-		</StyledContainer>
+		<>
+			{hasIcon ? (
+				<StyledContainer className={inputContainerClassName}>
+					<StyledLabel htmlFor={id}>{label}</StyledLabel>
+					<StyledContainerInputError>
+						<StyledIconInput>
+							<StyledIcon>
+								<FontAwesomeIcon icon={icon} />
+							</StyledIcon>
+							<StyledInput
+								type={type}
+								placeholder={placeholder}
+								value={value}
+								onChange={onChange}
+								onFocus={onFocus}
+								onBlur={onBlur}
+								className={`${className} ${error ? "error" : ""}`}
+								id={id}
+								name={name}
+								disabled={disabled}
+								minLength={minlength}
+								required={required}
+							/>
+						</StyledIconInput>
+						<StyledError
+							dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+							className={className}
+						/>
+					</StyledContainerInputError>
+				</StyledContainer>
+			) : (
+				<StyledContainer className={inputContainerClassName}>
+					<StyledLabel htmlFor={id}>{label}</StyledLabel>
+					<StyledContainerInputError>
+						<StyledIconInput>
+							<StyledInput
+								type={type}
+								placeholder={placeholder}
+								value={value}
+								onChange={onChange}
+								onFocus={onFocus}
+								onBlur={onBlur}
+								className={`${className} ${error ? "error" : ""}`}
+								id={id}
+								name={name}
+								disabled={disabled}
+								minLength={minlength}
+								required={required}
+							/>
+						</StyledIconInput>
+						<StyledError
+							dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+							className={className}
+						/>
+					</StyledContainerInputError>
+				</StyledContainer>
+			)}
+		</>
 	);
 };
 
