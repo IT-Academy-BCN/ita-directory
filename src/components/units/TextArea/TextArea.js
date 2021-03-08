@@ -42,9 +42,8 @@ const TextArea = ({
 				rows={rows}
 				cols={cols}
 				required={required}
-			>
-				{value}
-			</StyledTextArea>
+				value={value}
+			/>
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				className={className}
