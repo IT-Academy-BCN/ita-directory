@@ -13,6 +13,7 @@ const Colors = {
 	grey: "#707070",
 	lightGrey: "#999999",
 	lightGray: "#B0B0B0",
+	strongBlue: "#006BB9",
 };
 
 export default Colors;
