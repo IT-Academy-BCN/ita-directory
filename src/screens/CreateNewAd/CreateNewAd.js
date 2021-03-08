@@ -40,7 +40,6 @@ const CreateNewAd = () => {
 			label: "Título",
 			name: "title",
 			required: true,
-			inputClassName: "styleInputCreateNewAd",
 			inputContainerClassName: "createNewAd",
 		},
 		{
@@ -48,7 +47,6 @@ const CreateNewAd = () => {
 			type: "text",
 			label: "Descripción",
 			name: "description",
-			inputClassName: "styleInput styleInputCreateNewAd",
 			inputContainerClassName: "createNewAd",
 		},
 		{
@@ -57,7 +55,6 @@ const CreateNewAd = () => {
 			label: "Ciudad",
 			name: "city",
 			required: true,
-			inputClassName: "styleInputCreateNewAd",
 			inputContainerClassName: "createNewAd",
 			icon: faMapMarkerAlt,
 		},
@@ -65,7 +62,6 @@ const CreateNewAd = () => {
 			Component: InputNumber,
 			label: "Habitaciones",
 			name: "rooms",
-			inputClassName: "styleInputCreateNewAd",
 			icon: faBed,
 		},
 		{
@@ -73,7 +69,6 @@ const CreateNewAd = () => {
 			label: "Precio",
 			name: "price",
 			required: true,
-			inputClassName: "styleInputCreateNewAd",
 			icon: faEuroSign,
 		},
 		{
@@ -81,14 +76,12 @@ const CreateNewAd = () => {
 			label: "M\u00B2",
 			name: "squareM",
 			required: true,
-			inputClassName: "styleInputCreateNewAd",
 			icon: faHome,
 		},
 		{
 			Component: InputNumber,
 			label: "Baños",
 			name: "bathrooms",
-			inputClassName: "styleInputCreateNewAd",
 			icon: faBath,
 		},
 	];
