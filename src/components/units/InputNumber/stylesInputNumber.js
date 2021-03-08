@@ -32,7 +32,7 @@ export const StyledContainer = styled.div`
 		border: 3px solid #000 !important;
 	}
 	&.styleInputCreateNewAd {
-		border: 2px solid #707070;
+		border: 1px solid #707070;
 	}
 `;
 

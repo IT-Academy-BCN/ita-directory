@@ -40,7 +40,7 @@ export const StyledIconInput = styled.div`
 		color: #7d868b;
 	}
 	&.createNewAd {
-		border: 2px solid #707070;
+		border: 1px solid #707070;
 	}
 `;
 
