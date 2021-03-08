@@ -1,9 +1,6 @@
 import React from "react";
-// import data from "../assets/data.json";
-// import Styles from "components/composed/Map/Map.styles";
 import "leaflet/dist/leaflet.css";
 import {MapContainer, TileLayer, Marker} from "react-leaflet";
-// import styled from "styled-components";
 import "./Map.css";
 import L from "leaflet";
 
@@ -16,13 +13,14 @@ L.Icon.Default.mergeOptions({
 });
 
 const marker = {lat: 41.3879, lng: 2.16992};
+
 function Map() {
 	return (
 		<div className="Map">
 			<MapContainer className="Map-container" center={marker} zoom={17}>
 				<TileLayer
-					attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
 				<Marker position={[marker.lat, marker.lng]}></Marker>
