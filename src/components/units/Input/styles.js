@@ -33,14 +33,14 @@ export const StyledIconInput = styled.div`
 	padding: 5px;
 	&:focus-within {
 		outline: 0 none;
-		border: 3px solid #000;
+		border: 3px solid #000 !important;
 	}
 	&.error {
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
 	&.createNewAd {
-		border: 1px solid #707070;
+		border: 2px solid #707070;
 	}
 `;
 

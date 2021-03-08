@@ -63,6 +63,7 @@ const CreateNewAd = () => {
 			label: "Habitaciones",
 			name: "rooms",
 			icon: faBed,
+			inputClassName: "styleInputCreateNewAd",
 		},
 		{
 			Component: InputNumber,
@@ -70,6 +71,7 @@ const CreateNewAd = () => {
 			name: "price",
 			required: true,
 			icon: faEuroSign,
+			inputClassName: "styleInputCreateNewAd",
 		},
 		{
 			Component: InputNumber,
@@ -77,12 +79,14 @@ const CreateNewAd = () => {
 			name: "squareM",
 			required: true,
 			icon: faHome,
+			inputClassName: "styleInputCreateNewAd",
 		},
 		{
 			Component: InputNumber,
 			label: "Baños",
 			name: "bathrooms",
 			icon: faBath,
+			inputClassName: "styleInputCreateNewAd",
 		},
 	];
 

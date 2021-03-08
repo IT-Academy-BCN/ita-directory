@@ -46,7 +46,7 @@ const Input = ({
 				<StyledContainer className={inputContainerClassName}>
 					<StyledLabel htmlFor={id}>{label}</StyledLabel>
 					<StyledContainerInputError>
-						<StyledIconInput>
+						<StyledIconInput className={inputContainerClassName}>
 							<StyledIcon>
 								<FontAwesomeIcon icon={icon} />
 							</StyledIcon>
@@ -75,7 +75,7 @@ const Input = ({
 				<StyledContainer className={inputContainerClassName}>
 					<StyledLabel htmlFor={id}>{label}</StyledLabel>
 					<StyledContainerInputError>
-						<StyledIconInput>
+						<StyledIconInput className={inputContainerClassName}>
 							<StyledInput
 								type={type}
 								placeholder={placeholder}

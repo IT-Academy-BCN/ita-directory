@@ -31,6 +31,9 @@ export const StyledContainer = styled.div`
 		outline: 0 none;
 		border: 3px solid #000 !important;
 	}
+	&.styleInputCreateNewAd {
+		border: 2px solid #707070;
+	}
 `;
 
 export const StyledIcon = styled.div`
