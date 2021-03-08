@@ -104,9 +104,9 @@ const Ad = ({icon}) => {
 
 						<Map />
 						<StyledStreet>
-							<p>
-								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
-							</p>
+							<a href="https://cibernarium.barcelonactiva.cat/">
+								Dirección: Carrer de Roc Boronat, 117, 08018 Barcelona{" "}
+							</a>
 						</StyledStreet>
 						<Link to="/">
 							{" "}
