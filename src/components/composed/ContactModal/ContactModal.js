@@ -3,7 +3,8 @@ import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
 import useInput from "hooks/useInput";
-import {Wrapper} from "./ContactModal.style.js";
+import {Wrapper, StyledSmall} from "./ContactModal.style.js";
+import TextArea from "components/units/TextArea/TextArea.js";
 
 const ContactModal = ({active, hideModal}) => {
 	const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14,6 +15,7 @@ const ContactModal = ({active, hideModal}) => {
 		return "";
 	};
 
+	const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +37,10 @@ const ContactModal = ({active, hideModal}) => {
 		resetMessage();
 	};
 
+	const isAnyFieldEmpty = () => {
+		return name.length === 0 || email.length === 0 || message.length === 0;
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setAnimatedState(true);
@@ -46,8 +52,19 @@ const ContactModal = ({active, hideModal}) => {
 			setIsLoading(false);
 		}, 2000);
 
+		if (isAnyFieldEmpty()) {
+			setError("Missing required fields");
+			return;
+		}
+
 		sendContact(name, email, message, (error) => {
-			resetForm();
+			if (error) {
+				setError(error);
+			} else {
+				setError("");
+				console.log("The message has been sent!");
+				resetForm();
+			}
 		});
 	};
 
@@ -63,7 +80,6 @@ const ContactModal = ({active, hideModal}) => {
 					iconPosition="left"
 					type="submit"
 					className="darkBlue"
-					/* textStyles={{marginLeft: 10}} */
 					isLoading={isLoading}
 					animated={animatedState}
 					disabled={disabled}
@@ -93,15 +109,17 @@ const ContactModal = ({active, hideModal}) => {
 			</Wrapper>
 
 			<Wrapper>
-				<Input
-					type="textarea"
+				<TextArea
 					name="message"
 					placeholder="Mensaje"
 					className="styleInput"
+					required={true}
 					textStyle={{padding: 5}}
 					{...bindMessage}
 				/>
 			</Wrapper>
+
+			<StyledSmall>{error}</StyledSmall>
 		</Modal>
 	);
 };
