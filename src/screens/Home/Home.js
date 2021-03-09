@@ -3,6 +3,7 @@ import InputNumber from "../../components/units/InputNumber/InputNumber";
 import {faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "components/composed/Modal/Modal.styles";
 import Modal from "components/composed/Modal/Modal";
+import FilterList from "components/composed/FilterList/FilterList";
 
 const Home = () => {
 	const [inputNumberValue, setInputNumberValue] = useState("");
@@ -11,6 +12,9 @@ const Home = () => {
 
 	return (
 		<>
+			<div>
+				<FilterList />
+			</div>
 			<form>
 				<InputNumber
 					value={inputNumberValue}
