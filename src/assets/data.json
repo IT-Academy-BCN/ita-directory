@@ -2,7 +2,7 @@
     "apartments":[
 
         {  "key": 1,
-           "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscinaAd.jpg?true=false",
+           "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscinaAd.jpg?raw=true",
            "imgDesc":"casa con piscina", 
            "address": "calle Sagrada Familia 000",
            "geometry": [
@@ -20,7 +20,7 @@
             "contactPhone":345555789},
 
     {  "key": 2,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?true=false",
+        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?raw=true",
         "imgDesc":"piso con cama doble", 
         "address": "calle la Pedrera 000",
         "geometry": [
@@ -38,7 +38,7 @@
             "contactPhone":345555780},
 
     {   "key": 3,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?true=false",
+        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
         "imgDesc":"piso con mucho verde", 
         "address": "calle Liceu 000",
         "geometry": [
@@ -56,7 +56,7 @@
             "contactPhone":345555781},
 
     {  "key": 4,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?true=false",
+        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
         "imgDesc":"piso con despacho", 
         "address": "calle Torre Agbar 000",
         "geometry": [
@@ -74,7 +74,7 @@
             "contactPhone":345555782},
 
     {   "key": 5,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?true=false",
+        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
         "imgDesc":"piso cocina abierta", 
         "address": "calle Palacio la Moncloa 000",
         "geometry": [
@@ -92,7 +92,7 @@
             "contactPhone":345555783},
 
     {   "key": 6,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?true=false",
+        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
         "imgDesc":"piso moderno", 
         "address": "calle Santiago Bernabeu 000",
         "geometry": [
@@ -110,7 +110,7 @@
             "contactPhone":345555784},
 
         {   "key": 7,
-            "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?true=false",
+            "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
             "imgDesc":"piso con Amaca", 
             "address": "calle Camp Nou 000",
             "geometry": [
