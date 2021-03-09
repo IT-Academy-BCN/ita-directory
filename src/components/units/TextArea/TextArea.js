@@ -1,6 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledTextArea, StyledError, StyledLabel} from "./TextArea.styles.js";
+import {
+	StyledTextArea,
+	StyledError,
+	StyledLabel,
+	StyledContainer,
+	StyledTextAreaError,
+} from "./TextArea.styles.js";
 
 const TextArea = ({
 	placeholder,
@@ -23,33 +29,36 @@ const TextArea = ({
 	errorStyles,
 	error,
 	label,
+	inputContainerClassName,
 }) => {
 	return (
-		<div>
+		<StyledContainer className={inputContainerClassName}>
 			<StyledLabel style={labelStyles}>{label}</StyledLabel>
-			<StyledTextArea
-				style={textAreaStyles}
-				placeholder={placeholder}
-				onChange={onChange}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				className={`${className} ${error ? "error" : ""}`}
-				id={id}
-				name={name}
-				disabled={disabled}
-				maxLength={maxLength}
-				minLength={minLength}
-				rows={rows}
-				cols={cols}
-				required={required}
-				value={value}
-			/>
-			<StyledError
-				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-				className={className}
-				style={errorStyles}
-			/>
-		</div>
+			<StyledTextAreaError className={inputContainerClassName}>
+				<StyledTextArea
+					style={textAreaStyles}
+					placeholder={placeholder}
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					className={`${className} ${error ? "error" : ""}`}
+					id={id}
+					name={name}
+					disabled={disabled}
+					maxLength={maxLength}
+					minLength={minLength}
+					rows={rows}
+					cols={cols}
+					required={required}
+					value={value}
+				/>
+				<StyledError
+					dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+					className={className}
+					style={errorStyles}
+				/>
+			</StyledTextAreaError>
+		</StyledContainer>
 	);
 };
 

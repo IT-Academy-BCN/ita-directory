@@ -7,7 +7,6 @@ import {Container} from "theme/GlobalStyles";
 const Footer = () => {
 	return (
 		<Container column>
-			<hr />
 			<StyledFooter>
 				<Logo>LOGO EMPRESA</Logo>
 				<Information>

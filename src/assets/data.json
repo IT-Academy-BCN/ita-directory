@@ -1,0 +1,59 @@
+{ 
+    "apartments":[
+    {   "address": "calle Corsega 000, Barcelona", 
+        "monthlyRent":900, 
+        "numbRooms": 1, 
+        "squaredMeeters": 200, 
+        "expenses": "incluido", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact":345555789},
+
+    {   "address": "calle Mallorca 000, Barcelona", 
+        "monthlyRent":1700, 
+        "numbRooms": 2, 
+        "squaredMeeters": 170, 
+        "expenses": "aparte", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact":345555789},
+
+    {   "address": "calle Industria 000, Barcelona", 
+        "monthlyRent":2500, 
+        "numbRooms": 4, 
+        "squaredMeeters": 600, 
+        "expenses": "aparte", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact":345555789},
+
+    {   "address": "calle de L'Or 000, Barcelona", 
+        "monthlyRent":2100, 
+        "numbRooms": 6, 
+        "squaredMeeters": 350, 
+        "expenses": "incluido", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact":345555789},
+
+    {   "address": "calle Menorca 000, Barcelona", 
+        "monthlyRent":1900, 
+        "numbRooms": 3, 
+        "squaredMeeters": 200, 
+        "expenses": "incluido", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact":345555789}, 
+
+    {   "address": "calle de la Moncloa 000, Madrid", 
+        "monthlyRent":600, 
+        "numbRooms": 2, 
+        "squaredMeeters": 40, 
+        "expenses": "aparte", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact": 345555789},   
+        
+    {   "address": "calle de M'ostoles 000, Madrid", 
+        "monthlyRent":3000, 
+        "numbRooms": 4, 
+        "squaredMeeters": 400, 
+        "expenses": "aparte", 
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
+        "contact": 345555789}  
+         ]
+        }
