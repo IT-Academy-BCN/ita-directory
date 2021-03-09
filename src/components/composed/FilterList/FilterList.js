@@ -4,7 +4,11 @@ import InputNumber from "components/units/InputNumber/InputNumber";
 function FilterList(props) {
 	const handleChange = (e) => {
 		const {name, type, checked, value} = e.target;
-		props.onChange(name, type, checked, value);
+		let newFilters = {
+			...props.filters,
+			[name]: type === "checkbox" ? checked : value,
+		};
+		props.onChange(newFilters);
 	};
 
 	return (

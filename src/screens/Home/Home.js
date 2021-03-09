@@ -19,11 +19,8 @@ const Home = () => {
 
 	const [filters, setFilters] = useState(noFilters);
 
-	const handleChange = (name, type, checked, value) => {
-		setFilters({
-			...filters,
-			[name]: type === "checkbox" ? checked : value,
-		});
+	const handleChange = (changedFilters) => {
+		setFilters(changedFilters);
 	};
 	useEffect(() => {
 		console.log(filters);
