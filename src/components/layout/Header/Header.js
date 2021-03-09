@@ -24,22 +24,26 @@ const Header = ({isLoggedIn, title}) => {
 	};
 
 	const handleClickTwo = (e) => {
-		console.log(e.getBoundingClientRect());
-		const rec = e.getBoundingClientRect();
-		console.loge(rec` rec`);
+		/*  const rect = e.getBoundingClientRect()
+        console.log(rect)
+		
+        const right = rect.right
+        console.log(right) 
+		 */
 	};
+
 	if (isLoggedIn) {
 		return (
 			<header>
 				<StyledHeaderTop className={`logged`}>
 					<Logo className={`logged`}>Logo Empresa</Logo>
 					<StyledMiPerfil>
-						<StyledButton onClick={handleClick}>
+						<StyledButton onClick={handleClick} ref={handleClickTwo}>
 							<StyledImg src={profilePicture} alt="profile" />
 							<StyledText>Mi perfil</StyledText>
 						</StyledButton>
 						{dropdownVisible ? (
-							<StyledDropdown ref={handleClickTwo}>
+							<StyledDropdown>
 								<StyledUl>
 									<StyledLi>Editar perfil</StyledLi>
 									<StyledLi>Mis Anuncios</StyledLi>

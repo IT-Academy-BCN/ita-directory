@@ -100,7 +100,6 @@ export const StyledDropdown = styled.div`
 	border: 1px solid #dddddd;
 	border-radius: 10px;
 	opacity: 1;
-	background-color: ;
 `;
 
 export const StyledUl = styled.ul`
@@ -111,7 +110,7 @@ export const StyledUl = styled.ul`
 	box-shadow: 0px 4px 10px #00000029;
 	background: transparent;
 	border-radius: 6px;
-	right: 0;
+	right: 765.85;
 `;
 
 export const StyledLi = styled.li`

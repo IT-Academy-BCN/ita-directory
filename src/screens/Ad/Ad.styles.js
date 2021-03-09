@@ -149,6 +149,6 @@ export const StyledStreet = styled.p`
 `;
 
 export const StyledItems = styled.li`
-	border: solid 1px black;
 	list-style: none;
+	margin-left: 0.5rem;
 `;
