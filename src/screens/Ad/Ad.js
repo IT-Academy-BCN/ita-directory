@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
 // import Map from "components/composed/Map/Map";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {
 	StyledAd,
 	StyledUl,
@@ -38,6 +38,7 @@ const LIST_ICONS = [
 ];
 
 const Ad = ({icon}) => {
+	let history = useHistory();
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const handleClick = (e) => {
@@ -49,6 +50,7 @@ const Ad = ({icon}) => {
 			setIsDisabled(false);
 			setIsLoading(false);
 			console.log("finalizado");
+			history.push("/profile");
 		}, 3000);
 	};
 	const images = [
@@ -104,30 +106,26 @@ const Ad = ({icon}) => {
 
 						<Map />
 						<StyledStreet>
-							<p>
-								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
-							</p>
+							<a href="https://cibernarium.barcelonactiva.cat/">
+								Dirección: Carrer de Roc Boronat, 117, 08018 Barcelona{" "}
+							</a>
 						</StyledStreet>
-						<Link to="/">
-							{" "}
-							{/* //contacto */}
-							<Button
-								buttonStyles={{
-									width: "7.5rem",
-									fontsize: "12px",
-									height: "2.2rem",
-									marginTop: "0rem",
-									marginLeft: "6%",
-								}}
-								text="Contacto"
-								className="blueGradient"
-								loadingText="Cargando"
-								type="submit"
-								isLoading={isLoading}
-								disabled={disabled}
-								onClick={handleClick}
-							/>
-						</Link>
+
+						<Button
+							buttonStyles={{
+								width: "7.5rem",
+								fontsize: "12px",
+								height: "2.2rem",
+								marginTop: "0rem",
+							}}
+							text="Contacto"
+							className="blueGradient"
+							loadingText={isLoading ? <div>Loading</div> : <div>Cargando</div>}
+							type="submit"
+							isLoading={isLoading}
+							disabled={disabled}
+							onClick={handleClick}
+						/>
 					</StyledBottomDiv>
 				</StyledAd>
 			</Body>

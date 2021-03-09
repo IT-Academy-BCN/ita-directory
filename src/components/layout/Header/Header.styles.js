@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const HeaderWrapper = styled.header`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
 export const StyledHeader = styled.header`
 	display: flex;
 	justify-content: center;
@@ -24,7 +31,6 @@ export const StyledHeader = styled.header`
 
 	&.logged {
 		justify-content: left;
-		padding-left: 23rem;
 	}
 `;
 
@@ -45,24 +51,14 @@ export const Logo = styled.div`
 	}
 `;
 
-export const StyledHeaderTop = styled.div`
-	margin-top: 2rem;
-	display: flex;
-	justify-content: center;
-	padding: 2px 15vw;
-
-	&.logged {
-		justify-content: space-between;
-	}
-`;
-
 export const StyledMiPerfil = styled.div`
-	position: relative;
+	position: realtive;
 	display: inline-block;
 `;
 
 export const StyledLogo = styled.div`
 	text-align: left;
+	max-width: 50%;
 	font: normal normal normal 18px Korb-Bold;
 	letter-spacing: 0px;
 	color: #005593;
@@ -95,36 +91,48 @@ export const StyledDropdown = styled.div`
 	padding: 0;
 	z-index: 1;
 	text-align: center;
-	background: #ffffff 0% 0% no-repeat padding-box;
+	background: transparent 0% 0% no-repeat padding-box;
 	border: 1px solid #dddddd;
 	border-radius: 10px;
 	opacity: 1;
+	background-color: ;
 `;
 
 export const StyledUl = styled.ul`
 	list-style-type: none;
 	padding: 0px;
-	margin: 0px;
+	margin-top: 10px;
 	position: absolute;
 	box-shadow: 0px 4px 10px #00000029;
+	background: transparent;
+	border-radius: 6px;
+	right: 0;
 `;
 
 export const StyledLi = styled.li`
 	border: 1px solid #dddd;
-	padding-top: 10px;
 	align-items: center;
-	text-align: center;
-	min-height: 2.5rem;
+	text-align: left;
+	padding-left: 15px;
 	min-width: 6rem;
-	width: 120px;
-	line-height: 100%;
-
+	width: 150px;
 	display: block;
 	background-color: white;
 	position: relative;
-
-	top: 20px;
 	z-index: 2;
+	line-height: 2.5rem;
+	border-bottom: 0;
+	right: 0;
+
+	&:first-child {
+		border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+	}
+
+	&:last-child {
+		border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
+	}
 `;
 
 export const StyledButton = styled.button`
