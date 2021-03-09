@@ -4,4 +4,4 @@ export {default as adImage3} from "./casaPiscina.jpg";
 export {default as adThumbnail1} from "./bedroom-t.jpg";
 export {default as adThumbnail2} from "./bedroom2-t.jpg";
 export {default as adThumbnail3} from "./casaPiscina-t.jpg";
-export {default as adCardImage} from "./casaPiscinaCard.jpg";
+export {default as adCardImage} from "./casaPiscinaAd.jpg";
