@@ -1,30 +1,46 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const StyledMainContainer = styled.div`
+	display: flex;
+	@media screen and (max-width: 600px) {
+		flex-direction: column;
+	}
+`;
+
+export const StyledContainerInputError = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 export const StyledContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	flex-wrap: nowrap;
 	border-radius: 5px;
-	border: 1px solid grey;
+	border: 1px solid #dddddd;
 	width: 18.6rem;
 	height: 2.6rem;
 	padding: 5px;
-	border-radius: 5px;
 	&.error {
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
 	&:focus-within {
 		outline: 0 none;
+		border: 3px solid #000 !important;
+	}
+	&.styleInputCreateNewAd {
+		border: 1px solid #707070;
 	}
 `;
 
 export const StyledIcon = styled.div`
 	display: flex;
 	margin-right: 6px;
-	color: grey;
+	color: #999999;
+	flex-basis: 20px;
 `;
 
 export const StyledInput = styled.input`
@@ -59,6 +75,7 @@ export const StyledError = styled.small`
 	left: 0;
 	top: 0;
 	visibility: visible;
+	margin-bottom: 15px;
 	&.errorProfile {
 		position: static;
 	}
@@ -68,14 +85,5 @@ export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: row;
 	padding: 3px 45px 0 0;
-	color: grey;
-`;
-
-export const StyledMainContainer = styled.div`
-	display: flex;
-`;
-
-export const StyledContainerInputError = styled.div`
-	display: flex;
-	flex-direction: column;
+	color: #999999;
 `;

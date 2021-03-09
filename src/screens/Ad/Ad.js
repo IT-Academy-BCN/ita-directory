@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
+
 import {
 	StyledAd,
 	StyledUl,
@@ -22,11 +23,8 @@ import {
 	adThumbnail3,
 } from "assets/images";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
-// import 'leaflet/dist/leaflet.css';
-// import { MapContainer, TileLayer } from 'react-leaflet';
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
-// import Styles from "styled-components";
 
 const LIST_ICONS = [
 	{name: "Madrid", icon: faMapMarkerAlt},
@@ -38,6 +36,7 @@ const LIST_ICONS = [
 
 const Ad = ({icon}) => {
 	const [active, setActive] = useState(false);
+
 	const images = [
 		{
 			original: adImage1,
@@ -77,8 +76,9 @@ const Ad = ({icon}) => {
 						</StyledUl>
 						<StyledText>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at
-								tincidunt urna. Aenean eu ullamcorper eros, blandit volutpat turpis.
+								Lorem ipsum dolor sit amet, consectetur gadipiscing elit. Praesent
+								at tincidunt urna. Aenean eu ullamcorper eros, blandit volutpat
+								turpis.
 							</p>
 							<p>
 								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
@@ -95,7 +95,6 @@ const Ad = ({icon}) => {
 							</a>
 						</StyledStreet>
 						<Button
-							//buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
 							buttonStyles={{
 								width: "7.5rem",
 								fontsize: "12px",
