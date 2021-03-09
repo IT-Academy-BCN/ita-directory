@@ -1,5 +1,5 @@
 import React from "react";
-import {adThumbnail3} from "assets/images";
+import {adCardImage} from "assets/images";
 import {
 	Container,
 	AdCardInfo,
@@ -9,16 +9,17 @@ import {
 	StyledDescription,
 	StyledPrice,
 	StyledP,
-	StyledLink,
 } from "./AdCard.style.js";
-import {Link} from "react-router-dom";
-import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import {faComments} from "@fortawesome/free-solid-svg-icons";
+import Button from "components/units/Button/Button";
+import Colors from "theme/Colors";
+
+const handleClick = () => {};
 
 const AdCard = ({image, title, children, footer}) => {
 	return (
 		<Container>
-			<StyledImage src={adThumbnail3} alt="Casa Piscina" />
+			<StyledImage src={adCardImage} alt="Casa Piscina" />
 			<AdCardInfo>
 				<StyledTitle>Piso en calle Ángel Puech, Valdeacederas, Madrid </StyledTitle>
 
@@ -36,11 +37,24 @@ const AdCard = ({image, title, children, footer}) => {
 					nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 				</StyledText>
 
-				<StyledLink>
-					<Link>
-						<IconWithLabel icon={faComments} text="Contactar" />
-					</Link>
-				</StyledLink>
+				<Button
+					buttonStyles={{
+						width: "7.5rem",
+						height: "2.2rem",
+						marginTop: "auto",
+						fontSize: "1.125rem",
+						fontFamily: "Arial",
+						color: Colors.strongBlue,
+						background: "transparent",
+						boxShadow: "none",
+					}}
+					text="Contactar"
+					type="button"
+					onClick={handleClick}
+					icon={faComments}
+					iconPosition="left"
+					iconStyles={{marginRight: 5}}
+				/>
 			</AdCardInfo>
 		</Container>
 	);
