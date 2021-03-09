@@ -51,7 +51,7 @@ Button.propTypes = {
 	isLoading: PropTypes.bool,
 	iconPosition: PropTypes.string,
 	className: PropTypes.string,
-	buttonStyles: PropTypes.string,
+	buttonStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	textStyles: PropTypes.object,
 	iconStyles: PropTypes.string,
 	animated: PropTypes.bool,
