@@ -44,3 +44,10 @@ export const StyledContainer = styled.div`
 		margin-bottom: 15px;
 	}
 `;
+
+export const StyledTextAreaError = styled.div`
+	&.textAreaCreateNewAd {
+		border: 1px solid #707070;
+		border-radius: 5px;
+	}
+`;
