@@ -1,5 +1,13 @@
 import React from "react";
 import InputNumber from "components/units/InputNumber/InputNumber";
+import {
+	StyledContainer,
+	StyledLabel,
+	StyledCheckbox,
+	StyledFiltros,
+	StyledContainerInputs,
+	StyledContainerCheckbox,
+} from "./FilterList.styles";
 
 function FilterList(props) {
 	const handleChange = (e) => {
@@ -12,53 +20,57 @@ function FilterList(props) {
 	};
 
 	return (
-		<div>
-			<h3>Filtros</h3>
-			<div>
-				<h3>Precio</h3>
+		<StyledContainer>
+			<StyledFiltros>Filtros</StyledFiltros>
+			<StyledLabel>Precio</StyledLabel>
+			<StyledContainerInputs>
 				<InputNumber
 					name="priceMin"
 					type="number"
 					value={props.filters.priceMin}
 					onChange={handleChange}
 					placeholder="Mín"
+					className="styleFilterList"
 				/>
 				<InputNumber
 					name="priceMax"
 					type="number"
 					value={props.filters.priceMax}
 					onChange={handleChange}
-					placeholder="Max"
+					placeholder="Máx"
+					className="styleFilterList"
 				/>
-			</div>
-			<div>
-				<h3>Tamaño</h3>
+			</StyledContainerInputs>
+			<StyledLabel>Tamaño</StyledLabel>
+			<StyledContainerInputs>
 				<InputNumber
 					name="sizeMin"
 					type="number"
 					value={props.filters.sizeMin}
 					onChange={handleChange}
 					placeholder="Mín"
+					className="styleFilterList"
 				/>
 				<InputNumber
 					name="sizeMax"
 					type="number"
 					value={props.filters.sizeMax}
 					onChange={handleChange}
-					placeholder="Max"
+					placeholder="Máx"
+					className="styleFilterList"
 				/>
-			</div>
-			<div>
-				<input
+			</StyledContainerInputs>
+			<StyledContainerCheckbox>
+				<StyledCheckbox
 					type="checkbox"
 					id="check"
 					checked={props.filters.billsIncluded}
 					onChange={handleChange}
 					name="billsIncluded"
 				/>
-				<label>Gastos incluidos</label>
-			</div>
-		</div>
+				<StyledLabel>Gastos incluidos</StyledLabel>
+			</StyledContainerCheckbox>
+		</StyledContainer>
 	);
 }
 

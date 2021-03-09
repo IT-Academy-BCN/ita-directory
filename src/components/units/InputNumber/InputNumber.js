@@ -35,6 +35,8 @@ const InputNumber = ({
 	required,
 }) => {
 	const [isInvalid, setIsInvalid] = useState(false);
+	const hasIcon = icon ? true : false;
+	const hasLabel = label ? true : false;
 
 	/*warning on behavior of input type number:
 	target value is passed as empty string if the number is not interpreted as valid 
@@ -51,13 +53,15 @@ const InputNumber = ({
 
 	return (
 		<React.Fragment>
-			<StyledMainContainer>
-				<StyledLabel htmlFor={id}>{label}</StyledLabel>
+			<StyledMainContainer className="styleFilterList">
+				{hasLabel && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 				<StyledContainerInputError>
 					<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
-						<StyledIcon>
-							<FontAwesomeIcon icon={icon} />
-						</StyledIcon>
+						{hasIcon && (
+							<StyledIcon>
+								<FontAwesomeIcon icon={icon} />
+							</StyledIcon>
+						)}
 						<StyledInput
 							type="number"
 							placeholder={placeholder}
