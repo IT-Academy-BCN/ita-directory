@@ -26,7 +26,9 @@ const TextArea = ({
 }) => {
 	return (
 		<div>
-			<StyledLabel style={labelStyles}>{label}</StyledLabel>
+			<StyledLabel htmlFor={id} style={labelStyles}>
+				{label}
+			</StyledLabel>
 			<StyledTextArea
 				style={textAreaStyles}
 				placeholder={placeholder}
@@ -42,9 +44,8 @@ const TextArea = ({
 				rows={rows}
 				cols={cols}
 				required={required}
-			>
-				{value}
-			</StyledTextArea>
+				value={value}
+			/>
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				className={className}

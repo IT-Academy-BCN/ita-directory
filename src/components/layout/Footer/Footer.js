@@ -2,11 +2,11 @@ import React from "react";
 
 // Styles
 import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./styles";
-import {Wrapper} from "theme/GlobalStyles";
+import {Container} from "theme/GlobalStyles";
 
 const Footer = () => {
 	return (
-		<Wrapper>
+		<Container column>
 			<hr />
 			<StyledFooter>
 				<Logo>LOGO EMPRESA</Logo>
@@ -19,7 +19,7 @@ const Footer = () => {
 					</Legal>
 				</Information>
 			</StyledFooter>
-		</Wrapper>
+		</Container>
 	);
 };
 
