@@ -34,3 +34,13 @@ export const StyledError = styled.small`
 		position: static;
 	}
 `;
+
+export const StyledContainer = styled.div`
+	&.textAreaCreateNewAd {
+		display: flex;
+		@media screen and (max-width: 600px) {
+			flex-direction: column;
+		}
+		margin-bottom: 15px;
+	}
+`;

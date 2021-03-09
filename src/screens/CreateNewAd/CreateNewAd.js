@@ -3,6 +3,7 @@ import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import Button from "components/units/Button/Button";
+import TextArea from "components/units/TextArea/TextArea";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 
 // Styles
@@ -46,11 +47,11 @@ const CreateNewAd = () => {
 			inputContainerClassName: "createNewAd",
 		},
 		{
-			Component: Input,
+			Component: TextArea,
 			type: "text",
 			label: "Descripción",
 			name: "description",
-			inputContainerClassName: "createNewAd",
+			textAreaContainer: "textAreaCreateNewAd",
 		},
 		{
 			Component: Input,

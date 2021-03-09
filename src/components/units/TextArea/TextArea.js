@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyledTextArea, StyledError, StyledLabel} from "./TextArea.styles.js";
+import {StyledTextArea, StyledError, StyledLabel, StyledContainer} from "./TextArea.styles.js";
 
 const TextArea = ({
 	placeholder,
@@ -23,9 +23,10 @@ const TextArea = ({
 	errorStyles,
 	error,
 	label,
+	textAreaContainer,
 }) => {
 	return (
-		<div>
+		<StyledContainer className={textAreaContainer}>
 			<StyledLabel style={labelStyles}>{label}</StyledLabel>
 			<StyledTextArea
 				style={textAreaStyles}
@@ -49,7 +50,7 @@ const TextArea = ({
 				className={className}
 				style={errorStyles}
 			/>
-		</div>
+		</StyledContainer>
 	);
 };
 
