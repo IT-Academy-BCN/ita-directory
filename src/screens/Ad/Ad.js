@@ -90,6 +90,7 @@ const Ad = ({icon}) => {
 								);
 							})}
 						</StyledUl>
+
 						<StyledText>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at
