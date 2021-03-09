@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const HeaderWrapper = styled.header`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
 export const StyledHeader = styled.header`
 	display: flex;
 	justify-content: center;
@@ -24,7 +31,6 @@ export const StyledHeader = styled.header`
 
 	&.logged {
 		justify-content: left;
-		padding-left: 23rem;
 	}
 `;
 
@@ -42,17 +48,6 @@ export const Logo = styled.div`
 
 	&.logged {
 		justify-content: left;
-	}
-`;
-
-export const StyledHeaderTop = styled.div`
-	margin-top: 2rem;
-	display: flex;
-	justify-content: center;
-	padding: 2px 15vw;
-
-	&.logged {
-		justify-content: space-between;
 	}
 `;
 

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {
 	Logo,
 	StyledHeader,
-	StyledHeaderTop,
 	StyledImg,
 	StyledDropdown,
 	StyledLi,
@@ -10,7 +9,9 @@ import {
 	StyledMiPerfil,
 	StyledText,
 	StyledUl,
+	HeaderWrapper,
 } from "./Header.styles";
+import {Container} from "theme/GlobalStyles";
 
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
@@ -30,30 +31,35 @@ const Header = ({isLoggedIn, title}) => {
 	};
 	if (isLoggedIn) {
 		return (
-			<header>
-				<StyledHeaderTop className={`logged`}>
-					<Logo className={`logged`}>Logo Empresa</Logo>
-					<StyledMiPerfil>
-						<StyledButton onClick={handleClick}>
-							<StyledImg src={profilePicture} alt="profile" />
-							<StyledText>Mi perfil</StyledText>
-						</StyledButton>
-						{dropdownVisible ? (
-							<StyledDropdown ref={handleClickTwo}>
-								<StyledUl>
-									<StyledLi>Editar perfil</StyledLi>
-									<StyledLi>Mis Anuncios</StyledLi>
-									<StyledLi>Publicar Anuncio</StyledLi>
-									<StyledLi>Cerrar sesión</StyledLi>
-								</StyledUl>
-							</StyledDropdown>
-						) : null}
-					</StyledMiPerfil>
-				</StyledHeaderTop>
+			<>
+				<Container>
+					<HeaderWrapper>
+						<Logo className={`logged`}>Logo Empresa</Logo>
+						<StyledMiPerfil>
+							<StyledButton onClick={handleClick}>
+								<StyledImg src={profilePicture} alt="profile" />
+								<StyledText>Mi perfil</StyledText>
+							</StyledButton>
+							{dropdownVisible ? (
+								<StyledDropdown ref={handleClickTwo}>
+									<StyledUl>
+										<StyledLi>Editar perfil</StyledLi>
+										<StyledLi>Mis Anuncios</StyledLi>
+										<StyledLi>Publicar Anuncio</StyledLi>
+										<StyledLi>Cerrar sesión</StyledLi>
+									</StyledUl>
+								</StyledDropdown>
+							) : null}
+						</StyledMiPerfil>
+					</HeaderWrapper>
+				</Container>
+
 				<StyledHeader className={`logged`}>
-					<h1>{title}</h1>
+					<Container>
+						<h1>{title}</h1>
+					</Container>
 				</StyledHeader>
-			</header>
+			</>
 		);
 	} else {
 		return (

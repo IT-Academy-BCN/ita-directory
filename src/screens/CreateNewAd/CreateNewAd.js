@@ -3,8 +3,11 @@ import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import Button from "components/units/Button/Button";
-import {Wrapper} from "./CreateNewAd.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
+
+// Styles
+import {Wrapper} from "./CreateNewAd.styles";
+import {Container} from "theme/GlobalStyles";
 
 const CreateNewAd = () => {
 	const emptyForm = {
@@ -93,39 +96,41 @@ const CreateNewAd = () => {
 	return (
 		<>
 			<Body title="Publicar anuncio" isLoggedIn={true}>
-				<Wrapper>
-					<form onSubmit={handleSubmit}>
-						{inputComponentData.map((el, i) => {
-							const Component = el.Component;
-							return (
-								<Component
-									key={i}
-									type={el.type}
-									label={el.label}
-									name={el.name}
-									required={el.required}
-									value={form[el.name]}
-									onChange={handleChange}
-									className={el.inputClassName}
-									icon={el.icon}
-									inputContainerClassName={el.inputContainerClassName}
-								/>
-							);
-						})}
-						<Button
-							buttonStyles={{width: "7.25rem", height: "2.125rem"}}
-							text="Enviar"
-							type="normal"
-							className="blueGradient"
-						/>
-					</form>
-					{submittedData && (
-						<div>
-							<p>The following data was submitted:</p>
-							<pre>{submittedData}</pre>
-						</div>
-					)}
-				</Wrapper>
+				<Container>
+					<Wrapper>
+						<form onSubmit={handleSubmit}>
+							{inputComponentData.map((el, i) => {
+								const Component = el.Component;
+								return (
+									<Component
+										key={i}
+										type={el.type}
+										label={el.label}
+										name={el.name}
+										required={el.required}
+										value={form[el.name]}
+										onChange={handleChange}
+										className={el.inputClassName}
+										icon={el.icon}
+										inputContainerClassName={el.inputContainerClassName}
+									/>
+								);
+							})}
+							<Button
+								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
+								text="Enviar"
+								type="normal"
+								className="blueGradient"
+							/>
+						</form>
+						{submittedData && (
+							<div>
+								<p>The following data was submitted:</p>
+								<pre>{submittedData}</pre>
+							</div>
+						)}
+					</Wrapper>
+				</Container>
 			</Body>
 		</>
 	);
