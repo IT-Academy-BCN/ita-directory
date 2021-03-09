@@ -70,6 +70,7 @@ export const StyledInput = styled.input`
 		border: none;
 	}
 	&.error {
+		color: ${Colors.redColor};
 		border: none;
 		outline: 0 none;
 	}
