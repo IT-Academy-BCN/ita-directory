@@ -1,12 +1,11 @@
 .Map {
 	width: 95%;
 	height: 285px;
-	margin-left: 6%;
-	padding: 0;
+	margin-top: 1%;
 }
 
 .Map-container {
-	width: 80%;
-	height: 75%;
+	width: 60%;
+	height: 90%;
 	margin-bottom: 0;
 }
