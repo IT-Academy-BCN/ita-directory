@@ -26,7 +26,9 @@ const TextArea = ({
 }) => {
 	return (
 		<div>
-			<StyledLabel style={labelStyles}>{label}</StyledLabel>
+			<StyledLabel htmlFor={id} style={labelStyles}>
+				{label}
+			</StyledLabel>
 			<StyledTextArea
 				style={textAreaStyles}
 				placeholder={placeholder}

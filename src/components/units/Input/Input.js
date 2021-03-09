@@ -18,7 +18,7 @@ const Input = ({
 	onChange,
 	onFocus,
 	onBlur,
-	textStyles,
+	textStyles, //not working
 	inputStyles,
 	labelStyles,
 	className,
@@ -32,7 +32,6 @@ const Input = ({
 	errorStyles,
 	error,
 	disabled,
-	minLength,
 	label,
 	inputContainerClassName,
 	required,
@@ -42,62 +41,43 @@ const Input = ({
 
 	return (
 		<>
-			{hasIcon ? (
-				<StyledContainer className={inputContainerClassName}>
-					<StyledLabel htmlFor={id}>{label}</StyledLabel>
-					<StyledContainerInputError>
-						<StyledIconInput className={inputContainerClassName}>
+			<StyledContainer className={inputContainerClassName}>
+				<StyledLabel htmlFor={id} style={labelStyles}>
+					{label}
+				</StyledLabel>
+				<StyledContainerInputError>
+					<StyledIconInput className={inputContainerClassName}>
+						{hasIcon && (
 							<StyledIcon>
 								<FontAwesomeIcon icon={icon} />
 							</StyledIcon>
-							<StyledInput
-								type={type}
-								placeholder={placeholder}
-								value={value}
-								onChange={onChange}
-								onFocus={onFocus}
-								onBlur={onBlur}
-								className={`${className} ${error ? "error" : ""}`}
-								id={id}
-								name={name}
-								disabled={disabled}
-								minLength={minlength}
-								required={required}
-							/>
-						</StyledIconInput>
-						<StyledError
-							dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-							className={className}
+						)}
+						<StyledInput
+							type={type}
+							placeholder={placeholder}
+							value={value}
+							onChange={onChange}
+							onFocus={onFocus}
+							onBlur={onBlur}
+							className={`${className} ${error ? "error" : ""}`}
+							id={id}
+							name={name}
+							disabled={disabled}
+							minLength={minlength}
+							maxLength={maxlength}
+							size={size}
+							success={success}
+							required={required}
+							style={inputStyles}
 						/>
-					</StyledContainerInputError>
-				</StyledContainer>
-			) : (
-				<StyledContainer className={inputContainerClassName}>
-					<StyledLabel htmlFor={id}>{label}</StyledLabel>
-					<StyledContainerInputError>
-						<StyledIconInput className={inputContainerClassName}>
-							<StyledInput
-								type={type}
-								placeholder={placeholder}
-								value={value}
-								onChange={onChange}
-								onFocus={onFocus}
-								onBlur={onBlur}
-								className={`${className} ${error ? "error" : ""}`}
-								id={id}
-								name={name}
-								disabled={disabled}
-								minLength={minlength}
-								required={required}
-							/>
-						</StyledIconInput>
-						<StyledError
-							dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-							className={className}
-						/>
-					</StyledContainerInputError>
-				</StyledContainer>
-			)}
+					</StyledIconInput>
+					<StyledError
+						dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+						className={className}
+						styles={errorStyles}
+					/>
+				</StyledContainerInputError>
+			</StyledContainer>
 		</>
 	);
 };
