@@ -7,9 +7,21 @@ export const Container = styled.div`
 	display: flex;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
-	border: 1px solid ${Colors.lightGrey};
+	border: 1px solid ${Colors.extraLightGrey};
 	border-radius: 6px;
 	opacity: 1;
+
+	@media only screen and (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 70vw;
+		height: auto;
+	}
+
+	@media only screen and (max-width: 460px) {
+		width: 90vw;
+	}
 `;
 
 export const AdCardInfo = styled.div`
@@ -26,26 +38,39 @@ export const StyledTitle = styled.div`
 	text-align: left;
 	padding-bottom: 1rem;
 	letter-spacing: 0px;
+	font: normal normal normal 14px/16px Arial;
 	opacity: 1;
 `;
 
 export const StyledImage = styled.img`
 	height: auto;
+	min-width: 40%;
+	max-width: 100%;
+	overflow: hidden;
 `;
 
 export const StyledDescription = styled.div`
 	text-align: left;
 	display: flex;
 	justify-content: space-between;
-	margin-right: 1rem;
 	flex-direction: row;
+	align-items: flex-end;
 	font: normal normal normal 14px/10px Arial;
+	text-align: center;
+
+	@media only screen and (max-width: 460px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 `;
 export const StyledPrice = styled.label`
 	text-align: left;
 	color: ${Colors.redColor};
+	font-family: Arial;
 	font-size: 16px;
-	font: normal normal normal 14px/16px Arial;
+	line-height: 16px;
+	font-weight: bold;
+	vertical-align: bottom;
 	opacity: 1;
 `;
 
@@ -54,7 +79,7 @@ export const StyledP = styled.label`
 	text-align: left;
 	letter-spacing: 0px;
 	opacity: 1;
-	margin: 0;
+	padding: 1.5px;
 `;
 
 export const StyledText = styled.p`
