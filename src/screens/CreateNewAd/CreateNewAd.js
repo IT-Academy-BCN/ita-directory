@@ -7,8 +7,9 @@ import TextArea from "components/units/TextArea/TextArea";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 
 // Styles
-import {Wrapper} from "./CreateNewAd.styles";
+import {Wrapper, MapText} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
+import CustomMap from "components/composed/Map/CustomMap";
 
 const CreateNewAd = () => {
 	const emptyForm = {
@@ -117,6 +118,10 @@ const CreateNewAd = () => {
 									/>
 								);
 							})}
+							<MapText>
+								Índica la dirección de la propiedad pinchando sobre el mapa.
+							</MapText>
+							<CustomMap />
 							<Button
 								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 								text="Enviar"

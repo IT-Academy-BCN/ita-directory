@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	margin-left: 20%;
 	label {
 		flex-basis: 150px;
 		color: #707070;
@@ -16,4 +17,8 @@ export const Wrapper = styled.div`
 			padding: 5px;
 		}
 	}
+`;
+
+export const MapText = styled.p`
+	margin-top: 3%;
 `;

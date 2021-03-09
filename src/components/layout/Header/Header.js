@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import {
 	Logo,
 	StyledHeader,
@@ -47,10 +48,18 @@ const Header = ({isLoggedIn, title}) => {
 							{dropdownVisible ? (
 								<StyledDropdown>
 									<StyledUl>
-										<StyledLi>Editar perfil</StyledLi>
-										<StyledLi>Mis Anuncios</StyledLi>
-										<StyledLi>Publicar Anuncio</StyledLi>
-										<StyledLi>Cerrar sesión</StyledLi>
+										<Link to="/Profile">
+											<StyledLi>Editar perfil</StyledLi>
+										</Link>
+										<Link to="/Ad">
+											<StyledLi>Mis Anuncios</StyledLi>
+										</Link>
+										<Link to="/CreateNewAd">
+											<StyledLi>Publicar Anuncio</StyledLi>
+										</Link>
+										<Link to="/">
+											<StyledLi>Cerrar sesión</StyledLi>
+										</Link>
 									</StyledUl>
 								</StyledDropdown>
 							) : null}
