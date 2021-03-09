@@ -1,51 +1,28 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import InputNumber from "components/units/InputNumber/InputNumber";
 
-function FilterList() {
-	const noFilters = {
-		priceMin: "",
-		priceMax: "",
-		sizeMin: "",
-		sizeMax: "",
-		billsIncluded: false,
-	};
-
-	/*const [priceMin, setPriceMin] = useState("");
-    const [priceMax, setPriceMax] = useState("");
-    const [sizeMin, setSizeMin] = useState("");
-    const [sizeMax, setSizeMax] = useState("");*/
-	const [filters, setFilters] = useState(noFilters);
-
-	/*useEffect(() => {
-        console.log("pisos", {priceMin, priceMax});
-    }, [priceMin, priceMax, sizeMin, sizeMax]);*/
-
+function FilterList(props) {
 	const handleChange = (e) => {
-		const {name, value, type, checked} = e.target;
-		setFilters({
-			...filters,
-			[name]: type === "checkbox" ? checked : value,
-		});
+		const {name, type, checked, value} = e.target;
+		props.onChange(name, type, checked, value);
 	};
-	useEffect(() => {
-		console.log(filters);
-	}, [filters]);
 
 	return (
 		<div>
 			<h3>Filtros</h3>
 			<div>
+				<h3>Precio</h3>
 				<InputNumber
 					name="priceMin"
 					type="number"
-					value={filters.priceMin}
+					value={props.filters.priceMin}
 					onChange={handleChange}
 					placeholder="Mín"
 				/>
 				<InputNumber
 					name="priceMax"
 					type="number"
-					value={filters.priceMax}
+					value={props.filters.priceMax}
 					onChange={handleChange}
 					placeholder="Max"
 				/>
@@ -55,14 +32,14 @@ function FilterList() {
 				<InputNumber
 					name="sizeMin"
 					type="number"
-					value={filters.sizeMin}
+					value={props.filters.sizeMin}
 					onChange={handleChange}
 					placeholder="Mín"
 				/>
 				<InputNumber
 					name="sizeMax"
 					type="number"
-					value={filters.sizeMax}
+					value={props.filters.sizeMax}
 					onChange={handleChange}
 					placeholder="Max"
 				/>
@@ -71,7 +48,7 @@ function FilterList() {
 				<input
 					type="checkbox"
 					id="check"
-					checked={filters.billsIncluded}
+					checked={props.filters.billsIncluded}
 					onChange={handleChange}
 					name="billsIncluded"
 				/>

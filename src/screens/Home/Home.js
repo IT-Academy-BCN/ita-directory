@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import InputNumber from "../../components/units/InputNumber/InputNumber";
 import {faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "components/composed/Modal/Modal.styles";
@@ -9,11 +9,30 @@ const Home = () => {
 	const [inputNumberValue, setInputNumberValue] = useState("");
 	const [active, setActive] = useState(false);
 	const handleInputNumberChange = (e) => setInputNumberValue(e.target.value);
+	const noFilters = {
+		priceMin: "",
+		priceMax: "",
+		sizeMin: "",
+		sizeMax: "",
+		billsIncluded: false,
+	};
+
+	const [filters, setFilters] = useState(noFilters);
+
+	const handleChange = (name, type, checked, value) => {
+		setFilters({
+			...filters,
+			[name]: type === "checkbox" ? checked : value,
+		});
+	};
+	useEffect(() => {
+		console.log(filters);
+	}, [filters]);
 
 	return (
 		<>
 			<div>
-				<FilterList />
+				<FilterList filters={filters} onChange={handleChange} />
 			</div>
 			<form>
 				<InputNumber
