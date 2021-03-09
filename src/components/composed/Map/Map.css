@@ -3,6 +3,7 @@
 	height: 200px;
 	
 	padding: 0;
+	z-index: -1;
 }
 
 .Map-container {
