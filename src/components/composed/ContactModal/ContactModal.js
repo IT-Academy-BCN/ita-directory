@@ -89,34 +89,15 @@ const ContactModal = ({active, hideModal}) => {
 			}
 		>
 			<Wrapper>
-				<Input
-					type="text"
-					name="name"
-					placeholder="Nombre"
-					textStyle={{padding: 5}}
-					{...bindName}
-				/>
+				<Input type="text" name="name" label="Nombre" {...bindName} />
 			</Wrapper>
 
 			<Wrapper>
-				<Input
-					type="text"
-					name="email"
-					placeholder="Email"
-					textStyle={{padding: 5}}
-					{...bindEmail}
-				/>
+				<Input type="text" name="email" label="Email" {...bindEmail} />
 			</Wrapper>
 
 			<Wrapper>
-				<TextArea
-					name="message"
-					placeholder="Mensaje"
-					className="styleInput"
-					required={true}
-					textStyle={{padding: 5}}
-					{...bindMessage}
-				/>
+				<TextArea name="message" label="Mensaje" required={true} {...bindMessage} />
 			</Wrapper>
 
 			<StyledSmall>{error}</StyledSmall>
