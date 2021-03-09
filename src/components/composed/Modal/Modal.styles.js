@@ -40,9 +40,9 @@ export const ModalClose = styled.a`
 export const ModalContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	max-height: 75vh;
+	max-height: 95vh;
 	max-width: 850px;
-	min-width: 50%;
+	min-width: 25%;
 	padding: 0 1.5rem;
 	animation: ${keyframes`${fadeIn}`} 2s;
 	z-index: 1;
@@ -54,7 +54,7 @@ export const ModalContainer = styled.div`
 
 export const ModalBody = styled.div`
 	overflow-y: auto;
-	padding: 30px 10px;
+	padding: 22px 10px;
 	position: relative;
 	font-family: Arial;
 	font-size: 1rem;
