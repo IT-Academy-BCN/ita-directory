@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
 import {adCardImage} from "assets/images";
@@ -10,10 +10,12 @@ import {
 	StyledCard,
 	StyledAdList,
 } from "./AdList.style.js";
-import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
-import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
+import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
+import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
+import Colors from "theme/Colors";
 const AdList = () => {
+	const [mapView, setMapView] = useState(false);
 	const adList = [
 		{
 			image: {src: {adCardImage}, alt: "Casa Piscina"},
@@ -27,6 +29,19 @@ const AdList = () => {
 		},
 	];
 	const [ad] = adList;
+	const buttonStyle = {
+		display: "flex",
+		alignItems: "center",
+		width: "auto",
+		height: "auto",
+		fontSize: "0.95rem",
+		fontFamily: "Arial",
+		color: Colors.lightGray,
+		background: "transparent",
+		boxShadow: "none",
+		outline: "none",
+		paddingRight: 0,
+	};
 	return (
 		<Body title="Pisos en Alquiler en Madrid">
 			<Container row>
@@ -36,7 +51,31 @@ const AdList = () => {
 					</StyledTreeSearch>
 					<RowWrapper>
 						<StyledTitle>Listado de pisos</StyledTitle>
-						<IconWithLabel text="Vista de mapa" icon={faMapMarkerAlt} />
+						{mapView ? (
+							<Button
+								text="Vista de detalles"
+								icon={faBars}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
+							/>
+						) : (
+							<Button
+								text="Vista de mapa"
+								icon={faMapMarkerAlt}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
+							/>
+						)}
 					</RowWrapper>
 					<StyledWrapper>
 						<StyledCard>
