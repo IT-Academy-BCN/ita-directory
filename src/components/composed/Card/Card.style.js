@@ -74,5 +74,6 @@ export const StyledText = styled.p`
 `;
 
 export const StyledFooter = styled.div`
+	margin-top: auto;
 	display: flex;
 `;

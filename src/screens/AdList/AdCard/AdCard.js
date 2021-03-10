@@ -39,6 +39,7 @@ const AdCard = ({id, image, title, price, surface, includedExpenses, description
 							background: "transparent",
 							boxShadow: "none",
 							paddingLeft: "0",
+							outline: "none",
 						}}
 						text="Contactar"
 						type="button"
