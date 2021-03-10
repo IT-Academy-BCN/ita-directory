@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
 import {adCardImage} from "assets/images";
@@ -13,6 +13,7 @@ import {
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import {Container} from "theme/GlobalStyles.js";
+import FilterList from "components/composed/FilterList/FilterList.js";
 const AdList = () => {
 	const adList = [
 		{
@@ -27,12 +28,31 @@ const AdList = () => {
 		},
 	];
 	const [ad] = adList;
+
+	const noFilters = {
+		priceMin: "",
+		priceMax: "",
+		sizeMin: "",
+		sizeMax: "",
+		billsIncluded: false,
+	};
+
+	const [filters, setFilters] = useState(noFilters);
+
+	const handleChange = (changedFilters) => {
+		setFilters(changedFilters);
+	};
+	useEffect(() => {
+		console.log(filters);
+	}, [filters]);
+
 	return (
 		<Body title="Pisos en Alquiler en Madrid">
 			<Container row>
+				<FilterList filters={filters} onChange={handleChange} />
 				<StyledAdList>
 					<StyledTreeSearch>
-						<label>Madrid</label> > <label>Alquiler</label>
+						<label>Madrid</label> <label>Alquiler</label>
 					</StyledTreeSearch>
 					<RowWrapper>
 						<StyledTitle>Listado de pisos</StyledTitle>
