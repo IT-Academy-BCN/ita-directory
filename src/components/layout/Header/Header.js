@@ -1,8 +1,8 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import {
 	Logo,
 	StyledHeader,
-	StyledHeaderTop,
 	StyledImg,
 	StyledDropdown,
 	StyledLi,
@@ -10,7 +10,9 @@ import {
 	StyledMiPerfil,
 	StyledText,
 	StyledUl,
+	HeaderWrapper,
 } from "./Header.styles";
+import {Container} from "theme/GlobalStyles";
 
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
@@ -22,33 +24,55 @@ const Header = ({isLoggedIn, title}) => {
 		console.log("profile clicked");
 		setDropdownVisible(!dropdownVisible);
 	};
+
+	const handleClickTwo = (e) => {
+		/*  const rect = e.getBoundingClientRect()
+        console.log(rect)
+		
+        const right = rect.right
+        console.log(right) 
+		 */
+	};
+
 	if (isLoggedIn) {
 		return (
-			<header>
-				<StyledHeaderTop className={`logged`}>
-					<Logo className={`logged`}>Logo Empresa</Logo>
-					<StyledMiPerfil>
-						<StyledButton onClick={handleClick}>
-							<StyledImg src={profilePicture} alt="profile" />
-							<StyledText>Mi perfil</StyledText>
-						</StyledButton>
+			<>
+				<Container>
+					<HeaderWrapper>
+						<Logo className={`logged`}>Logo Empresa</Logo>
+						<StyledMiPerfil>
+							<StyledButton onClick={handleClick} ref={handleClickTwo}>
+								<StyledImg src={profilePicture} alt="profile" />
+								<StyledText>Mi perfil</StyledText>
+							</StyledButton>
+							{dropdownVisible ? (
+								<StyledDropdown>
+									<StyledUl>
+										<Link to="/Profile">
+											<StyledLi>Editar perfil</StyledLi>
+										</Link>
+										<Link to="/Ad">
+											<StyledLi>Mis Anuncios</StyledLi>
+										</Link>
+										<Link to="/CreateNewAd">
+											<StyledLi>Publicar Anuncio</StyledLi>
+										</Link>
+										<Link to="/">
+											<StyledLi>Cerrar sesión</StyledLi>
+										</Link>
+									</StyledUl>
+								</StyledDropdown>
+							) : null}
+						</StyledMiPerfil>
+					</HeaderWrapper>
+				</Container>
 
-						{dropdownVisible ? (
-							<StyledDropdown>
-								<StyledUl>
-									<StyledLi>Editar perfil</StyledLi>
-									<StyledLi>Mis Anuncios</StyledLi>
-									<StyledLi>Publicar Anuncio</StyledLi>
-									<StyledLi>Cerrar sesión</StyledLi>
-								</StyledUl>
-							</StyledDropdown>
-						) : null}
-					</StyledMiPerfil>
-				</StyledHeaderTop>
 				<StyledHeader className={`logged`}>
-					<h1>{title}</h1>
+					<Container>
+						<h1>{title}</h1>
+					</Container>
 				</StyledHeader>
-			</header>
+			</>
 		);
 	} else {
 		return (

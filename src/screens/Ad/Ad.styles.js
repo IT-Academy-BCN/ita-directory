@@ -127,4 +127,28 @@ export const StyledBottomDiv = styled.div`
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
+
+	display: flex;
+	flex-direction: row;
+	align-items: space-between;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-size: 16px;
+	padding-right: 1.5rem;
+	margin-top: 1rem;
+`;
+
+export const SyledButton = styled.button`
+	margin: 0;
+	padding: 0;
+`;
+
+export const StyledStreet = styled.p`
+	font-style: italic;
+	text-decoration: underline;
+`;
+
+export const StyledItems = styled.li`
+	list-style: none;
+	margin-left: 0.5rem;
 `;
