@@ -14,6 +14,8 @@ import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import {Container} from "theme/GlobalStyles.js";
 import FilterList from "components/composed/FilterList/FilterList.js";
+import dataList from "assets/data.json";
+
 const AdList = () => {
 	const adList = [
 		{
@@ -28,28 +30,37 @@ const AdList = () => {
 		},
 	];
 	const [ad] = adList;
+	const [filtersToApply, setFiltersToApply] = useState({});
 
-	const noFilters = {
-		priceMin: "",
-		priceMax: "",
-		sizeMin: "",
-		sizeMax: "",
-		billsIncluded: false,
+	const handleSubmit = (filters) => setFiltersToApply(filters);
+
+	const isComplyingWithFilters = (ad) => {
+		return (
+			(!filtersToApply.priceMin || ad.monthlyRent >= parseInt(filtersToApply.priceMin)) &&
+			(!filtersToApply.priceMax || ad.monthlyRent <= parseInt(filtersToApply.priceMax)) &&
+			(!filtersToApply.sizeMin || ad.squareMeters >= parseInt(filtersToApply.sizeMin)) &&
+			(!filtersToApply.sizeMax || ad.squareMeters >= parseInt(filtersToApply.sizeMax)) &&
+			(ad.expenses === "incluido") === filtersToApply.billsIncluded
+		);
 	};
 
-	const [filters, setFilters] = useState(noFilters);
-
-	const handleChange = (changedFilters) => {
-		setFilters(changedFilters);
+	const filterData = (filtersToApply) => {
+		const allData = dataList.apartments;
+		let dataToDisplay = allData.filter((apartment) => isComplyingWithFilters(apartment));
+		console.log(dataToDisplay);
+		return dataToDisplay;
 	};
+
 	useEffect(() => {
-		console.log(filters);
-	}, [filters]);
+		console.log(filtersToApply);
+		filterData(filtersToApply);
+		//eslint-disable-next-line
+	}, [filtersToApply]);
 
 	return (
 		<Body title="Pisos en Alquiler en Madrid">
 			<Container row>
-				<FilterList filters={filters} onChange={handleChange} />
+				<FilterList onSubmit={handleSubmit} />
 				<StyledAdList>
 					<StyledTreeSearch>
 						<label>Madrid</label> <label>Alquiler</label>
