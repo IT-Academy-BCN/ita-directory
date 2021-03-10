@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-	width: 168px;
-	height: 233px;
 	font-family: Arial, bold;
 	background: #f4f4f4 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
@@ -21,7 +19,7 @@ export const StyledFiltros = styled.h3`
 	letter-spacing: 0;
 	color: #404040;
 	opacity: 1;
-	border-bottom: 2px solid currentColor;
+	border-bottom: 1px solid currentColor;
 	margin-top: 0;
 	padding-bottom: 2px;
 `;
