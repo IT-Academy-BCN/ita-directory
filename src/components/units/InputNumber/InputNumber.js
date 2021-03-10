@@ -26,7 +26,7 @@ const InputNumber = ({
 	min,
 	max,
 	size,
-	errorText = "Tiene que ser un número válido o no puede estar vacío",
+	errorText = "No válido",
 	errorStyles,
 	disabled,
 	step,
@@ -35,6 +35,8 @@ const InputNumber = ({
 	required,
 }) => {
 	const [isInvalid, setIsInvalid] = useState(false);
+	const hasIcon = icon ? true : false;
+	const hasLabel = label ? true : false;
 
 	/*warning on behavior of input type number:
 	target value is passed as empty string if the number is not interpreted as valid 
@@ -45,19 +47,21 @@ const InputNumber = ({
 	const handleOnChange = (e) => {
 		const val = e.target.value;
 		const regex = /^\d+$/;
-		setIsInvalid(val === "" || !regex.test(val) ? true : false);
+		setIsInvalid(!regex.test(val) ? true : false);
 		onChange(e);
 	};
 
 	return (
 		<React.Fragment>
-			<StyledMainContainer>
-				<StyledLabel htmlFor={id}>{label}</StyledLabel>
+			<StyledMainContainer className="styleFilterList styleFilter">
+				{hasLabel && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
 				<StyledContainerInputError>
 					<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
-						<StyledIcon>
-							<FontAwesomeIcon icon={icon} />
-						</StyledIcon>
+						{hasIcon && (
+							<StyledIcon>
+								<FontAwesomeIcon icon={icon} />
+							</StyledIcon>
+						)}
 						<StyledInput
 							type="number"
 							placeholder={placeholder}
