@@ -1,5 +1,6 @@
 import React from "react";
 import {Popup} from "react-leaflet";
+import {Prova, StyledPopup} from "./MapPopUp.Style";
 
 const MapPopup = (props) => {
 	const {
@@ -13,15 +14,17 @@ const MapPopup = (props) => {
 	} = props.data;
 	return (
 		<Popup>
-			<div>{imgDesc} contactar</div>
-			<div>
-				<img src={imgName} alt={imgName} />
-			</div>
-			<div>{Number(monthlyRent.toFixed(2)).toLocaleString() + " €"}/mes</div>
-			<div>{numRooms} habitaciones</div>
-			<div>{squareMeters} m2</div>
-			<div>{contactPerson} contactar</div>
-			<div>{contactPhone} contactar</div>
+			<StyledPopup>
+				<div>
+					<img src={imgName} alt={imgName} />
+				</div>
+				<div>{imgDesc} contactar</div>
+				<Prova>{Number(monthlyRent.toFixed(2)).toLocaleString() + " €"}/mes</Prova>
+				<div>{numRooms} habitaciones</div>
+				<div>{squareMeters} m2</div>
+				<div>{contactPerson} contactar</div>
+				<div>{contactPhone} contactar</div>
+			</StyledPopup>
 		</Popup>
 	);
 };
