@@ -9,7 +9,7 @@ import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
-import AdList from "screens/AdList/AdList";
+import AdList from "screens/AdList/AdList/AdList";
 
 const App = () => {
 	return (
@@ -17,7 +17,7 @@ const App = () => {
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/ad" component={Ad} />
-				<Route exact path="/newAd" component={CreateNewAd} />
+				<Route exact path="/new-ad" component={CreateNewAd} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
 				<Route exact path="/profile" component={Profile} />

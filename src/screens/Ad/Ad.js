@@ -101,7 +101,6 @@ const Ad = ({icon}) => {
 								fontsize: "12px",
 								height: "2.2rem",
 								marginTop: "0rem",
-								marginLeft: "6%",
 							}}
 							text="Contacto"
 							className="blueGradient"
