@@ -11,6 +11,7 @@ export const StyledTitle = styled.h3`
 	font: normal normal normal 26px/21px Arial;
 	letter-spacing: 0px;
 	margin-bottom: 0;
+	margin-right: 5rem;
 `;
 export const StyledWrapper = styled.div`
 	display: flex;
@@ -28,6 +29,7 @@ export const RowWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
+	width: 100%;
 `;
 
 export const StyledTreeSearch = styled.div`
