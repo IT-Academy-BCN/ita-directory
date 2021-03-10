@@ -44,7 +44,7 @@ export const ModalContainer = styled.div`
 	max-width: 850px;
 	min-width: 25%;
 	padding: 0 1.5rem;
-	animation: ${keyframes`${fadeIn}`} 2s;
+	animation: ${keyframes`${fadeIn}`} 0.5s;
 	z-index: 1;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
