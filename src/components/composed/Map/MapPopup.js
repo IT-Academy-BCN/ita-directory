@@ -13,9 +13,9 @@ const MapPopup = (props) => {
 	} = props.data;
 	return (
 		<Popup>
-			<div>{imgDesc} contactar</div>
+			<div>{imgDesc} contactar</div> {/* //alt */}
 			<div>
-				<img src={imgName} alt={imgName} />
+				<img src={imgName} alt={imgDesc} /> {/* //url alt */}
 			</div>
 			<div>{Number(monthlyRent.toFixed(2)).toLocaleString() + " €"}/mes</div>
 			<div>{numRooms} habitaciones</div>
