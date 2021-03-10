@@ -42,7 +42,7 @@ const MapView = (props) => {
 	}, [location]);
 
 	return (
-		<MapContainer center={state.currentLocation} zoom={state.zoom}>
+		<MapContainer className="Container-View" center={state.currentLocation} zoom={state.zoom}>
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 			<MapMarkers apartments={state.data.apartments} />
 		</MapContainer>
