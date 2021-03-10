@@ -40,9 +40,9 @@ class CustomMap extends Component {
 
 	render() {
 		return (
-			<div className="Map">
+			<div className="Mapa">
 				<MapContainer
-					className="Map-container"
+					className="Container"
 					center={{lat: 41.3879, lng: 2.16992}}
 					zoom={18}
 					scrollWheelZoom={false}

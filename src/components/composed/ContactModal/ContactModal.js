@@ -3,10 +3,12 @@ import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
 import useInput from "hooks/useInput";
-import {Wrapper, StyledSmall} from "./ContactModal.style.js";
+import {Wrapper, StyledSmall, ButtonWrapper} from "./ContactModal.style.js";
 import TextArea from "components/units/TextArea/TextArea.js";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import Colors from "theme/Colors";
 
-const ContactModal = ({active, hideModal}) => {
+const ContactModal = ({id, active, hideModal}) => {
 	const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 	const validateEmail = (email) => {
@@ -74,30 +76,75 @@ const ContactModal = ({active, hideModal}) => {
 			hideModal={hideModal}
 			title="Contactar"
 			footer={
-				<Button
-					text="Enviar"
-					loadingText="Enviando"
-					iconPosition="left"
-					type="submit"
-					className="darkBlue"
-					isLoading={isLoading}
-					animated={animatedState}
-					disabled={disabled}
-					onClick={handleSubmit}
-					form
-				/>
+				<ButtonWrapper>
+					<Button
+						text="Cancelar"
+						iconPosition="left"
+						type="submit"
+						onClick={() => hideModal()}
+						icon={faTimes}
+						buttonStyles={{
+							color: Colors.lightGrey,
+							background: "transparent",
+							boxShadow: "none",
+							fontSize: "0.95rem",
+							fontFamily: "Arial",
+							width: "auto",
+							paddingLeft: 0,
+						}}
+						iconStyles={{
+							paddingRight: "5px",
+							paddingLeft: "0px",
+							width: "1rem",
+							height: "1rem",
+						}}
+					/>
+					<Button
+						text="Enviar"
+						loadingText="Enviando"
+						iconPosition="left"
+						type="submit"
+						className="darkBlue"
+						isLoading={isLoading}
+						animated={animatedState}
+						disabled={disabled}
+						onClick={handleSubmit}
+						buttonStyles={{marginRight: 0}}
+					/>
+				</ButtonWrapper>
 			}
 		>
 			<Wrapper>
-				<Input type="text" name="name" label="Nombre" {...bindName} />
+				<p>Estoy intentando contactar por el anuncio con id: {id}</p>
+			</Wrapper>
+			<Wrapper>
+				<Input
+					type="text"
+					name="name"
+					label="Nombre"
+					{...bindName}
+					inputContainerClassName="inputContainer"
+				/>
 			</Wrapper>
 
 			<Wrapper>
-				<Input type="text" name="email" label="Email" {...bindEmail} />
+				<Input
+					type="text"
+					name="email"
+					label="Email"
+					{...bindEmail}
+					inputContainerClassName="inputContainer"
+				/>
 			</Wrapper>
 
 			<Wrapper>
-				<TextArea name="message" label="Mensaje" required={true} {...bindMessage} />
+				<TextArea
+					name="message"
+					label="Mensaje"
+					required={true}
+					{...bindMessage}
+					textAreaStyles={{width: "100%"}}
+				/>
 			</Wrapper>
 
 			<StyledSmall>{error}</StyledSmall>
