@@ -11,6 +11,9 @@ import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
 
+import GoToMap from "components/composed/Map/GoToMap";
+import MapView from "components/composed/Map/MapView";
+
 const App = () => {
 	return (
 		<>
@@ -23,6 +26,8 @@ const App = () => {
 				<Route exact path="/profile" component={Profile} />
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
+				<Route exact path="/go-to-map" component={GoToMap} />
+				<Route exact path="/map" component={MapView} />
 			</Switch>
 		</>
 	);
