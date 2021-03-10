@@ -42,13 +42,15 @@ const StyledButton = styled.button`
 	}
 	&.darkBlue {
 		width: 7rem;
-		background: ${Colors.darkBlue};
+		height: 37px;
+		background: ${Colors.extraDarkBlue};
 		color: ${Colors.white};
 		margin: 10px;
 		padding: 5px 10px;
-		border: 2px solid ${Colors.darkBlue};
-		border-radius: 3px;
+		border: 2px solid ${Colors.extraDarkBlue};
+		border-radius: 6px;
 		cursor: pointer;
+		box-shadow: 0px 3px 6px #00000029;
 	}
 	&.disabled {
 		cursor: not-allowed;
