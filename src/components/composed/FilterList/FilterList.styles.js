@@ -7,6 +7,10 @@ export const StyledContainer = styled.div`
 	border-radius: 6px;
 	opacity: 1;
 	padding: 10px;
+	&.styleFilter {
+		margin-right: 20px;
+		height: 370px;
+	}
 `;
 
 export const StyledContainerInputs = styled.div`

@@ -39,7 +39,7 @@ function FilterList(props) {
 	};
 
 	return (
-		<StyledContainer>
+		<StyledContainer className="styleFilter">
 			<form onSubmit={handleSubmit}>
 				<StyledFiltros>Filtros</StyledFiltros>
 				<StyledLabel>Precio</StyledLabel>
@@ -91,14 +91,14 @@ function FilterList(props) {
 					<StyledLabel>Gastos incluidos</StyledLabel>
 				</StyledContainerCheckbox>
 				<Button
-					buttonStyles={{width: "7.25rem", height: "2.125rem", marginTop: "2rem"}}
+					buttonStyles={{width: "100%", height: "2.125rem", margin: "2rem 0 0.5rem 0"}}
 					text="Aplicar filtros"
 					type="normal"
 					className="blueGradient"
 				/>
 				<Button
-					buttonStyles={{width: "7.25rem", height: "2.125rem", marginTop: "2rem"}}
 					text="Reset"
+					buttonStyles={{width: "100%", height: "2.125rem", margin: "1rem 0 0.5rem 0"}}
 					type="normal"
 					className="blueGradient"
 					onClick={handleReset}

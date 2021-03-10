@@ -63,7 +63,7 @@ const AdList = () => {
 	return (
 		<Body title="Pisos en Alquiler en Madrid">
 			<Container row>
-				<FilterList onSubmit={handleSubmit} />
+				<FilterList onSubmit={handleSubmit} className="styleFilter" />
 				<StyledAdList>
 					<StyledTreeSearch>
 						<label>Madrid</label> <label>Alquiler</label>
