@@ -28,6 +28,8 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"dev": "env FAST_REFRESH=false react-scripts start",
+		"json-server": "json-server --watch src/api/data/db.json --port 5000",
+		"app-server": "concurrently \"npm start\" \"npm run json-server\"",
 		"postinstall": "husky install",
 		"prepare": "husky install"
 	},
