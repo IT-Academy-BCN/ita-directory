@@ -8,7 +8,7 @@ import TextArea from "components/units/TextArea/TextArea.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const ContactModal = ({active, hideModal}) => {
+const ContactModal = ({id, active, hideModal}) => {
 	const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 	const validateEmail = (email) => {
@@ -90,10 +90,10 @@ const ContactModal = ({active, hideModal}) => {
 							fontSize: "0.95rem",
 							fontFamily: "Arial",
 							width: "auto",
-							paddingLeft: "3px",
 						}}
 						iconStyles={{
 							paddingRight: "5px",
+							paddingLeft: "0px",
 							width: "1rem",
 							height: "1rem",
 						}}
@@ -116,15 +116,36 @@ const ContactModal = ({active, hideModal}) => {
 			}
 		>
 			<Wrapper>
-				<Input type="text" name="name" label="Nombre" {...bindName} />
+				<p>Estoy intentando contactar por el anuncio con id: {id}</p>
+			</Wrapper>
+			<Wrapper>
+				<Input
+					type="text"
+					name="name"
+					label="Nombre"
+					{...bindName}
+					inputContainerClassName="inputContainer"
+				/>
 			</Wrapper>
 
 			<Wrapper>
-				<Input type="text" name="email" label="Email" {...bindEmail} />
+				<Input
+					type="text"
+					name="email"
+					label="Email"
+					{...bindEmail}
+					inputContainerClassName="inputContainer"
+				/>
 			</Wrapper>
 
 			<Wrapper>
-				<TextArea name="message" label="Mensaje" required={true} {...bindMessage} />
+				<TextArea
+					name="message"
+					label="Mensaje"
+					required={true}
+					{...bindMessage}
+					textAreaStyles={{width: "100%"}}
+				/>
 			</Wrapper>
 
 			<StyledSmall>{error}</StyledSmall>
