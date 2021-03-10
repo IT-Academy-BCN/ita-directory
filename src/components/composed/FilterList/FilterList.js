@@ -92,7 +92,7 @@ function FilterList(props) {
 				</StyledContainerCheckbox>
 				<Button
 					buttonStyles={{width: "7.25rem", height: "2.125rem", marginTop: "2rem"}}
-					text="Enviar"
+					text="Aplicar filtros"
 					type="normal"
 					className="blueGradient"
 				/>

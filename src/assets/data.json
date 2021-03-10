@@ -2,8 +2,8 @@
     "apartments":[
 
         {  "key": 1,
-           "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscinaAd.jpg?raw=true",
-           "imgDesc":"casa con piscina", 
+           "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscinaAd.jpg?raw=true",
+           "alt":"casa con piscina", 
            "address": "calle Sagrada Familia 000",
            "geometry": [
             41.40379082644374,
@@ -20,8 +20,8 @@
             "contactPhone":345555789},
 
     {  "key": 2,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?raw=true",
-        "imgDesc":"piso con cama doble", 
+        "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?raw=true",
+        "alt":"piso con cama doble", 
         "address": "calle la Pedrera 000",
         "geometry": [
             41.39724453046608, 
@@ -38,8 +38,8 @@
             "contactPhone":345555780},
 
     {   "key": 3,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
-        "imgDesc":"piso con mucho verde", 
+        "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoVerde.jpg?raw=true",
+        "alt":"piso con mucho verde", 
         "address": "calle Liceu 000",
         "geometry": [
             41.380373984971065,
@@ -56,8 +56,8 @@
             "contactPhone":345555781},
 
     {  "key": 4,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
-        "imgDesc":"piso con despacho", 
+        "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConDespacho.jpg?raw=true",
+        "alt":"piso con despacho", 
         "address": "calle Torre Agbar 000",
         "geometry": [
             41.40361411124494, 
@@ -74,8 +74,8 @@
             "contactPhone":345555782},
 
     {   "key": 5,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
-        "imgDesc":"piso cocina abierta", 
+        "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoCocinaAbierta.jpg?raw=true",
+        "alt":"piso cocina abierta", 
         "address": "calle Palacio la Moncloa 000",
         "geometry": [
             40.445306132254075,
@@ -92,8 +92,8 @@
             "contactPhone":345555783},
 
     {   "key": 6,
-        "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
-        "imgDesc":"piso moderno", 
+        "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoModerno.jpg?raw=true",
+        "alt":"piso moderno", 
         "address": "calle Santiago Bernabeu 000",
         "geometry": [
             40.45301434281259,
@@ -110,8 +110,8 @@
             "contactPhone":345555784},
 
         {   "key": 7,
-            "imgName":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscina-t.jpg?raw=true",
-            "imgDesc":"piso con Amaca", 
+            "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConHamaca.jpg?raw=true",
+            "alt":"piso con Amaca", 
             "address": "calle Camp Nou 000",
             "geometry": [
                 41.381073083067044, 

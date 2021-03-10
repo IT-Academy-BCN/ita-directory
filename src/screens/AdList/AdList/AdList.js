@@ -10,14 +10,30 @@ import {
 	StyledCard,
 	StyledAdList,
 } from "./AdList.style.js";
-import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
-import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
+import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
+import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import FilterList from "components/composed/FilterList/FilterList.js";
 import dataList from "assets/data.json";
+import Colors from "theme/Colors";
 
 const AdList = () => {
 	const [filtersToApply, setFiltersToApply] = useState({});
+	const [mapView, setMapView] = useState(false);
+
+	const buttonStyle = {
+		display: "flex",
+		alignItems: "center",
+		width: "auto",
+		height: "auto",
+		fontSize: "0.95rem",
+		fontFamily: "Arial",
+		color: Colors.lightGray,
+		background: "transparent",
+		boxShadow: "none",
+		outline: "none",
+		paddingRight: 0,
+	};
 
 	const handleSubmit = (submittedFilters) => {
 		console.log(submittedFilters);
@@ -44,8 +60,6 @@ const AdList = () => {
 		return dataToDisplay;
 	};
 
-	console.log(filteredData(filtersToApply));
-
 	return (
 		<Body title="Pisos en Alquiler en Madrid">
 			<Container row>
@@ -56,7 +70,33 @@ const AdList = () => {
 					</StyledTreeSearch>
 					<RowWrapper>
 						<StyledTitle>Listado de pisos</StyledTitle>
-						<IconWithLabel text="Vista de mapa" icon={faMapMarkerAlt} />
+						{mapView ? (
+							<Button
+								text="Vista de detalles"
+								icon={faBars}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
+								type="normal"
+							/>
+						) : (
+							<Button
+								text="Vista de mapa"
+								icon={faMapMarkerAlt}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
+								type="normal"
+							/>
+						)}
 					</RowWrapper>
 					<StyledWrapper>
 						{filteredData(filtersToApply).map((ad, i) => (
@@ -64,7 +104,7 @@ const AdList = () => {
 								{" "}
 								<AdCard
 									key={ad.key}
-									image={{src: ad.imgName, alt: ad.imgDesc}}
+									image={{src: ad.url, alt: ad.imgDesc}}
 									title={`Casa n. ${ad.key}`}
 									description={ad.description}
 									price={ad.monthlyRent}

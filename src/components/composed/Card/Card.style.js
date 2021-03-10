@@ -47,6 +47,7 @@ export const StyledImage = styled.img`
 	min-width: 40%;
 	max-width: 100%;
 	overflow: hidden;
+	border-radius: 6px;
 `;
 
 export const StyledDescription = styled.div`
