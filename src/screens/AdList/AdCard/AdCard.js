@@ -6,9 +6,9 @@ import Colors from "theme/Colors";
 import Card from "components/composed/Card/Card";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
 
-const AdCard = ({image, title, price, surface, includedExpenses, description, rooms}) => {
+const AdCard = ({id, image, title, price, surface, includedExpenses, description, rooms}) => {
 	const [active, setActive] = useState(false);
-
+	console.log("id" + id);
 	return (
 		<Card
 			image={image}
@@ -50,7 +50,7 @@ const AdCard = ({image, title, price, surface, includedExpenses, description, ro
 						}}
 						onClick={() => setActive(true)}
 					/>
-					<ContactModal active={active} hideModal={() => setActive(false)} />
+					<ContactModal id={id} active={active} hideModal={() => setActive(false)} />
 				</>
 			}
 		/>
