@@ -7,13 +7,16 @@ import {
 	StyledText,
 	StyledDescription,
 	StyledFooter,
+	StyledImageWrapper,
 } from "./Card.style.js";
 import PropTypes from "prop-types";
 
 const Card = ({image, title, description, text, footer}) => {
 	return (
 		<Container>
-			<StyledImage {...image} />
+			<StyledImageWrapper>
+				<StyledImage {...image} />
+			</StyledImageWrapper>
 			<CardInfo>
 				<StyledTitle>{title}</StyledTitle>
 				<StyledDescription>{description}</StyledDescription>
