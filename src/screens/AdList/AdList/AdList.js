@@ -1,7 +1,7 @@
 import React from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
-import {adCardImage} from "assets/images";
+import {adCardImage, adThumbnail2} from "assets/images";
 import {
 	StyledTitle,
 	StyledWrapper,
@@ -16,7 +16,7 @@ import {Container} from "theme/GlobalStyles.js";
 const AdList = () => {
 	const adList = [
 		{
-			image: {src: {adCardImage}, alt: "Casa Piscina"},
+			image: {src: {adCardImage, adThumbnail2}, alt: "Casa Piscina"},
 			title: "Piso en calle Ángel Puech, Valdeacederas, Madrid ",
 			price: "990 €/mes",
 			rooms: "3 habitaciones",
@@ -40,15 +40,12 @@ const AdList = () => {
 					</RowWrapper>
 					<StyledWrapper>
 						<StyledCard>
-							{" "}
 							<AdCard {...ad} />
 						</StyledCard>
 						<StyledCard>
-							{" "}
 							<AdCard {...ad} />
 						</StyledCard>
 						<StyledCard>
-							{" "}
 							<AdCard {...ad} />
 						</StyledCard>
 					</StyledWrapper>
