@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
-import {adCardImage} from "assets/images";
+
 import {
 	StyledTitle,
 	StyledWrapper,
@@ -17,22 +17,12 @@ import FilterList from "components/composed/FilterList/FilterList.js";
 import dataList from "assets/data.json";
 
 const AdList = () => {
-	const adList = [
-		{
-			image: {src: {adCardImage}, alt: "Casa Piscina"},
-			title: "Piso en calle Ángel Puech, Valdeacederas, Madrid ",
-			price: "990 €/mes",
-			rooms: "3 habitaciones",
-			surface: "95m2",
-			includedExpenses: true,
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-		},
-	];
-	const [ad] = adList;
 	const [filtersToApply, setFiltersToApply] = useState({});
 
-	const handleSubmit = (filters) => setFiltersToApply(filters);
+	const handleSubmit = (submittedFilters) => {
+		console.log(submittedFilters);
+		setFiltersToApply(submittedFilters);
+	};
 
 	const isComplyingWithFilters = (ad) => {
 		return (
@@ -40,22 +30,21 @@ const AdList = () => {
 			(!filtersToApply.priceMax || ad.monthlyRent <= parseInt(filtersToApply.priceMax)) &&
 			(!filtersToApply.sizeMin || ad.squareMeters >= parseInt(filtersToApply.sizeMin)) &&
 			(!filtersToApply.sizeMax || ad.squareMeters >= parseInt(filtersToApply.sizeMax)) &&
-			(ad.expenses === "incluido") === filtersToApply.billsIncluded
+			(!filtersToApply.billsIncluded || ad.expenses === "incluido")
 		);
 	};
 
-	const filterData = (filtersToApply) => {
+	const filteredData = (filters) => {
 		const allData = dataList.apartments;
-		let dataToDisplay = allData.filter((apartment) => isComplyingWithFilters(apartment));
-		console.log(dataToDisplay);
+		let dataToDisplay;
+		dataToDisplay =
+			Object.keys(filters).length === 0
+				? allData
+				: allData.filter((apartment) => isComplyingWithFilters(apartment));
 		return dataToDisplay;
 	};
 
-	useEffect(() => {
-		console.log(filtersToApply);
-		filterData(filtersToApply);
-		//eslint-disable-next-line
-	}, [filtersToApply]);
+	console.log(filteredData(filtersToApply));
 
 	return (
 		<Body title="Pisos en Alquiler en Madrid">
@@ -70,18 +59,21 @@ const AdList = () => {
 						<IconWithLabel text="Vista de mapa" icon={faMapMarkerAlt} />
 					</RowWrapper>
 					<StyledWrapper>
-						<StyledCard>
-							{" "}
-							<AdCard {...ad} />
-						</StyledCard>
-						<StyledCard>
-							{" "}
-							<AdCard {...ad} />
-						</StyledCard>
-						<StyledCard>
-							{" "}
-							<AdCard {...ad} />
-						</StyledCard>
+						{filteredData(filtersToApply).map((ad, i) => (
+							<StyledCard key={i}>
+								{" "}
+								<AdCard
+									key={ad.key}
+									image={{src: ad.imgName, alt: ad.imgDesc}}
+									title={`Casa n. ${ad.key}`}
+									description={ad.description}
+									price={ad.monthlyRent}
+									rooms={ad.numRooms}
+									includedExpenses={ad.expenses === "incluido"}
+									surface={ad.squareMeters}
+								/>
+							</StyledCard>
+						))}
 					</StyledWrapper>
 				</StyledAdList>
 			</Container>

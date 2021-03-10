@@ -32,6 +32,11 @@ function FilterList(props) {
 		e.preventDefault();
 		props.onSubmit(filters);
 	};
+	const handleReset = (e) => {
+		e.preventDefault();
+		setFilters(noFilters);
+		props.onSubmit(noFilters);
+	};
 
 	return (
 		<StyledContainer>
@@ -90,6 +95,13 @@ function FilterList(props) {
 					text="Enviar"
 					type="normal"
 					className="blueGradient"
+				/>
+				<Button
+					buttonStyles={{width: "7.25rem", height: "2.125rem", marginTop: "2rem"}}
+					text="Reset"
+					type="normal"
+					className="blueGradient"
+					onClick={handleReset}
 				/>
 			</form>
 		</StyledContainer>

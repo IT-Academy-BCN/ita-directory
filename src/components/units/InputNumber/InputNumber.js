@@ -26,7 +26,7 @@ const InputNumber = ({
 	min,
 	max,
 	size,
-	errorText = "Tiene que ser un número válido o no puede estar vacío",
+	errorText = "No válido",
 	errorStyles,
 	disabled,
 	step,
@@ -47,7 +47,7 @@ const InputNumber = ({
 	const handleOnChange = (e) => {
 		const val = e.target.value;
 		const regex = /^\d+$/;
-		setIsInvalid(val === "" || !regex.test(val) ? true : false);
+		setIsInvalid(!regex.test(val) ? true : false);
 		onChange(e);
 	};
 

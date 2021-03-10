@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {adCardImage} from "assets/images";
 import {StyledPrice, StyledP} from "./AdCard.style.js";
 import {faComments} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
@@ -12,13 +11,13 @@ const AdCard = ({image, title, price, surface, includedExpenses, description, ro
 
 	return (
 		<Card
-			image={{src: adCardImage, alt: "Casa Piscina"}}
+			image={image}
 			title={title}
 			description={
 				<>
-					<StyledPrice>{price}</StyledPrice>
-					<StyledP>{rooms}</StyledP>
-					<StyledP>{surface}</StyledP>
+					<StyledPrice>{`${price} €/mes`}</StyledPrice>
+					<StyledP>{`${rooms} habitaciones`}</StyledP>
+					<StyledP>{`${surface} m\u00B2`}</StyledP>
 					<StyledP>
 						{includedExpenses ? "Gastos incluidos" : "Gastos no incluidos"}
 					</StyledP>
