@@ -1,5 +1,6 @@
 import React from "react";
 import InputNumber from "components/units/InputNumber/InputNumber";
+import Button from "components/units/Button/Button";
 import {
 	StyledContainer,
 	StyledLabel,
@@ -70,6 +71,12 @@ function FilterList(props) {
 				/>
 				<StyledLabel>Gastos incluidos</StyledLabel>
 			</StyledContainerCheckbox>
+			<Button
+				buttonStyles={{width: "7.25rem", height: "2.125rem", marginTop: "2rem"}}
+				text="Enviar"
+				type="normal"
+				className="blueGradient"
+			/>
 		</StyledContainer>
 	);
 }

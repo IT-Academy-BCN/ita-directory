@@ -34,7 +34,7 @@ export const StyledLabel = styled.label`
 
 export const StyledContainerCheckbox = styled.div`
 	display: flex;
-	margin-top: 5px;
+	margin-top: 10px;
 `;
 
 export const StyledCheckbox = styled.input`
