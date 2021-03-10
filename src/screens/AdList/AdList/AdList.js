@@ -19,7 +19,7 @@ const AdList = () => {
 
 	useEffect(() => {
 		try {
-			getAds().then((ads) => setAds(ads));
+			getAds().then((ads) => ads && setAds(ads));
 		} catch (e) {
 			console.log(e);
 		}
