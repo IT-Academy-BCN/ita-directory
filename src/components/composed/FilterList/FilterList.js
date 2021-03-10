@@ -30,7 +30,7 @@ function FilterList(props) {
 					value={props.filters.priceMin}
 					onChange={handleChange}
 					placeholder="Mín"
-					className="styleFilterList"
+					className="styleFilterList styleFilter"
 				/>
 				<InputNumber
 					name="priceMax"
@@ -49,7 +49,7 @@ function FilterList(props) {
 					value={props.filters.sizeMin}
 					onChange={handleChange}
 					placeholder="Mín"
-					className="styleFilterList"
+					className="styleFilterList styleFilter"
 				/>
 				<InputNumber
 					name="sizeMax"

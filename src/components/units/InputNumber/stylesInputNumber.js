@@ -38,12 +38,15 @@ export const StyledContainer = styled.div`
 		width: 67px;
 		height: 31px;
 		padding: 0;
-		margin: 5px 10px 0 0;
+		margin-top: 5px;
 		border: none;
 		&:focus-within {
 			outline: 0 none;
 			border: none;
 		}
+	}
+	&.styleFilter {
+		margin-right: 10px;
 	}
 `;
 
