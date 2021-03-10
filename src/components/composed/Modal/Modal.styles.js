@@ -54,7 +54,7 @@ export const ModalContainer = styled.div`
 
 export const ModalBody = styled.div`
 	overflow-y: auto;
-	padding: 22px 10px;
+	padding: 22px 0px;
 	position: relative;
 	font-family: Arial;
 	font-size: 1rem;
@@ -65,7 +65,7 @@ export const ModalHeader = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	color: #303742;
-	padding: 20px 5px 10px 5px;
+	padding: 20px 0px 10px 0px;
 	border-bottom: 1px solid ${Colors.lightGray};
 `;
 
@@ -74,7 +74,7 @@ export const ModalTitle = styled.span`
 	font-weight: 500;
 	color: ${Colors.darkRed};
 	font: normal normal bold 24px/20px Arial;
-	margin-right: 1rem;
+	padding-left: 0px;
 `;
 
 export const ModalFooter = styled.div`
