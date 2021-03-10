@@ -8,3 +8,8 @@ export const Wrapper = styled.div`
 export const StyledSmall = styled.small`
 	color: ${Colors.redColor};
 `;
+export const ButtonWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+`;
