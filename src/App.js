@@ -11,6 +11,7 @@ import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
 
+import GoTo from "components/composed/Map/GoTo";
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
 
@@ -28,6 +29,7 @@ const App = () => {
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/go-to-map" component={GoToMap} />
 				<Route exact path="/map" component={MapView} />
+				<Route exact path="/goTo" component={GoTo} />
 			</Switch>
 		</>
 	);

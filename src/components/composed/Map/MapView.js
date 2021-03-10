@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {MapContainer, TileLayer} from "react-leaflet";
-import data from "./data.json";
+import data from "assets/data.json";
 import MapMarkers from "./MapMarkers";
 import {useLocation, useHistory} from "react-router-dom";
 import "leaflet/dist/leaflet.css";
