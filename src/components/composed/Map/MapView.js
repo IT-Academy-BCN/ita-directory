@@ -1,49 +1,41 @@
-import React, {useState, useEffect} from "react";
-import {MapContainer, TileLayer} from "react-leaflet";
+import React, {useState} from "react";
+import {MapContainer, TileLayer, Rectangle} from "react-leaflet";
 import data from "assets/data.json";
 import MapMarkers from "./MapMarkers";
-import {useLocation, useHistory} from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
-const MapView = (props) => {
+const MapView = () => {
+	const outer = [
+		[43.26544319441563, -5], //bilbao
+		[39.48299617133865, 5], //valencia
+	];
+
+	const [bounds, setBounds] = useState(outer);
+
+	const onClickOuter = () => {
+		setBounds({bounds: outer});
+	};
+	// eslint-disable-next-line
 	const [state, setState] = useState({
-		currentLocation: {lat: 40.34572785994146, lng: -1.106286485224387},
+		currentLocation: {lat: 40.34572785994146, lng: -1.106286485224387}, //teruel
 		zoom: 6,
 		data,
 	});
 
-	const location = useLocation();
-	const history = useHistory();
-
-	useEffect(() => {
-		if (location.state.latitude && location.state.longitude) {
-			const currentLocation = {
-				lat: location.state.latitude,
-				lng: location.state.longitude,
-			};
-			console.log(state);
-			setState({
-				...state,
-				data: {
-					apartments: state.data.apartments.concat({
-						name: "You are currently here",
-						geometry: [currentLocation.lat, currentLocation.lng],
-					}),
-				},
-				currentLocation,
-			});
-			history.replace({
-				pathname: "/map",
-				state: {},
-			});
-		}
-		// eslint-disable-next-line
-	}, [location]);
-
 	return (
-		<MapContainer className="Container-View" center={state.currentLocation} zoom={state.zoom}>
+		<MapContainer
+			className="Container-View"
+			center={state.currentLocation}
+			zoom={state.zoom}
+			bound={bounds}
+		>
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+			<Rectangle
+				bounds={outer}
+				color={bounds === outer ? "blue" : "blue"}
+				onClick={onClickOuter}
+			/>
 			<MapMarkers apartments={state.data.apartments} />
 		</MapContainer>
 	);
