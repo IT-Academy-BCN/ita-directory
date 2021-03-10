@@ -90,6 +90,7 @@ const ContactModal = ({id, active, hideModal}) => {
 							fontSize: "0.95rem",
 							fontFamily: "Arial",
 							width: "auto",
+							paddingLeft: 0,
 						}}
 						iconStyles={{
 							paddingRight: "5px",
@@ -108,9 +109,7 @@ const ContactModal = ({id, active, hideModal}) => {
 						animated={animatedState}
 						disabled={disabled}
 						onClick={handleSubmit}
-						buttonStyles={{
-							marginRight: 0,
-						}}
+						buttonStyles={{marginRight: 0}}
 					/>
 				</ButtonWrapper>
 			}
