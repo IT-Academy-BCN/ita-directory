@@ -13,30 +13,29 @@ const icon = L.icon({
 	shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 });
 
-function Marcador({saveMarkers}) {
+function Marcador() {
 	const map = useMapEvents({
 		click: (e) => {
 			const {lat, lng} = e.latlng;
 			L.marker([lat, lng], {icon}).addTo(map);
-			saveMarkers([lat, lng]);
 		},
 	});
 	return null;
 }
 
 class CustomMap extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			markers: [[41.3879, 2.16992]],
-			data: [],
-		};
-	}
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {
+	// 		markers: [],
 
-	saveMarkers = (newMarkerCoords) => {
-		const data = [...this.state.data, newMarkerCoords];
-		this.setState((prevState) => ({...prevState, data}));
-	};
+	// 	};
+	// }
+
+	// saveMarkers = (newMarkerCoords) => {
+	// 	const data = [...this.state.data, newMarkerCoords];
+	// 	this.setState((prevState) => ({...prevState, data}));
+	// };
 
 	render() {
 		return (
@@ -51,7 +50,7 @@ class CustomMap extends Component {
 						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					/>
-					<Marcador saveMarkers={this.saveMarkers} />
+					<Marcador />
 				</MapContainer>
 			</div>
 		);
