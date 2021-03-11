@@ -16,7 +16,9 @@
             "expenses": "incluido", 
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
             "contactPerson": "Montserrat C.",
-            "contactPhone":345555789},
+            "contactPhone":345555789,
+            "userId": 1
+        },
 
     {  "key": 2,
         "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?raw=true",
@@ -34,7 +36,9 @@
             "expenses": "aparte", 
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
             "contactPerson": "Aleix C.",
-            "contactPhone":345555780},
+            "contactPhone":345555780,
+            "userId": 2
+    },
 
     {   "key": 3,
         "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoVerde.jpg?raw=true",
@@ -52,7 +56,9 @@
             "expenses": "incluido", 
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
             "contactPerson": "Arantxa K.",
-            "contactPhone":345555781},
+            "contactPhone":345555781,
+            "userId": 1
+    },
 
     {  "key": 4,
         "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConDespacho.jpg?raw=true",
@@ -70,7 +76,9 @@
             "expenses": "aparte", 
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
             "contactPerson": "Jaume A.",
-            "contactPhone":345555782},
+            "contactPhone":345555782,
+            "userId": 1
+        },
 
     {   "key": 5,
         "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoCocinaAbierta.jpg?raw=true",
@@ -88,7 +96,9 @@
             "expenses": "aparte", 
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
             "contactPerson": "Mariano C.",
-            "contactPhone":345555783},
+            "contactPhone":345555783,
+            "userId": 2
+        },
 
     {   "key": 6,
         "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoModerno.jpg?raw=true",
@@ -106,7 +116,10 @@
             "expenses": "incluido", 
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
             "contactPerson": "Maria P.",
-            "contactPhone":345555784},
+            "contactPhone":345555784,
+            "userId": 2
+        
+        },
 
         {   "key": 7,
             "url":"https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConHamaca.jpg?raw=true",
@@ -124,7 +137,9 @@
                 "expenses": "aparte", 
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , 
                 "contactPerson": "Jordi D.",
-                "contactPhone":345555786}
+                "contactPhone":345555786,
+                "userId": 2
+            }
 
          ]
 }
