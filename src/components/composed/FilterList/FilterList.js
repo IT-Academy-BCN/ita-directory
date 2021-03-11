@@ -34,13 +34,14 @@ function FilterList(props) {
 	};
 	const handleReset = (e) => {
 		e.preventDefault();
+		document.getElementById("filterList").reset();
 		setFilters(noFilters);
 		props.onSubmit(noFilters);
 	};
 
 	return (
 		<StyledContainer className="styleFilter">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} id="filterList">
 				<StyledFiltros>Filtros</StyledFiltros>
 				<StyledLabel>Precio</StyledLabel>
 				<StyledContainerInputs>
