@@ -3,10 +3,10 @@ import Colors from "theme/Colors";
 
 export const StyledCity = styled.label`
 	text-align: left;
-	color: ${Colors.redColor};
+	color: ${Colors.darkRed};
 	font-family: Arial;
 	font-size: 16px;
-	line-height: 16px;
+	line-heighit: 16px;
 	font-weight: bold;
 	vertical-align: bottom;
 	opacity: 1;
