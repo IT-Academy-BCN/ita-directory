@@ -50,6 +50,7 @@ export const StyledImageWrapper = styled.div`
 	height: auto;
 	overflow: hidden;
 	flex: 1;
+	border-radius: 6px;
 
 	@media only screen and (max-width: 768px) {
 		flex: 1;
@@ -60,8 +61,8 @@ export const StyledImageWrapper = styled.div`
 export const StyledImage = styled.img`
 	height: 100%;
 	width: auto;
-	border-radius: 6px;
 	margin: auto;
+	border-radius: 6px;
 
 	@media only screen and (max-width: 768px) {
 		height: auto;
@@ -75,7 +76,7 @@ export const StyledDescription = styled.div`
 	justify-content: space-between;
 	flex-direction: row;
 	align-items: flex-end;
-	font: normal normal normal 14px/10px Arial;
+	font: normal normal normal 14px/14px Arial;
 	text-align: center;
 
 	@media only screen and (max-width: 460px) {
