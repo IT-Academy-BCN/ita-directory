@@ -23,34 +23,15 @@ const AdList = () => {
 
 	useEffect(() => {
 		try {
-			getAds().then((ads) => ads && setAds(ads));
+			getAds(filtersToApply).then((ads) => ads && setAds(ads));
 		} catch (e) {
 			console.log(e);
 		}
-	}, []);
+	}, [filtersToApply]);
 
 	const handleSubmit = (submittedFilters) => {
 		console.log(submittedFilters);
 		setFiltersToApply(submittedFilters);
-	};
-
-	const isComplyingWithFilters = (ad) => {
-		return (
-			(!filtersToApply.priceMin || ad.monthlyRent >= parseInt(filtersToApply.priceMin)) &&
-			(!filtersToApply.priceMax || ad.monthlyRent <= parseInt(filtersToApply.priceMax)) &&
-			(!filtersToApply.sizeMin || ad.squareMeters >= parseInt(filtersToApply.sizeMin)) &&
-			(!filtersToApply.sizeMax || ad.squareMeters >= parseInt(filtersToApply.sizeMax)) &&
-			(!filtersToApply.billsIncluded || ad.expenses === "incluido")
-		);
-	};
-
-	const filteredData = (filters) => {
-		let dataToDisplay;
-		dataToDisplay =
-			Object.keys(filters).length === 0
-				? ads
-				: ads.filter((ad) => isComplyingWithFilters(ad));
-		return dataToDisplay;
 	};
 
 	const buttonStyle = {
@@ -108,7 +89,7 @@ const AdList = () => {
 						)}
 					</RowWrapper>
 					<StyledWrapper>
-						{filteredData(filtersToApply).map((ad, i) => (
+						{ads.map((ad, i) => (
 							<StyledCard key={i}>
 								<AdCard
 									key={ad.key}
