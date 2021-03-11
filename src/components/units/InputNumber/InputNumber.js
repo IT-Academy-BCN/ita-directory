@@ -51,6 +51,8 @@ const InputNumber = ({
 		onChange(e);
 	};
 
+	const handleOnBlur = () => setIsInvalid(false);
+
 	return (
 		<React.Fragment>
 			<StyledMainContainer className="styleFilterList styleFilter">
@@ -68,7 +70,7 @@ const InputNumber = ({
 							value={value}
 							onChange={handleOnChange}
 							onFocus={onFocus}
-							onBlur={onBlur}
+							onBlur={onBlur ? onBlur : handleOnBlur}
 							className={`${className} ${isInvalid ? "error" : ""}`}
 							id={id}
 							name={name}
