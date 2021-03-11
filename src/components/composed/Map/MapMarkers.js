@@ -5,7 +5,7 @@ import MapPopup from "./MapPopup";
 
 const MapMarkers = ({apartments}) => {
 	const markers = apartments.map((apartment, i) => (
-		<Marker key={i} position={apartment.geometry} icon={icon}>
+		<Marker key={i} position={apartment.latlng} icon={icon}>
 			<MapPopup data={apartment} />
 		</Marker>
 	));

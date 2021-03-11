@@ -19,6 +19,7 @@ export const ModalBlock = styled.div`
 
 export const ModalOverlay = styled.a`
 	background: rgba(0, 0, 0, 0.75);
+	animation: ${keyframes`${fadeIn}`} 0.25s;
 	bottom: 0;
 	cursor: default;
 	display: block;
@@ -44,10 +45,10 @@ export const ModalContainer = styled.div`
 	max-width: 850px;
 	min-width: 25%;
 	padding: 0 1.5rem;
-	animation: ${keyframes`${fadeIn}`} 0.5s;
+	animation: ${keyframes`${fadeIn}`} 0.25s;
 	z-index: 1;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 	border-radius: 12px;
 	opacity: 1;
 `;

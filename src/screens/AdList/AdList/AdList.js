@@ -68,7 +68,7 @@ const AdList = () => {
 	};
 
 	return (
-		<Body title="Pisos en Alquiler en Madrid">
+		<Body title="Pisos en Alquiler en Madrid" isLoggedIn={true}>
 			<Container row>
 				<FilterList onSubmit={handleSubmit} className="styleFilter" />
 				<StyledAdList>
