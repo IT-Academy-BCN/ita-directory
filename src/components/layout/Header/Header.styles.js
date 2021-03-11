@@ -52,7 +52,7 @@ export const Logo = styled.div`
 `;
 
 export const StyledMiPerfil = styled.div`
-	position: realtive;
+	position: relative;
 	display: inline-block;
 `;
 
@@ -86,51 +86,36 @@ export const StyledText = styled.h6`
 	opacity: 1;
 `;
 
-export const StyledDropdown = styled.div`
+export const Dropdown = styled.ul`
 	position: absolute;
-	padding: 0;
-	z-index: 1;
-	text-align: center;
-	background: transparent 0% 0% no-repeat padding-box;
-	border: 1px solid #dddddd;
-	border-radius: 10px;
-	opacity: 1;
-`;
-
-export const StyledUl = styled.ul`
+	right: 0;
 	list-style-type: none;
 	padding: 0px;
 	margin-top: 10px;
 	position: absolute;
-	box-shadow: 0px 4px 10px #00000029;
-	background: transparent;
-	border-radius: 6px;
-	right: 765.85;
-`;
-
-export const StyledLi = styled.li`
-	border: 1px solid #dddd;
-	align-items: center;
-	text-align: left;
-	padding-left: 15px;
-	min-width: 6rem;
-	width: 150px;
-	display: block;
 	background-color: white;
-	position: relative;
-	z-index: 2;
-	line-height: 2.5rem;
-	border-bottom: 0;
-	right: 0;
+	box-shadow: 0px 4px 10px #00000029;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	width: 180px;
 
-	&:first-child {
-		border-top-right-radius: 6px;
-		border-top-left-radius: 6px;
-	}
+	li {
+		border-bottom: 1px solid #ddd;
 
-	&:last-child {
-		border-bottom-right-radius: 6px;
-		border-bottom-left-radius: 6px;
+		&:last-child {
+			border-bottom: none;
+		}
+
+		a {
+			display: inline-block;
+			width: 100%;
+			padding: 1rem 1rem;
+			color: #999;
+			text-decoration: none;
+			&:hover {
+				background-color: #ddd;
+			}
+		}
 	}
 `;
 
@@ -139,11 +124,23 @@ export const StyledButton = styled.button`
 	justify-content: center;
 	align-items: center;
 	background: #ffffff 0% 0% no-repeat padding-box;
-	box-shadow: 0px 4px 8px #00000029;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 	border: none;
 	border-radius: 10px;
 	opacity: 1;
 	min-width: 6rem;
 	width: 120px;
 	height: 50px;
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&.selected {
+		box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+	}
 `;

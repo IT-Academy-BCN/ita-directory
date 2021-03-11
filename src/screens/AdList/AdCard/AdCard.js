@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {adCardImage} from "assets/images";
 import {StyledPrice, StyledP} from "./AdCard.style.js";
 import {faComments} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
@@ -7,18 +6,18 @@ import Colors from "theme/Colors";
 import Card from "components/composed/Card/Card";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
 
-const AdCard = ({image, title, price, surface, includedExpenses, description, rooms}) => {
+const AdCard = ({id, image, title, price, surface, includedExpenses, description, rooms}) => {
 	const [active, setActive] = useState(false);
-
+	console.log("id" + id);
 	return (
 		<Card
-			image={{src: adCardImage, alt: "Casa Piscina"}}
+			image={image}
 			title={title}
 			description={
 				<>
-					<StyledPrice>{price}</StyledPrice>
-					<StyledP>{rooms}</StyledP>
-					<StyledP>{surface}</StyledP>
+					<StyledPrice>{`${price} €/mes`}</StyledPrice>
+					<StyledP>{`${rooms} habitaciones`}</StyledP>
+					<StyledP>{`${surface} m\u00B2`}</StyledP>
 					<StyledP>
 						{includedExpenses ? "Gastos incluidos" : "Gastos no incluidos"}
 					</StyledP>
@@ -29,6 +28,8 @@ const AdCard = ({image, title, price, surface, includedExpenses, description, ro
 				<>
 					<Button
 						buttonStyles={{
+							display: "flex",
+							alignItems: "center",
 							width: "7.5rem",
 							height: "2.2rem",
 							marginTop: "auto",
@@ -37,15 +38,20 @@ const AdCard = ({image, title, price, surface, includedExpenses, description, ro
 							color: Colors.strongBlue,
 							background: "transparent",
 							boxShadow: "none",
+							paddingLeft: "0",
+							outline: "none",
 						}}
 						text="Contactar"
 						type="button"
 						icon={faComments}
 						iconPosition="left"
-						iconStyles={{marginRight: 5}}
+						iconStyles={{
+							marginRight: 5,
+							paddingLeft: 0,
+						}}
 						onClick={() => setActive(true)}
 					/>
-					<ContactModal active={active} hideModal={() => setActive(false)} />
+					<ContactModal id={id} active={active} hideModal={() => setActive(false)} />
 				</>
 			}
 		/>

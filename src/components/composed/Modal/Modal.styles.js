@@ -19,6 +19,7 @@ export const ModalBlock = styled.div`
 
 export const ModalOverlay = styled.a`
 	background: rgba(0, 0, 0, 0.75);
+	animation: ${keyframes`${fadeIn}`} 0.25s;
 	bottom: 0;
 	cursor: default;
 	display: block;
@@ -44,17 +45,17 @@ export const ModalContainer = styled.div`
 	max-width: 850px;
 	min-width: 25%;
 	padding: 0 1.5rem;
-	animation: ${keyframes`${fadeIn}`} 2s;
+	animation: ${keyframes`${fadeIn}`} 0.25s;
 	z-index: 1;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 	border-radius: 12px;
 	opacity: 1;
 `;
 
 export const ModalBody = styled.div`
 	overflow-y: auto;
-	padding: 22px 10px;
+	padding: 22px 0px;
 	position: relative;
 	font-family: Arial;
 	font-size: 1rem;
@@ -65,7 +66,7 @@ export const ModalHeader = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	color: #303742;
-	padding: 20px 5px 10px 5px;
+	padding: 20px 0px 10px 0px;
 	border-bottom: 1px solid ${Colors.lightGray};
 `;
 
@@ -74,7 +75,7 @@ export const ModalTitle = styled.span`
 	font-weight: 500;
 	color: ${Colors.darkRed};
 	font: normal normal bold 24px/20px Arial;
-	margin-right: 1rem;
+	padding-left: 0px;
 `;
 
 export const ModalFooter = styled.div`

@@ -1,42 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import React, {useState} from "react";
+import MapView from "./MapView";
 
-const GoToMap = () => {
-	const [state, setState] = useState({
-		longitude: 0,
-		latitude: 0,
-	});
+const Component1 = () => {
+	return <h1>Componente1 sin mapa</h1>;
+};
 
-	useEffect(() => {
-		navigator.geolocation.getCurrentPosition(
-			function (position) {
-				setState({
-					longitude: position.coords.longitude,
-					latitude: position.coords.latitude,
-				});
-			},
-			function (error) {
-				console.error("Error Code = " + error.code + " - " + error.message);
-			},
-			{
-				enableHighAccuracy: true,
-			}
-		);
-	}, []);
-
+const GoTo = () => {
+	const [showMap, setShowMap] = useState(true);
 	return (
 		<div>
-			<Link
-				// anadir botone de switch aqui.
-				to={{
-					pathname: "/map",
-					state,
-				}}
-			>
-				MAP VIEW
-			</Link>
+			<button onClick={() => setShowMap(!showMap)}>
+				{!showMap ? "Show Map" : "Hide map"}
+			</button>
+			{showMap ? <MapView /> : <Component1 />}
 		</div>
 	);
 };
 
-export default GoToMap;
+export default GoTo;

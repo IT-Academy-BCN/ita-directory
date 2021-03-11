@@ -15,7 +15,7 @@ export const Container = styled.div`
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		width: 70vw;
+		width: 60vw;
 		height: auto;
 	}
 
@@ -30,6 +30,11 @@ export const CardInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+	flex: 2;
+
+	@media only screen and (max-width: 768px) {
+		flex: 1;
+	}
 `;
 
 export const StyledTitle = styled.div`
@@ -41,12 +46,27 @@ export const StyledTitle = styled.div`
 	font: normal normal normal 14px/16px Arial;
 	opacity: 1;
 `;
-
-export const StyledImage = styled.img`
+export const StyledImageWrapper = styled.div`
 	height: auto;
-	min-width: 40%;
-	max-width: 100%;
 	overflow: hidden;
+	flex: 1;
+
+	@media only screen and (max-width: 768px) {
+		flex: 1;
+		height: 15rem;
+		width: 100%;
+	}
+`;
+export const StyledImage = styled.img`
+	height: 100%;
+	width: auto;
+	border-radius: 6px;
+	margin: auto;
+
+	@media only screen and (max-width: 768px) {
+		height: auto;
+		width: 100%;
+	}
 `;
 
 export const StyledDescription = styled.div`
@@ -73,5 +93,6 @@ export const StyledText = styled.p`
 `;
 
 export const StyledFooter = styled.div`
+	margin-top: auto;
 	display: flex;
 `;
