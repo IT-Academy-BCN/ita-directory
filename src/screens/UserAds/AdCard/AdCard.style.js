@@ -17,5 +17,4 @@ export const StyledP = styled.label`
 	text-align: left;
 	letter-spacing: 0px;
 	opacity: 1;
-	padding: 1.5px;
 `;
