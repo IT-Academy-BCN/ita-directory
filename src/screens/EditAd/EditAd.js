@@ -1,5 +1,4 @@
 import {useState} from "react";
-//import {useParams} from "react-router-dom";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
@@ -12,26 +11,20 @@ import {Wrapper, MapText} from "./EditAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap";
 
-const EditAd = () => {
-	const emptyForm = {
-		title: "",
-		description: "",
-		city: "",
-		rooms: "",
-		price: "",
-		squareM: "",
-		bathrooms: "",
+const EditAd = (props) => {
+	const adToEdit = props.location.state.ad;
+	const {title, description, city, numRooms, monthlyRent, squareMeters, numBath} = adToEdit;
+	const formToEdit = {
+		title: title,
+		description: description,
+		city: city,
+		rooms: numRooms,
+		price: monthlyRent,
+		squareM: squareMeters,
+		bathrooms: numBath,
 	};
-	const [form, setForm] = useState(emptyForm);
+	const [form, setForm] = useState(formToEdit);
 	const [submittedData, setSubmittedData] = useState("");
-	//const {id, userId} = useParams();
-
-	/*useEffect(() => {
-
-		setForm({
-
-		})
-	}, []);*/
 
 	const handleChange = (e) => {
 		const {name, value} = e.target;
@@ -44,7 +37,6 @@ const EditAd = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setSubmittedData(JSON.stringify(form, 0, 2));
-		setForm(emptyForm);
 	};
 
 	const inputComponentData = [
