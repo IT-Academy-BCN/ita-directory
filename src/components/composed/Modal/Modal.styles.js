@@ -14,7 +14,7 @@ export const ModalBlock = styled.div`
 	top: 0;
 	display: flex;
 	opacity: 1;
-	z-index: 400;
+	z-index: 1000;
 `;
 
 export const ModalOverlay = styled.a`
