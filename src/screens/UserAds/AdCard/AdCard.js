@@ -5,8 +5,8 @@ import Button from "components/units/Button/Button";
 import Card from "components/composed/Card/Card";
 
 const AdCard = ({ad, containerClassName}) => {
-	const {key: id, url, alt, title, city, squareMeters, description, numRooms} = ad;
-	console.log("id" + id);
+	const {id, url, alt, title, city, squareMeters, description, numRooms} = ad;
+
 	return (
 		<Card
 			titleClassName="titleClassName"

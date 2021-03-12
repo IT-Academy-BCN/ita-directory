@@ -6,7 +6,7 @@ export const StyledCity = styled.label`
 	color: ${Colors.darkRed};
 	font-family: Arial;
 	font-size: 16px;
-	line-heighit: 16px;
+	line-height: 16px;
 	font-weight: bold;
 	vertical-align: bottom;
 	opacity: 1;
