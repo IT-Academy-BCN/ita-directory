@@ -14,14 +14,7 @@ import {
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
-import {
-	adImage1,
-	adImage2,
-	adImage3,
-	adThumbnail1,
-	adThumbnail2,
-	adThumbnail3,
-} from "assets/images";
+
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
@@ -42,28 +35,28 @@ const Ad = ({match}) => {
 		}
 	}, [id]);
 
-	const {title, city, monthlyRent, numBaths, numRooms, squareMeters, longDescription} = ad;
+	const {
+		title,
+		gallery,
+		city,
+		monthlyRent,
+		numBaths,
+		numRooms,
+		squareMeters,
+		longDescription,
+	} = ad;
 
-	const images = [
-		{
-			original: adImage1,
-			thumbnail: adThumbnail1,
-			originalAlt: "Bedroom",
-			thumbnailAlt: "Bedroom",
-		},
-		{
-			original: adImage2,
-			thumbnail: adThumbnail2,
-			originalAlt: "Bedroom2",
-			thumbnailAlt: "Bedroom2",
-		},
-		{
-			original: adImage3,
-			thumbnail: adThumbnail3,
-			originalAlt: "Casa piscina",
-			thumbnailAlt: "Casa piscina",
-		},
-	];
+	const getImagesFrom = (gallery) => {
+		if (!gallery) return [];
+		return gallery.map((image) => {
+			return {
+				original: image.url,
+				thumbnail: image.urlThumbnail,
+				originalAlt: image.alt,
+				thumbnailAlt: image.altThumbnail,
+			};
+		});
+	};
 
 	const adMonthlyPrice = new Intl.NumberFormat("es-ES", {
 		style: "currency",
@@ -84,7 +77,7 @@ const Ad = ({match}) => {
 			<Body title="Anuncio">
 				<StyledAd>
 					<StyledTitle>{title}</StyledTitle>
-					<Gallery images={images} />
+					<Gallery images={getImagesFrom(gallery)} />
 					<StyledBottomDiv>
 						<StyledUl>
 							{LIST_ICONS.map((el, index) => {
@@ -97,7 +90,7 @@ const Ad = ({match}) => {
 						</StyledUl>
 
 						<StyledText>
-							<p>{longDescription}</p>
+							<pre>{longDescription}</pre>
 						</StyledText>
 						<Map />
 						<StyledStreet>
