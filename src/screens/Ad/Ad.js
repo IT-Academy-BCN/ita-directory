@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
 
@@ -25,17 +25,24 @@ import {
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
+import {getAd} from "api/ads.js";
 
-const LIST_ICONS = [
-	{name: "Madrid", icon: faMapMarkerAlt},
-	{name: "3 habitaciones", icon: faBed},
-	{name: "1.390.000", icon: faEuroSign},
-	{name: "55m2", icon: faHome},
-	{name: "4 Baños", icon: faBath},
-];
-
-const Ad = ({icon}) => {
+const Ad = ({match}) => {
+	const {
+		params: {id},
+	} = match;
 	const [active, setActive] = useState(false);
+	const [ad, setAd] = useState([]);
+
+	useEffect(() => {
+		try {
+			getAd(id).then((ad) => ad && setAd(ad));
+		} catch (e) {
+			console.log(e);
+		}
+	}, [id]);
+
+	const {title, city, monthlyRent, numBaths, numRooms, squareMeters, longDescription} = ad;
 
 	const images = [
 		{
@@ -58,36 +65,39 @@ const Ad = ({icon}) => {
 		},
 	];
 
+	const adMonthlyPrice = new Intl.NumberFormat("es-ES", {
+		style: "currency",
+		currency: "EUR",
+		minimumFractionDigits: 3,
+	});
+
+	const LIST_ICONS = [
+		{name: city, icon: faMapMarkerAlt},
+		{name: `${numRooms} Habitacion${numRooms > 1 ? "es" : ""}`, icon: faBed},
+		{name: `${adMonthlyPrice.format(monthlyRent)}`, icon: faEuroSign},
+		{name: `${squareMeters}m2`, icon: faHome},
+		{name: `${numBaths} Baño${numBaths > 1 ? "s" : ""}`, icon: faBath},
+	];
+
 	return (
 		<>
 			<Body title="Anuncio">
 				<StyledAd>
-					<StyledTitle>Título de mi anuncio</StyledTitle>
+					<StyledTitle>{title}</StyledTitle>
 					<Gallery images={images} />
 					<StyledBottomDiv>
 						<StyledUl>
 							{LIST_ICONS.map((el, index) => {
 								return (
 									<StyledItems>
-										<IconWithLabel key={index} icon={el.icon} text={el.name} />
+										<IconWithLabel id={index} icon={el.icon} text={el.name} />
 									</StyledItems>
 								);
 							})}
 						</StyledUl>
 
 						<StyledText>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur gadipiscing elit. Praesent
-								at tincidunt urna. Aenean eu ullamcorper eros, blandit volutpat
-								turpis.
-							</p>
-							<p>
-								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
-								Maecenas nec dictum nisl, a maximus elit. Praesent dolor erat,
-								condimentum nec luctus vel, tincidunt a tellus. Sed fringilla
-								blandit cursus. Mauris cursus viverra congue. Nullam ultricies metus
-								eget condimentum congue.
-							</p>
+							<p>{longDescription}</p>
 						</StyledText>
 						<Map />
 						<StyledStreet>

@@ -83,6 +83,8 @@ export const StyledUl = styled.ul`
 `;
 
 export const StyledText = styled.div`
+	width: 100%;
+
 	@media only screen and (min-width: 1020px) {
 		font-size: 16px;
 		text-align: left;
