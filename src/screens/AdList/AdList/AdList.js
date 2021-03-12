@@ -89,11 +89,11 @@ const AdList = () => {
 							/>
 						)}
 					</RowWrapper>
-					{!mapView ? (
-						<CustomMapAd ads={ads} />
-					) : (
-						<StyledWrapper>
-							{ads.map((ad, i) => (
+					<StyledWrapper>
+						{!mapView ? (
+							<CustomMapAd ads={ads} />
+						) : (
+							ads.map((ad, i) => (
 								<StyledCard key={i}>
 									<AdCard
 										key={ad.key}
@@ -107,9 +107,9 @@ const AdList = () => {
 										surface={ad.squareMeters}
 									/>
 								</StyledCard>
-							))}
-						</StyledWrapper>
-					)}
+							))
+						)}
+					</StyledWrapper>
 				</StyledAdList>
 			</Container>
 		</Body>
