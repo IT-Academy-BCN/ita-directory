@@ -92,10 +92,9 @@ const AdList = () => {
 						{ads.map((ad, i) => (
 							<StyledCard key={i}>
 								<AdCard
-									key={ad.key}
-									id={ad.key}
+									id={ad.id}
 									image={{src: ad.url, alt: ad.imgDesc}}
-									title={`Casa n. ${ad.key}`}
+									title={`Casa n. ${ad.id}`}
 									description={ad.description}
 									price={ad.monthlyRent}
 									rooms={ad.numRooms}
