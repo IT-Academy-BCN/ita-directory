@@ -14,6 +14,7 @@ import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import FilterList from "components/composed/FilterList/FilterList.js";
+import CustomMapAd from "components/composed/Map/CustomMapAd";
 import Colors from "theme/Colors";
 
 const AdList = () => {
@@ -88,23 +89,27 @@ const AdList = () => {
 							/>
 						)}
 					</RowWrapper>
-					<StyledWrapper>
-						{ads.map((ad, i) => (
-							<StyledCard key={i}>
-								<AdCard
-									key={ad.key}
-									id={ad.key}
-									image={{src: ad.url, alt: ad.imgDesc}}
-									title={`Casa n. ${ad.key}`}
-									description={ad.description}
-									price={ad.monthlyRent}
-									rooms={ad.numRooms}
-									includedExpenses={ad.expenses === "incluido"}
-									surface={ad.squareMeters}
-								/>
-							</StyledCard>
-						))}
-					</StyledWrapper>
+					{!mapView ? (
+						<CustomMapAd ads={ads} />
+					) : (
+						<StyledWrapper>
+							{ads.map((ad, i) => (
+								<StyledCard key={i}>
+									<AdCard
+										key={ad.key}
+										id={ad.key}
+										image={{src: ad.url, alt: ad.imgDesc}}
+										title={`Casa n. ${ad.key}`}
+										description={ad.description}
+										price={ad.monthlyRent}
+										rooms={ad.numRooms}
+										includedExpenses={ad.expenses === "incluido"}
+										surface={ad.squareMeters}
+									/>
+								</StyledCard>
+							))}
+						</StyledWrapper>
+					)}
 				</StyledAdList>
 			</Container>
 		</Body>
