@@ -13,7 +13,6 @@ import AdList from "screens/AdList/AdList/AdList";
 import UserAds from "screens/UserAds/UserAds";
 
 import MapView from "components/composed/Map/MapView";
-import AdMap from "screens/AdMap/AdMap";
 
 const App = () => {
 	return (
@@ -28,7 +27,6 @@ const App = () => {
 				<Route exact path="/profile" component={Profile} />
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
-				<Route exact path="/ad-map" component={AdMap} />
 				<Route exact path="/map" component={MapView} />
 			</Switch>
 		</>
