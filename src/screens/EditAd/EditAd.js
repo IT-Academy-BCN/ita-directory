@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useHistory} from "react-router-dom";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
@@ -12,47 +13,35 @@ import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap";
 
 const EditAd = (props) => {
-	const adToEdit = props.location.state.ad;
-	console.log(adToEdit);
-	const {
-		title,
-		description,
-		city,
-		numRooms,
-		monthlyRent,
-		squareMeters,
-		numBaths,
-		geometry,
-	} = adToEdit;
-	const formToEdit = {
-		title: title,
-		description: description,
-		city: city,
-		rooms: numRooms,
-		price: monthlyRent,
-		squareM: squareMeters,
-		bathrooms: numBaths,
-	};
-	const [form, setForm] = useState(formToEdit);
+	const originalAd = Object.assign({}, props.location.state.ad);
+	const {geometry, id} = props.location.state.ad;
+
+	const [ad, setAd] = useState(originalAd);
 	const [submittedData, setSubmittedData] = useState("");
 	const [position, setPosition] = useState(geometry);
 
 	const handleChange = (e) => {
-		const {name, value} = e.target;
-		setForm({
-			...form,
-			[name]: value,
+		const {name, value, type} = e.target;
+		setAd({
+			...ad,
+			[name]: type === "number" ? parseInt(value) : value,
 		});
 	};
 
 	const handleMapClick = (latlng) => {
 		setPosition(latlng);
-		console.log("click", latlng);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSubmittedData(JSON.stringify({...form, geometry: position}, 0, 2));
+		setSubmittedData(JSON.stringify({...ad, geometry: position, id: id}, 0, 2));
+		//if using an API, delete the stringify and pass the object to the API
+	};
+
+	const history = useHistory();
+	const handleCancel = (e) => {
+		e.preventDefault();
+		history.goBack();
 	};
 
 	const inputComponentData = [
@@ -83,14 +72,14 @@ const EditAd = (props) => {
 		{
 			Component: InputNumber,
 			label: "Habitaciones",
-			name: "rooms",
+			name: "numRooms",
 			icon: faBed,
 			inputClassName: "styleInputCreateNewAd",
 		},
 		{
 			Component: InputNumber,
 			label: "Precio",
-			name: "price",
+			name: "monthlyRent",
 			required: true,
 			icon: faEuroSign,
 			inputClassName: "styleInputCreateNewAd",
@@ -98,7 +87,7 @@ const EditAd = (props) => {
 		{
 			Component: InputNumber,
 			label: "M\u00B2",
-			name: "squareM",
+			name: "squareMeters",
 			required: true,
 			icon: faHome,
 			inputClassName: "styleInputCreateNewAd",
@@ -106,7 +95,7 @@ const EditAd = (props) => {
 		{
 			Component: InputNumber,
 			label: "Baños",
-			name: "bathrooms",
+			name: "numBaths",
 			icon: faBath,
 			inputClassName: "styleInputCreateNewAd",
 		},
@@ -127,7 +116,7 @@ const EditAd = (props) => {
 										label={el.label}
 										name={el.name}
 										required={el.required}
-										value={form[el.name]}
+										value={ad[el.name]}
 										onChange={handleChange}
 										className={el.inputClassName}
 										icon={el.icon}
@@ -141,16 +130,26 @@ const EditAd = (props) => {
 							<CustomMap geometry={position} onClick={handleMapClick} />
 							<Button
 								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
-								text="Enviar"
+								text="Editar"
 								type="normal"
 								className="blueGradient"
+							/>
+							<Button
+								buttonStyles={{
+									width: "7.25rem",
+									height: "2.125rem",
+									marginLeft: "20px",
+								}}
+								text="Volver"
+								onClick={handleCancel}
+								type="normal"
+								className="orangeGradient"
 							/>
 						</form>
 						{submittedData && (
 							<div>
-								<p>The following data was submitted:</p>
+								<p>The ad was changed as follows:</p>
 								<pre>{submittedData}</pre>
-								<pre></pre>
 							</div>
 						)}
 					</Wrapper>

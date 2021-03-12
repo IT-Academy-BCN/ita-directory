@@ -5,7 +5,7 @@ import Button from "components/units/Button/Button";
 import Card from "components/composed/Card/Card";
 
 const AdCard = ({ad, containerClassName}) => {
-	const {key: id, url, alt, title, city, squareMeters, description, numRooms, userId} = ad;
+	const {id, url, alt, title, city, squareMeters, description, numRooms, userId} = ad;
 	console.log("id" + id);
 	return (
 		<Card
