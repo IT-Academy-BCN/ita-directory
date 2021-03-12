@@ -4,9 +4,10 @@ import "./CustomMap.css";
 
 import "leaflet/dist/leaflet.css";
 
-const CustomMap = () => {
+const CustomMap = ({geometry}) => {
 	function LocationMarker() {
-		const [position, setPosition] = useState(null);
+		const [position, setPosition] = useState(geometry ? geometry : null);
+		console.log("geometry", geometry);
 		// eslint-disable-next-line
 		const map = useMapEvents({
 			click(e) {
@@ -21,8 +22,8 @@ const CustomMap = () => {
 		<div className="Mapa">
 			<MapContainer
 				className="Container"
-				center={{lat: 41.3879, lng: 2.16992}}
-				zoom={18}
+				center={{lat: geometry[0], lng: geometry[1]}}
+				zoom={15}
 				scrollWheelZoom={true}
 			>
 				<TileLayer

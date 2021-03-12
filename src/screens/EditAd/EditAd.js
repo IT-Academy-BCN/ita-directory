@@ -13,7 +13,17 @@ import CustomMap from "components/composed/Map/CustomMap";
 
 const EditAd = (props) => {
 	const adToEdit = props.location.state.ad;
-	const {title, description, city, numRooms, monthlyRent, squareMeters, numBath} = adToEdit;
+	console.log(adToEdit);
+	const {
+		title,
+		description,
+		city,
+		numRooms,
+		monthlyRent,
+		squareMeters,
+		numBaths,
+		geometry,
+	} = adToEdit;
 	const formToEdit = {
 		title: title,
 		description: description,
@@ -21,7 +31,7 @@ const EditAd = (props) => {
 		rooms: numRooms,
 		price: monthlyRent,
 		squareM: squareMeters,
-		bathrooms: numBath,
+		bathrooms: numBaths,
 	};
 	const [form, setForm] = useState(formToEdit);
 	const [submittedData, setSubmittedData] = useState("");
@@ -122,7 +132,7 @@ const EditAd = (props) => {
 							<MapText>
 								Índica la dirección de la propiedad pinchando sobre el mapa.
 							</MapText>
-							<CustomMap />
+							<CustomMap geometry={geometry} />
 							<Button
 								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 								text="Enviar"
