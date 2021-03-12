@@ -1,151 +1,150 @@
 {
-    "ads": [
-      {
-        "key": 1,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscinaAd.jpg?raw=true",
-        "alt": "casa con piscina",
-        "address": "calle Sagrada Familia 000",
-        "geometry": [
-          41.40379082644374,
-          2.1743450690757435
-        ],
-        "city": "Barcelona",
-        "monthlyRent": 900,
-        "numRooms": 2,
-        "numBaths": 1,
-        "squareMeters": 100,
-        "expenses": "incluido",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Montserrat C.",
-        "contactPhone": 345555789,
-        "userId": 1,
-        "title": "Titulo anuncio 1"
-      },
-      {
-        "key": 2,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?raw=true",
-        "alt": "piso con cama doble",
-        "address": "calle la Pedrera 000",
-        "geometry": [
-          41.39724453046608,
-          2.1619872004654654
-        ],
-        "city": "Barcelona",
-        "monthlyRent": 2900,
-        "numRooms": 1,
-        "numBaths": 2,
-        "squareMeters": 400,
-        "expenses": "aparte",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Aleix C.",
-        "contactPhone": 345555780,
-        "userId": 2,
-        "title": "Titulo anuncio 2"
-      },
-      {
-        "key": 3,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoVerde.jpg?raw=true",
-        "alt": "piso con mucho verde",
-        "address": "calle Liceu 000",
-        "geometry": [
-          41.380373984971065,
-          2.173337713254016
-        ],
-        "city": "Barcelona",
-        "monthlyRent": 3900,
-        "numRooms": 4,
-        "numBaths": 3,
-        "squareMeters": 300,
-        "expenses": "incluido",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Arantxa K.",
-        "contactPhone": 345555781,
-        "userId": 1,
-        "title": "Titulo anuncio 3"
-      },
-      {
-        "key": 4,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConDespacho.jpg?raw=true",
-        "alt": "piso con despacho",
-        "address": "calle Torre Agbar 000",
-        "geometry": [
-          41.40361411124494,
-          2.1895501825683876
-        ],
-        "city": "Barcelona",
-        "monthlyRent": 500,
-        "numRooms": 1,
-        "numBaths": 1,
-        "squareMeters": 40,
-        "expenses": "aparte",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Jaume A.",
-        "contactPhone": 345555782,
-        "userId": 1,
-        "title": "Titulo anuncio 4"
-      },
-      {
-        "key": 5,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoCocinaAbierta.jpg?raw=true",
-        "alt": "piso cocina abierta",
-        "address": "calle Palacio la Moncloa 000",
-        "geometry": [
-          40.445306132254075,
-          -3.7339569468358196
-        ],
-        "city": "Madrid",
-        "monthlyRent": 1600,
-        "numRooms": 3,
-        "numBaths": 2,
-        "squareMeters": 60,
-        "expenses": "aparte",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Mariano C.",
-        "contactPhone": 345555783,
-        "userId": 2,
-        "title": "Titulo anuncio 5"
-      },
-      {
-        "key": 6,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoModerno.jpg?raw=true",
-        "alt": "piso moderno",
-        "address": "calle Santiago Bernabeu 000",
-        "geometry": [
-          40.45301434281259,
-          -3.6884798285356886
-        ],
-        "city": "Madrid",
-        "monthlyRent": 1800,
-        "numRooms": 4,
-        "numBaths": 1,
-        "squareMeters": 120,
-        "expenses": "incluido",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Maria P.",
-        "contactPhone": 345555784,
-        "userId": 2,
-        "title": "Titulo anuncio 6"
-      },
-      {
-        "key": 7,
-        "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConHamaca.jpg?raw=true",
-        "alt": "piso con Amaca",
-        "address": "calle Camp Nou 000",
-        "geometry": [
-          41.381073083067044,
-          2.1227661537318867
-        ],
-        "city": "Barcelona",
-        "monthlyRent": 3200,
-        "numRooms": 3,
-        "numBaths": 2,
-        "squareMeters": 90,
-        "expenses": "aparte",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "contactPerson": "Jordi D.",
-        "contactPhone": 345555786,
-        "userId": 2,
-        "title": "Titulo auncio 7"
-      }
-    ]
-  }
+  "ads": [{
+      "id": 1,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/casaPiscinaAd.jpg?raw=true",
+      "alt": "casa con piscina",
+      "address": "calle Sagrada Familia 000",
+      "geometry": [
+        41.40379082644374,
+        2.1743450690757435
+      ],
+      "city": "Barcelona",
+      "monthlyRent": 900,
+      "numRooms": 2,
+      "numBaths": 1,
+      "squareMeters": 100,
+      "expenses": "incluido",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Montserrat C.",
+      "contactPhone": 345555789,
+      "userId": 1,
+      "title": "Titulo anuncio 1"
+    },
+    {
+      "id": 2,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/bedroom2.jpg?raw=true",
+      "alt": "piso con cama doble",
+      "address": "calle la Pedrera 000",
+      "geometry": [
+        41.39724453046608,
+        2.1619872004654654
+      ],
+      "city": "Barcelona",
+      "monthlyRent": 2900,
+      "numRooms": 1,
+      "numBaths": 2,
+      "squareMeters": 400,
+      "expenses": "aparte",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Aleix C.",
+      "contactPhone": 345555780,
+      "userId": 2,
+      "title": "Titulo anuncio 2"
+    },
+    {
+      "id": 3,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoVerde.jpg?raw=true",
+      "alt": "piso con mucho verde",
+      "address": "calle Liceu 000",
+      "geometry": [
+        41.380373984971065,
+        2.173337713254016
+      ],
+      "city": "Barcelona",
+      "monthlyRent": 3900,
+      "numRooms": 4,
+      "numBaths": 3,
+      "squareMeters": 300,
+      "expenses": "incluido",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Arantxa K.",
+      "contactPhone": 345555781,
+      "userId": 1,
+      "title": "Titulo anuncio 3"
+    },
+    {
+      "id": 4,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConDespacho.jpg?raw=true",
+      "alt": "piso con despacho",
+      "address": "calle Torre Agbar 000",
+      "geometry": [
+        41.40361411124494,
+        2.1895501825683876
+      ],
+      "city": "Barcelona",
+      "monthlyRent": 500,
+      "numRooms": 1,
+      "numBaths": 1,
+      "squareMeters": 40,
+      "expenses": "aparte",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Jaume A.",
+      "contactPhone": 345555782,
+      "userId": 1,
+      "title": "Titulo anuncio 4"
+    },
+    {
+      "id": 5,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoCocinaAbierta.jpg?raw=true",
+      "alt": "piso cocina abierta",
+      "address": "calle Palacio la Moncloa 000",
+      "geometry": [
+        40.445306132254075,
+        -3.7339569468358196
+      ],
+      "city": "Madrid",
+      "monthlyRent": 1600,
+      "numRooms": 3,
+      "numBaths": 2,
+      "squareMeters": 60,
+      "expenses": "aparte",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Mariano C.",
+      "contactPhone": 345555783,
+      "userId": 2,
+      "title": "Titulo anuncio 5"
+    },
+    {
+      "id": 6,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoModerno.jpg?raw=true",
+      "alt": "piso moderno",
+      "address": "calle Santiago Bernabeu 000",
+      "geometry": [
+        40.45301434281259,
+        -3.6884798285356886
+      ],
+      "city": "Madrid",
+      "monthlyRent": 1800,
+      "numRooms": 4,
+      "numBaths": 1,
+      "squareMeters": 120,
+      "expenses": "incluido",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Maria P.",
+      "contactPhone": 345555784,
+      "userId": 2,
+      "title": "Titulo anuncio 6"
+    },
+    {
+      "id": 7,
+      "url": "https://github.com/it-academyproject/ita-directory-frontend/blob/develop/src/assets/images/pisoConHamaca.jpg?raw=true",
+      "alt": "piso con Amaca",
+      "address": "calle Camp Nou 000",
+      "geometry": [
+        41.381073083067044,
+        2.1227661537318867
+      ],
+      "city": "Barcelona",
+      "monthlyRent": 3200,
+      "numRooms": 3,
+      "numBaths": 2,
+      "squareMeters": 90,
+      "expenses": "aparte",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "contactPerson": "Jordi D.",
+      "contactPhone": 345555786,
+      "userId": 2,
+      "title": "Titulo auncio 7"
+    }
+  ]
+}
