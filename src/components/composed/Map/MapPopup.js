@@ -1,19 +1,46 @@
 import React from "react";
 import {Popup} from "react-leaflet";
+import {
+	StyledPopup,
+	StyledImage,
+	StyledPopupData,
+	StyledPhone,
+	StyledChar,
+	StyledContact,
+	StyledPrice,
+	StyledDescription,
+} from "./MapPopUp.Style";
 
 const MapPopup = (props) => {
-	const {url, monthlyRent, numRooms, squareMeters, contactPerson, contactPhone, alt} = props.data;
+	const {
+		imgDesc,
+		monthlyRent,
+		numRooms,
+		squareMeters,
+		contactPerson,
+		contactPhone,
+		url,
+		imgName,
+	} = props.data;
 	return (
 		<Popup>
-			<div>{alt} contactar</div>
-			<div>
-				<img src={url} alt={alt} />
-			</div>
-			<div>{Number(monthlyRent.toFixed(2)).toLocaleString() + " €"}/mes</div>
-			<div>{numRooms} habitaciones</div>
-			<div>{squareMeters} m2</div>
-			<div>{contactPerson} contactar</div>
-			<div>{contactPhone} contactar</div>
+			<StyledPopup>
+				<div>
+					<StyledImage src={url} alt={imgName} />
+				</div>
+				<StyledPopupData>
+					<StyledDescription>{imgDesc}</StyledDescription>
+					<StyledPrice>
+						{Number(monthlyRent.toFixed(2)).toLocaleString() + " €"}/mes
+					</StyledPrice>
+					<StyledChar>
+						{numRooms} habitaciones {squareMeters} m2
+					</StyledChar>
+
+					<StyledContact>{contactPerson} contactar</StyledContact>
+					<StyledPhone>{contactPhone}</StyledPhone>
+				</StyledPopupData>
+			</StyledPopup>
 		</Popup>
 	);
 };

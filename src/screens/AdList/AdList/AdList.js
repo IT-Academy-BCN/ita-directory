@@ -14,13 +14,13 @@ import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import FilterList from "components/composed/FilterList/FilterList.js";
-import CustomMapAd from "components/composed/Map/CustomMapAd";
+import MapFilter from "components/composed/Map/MapaFiltro";
 import Colors from "theme/Colors";
 
 const AdList = () => {
 	const [ads, setAds] = useState([]);
 	const [filtersToApply, setFiltersToApply] = useState({});
-	const [mapView, setMapView] = useState(false);
+	const [FilterMap, setFilterMap] = useState(false);
 
 	useEffect(() => {
 		try {
@@ -61,20 +61,7 @@ const AdList = () => {
 					</StyledTreeSearch>
 					<RowWrapper>
 						<StyledTitle>Listado de pisos</StyledTitle>
-						{mapView ? (
-							<Button
-								text="Vista de detalles"
-								icon={faBars}
-								iconPosition="left"
-								iconStyles={{
-									marginRight: 5,
-									paddingLeft: 0,
-								}}
-								onClick={() => setMapView(!mapView)}
-								buttonStyles={buttonStyle}
-								type="normal"
-							/>
-						) : (
+						{FilterMap ? (
 							<Button
 								text="Vista de mapa"
 								icon={faMapMarkerAlt}
@@ -83,14 +70,27 @@ const AdList = () => {
 									marginRight: 5,
 									paddingLeft: 0,
 								}}
-								onClick={() => setMapView(!mapView)}
+								onClick={() => setFilterMap(!FilterMap)}
+								buttonStyles={buttonStyle}
+								type="normal"
+							/>
+						) : (
+							<Button
+								text="Vista de detalles"
+								icon={faBars}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setFilterMap(!FilterMap)}
 								buttonStyles={buttonStyle}
 								type="normal"
 							/>
 						)}
 					</RowWrapper>
-					{!mapView ? (
-						<CustomMapAd ads={ads} />
+					{!FilterMap ? (
+						<MapFilter ads={ads} />
 					) : (
 						<StyledWrapper>
 							{ads.map((ad, i) => (
