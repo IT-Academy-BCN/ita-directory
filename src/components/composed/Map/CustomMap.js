@@ -4,14 +4,16 @@ import "./CustomMap.css";
 
 import "leaflet/dist/leaflet.css";
 
-const CustomMap = ({geometry}) => {
+const CustomMap = ({geometry, onClick}) => {
 	function LocationMarker() {
 		const [position, setPosition] = useState(geometry ? geometry : null);
 		console.log("geometry", geometry);
 		// eslint-disable-next-line
 		const map = useMapEvents({
 			click(e) {
-				setPosition([e.latlng.lat, e.latlng.lng]);
+				const clickedPosition = [e.latlng.lat, e.latlng.lng];
+				setPosition(clickedPosition);
+				onClick(clickedPosition);
 			},
 		});
 

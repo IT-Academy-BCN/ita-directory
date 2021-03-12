@@ -35,6 +35,7 @@ const EditAd = (props) => {
 	};
 	const [form, setForm] = useState(formToEdit);
 	const [submittedData, setSubmittedData] = useState("");
+	const [position, setPosition] = useState(geometry);
 
 	const handleChange = (e) => {
 		const {name, value} = e.target;
@@ -44,9 +45,14 @@ const EditAd = (props) => {
 		});
 	};
 
+	const handleMapClick = (latlng) => {
+		setPosition(latlng);
+		console.log("click", latlng);
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSubmittedData(JSON.stringify(form, 0, 2));
+		setSubmittedData(JSON.stringify({...form, geometry: position}, 0, 2));
 	};
 
 	const inputComponentData = [
@@ -132,7 +138,7 @@ const EditAd = (props) => {
 							<MapText>
 								Índica la dirección de la propiedad pinchando sobre el mapa.
 							</MapText>
-							<CustomMap geometry={geometry} />
+							<CustomMap geometry={position} onClick={handleMapClick} />
 							<Button
 								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 								text="Enviar"
@@ -144,6 +150,7 @@ const EditAd = (props) => {
 							<div>
 								<p>The following data was submitted:</p>
 								<pre>{submittedData}</pre>
+								<pre></pre>
 							</div>
 						)}
 					</Wrapper>
