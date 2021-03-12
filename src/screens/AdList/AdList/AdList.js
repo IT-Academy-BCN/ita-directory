@@ -90,7 +90,7 @@ const AdList = () => {
 						)}
 					</RowWrapper>
 					<StyledWrapper>
-						{!mapView ? (
+						{mapView ? (
 							<CustomMapAd ads={ads} />
 						) : (
 							ads.map((ad, i) => (
