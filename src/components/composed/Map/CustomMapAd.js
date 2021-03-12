@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {MapContainer, TileLayer, useMapEvents, Marker} from "react-leaflet";
-import "./CustomMap.css";
+import "./CustomMapAd.css";
 
 import "leaflet/dist/leaflet.css";
 
