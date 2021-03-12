@@ -11,15 +11,26 @@ import {
 } from "./Card.style.js";
 import PropTypes from "prop-types";
 
-const Card = ({image, title, description, text, footer}) => {
+const Card = ({
+	image,
+	title,
+	description,
+	text,
+	footer,
+	containerClassName,
+	descriptionClassName,
+	titleClassName,
+}) => {
 	return (
-		<Container>
+		<Container className={containerClassName}>
 			<StyledImageWrapper>
 				<StyledImage {...image} />
 			</StyledImageWrapper>
 			<CardInfo>
-				<StyledTitle>{title}</StyledTitle>
-				<StyledDescription>{description}</StyledDescription>
+				<StyledTitle className={titleClassName}>{title}</StyledTitle>
+				<StyledDescription className={descriptionClassName}>
+					{description}
+				</StyledDescription>
 				<StyledText>{text}</StyledText>
 				<StyledFooter>{footer}</StyledFooter>
 			</CardInfo>
@@ -29,6 +40,8 @@ const Card = ({image, title, description, text, footer}) => {
 Card.propTypes = {
 	image: PropTypes.object,
 	title: PropTypes.string,
+	containerClassName: PropTypes.string,
+	descriptionClassName: PropTypes.string,
 	description: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
