@@ -5,7 +5,7 @@ import Button from "components/units/Button/Button";
 import Card from "components/composed/Card/Card";
 
 const AdCard = ({ad, containerClassName}) => {
-	const {key: id, url, alt, title, city, squareMeters, description, numRooms} = ad;
+	const {key: id, url, alt, title, city, squareMeters, description, numRooms, userId} = ad;
 	console.log("id" + id);
 	return (
 		<Card
@@ -48,7 +48,7 @@ const AdCard = ({ad, containerClassName}) => {
 					</Link>
 					<Link
 						style={{textDecoration: "none"}}
-						to={{pathname: `edit-ad/${id}`, state: {ad: ad}}}
+						to={{pathname: `/${userId}/edit-ad/${id}`, state: {ad: ad}}}
 					>
 						<Button
 							className="orangeGradient"
