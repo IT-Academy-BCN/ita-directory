@@ -6,7 +6,6 @@ import Card from "components/composed/Card/Card";
 
 const AdCard = ({ad, containerClassName}) => {
 	const {id, url, alt, title, city, squareMeters, description, numRooms, userId} = ad;
-	console.log("id" + id);
 	return (
 		<Card
 			titleClassName="titleClassName"

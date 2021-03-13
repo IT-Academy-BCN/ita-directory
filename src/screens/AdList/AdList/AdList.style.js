@@ -18,6 +18,27 @@ export const StyledWrapper = styled.div`
 	flex-direction: column;
 	flex-wrap: nowrap;
 	padding-bottom: 1.5rem;
+	width: 43rem;
+
+	.Mapa {
+		width: 100%;
+		height: 50vh;
+		margin-top: 1rem;
+
+		& > .Container {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+		}
+	}
+
+	@media only screen and (max-width: 768px) {
+		width: 60vw;
+	}
+
+	@media only screen and (max-width: 460px) {
+		width: 90vw;
+	}
 `;
 
 export const StyledCard = styled.div`
