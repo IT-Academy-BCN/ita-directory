@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {MapContainer, TileLayer, useMapEvents, Marker} from "react-leaflet";
+import PropTypes from "prop-types";
 import "./CustomMap.css";
 
 import "leaflet/dist/leaflet.css";
@@ -7,13 +8,14 @@ import "leaflet/dist/leaflet.css";
 const CustomMap = ({geometry, onClick}) => {
 	function LocationMarker() {
 		const [position, setPosition] = useState(geometry ? geometry : null);
-		console.log("geometry", geometry);
 		// eslint-disable-next-line
 		const map = useMapEvents({
 			click(e) {
 				const clickedPosition = [e.latlng.lat, e.latlng.lng];
 				setPosition(clickedPosition);
-				onClick(clickedPosition);
+				if (onClick) {
+					onClick(clickedPosition);
+				}
 			},
 		});
 
@@ -36,6 +38,11 @@ const CustomMap = ({geometry, onClick}) => {
 			</MapContainer>
 		</div>
 	);
+};
+
+CustomMap.propTypes = {
+	geometry: PropTypes.array,
+	onClick: PropTypes.func,
 };
 
 export default CustomMap;
