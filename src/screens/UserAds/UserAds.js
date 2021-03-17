@@ -23,7 +23,7 @@ const UserAds = () => {
 				<StyledAdList>
 					{ads.map((ad, i) => (
 						<StyledCard key={i}>
-							<AdCard ad={ad} containerClassName="cardContainer" />
+							<AdCard key={ad.id} ad={ad} containerClassName="cardContainer" />
 						</StyledCard>
 					))}
 				</StyledAdList>
