@@ -14,6 +14,7 @@ import UserAds from "screens/UserAds/UserAds";
 import EditAd from "screens/EditAd/EditAd";
 
 import MapView from "components/composed/Map/MapView";
+import LinealGraphic from "screens/LinealGraphic/LinealGraphic";
 
 const App = () => {
 	return (
@@ -30,6 +31,7 @@ const App = () => {
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/map" component={MapView} />
+				<Route exact path="/lineal-graphic" component={LinealGraphic} />
 			</Switch>
 		</>
 	);
