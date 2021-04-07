@@ -1,10 +1,11 @@
+import Body from "components/layout/Body/Body";
 import React from "react";
 import Card from "../../components/composed/Card/Card";
 function LinealGraphic() {
 	return (
-		<div>
+		<Body title="Lineal Graphic">
 			<Card />
-		</div>
+		</Body>
 	);
 }
 
