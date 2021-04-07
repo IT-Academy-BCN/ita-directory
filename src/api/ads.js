@@ -28,3 +28,13 @@ export async function getAds(filters) {
 		console.log("Error: ", e);
 	}
 }
+
+export async function getAd(adId) {
+	try {
+		const data = await axios.get(`http://localhost:5000/ads/${adId}`);
+		const ads = await data.data;
+		return ads;
+	} catch (e) {
+		console.log("Error: ", e);
+	}
+}

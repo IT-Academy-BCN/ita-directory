@@ -98,7 +98,7 @@ const InputNumber = ({
 
 InputNumber.propTypes = {
 	placeholder: PropTypes.string,
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,

@@ -83,23 +83,14 @@ export const StyledUl = styled.ul`
 `;
 
 export const StyledText = styled.div`
-	@media only screen and (min-width: 1020px) {
-		font-size: 16px;
-		text-align: left;
-		line-height: 1.5;
-		padding-bottom: 1rem;
-	}
-	@media only screen and (max-width: 1019px) {
-		font-size: 16px;
-		text-align: left;
-		line-height: 1.5;
-		padding-bottom: 1rem;
-	}
-	@media only screen and (max-width: 468px) {
-		font-size: 14px;
-		text-align: left;
-		line-height: 1.5;
-		padding-bottom: 1rem;
+	font-size: 16px;
+	line-height: 1.5;
+	text-align: left;
+	padding-bottom: 1rem;
+
+	pre {
+		white-space: break-spaces;
+		width: 100%;
 	}
 `;
 

@@ -89,17 +89,18 @@ const AdList = () => {
 							/>
 						)}
 					</RowWrapper>
-					{!FilterMap ? (
-						<MapFilter ads={ads} />
-					) : (
-						<StyledWrapper>
+					
 							{ads.map((ad, i) => (
+					<StyledWrapper>
+						{mapView ? (
+							<CustomMapAd ads={ads} />
+						) : (
+							ads.map((ad, i) => (
 								<StyledCard key={i}>
 									<AdCard
-										key={ad.key}
 										id={ad.key}
 										image={{src: ad.url, alt: ad.imgDesc}}
-										title={`Casa n. ${ad.key}`}
+										title={ad.title}
 										description={ad.description}
 										price={ad.monthlyRent}
 										rooms={ad.numRooms}
@@ -107,9 +108,9 @@ const AdList = () => {
 										surface={ad.squareMeters}
 									/>
 								</StyledCard>
-							))}
-						</StyledWrapper>
-					)}
+							))
+						)}
+					</StyledWrapper>
 				</StyledAdList>
 			</Container>
 		</Body>
