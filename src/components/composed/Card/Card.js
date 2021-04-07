@@ -31,6 +31,7 @@ const Card = ({
 				<StyledDescription className={descriptionClassName}>
 					{description}
 				</StyledDescription>
+
 				<StyledText>{text}</StyledText>
 				<StyledFooter>{footer}</StyledFooter>
 			</CardInfo>

@@ -5,6 +5,7 @@ export const StyledAdList = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
 export const StyledTitle = styled.h3`
 	color: ${Colors.redColor};
 	text-align: left;
@@ -13,6 +14,7 @@ export const StyledTitle = styled.h3`
 	margin-bottom: 0;
 	margin-right: 5rem;
 `;
+
 export const StyledWrapper = styled.div`
 	display: flex;
 	flex-direction: column;

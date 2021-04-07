@@ -4,7 +4,7 @@ import Body from "components/layout/Body/Body";
 import {getAds} from "api/ads";
 import {
 	StyledTitle,
-	StyledWrapper,
+	// StyledWrapper,
 	RowWrapper,
 	StyledTreeSearch,
 	StyledCard,
@@ -14,7 +14,7 @@ import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import FilterList from "components/composed/FilterList/FilterList.js";
-import MapFilter from "components/composed/Map/MapaFiltro";
+// import MapFilter from "components/composed/Map/MapaFiltro";
 import Colors from "theme/Colors";
 
 const AdList = () => {
@@ -89,28 +89,20 @@ const AdList = () => {
 							/>
 						)}
 					</RowWrapper>
-					
-							{ads.map((ad, i) => (
-					<StyledWrapper>
-						{mapView ? (
-							<CustomMapAd ads={ads} />
-						) : (
-							ads.map((ad, i) => (
-								<StyledCard key={i}>
-									<AdCard
-										id={ad.key}
-										image={{src: ad.url, alt: ad.imgDesc}}
-										title={ad.title}
-										description={ad.description}
-										price={ad.monthlyRent}
-										rooms={ad.numRooms}
-										includedExpenses={ad.expenses === "incluido"}
-										surface={ad.squareMeters}
-									/>
-								</StyledCard>
-							))
-						)}
-					</StyledWrapper>
+					{ads.map((ad, i) => (
+						<StyledCard key={i}>
+							<AdCard
+								id={ad.key}
+								image={{src: ad.url, alt: ad.imgDesc}}
+								title={ad.title}
+								description={ad.description}
+								price={ad.monthlyRent}
+								rooms={ad.numRooms}
+								includedExpenses={ad.expenses === "incluido"}
+								surface={ad.squareMeters}
+							/>
+						</StyledCard>
+					))}
 				</StyledAdList>
 			</Container>
 		</Body>
