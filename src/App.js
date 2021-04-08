@@ -12,7 +12,7 @@ import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
 import UserAds from "screens/UserAds/UserAds";
 import EditAd from "screens/EditAd/EditAd";
-import barChart from "screens/Sales/GraphBars.js";
+import barChart from "screens/Sales/BarChart.js";
 
 import MapView from "components/composed/Map/MapView";
 
