@@ -37,3 +37,8 @@ export const CardHeaderSelect = styled.select`
 	justify-content: center;
 	margin-right: 10px;
 `;
+
+export const CardBody = styled.div`
+	width: 55vw;
+	height: 40vh;
+`;
