@@ -43,20 +43,6 @@ export const CardHeaderSelect = styled.select`
 	margin-right: 10px;
 `;
 
-export const CardHeaderText = styled.p`
-	width: 90px;
-	border: none;
-	background-color: #fff;
-	color: #e12d2d;
-	height: 30px;
-	box-shadow: 0px 3px 6px #00000029;
-	border-radius: 4px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-right: 10px;
-`;
-
 export const CardBody = styled.div`
 	width: 55vw;
 	height: 40vh;

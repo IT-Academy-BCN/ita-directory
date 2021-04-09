@@ -9,7 +9,6 @@ import {
 	CardHeaderTitle,
 	CardHeaderSelect,
 	CardBody,
-	CardHeaderText,
 } from "./LinealGraphic.styles";
 
 const options = {
@@ -43,6 +42,7 @@ function LinealGraphic() {
 				<CardHeader>
 					<CardHeaderTitle>Ventas mensuales 2020</CardHeaderTitle>
 					<CardHeaderSelect>
+						<option value="mes">Meses</option>
 						<option value="en">Enero</option>
 						<option value="feb">Febrero</option>
 						<option value="mar">Marzo</option>
@@ -56,9 +56,14 @@ function LinealGraphic() {
 						<option value="nov">Noviembre</option>
 						<option value="dic">Diciembre</option>
 					</CardHeaderSelect>
-					<CardHeaderText>
-						<p>2020</p>
-					</CardHeaderText>
+
+					<CardHeaderSelect>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+					</CardHeaderSelect>
 				</CardHeader>
 				<CardBody ref={lineChartRef}></CardBody>
 			</CardChart>
