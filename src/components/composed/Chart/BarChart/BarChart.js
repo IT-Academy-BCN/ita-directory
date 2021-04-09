@@ -1,3 +1,6 @@
+import React, {useRef, useEffect} from "react";
+import * as echarts from "echarts";
+
 let config = {
 	rotate: 90,
 	align: "left",
@@ -20,7 +23,7 @@ let labelOption = {
 	},
 };
 
-const bars = {
+const options = {
 	tooltip: {
 		trigger: "axis",
 		axisPointer: {
@@ -96,4 +99,15 @@ const bars = {
 	],
 };
 
-export default bars;
+function BarChart({customOptions}) {
+	const chartRef = useRef(null);
+
+	useEffect(() => {
+		const chart = echarts.init(chartRef.current);
+		chart.setOption({...options, ...customOptions});
+	}, [customOptions]);
+
+	return <div style={{width: "100%", height: "80vh"}} ref={chartRef}></div>;
+}
+
+export default BarChart;
