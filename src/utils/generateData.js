@@ -1,9 +1,9 @@
 const dayInMiliseconds = 24 * 60 * 60 * 1000;
-//const initialDate = new Date(2020, 4, 8);
-//const values = [30, 80];
+const initialDate = new Date(2020, 4, 8);
+const values = [30, 80];
 const randomValue = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-export const generateData = (startDay, days, rangeValues) => {
+const generateData = (startDay, days, rangeValues) => {
 	const data = [];
 	const [min, max] = rangeValues;
 
@@ -19,5 +19,5 @@ export const generateData = (startDay, days, rangeValues) => {
 	return data;
 };
 
-//const options = generateData(initialDate, 30, values);
-//console.log('options', options);
+const options = generateData(initialDate, 30, values);
+console.log("options", options);

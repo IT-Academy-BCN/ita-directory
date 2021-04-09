@@ -9,22 +9,23 @@ import {
 	CardHeaderTitle,
 	CardHeaderSelect,
 	CardBody,
+	CardHeaderText,
 } from "./LinealGraphic.styles";
 
 const options = {
 	title: {
-		text: "ECharts Getting Started Example",
+		text: "",
 	},
 	tooltip: {},
 	xAxis: {
-		data: ["shirt", "cardigan", "chiffon", "pants", "heels", "socks"],
+		data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
 	},
 	yAxis: {},
 	series: [
 		{
 			name: "sales",
 			type: "line",
-			data: [5, 20, 36, 10, 10, 20],
+			data: [0, 50, 100, 150, 200, 250, 300],
 		},
 	],
 };
@@ -42,11 +43,22 @@ function LinealGraphic() {
 				<CardHeader>
 					<CardHeaderTitle>Ventas mensuales 2020</CardHeaderTitle>
 					<CardHeaderSelect>
-						<option value="volvo">Months</option>
-						<option value="saab">Saab</option>
-						<option value="opel">Opel</option>
-						<option value="audi">Audi</option>
+						<option value="en">Enero</option>
+						<option value="feb">Febrero</option>
+						<option value="mar">Marzo</option>
+						<option value="abr">Abril</option>
+						<option value="may">Mayo</option>
+						<option value="jun">Junio</option>
+						<option value="jul">Julio</option>
+						<option value="ago">Agosto</option>
+						<option value="set">Setiembre</option>
+						<option value="oct">Octubre</option>
+						<option value="nov">Noviembre</option>
+						<option value="dic">Diciembre</option>
 					</CardHeaderSelect>
+					<CardHeaderText>
+						<p>2020</p>
+					</CardHeaderText>
 				</CardHeader>
 				<CardBody ref={lineChartRef}></CardBody>
 			</CardChart>
