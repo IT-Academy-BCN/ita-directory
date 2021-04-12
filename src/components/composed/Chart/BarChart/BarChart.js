@@ -52,7 +52,20 @@ const options = {
 		{
 			type: "category",
 			axisTick: {show: false},
-			data: ["2012", "2013", "2014", "2015", "2016"],
+			data: [
+				"Jan",
+				"Feb",
+				"Mar",
+				"Apr",
+				"May",
+				"Jun",
+				"Jul",
+				"Aug",
+				"Sep",
+				"Oct",
+				"Nov",
+				"Dec",
+			],
 		},
 	],
 	yAxis: [
