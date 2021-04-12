@@ -1,26 +1,48 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from "react";
+import React from "react";
 import Body from "components/layout/Body/Body";
 import BarChart from "components/composed/Chart/BarChart/BarChart";
+import generateData from "utils/generateData";
 
-import {generateData} from "utils/generateFakeData";
+const data = generateData(new Date("2009, 1, 1"), 5, [1, 50]);
 
-// const DATA = generateData(diaInicial, length, values);
-// for (let i = 0; i < DATA.length; i++) {
-// 	const el = DATA[i];
-// }
+const years = [];
+const chalets = [];
+const garages = [];
+const locales = [];
+const pisos = [];
+
+for (let i = 0; i < data.length; i++) {
+	years.push(data[i].year);
+	chalets.push(data[i].chalets);
+	garages.push(data[i].garages);
+	locales.push(data[i].locales);
+	pisos.push(data[i].pisos);
+}
 
 function Sales() {
 	return (
 		<Body title="Ventas por categoría" isLoggedIn={true}>
+			{console.log("Object data received", data)}
 			<BarChart
 				customOptions={{
+					xAxis: [
+						{
+							data: years,
+						},
+					],
 					series: [
 						{
-							data: [140, 205, 101, 334, 390],
+							data: pisos,
 						},
 						{
-							data: [114, 115, 101, 0, 390],
+							data: garages,
+						},
+						{
+							data: locales,
+						},
+						{
+							data: chalets,
 						},
 					],
 				}}
