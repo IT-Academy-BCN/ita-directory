@@ -65,3 +65,6 @@ export const groupByType = (yearlyData) => {
 
 	return [{data: totalpisos}, {data: totallocales}, {data: totalgarages}, {data: totalchalets}];
 };
+
+export const groupByYear = (selectedYear, data) =>
+	data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear));
