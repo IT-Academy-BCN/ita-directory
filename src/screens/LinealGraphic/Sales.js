@@ -18,7 +18,7 @@ for (let i = 0; i < data.length; i++) {
 	//console.log(totalDia);
 	totalAnio.push(totalDia);
 }
-//console.log('totalAnio', totalAnio);
+console.log("totalAnio", totalAnio);
 
 export const Sales = () => (
 	<Body title="Ventas mensuales" isLoggedIn={true}>
