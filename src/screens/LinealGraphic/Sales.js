@@ -1,36 +1,17 @@
 import Body from "components/layout/Body/Body";
 import LinealGraphic from "./LinealGraphic";
-import {generateData} from "utils/generateData";
+import {generateData, daysBetween} from "utils/generateData";
 
-const months = 12;
-let totalDia;
-const totalAnio = [];
-const data = generateData(new Date(), months, [30, 80]);
-for (let i = 0; i < data.length; i++) {
-	const element = data[i];
-	const categoriesDia = [];
-	categoriesDia.push(element.pisos);
-	categoriesDia.push(element.garajes);
-	categoriesDia.push(element.locales);
-	categoriesDia.push(element.chalets);
-	totalDia = categoriesDia.reduce((accumulator, currentValue) => accumulator + currentValue);
-	//console.log(categoriesDia);
-	//console.log(totalDia);
-	totalAnio.push(totalDia);
+const initialDate = "2012-01-01";
+const days = daysBetween(initialDate, "2016-12-31");
+const data = generateData(new Date(initialDate), days, [30, 80]);
+
+function Sales() {
+	return (
+		<Body title="Ventas mensuales" isLoggedIn={true}>
+			<LinealGraphic data={data} />
+		</Body>
+	);
 }
-console.log("totalAnio", totalAnio);
 
-export const Sales = () => (
-	<Body title="Ventas mensuales" isLoggedIn={true}>
-		<LinealGraphic
-			customOptions={{
-				series: [
-					{
-						type: "line",
-						data: totalAnio,
-					},
-				],
-			}}
-		/>
-	</Body>
-);
+export default Sales;

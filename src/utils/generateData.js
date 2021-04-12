@@ -16,11 +16,45 @@ export const generateData = (startDay, days, rangeValues) => {
 			locales: randomValue(min, max),
 			chalets: randomValue(min, max),
 		};
+		option["total"] = option.pisos + option.garajes + option.locales + option.chalets;
 		data.push(option);
 	}
-	console.log(data);
 	return data;
 };
 
-// const options = generateData(initialDate, 30, values);
-// console.log("options", options);
+export const daysBetween = (firstDay, lastDay) => {
+	const fD = new Date(firstDay);
+	const lD = new Date(lastDay);
+	const miliSecondsDifference = Math.abs(fD - lD);
+	return Math.ceil(miliSecondsDifference / dayInMiliseconds) + 1;
+};
+
+export const groupByMonth = (yearlyData) => {
+	const months = {
+		0: 0,
+		1: 0,
+		2: 0,
+		3: 0,
+		4: 0,
+		5: 0,
+		6: 0,
+		7: 0,
+		8: 0,
+		9: 0,
+		10: 0,
+		11: 0,
+	};
+
+	for (let i = 0; i < yearlyData.length; i++) {
+		const el = yearlyData[i];
+		const curMonth = el.day.getMonth();
+		months[curMonth] = months[curMonth] += el.total;
+	}
+
+	let finalArr = [];
+	for (const month in months) {
+		finalArr.push(months[month]);
+	}
+
+	return finalArr;
+};
