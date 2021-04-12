@@ -16,11 +16,9 @@ function Sales() {
 			<BarChart
 				customOptions={{
 					series: [
-						{data: [14]},
 						{
 							data: [140, 205, 101, 334, 390],
 						},
-						{},
 						{
 							data: [114, 115, 101, 0, 390],
 						},
