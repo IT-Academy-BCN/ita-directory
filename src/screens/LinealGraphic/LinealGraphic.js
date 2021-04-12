@@ -45,6 +45,7 @@ const options = {
 function LinealGraphic({data}) {
 	const lineChartRef = useRef(null);
 	const [selectedYear, setSelectedYear] = useState("2016");
+	const [detail, setDetail] = useState("all");
 
 	useEffect(() => {
 		// Obtengo días entre el 1 de Enero y 31 de Diciembre del año correspondiente
@@ -68,19 +69,57 @@ function LinealGraphic({data}) {
 		let daysYearData = 0;
 		selectedYear !== 2012
 			? (daysYearData = data.slice(sliceEnd - daysLength, sliceEnd))
-			: (daysYearData = data.slice(0, daysLength));
+			: (daysYearData = data.slice(0, daysLength)); // does not work
 
 		const monthValues = groupByMonth(daysYearData);
+
+		const monthsLabel = [
+			"Ene",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Ago",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dic",
+		];
+		const daysLabel = (monthSelected) => {
+			// seguir aquí
+		};
+
+		console.log(daysLabel(detail));
+
+		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail);
+
 		options.series[0].data = monthValues;
+		options.xAxis.data = xAxis;
 		const lineChart = echarts.init(lineChartRef.current);
 		lineChart.setOption({...options});
-	}, [data, selectedYear]);
+	}, [data, selectedYear, detail]);
 
 	return (
 		<CardChart>
 			<CardHeader>
 				<CardHeaderTitle>Ventas mensuales {selectedYear}</CardHeaderTitle>
-
+				<CardHeaderSelect defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
+					<option value="all">All</option>
+					<option value="0">January</option>
+					<option value="1">February</option>
+					<option value="2">March</option>
+					<option value="3">April</option>
+					<option value="4">May</option>
+					<option value="5">Juny</option>
+					<option value="6">July</option>
+					<option value="7">Agost</option>
+					<option value="8">Septembre</option>
+					<option value="9">Octobre</option>
+					<option value="10">Novembre</option>
+					<option value="11">Decembre</option>
+				</CardHeaderSelect>
 				<CardHeaderSelect
 					defaultValue={selectedYear}
 					onChange={(e) => setSelectedYear(e.target.value)}
