@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
-import {daysBetween, groupByType} from "utils/generateData";
+import {groupByType, groupByYear} from "utils/generateData";
+import {Card, CardHeader, CardTitle, CardSelector, Chart} from "./BarChart.styles";
 
 let config = {
 	rotate: 90,
@@ -118,22 +119,57 @@ function BarChart({data}) {
 	const chartRef = useRef(null);
 	const [selectedYear, setSelectedYear] = useState("2016");
 
-	console.log("data", data);
+	// console.log("data", data);
 	useEffect(() => {
-		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
+		// const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 		// De los datos totales, corto el array para tener los días de un año. Ahora mismo, solo corto por el final.
-		const daysYearData = data.slice(data.length - daysLength, data.length);
+		const daysYearData = data.slice(groupByYear(selectedYear, data), data.length);
 
 		// array con cuatro objetos: uno por cada tipo de immueble
 		const customOptions = groupByType(daysYearData);
 		options.series = _.merge(options.series, customOptions);
 
-		setSelectedYear("2016"); // call the variable to avoid WARNING
+		// setSelectedYear("2016"); // call the variable to avoid WARNING
 		const chart = echarts.init(chartRef.current);
 		chart.setOption({...options});
 	}, [data, selectedYear]);
 
-	return <div style={{width: "100%", height: "80vh"}} ref={chartRef}></div>;
+	const handleYearChange = (e) => {
+		setSelectedYear(e.target.value);
+	};
+
+	return (
+		<Card>
+			<CardHeader>
+				<CardTitle> Ventas del año {selectedYear} </CardTitle>
+				<div>
+					<CardSelector defaultValue="jan">
+						<option value="jan">January</option>
+						<option value="feb">February</option>
+						<option value="mar">March</option>
+						<option value="apr">April </option>
+						<option value="may">May</option>
+						<option value="jun">June</option>
+						<option value="jul">July</option>
+						<option value="may">May</option>
+						<option value="aug">August</option>
+						<option value="sep">September</option>
+						<option value="oct">Octubre</option>
+						<option value="nov">November</option>
+						<option value="dec">December</option>
+					</CardSelector>
+					<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+					</CardSelector>
+				</div>
+			</CardHeader>
+			<Chart ref={chartRef}></Chart>
+		</Card>
+	);
 }
 
 export default BarChart;
