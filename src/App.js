@@ -12,6 +12,7 @@ import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
 import UserAds from "screens/UserAds/UserAds";
 import EditAd from "screens/EditAd/EditAd";
+import Sales from "screens/Sales/Sales.js";
 
 import MapView from "components/composed/Map/MapView";
 
@@ -30,6 +31,7 @@ const App = () => {
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/map" component={MapView} />
+				<Route exact path="/sales" component={Sales} />
 			</Switch>
 		</>
 	);
