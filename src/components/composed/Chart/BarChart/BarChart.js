@@ -1,5 +1,6 @@
 import React, {useRef, useEffect} from "react";
 import * as echarts from "echarts";
+import _ from "lodash";
 
 let config = {
 	rotate: 90,
@@ -104,7 +105,8 @@ function BarChart({customOptions}) {
 
 	useEffect(() => {
 		const chart = echarts.init(chartRef.current);
-		chart.setOption({...options, ...customOptions});
+		let mergedData = _.merge(options, customOptions);
+		chart.setOption(mergedData);
 	}, [customOptions]);
 
 	return <div style={{width: "100%", height: "80vh"}} ref={chartRef}></div>;
