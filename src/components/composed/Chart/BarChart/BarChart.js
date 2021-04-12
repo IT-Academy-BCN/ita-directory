@@ -1,6 +1,7 @@
-import React, {useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
+import {daysBetween, groupByType} from "utils/generateData";
 
 let config = {
 	rotate: 90,
@@ -100,14 +101,24 @@ const options = {
 	],
 };
 
-function BarChart({customOptions}) {
+function BarChart({data}) {
 	const chartRef = useRef(null);
+	const [selectedYear, setSelectedYear] = useState("2016");
 
+	console.log("data", data);
 	useEffect(() => {
+		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
+		// De los datos totales, corto el array para tener los días de un año. Ahora mismo, solo corto por el final.
+		const daysYearData = data.slice(data.length - daysLength, data.length);
+
+		// array con cuatro objetos: uno por cada tipo de immueble
+		const customOptions = groupByType(daysYearData);
+		options.series = _.merge(options.series, customOptions);
+
+		setSelectedYear("2016"); // call the variable to avoid WARNING
 		const chart = echarts.init(chartRef.current);
-		let mergedData = _.merge(options, customOptions);
-		chart.setOption(mergedData);
-	}, [customOptions]);
+		chart.setOption({...options});
+	}, [data, selectedYear]);
 
 	return <div style={{width: "100%", height: "80vh"}} ref={chartRef}></div>;
 }
