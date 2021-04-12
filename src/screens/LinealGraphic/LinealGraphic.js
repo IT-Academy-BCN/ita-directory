@@ -30,16 +30,16 @@ const options = {
 };
 
 /*
-    1. ARRAY DE DATOS DE DÍAS CON VALORES ENTRE 2012 y 2016.
-    2. POR DEFECTO TENGO SELECCIONADO EL AÑO 2016.
+		1. ARRAY DE DATOS DE DÍAS CON VALORES ENTRE 2012 y 2016.
+		2. POR DEFECTO TENGO SELECCIONADO EL AÑO 2016.
 
-    Y QUIERO
-        RESPRESENTAR POR MESES DEL CORRESPONDIENTE AÑO
+		Y QUIERO
+				RESPRESENTAR POR MESES DEL CORRESPONDIENTE AÑO
 
-    POR LO TANTO
-    1. LO PRIMERO PARA AGRUPAR ESOS DATOS POR AÑO
-        ES TENER LOS CORRESPONDIENTES AL AÑO POR DEFECTO.
-    2. AGRUPAR LOS DÍAS DEL AÑO EN MESES
+		POR LO TANTO
+		1. LO PRIMERO PARA AGRUPAR ESOS DATOS POR AÑO
+				ES TENER LOS CORRESPONDIENTES AL AÑO POR DEFECTO.
+		2. AGRUPAR LOS DÍAS DEL AÑO EN MESES
  */
 
 function LinealGraphic({data}) {
@@ -50,8 +50,25 @@ function LinealGraphic({data}) {
 		// Obtengo días entre el 1 de Enero y 31 de Diciembre del año correspondiente
 		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 
-		// De los datos totales, corto el array. Ahora mismo, solo corto por el final.
-		const daysYearData = data.slice(data.length - daysLength, data.length);
+		// determinar length del array según el año elegido
+		const calculateDataLength = (selectedYear) => {
+			let dataLength = data.length;
+			let years = 2016 - selectedYear;
+			let selYear = parseInt(selectedYear);
+
+			for (let i = 0; i < years + 1; i++) {
+				dataLength -= daysBetween(`${selYear + i}-01-01`, `${selYear + i}-12-31`);
+			}
+			return dataLength;
+		};
+		// De los datos totales, corto el array.
+		// 1. Calculo la posición hasta dónde cortar
+		let sliceEnd = calculateDataLength(selectedYear);
+		// 2. Corto el array hasta la posición calculada
+		let daysYearData = 0;
+		selectedYear !== 2012
+			? (daysYearData = data.slice(sliceEnd - daysLength, sliceEnd))
+			: (daysYearData = data.slice(0, daysLength));
 
 		const monthValues = groupByMonth(daysYearData);
 		options.series[0].data = monthValues;
