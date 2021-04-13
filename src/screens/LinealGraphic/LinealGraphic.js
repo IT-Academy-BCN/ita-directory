@@ -51,17 +51,18 @@ function LinealGraphic({data}) {
 		// Obtengo días entre el 1 de Enero y 31 de Diciembre del año correspondiente
 		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 
-		// determinar length del array según el año elegido
+		// Determinar length del array según el año elegido
 		const calculateDataLength = (selectedYear) => {
 			let dataLength = data.length;
 			let years = 2016 - selectedYear;
 			let selYear = parseInt(selectedYear);
 
-			for (let i = 0; i < years + 1; i++) {
+			for (let i = 0; i < years; i++) {
 				dataLength -= daysBetween(`${selYear + i}-01-01`, `${selYear + i}-12-31`);
 			}
 			return dataLength;
 		};
+
 		// De los datos totales, corto el array.
 		// 1. Calculo la posición hasta dónde cortar
 		let sliceEnd = calculateDataLength(selectedYear);
@@ -69,7 +70,7 @@ function LinealGraphic({data}) {
 		let daysYearData = 0;
 		selectedYear !== 2012
 			? (daysYearData = data.slice(sliceEnd - daysLength, sliceEnd))
-			: (daysYearData = data.slice(0, daysLength)); // does not work
+			: (daysYearData = data.slice(0, daysLength));
 
 		const monthValues = groupByMonth(daysYearData);
 
@@ -91,7 +92,7 @@ function LinealGraphic({data}) {
 			// seguir aquí
 		};
 
-		console.log(daysLabel(detail));
+		// console.log(daysLabel(detail));
 
 		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail);
 
