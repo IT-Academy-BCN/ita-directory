@@ -91,7 +91,7 @@ function LinealGraphic({data}) {
 			// seguir aquí
 		};
 
-		console.log(daysLabel(detail));
+		//console.log(daysLabel(detail));
 
 		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail);
 
