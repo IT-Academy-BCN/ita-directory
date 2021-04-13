@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
-import {daysBetween, groupByMonth} from "utils/generateData";
+import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
 
 // import styles
 import {
@@ -74,6 +74,33 @@ function LinealGraphic({data}) {
 
 		const monthValues = groupByMonth(daysYearData);
 
+		const monthLength = (year, month) => {
+			let numMonth = parseInt(month) + 1;
+			let numYear = parseInt(year);
+			return new Date(numYear, numMonth, 0).getDate();
+		};
+
+		const calculateArrayYearLength = (selectedMonth) => {
+			let arrayLength = daysYearData.length;
+			let months = 12 - parseInt(selectedMonth);
+
+			for (let i = 0; i < months; i++) {
+				let daysInMonth = monthLength(selectedYear, i);
+				arrayLength -= daysInMonth;
+			}
+			return arrayLength;
+		};
+
+		const daysInMonth = monthLength(selectedYear, detail);
+		const sliceMonthEnd = calculateArrayYearLength(detail);
+
+		let daysMonthData = 0;
+		detail !== "all" && detail !== "0"
+			? (daysMonthData = daysYearData.slice(sliceMonthEnd - daysInMonth, sliceMonthEnd))
+			: (daysMonthData = daysYearData.slice(0, daysInMonth));
+
+		const dayValues = getByDays(daysMonthData);
+
 		const monthsLabel = [
 			"Ene",
 			"Feb",
@@ -92,11 +119,9 @@ function LinealGraphic({data}) {
 			// seguir aquí
 		};
 
-		//console.log(daysLabel(detail));
-
 		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail);
 
-		options.series[0].data = monthValues;
+		options.series[0].data = detail === "all" ? monthValues : dayValues;
 		options.xAxis.data = xAxis;
 		const lineChart = echarts.init(lineChartRef.current);
 		lineChart.setOption({...options});
