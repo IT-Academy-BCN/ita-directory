@@ -125,7 +125,7 @@ const options = {
 	],
 };
 
-function BarChart({data}) {
+function BarChart({data, handleClick}) {
 	const chartRef = useRef(null);
 	const [selectedYear, setSelectedYear] = useState("2016");
 
@@ -174,7 +174,7 @@ function BarChart({data}) {
 						<option value="2015">2015</option>
 						<option value="2016">2016</option>
 					</CardSelector>
-					<CardOpenModal>
+					<CardOpenModal onClick={handleClick}>
 						<FontAwesomeIcon icon={faExternalLinkAlt} />
 					</CardOpenModal>
 				</CardSelectorWrapper>
