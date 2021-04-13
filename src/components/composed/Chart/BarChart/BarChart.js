@@ -141,6 +141,10 @@ function BarChart({data, handleClick}) {
 
 		const chart = echarts.init(chartRef.current);
 		chart.setOption({...options});
+
+		window.onresize = function () {
+			chart.resize();
+		};
 	}, [data, selectedYear]);
 
 	const handleYearChange = (e) => {
