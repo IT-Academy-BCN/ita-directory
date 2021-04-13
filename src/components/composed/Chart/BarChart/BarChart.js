@@ -2,7 +2,17 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByType, groupByYear} from "utils/generateData";
-import {Card, CardHeader, CardTitle, CardSelector, Chart} from "./BarChart.styles";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardSelector,
+	Chart,
+	CardSelectorWrapper,
+	CardOpenModal,
+} from "./BarChart.styles";
+import {faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 let config = {
 	rotate: 90,
@@ -129,7 +139,6 @@ function BarChart({data}) {
 		const customOptions = groupByType(daysYearData);
 		options.series = _.merge(options.series, customOptions);
 
-		// setSelectedYear("2016"); // call the variable to avoid WARNING
 		const chart = echarts.init(chartRef.current);
 		chart.setOption({...options});
 	}, [data, selectedYear]);
@@ -142,7 +151,7 @@ function BarChart({data}) {
 		<Card>
 			<CardHeader>
 				<CardTitle> Ventas del año {selectedYear} </CardTitle>
-				<div>
+				<CardSelectorWrapper>
 					<CardSelector defaultValue="jan">
 						<option value="jan">January</option>
 						<option value="feb">February</option>
@@ -165,7 +174,10 @@ function BarChart({data}) {
 						<option value="2015">2015</option>
 						<option value="2016">2016</option>
 					</CardSelector>
-				</div>
+					<CardOpenModal>
+						<FontAwesomeIcon icon={faExternalLinkAlt} />
+					</CardOpenModal>
+				</CardSelectorWrapper>
 			</CardHeader>
 			<Chart ref={chartRef}></Chart>
 		</Card>

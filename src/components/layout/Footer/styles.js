@@ -27,14 +27,14 @@ export const StyledFooter = styled.footer`
 	margin: 1rem 0rem;
 	padding-top: 1rem;
 
+	@media only screen and (max-width: 600px) {
+		margin: 2rem 0;
+	}
+
 	@media only screen and (max-width: 468px) {
 		flex-wrap: wrap;
 		justify-content: center;
-		margin: 1rem 0.5rem;
-	}
-
-	@media only screen and (max-width: 600px) {
-		margin: 2rem;
+		margin: 1rem 0;
 	}
 `;
 
