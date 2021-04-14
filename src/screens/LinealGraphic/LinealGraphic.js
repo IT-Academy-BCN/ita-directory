@@ -1,6 +1,8 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
+import {FiExternalLink} from "react-icons/fi";
+import {RiArrowDownSFill} from "react-icons/ri";
 
 // import styles
 import {
@@ -9,6 +11,8 @@ import {
 	CardHeaderTitle,
 	CardHeaderSelect,
 	CardBody,
+	CardOpenModal,
+	CardSelectWrapper,
 } from "./LinealGraphic.styles";
 
 const options = {
@@ -137,31 +141,40 @@ function LinealGraphic({data}) {
 		<CardChart>
 			<CardHeader>
 				<CardHeaderTitle>Ventas mensuales {selectedYear}</CardHeaderTitle>
-				<CardHeaderSelect defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
-					<option value="all">All</option>
-					<option value="0">January</option>
-					<option value="1">February</option>
-					<option value="2">March</option>
-					<option value="3">April</option>
-					<option value="4">May</option>
-					<option value="5">Juny</option>
-					<option value="6">July</option>
-					<option value="7">Agost</option>
-					<option value="8">Septembre</option>
-					<option value="9">Octobre</option>
-					<option value="10">Novembre</option>
-					<option value="11">Decembre</option>
-				</CardHeaderSelect>
-				<CardHeaderSelect
-					defaultValue={selectedYear}
-					onChange={(e) => setSelectedYear(e.target.value)}
-				>
-					<option value="2012">2012</option>
-					<option value="2013">2013</option>
-					<option value="2014">2014</option>
-					<option value="2015">2015</option>
-					<option value="2016">2016</option>
-				</CardHeaderSelect>
+				<CardSelectWrapper>
+					<CardHeaderSelect
+						defaultValue={detail}
+						onChange={(e) => setDetail(e.target.value)}
+					>
+						<option value="all">All</option>
+						<option value="0">January</option>
+						<option value="1">February</option>
+						<option value="2">March</option>
+						<option value="3">April</option>
+						<option value="4">May</option>
+						<option value="5">Juny</option>
+						<option value="6">July</option>
+						<option value="7">Agost</option>
+						<option value="8">Septembre</option>
+						<option value="9">Octobre</option>
+						<option value="10">Novembre</option>
+						<option value="11">Decembre</option>
+						<RiArrowDownSFill style={{color: "black"}} />
+					</CardHeaderSelect>
+					<CardHeaderSelect
+						defaultValue={selectedYear}
+						onChange={(e) => setSelectedYear(e.target.value)}
+					>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+					</CardHeaderSelect>
+					<CardOpenModal>
+						<FiExternalLink />
+					</CardOpenModal>
+				</CardSelectWrapper>
 			</CardHeader>
 			<CardBody ref={lineChartRef}></CardBody>
 		</CardChart>
