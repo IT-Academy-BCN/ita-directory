@@ -80,23 +80,21 @@ function LinealGraphic({data}) {
 			return new Date(numYear, numMonth, 0).getDate();
 		};
 
-		const calculateArrayYearLength = (selectedMonth) => {
-			let arrayLength = daysYearData.length;
-			let months = 12 - parseInt(selectedMonth);
+		const daysInMonth = monthLength(selectedYear, detail);
+		const addLeadingZero = (num) => (num < 10 ? `0${num}` : num);
 
-			for (let i = 0; i < months; i++) {
-				let daysInMonth = monthLength(selectedYear, i);
-				arrayLength -= daysInMonth;
-			}
-			return arrayLength;
+		const sliceMonth = (year, month) => {
+			return daysBetween(`${year}-01-01`, `${year}-${addLeadingZero(month + 1)}-01`) - 1;
 		};
 
-		const daysInMonth = monthLength(selectedYear, detail);
-		const sliceMonthEnd = calculateArrayYearLength(detail);
+		const sliceInitialPoint = sliceMonth(parseInt(selectedYear), parseInt(detail));
 
 		let daysMonthData = 0;
 		detail !== "all" && detail !== "0"
-			? (daysMonthData = daysYearData.slice(sliceMonthEnd - daysInMonth, sliceMonthEnd))
+			? (daysMonthData = daysYearData.slice(
+					sliceInitialPoint,
+					sliceInitialPoint + daysInMonth
+			  ))
 			: (daysMonthData = daysYearData.slice(0, daysInMonth));
 
 		const dayValues = getByDays(daysMonthData);
@@ -115,11 +113,19 @@ function LinealGraphic({data}) {
 			"Nov",
 			"Dic",
 		];
-		const daysLabel = (monthSelected) => {
-			// seguir aquí
+
+		const daysLabel = (selectedMonth, selectedYear) => {
+			const numSelectedMonth = parseInt(selectedMonth);
+			const numSelectedYear = parseInt(selectedYear);
+			const monthSelectedLength = monthLength(numSelectedYear, numSelectedMonth);
+			const daysLabel = [];
+			for (let i = 0; i < monthSelectedLength; i++) {
+				daysLabel.push(i + 1);
+			}
+			return daysLabel;
 		};
 
-		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail);
+		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail, selectedYear);
 
 		options.series[0].data = detail === "all" ? monthValues : dayValues;
 		options.xAxis.data = xAxis;

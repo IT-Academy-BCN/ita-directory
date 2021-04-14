@@ -59,21 +59,6 @@ export const groupByMonth = (yearlyData) => {
 	return finalArr;
 };
 
-// export const getByDays = (yearlyData, month) => {
-// 	const days = [];
-
-// 	for (let i = 0; i < yearlyData.length; i++) {
-// 		const el = yearlyData[i];
-// 		const curMonth = el.day.getMonth();
-// 		console.log('curMonth: ', curMonth);
-// 		console.log('month: ', month);
-// 		console.log('el: ', el.total);
-// 		if (parseInt(curMonth) === parseInt(month)) days.push(el.total);
-// 	}
-// 	console.log(`days for month ${month}`, days)
-// 	return days;
-// };
-
 export const getByDays = (monthlyData) => {
 	const days = [];
 
