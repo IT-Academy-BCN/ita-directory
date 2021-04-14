@@ -66,5 +66,38 @@ export const groupByType = (yearlyData) => {
 	return [{data: totalpisos}, {data: totallocales}, {data: totalgarages}, {data: totalchalets}];
 };
 
-export const groupByYear = (selectedYear, data) =>
-	data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear));
+export const groupByTypeMonth = (monthData) => {
+	let totalpisos = 0;
+	let totallocales = 0;
+	let totalgarages = 0;
+	let totalchalets = 0;
+	for (let i = 0; i < monthData.length; i++) {
+		const el = monthData[i];
+		totalpisos += el.pisos;
+		totallocales += el.locales;
+		totalgarages += el.garages;
+		totalchalets += el.chalets;
+	}
+	return [
+		{data: [totalpisos]},
+		{data: [totallocales]},
+		{data: [totalgarages]},
+		{data: [totalchalets]},
+	];
+};
+
+export const groupByYear = (selectedYear, data) => {
+	return data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear));
+};
+
+export const getDaysInMonth = (month, year) => {
+	return new Date(year, parseInt(month) + 1, 0).getDate();
+};
+
+export const groupByFilter = (selectedMonth, selectedYear, data) => {
+	return data
+		.map((e) => {
+			return `${e.day.getMonth()}, ${e.day.getDate()}, ${e.day.getFullYear()}`;
+		})
+		.indexOf(`${selectedMonth}, 1, ${selectedYear}`);
+};
