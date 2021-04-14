@@ -1,7 +1,14 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
-import {groupByType, groupByYear} from "utils/generateData";
+import {
+	daysBetween,
+	getDaysInMonth,
+	groupByFilter,
+	groupByType,
+	groupByTypeMonth,
+	groupByYear,
+} from "utils/generateData";
 import {
 	Card,
 	CardHeader,
@@ -128,16 +135,51 @@ const options = {
 function BarChart({data, handleClick}) {
 	const chartRef = useRef(null);
 	const [selectedYear, setSelectedYear] = useState("2016");
+	const [selectedMonth, setSelectedMonth] = useState(null); //0-11
+	const allMonths = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+	const [months, setMonths] = useState(allMonths);
 
-	// console.log("data", data);
 	useEffect(() => {
-		// const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
+		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 		// De los datos totales, corto el array para tener los días de un año. Ahora mismo, solo corto por el final.
-		const daysYearData = data.slice(groupByYear(selectedYear, data), data.length);
+		// const daysYearData = data.slice(groupByYear(selectedYear, data), data.length);
+
+		//
+		const groupFilterMonthYear = groupByFilter(selectedMonth, selectedYear, data);
+		const groupFilterYear = groupByYear(selectedYear, data);
+		let daysYearData;
+		let customOptions;
+
+		if (groupFilterMonthYear === -1) {
+			daysYearData = data.slice(groupFilterYear, groupFilterYear + daysLength);
+			customOptions = groupByType(daysYearData);
+		} else {
+			daysYearData = data.slice(
+				groupFilterMonthYear,
+				groupFilterMonthYear + getDaysInMonth(selectedMonth, selectedYear)
+			);
+			customOptions = groupByTypeMonth(daysYearData);
+		}
+
+		//
 
 		// array con cuatro objetos: uno por cada tipo de immueble
-		const customOptions = groupByType(daysYearData);
+		// const customOptions = groupByType(daysYearData);
 		options.series = _.merge(options.series, customOptions);
+		options.xAxis[0].data = months;
 
 		const chart = echarts.init(chartRef.current);
 		chart.setOption({...options});
@@ -145,10 +187,21 @@ function BarChart({data, handleClick}) {
 		window.onresize = function () {
 			chart.resize();
 		};
-	}, [data, selectedYear]);
+	}, [months, selectedMonth, selectedYear, data]);
 
+	// handlers
 	const handleYearChange = (e) => {
 		setSelectedYear(e.target.value);
+	};
+
+	const handleMonthChange = (e) => {
+		if (e.target.value === "all") {
+			setMonths(allMonths);
+		} else {
+			setMonths([allMonths[e.target.value]]);
+		}
+
+		setSelectedMonth(e.target.value);
 	};
 
 	return (
@@ -156,20 +209,20 @@ function BarChart({data, handleClick}) {
 			<CardHeader>
 				<CardTitle> Ventas del año {selectedYear} </CardTitle>
 				<CardSelectorWrapper>
-					<CardSelector defaultValue="jan">
-						<option value="jan">January</option>
-						<option value="feb">February</option>
-						<option value="mar">March</option>
-						<option value="apr">April </option>
-						<option value="may">May</option>
-						<option value="jun">June</option>
-						<option value="jul">July</option>
-						<option value="may">May</option>
-						<option value="aug">August</option>
-						<option value="sep">September</option>
-						<option value="oct">Octubre</option>
-						<option value="nov">November</option>
-						<option value="dec">December</option>
+					<CardSelector defaultValue={months} onChange={handleMonthChange}>
+						<option value="all">All</option>
+						<option value="0">January</option>
+						<option value="1">February</option>
+						<option value="2">March</option>
+						<option value="3">April </option>
+						<option value="4">May</option>
+						<option value="5">June</option>
+						<option value="6">July</option>
+						<option value="7">August</option>
+						<option value="8">September</option>
+						<option value="9">Octubre</option>
+						<option value="10">November</option>
+						<option value="11">December</option>
 					</CardSelector>
 					<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
 						<option value="2012">2012</option>
