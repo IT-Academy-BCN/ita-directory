@@ -1,8 +1,10 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
-import {FiExternalLink} from "react-icons/fi";
-import {GrClose} from "react-icons/gr";
+import {FiX} from "react-icons/fi";
+import {VscLinkExternal} from "react-icons/vsc";
+// import {GrClose} from "react-icons/gr";
+import {IconContext} from "react-icons";
 //import {RiArrowDownSFill} from "react-icons/ri";
 
 // import styles
@@ -181,7 +183,17 @@ function LinealGraphic({data, active, hideModal}) {
 						<option value="2016">2016</option>
 					</CardHeaderSelect>
 					<CardOpenModal onClick={() => hideModal()}>
-						{active ? <GrClose /> : <FiExternalLink />}
+						<IconContext.Provider
+							value={{
+								style: {
+									color: "#e12d2d",
+									display: "flex",
+									alignItems: "center",
+								},
+							}}
+						>
+							{active ? <FiX size={30} /> : <VscLinkExternal />}
+						</IconContext.Provider>
 					</CardOpenModal>
 				</CardSelectWrapper>
 			</CardHeader>
