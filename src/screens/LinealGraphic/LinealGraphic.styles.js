@@ -14,12 +14,18 @@ export const CardHeader = styled.div`
 	height: 51px;
 	width: 100%;
 	display: flex;
-	color: #ffffff;
-	font-size: 16px;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	color: #ffffff;
 	background-color: #e12d2d;
+	font-size: 16px;
 	border-radius: 6px 6px 0px 0px;
+
+	@media only screen and (min-width: 768px) {
+		flex-direction: row;
+		padding: 1rem 1rem;
+	}
 `;
 
 export const CardHeaderTitle = styled.h3`
@@ -27,6 +33,12 @@ export const CardHeaderTitle = styled.h3`
 	font-weight: 400;
 	padding-left: 17px;
 	font: normal normal normal 15px/20px Helvetica Neue;
+`;
+
+export const CardSelectWrapper = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
 `;
 
 export const CardHeaderSelect = styled.select`
@@ -46,4 +58,18 @@ export const CardHeaderSelect = styled.select`
 export const CardBody = styled.div`
 	width: 55vw;
 	height: 40vh;
+`;
+
+export const CardOpenModal = styled.button`
+	width: 35px;
+	height: 35px;
+	border-radius: 90px;
+	border: none;
+	background: #ffffff;
+	color: #e22e2e;
+	box-shadow: 0px 3px 6px #00000029;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
 `;
