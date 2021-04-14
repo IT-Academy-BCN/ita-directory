@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
 import {FiExternalLink} from "react-icons/fi";
-import {RiArrowDownSFill} from "react-icons/ri";
+//import {RiArrowDownSFill} from "react-icons/ri";
 
 // import styles
 import {
@@ -48,94 +48,118 @@ const options = {
 
 function LinealGraphic({data}) {
 	const lineChartRef = useRef(null);
-	const [selectedYear, setSelectedYear] = useState("2016");
-	const [detail, setDetail] = useState("all");
+	const [curChart, setCurChart] = useState(undefined);
 
 	useEffect(() => {
-		// Obtengo días entre el 1 de Enero y 31 de Diciembre del año correspondiente
-		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
+		if (lineChartRef !== null && curChart === undefined)
+			setCurChart(echarts.init(lineChartRef.current));
+		// eslint-disable-next-line
+	}, [lineChartRef]);
 
-		// Determinar length del array según el año elegido
-		const calculateDataLength = (selectedYear) => {
-			let dataLength = data.length;
-			let years = 2016 - selectedYear;
-			let selYear = parseInt(selectedYear);
+	const [selectedYear, setSelectedYear] = useState("2016");
+	const [detail, setDetail] = useState("all");
+	const monthsLabel = [
+		"Ene",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Ago",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dic",
+	];
 
-			for (let i = 0; i < years; i++) {
-				dataLength -= daysBetween(`${selYear + i}-01-01`, `${selYear + i}-12-31`);
-			}
-			return dataLength;
-		};
+	useEffect(() => {
+		if (curChart !== undefined) {
+			// Obtengo días entre el 1 de Enero y 31 de Diciembre del año correspondiente
+			const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 
-		// De los datos totales, corto el array.
-		// 1. Calculo la posición hasta dónde cortar
-		let sliceEnd = calculateDataLength(selectedYear);
-		// 2. Corto el array hasta la posición calculada
-		let daysYearData = 0;
-		selectedYear !== 2012
-			? (daysYearData = data.slice(sliceEnd - daysLength, sliceEnd))
-			: (daysYearData = data.slice(0, daysLength));
+			// Determinar length del array según el año elegido
+			const calculateDataLength = (selectedYear) => {
+				let dataLength = data.length;
+				let years = 2016 - selectedYear;
+				let selYear = parseInt(selectedYear);
 
-		const monthValues = groupByMonth(daysYearData);
+				for (let i = 0; i < years; i++) {
+					dataLength -= daysBetween(`${selYear + i}-01-01`, `${selYear + i}-12-31`);
+				}
+				return dataLength;
+			};
 
-		const monthLength = (year, month) => {
-			let numMonth = parseInt(month) + 1;
-			let numYear = parseInt(year);
-			return new Date(numYear, numMonth, 0).getDate();
-		};
+			// De los datos totales, corto el array.
+			// 1. Calculo la posición hasta dónde cortar
+			let sliceEnd = calculateDataLength(selectedYear);
+			// 2. Corto el array hasta la posición calculada
+			let daysYearData = 0;
+			selectedYear !== 2012
+				? (daysYearData = data.slice(sliceEnd - daysLength, sliceEnd))
+				: (daysYearData = data.slice(0, daysLength));
 
-		const daysInMonth = monthLength(selectedYear, detail);
-		const addLeadingZero = (num) => (num < 10 ? `0${num}` : num);
+			const monthValues = groupByMonth(daysYearData);
 
-		const sliceMonth = (year, month) => {
-			return daysBetween(`${year}-01-01`, `${year}-${addLeadingZero(month + 1)}-01`) - 1;
-		};
+			const monthLength = (year, month) => {
+				let numMonth = parseInt(month) + 1;
+				let numYear = parseInt(year);
+				return new Date(numYear, numMonth, 0).getDate();
+			};
 
-		const sliceInitialPoint = sliceMonth(parseInt(selectedYear), parseInt(detail));
+			// Filter by month
+			const daysInMonth = monthLength(selectedYear, detail);
+			const addLeadingZero = (num) => (num < 10 ? `0${num}` : num);
+			const sliceMonth = (year, month) =>
+				daysBetween(`${year}-01-01`, `${year}-${addLeadingZero(month + 1)}-01`) - 1;
+			const sliceInitialPoint = sliceMonth(parseInt(selectedYear), parseInt(detail));
 
-		let daysMonthData = 0;
-		detail !== "all" && detail !== "0"
-			? (daysMonthData = daysYearData.slice(
-					sliceInitialPoint,
-					sliceInitialPoint + daysInMonth
-			  ))
-			: (daysMonthData = daysYearData.slice(0, daysInMonth));
+			let daysMonthData = 0;
+			detail !== "all" && detail !== "0"
+				? (daysMonthData = daysYearData.slice(
+						sliceInitialPoint,
+						sliceInitialPoint + daysInMonth
+				  ))
+				: (daysMonthData = daysYearData.slice(0, daysInMonth));
 
-		const dayValues = getByDays(daysMonthData);
+			const dayValues = getByDays(daysMonthData);
 
-		const monthsLabel = [
-			"Ene",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Ago",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dic",
-		];
+			// Labels x-axis
+			const daysLabel = (selectedMonth, selectedYear) => {
+				const numSelectedMonth = parseInt(selectedMonth);
+				const numSelectedYear = parseInt(selectedYear);
+				const monthSelectedLength = monthLength(numSelectedYear, numSelectedMonth);
+				const daysLabel = [];
+				for (let i = 0; i < monthSelectedLength; i++) {
+					daysLabel.push(i + 1);
+				}
+				return daysLabel;
+			};
 
-		const daysLabel = (selectedMonth, selectedYear) => {
-			const numSelectedMonth = parseInt(selectedMonth);
-			const numSelectedYear = parseInt(selectedYear);
-			const monthSelectedLength = monthLength(numSelectedYear, numSelectedMonth);
-			const daysLabel = [];
-			for (let i = 0; i < monthSelectedLength; i++) {
-				daysLabel.push(i + 1);
-			}
-			return daysLabel;
-		};
+			const xAxis = detail === "all" ? monthsLabel : daysLabel(detail, selectedYear);
 
-		const xAxis = detail === "all" ? monthsLabel : daysLabel(detail, selectedYear);
-
-		options.series[0].data = detail === "all" ? monthValues : dayValues;
-		options.xAxis.data = xAxis;
-		const lineChart = echarts.init(lineChartRef.current);
-		lineChart.setOption({...options});
+			options.series[0].data = detail === "all" ? monthValues : dayValues;
+			options.xAxis.data = xAxis;
+			const lineChart = echarts.init(lineChartRef.current);
+			lineChart.setOption({...options});
+		}
+		// eslint-disable-next-line
 	}, [data, selectedYear, detail]);
+
+	const resizeChart = () => {
+		curChart.resize();
+	};
+
+	// Resize the chart when window resizes
+	useEffect(() => {
+		if (curChart !== undefined) {
+			window.addEventListener("resize", resizeChart);
+			return () => {
+				window.removeEventListener("resize", resizeChart);
+			};
+		}
+		// eslint-disable-next-line
+	}, [curChart]);
 
 	return (
 		<CardChart>
@@ -145,6 +169,7 @@ function LinealGraphic({data}) {
 					<CardHeaderSelect
 						defaultValue={detail}
 						onChange={(e) => setDetail(e.target.value)}
+						//components={<RiArrowDownSFill style={{color: "black"}} />}
 					>
 						<option value="all">All</option>
 						<option value="0">January</option>
@@ -159,7 +184,6 @@ function LinealGraphic({data}) {
 						<option value="9">Octobre</option>
 						<option value="10">Novembre</option>
 						<option value="11">Decembre</option>
-						<RiArrowDownSFill style={{color: "black"}} />
 					</CardHeaderSelect>
 					<CardHeaderSelect
 						defaultValue={selectedYear}
