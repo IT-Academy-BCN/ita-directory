@@ -132,62 +132,77 @@ const options = {
 	],
 };
 
+const allMonths = [
+	"Jan",
+	"Feb",
+	"Mar",
+	"Apr",
+	"May",
+	"Jun",
+	"Jul",
+	"Aug",
+	"Sep",
+	"Oct",
+	"Nov",
+	"Dec",
+];
+
 function BarChart({data, handleClick}) {
-	const chartRef = useRef(null);
-	const [selectedYear, setSelectedYear] = useState("2016");
-	const [selectedMonth, setSelectedMonth] = useState(null); //0-11
-	const allMonths = [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"May",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Oct",
-		"Nov",
-		"Dec",
-	];
-	const [months, setMonths] = useState(allMonths);
-
+	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
+	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 	useEffect(() => {
-		const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
-		// De los datos totales, corto el array para tener los días de un año. Ahora mismo, solo corto por el final.
-		// const daysYearData = data.slice(groupByYear(selectedYear, data), data.length);
-
-		//
-		const groupFilterMonthYear = groupByFilter(selectedMonth, selectedYear, data);
-		const groupFilterYear = groupByYear(selectedYear, data);
-		let daysYearData;
-		let customOptions;
-
-		if (groupFilterMonthYear === -1) {
-			daysYearData = data.slice(groupFilterYear, groupFilterYear + daysLength);
-			customOptions = groupByType(daysYearData);
-		} else {
-			daysYearData = data.slice(
-				groupFilterMonthYear,
-				groupFilterMonthYear + getDaysInMonth(selectedMonth, selectedYear)
-			);
-			customOptions = groupByTypeMonth(daysYearData);
+		if (chartRef !== null && curChart === undefined) {
+			setCurChart(echarts.init(chartRef.current));
 		}
+		// eslint-disable-next-line
+	}, [chartRef]);
 
-		//
+	const [selectedYear, setSelectedYear] = useState("2016");
+	const [selectedMonth, setSelectedMonth] = useState("all");
 
-		// array con cuatro objetos: uno por cada tipo de immueble
-		// const customOptions = groupByType(daysYearData);
-		options.series = _.merge(options.series, customOptions);
-		options.xAxis[0].data = months;
+	// Set graph options and data based on filters
+	useEffect(() => {
+		if (curChart !== undefined) {
+			const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
+			const groupFilterMonthYear = groupByFilter(selectedMonth, selectedYear, data);
+			const groupFilterYear = groupByYear(selectedYear, data);
+			let daysYearData;
+			let customOptions;
 
-		const chart = echarts.init(chartRef.current);
-		chart.setOption({...options});
+			if (groupFilterMonthYear === -1) {
+				daysYearData = data.slice(groupFilterYear, groupFilterYear + daysLength);
+				customOptions = groupByType(daysYearData);
+			} else {
+				daysYearData = data.slice(
+					groupFilterMonthYear,
+					groupFilterMonthYear + getDaysInMonth(selectedMonth, selectedYear)
+				);
+				customOptions = groupByTypeMonth(daysYearData);
+			}
 
-		window.onresize = function () {
-			chart.resize();
-		};
-	}, [months, selectedMonth, selectedYear, data]);
+			options.series = _.merge(options.series, customOptions);
+			options.xAxis[0].data =
+				selectedMonth === "all" ? allMonths : [allMonths[selectedMonth]];
+
+			curChart.setOption({...options});
+		}
+		// eslint-disable-next-line
+	}, [curChart, selectedMonth, selectedYear, data]);
+
+	const resizeChart = () => {
+		curChart.resize();
+	};
+
+	// Resize the chart when window resizes
+	useEffect(() => {
+		if (curChart !== undefined) {
+			window.addEventListener("resize", resizeChart);
+			return () => {
+				window.removeEventListener("resize", resizeChart);
+			};
+		}
+		// eslint-disable-next-line
+	}, [curChart]);
 
 	// handlers
 	const handleYearChange = (e) => {
@@ -195,12 +210,6 @@ function BarChart({data, handleClick}) {
 	};
 
 	const handleMonthChange = (e) => {
-		if (e.target.value === "all") {
-			setMonths(allMonths);
-		} else {
-			setMonths([allMonths[e.target.value]]);
-		}
-
 		setSelectedMonth(e.target.value);
 	};
 
@@ -209,7 +218,7 @@ function BarChart({data, handleClick}) {
 			<CardHeader>
 				<CardTitle> Ventas del año {selectedYear} </CardTitle>
 				<CardSelectorWrapper>
-					<CardSelector defaultValue={months} onChange={handleMonthChange}>
+					<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
 						<option value="all">All</option>
 						<option value="0">January</option>
 						<option value="1">February</option>
