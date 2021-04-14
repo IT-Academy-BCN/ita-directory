@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
 import {FiExternalLink} from "react-icons/fi";
+import {GrClose} from "react-icons/gr";
 //import {RiArrowDownSFill} from "react-icons/ri";
 
 // import styles
@@ -15,23 +16,7 @@ import {
 	CardSelectWrapper,
 } from "./LinealGraphic.styles";
 
-const options = {
-	title: {
-		text: "",
-	},
-	tooltip: {},
-	xAxis: {
-		data: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-	},
-	yAxis: {},
-	series: [
-		{
-			name: "sales",
-			type: "line",
-			data: [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550],
-		},
-	],
-};
+import {options} from "./options";
 
 /*
 		1. ARRAY DE DATOS DE DÍAS CON VALORES ENTRE 2012 y 2016.
@@ -46,7 +31,7 @@ const options = {
 		2. AGRUPAR LOS DÍAS DEL AÑO EN MESES
  */
 
-function LinealGraphic({data}) {
+function LinealGraphic({data, active, hideModal}) {
 	const lineChartRef = useRef(null);
 	const [curChart, setCurChart] = useState(undefined);
 
@@ -195,8 +180,8 @@ function LinealGraphic({data}) {
 						<option value="2015">2015</option>
 						<option value="2016">2016</option>
 					</CardHeaderSelect>
-					<CardOpenModal>
-						<FiExternalLink />
+					<CardOpenModal onClick={() => hideModal()}>
+						{active ? <GrClose /> : <FiExternalLink />}
 					</CardOpenModal>
 				</CardSelectWrapper>
 			</CardHeader>
