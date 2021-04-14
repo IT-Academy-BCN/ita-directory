@@ -53,6 +53,10 @@ export const CardHeaderSelect = styled.select`
 	justify-content: center;
 	align-items: center;
 	margin-right: 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding-left: 0.5rem;
 `;
 
 export const CardBody = styled.div`

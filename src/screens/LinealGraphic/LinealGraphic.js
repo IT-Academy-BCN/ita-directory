@@ -3,9 +3,8 @@ import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
 import {FiX} from "react-icons/fi";
 import {VscLinkExternal} from "react-icons/vsc";
-// import {GrClose} from "react-icons/gr";
 import {IconContext} from "react-icons";
-//import {RiArrowDownSFill} from "react-icons/ri";
+import {RiArrowDownSFill} from "react-icons/ri";
 
 // import styles
 import {
@@ -156,7 +155,6 @@ function LinealGraphic({data, active, hideModal}) {
 					<CardHeaderSelect
 						defaultValue={detail}
 						onChange={(e) => setDetail(e.target.value)}
-						//components={<RiArrowDownSFill style={{color: "black"}} />}
 					>
 						<option value="all">All</option>
 						<option value="0">January</option>
@@ -172,6 +170,7 @@ function LinealGraphic({data, active, hideModal}) {
 						<option value="10">Novembre</option>
 						<option value="11">Decembre</option>
 					</CardHeaderSelect>
+					<RiArrowDownSFill size={30} style={{color: "#e12d2d", position: " absolute"}} />
 					<CardHeaderSelect
 						defaultValue={selectedYear}
 						onChange={(e) => setSelectedYear(e.target.value)}
@@ -182,6 +181,7 @@ function LinealGraphic({data, active, hideModal}) {
 						<option value="2015">2015</option>
 						<option value="2016">2016</option>
 					</CardHeaderSelect>
+					<RiArrowDownSFill size={30} style={{color: "black"}} />
 					<CardOpenModal onClick={() => hideModal()}>
 						<IconContext.Provider
 							value={{
