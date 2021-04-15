@@ -73,7 +73,7 @@ export const CardHeader = styled.div`
 	}
 `;
 
-export const CardSelectWrapper = styled.div`
+export const CardContainer = styled.div`
 	display: flex;
 	justify-content: start;
 	align-items: center;

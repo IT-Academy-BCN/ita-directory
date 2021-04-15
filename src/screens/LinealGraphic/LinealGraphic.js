@@ -5,10 +5,9 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
-import {CardChart, CardHeader, CardBody, CardSelectWrapper} from "./LinealGraphic.styles";
+import {CardChart, CardHeader, CardBody, CardContainer} from "./LinealGraphic.styles";
 
 import {options} from "./options";
-import Colors from "theme/Colors";
 
 const monthsLabel = [
 	"Ene",
@@ -146,7 +145,7 @@ function LinealGraphic({data, active, hideModal}) {
 		<CardChart>
 			<CardHeader>
 				<h3>Ventas mensuales {selectedYear}</h3>
-				<CardSelectWrapper>
+				<CardContainer>
 					<select defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
 						<option value="all">All</option>
 						<option value="0">January</option>
@@ -175,10 +174,10 @@ function LinealGraphic({data, active, hideModal}) {
 					<button className="open-modal" onClick={() => hideModal()}>
 						<FontAwesomeIcon
 							icon={active ? faTimes : faExternalLinkAlt}
-							style={{color: Colors.redColor}}
+							style={{color: "#e22e2e"}}
 						/>
 					</button>
-				</CardSelectWrapper>
+				</CardContainer>
 			</CardHeader>
 			<CardBody ref={lineChartRef}></CardBody>
 		</CardChart>
