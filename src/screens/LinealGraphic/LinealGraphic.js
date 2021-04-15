@@ -33,18 +33,15 @@ Object.entries(monthNames).map((month) => monthsLabel.push(month[1].shortName));
 // option with months for select input
 let optionsSelectMonth = [];
 const monthKeys = Object.keys(monthNames);
-console.log(monthKeys);
 
 for (let i = 0; i < monthKeys.length; i++) {
 	const el = monthNames[monthKeys[i]];
-	console.log("el", el);
 	optionsSelectMonth.push(
 		<option value={i} key={el.shortName}>
 			{el.name}
 		</option>
 	);
 }
-console.log("optionsSelectMonth", optionsSelectMonth);
 
 // options with years for select input
 const startYear = 2012;
