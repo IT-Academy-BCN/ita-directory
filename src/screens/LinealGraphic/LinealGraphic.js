@@ -1,36 +1,45 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
-import {FiX} from "react-icons/fi";
-import {VscLinkExternal} from "react-icons/vsc";
-import {IconContext} from "react-icons";
-import {RiArrowDownSFill} from "react-icons/ri";
+import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
-import {
-	CardChart,
-	CardHeader,
-	CardHeaderTitle,
-	CardHeaderSelect,
-	CardBody,
-	CardOpenModal,
-	CardSelectWrapper,
-} from "./LinealGraphic.styles";
+import {CardChart, CardHeader, CardBody, CardSelectWrapper} from "./LinealGraphic.styles";
 
 import {options} from "./options";
+import Colors from "theme/Colors";
 
-/*
-		1. ARRAY DE DATOS DE DÍAS CON VALORES ENTRE 2012 y 2016.
-		2. POR DEFECTO TENGO SELECCIONADO EL AÑO 2016.
+const monthsLabel = [
+	"Ene",
+	"Feb",
+	"Mar",
+	"Apr",
+	"May",
+	"Jun",
+	"Jul",
+	"Ago",
+	"Sep",
+	"Oct",
+	"Nov",
+	"Dic",
+];
 
-		Y QUIERO
-				RESPRESENTAR POR MESES DEL CORRESPONDIENTE AÑO
-
-		POR LO TANTO
-		1. LO PRIMERO PARA AGRUPAR ESOS DATOS POR AÑO
-				ES TENER LOS CORRESPONDIENTES AL AÑO POR DEFECTO.
-		2. AGRUPAR LOS DÍAS DEL AÑO EN MESES
- */
+//eslint-disable-next-line
+const monthNames = {
+	0: {name: "January", shortName: "Jan"},
+	1: {name: "January", shortName: "Jan"},
+	2: {name: "January", shortName: "Jan"},
+	3: {name: "January", shortName: "Jan"},
+	4: {name: "January", shortName: "Jan"},
+	5: {name: "January", shortName: "Jan"},
+	6: {name: "January", shortName: "Jan"},
+	7: {name: "January", shortName: "Jan"},
+	8: {name: "January", shortName: "Jan"},
+	9: {name: "January", shortName: "Jan"},
+	10: {name: "January", shortName: "Jan"},
+	11: {name: "January", shortName: "Jan"},
+};
 
 function LinealGraphic({data, active, hideModal}) {
 	const lineChartRef = useRef(null);
@@ -44,20 +53,6 @@ function LinealGraphic({data, active, hideModal}) {
 
 	const [selectedYear, setSelectedYear] = useState("2016");
 	const [detail, setDetail] = useState("all");
-	const monthsLabel = [
-		"Ene",
-		"Feb",
-		"Mar",
-		"Apr",
-		"May",
-		"Jun",
-		"Jul",
-		"Ago",
-		"Sep",
-		"Oct",
-		"Nov",
-		"Dic",
-	];
 
 	useEffect(() => {
 		if (curChart !== undefined) {
@@ -130,7 +125,7 @@ function LinealGraphic({data, active, hideModal}) {
 			lineChart.setOption({...options});
 		}
 		// eslint-disable-next-line
-	}, [data, selectedYear, detail]);
+	}, [curChart, data, selectedYear, detail]);
 
 	const resizeChart = () => {
 		curChart.resize();
@@ -150,12 +145,9 @@ function LinealGraphic({data, active, hideModal}) {
 	return (
 		<CardChart>
 			<CardHeader>
-				<CardHeaderTitle>Ventas mensuales {selectedYear}</CardHeaderTitle>
+				<h3>Ventas mensuales {selectedYear}</h3>
 				<CardSelectWrapper>
-					<CardHeaderSelect
-						defaultValue={detail}
-						onChange={(e) => setDetail(e.target.value)}
-					>
+					<select defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
 						<option value="all">All</option>
 						<option value="0">January</option>
 						<option value="1">February</option>
@@ -169,9 +161,8 @@ function LinealGraphic({data, active, hideModal}) {
 						<option value="9">Octobre</option>
 						<option value="10">Novembre</option>
 						<option value="11">Decembre</option>
-					</CardHeaderSelect>
-					<RiArrowDownSFill size={30} style={{color: "#e12d2d", position: " absolute"}} />
-					<CardHeaderSelect
+					</select>
+					<select
 						defaultValue={selectedYear}
 						onChange={(e) => setSelectedYear(e.target.value)}
 					>
@@ -180,21 +171,13 @@ function LinealGraphic({data, active, hideModal}) {
 						<option value="2014">2014</option>
 						<option value="2015">2015</option>
 						<option value="2016">2016</option>
-					</CardHeaderSelect>
-					<RiArrowDownSFill size={30} style={{color: "black"}} />
-					<CardOpenModal onClick={() => hideModal()}>
-						<IconContext.Provider
-							value={{
-								style: {
-									color: "#e12d2d",
-									display: "flex",
-									alignItems: "center",
-								},
-							}}
-						>
-							{active ? <FiX size={30} /> : <VscLinkExternal />}
-						</IconContext.Provider>
-					</CardOpenModal>
+					</select>
+					<button className="open-modal" onClick={() => hideModal()}>
+						<FontAwesomeIcon
+							icon={active ? faTimes : faExternalLinkAlt}
+							style={{color: Colors.redColor}}
+						/>
+					</button>
 				</CardSelectWrapper>
 			</CardHeader>
 			<CardBody ref={lineChartRef}></CardBody>
