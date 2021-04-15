@@ -10,36 +10,55 @@ import {Container} from "theme/GlobalStyles";
 
 import {options} from "./options";
 
-const monthsLabel = [
-	"Ene",
-	"Feb",
-	"Mar",
-	"Apr",
-	"May",
-	"Jun",
-	"Jul",
-	"Ago",
-	"Sep",
-	"Oct",
-	"Nov",
-	"Dic",
-];
-
 //eslint-disable-next-line
 const monthNames = {
 	0: {name: "January", shortName: "Jan"},
-	1: {name: "January", shortName: "Jan"},
-	2: {name: "January", shortName: "Jan"},
-	3: {name: "January", shortName: "Jan"},
-	4: {name: "January", shortName: "Jan"},
-	5: {name: "January", shortName: "Jan"},
-	6: {name: "January", shortName: "Jan"},
-	7: {name: "January", shortName: "Jan"},
-	8: {name: "January", shortName: "Jan"},
-	9: {name: "January", shortName: "Jan"},
-	10: {name: "January", shortName: "Jan"},
-	11: {name: "January", shortName: "Jan"},
+	1: {name: "February", shortName: "Feb"},
+	2: {name: "March", shortName: "Mar"},
+	3: {name: "April", shortName: "Apr"},
+	4: {name: "May", shortName: "May"},
+	5: {name: "Juny", shortName: "Jun"},
+	6: {name: "July", shortName: "Jul"},
+	7: {name: "August", shortName: "Aug"},
+	8: {name: "September", shortName: "Sep"},
+	9: {name: "October", shortName: "Oct"},
+	10: {name: "November", shortName: "Nov"},
+	11: {name: "December", shortName: "Dec"},
 };
+
+// month label for x axis
+const monthsLabel = [];
+Object.entries(monthNames).map((month) => monthsLabel.push(month[1].shortName));
+
+// option with months for select input
+let optionsSelectMonth = [];
+const monthKeys = Object.keys(monthNames);
+console.log(monthKeys);
+
+for (let i = 0; i < monthKeys.length; i++) {
+	const el = monthNames[monthKeys[i]];
+	console.log("el", el);
+	optionsSelectMonth.push(
+		<option value={i} key={el.shortName}>
+			{el.name}
+		</option>
+	);
+}
+console.log("optionsSelectMonth", optionsSelectMonth);
+
+// options with years for select input
+const startYear = 2012;
+const endYear = 2016;
+const yearDifference = endYear - startYear;
+const optionsSelectYear = [];
+for (let i = 0; i < yearDifference + 1; i++) {
+	const curYear = startYear + i;
+	optionsSelectYear.push(
+		<option value={curYear} key={curYear}>
+			{curYear}
+		</option>
+	);
+}
 
 function LinealGraphic({data, active, hideModal}) {
 	const lineChartRef = useRef(null);
@@ -150,28 +169,13 @@ function LinealGraphic({data, active, hideModal}) {
 					<CardContainer>
 						<select defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
 							<option value="all">All</option>
-							<option value="0">January</option>
-							<option value="1">February</option>
-							<option value="2">March</option>
-							<option value="3">April</option>
-							<option value="4">May</option>
-							<option value="5">Juny</option>
-							<option value="6">July</option>
-							<option value="7">Agost</option>
-							<option value="8">Septembre</option>
-							<option value="9">Octobre</option>
-							<option value="10">Novembre</option>
-							<option value="11">Decembre</option>
+							{optionsSelectMonth}
 						</select>
 						<select
 							defaultValue={selectedYear}
 							onChange={(e) => setSelectedYear(e.target.value)}
 						>
-							<option value="2012">2012</option>
-							<option value="2013">2013</option>
-							<option value="2014">2014</option>
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
+							{optionsSelectYear}
 						</select>
 						<button className="open-modal" onClick={() => hideModal()}>
 							<FontAwesomeIcon
