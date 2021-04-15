@@ -9,6 +9,7 @@ export const CardChart = styled.div`
 	opacity: 1;
 	font: normal normal normal 15px/20px Helvetica Neue;
 	justify-content: center;
+	background: ${Colors.white};
 `;
 
 export const CardHeader = styled.div`
