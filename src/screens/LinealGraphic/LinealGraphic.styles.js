@@ -80,6 +80,6 @@ export const CardContainer = styled.div`
 `;
 
 export const CardBody = styled.div`
-	width: 55vw;
+	width: 100%;
 	height: 40vh;
 `;

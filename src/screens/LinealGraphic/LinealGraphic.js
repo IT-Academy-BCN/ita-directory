@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
 import {CardChart, CardHeader, CardBody, CardContainer} from "./LinealGraphic.styles";
+import {Container} from "theme/GlobalStyles";
 
 import {options} from "./options";
 
@@ -142,45 +143,47 @@ function LinealGraphic({data, active, hideModal}) {
 	}, [curChart]);
 
 	return (
-		<CardChart>
-			<CardHeader>
-				<h3>Ventas mensuales {selectedYear}</h3>
-				<CardContainer>
-					<select defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
-						<option value="all">All</option>
-						<option value="0">January</option>
-						<option value="1">February</option>
-						<option value="2">March</option>
-						<option value="3">April</option>
-						<option value="4">May</option>
-						<option value="5">Juny</option>
-						<option value="6">July</option>
-						<option value="7">Agost</option>
-						<option value="8">Septembre</option>
-						<option value="9">Octobre</option>
-						<option value="10">Novembre</option>
-						<option value="11">Decembre</option>
-					</select>
-					<select
-						defaultValue={selectedYear}
-						onChange={(e) => setSelectedYear(e.target.value)}
-					>
-						<option value="2012">2012</option>
-						<option value="2013">2013</option>
-						<option value="2014">2014</option>
-						<option value="2015">2015</option>
-						<option value="2016">2016</option>
-					</select>
-					<button className="open-modal" onClick={() => hideModal()}>
-						<FontAwesomeIcon
-							icon={active ? faTimes : faExternalLinkAlt}
-							style={{color: "#e22e2e"}}
-						/>
-					</button>
-				</CardContainer>
-			</CardHeader>
-			<CardBody ref={lineChartRef}></CardBody>
-		</CardChart>
+		<Container>
+			<CardChart style={{marginTop: 20, marginBottom: 40, width: "100%"}}>
+				<CardHeader>
+					<h3>Ventas mensuales {selectedYear}</h3>
+					<CardContainer>
+						<select defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
+							<option value="all">All</option>
+							<option value="0">January</option>
+							<option value="1">February</option>
+							<option value="2">March</option>
+							<option value="3">April</option>
+							<option value="4">May</option>
+							<option value="5">Juny</option>
+							<option value="6">July</option>
+							<option value="7">Agost</option>
+							<option value="8">Septembre</option>
+							<option value="9">Octobre</option>
+							<option value="10">Novembre</option>
+							<option value="11">Decembre</option>
+						</select>
+						<select
+							defaultValue={selectedYear}
+							onChange={(e) => setSelectedYear(e.target.value)}
+						>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+						</select>
+						<button className="open-modal" onClick={() => hideModal()}>
+							<FontAwesomeIcon
+								icon={active ? faTimes : faExternalLinkAlt}
+								style={{color: "#e22e2e"}}
+							/>
+						</button>
+					</CardContainer>
+				</CardHeader>
+				<CardBody ref={lineChartRef}></CardBody>
+			</CardChart>
+		</Container>
 	);
 }
 
