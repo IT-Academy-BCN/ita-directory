@@ -16,8 +16,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 
-function BarChart({data, hideModal, active}) {
-	console.log(data);
+function BarChart({data, hideModal, active, size}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 	useEffect(() => {
@@ -101,7 +100,7 @@ function BarChart({data, hideModal, active}) {
 			};
 		}
 		// eslint-disable-next-line
-	}, [curChart]);
+	}, [curChart, size]);
 
 	// handlers
 	const handleYearChange = (e) => {
@@ -130,7 +129,14 @@ function BarChart({data, hideModal, active}) {
 						</CardOpenModal>
 					</CardSelectorWrapper>
 				</CardHeader>
-				<Chart ref={chartRef}></Chart>
+				{active ? (
+					<Chart
+						style={{width: `${size[0]}px`, height: `${size[1]}px`}}
+						ref={chartRef}
+					></Chart>
+				) : (
+					<Chart ref={chartRef}></Chart>
+				)}
 			</Card>
 		</>
 	);

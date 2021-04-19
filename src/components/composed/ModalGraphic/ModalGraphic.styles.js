@@ -14,6 +14,7 @@ export const ModalBlock = styled.div`
 	display: flex;
 	opacity: 1;
 	z-index: 1000;
+	height: 100%;
 `;
 
 export const ModalOverlay = styled.a`
@@ -34,4 +35,5 @@ export const ModalBody = styled.div`
 	position: relative;
 	font-family: Arial;
 	font-size: 1rem;
+	height: 100%;
 `;
