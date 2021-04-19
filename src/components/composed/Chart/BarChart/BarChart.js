@@ -16,7 +16,8 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 
-function BarChart({data, active, hideModal}) {
+function BarChart({data, hideModal, active}) {
+	console.log(data);
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 	useEffect(() => {
@@ -112,24 +113,26 @@ function BarChart({data, active, hideModal}) {
 	};
 
 	return (
-		<Card>
-			<CardHeader>
-				<CardTitle> Ventas del año {selectedYear} </CardTitle>
-				<CardSelectorWrapper>
-					<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
-						<option value="all">All</option>
-						{optionsSelectMonth}
-					</CardSelector>
-					<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
-						{optionsSelectYear}
-					</CardSelector>
-					<CardOpenModal onClick={hideModal}>
-						<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
-					</CardOpenModal>
-				</CardSelectorWrapper>
-			</CardHeader>
-			<Chart ref={chartRef}></Chart>
-		</Card>
+		<>
+			<Card>
+				<CardHeader>
+					<CardTitle> Ventas del año {selectedYear} </CardTitle>
+					<CardSelectorWrapper>
+						<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
+							<option value="all">All</option>
+							{optionsSelectMonth}
+						</CardSelector>
+						<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
+							{optionsSelectYear}
+						</CardSelector>
+						<CardOpenModal onClick={hideModal}>
+							<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+						</CardOpenModal>
+					</CardSelectorWrapper>
+				</CardHeader>
+				<Chart ref={chartRef}></Chart>
+			</Card>
+		</>
 	);
 }
 
