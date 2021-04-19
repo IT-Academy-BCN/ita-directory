@@ -4,6 +4,9 @@ import LinealGraphic from "./LinealGraphic";
 import {generateData, daysBetween} from "utils/generateData";
 import Modal from "components/composed/Modal/Modal";
 
+// import styles
+// import {CardBody} from "./Sales.styles";
+
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
 const data = generateData(new Date(initialDate), days, [30, 80]);
