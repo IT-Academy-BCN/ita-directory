@@ -1,18 +1,20 @@
 const returnNumFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
+const dayInMiliseconds = 24 * 60 * 60 * 1000; // Día en milisegundos porque el objetdo Date de JS funciona en milisegundos.
+
+// Entre primer y último día, saber cuantos días tengo
 export const daysBetween = (firstDay, lastDay) => {
 	const fD = new Date(firstDay);
 	const lD = new Date(lastDay);
 	const miliSecondsDifference = Math.abs(fD - lD);
-	return Math.ceil(miliSecondsDifference / (24 * 60 * 60 * 1000)) + 1;
+	return Math.ceil(miliSecondsDifference / dayInMiliseconds) + 1;
 };
 
-export const generateData = (startDay, days, valueRange) => {
+export const generateData = (startDate, endDate, valueRange) => {
 	const data = [];
-
+	const days = daysBetween(startDate, endDate);
 	for (let i = 0; i < days; i++) {
-		// 24 * 60 * 60 * 1000 -> día en milisegundos
-		let day = new Date(startDay.getTime() + 24 * 60 * 60 * 1000 * i);
+		let day = new Date(new Date(startDate).getTime() + dayInMiliseconds * i);
 		let option = {
 			day: day,
 			pisos: returnNumFromRange(valueRange[0], valueRange[1]),
@@ -25,7 +27,7 @@ export const generateData = (startDay, days, valueRange) => {
 	return data;
 };
 
-export const groupByType = (yearlyData) => {
+export const groupByTypeYear = (yearlyData) => {
 	const months = {
 		0: {pisos: 0, locales: 0, garages: 0, chalets: 0},
 		1: {pisos: 0, locales: 0, garages: 0, chalets: 0},
@@ -84,20 +86,4 @@ export const groupByTypeMonth = (monthData) => {
 		{data: [totalgarages]},
 		{data: [totalchalets]},
 	];
-};
-
-export const groupByYear = (selectedYear, data) => {
-	return data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear));
-};
-
-export const getDaysInMonth = (month, year) => {
-	return new Date(year, parseInt(month) + 1, 0).getDate();
-};
-
-export const groupByFilter = (selectedMonth, selectedYear, data) => {
-	return data
-		.map((e) => {
-			return `${e.day.getMonth()}, ${e.day.getDate()}, ${e.day.getFullYear()}`;
-		})
-		.indexOf(`${selectedMonth}, 1, ${selectedYear}`);
 };
