@@ -12,11 +12,12 @@ export const ModalBlock = styled.div`
 	top: 0;
 	overflow: hidden;
 	position: fixed;
+	// z-index: 1000;
 `;
 
 export const ModalOverlay = styled.a`
 	background: #0000004d 0% 0%;
-	/* opacity: 1; */
+	opacity: 1;
 	right: 0;
 	top: 0;
 	bottom: 0;
@@ -42,7 +43,6 @@ export const ModalContainer = styled.div`
 	padding: 0 1.5rem;
 	animation: ${keyframes`${fadeIn}`} 0.25s;
 	z-index: 1;
-	background-color: white;
 `;
 
 export const ModalBody = styled.div`
