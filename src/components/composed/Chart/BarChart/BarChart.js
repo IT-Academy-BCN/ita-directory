@@ -1,14 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
-import {
-	daysBetween,
-	getDaysInMonth,
-	groupByFilter,
-	groupByType,
-	groupByTypeMonth,
-	groupByYear,
-} from "utils/generateData";
+import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
 import {
 	Card,
 	CardHeader,
@@ -18,9 +11,10 @@ import {
 	CardSelectorWrapper,
 	CardOpenModal,
 } from "./BarChart.styles";
-import {options, allMonths} from "./defaultOptions";
+import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 
 function BarChart({data, handleClick}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
@@ -35,29 +29,44 @@ function BarChart({data, handleClick}) {
 	const [selectedYear, setSelectedYear] = useState("2016");
 	const [selectedMonth, setSelectedMonth] = useState("all");
 
+	// console.log(data[0].day.getFullYear(), data[data.length - 1].day.getFullYear())
+
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
-			const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
-			const groupFilterMonthYear = groupByFilter(selectedMonth, selectedYear, data);
-			const groupFilterYear = groupByYear(selectedYear, data);
-			let daysYearData;
 			let customOptions;
 
-			if (groupFilterMonthYear === -1) {
-				daysYearData = data.slice(groupFilterYear, groupFilterYear + daysLength);
-				customOptions = groupByType(daysYearData);
+			const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear));
+			const yearToFilterLength = daysBetween(
+				`${selectedYear}-01-01`,
+				`${selectedYear}-12-31`
+			);
+			const yearToFilterData = data.slice(
+				parseInt(startingCut),
+				parseInt(startingCut) + parseInt(yearToFilterLength)
+			);
+
+			let monthToFilterLength = getMonthLength(selectedYear, selectedMonth);
+			const corteInicialMes = startingCutPerMonth(
+				parseInt(selectedYear),
+				parseInt(selectedMonth)
+			);
+			const monthToFilterData = yearToFilterData.slice(
+				parseInt(corteInicialMes),
+				parseInt(corteInicialMes) + parseInt(monthToFilterLength)
+			);
+
+			if (selectedMonth === "all") {
+				customOptions = groupByTypeYear(yearToFilterData);
 			} else {
-				daysYearData = data.slice(
-					groupFilterMonthYear,
-					groupFilterMonthYear + getDaysInMonth(selectedMonth, selectedYear)
-				);
-				customOptions = groupByTypeMonth(daysYearData);
+				customOptions = groupByTypeMonth(monthToFilterData);
 			}
 
 			options.series = _.merge(options.series, customOptions);
 			options.xAxis[0].data =
-				selectedMonth === "all" ? allMonths : [allMonths[selectedMonth]];
+				selectedMonth === "all"
+					? returnMonthsData(allMonths, "shortName")
+					: [returnMonthsData(allMonths, "shortName")[selectedMonth]];
 
 			curChart.setOption({...options});
 		}
@@ -95,18 +104,7 @@ function BarChart({data, handleClick}) {
 				<CardSelectorWrapper>
 					<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
 						<option value="all">All</option>
-						<option value="0">January</option>
-						<option value="1">February</option>
-						<option value="2">March</option>
-						<option value="3">April </option>
-						<option value="4">May</option>
-						<option value="5">June</option>
-						<option value="6">July</option>
-						<option value="7">August</option>
-						<option value="8">September</option>
-						<option value="9">Octubre</option>
-						<option value="10">November</option>
-						<option value="11">December</option>
+						{optionsSelectMonth}
 					</CardSelector>
 					<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
 						<option value="2012">2012</option>
@@ -114,6 +112,7 @@ function BarChart({data, handleClick}) {
 						<option value="2014">2014</option>
 						<option value="2015">2015</option>
 						<option value="2016">2016</option>
+						{/* {optionsSelectYear} */}
 					</CardSelector>
 					<CardOpenModal onClick={handleClick}>
 						<FontAwesomeIcon icon={faExternalLinkAlt} />
