@@ -14,7 +14,7 @@ export const LineChart = ({data}) => {
 			<Modal
 				active={active}
 				hideModal={hideModal}
-				children={<LineChart data={data} active={active} hideModal={() => hideModal()} />}
+				children={<Graphic data={data} active={active} hideModal={() => hideModal()} />}
 			/>
 		</>
 	);
