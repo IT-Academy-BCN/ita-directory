@@ -13,6 +13,7 @@ import AdList from "screens/AdList/AdList/AdList";
 import UserAds from "screens/UserAds/UserAds";
 import EditAd from "screens/EditAd/EditAd";
 import Sales from "screens/Sales/Sales";
+import Dashboard from "screens/Dashboard/Dashboard";
 
 import MapView from "components/composed/Map/MapView";
 
@@ -32,6 +33,7 @@ const App = () => {
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/map" component={MapView} />
 				<Route exact path="/sales" component={Sales} />
+				<Route exact path="/dashboard" component={Dashboard} />
 			</Switch>
 		</>
 	);
