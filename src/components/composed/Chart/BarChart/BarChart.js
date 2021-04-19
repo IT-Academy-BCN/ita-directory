@@ -12,11 +12,11 @@ import {
 	CardOpenModal,
 } from "./BarChart.styles";
 import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
-import {faExternalLinkAlt} from "@fortawesome/free-solid-svg-icons";
+import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 
-function BarChart({data, handleClick}) {
+function BarChart({data, active, hideModal}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 	useEffect(() => {
@@ -114,8 +114,8 @@ function BarChart({data, handleClick}) {
 						<option value="2016">2016</option>
 						{/* {optionsSelectYear} */}
 					</CardSelector>
-					<CardOpenModal onClick={handleClick}>
-						<FontAwesomeIcon icon={faExternalLinkAlt} />
+					<CardOpenModal onClick={hideModal}>
+						<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
 					</CardOpenModal>
 				</CardSelectorWrapper>
 			</CardHeader>
