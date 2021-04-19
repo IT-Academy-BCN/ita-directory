@@ -17,7 +17,7 @@ export const generateData = (startDay, days, rangeValues) => {
 			chalets: randomValue(min, max),
 		};
 		option["total"] = option.pisos + option.garajes + option.locales + option.chalets;
-    data.push(option);
+		data.push(option);
 	}
 	return data;
 };
@@ -43,9 +43,9 @@ export const groupByMonth = (yearlyData) => {
 		9: 0,
 		10: 0,
 		11: 0,
- };
-  
-for (let i = 0; i < yearlyData.length; i++) {
+	};
+
+	for (let i = 0; i < yearlyData.length; i++) {
 		const el = yearlyData[i];
 		const curMonth = el.day.getMonth();
 		months[curMonth] = months[curMonth] += el.total;
@@ -68,18 +68,8 @@ export const getByDays = (monthlyData) => {
 	}
 	return days;
 };
-    
+
 const returnNumFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
-const dayInMiliseconds = 24 * 60 * 60 * 1000; // Día en milisegundos porque el objetdo Date de JS funciona en milisegundos.
-
-// Entre primer y último día, saber cuantos días tengo
-export const daysBetween = (firstDay, lastDay) => {
-	const fD = new Date(firstDay);
-	const lD = new Date(lastDay);
-	const miliSecondsDifference = Math.abs(fD - lD);
-	return Math.ceil(miliSecondsDifference / dayInMiliseconds) + 1;
-};
 
 export const generateDataBar = (startDate, endDate, valueRange) => {
 	const data = [];
@@ -97,7 +87,7 @@ export const generateDataBar = (startDate, endDate, valueRange) => {
 	}
 	return data;
 };
-  
+
 export const groupByTypeYear = (yearlyData) => {
 	const months = {
 		0: {pisos: 0, locales: 0, garages: 0, chalets: 0},
@@ -117,8 +107,8 @@ export const groupByTypeYear = (yearlyData) => {
 	for (let i = 0; i < yearlyData.length; i++) {
 		const el = yearlyData[i];
 		const curMonth = el.day.getMonth();
-    
-    months[curMonth].pisos = months[curMonth].pisos += el.pisos;
+
+		months[curMonth].pisos = months[curMonth].pisos += el.pisos;
 		months[curMonth].locales = months[curMonth].locales += el.locales;
 		months[curMonth].garages = months[curMonth].garages += el.garages;
 		months[curMonth].chalets = months[curMonth].chalets += el.chalets;
