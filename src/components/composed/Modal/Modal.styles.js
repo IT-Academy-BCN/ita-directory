@@ -53,7 +53,6 @@ export const ModalBody = styled.div`
 	font-size: 1rem;
 	display: flex;
 	width: 100%;
-	height: 100vh;
 `;
 
 export const ModalTitle = styled.span`
