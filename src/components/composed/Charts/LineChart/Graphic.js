@@ -5,7 +5,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
-import {CardChart, CardHeader, CardBody, CardContainer} from "./LinealGraphic.styles";
+import {CardChart, CardHeader, CardBody, CardContainer} from "./LineChart.styles";
 import {Container} from "theme/GlobalStyles";
 
 import {options} from "./options";
@@ -57,7 +57,7 @@ for (let i = 0; i < yearDifference + 1; i++) {
 	);
 }
 
-function LinealGraphic({data, active, hideModal}) {
+function LineChart({data, active, hideModal}) {
 	const lineChartRef = useRef(null);
 	const [curChart, setCurChart] = useState(undefined);
 
@@ -188,4 +188,4 @@ function LinealGraphic({data, active, hideModal}) {
 	);
 }
 
-export default LinealGraphic;
+export default LineChart;
