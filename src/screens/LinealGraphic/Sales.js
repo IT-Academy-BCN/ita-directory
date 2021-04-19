@@ -13,7 +13,7 @@ function Sales() {
 	const hideModal = () => setActive(!active);
 
 	return (
-		<Body title="Ventas mensuales" isLoggedIn={true}>
+		<Body title="Ventas mensuales" isLoggedIn={true} style={{fontSize: "5rem"}}>
 			<LinealGraphic data={data} active={active} hideModal={hideModal} />
 			<Modal
 				active={active}

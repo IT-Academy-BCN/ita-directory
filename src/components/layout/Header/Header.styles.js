@@ -24,6 +24,7 @@ export const StyledHeader = styled.header`
 	& > h1 {
 		text-align: center;
 		font: normal normal normal 30px/36px Helvetica Neue;
+		font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2em);
 		letter-spacing: 0px;
 		color: #7d868b;
 		opacity: 1;
