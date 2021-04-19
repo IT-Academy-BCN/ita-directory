@@ -29,18 +29,32 @@ function BarChart({data, active, hideModal}) {
 	const [selectedYear, setSelectedYear] = useState("2016");
 	const [selectedMonth, setSelectedMonth] = useState("all");
 
-	// console.log(data[0].day.getFullYear(), data[data.length - 1].day.getFullYear())
+	const returnOptionsSelectYear = (startYear, lastYear) => {
+		const years = [];
+
+		let yearsDifference = lastYear - startYear + 1;
+
+		for (let i = 0; i < yearsDifference; i++) {
+			years.push(
+				<option key={parseInt(startYear) + i} value={parseInt(startYear) + i}>
+					{parseInt(startYear) + i}
+				</option>
+			);
+		}
+		return years;
+	};
+	const optionsSelectYear = returnOptionsSelectYear(
+		data[0].day.getFullYear(),
+		data[data.length - 1].day.getFullYear()
+	);
 
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
 			let customOptions;
 
+			let yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 			const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear));
-			const yearToFilterLength = daysBetween(
-				`${selectedYear}-01-01`,
-				`${selectedYear}-12-31`
-			);
 			const yearToFilterData = data.slice(
 				parseInt(startingCut),
 				parseInt(startingCut) + parseInt(yearToFilterLength)
@@ -107,12 +121,7 @@ function BarChart({data, active, hideModal}) {
 						{optionsSelectMonth}
 					</CardSelector>
 					<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
-						<option value="2012">2012</option>
-						<option value="2013">2013</option>
-						<option value="2014">2014</option>
-						<option value="2015">2015</option>
-						<option value="2016">2016</option>
-						{/* {optionsSelectYear} */}
+						{optionsSelectYear}
 					</CardSelector>
 					<CardOpenModal onClick={hideModal}>
 						<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
