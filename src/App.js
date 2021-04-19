@@ -14,7 +14,6 @@ import UserAds from "screens/UserAds/UserAds";
 import EditAd from "screens/EditAd/EditAd";
 import Sales from "screens/Sales/Sales1.js";
 
-
 import MapView from "components/composed/Map/MapView";
 
 const App = () => {
