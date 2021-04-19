@@ -1,81 +1,18 @@
-const dayInMiliseconds = 24 * 60 * 60 * 1000;
-// const initialDate = new Date(2020, 4, 8);
-// const values = [30, 80];
-const randomValue = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
-export const generateData = (startDay, days, rangeValues) => {
-	const data = [];
-	const [min, max] = rangeValues;
-
-	for (let i = 0; i < days; i++) {
-		let day = new Date(startDay.getTime() + dayInMiliseconds * i);
-		let option = {
-			day,
-			pisos: randomValue(min, max),
-			garajes: randomValue(min, max),
-			locales: randomValue(min, max),
-			chalets: randomValue(min, max),
-		};
-		option["total"] = option.pisos + option.garajes + option.locales + option.chalets;
-		data.push(option);
-	}
-	return data;
-};
+const returnNumFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 export const daysBetween = (firstDay, lastDay) => {
 	const fD = new Date(firstDay);
 	const lD = new Date(lastDay);
 	const miliSecondsDifference = Math.abs(fD - lD);
-	return Math.ceil(miliSecondsDifference / dayInMiliseconds) + 1;
+	return Math.ceil(miliSecondsDifference / (24 * 60 * 60 * 1000)) + 1;
 };
 
-export const groupByMonth = (yearlyData) => {
-	const months = {
-		0: 0,
-		1: 0,
-		2: 0,
-		3: 0,
-		4: 0,
-		5: 0,
-		6: 0,
-		7: 0,
-		8: 0,
-		9: 0,
-		10: 0,
-		11: 0,
-	};
-
-	for (let i = 0; i < yearlyData.length; i++) {
-		const el = yearlyData[i];
-		const curMonth = el.day.getMonth();
-		months[curMonth] = months[curMonth] += el.total;
-	}
-
-	let finalArr = [];
-	for (const month in months) {
-		finalArr.push(months[month]);
-	}
-
-	return finalArr;
-};
-
-export const getByDays = (monthlyData) => {
-	const days = [];
-
-	for (let i = 0; i < monthlyData.length; i++) {
-		const el = monthlyData[i];
-		days.push(el.total);
-	}
-	return days;
-};
-
-const returnNumFromRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
-export const generateDataBar = (startDate, endDate, valueRange) => {
+export const generateData = (startDay, days, valueRange) => {
 	const data = [];
-	const days = daysBetween(startDate, endDate);
+
 	for (let i = 0; i < days; i++) {
-		let day = new Date(new Date(startDate).getTime() + dayInMiliseconds * i);
+		// 24 * 60 * 60 * 1000 -> día en milisegundos
+		let day = new Date(startDay.getTime() + 24 * 60 * 60 * 1000 * i);
 		let option = {
 			day: day,
 			pisos: returnNumFromRange(valueRange[0], valueRange[1]),
@@ -88,7 +25,7 @@ export const generateDataBar = (startDate, endDate, valueRange) => {
 	return data;
 };
 
-export const groupByTypeYear = (yearlyData) => {
+export const groupByType = (yearlyData) => {
 	const months = {
 		0: {pisos: 0, locales: 0, garages: 0, chalets: 0},
 		1: {pisos: 0, locales: 0, garages: 0, chalets: 0},
@@ -147,4 +84,20 @@ export const groupByTypeMonth = (monthData) => {
 		{data: [totalgarages]},
 		{data: [totalchalets]},
 	];
+};
+
+export const groupByYear = (selectedYear, data) => {
+	return data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear));
+};
+
+export const getDaysInMonth = (month, year) => {
+	return new Date(year, parseInt(month) + 1, 0).getDate();
+};
+
+export const groupByFilter = (selectedMonth, selectedYear, data) => {
+	return data
+		.map((e) => {
+			return `${e.day.getMonth()}, ${e.day.getDate()}, ${e.day.getFullYear()}`;
+		})
+		.indexOf(`${selectedMonth}, 1, ${selectedYear}`);
 };
