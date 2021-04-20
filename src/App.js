@@ -15,6 +15,8 @@ import EditAd from "screens/EditAd/EditAd";
 import SalesLineChart from "screens/Sales/SalesLineChart";
 import Dashboard from "screens/Dashboard/Dashboard";
 //import Sales from "screens/Sales/Sales1.js";
+import SalesByType from "screens/Sales/SalesByType.js";
+import SalesByMonth from "screens/Sales/SalesByMonth.js";
 
 import MapView from "components/composed/Map/MapView";
 
@@ -35,6 +37,8 @@ const App = () => {
 				<Route exact path="/map" component={MapView} />
 				<Route exact path="/sales-line-chart" component={SalesLineChart} />
 				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/salesbytype" component={SalesByType} />
+				<Route exact path="/salesbymonth" component={SalesByMonth} />
 			</Switch>
 		</>
 	);
