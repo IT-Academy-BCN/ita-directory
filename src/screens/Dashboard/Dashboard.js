@@ -10,7 +10,7 @@ const data = generateData(new Date(initialDate), days, [30, 80]);
 function Dashboard() {
 	return (
 		<Body title="Ventas mensuales" isLoggedIn={true} style={{fontSize: "5rem"}}>
-			<BarChart />
+			<BarChart data={data} />
 			<LineChart data={data} />
 		</Body>
 	);
