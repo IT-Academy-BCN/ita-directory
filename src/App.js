@@ -13,6 +13,7 @@ import AdList from "screens/AdList/AdList/AdList";
 
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
+import AdminTable from "screens/Usuarios/AdminTable";
 
 const App = () => {
 	return (
@@ -28,6 +29,7 @@ const App = () => {
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/go-to-map" component={GoToMap} />
 				<Route exact path="/map" component={MapView} />
+				<Route exact path="/registro" component={AdminTable} />
 			</Switch>
 		</>
 	);
