@@ -6,7 +6,7 @@ const Component1 = () => {
 };
 
 const GoTo = () => {
-	const [showMap, setShowMap] = useState(true);
+	const [showMap, setShowMap] = useState(false);
 	return (
 		<div>
 			<button onClick={() => setShowMap(!showMap)}>

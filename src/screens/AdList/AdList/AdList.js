@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
-import {getAds} from "api/ads";
+import {adCardImage} from "assets/images";
 import {
 	StyledTitle,
-	// StyledWrapper,
+	StyledWrapper,
 	RowWrapper,
 	StyledTreeSearch,
 	StyledCard,
@@ -13,28 +13,22 @@ import {
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
-import FilterList from "components/composed/FilterList/FilterList.js";
-// import MapFilter from "components/composed/Map/MapaFiltro";
 import Colors from "theme/Colors";
-
 const AdList = () => {
-	const [ads, setAds] = useState([]);
-	const [filtersToApply, setFiltersToApply] = useState({});
-	const [FilterMap, setFilterMap] = useState(false);
-
-	useEffect(() => {
-		try {
-			getAds(filtersToApply).then((ads) => ads && setAds(ads));
-		} catch (e) {
-			console.log(e);
-		}
-	}, [filtersToApply]);
-
-	const handleSubmit = (submittedFilters) => {
-		console.log(submittedFilters);
-		setFiltersToApply(submittedFilters);
-	};
-
+	const [mapView, setMapView] = useState(false);
+	const adList = [
+		{
+			image: {src: {adCardImage}, alt: "Casa Piscina"},
+			title: "Piso en calle Ángel Puech, Valdeacederas, Madrid ",
+			price: "990 €/mes",
+			rooms: "3 habitaciones",
+			surface: "95m2",
+			includedExpenses: true,
+			description:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+		},
+	];
+	const [ad] = adList;
 	const buttonStyle = {
 		display: "flex",
 		alignItems: "center",
@@ -48,33 +42,17 @@ const AdList = () => {
 		outline: "none",
 		paddingRight: 0,
 	};
-
 	return (
-		<Body title="Pisos en Alquiler en Madrid" isLoggedIn={true}>
+		<Body title="Pisos en Alquiler en Madrid">
 			<Container row>
-				<FilterList onSubmit={handleSubmit} className="styleFilter" />
 				<StyledAdList>
 					<StyledTreeSearch>
 						<label>Madrid</label>
-						{">"}
 						<label>Alquiler</label>
 					</StyledTreeSearch>
 					<RowWrapper>
 						<StyledTitle>Listado de pisos</StyledTitle>
-						{FilterMap ? (
-							<Button
-								text="Vista de mapa"
-								icon={faMapMarkerAlt}
-								iconPosition="left"
-								iconStyles={{
-									marginRight: 5,
-									paddingLeft: 0,
-								}}
-								onClick={() => setFilterMap(!FilterMap)}
-								buttonStyles={buttonStyle}
-								type="normal"
-							/>
-						) : (
+						{mapView ? (
 							<Button
 								text="Vista de detalles"
 								icon={faBars}
@@ -83,26 +61,34 @@ const AdList = () => {
 									marginRight: 5,
 									paddingLeft: 0,
 								}}
-								onClick={() => setFilterMap(!FilterMap)}
+								onClick={() => setMapView(!mapView)}
 								buttonStyles={buttonStyle}
-								type="normal"
+							/>
+						) : (
+							<Button
+								text="Vista de mapa"
+								icon={faMapMarkerAlt}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
 							/>
 						)}
 					</RowWrapper>
-					{ads.map((ad, i) => (
-						<StyledCard key={i}>
-							<AdCard
-								id={ad.key}
-								image={{src: ad.url, alt: ad.imgDesc}}
-								title={ad.title}
-								description={ad.description}
-								price={ad.monthlyRent}
-								rooms={ad.numRooms}
-								includedExpenses={ad.expenses === "incluido"}
-								surface={ad.squareMeters}
-							/>
+					<StyledWrapper>
+						<StyledCard>
+							<AdCard {...ad} />
 						</StyledCard>
-					))}
+						<StyledCard>
+							<AdCard {...ad} />
+						</StyledCard>
+						<StyledCard>
+							<AdCard {...ad} />
+						</StyledCard>
+					</StyledWrapper>
 				</StyledAdList>
 			</Container>
 		</Body>

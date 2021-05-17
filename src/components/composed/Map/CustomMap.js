@@ -1,48 +1,61 @@
-import React, {useState} from "react";
-import {MapContainer, TileLayer, useMapEvents, Marker} from "react-leaflet";
-import PropTypes from "prop-types";
+import React, {Component} from "react";
+import {MapContainer, TileLayer, useMapEvents} from "react-leaflet";
+import L from "leaflet";
 import "./CustomMap.css";
 
 import "leaflet/dist/leaflet.css";
 
-const CustomMap = ({geometry, onClick}) => {
-	function LocationMarker() {
-		const [position, setPosition] = useState(geometry ? geometry : null);
-		// eslint-disable-next-line
-		const map = useMapEvents({
-			click(e) {
-				const clickedPosition = [e.latlng.lat, e.latlng.lng];
-				setPosition(clickedPosition);
-				if (onClick) {
-					onClick(clickedPosition);
-				}
-			},
-		});
+const icon = L.icon({
+	iconSize: [25, 41],
+	iconAnchor: [10, 41],
+	popupAnchor: [2, -40],
+	iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
+	shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
+});
 
-		return position === null ? null : <Marker position={position}></Marker>;
+function Marcador({saveMarkers}) {
+	const map = useMapEvents({
+		click: (e) => {
+			const {lat, lng} = e.latlng;
+			L.marker([lat, lng], {icon}).addTo(map);
+			saveMarkers([lat, lng]);
+		},
+	});
+	return null;
+}
+
+class CustomMap extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			markers: [[41.3879, 2.16992]],
+			data: [],
+		};
 	}
 
-	return (
-		<div className="Mapa">
-			<MapContainer
-				className="Container"
-				center={{lat: geometry[0], lng: geometry[1]}}
-				zoom={15}
-				scrollWheelZoom={true}
-			>
-				<TileLayer
-					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				/>
-				<LocationMarker />
-			</MapContainer>
-		</div>
-	);
-};
+	saveMarkers = (newMarkerCoords) => {
+		const data = [...this.state.data, newMarkerCoords];
+		this.setState((prevState) => ({...prevState, data}));
+	};
 
-CustomMap.propTypes = {
-	geometry: PropTypes.array,
-	onClick: PropTypes.func,
-};
+	render() {
+		return (
+			<div className="Mapa">
+				<MapContainer
+					className="Container"
+					center={{lat: 41.3879, lng: 2.16992}}
+					zoom={18}
+					scrollWheelZoom={false}
+				>
+					<TileLayer
+						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					/>
+					<Marcador saveMarkers={this.saveMarkers} />
+				</MapContainer>
+			</div>
+		);
+	}
+}
 
 export default CustomMap;

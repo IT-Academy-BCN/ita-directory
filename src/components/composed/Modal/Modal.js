@@ -1,6 +1,17 @@
 import React, {Fragment} from "react";
-import {ModalBlock, ModalBody, ModalOverlay, ModalTitle} from "./Modal.styles";
+import {
+	ModalBlock,
+	ModalBody,
+	ModalClose,
+	ModalContainer,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	ModalTitle,
+} from "./Modal.styles";
 import PropTypes from "prop-types";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Modal = ({title, footer, children, active, hideModal}) => {
 	return (
@@ -8,8 +19,16 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 			{active && (
 				<ModalBlock>
 					<ModalOverlay onClick={() => hideModal()}></ModalOverlay>
-					<ModalTitle>{title}</ModalTitle>
-					<ModalBody>{children}</ModalBody>
+					<ModalContainer>
+						<ModalHeader>
+							<ModalTitle>{title}</ModalTitle>
+							<ModalClose onClick={() => hideModal()}>
+								<FontAwesomeIcon icon={faTimes} style={{height: "1rem"}} />
+							</ModalClose>
+						</ModalHeader>
+						<ModalBody>{children}</ModalBody>
+						<ModalFooter>{footer}</ModalFooter>
+					</ModalContainer>
 				</ModalBlock>
 			)}
 		</Fragment>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
 
@@ -14,83 +14,86 @@ import {
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
-
+import {
+	adImage1,
+	adImage2,
+	adImage3,
+	adThumbnail1,
+	adThumbnail2,
+	adThumbnail3,
+} from "assets/images";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
-import {getAd} from "api/ads.js";
+import Colors from "theme/Colors";
 
-const Ad = ({match}) => {
-	const {
-		params: {id},
-	} = match;
+const LIST_ICONS = [
+	{name: "Madrid", icon: faMapMarkerAlt},
+	{name: "3 habitaciones", icon: faBed},
+	{name: "1.390.000", icon: faEuroSign},
+	{name: "55m2", icon: faHome},
+	{name: "4 Baños", icon: faBath},
+];
+
+const Ad = ({icon}) => {
 	const [active, setActive] = useState(false);
-	const [ad, setAd] = useState([]);
 
-	useEffect(() => {
-		try {
-			getAd(id).then((ad) => ad && setAd(ad));
-		} catch (e) {
-			console.log(e);
-		}
-	}, [id]);
-
-	const {
-		title,
-		gallery,
-		city,
-		monthlyRent,
-		numBaths,
-		numRooms,
-		squareMeters,
-		longDescription,
-	} = ad;
-
-	const getImagesFrom = (gallery) => {
-		if (!gallery) return [];
-		return gallery.map((image) => {
-			return {
-				original: image.url,
-				thumbnail: image.urlThumbnail,
-				originalAlt: image.alt,
-				thumbnailAlt: image.altThumbnail,
-			};
-		});
-	};
-
-	const adMonthlyPrice = new Intl.NumberFormat("es-ES", {
-		style: "currency",
-		currency: "EUR",
-		minimumFractionDigits: 3,
-	});
-
-	const LIST_ICONS = [
-		{name: city, icon: faMapMarkerAlt},
-		{name: `${numRooms} Habitacion${numRooms > 1 ? "es" : ""}`, icon: faBed},
-		{name: `${adMonthlyPrice.format(monthlyRent)}`, icon: faEuroSign},
-		{name: `${squareMeters}m2`, icon: faHome},
-		{name: `${numBaths} Baño${numBaths > 1 ? "s" : ""}`, icon: faBath},
+	const images = [
+		{
+			original: adImage1,
+			thumbnail: adThumbnail1,
+			originalAlt: "Bedroom",
+			thumbnailAlt: "Bedroom",
+		},
+		{
+			original: adImage2,
+			thumbnail: adThumbnail2,
+			originalAlt: "Bedroom2",
+			thumbnailAlt: "Bedroom2",
+		},
+		{
+			original: adImage3,
+			thumbnail: adThumbnail3,
+			originalAlt: "Casa piscina",
+			thumbnailAlt: "Casa piscina",
+		},
 	];
 
 	return (
 		<>
-			<Body title="Anuncio">
+			<Body
+				title="Anuncio"
+				color_logo={Colors.darkRed}
+				color_header="#e6f2f2"
+				color_letra="#7d868b"
+			>
 				<StyledAd>
-					<StyledTitle>{title}</StyledTitle>
-					<Gallery images={getImagesFrom(gallery)} />
+					<StyledTitle>Título de mi anuncio</StyledTitle>
+					<Gallery images={images} />
 					<StyledBottomDiv>
 						<StyledUl>
 							{LIST_ICONS.map((el, index) => {
 								return (
 									<StyledItems>
-										<IconWithLabel id={index} icon={el.icon} text={el.name} />
+										<IconWithLabel key={index} icon={el.icon} text={el.name} />
 									</StyledItems>
 								);
 							})}
 						</StyledUl>
 
 						<StyledText>
-							<pre>{longDescription}</pre>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur gadipiscing elit. Praesent
+								at tincidunt urna. Aenean eu ullamcorper eros, blandit volutpat
+								turpis.
+							</p>
+							<p>
+								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
+								Maecenas nec dictum nisl, a maximus elit. Praesent dolor erat,
+								condimentum nec luctus vel, tincidunt a tellus. Sed fringilla
+								blandit cursus. Mauris cursus viverra congue. Nullam ultricies metus
+								eget condimentum congue.
+							</p>
 						</StyledText>
 						<Map />
 						<StyledStreet>

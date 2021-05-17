@@ -8,22 +8,18 @@
 		"@fortawesome/react-fontawesome": "^0.1.14",
 		"axios": "^0.21.1",
 		"chokidar": "^2.1.8",
-		"concurrently": "^6.0.0",
 		"cra-template": "1.1.1",
-		"echarts": "^5.0.2",
-		"echarts-for-react": "^3.0.1",
-		"json-server": "^0.16.3",
 		"leaflet": "^1.7.1",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.1",
 		"react-animations": "^1.0.0",
+		"react-data-table-component": "^6.11.7",
 		"react-dom": "^17.0.1",
-		"react-icons": "^4.2.0",
 		"react-image-gallery": "^1.0.9",
 		"react-leaflet": "^3.1.0",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.1",
-		"styled-components": "^5.2.1"
+		"styled-components": "^5.3.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -31,8 +27,6 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"dev": "env FAST_REFRESH=false react-scripts start",
-		"json-server": "json-server --watch src/api/data/db.json --port 5000",
-		"app-server": "concurrently \"npm start\" \"npm run json-server\"",
 		"postinstall": "husky install",
 		"prepare": "husky install"
 	},
@@ -64,7 +58,8 @@
 		"*.js": [
 			"eslint --cache --fix",
 			"./node_modules/.bin/eslint --max-warnings=0",
-			"./node_modules/.bin/prettier --write"
+			"./node_modules/.bin/prettier --write",
+			"git add"
 		]
 	}
 }

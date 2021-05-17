@@ -5,8 +5,8 @@ export const Wrapper = styled.div`
 	margin-bottom: 25px;
 	p {
 		color: ${Colors.grey};
-		font-size: 0.95rem;
-		font-family: "Arial";
+		fontsize: 0.95rem;
+		fontfamily: "Arial";
 		width: auto;
 		letter-spacing: 0px;
 		opacity: 1;
