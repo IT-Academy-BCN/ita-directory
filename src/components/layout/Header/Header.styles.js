@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 
 export const HeaderWrapper = styled.header`
 	width: 100%;
@@ -14,9 +15,10 @@ export const StyledHeader = styled.header`
 	left: 0px;
 	font: normal normal normal 26px/32px Helvetica Neue;
 	letter-spacing: 0px;
-	color: ${(props) => props.color_letra};
+	color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 	background: var(--unnamed-color-e6f2f2) 0% 0% no-repeat padding-box;
-	background: ${(props) => props.color_header} 0% 0% no-repeat padding-box;
+	background: ${(props) => (props.color_header ? props.color_header : "#e6f2f2")} 0% 0% no-repeat
+		padding-box;
 	opacity: 1;
 	border: 1px solid #b5dddd;
 	max-width: 100%;
@@ -25,7 +27,7 @@ export const StyledHeader = styled.header`
 		text-align: center;
 		font: normal normal normal 30px/36px Helvetica Neue;
 		letter-spacing: 0px;
-		color: ${(props) => props.color_letra};
+		color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 		opacity: 1;
 	}
 
@@ -40,7 +42,7 @@ export const Logo = styled.div`
 	align-items: center;
 	width: 100%;
 	height: 5rem;
-	color: ${(props) => props.color_logo};
+	color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 	font: normal normal normal 15px/15px Korb-Bold;
 	letter-spacing: 0px;
 	text-transform: uppercase;

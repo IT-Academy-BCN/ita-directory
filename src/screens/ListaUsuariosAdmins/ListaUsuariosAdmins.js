@@ -11,7 +11,7 @@ const ListaUsuariosAdmins = () => {
 	const images = [people1b, people4b, people13b];
 	const columns = [
 		{
-			name: <div>{<StyledP> Foto </StyledP>}</div>,
+			name: <div>{<StyledP>Foto</StyledP>}</div>,
 			selector: "foto",
 			cell: (row) => (
 				<div>
@@ -21,18 +21,18 @@ const ListaUsuariosAdmins = () => {
 			sortable: true,
 		},
 		{
-			name: <div>{<StyledP> Nombre </StyledP>}</div>,
+			name: <div>{<StyledP>Nombre</StyledP>}</div>,
 			selector: "nombre",
-			cell: (row) => <div>{<StyledP> {row.nombre} </StyledP>}</div>,
+			cell: (row) => <div>{<StyledP>{row.nombre}</StyledP>}</div>,
 			sortable: true,
 		},
 		{
-			name: <div>{<StyledP> Email </StyledP>}</div>,
+			name: <div>{<StyledP>Email</StyledP>}</div>,
 			selector: "email",
 			sortable: true,
 		},
 		{
-			name: <div>{<StyledP> Acciones </StyledP>}</div>,
+			name: <div>{<StyledP>Acciones</StyledP>}</div>,
 			selector: "acciones",
 			sortable: true,
 		},

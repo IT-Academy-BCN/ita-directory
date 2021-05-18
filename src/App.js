@@ -10,11 +10,10 @@ import Registration from "screens/UserFlow/Registration/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
-import ListaUsuariosAdmins from "screens/Admins/ListaUsuariosAdmins";
+import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
 
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
-import AdminTable from "screens/Usuarios/AdminTable";
 
 const App = () => {
 	return (
@@ -31,7 +30,6 @@ const App = () => {
 				<Route exact path="/go-to-map" component={GoToMap} />
 				<Route exact path="/map" component={MapView} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
-				<Route exact path="/registro" component={AdminTable} />
 			</Switch>
 		</>
 	);
