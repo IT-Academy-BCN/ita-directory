@@ -72,7 +72,7 @@ export const ModalHeader = styled.div`
 export const ModalTitle = styled.span`
 	font-size: 30px;
 	font-weight: 500;
-	color: ${Colors.darkRed};
+	color: ${(props) => (props.colorModalTitle ? props.colorModalTitle : Colors.darkRed)};
 	font: normal normal bold 24px/20px Arial;
 	padding-left: 0px;
 `;

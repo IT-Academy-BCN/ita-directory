@@ -5,10 +5,17 @@ import Colors from "theme/Colors";
 import DataTable from "react-data-table-component";
 import Usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import UserModal from "components/composed/UserModal/UserModal.js";
+import React, {useState} from "react";
+import {faUserClock} from "@fortawesome/free-solid-svg-icons";
 
 const ListaUsuariosAdmins = () => {
 	const usuarios = Usuarios;
 	const images = [people1b, people4b, people13b];
+
+	const [active, setActive] = useState(false);
+
 	const columns = [
 		{
 			name: <div>{<StyledP>Foto</StyledP>}</div>,
@@ -35,6 +42,13 @@ const ListaUsuariosAdmins = () => {
 			name: <div>{<StyledP>Acciones</StyledP>}</div>,
 			selector: "acciones",
 			sortable: true,
+			cell: (row) => (
+				<div>
+					<span>
+						<FontAwesomeIcon icon={faUserClock} onClick={() => setActive(true)} />
+					</span>
+				</div>
+			),
 		},
 	];
 
@@ -50,6 +64,7 @@ const ListaUsuariosAdmins = () => {
 					<DataTable columns={columns} data={usuarios} />
 				</StyledWrapper>
 			</Container>
+			<UserModal active={active} hideModal={() => setActive(false)} />
 		</Body>
 	);
 };
