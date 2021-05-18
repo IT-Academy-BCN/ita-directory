@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 
 export const HeaderWrapper = styled.header`
 	width: 100%;
@@ -14,21 +15,20 @@ export const StyledHeader = styled.header`
 	left: 0px;
 	font: normal normal normal 26px/32px Helvetica Neue;
 	letter-spacing: 0px;
-	color: #7d868b;
+	color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 	background: var(--unnamed-color-e6f2f2) 0% 0% no-repeat padding-box;
-	background: #e6f2f2 0% 0% no-repeat padding-box;
+	background: ${(props) => (props.color_header ? props.color_header : "#e6f2f2")} 0% 0% no-repeat
+		padding-box;
 	opacity: 1;
 	border: 1px solid #b5dddd;
 	max-width: 100%;
 	height: 5rem;
-	& h1 {
+	& > h1 {
 		text-align: center;
 		font: normal normal normal 30px/36px Helvetica Neue;
-		font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2em);
 		letter-spacing: 0px;
-		color: #7d868b;
+		color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 		opacity: 1;
-		margin: 0;
 	}
 
 	&.logged {
@@ -42,7 +42,7 @@ export const Logo = styled.div`
 	align-items: center;
 	width: 100%;
 	height: 5rem;
-	color: #823434;
+	color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 	font: normal normal normal 15px/15px Korb-Bold;
 	letter-spacing: 0px;
 	text-transform: uppercase;
@@ -54,7 +54,7 @@ export const Logo = styled.div`
 `;
 
 export const StyledMiPerfil = styled.div`
-	position: relative;
+	position: realtive;
 	display: inline-block;
 `;
 
@@ -88,36 +88,51 @@ export const StyledText = styled.h6`
 	opacity: 1;
 `;
 
-export const Dropdown = styled.ul`
+export const StyledDropdown = styled.div`
 	position: absolute;
-	right: 0;
+	padding: 0;
+	z-index: 1;
+	text-align: center;
+	background: transparent 0% 0% no-repeat padding-box;
+	border: 1px solid #dddddd;
+	border-radius: 10px;
+	opacity: 1;
+`;
+
+export const StyledUl = styled.ul`
 	list-style-type: none;
 	padding: 0px;
 	margin-top: 10px;
 	position: absolute;
-	background-color: white;
 	box-shadow: 0px 4px 10px #00000029;
+	background: transparent;
 	border-radius: 6px;
-	border: 1px solid #ddd;
-	width: 180px;
+	right: 765.85;
+`;
 
-	li {
-		border-bottom: 1px solid #ddd;
+export const StyledLi = styled.li`
+	border: 1px solid #dddd;
+	align-items: center;
+	text-align: left;
+	padding-left: 15px;
+	min-width: 6rem;
+	width: 150px;
+	display: block;
+	background-color: white;
+	position: relative;
+	z-index: 2;
+	line-height: 2.5rem;
+	border-bottom: 0;
+	right: 0;
 
-		&:last-child {
-			border-bottom: none;
-		}
+	&:first-child {
+		border-top-right-radius: 6px;
+		border-top-left-radius: 6px;
+	}
 
-		a {
-			display: inline-block;
-			width: 100%;
-			padding: 1rem 1rem;
-			color: #999;
-			text-decoration: none;
-			&:hover {
-				background-color: #ddd;
-			}
-		}
+	&:last-child {
+		border-bottom-right-radius: 6px;
+		border-bottom-left-radius: 6px;
 	}
 `;
 
@@ -126,23 +141,11 @@ export const StyledButton = styled.button`
 	justify-content: center;
 	align-items: center;
 	background: #ffffff 0% 0% no-repeat padding-box;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 4px 8px #00000029;
 	border: none;
 	border-radius: 10px;
 	opacity: 1;
 	min-width: 6rem;
 	width: 120px;
 	height: 50px;
-
-	&:focus {
-		outline: none;
-	}
-
-	&:hover {
-		cursor: pointer;
-	}
-
-	&.selected {
-		box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-	}
 `;

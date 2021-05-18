@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-//import ProtectedRoute from "components/composed/ProtectedRoute";
+import ProtectedRoute from "components/composed/ProtectedRoute";
 
 import Home from "screens/Home/Home";
 import Ad from "screens/Ad/Ad";
@@ -10,35 +10,26 @@ import Registration from "screens/UserFlow/Registration/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
-import UserAds from "screens/UserAds/UserAds";
-import EditAd from "screens/EditAd/EditAd";
-import SalesLineChart from "screens/Sales/SalesLineChart";
-import Dashboard from "screens/Dashboard/Dashboard";
-//import Sales from "screens/Sales/Sales1.js";
-import SalesByType from "screens/Sales/SalesByType.js";
-import SalesByMonth from "screens/Sales/SalesByMonth.js";
+import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
 
+import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
 
 const App = () => {
 	return (
 		<>
 			<Switch>
-				<Route exact path="/" component={Home} />
-				<Route exact path="/ad/:id" component={Ad} />
+				<ProtectedRoute exact path="/" component={Home} />
+				<Route exact path="/ad" component={Ad} />
 				<Route exact path="/new-ad" component={CreateNewAd} />
-				<Route exact path="/user-ads" component={UserAds} />
-				<Route exact path="/:user_id/edit-ad/:id" component={EditAd} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
 				<Route exact path="/profile" component={Profile} />
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
+				<Route exact path="/go-to-map" component={GoToMap} />
 				<Route exact path="/map" component={MapView} />
-				<Route exact path="/sales-line-chart" component={SalesLineChart} />
-				<Route exact path="/dashboard" component={Dashboard} />
-				<Route exact path="/salesbytype" component={SalesByType} />
-				<Route exact path="/salesbymonth" component={SalesByMonth} />
+				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 			</Switch>
 		</>
 	);

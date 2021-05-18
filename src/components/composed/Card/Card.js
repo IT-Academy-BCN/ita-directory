@@ -7,31 +7,16 @@ import {
 	StyledText,
 	StyledDescription,
 	StyledFooter,
-	StyledImageWrapper,
 } from "./Card.style.js";
 import PropTypes from "prop-types";
 
-const Card = ({
-	image,
-	title,
-	description,
-	text,
-	footer,
-	containerClassName,
-	descriptionClassName,
-	titleClassName,
-}) => {
+const Card = ({image, title, description, text, footer}) => {
 	return (
-		<Container className={containerClassName}>
-			<StyledImageWrapper>
-				<StyledImage {...image} />
-			</StyledImageWrapper>
+		<Container>
+			<StyledImage {...image} />
 			<CardInfo>
-				<StyledTitle className={titleClassName}>{title}</StyledTitle>
-				<StyledDescription className={descriptionClassName}>
-					{description}
-				</StyledDescription>
-
+				<StyledTitle>{title}</StyledTitle>
+				<StyledDescription>{description}</StyledDescription>
 				<StyledText>{text}</StyledText>
 				<StyledFooter>{footer}</StyledFooter>
 			</CardInfo>
@@ -41,8 +26,6 @@ const Card = ({
 Card.propTypes = {
 	image: PropTypes.object,
 	title: PropTypes.string,
-	containerClassName: PropTypes.string,
-	descriptionClassName: PropTypes.string,
 	description: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,

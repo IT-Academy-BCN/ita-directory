@@ -1,18 +1,9 @@
 .Map {
-	@media only screen and (min-width: 1020px) {
-		width: 60vw;
-		height: 20vh;
-		padding-bottom: 2rem;
-		margin-bottom: 2vh;
-		margin-right: 2rem;
-	}
-	@media only screen and (max-width: 1019px) {
-	}
-	@media only screen and (max-width: 468px) {
-	}
+	width: 95%;
+	height: 200px;
 }
 
 .Map-container {
-	width: 60vw;
-	height: 20vw;
+	width: 70%;
+	height: 100%;
 }
