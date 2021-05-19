@@ -8,11 +8,15 @@ import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import React, {useState} from "react";
-import {faUserClock} from "@fortawesome/free-solid-svg-icons";
+import {faUserClock, faTrash} from "@fortawesome/free-solid-svg-icons";
+import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
+
+	//Delete user
+	const [eliminar, setEliminar] = useState(false);
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
@@ -57,6 +61,13 @@ function ListaUsuariosAdmins() {
 							icon={faUserClock}
 							onClick={() => handleClick(row.nombre, "active")}
 						/>
+						<span>
+							<FontAwesomeIcon
+								icon={faTrash}
+								style={{color: "red"}}
+								onClick={() => setEliminar(true)}
+							/>
+						</span>
 					</span>
 				</div>
 			),
@@ -81,6 +92,7 @@ function ListaUsuariosAdmins() {
 				active={active}
 				hideModal={() => setActive(false)}
 			/>
+			<DeleteModal active={eliminar} hideModal={() => setEliminar(false)} />
 		</Body>
 	);
 }

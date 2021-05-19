@@ -1,0 +1,23 @@
+[
+    {
+        "id": 0,
+        "foto": "people1b",
+        "nombre": "María Moreno",
+        "email": "maria@gmail.com",
+        "acciones": ""
+    },
+    {
+        "id": 1,
+        "foto": "people4b",
+        "nombre": "Sonia García",
+        "email": "sonia@gmail.com",
+        "acciones": ""
+    },
+    {
+        "id": 2,
+        "foto": "people13b",
+        "nombre": "Iván Grau",
+        "email": "ivan@gmail.com",
+        "acciones": ""
+    }
+]
