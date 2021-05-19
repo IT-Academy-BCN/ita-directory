@@ -3,18 +3,26 @@ import {Container} from "theme/GlobalStyles.js";
 import {StyledWrapper, StyledImage, StyledP} from "./ListaUsuariosAdmins.style";
 import Colors from "theme/Colors";
 import DataTable from "react-data-table-component";
-import Usuarios from "assets/usuarios.json";
+import usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import React, {useState} from "react";
 import {faUserClock} from "@fortawesome/free-solid-svg-icons";
 
-const ListaUsuariosAdmins = () => {
-	const usuarios = Usuarios;
+function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
-
 	const [active, setActive] = useState(false);
+
+	// Current user
+	const [currentName, setCurrentName] = useState("");
+	const [currentUserState, setCurrentUserState] = useState("active");
+
+	const handleClick = (name, state) => {
+		setCurrentName(name);
+		setCurrentUserState(state);
+		setActive(true);
+	};
 
 	const columns = [
 		{
@@ -45,7 +53,10 @@ const ListaUsuariosAdmins = () => {
 			cell: (row) => (
 				<div>
 					<span>
-						<FontAwesomeIcon icon={faUserClock} onClick={() => setActive(true)} />
+						<FontAwesomeIcon
+							icon={faUserClock}
+							onClick={() => handleClick(row.nombre, "active")}
+						/>
 					</span>
 				</div>
 			),
@@ -64,8 +75,13 @@ const ListaUsuariosAdmins = () => {
 					<DataTable columns={columns} data={usuarios} />
 				</StyledWrapper>
 			</Container>
-			<UserModal active={active} hideModal={() => setActive(false)} />
+			<UserModal
+				nombreUsuario={currentName}
+				currentUserState={currentUserState}
+				active={active}
+				hideModal={() => setActive(false)}
+			/>
 		</Body>
 	);
-};
+}
 export default ListaUsuariosAdmins;

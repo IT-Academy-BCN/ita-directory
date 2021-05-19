@@ -1,43 +1,59 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const Wrapper = styled.div`
-	margin-bottom: 25px;
+export const UserModalStyled = styled.div`
 	p {
 		color: ${Colors.grey};
-		fontsize: 0.95rem;
-		fontfamily: "Arial";
 		width: auto;
 		letter-spacing: 0px;
 		opacity: 1;
 		width: auto;
 	}
 
-	.inputContainer :nth-child(2) div {
-		width: 100%;
-	}
-
 	label {
-		padding-right: 0;
-		width: auto;
+		display: none;
+	}
+
+	select {
+		text-transform: uppercase;
+		padding: 0.5em;
+		font-size: 20px;
+		border-radius: 5px;
+		font-weight: bold;
+		width: 100%;
+
+		color: ${(props) =>
+			props.currentUserState === "pending"
+				? Colors.grey
+				: props.currentUserState === "active"
+				? Colors.darkGreen
+				: Colors.darkRed};
+
+		border-color: ${(props) =>
+			props.currentUserState === "pending"
+				? Colors.grey
+				: props.currentUserState === "active"
+				? Colors.darkGreen
+				: Colors.darkRed};
+
+		option {
+			text-transform: uppercase;
+		}
 	}
 `;
 
-export const StyledOption = styled.option``;
+// export const StyledOption = styled.option``;
 
-export const StyledSelect = styled.select`
-	font-size: 20px;
-	color: ${(value) => (value = 1 ? Colors.darkGreen : Colors.darkRed)};
-	border-color: ${(value) => (value = 1 ? Colors.darkGreen : Colors.darkRed)};
-	padding: 10px;
-	border-radius: 5px;
-	font-weight: bold;
-	width: 100%;
-`;
+// export const StyledSelect = styled.select`
+// 	font-size: 20px;
+// 	color: ${(props) => (props.value = 1 ? Colors.darkGreen : Colors.darkRed)};
+// 	border-color: ${(props) => (props.value = 1 ? Colors.darkGreen : Colors.darkRed)};
+// 	padding: 10px;
+// 	border-radius: 5px;
+// 	font-weight: bold;
+// 	width: 100%;
+// `;
 
-export const StyledSmall = styled.small`
-	backgroundcolor: ${Colors.extraDarkBlue};
-`;
 export const ButtonWrapper = styled.div`
 	width: 100%;
 	display: flex;

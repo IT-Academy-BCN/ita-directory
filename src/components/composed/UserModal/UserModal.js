@@ -1,71 +1,14 @@
 import React, {useState} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
-import useInput from "hooks/useInput";
-import {Wrapper, StyledSmall, ButtonWrapper, StyledSelect} from "./UserModal.style.js";
+import {UserModalStyled, ButtonWrapper} from "./UserModal.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const UserModal = ({nombreUsuario, active, hideModal}) => {
-	const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-	const validateEmail = (email) => {
-		if (!email) return "Email is required";
-		if (!EMAIL_REGEX.test(email.toLowerCase())) return "Email invalid";
-		return "";
-	};
-
-	const [error, setError] = useState("");
-	const [animatedState, setAnimatedState] = useState(false);
-	const [disabled, setIsDisabled] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-
-	const [name, resetName] = useInput("");
-	const [email, resetEmail] = useInput("", validateEmail);
-	const [message, resetMessage] = useInput("");
-
-	const sendContact = (name, email, message, callback) => {
-		setTimeout(() => {
-			console.log(`send contact => ${name}, ${email}, ${message}`);
-			callback("The message could not be sent");
-		}, 2000);
-	};
-
-	const resetForm = () => {
-		resetEmail();
-		resetName();
-		resetMessage();
-	};
-
-	const isAnyFieldEmpty = () => {
-		return name.length === 0 || email.length === 0 || message.length === 0;
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setAnimatedState(true);
-		setIsDisabled(true);
-		setIsLoading(true);
-		setTimeout(() => {
-			setAnimatedState(false);
-			setIsDisabled(false);
-			setIsLoading(false);
-		}, 2000);
-
-		if (isAnyFieldEmpty()) {
-			setError("Missing required fields");
-			return;
-		}
-
-		sendContact(name, email, message, (error) => {
-			if (error) {
-				setError(error);
-			} else {
-				setError("");
-				console.log("The message has been sent!");
-				resetForm();
-			}
-		});
+const UserModal = ({nombreUsuario, currentUserState, active, hideModal}) => {
+	const [selectValue, setSelectValue] = useState(currentUserState);
+	const handleSelect = (val) => {
+		setSelectValue(val);
 	};
 
 	return (
@@ -104,25 +47,25 @@ const UserModal = ({nombreUsuario, active, hideModal}) => {
 						iconPosition="left"
 						type="submit"
 						className="darkBlue"
-						isLoading={isLoading}
-						animated={animatedState}
-						disabled={disabled}
-						onClick={handleSubmit}
 						buttonStyles={{marginRight: 0}}
 					/>
 				</ButtonWrapper>
 			}
 		>
-			<Wrapper>
+			<UserModalStyled currentUserState={selectValue}>
 				<p>Cambiar el estado del usuario {nombreUsuario}</p>
-			</Wrapper>
-			<Wrapper>
-				<StyledSelect name="estadoUsuario">
-					<option value="1">APROBADO</option>
-					<option value="2">RECHAZADO</option>
-				</StyledSelect>
-			</Wrapper>
-			<StyledSmall>{error}</StyledSmall>
+				<label htmlFor="estado-usuario">Estado usuario</label>
+				<select
+					name="estado-usuario"
+					id="estado-usuario"
+					defaultValue={currentUserState}
+					onChange={(e) => handleSelect(e.target.value)}
+				>
+					<option value="active">Aprobado</option>
+					<option value="pending">Pendiente</option>
+					<option value="rejected">Rechazado</option>
+				</select>
+			</UserModalStyled>
 		</Modal>
 	);
 };
