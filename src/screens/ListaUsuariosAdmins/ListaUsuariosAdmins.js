@@ -14,9 +14,11 @@ import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
+	const [dataUsers, setDataUsers] = useState(usuarios);
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
+	const [currentColum, setCurrentColum] = useState("");
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
@@ -26,6 +28,19 @@ function ListaUsuariosAdmins() {
 		setCurrentName(name);
 		setCurrentUserState(state);
 		setActive(true);
+	};
+
+	const handleDelete = (row) => {
+		setCurrentColum(row);
+		setEliminar(true);
+	};
+
+	const updateDelete = (user) => {
+		const newUsers = dataUsers.filter(function (user) {
+			return user !== currentColum;
+		});
+
+		setDataUsers(newUsers);
 	};
 
 	const columns = [
@@ -65,7 +80,7 @@ function ListaUsuariosAdmins() {
 							<FontAwesomeIcon
 								icon={faTrash}
 								style={{color: "red"}}
-								onClick={() => setEliminar(true)}
+								onClick={() => handleDelete(row)}
 							/>
 						</span>
 					</span>
@@ -83,7 +98,7 @@ function ListaUsuariosAdmins() {
 		>
 			<Container row>
 				<StyledWrapper>
-					<DataTable columns={columns} data={usuarios} />
+					<DataTable columns={columns} data={dataUsers} />
 				</StyledWrapper>
 			</Container>
 			<UserModal
@@ -92,7 +107,13 @@ function ListaUsuariosAdmins() {
 				active={active}
 				hideModal={() => setActive(false)}
 			/>
-			<DeleteModal active={eliminar} hideModal={() => setEliminar(false)} />
+			<DeleteModal
+				columnSelect={currentColum}
+				currentUser={eliminar}
+				active={eliminar}
+				hideModal={() => setEliminar(false)}
+				updateDelete={updateDelete}
+			/>
 		</Body>
 	);
 }

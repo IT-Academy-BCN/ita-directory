@@ -11,10 +11,10 @@ import {
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const DeleteModal = ({id, active, hideModal}) => {
+const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 	const [error, setError] = useState("");
 
-	const [name, bindName] = useInput("");
+	const [name, bindName, resetName] = useInput("");
 
 	const eliminar = "ELIMINAR";
 
@@ -22,8 +22,8 @@ const DeleteModal = ({id, active, hideModal}) => {
 		return name.length === 0 || name !== eliminar;
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleSubmit = () => {
+		updateDelete(columnSelect);
 
 		if (errorEscritura()) {
 			setError("Escribe la palabra ELIMINAR");
@@ -31,12 +31,19 @@ const DeleteModal = ({id, active, hideModal}) => {
 		}
 
 		hideModal();
+		resetForm();
+	};
+
+	const resetForm = () => {
+		resetName();
+		setError();
+		hideModal();
 	};
 
 	return (
 		<Modal
 			active={active}
-			hideModal={hideModal}
+			hideModal={resetForm}
 			title="Eliminar Usuario"
 			footer={
 				<ButtonWrapper>
@@ -44,8 +51,8 @@ const DeleteModal = ({id, active, hideModal}) => {
 						text="Cancelar"
 						iconPosition="left"
 						type="submit"
-						onClick={() => hideModal()}
 						icon={faTimes}
+						onClick={resetForm}
 						buttonStyles={{
 							color: Colors.lightGrey,
 							background: "transparent",
