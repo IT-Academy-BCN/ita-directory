@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const Modal = ({title, footer, children, active, hideModal}) => {
+const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) => {
 	return (
 		<Fragment>
 			{active && (
@@ -21,7 +21,7 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 					<ModalOverlay onClick={() => hideModal()}></ModalOverlay>
 					<ModalContainer>
 						<ModalHeader>
-							<ModalTitle>{title}</ModalTitle>
+							<ModalTitle colorModalTitle={colorModalTitle}>{title}</ModalTitle>
 							<ModalClose onClick={() => hideModal()}>
 								<FontAwesomeIcon icon={faTimes} style={{height: "1rem"}} />
 							</ModalClose>
@@ -36,6 +36,7 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 };
 
 Modal.propTypes = {
+	colorModalTitle: PropTypes.string,
 	title: PropTypes.string,
 	footer: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
