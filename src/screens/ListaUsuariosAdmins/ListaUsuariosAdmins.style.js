@@ -13,6 +13,15 @@ export const StyledWrapper = styled.div`
 	padding-bottom: 0.1rem;
 `;
 
+export const StyledSpan = styled.span`
+	color: ${(props) =>
+		props.colorIcono === "rejected"
+			? Colors.redColor
+			: props.colorIcono === "aprobado"
+			? Colors.darkGreen
+			: Colors.grey};
+`;
+
 export const StyledImage = styled.img`
 	border-radius: 50%;
 `;
