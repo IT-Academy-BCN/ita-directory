@@ -73,7 +73,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 						text="Eliminar"
 						iconPosition="right"
 						type="submit"
-						className="darkBlue"
+						className="darkRed"
 						onClick={handleSubmit}
 						buttonStyles={{marginRight: 0}}
 					/>
