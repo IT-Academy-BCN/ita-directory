@@ -23,8 +23,6 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 	};
 
 	const handleSubmit = () => {
-		updateDelete(columnSelect);
-
 		if (errorEscritura()) {
 			setError("Escribe la palabra ELIMINAR");
 			return;
@@ -32,6 +30,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 
 		hideModal();
 		resetForm();
+		updateDelete(columnSelect);
 	};
 
 	const resetForm = () => {
