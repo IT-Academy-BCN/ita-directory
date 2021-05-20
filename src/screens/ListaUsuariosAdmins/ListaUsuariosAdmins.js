@@ -26,10 +26,14 @@ function ListaUsuariosAdmins() {
 	};
 
 	const updateUser = (val, nombreUsuario) => {
+		console.log(val, nombreUsuario);
 		setDataUsers(
 			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
 		);
 	};
+
+	console.log("currentUserState parent", currentUserState);
+	console.log("dataUsers", dataUsers[0]);
 
 	const columns = [
 		{

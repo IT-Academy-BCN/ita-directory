@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import {UserModalStyled, ButtonWrapper} from "./UserModal.style.js";
@@ -6,7 +6,13 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
 const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUser}) => {
+	// Aquí ponemos el estado inicial, pero no se actualiza al volver a renderizar cuando se actualizan las props.
 	const [selectValue, setSelectValue] = useState(currentUserState);
+
+	// Aquí actualizamos el estado cuando cambian las props.
+	useEffect(() => {
+		setSelectValue(currentUserState);
+	}, [currentUserState]);
 
 	const handleSelect = (val) => {
 		setSelectValue(val);
@@ -14,10 +20,11 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 
 	const handleClick = (val, nombreUsuario) => {
 		updateUser(val, nombreUsuario);
-		closeModal(val);
+		closeModal();
 	};
 
-	const closeModal = (val) => {
+	const closeModal = () => {
+		setSelectValue(currentUserState);
 		hideModal();
 	};
 
@@ -25,7 +32,7 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 		<Modal
 			colorModalTitle={Colors.extraDarkBlue}
 			active={active}
-			hideModal={hideModal}
+			hideModal={closeModal}
 			title="Cambiar Estado"
 			footer={
 				<ButtonWrapper>
@@ -33,7 +40,7 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 						text="Cancelar"
 						iconPosition="left"
 						type="submit"
-						onClick={() => hideModal()}
+						onClick={closeModal}
 						icon={faTimes}
 						buttonStyles={{
 							color: Colors.lightGrey,
