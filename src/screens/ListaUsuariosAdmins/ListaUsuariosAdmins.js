@@ -1,6 +1,6 @@
 import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
-import {StyledWrapper, StyledImage, StyledP} from "./ListaUsuariosAdmins.style";
+import {StyledWrapper, StyledImage, StyledP, StyledSpan} from "./ListaUsuariosAdmins.style";
 import Colors from "theme/Colors";
 import DataTable from "react-data-table-component";
 import usuarios from "assets/usuarios.json";
@@ -8,8 +8,8 @@ import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import React, {useState} from "react";
-import {faUserClock, faTrash} from "@fortawesome/free-solid-svg-icons";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
+import {faUserClock, faUserCheck, faUserAltSlash, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
@@ -22,7 +22,7 @@ function ListaUsuariosAdmins() {
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
-	const [currentUserState, setCurrentUserState] = useState("active");
+	const [currentUserState, setCurrentUserState] = useState("pending");
 
 	const handleClick = (name, state) => {
 		setCurrentName(name);
@@ -42,6 +42,15 @@ function ListaUsuariosAdmins() {
 
 		setDataUsers(newUsers);
 	};
+	const updateUser = (val, nombreUsuario) => {
+		console.log(val, nombreUsuario);
+		setDataUsers(
+			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
+		);
+	};
+
+	console.log("currentUserState parent", currentUserState);
+	console.log("dataUsers", dataUsers[0]);
 
 	const columns = [
 		{
@@ -71,10 +80,16 @@ function ListaUsuariosAdmins() {
 			sortable: true,
 			cell: (row) => (
 				<div>
-					<span>
+					<StyledSpan colorIcono={row.acciones}>
 						<FontAwesomeIcon
-							icon={faUserClock}
-							onClick={() => handleClick(row.nombre, "active")}
+							icon={
+								row.acciones === "rejected"
+									? faUserAltSlash
+									: row.acciones === "aprobado"
+									? faUserCheck
+									: faUserClock
+							}
+							onClick={() => handleClick(row.nombre, row.acciones)}
 						/>
 						<span>
 							<FontAwesomeIcon
@@ -83,7 +98,7 @@ function ListaUsuariosAdmins() {
 								onClick={() => handleDelete(row)}
 							/>
 						</span>
-					</span>
+					</StyledSpan>
 				</div>
 			),
 		},
@@ -106,6 +121,7 @@ function ListaUsuariosAdmins() {
 				currentUserState={currentUserState}
 				active={active}
 				hideModal={() => setActive(false)}
+				updateUser={updateUser}
 			/>
 			<DeleteModal
 				columnSelect={currentColum}
