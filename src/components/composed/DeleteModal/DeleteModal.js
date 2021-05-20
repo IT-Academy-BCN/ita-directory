@@ -41,6 +41,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 
 	return (
 		<Modal
+			colorModalTitle={Colors.extraDarkBlue}
 			active={active}
 			hideModal={resetForm}
 			title="Eliminar Usuario"
@@ -80,7 +81,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 			}
 		>
 			<Wrapper>
-				<p>Escribe la palabra ELIMINAR para poder continuar:</p>
+				<p>Escribe la palabra ELIMINAR para poder continuar</p>
 			</Wrapper>
 			<Wrapper>
 				<Input
