@@ -8,16 +8,21 @@ import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import React, {useState} from "react";
-import {faUserClock, faUserCheck, faUserAltSlash} from "@fortawesome/free-solid-svg-icons";
+import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
+import {faUserClock, faUserCheck, faUserAltSlash, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
+	const [dataUsers, setDataUsers] = useState(usuarios);
+
+	//Delete user
+	const [eliminar, setEliminar] = useState(false);
+	const [currentColum, setCurrentColum] = useState("");
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
 	const [currentUserState, setCurrentUserState] = useState("pending");
-	const [dataUsers, setDataUsers] = useState(usuarios);
 
 	const handleClick = (name, state) => {
 		setCurrentName(name);
@@ -25,6 +30,18 @@ function ListaUsuariosAdmins() {
 		setActive(true);
 	};
 
+	const handleDelete = (row) => {
+		setCurrentColum(row);
+		setEliminar(true);
+	};
+
+	const updateDelete = (user) => {
+		const newUsers = dataUsers.filter(function (user) {
+			return user !== currentColum;
+		});
+
+		setDataUsers(newUsers);
+	};
 	const updateUser = (val, nombreUsuario) => {
 		console.log(val, nombreUsuario);
 		setDataUsers(
@@ -74,6 +91,13 @@ function ListaUsuariosAdmins() {
 							}
 							onClick={() => handleClick(row.nombre, row.acciones)}
 						/>
+						<span>
+							<FontAwesomeIcon
+								icon={faTrash}
+								style={{color: "red"}}
+								onClick={() => handleDelete(row)}
+							/>
+						</span>
 					</StyledSpan>
 				</div>
 			),
@@ -98,6 +122,13 @@ function ListaUsuariosAdmins() {
 				active={active}
 				hideModal={() => setActive(false)}
 				updateUser={updateUser}
+			/>
+			<DeleteModal
+				columnSelect={currentColum}
+				currentUser={eliminar}
+				active={eliminar}
+				hideModal={() => setEliminar(false)}
+				updateDelete={updateDelete}
 			/>
 		</Body>
 	);
