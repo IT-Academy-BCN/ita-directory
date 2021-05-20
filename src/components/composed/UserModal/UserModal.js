@@ -5,10 +5,20 @@ import {UserModalStyled, ButtonWrapper} from "./UserModal.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const UserModal = ({nombreUsuario, currentUserState, active, hideModal}) => {
+const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUser}) => {
 	const [selectValue, setSelectValue] = useState(currentUserState);
+
 	const handleSelect = (val) => {
 		setSelectValue(val);
+	};
+
+	const handleClick = (val, nombreUsuario) => {
+		updateUser(val, nombreUsuario);
+		closeModal(val);
+	};
+
+	const closeModal = (val) => {
+		hideModal();
 	};
 
 	return (
@@ -48,6 +58,7 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal}) => {
 						type="submit"
 						className="darkBlue"
 						buttonStyles={{marginRight: 0}}
+						onClick={() => handleClick(selectValue, nombreUsuario)}
 					/>
 				</ButtonWrapper>
 			}
@@ -61,9 +72,15 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal}) => {
 					defaultValue={currentUserState}
 					onChange={(e) => handleSelect(e.target.value)}
 				>
-					<option value="active">Aprobado</option>
-					<option value="pending">Pendiente</option>
-					<option value="rejected">Rechazado</option>
+					<option value="aprobado" className="aprobado">
+						Aprobado
+					</option>
+					<option value="pending" className="pending">
+						Pendiente
+					</option>
+					<option value="rejected" className="rejected">
+						Rechazado
+					</option>
 				</select>
 			</UserModalStyled>
 		</Modal>

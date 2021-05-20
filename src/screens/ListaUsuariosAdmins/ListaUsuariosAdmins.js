@@ -1,6 +1,6 @@
 import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
-import {StyledWrapper, StyledImage, StyledP} from "./ListaUsuariosAdmins.style";
+import {StyledWrapper, StyledImage, StyledP, StyledSpan} from "./ListaUsuariosAdmins.style";
 import Colors from "theme/Colors";
 import DataTable from "react-data-table-component";
 import usuarios from "assets/usuarios.json";
@@ -8,7 +8,7 @@ import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import React, {useState} from "react";
-import {faUserClock} from "@fortawesome/free-solid-svg-icons";
+import {faUserClock, faUserCheck, faUserAltSlash} from "@fortawesome/free-solid-svg-icons";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
@@ -16,12 +16,19 @@ function ListaUsuariosAdmins() {
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
-	const [currentUserState, setCurrentUserState] = useState("active");
+	const [currentUserState, setCurrentUserState] = useState("pending");
+	const [dataUsers, setDataUsers] = useState(usuarios);
 
 	const handleClick = (name, state) => {
 		setCurrentName(name);
 		setCurrentUserState(state);
 		setActive(true);
+	};
+
+	const updateUser = (val, nombreUsuario) => {
+		setDataUsers(
+			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
+		);
 	};
 
 	const columns = [
@@ -52,12 +59,18 @@ function ListaUsuariosAdmins() {
 			sortable: true,
 			cell: (row) => (
 				<div>
-					<span>
+					<StyledSpan colorIcono={row.acciones}>
 						<FontAwesomeIcon
-							icon={faUserClock}
-							onClick={() => handleClick(row.nombre, "active")}
+							icon={
+								row.acciones === "rejected"
+									? faUserAltSlash
+									: row.acciones === "aprobado"
+									? faUserCheck
+									: faUserClock
+							}
+							onClick={() => handleClick(row.nombre, row.acciones)}
 						/>
-					</span>
+					</StyledSpan>
 				</div>
 			),
 		},
@@ -72,7 +85,7 @@ function ListaUsuariosAdmins() {
 		>
 			<Container row>
 				<StyledWrapper>
-					<DataTable columns={columns} data={usuarios} />
+					<DataTable columns={columns} data={dataUsers} />
 				</StyledWrapper>
 			</Container>
 			<UserModal
@@ -80,6 +93,7 @@ function ListaUsuariosAdmins() {
 				currentUserState={currentUserState}
 				active={active}
 				hideModal={() => setActive(false)}
+				updateUser={updateUser}
 			/>
 		</Body>
 	);

@@ -23,21 +23,30 @@ export const UserModalStyled = styled.div`
 		width: 100%;
 
 		color: ${(props) =>
-			props.currentUserState === "pending"
-				? Colors.grey
-				: props.currentUserState === "active"
+			props.currentUserState === "rejected"
+				? Colors.redColor
+				: props.currentUserState === "aprobado"
 				? Colors.darkGreen
-				: Colors.darkRed};
+				: Colors.grey};
 
 		border-color: ${(props) =>
-			props.currentUserState === "pending"
-				? Colors.grey
-				: props.currentUserState === "active"
+			props.currentUserState === "rejected"
+				? Colors.redColor
+				: props.currentUserState === "aprobado"
 				? Colors.darkGreen
-				: Colors.darkRed};
+				: Colors.grey};
 
 		option {
 			text-transform: uppercase;
+		}
+		option.aprobado {
+			color: ${Colors.darkGreen};
+		}
+		option.pending {
+			color: ${Colors.grey};
+		}
+		option.rejected {
+			color: ${Colors.redColor};
 		}
 	}
 `;
