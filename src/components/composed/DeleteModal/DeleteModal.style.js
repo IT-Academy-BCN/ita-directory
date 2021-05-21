@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
 	margin-bottom: 25px;
 	p {
 		color: ${Colors.grey};
-
 		fontsize: 0.95rem;
 		fontfamily: "Arial";
 		width: auto;
