@@ -58,7 +58,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 							background: "transparent",
 							boxShadow: "none",
 							fontSize: "0.95rem",
-							fontFamily: "Arial",
+							fontFamily: "Helvetica",
 							width: "auto",
 							paddingLeft: 0,
 						}}
@@ -81,14 +81,12 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 			}
 		>
 			<Wrapper>
-				<p>Escribe la palabra ELIMINAR para poder continuar</p>
-			</Wrapper>
-			<Wrapper>
 				<Input
+					label="Escribe la palabra ELIMINAR para poder continuar"
 					type="text"
 					name="name"
 					{...bindName}
-					placeholder="escribe aqui"
+					placeholder="Escribe aqui"
 					inputContainerClassName="inputContainer"
 				/>
 			</Wrapper>

@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 	margin-bottom: 25px;
 	p {
 		color: ${Colors.grey};
+
 		fontsize: 0.95rem;
 		fontfamily: "Arial";
 		width: auto;
@@ -15,11 +16,25 @@ export const Wrapper = styled.div`
 
 	.inputContainer :nth-child(2) div {
 		width: 100%;
+		height: 70px;
+		margin-top: 20px;
 	}
 
 	label {
+		font-size: 14px;
+		font-family: Helvetica;
+		font-weight: bold;
 		padding-right: 0;
 		width: auto;
+		opacity: 0.8;
+	}
+
+	input::placeholder {
+		color: ${Colors.grey};
+		font-family: Helvetica;
+		font-weight: bold;
+		font-size: 30px;
+		opacity: 0.6;
 	}
 `;
 
