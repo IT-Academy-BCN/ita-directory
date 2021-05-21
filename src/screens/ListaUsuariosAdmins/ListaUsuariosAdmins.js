@@ -13,21 +13,22 @@ import usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
-import React, {useState} from "react";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
-import VisualModal from "components/composed/VisualModal/VisualModal.js";
-import {faUserClock, faUserCheck, faUserAltSlash, faTrash} from "@fortawesome/free-solid-svg-icons";
+import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
+
+import React, {useState} from "react";
+import {
+	faUserClock,
+	faUserCheck,
+	faUserAltSlash,
+	faTrash,
+	faEye,
+} from "@fortawesome/free-solid-svg-icons";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
 	const [dataUsers, setDataUsers] = useState(usuarios);
-
-	//Visual user
-
-	const [cerrar, setCerrar] = useState(false);
-	// const [currentVisual, setCurrentVisual] = useState("");
-	const currentVisual = "";
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -36,6 +37,11 @@ function ListaUsuariosAdmins() {
 	// Current user
 	const [currentName, setCurrentName] = useState("");
 	const [currentUserState, setCurrentUserState] = useState("pending");
+
+	//Edit Profile
+	const [currentNombre, setCurrentNombre] = useState("");
+	const [currentEmail, setCurrentEmail] = useState("");
+	const [cerrar, setCerrar] = useState(false);
 
 	const handleClick = (name, state) => {
 		setCurrentName(name);
@@ -48,13 +54,10 @@ function ListaUsuariosAdmins() {
 		setEliminar(true);
 	};
 
-	// const handleVisual = (eyes) => {
-	// 	setCurrentVisual(eyes);
-	// 	setCerrar(true);
-	// };
-
-	const updateCerrar = (e) => {
-		console.log("estoy cerrando");
+	const handleVisual = (nombre, email) => {
+		setCurrentNombre(nombre);
+		setCurrentEmail(email);
+		setCerrar(true);
 	};
 
 	const updateDelete = (user) => {
@@ -138,13 +141,20 @@ function ListaUsuariosAdmins() {
 							}
 							onClick={() => handleClick(row.nombre, row.acciones)}
 						/>
-					</StyledSpan>
-					<StyledSpan paddingL="20px">
-						<FontAwesomeIcon
-							icon={faTrash}
-							style={{color: "red"}}
-							onClick={() => handleDelete(row)}
-						/>
+						<span>
+							<FontAwesomeIcon
+								icon={faTrash}
+								style={{color: "red"}}
+								onClick={() => handleDelete(row)}
+							/>
+						</span>
+						<span>
+							<FontAwesomeIcon
+								icon={faEye}
+								style={{color: "blue"}}
+								onClick={() => handleVisual(row.nombre, row.email)}
+							/>
+						</span>
 					</StyledSpan>
 				</div>
 			),
@@ -174,18 +184,21 @@ function ListaUsuariosAdmins() {
 				hideModal={() => setActive(false)}
 				updateUser={updateUser}
 			/>
-			<VisualModal
-				currentVisual={currentVisual}
-				active={cerrar}
-				hideModal={() => setCerrar(false)}
-				updateCerrar={updateCerrar}
-			/>
+
 			<DeleteModal
 				columnSelect={currentColum}
 				currentUser={eliminar}
 				active={eliminar}
 				hideModal={() => setEliminar(false)}
 				updateDelete={updateDelete}
+			/>
+			<EditProfile
+				currentNombre={currentNombre}
+				currentEmail={currentEmail}
+				currentUser={eliminar}
+				active={cerrar}
+				hideModal={() => setCerrar(false)}
+				// updateCerrar={updateCerrar}
 			/>
 		</Body>
 	);
