@@ -7,9 +7,17 @@ import usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
-import React, {useState} from "react";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
-import {faUserClock, faUserCheck, faUserAltSlash, faTrash} from "@fortawesome/free-solid-svg-icons";
+import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
+
+import React, {useState} from "react";
+import {
+	faUserClock,
+	faUserCheck,
+	faUserAltSlash,
+	faTrash,
+	faEye,
+} from "@fortawesome/free-solid-svg-icons";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
@@ -24,6 +32,11 @@ function ListaUsuariosAdmins() {
 	const [currentName, setCurrentName] = useState("");
 	const [currentUserState, setCurrentUserState] = useState("pending");
 
+	//Edit Profile
+	const [currentNombre, setCurrentNombre] = useState("");
+	const [currentEmail, setCurrentEmail] = useState("");
+	const [cerrar, setCerrar] = useState(false);
+
 	const handleClick = (name, state) => {
 		setCurrentName(name);
 		setCurrentUserState(state);
@@ -33,6 +46,12 @@ function ListaUsuariosAdmins() {
 	const handleDelete = (row) => {
 		setCurrentColum(row);
 		setEliminar(true);
+	};
+
+	const handleVisual = (nombre, email) => {
+		setCurrentNombre(nombre);
+		setCurrentEmail(email);
+		setCerrar(true);
 	};
 
 	const updateDelete = (user) => {
@@ -98,6 +117,13 @@ function ListaUsuariosAdmins() {
 								onClick={() => handleDelete(row)}
 							/>
 						</span>
+						<span>
+							<FontAwesomeIcon
+								icon={faEye}
+								style={{color: "blue"}}
+								onClick={() => handleVisual(row.nombre, row.email)}
+							/>
+						</span>
 					</StyledSpan>
 				</div>
 			),
@@ -129,6 +155,14 @@ function ListaUsuariosAdmins() {
 				active={eliminar}
 				hideModal={() => setEliminar(false)}
 				updateDelete={updateDelete}
+			/>
+			<EditProfile
+				currentNombre={currentNombre}
+				currentEmail={currentEmail}
+				currentUser={eliminar}
+				active={cerrar}
+				hideModal={() => setCerrar(false)}
+				// updateCerrar={updateCerrar}
 			/>
 		</Body>
 	);
