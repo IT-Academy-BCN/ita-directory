@@ -72,6 +72,7 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 		>
 			<UserModalStyled currentUserState={selectValue}>
 				<p>Cambiar el estado del usuario {nombreUsuario}</p>
+
 				<label htmlFor="estado-usuario">Estado usuario</label>
 				<select
 					name="estado-usuario"
