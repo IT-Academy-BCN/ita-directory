@@ -9,12 +9,24 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import React, {useState} from "react";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
-import {faUserClock, faUserCheck, faUserAltSlash, faTrash} from "@fortawesome/free-solid-svg-icons";
+import VisualModal from "components/composed/VisualModal/VisualModal.js";
+import {
+	faUserClock,
+	faUserCheck,
+	faUserAltSlash,
+	faTrash,
+	faEye,
+} from "@fortawesome/free-solid-svg-icons";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
 	const [dataUsers, setDataUsers] = useState(usuarios);
+
+	//Visual user
+
+	const [cerrar, setCerrar] = useState(false);
+	const [currentVisual, setCurrentVisual] = useState("");
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -33,6 +45,15 @@ function ListaUsuariosAdmins() {
 	const handleDelete = (row) => {
 		setCurrentColum(row);
 		setEliminar(true);
+	};
+
+	const handleVisual = (eyes) => {
+		setCurrentVisual(eyes);
+		setCerrar(true);
+	};
+
+	const updateCerrar = (e) => {
+		console.log("estoy cerrando");
 	};
 
 	const updateDelete = (user) => {
@@ -93,6 +114,13 @@ function ListaUsuariosAdmins() {
 						/>
 						<span>
 							<FontAwesomeIcon
+								icon={faEye}
+								style={{color: "grey"}}
+								onClick={() => handleVisual(row.email)}
+							/>
+						</span>
+						<span>
+							<FontAwesomeIcon
 								icon={faTrash}
 								style={{color: "red"}}
 								onClick={() => handleDelete(row)}
@@ -122,6 +150,12 @@ function ListaUsuariosAdmins() {
 				active={active}
 				hideModal={() => setActive(false)}
 				updateUser={updateUser}
+			/>
+			<VisualModal
+				currentVisual={currentVisual}
+				active={cerrar}
+				hideModal={() => setCerrar(false)}
+				updateCerrar={updateCerrar}
 			/>
 			<DeleteModal
 				columnSelect={currentColum}

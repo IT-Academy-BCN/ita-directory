@@ -23,8 +23,6 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 	};
 
 	const handleSubmit = () => {
-		updateDelete(columnSelect);
-
 		if (errorEscritura()) {
 			setError("Escribe la palabra ELIMINAR");
 			return;
@@ -32,6 +30,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 
 		hideModal();
 		resetForm();
+		updateDelete(columnSelect);
 	};
 
 	const resetForm = () => {
@@ -42,6 +41,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 
 	return (
 		<Modal
+			colorModalTitle={Colors.extraDarkBlue}
 			active={active}
 			hideModal={resetForm}
 			title="Eliminar Usuario"
@@ -73,7 +73,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 						text="Eliminar"
 						iconPosition="right"
 						type="submit"
-						className="darkBlue"
+						className="darkRed"
 						onClick={handleSubmit}
 						buttonStyles={{marginRight: 0}}
 					/>
@@ -81,7 +81,7 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 			}
 		>
 			<Wrapper>
-				<p>Escribe la palabra ELIMINAR para poder continuar:</p>
+				<p>Escribe la palabra ELIMINAR para poder continuar</p>
 			</Wrapper>
 			<Wrapper>
 				<Input
