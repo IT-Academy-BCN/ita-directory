@@ -1,6 +1,12 @@
 import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
-import {StyledWrapper, StyledImage, StyledP, StyledSpan} from "./ListaUsuariosAdmins.style";
+import {
+	StyledWrapper,
+	StyledImage,
+	StyledP,
+	StyledSpan,
+	StyledDiv,
+} from "./ListaUsuariosAdmins.style";
 import Colors from "theme/Colors";
 import DataTable from "react-data-table-component";
 import usuarios from "assets/usuarios.json";
@@ -73,33 +79,58 @@ function ListaUsuariosAdmins() {
 
 	const columns = [
 		{
-			name: <div>{<StyledP>Foto</StyledP>}</div>,
+			name: (
+				<div>
+					{
+						<StyledP color={Colors.frenchBlue} paddingL="10px">
+							Foto
+						</StyledP>
+					}
+				</div>
+			),
 			selector: "foto",
 			cell: (row) => (
-				<div>
-					{<StyledImage src={images[row.id]} alt="foto" width="70px" height="70px" />}
-				</div>
+				<StyledDiv>
+					{<StyledImage src={images[row.id]} alt="foto" width="60px" height="60px" />}
+				</StyledDiv>
 			),
 			sortable: true,
 		},
 		{
-			name: <div>{<StyledP>Nombre</StyledP>}</div>,
+			name: (
+				<div>
+					{
+						<StyledP color={Colors.frenchBlue} padding="0">
+							Nombre
+						</StyledP>
+					}
+				</div>
+			),
 			selector: "nombre",
-			cell: (row) => <div>{<StyledP>{row.nombre}</StyledP>}</div>,
+			cell: (row) => <div>{<StyledP color={Colors.frenchBlue}>{row.nombre}</StyledP>}</div>,
 			sortable: true,
 		},
 		{
-			name: <div>{<StyledP>Email</StyledP>}</div>,
+			name: <div>{<StyledP color={Colors.frenchBlue}>Email</StyledP>}</div>,
 			selector: "email",
+			cell: (row) => <div>{<StyledP color={Colors.extraDarkBlue}>{row.email}</StyledP>}</div>,
 			sortable: true,
 		},
 		{
-			name: <div>{<StyledP>Acciones</StyledP>}</div>,
+			name: (
+				<div>
+					{
+						<StyledP color={Colors.frenchBlue} paddingL="210px">
+							Acciones
+						</StyledP>
+					}
+				</div>
+			),
 			selector: "acciones",
 			sortable: true,
 			cell: (row) => (
 				<div>
-					<StyledSpan colorIcono={row.acciones}>
+					<StyledSpan colorIcono={row.acciones} paddingL="210px">
 						<FontAwesomeIcon
 							icon={
 								row.acciones === "rejected"
@@ -136,10 +167,14 @@ function ListaUsuariosAdmins() {
 			color_logo={Colors.extraDarkBlue}
 			color_header={Colors.extraDarkBlue}
 			color_letra={Colors.white}
+			justifyTitle="flex-start"
+			paddingTitle="5px"
+			paddingTitle2="70px"
+			isLoggedIn="true"
 		>
 			<Container row>
 				<StyledWrapper>
-					<DataTable columns={columns} data={dataUsers} />
+					<DataTable columns={columns} data={dataUsers} noHeader={true} />
 				</StyledWrapper>
 			</Container>
 			<UserModal
@@ -149,6 +184,7 @@ function ListaUsuariosAdmins() {
 				hideModal={() => setActive(false)}
 				updateUser={updateUser}
 			/>
+
 			<DeleteModal
 				columnSelect={currentColum}
 				currentUser={eliminar}

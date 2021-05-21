@@ -17,7 +17,16 @@ import {Container} from "theme/GlobalStyles";
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 
-const Header = ({isLoggedIn, title, color_logo, color_header, color_letra}) => {
+const Header = ({
+	isLoggedIn,
+	title,
+	color_logo,
+	color_header,
+	color_letra,
+	justifyTitle,
+	paddingTitle,
+	paddingTitle2,
+}) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
@@ -39,7 +48,12 @@ const Header = ({isLoggedIn, title, color_logo, color_header, color_letra}) => {
 			<>
 				<Container>
 					<HeaderWrapper>
-						<Logo className={`logged`} color_logo={color_logo}>
+						<Logo
+							className={`logged`}
+							color_logo={color_logo}
+							justifyTitle={justifyTitle}
+							paddingTitle={paddingTitle}
+						>
 							Logo Empresa
 						</Logo>
 						<StyledMiPerfil>
@@ -73,18 +87,32 @@ const Header = ({isLoggedIn, title, color_logo, color_header, color_letra}) => {
 					className={`logged`}
 					color_header={color_header}
 					color_letra={color_letra}
+					justifyTitle={justifyTitle}
+					paddingTitle2={paddingTitle2}
 				>
-					<Container>
-						<h1>{title}</h1>
-					</Container>
+					<h1>{title}</h1>
 				</StyledHeader>
 			</>
 		);
 	} else {
 		return (
 			<div>
-				<Logo color_logo={color_logo}> Mi Empresa</Logo>
-				<StyledHeader color_header={color_header} color_letra={color_letra}>
+				<div>
+					<Logo
+						color_logo={color_logo}
+						justifyTitle={justifyTitle}
+						paddingTitle={paddingTitle}
+					>
+						{" "}
+						Mi Empresa
+					</Logo>
+				</div>
+				<StyledHeader
+					color_header={color_header}
+					color_letra={color_letra}
+					justifyTitle={justifyTitle}
+					paddingTitle={paddingTitle}
+				>
 					<h1>{title}</h1>
 				</StyledHeader>
 			</div>
