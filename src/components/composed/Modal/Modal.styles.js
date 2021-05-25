@@ -8,7 +8,7 @@ export const ModalBlock = styled.div`
 	justify-content: center;
 	left: 0;
 	overflow: hidden;
-	padding: 0.4rem;
+	padding: 0.2rem;
 	position: fixed;
 	right: 0;
 	top: 0;
@@ -54,7 +54,7 @@ export const ModalContainer = styled.div`
 
 export const ModalBody = styled.div`
 	overflow-y: auto;
-	padding: 22px 0px;
+	padding: 5px 0px;
 	position: relative;
 	font-family: Arial;
 	font-size: 1rem;
