@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+// import Colors from "theme/Colors";
 
 export const StyledBodyWrapper = styled.div`
 	display: flex;

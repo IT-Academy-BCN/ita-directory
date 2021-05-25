@@ -11,7 +11,7 @@ import {
 	ImageWrapper,
 	StyledLabel,
 	StyledBodyWrapper,
-	StyledError,
+	// StyledError,
 } from "./Profile.styles";
 
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
@@ -25,7 +25,7 @@ const Profile = () => {
 	const [password2, setPassword2] = useState("");
 	const [isPassError, setIsPassError] = useState(false);
 	const [isPassError2, setIsPassError2] = useState(false);
-	const [disabled, setIsDisabled] = useState(true);
+	// const [disabled, setIsDisabled] = useState(true);
 	const [image, setImage] = useState(
 		"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg"
 	);
@@ -88,7 +88,7 @@ const Profile = () => {
 								id="username"
 								name="username"
 								placeholder="Introducir nombre de usuario"
-								disabled={disabled}
+								disabled={true}
 							/>
 							<p>El nombre de usuario no se puede modificar</p>
 						</StyledLabel>
@@ -98,7 +98,7 @@ const Profile = () => {
 								id="email"
 								name="email"
 								placeholder="Introducir email"
-								disabled={disabled}
+								disabled={true}
 							/>
 							<p>
 								El email no se puede modificar. Ponte en contacto si necesitas
