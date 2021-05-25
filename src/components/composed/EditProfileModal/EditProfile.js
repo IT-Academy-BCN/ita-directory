@@ -2,70 +2,42 @@ import React, {useState, useEffect} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
-// import useInput from "hooks/useInput";
-import AsyncButton from "components/units/Button/Button";
+// STYLES
 import {
-	// StyledSmall,
 	ButtonWrapper,
-	StyledFormBack,
-	StyledPhotoWrapper,
-	// ImageWrapper,
+	EditModalStyled,
+	PhotoWrapper,
 	StyledLabel,
-	StyleUploadPhotoWrapper,
-	StyledInputsWrapper,
-	ContainerImage,
-	StyledSubtitle,
-	StyledTextProfile,
+	InputsWrapper,
 } from "components/composed/EditProfileModal/EditProfile.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
-// import {StyledTitle} from "screens/Ad/Ad.styles";
-// import {StyledText} from "components/layout/Header/Header.styles";
 
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
-const EditProfile = ({
-	// updateCerrar,
-	// currentUserState,
-	currentNombre,
-	currentEmail,
-	active,
-	hideModal,
-	updateUser,
-}) => {
+const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUserData}) => {
 	const [password, setPassword] = useState("");
-	// const [password2, setPassword2] = useState("");
 	const [isPassError, setIsPassError] = useState(false);
 	const [isPassError2, setIsPassError2] = useState(false);
-	// const [disabled, setIsDisabled] = useState(true);
-	// const [check, setCheck] = useState("");
 
 	// MODIFY USERNAME / EMAIL
 	const [newName, setNewName] = useState(currentNombre);
+	const [newEmail, setNewEmail] = useState(currentEmail);
 
 	// Aquí actualizamos el estado cuando cambian las props.
 	useEffect(() => {
 		setNewName(currentNombre);
-	}, [currentNombre]);
-
-	// const handleSelect = (val) => {
-	//     setNewName(val);
-	// };
-
-	// const handleClick = (newName) => {
-	//     setNewName(newName);
-	//     closeModal();
-	// };
-
-	// const closeModal = () => {
-	//     setNewName(currentUserState);
-	//     hideModal();
-	// };
+		setNewEmail(currentEmail);
+	}, [currentNombre, currentEmail]);
 
 	const handleNameChange = (newName) => {
 		setNewName(newName);
+	};
+
+	const handleEmailChange = (newEmail) => {
+		setNewEmail(newEmail);
 	};
 
 	// PASSWORD
@@ -76,7 +48,6 @@ const EditProfile = ({
 	};
 
 	const handlePasswordChange2 = (value) => {
-		// setPassword2(value);
 		if (password === value) {
 			setIsPassError2(false);
 		} else {
@@ -84,23 +55,13 @@ const EditProfile = ({
 		}
 	};
 
-	// const agregar = () => {
-	// 	setCheck("Escribe una contraseña valida");
-	// };
-
 	const actualizar = (value) => {
-		// if (password.length === 0 || password2.length === 0 || password !== password2) {
-		// 	agregar();
-		// } else {
-		// 	// updateCerrar(e);
-		// 	console.log(newName);
-		// 	hideModal();
-		// }
 		if (newName === "") {
 			alert("Debes rellenar el nombre de usuario");
+		} else {
+			updateUserData(newName, newEmail);
+			hideModal();
 		}
-
-		updateUser(value);
 	};
 
 	const resetForm = () => {
@@ -109,9 +70,6 @@ const EditProfile = ({
 		setIsPassError(false);
 		setIsPassError2(false);
 		hideModal();
-		// MODIFY USERNAME - EMAIL
-		// resetEmail();
-		// resetName();
 	};
 
 	return (
@@ -156,28 +114,26 @@ const EditProfile = ({
 				</ButtonWrapper>
 			}
 		>
-			<StyledFormBack>
-				<StyledPhotoWrapper>
-					<ContainerImage></ContainerImage>
-					<StyleUploadPhotoWrapper>
-						<StyledSubtitle>Fotografía de perfil</StyledSubtitle>
-						<StyledTextProfile>
+			<EditModalStyled>
+				<PhotoWrapper>
+					<div className="containerImage"></div>
+					<div className="profileContain">
+						<div className="StyledSubtitle">Fotografía de perfil</div>
+						<div className="StyledTextProfile">
 							Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato.JPG,
 							.JPEG, .PNG, y .GIF.
-						</StyledTextProfile>
-						<AsyncButton
+						</div>
+						<Button
 							text="Subir"
 							loadingText="Subiendo"
 							type="submit"
 							className="blueGradientProfile"
 							isLoading={false}
 						/>
-					</StyleUploadPhotoWrapper>
-				</StyledPhotoWrapper>
-			</StyledFormBack>
+					</div>
+				</PhotoWrapper>
 
-			<StyledFormBack>
-				<StyledInputsWrapper>
+				<InputsWrapper>
 					<StyledLabel>
 						<Input
 							id="userName"
@@ -193,16 +149,23 @@ const EditProfile = ({
 							// minLength={6}
 						/>
 					</StyledLabel>
-					<StyledLabel>
-						<label htmlFor="email">Email</label>
-						<Input id="email" name="email" placeholder={currentEmail} disabled={true} />
-						{/* <StyledTextProfile>El email no se puede modificar. Ponte en contacto si necesitas</StyledTextProfile> */}
-					</StyledLabel>
-				</StyledInputsWrapper>
 
-				<StyledInputsWrapper>
 					<StyledLabel>
-						{/* <label htmlFor="passName">Nueva Contraseña</label> */}
+						{/* <label htmlFor="email">Email</label> */}
+						<Input
+							id="email"
+							name="email"
+							label="Email"
+							ype="text"
+							placeholder="Introduce un email"
+							value={newEmail}
+							onChange={(e) => handleEmailChange(e.target.value)}
+						/>
+					</StyledLabel>
+				</InputsWrapper>
+
+				<InputsWrapper>
+					<StyledLabel>
 						<Input
 							label="Nueva contraseña"
 							type="password"
@@ -217,7 +180,6 @@ const EditProfile = ({
 						/>
 					</StyledLabel>
 					<StyledLabel>
-						{/* <label htmlFor="confirmPassName">Confirmar Contraseña</label> */}
 						<Input
 							label="Confirmar contraseña"
 							type="password"
@@ -231,14 +193,14 @@ const EditProfile = ({
 							minLength={6}
 						/>
 					</StyledLabel>
-				</StyledInputsWrapper>
+				</InputsWrapper>
 				<Button
 					onClick={actualizar}
 					text="Guardar"
 					type="submit"
 					className="greenGradient"
 				/>
-			</StyledFormBack>
+			</EditModalStyled>
 
 			{/* <StyledSmall>{check}</StyledSmall> */}
 		</Modal>
