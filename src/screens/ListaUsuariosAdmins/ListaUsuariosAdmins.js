@@ -54,7 +54,7 @@ function ListaUsuariosAdmins() {
 		setEliminar(true);
 	};
 
-	const handleVisual = (nombre, email) => {
+	const handleEdit = (nombre, email) => {
 		setCurrentNombre(nombre);
 		setCurrentEmail(email);
 		setCerrar(true);
@@ -152,7 +152,7 @@ function ListaUsuariosAdmins() {
 							<FontAwesomeIcon
 								icon={faEye}
 								style={{color: "blue"}}
-								onClick={() => handleVisual(row.nombre, row.email)}
+								onClick={() => handleEdit(row.nombre, row.email)}
 							/>
 						</span>
 					</StyledSpan>
@@ -184,7 +184,6 @@ function ListaUsuariosAdmins() {
 				hideModal={() => setActive(false)}
 				updateUser={updateUser}
 			/>
-
 			<DeleteModal
 				columnSelect={currentColum}
 				currentUser={eliminar}

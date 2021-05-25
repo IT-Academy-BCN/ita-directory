@@ -53,7 +53,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalBody = styled.div`
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	padding: 22px 0px;
 	position: relative;
 	font-family: Arial;
