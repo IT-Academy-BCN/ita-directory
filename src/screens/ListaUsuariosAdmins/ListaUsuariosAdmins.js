@@ -1,13 +1,7 @@
 import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
-import {
-	StyledWrapper,
-	StyledImage,
-	StyledP,
-	StyledSpan,
-	StyledDiv,
-} from "./ListaUsuariosAdmins.style";
 import Colors from "theme/Colors";
+import {StyledWrapper, StyledImage, StyledSpan, StyledDiv} from "./ListaUsuariosAdmins.style";
 import DataTable from "react-data-table-component";
 import usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
@@ -74,63 +68,53 @@ function ListaUsuariosAdmins() {
 		);
 	};
 
-	console.log("currentUserState parent", currentUserState);
-	console.log("dataUsers", dataUsers[0]);
-
 	const columns = [
 		{
 			name: (
-				<div>
-					{
-						<StyledP color={Colors.frenchBlue} paddingL="10px">
-							Foto
-						</StyledP>
-					}
-				</div>
+				<StyledDiv color={Colors.frenchBlue} paddingL="0px">
+					Foto
+				</StyledDiv>
 			),
 			selector: "foto",
 			cell: (row) => (
 				<StyledDiv>
-					{<StyledImage src={images[row.id]} alt="foto" width="60px" height="60px" />}
+					{<StyledImage src={images[row.id]} alt="foto" width="50px" height="50px" />}
 				</StyledDiv>
 			),
 			sortable: true,
+			compact: false,
+			minWidth: "50px",
 		},
 		{
 			name: (
-				<div>
-					{
-						<StyledP color={Colors.frenchBlue} padding="0">
-							Nombre
-						</StyledP>
-					}
-				</div>
+				<StyledDiv color={Colors.frenchBlue} padding="0">
+					Nombre
+				</StyledDiv>
 			),
 			selector: "nombre",
-			cell: (row) => <div>{<StyledP color={Colors.frenchBlue}>{row.nombre}</StyledP>}</div>,
+			cell: (row) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
 			sortable: true,
+			compact: true,
+			minWidth: "50px",
 		},
 		{
-			name: <div>{<StyledP color={Colors.frenchBlue}>Email</StyledP>}</div>,
+			name: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
 			selector: "email",
-			cell: (row) => <div>{<StyledP color={Colors.extraDarkBlue}>{row.email}</StyledP>}</div>,
+			cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
 			sortable: true,
+			compact: true,
+			minWidth: "70px",
 		},
 		{
-			name: (
-				<div>
-					{
-						<StyledP color={Colors.frenchBlue} paddingL="210px">
-							Acciones
-						</StyledP>
-					}
-				</div>
-			),
+			name: <StyledDiv color={Colors.frenchBlue}>Acciones</StyledDiv>,
 			selector: "acciones",
 			sortable: true,
+			compact: false,
+			right: true,
+			minWidth: "70px",
 			cell: (row) => (
-				<div>
-					<StyledSpan colorIcono={row.acciones} paddingL="210px">
+				<StyledDiv>
+					<StyledSpan colorIcono={row.acciones}>
 						<FontAwesomeIcon
 							icon={
 								row.acciones === "rejected"
@@ -141,22 +125,17 @@ function ListaUsuariosAdmins() {
 							}
 							onClick={() => handleClick(row.nombre, row.acciones)}
 						/>
-						<span>
-							<FontAwesomeIcon
-								icon={faTrash}
-								style={{color: "red"}}
-								onClick={() => handleDelete(row)}
-							/>
-						</span>
-						<span>
+						<StyledSpan colorIcono={Colors.extraDarkBlue} paddingL="12px">
 							<FontAwesomeIcon
 								icon={faEye}
-								style={{color: "blue"}}
 								onClick={() => handleVisual(row.nombre, row.email)}
 							/>
-						</span>
+						</StyledSpan>
+						<StyledSpan colorIcono={Colors.redColor} paddingL="12px">
+							<FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(row)} />
+						</StyledSpan>
 					</StyledSpan>
-				</div>
+				</StyledDiv>
 			),
 		},
 	];
@@ -168,8 +147,8 @@ function ListaUsuariosAdmins() {
 			color_header={Colors.extraDarkBlue}
 			color_letra={Colors.white}
 			justifyTitle="flex-start"
-			paddingTitle="5px"
-			paddingTitle2="70px"
+			paddingTitle="0px"
+			paddingTitle2="40px"
 			isLoggedIn="true"
 		>
 			<Container row>
