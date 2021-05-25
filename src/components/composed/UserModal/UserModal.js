@@ -5,7 +5,7 @@ import {UserModalStyled, ButtonWrapper} from "./UserModal.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUser}) => {
+const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUserStatus}) => {
 	// Aquí ponemos el estado inicial, pero no se actualiza al volver a renderizar cuando se actualizan las props.
 	const [selectValue, setSelectValue] = useState(currentUserState);
 
@@ -19,7 +19,7 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 	};
 
 	const handleClick = (val, nombreUsuario) => {
-		updateUser(val, nombreUsuario);
+		updateUserStatus(val, nombreUsuario);
 		closeModal();
 	};
 
