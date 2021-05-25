@@ -1,15 +1,3 @@
-import Body from "components/layout/Body/Body";
-import {Container} from "theme/GlobalStyles.js";
-import Colors from "theme/Colors";
-import {StyledWrapper, StyledImage, StyledSpan, StyledDiv} from "./ListaUsuariosAdmins.style";
-import DataTable from "react-data-table-component";
-import usuarios from "assets/usuarios.json";
-import {people1b, people4b, people13b} from "assets/images";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import UserModal from "components/composed/UserModal/UserModal.js";
-import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
-import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
-
 import React, {useState} from "react";
 import {
 	faUserClock,
@@ -18,6 +6,19 @@ import {
 	faTrash,
 	faEye,
 } from "@fortawesome/free-solid-svg-icons";
+import Body from "components/layout/Body/Body";
+import {Container} from "theme/GlobalStyles.js";
+import Colors from "theme/Colors";
+import DataTable from "react-data-table-component";
+import usuarios from "assets/usuarios.json";
+import {people1b, people4b, people13b} from "assets/images";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import UserModal from "components/composed/UserModal/UserModal.js";
+import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
+import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
+
+// Styles
+import {StyledWrapper, StyledImage, StyledDiv} from "./ListaUsuariosAdmins.style";
 
 function ListaUsuariosAdmins() {
 	const images = [people1b, people4b, people13b];
@@ -37,18 +38,18 @@ function ListaUsuariosAdmins() {
 	const [currentEmail, setCurrentEmail] = useState("");
 	const [cerrar, setCerrar] = useState(false);
 
-	const handleClick = (name, state) => {
+	const handleModalStatus = (name, state) => {
 		setCurrentName(name);
 		setCurrentUserState(state);
 		setActive(true);
 	};
 
-	const handleDelete = (row) => {
+	const handleModalDelete = (row) => {
 		setCurrentColum(row);
 		setEliminar(true);
 	};
 
-	const handleEdit = (nombre, email) => {
+	const handleModalEdit = (nombre, email) => {
 		setCurrentNombre(nombre);
 		setCurrentEmail(email);
 		setCerrar(true);
@@ -61,8 +62,10 @@ function ListaUsuariosAdmins() {
 
 		setDataUsers(newUsers);
 	};
-	const updateUser = (val, nombreUsuario) => {
-		console.log(val, nombreUsuario);
+
+	const updateUserData = (value) => {};
+
+	const updateUserStatus = (val, nombreUsuario) => {
 		setDataUsers(
 			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
 		);
@@ -113,12 +116,8 @@ function ListaUsuariosAdmins() {
 			right: true,
 			minWidth: "140px",
 			cell: (row) => (
-				<StyledDiv>
-					<StyledSpan
-						colorIcono={row.acciones}
-						paddingL="10px"
-						onClick={() => handleClick(row.nombre, row.acciones)}
-					>
+				<div className="actions-column">
+					<button onClick={() => handleModalStatus(row.nombre, row.acciones)}>
 						<FontAwesomeIcon
 							icon={
 								row.acciones === "rejected"
@@ -128,36 +127,14 @@ function ListaUsuariosAdmins() {
 									: faUserClock
 							}
 						/>
-						<span>
-							<FontAwesomeIcon
-								icon={faTrash}
-								style={{color: "red"}}
-								onClick={() => handleDelete(row)}
-							/>
-						</span>
-						<span>
-							<FontAwesomeIcon
-								icon={faEye}
-								style={{color: "blue"}}
-								onClick={() => handleEdit(row.nombre, row.email)}
-							/>
-						</span>
-					</StyledSpan>
-					<StyledSpan
-						colorIcono={Colors.extraDarkBlue}
-						paddingL="10px"
-						onClick={() => handleVisual(row.nombre, row.email)}
-					>
-						<FontAwesomeIcon icon={faEye} />
-					</StyledSpan>
-					<StyledSpan
-						colorIcono={Colors.redColor}
-						paddingL="10px"
-						onClick={() => handleDelete(row)}
-					>
-						<FontAwesomeIcon icon={faTrash} />
-					</StyledSpan>
-				</StyledDiv>
+					</button>
+					<button onClick={() => handleModalEdit(row.nombre, row.email)}>
+						<FontAwesomeIcon icon={faEye} style={{color: "blue"}} />
+					</button>
+					<button onClick={() => handleModalDelete(row)}>
+						<FontAwesomeIcon icon={faTrash} style={{color: "red"}} />
+					</button>
+				</div>
 			),
 		},
 	];
@@ -183,7 +160,7 @@ function ListaUsuariosAdmins() {
 				currentUserState={currentUserState}
 				active={active}
 				hideModal={() => setActive(false)}
-				updateUser={updateUser}
+				updateUserStatus={updateUserStatus}
 			/>
 			<DeleteModal
 				columnSelect={currentColum}
@@ -198,6 +175,7 @@ function ListaUsuariosAdmins() {
 				currentUser={eliminar}
 				active={cerrar}
 				hideModal={() => setCerrar(false)}
+				updateUserData={updateUserData}
 				// updateCerrar={updateCerrar}
 			/>
 		</Body>

@@ -5,7 +5,7 @@ import Input from "components/units/Input/Input.js";
 // import useInput from "hooks/useInput";
 import AsyncButton from "components/units/Button/Button";
 import {
-	StyledSmall,
+	// StyledSmall,
 	ButtonWrapper,
 	StyledFormBack,
 	StyledPhotoWrapper,
@@ -27,8 +27,8 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
 const EditProfile = ({
-	updateCerrar,
-	currentUserState,
+	// updateCerrar,
+	// currentUserState,
 	currentNombre,
 	currentEmail,
 	active,
@@ -36,11 +36,11 @@ const EditProfile = ({
 	updateUser,
 }) => {
 	const [password, setPassword] = useState("");
-	const [password2, setPassword2] = useState("");
+	// const [password2, setPassword2] = useState("");
 	const [isPassError, setIsPassError] = useState(false);
 	const [isPassError2, setIsPassError2] = useState(false);
 	// const [disabled, setIsDisabled] = useState(true);
-	const [check, setCheck] = useState("");
+	// const [check, setCheck] = useState("");
 
 	// MODIFY USERNAME / EMAIL
 	const [newName, setNewName] = useState(currentNombre);
@@ -76,7 +76,7 @@ const EditProfile = ({
 	};
 
 	const handlePasswordChange2 = (value) => {
-		setPassword2(value);
+		// setPassword2(value);
 		if (password === value) {
 			setIsPassError2(false);
 		} else {
@@ -84,23 +84,28 @@ const EditProfile = ({
 		}
 	};
 
-	const agregar = () => {
-		setCheck("Escribe una contraseña valida");
-	};
+	// const agregar = () => {
+	// 	setCheck("Escribe una contraseña valida");
+	// };
 
-	const actualizar = (e) => {
-		if (password.length === 0 || password2.length === 0 || password !== password2) {
-			agregar();
-		} else {
-			// updateCerrar(e);
-			console.log(newName);
-			hideModal();
+	const actualizar = (value) => {
+		// if (password.length === 0 || password2.length === 0 || password !== password2) {
+		// 	agregar();
+		// } else {
+		// 	// updateCerrar(e);
+		// 	console.log(newName);
+		// 	hideModal();
+		// }
+		if (newName === "") {
+			alert("Debes rellenar el nombre de usuario");
 		}
+
+		updateUser(value);
 	};
 
 	const resetForm = () => {
 		setPassword();
-		setPassword2();
+		// setPassword2();
 		setIsPassError(false);
 		setIsPassError2(false);
 		hideModal();
@@ -179,7 +184,8 @@ const EditProfile = ({
 							name="userName"
 							label="Nuevo usuario"
 							type="text"
-							placeholder={currentNombre}
+							placeholder="Introduce nombre de usuario"
+							value={newName}
 							onChange={(e) => handleNameChange(e.target.value)}
 							className="errorProfile"
 							// error={isPassError}
@@ -234,7 +240,7 @@ const EditProfile = ({
 				/>
 			</StyledFormBack>
 
-			<StyledSmall>{check}</StyledSmall>
+			{/* <StyledSmall>{check}</StyledSmall> */}
 		</Modal>
 	);
 };

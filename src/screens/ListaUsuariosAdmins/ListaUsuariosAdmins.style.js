@@ -21,6 +21,26 @@ export const StyledWrapper = styled.div`
 	@media only screen and (max-width: 450px) {
 		width: 100%;
 	}
+
+	.actions-column {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		button {
+			width: 42px;
+			height: 42px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: transparent;
+			border: none;
+
+			svg {
+				font-size: 20px;
+			}
+		}
+	}
 `;
 
 export const StyledSpan = styled.span`
