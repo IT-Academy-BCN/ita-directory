@@ -5,13 +5,22 @@ export const StyledWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	width: 100%;
 	margin: 20px 0px;
+	font: normal normal normal 14px/18px Arial;
+	width: 100%;
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid #b0b0b0;
 	box-shadow: 1px 4px 8px 0 rgba(0, 0, 0, 0.2), 1px 6px 20px 0 rgba(0, 0, 0, 0.19);
 	flex-wrap: nowrap;
-	padding: 0.1rem;
+	padding: 0.5rem;
+
+	@media only screen and (max-width: 650px) {
+		width: 100%;
+		font: normal normal normal 6px/18px Arial;
+	}
+	@media only screen and (max-width: 450px) {
+		width: 100%;
+	}
 `;
 
 export const StyledSpan = styled.span`
@@ -20,8 +29,14 @@ export const StyledSpan = styled.span`
 			? Colors.redColor
 			: props.colorIcono === "aprobado"
 			? Colors.darkGreen
-			: Colors.grey};
+			: props.colorIcono === "pending"
+			? Colors.grey
+			: props.colorIcono};
+	padding: ${(props) => props.paddingL};
+	padding-right: ${(props) => props.paddingL};
 	padding-left: ${(props) => props.paddingL};
+	font-size: 24px;
+	max-size: 24px;
 `;
 
 export const StyledImage = styled.img`
@@ -29,16 +44,14 @@ export const StyledImage = styled.img`
 `;
 
 export const StyledDiv = styled.div`
-	padding: 10px 5px;
-`;
-
-export const StyledP = styled.p`
 	color: ${(props) => props.color};
 	font-weight: bold;
+	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
-`;
-
-export const StyledP2 = styled.p`
-	color: ${(props) => props.color};
-	font-weight: bold;
+	@media only screen and (max-width: 650px) {
+		font-size: 14px;
+	}
+	@media only screen and (max-width: 450px) {
+		font-size: 14px;
+	}
 `;

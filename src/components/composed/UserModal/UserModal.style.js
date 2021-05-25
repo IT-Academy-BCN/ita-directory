@@ -2,12 +2,15 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const UserModalStyled = styled.div`
+	margin-bottom: 25px;
 	p {
 		color: ${Colors.grey};
 		width: auto;
 		letter-spacing: 0px;
 		opacity: 1;
-		width: auto;
+		font-size: 16px;
+		width: 90%;
+		margin-bottom: 2px;
 	}
 
 	label {
@@ -16,7 +19,7 @@ export const UserModalStyled = styled.div`
 
 	select {
 		text-transform: uppercase;
-		padding: 0.5em;
+		padding: 0.2em;
 		font-size: 20px;
 		border-radius: 5px;
 		font-weight: bold;

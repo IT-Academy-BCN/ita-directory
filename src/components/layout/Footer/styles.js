@@ -34,7 +34,7 @@ export const StyledFooter = styled.footer`
 	}
 
 	@media only screen and (max-width: 600px) {
-		margin: 2rem;
+		margin: 0.5rem;
 	}
 `;
 
