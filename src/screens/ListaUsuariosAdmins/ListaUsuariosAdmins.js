@@ -78,12 +78,12 @@ function ListaUsuariosAdmins() {
 			selector: "foto",
 			cell: (row) => (
 				<StyledDiv>
-					{<StyledImage src={images[row.id]} alt="foto" width="50px" height="50px" />}
+					{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
 				</StyledDiv>
 			),
 			sortable: true,
-			compact: false,
-			minWidth: "50px",
+			compact: true,
+			minWidth: "32px",
 		},
 		{
 			name: (
@@ -95,7 +95,7 @@ function ListaUsuariosAdmins() {
 			cell: (row) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
 			sortable: true,
 			compact: true,
-			minWidth: "50px",
+			minWidth: "40px",
 		},
 		{
 			name: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
@@ -103,18 +103,22 @@ function ListaUsuariosAdmins() {
 			cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
 			sortable: true,
 			compact: true,
-			minWidth: "70px",
+			minWidth: "60px",
 		},
 		{
 			name: <StyledDiv color={Colors.frenchBlue}>Acciones</StyledDiv>,
 			selector: "acciones",
 			sortable: true,
-			compact: false,
+			compact: true,
 			right: true,
-			minWidth: "70px",
+			minWidth: "140px",
 			cell: (row) => (
 				<StyledDiv>
-					<StyledSpan colorIcono={row.acciones}>
+					<StyledSpan
+						colorIcono={row.acciones}
+						paddingL="10px"
+						onClick={() => handleClick(row.nombre, row.acciones)}
+					>
 						<FontAwesomeIcon
 							icon={
 								row.acciones === "rejected"
@@ -123,17 +127,21 @@ function ListaUsuariosAdmins() {
 									? faUserCheck
 									: faUserClock
 							}
-							onClick={() => handleClick(row.nombre, row.acciones)}
 						/>
-						<StyledSpan colorIcono={Colors.extraDarkBlue} paddingL="12px">
-							<FontAwesomeIcon
-								icon={faEye}
-								onClick={() => handleVisual(row.nombre, row.email)}
-							/>
-						</StyledSpan>
-						<StyledSpan colorIcono={Colors.redColor} paddingL="12px">
-							<FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(row)} />
-						</StyledSpan>
+					</StyledSpan>
+					<StyledSpan
+						colorIcono={Colors.extraDarkBlue}
+						paddingL="10px"
+						onClick={() => handleVisual(row.nombre, row.email)}
+					>
+						<FontAwesomeIcon icon={faEye} />
+					</StyledSpan>
+					<StyledSpan
+						colorIcono={Colors.redColor}
+						paddingL="10px"
+						onClick={() => handleDelete(row)}
+					>
+						<FontAwesomeIcon icon={faTrash} />
 					</StyledSpan>
 				</StyledDiv>
 			),
@@ -148,7 +156,7 @@ function ListaUsuariosAdmins() {
 			color_letra={Colors.white}
 			justifyTitle="flex-start"
 			paddingTitle="0px"
-			paddingTitle2="40px"
+			paddingTitle2="70px"
 			isLoggedIn="true"
 		>
 			<Container row>

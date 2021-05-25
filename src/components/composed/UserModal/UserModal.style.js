@@ -8,7 +8,9 @@ export const UserModalStyled = styled.div`
 		width: auto;
 		letter-spacing: 0px;
 		opacity: 1;
-		font-size: 8px;
+		font-size: 16px;
+		width: 90%;
+		margin-bottom: 2px;
 	}
 
 	label {
