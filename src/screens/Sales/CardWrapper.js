@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import BarChart from "components/composed/Chart/BarChart/BarChart";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
-import {generateData, daysBetween} from "utils/generateData";
+import {generateData, daysBetween} from "utils/generateData1";
 
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
