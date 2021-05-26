@@ -63,9 +63,13 @@ function ListaUsuariosAdmins() {
 		setDataUsers(newUsers);
 	};
 
-	const updateUserData = (value, nombreUsuario) => {
+	const updateUserData = (newName, newEmail) => {
 		setDataUsers(
-			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, nombre: value} : t))
+			dataUsers.map((item) =>
+				item.nombre === currentNombre || item.email === currentEmail
+					? {...item, nombre: newName, email: newEmail}
+					: item
+			)
 		);
 	};
 
