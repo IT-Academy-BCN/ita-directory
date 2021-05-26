@@ -9,7 +9,7 @@ const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
 const data = generateData(new Date(initialDate), days, [1, 50]);
 
-function Sales() {
+function SalesByMonth() {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
@@ -25,4 +25,4 @@ function Sales() {
 	);
 }
 
-export default Sales;
+export default SalesByMonth;

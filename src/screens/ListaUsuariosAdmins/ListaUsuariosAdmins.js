@@ -31,12 +31,11 @@ function ListaUsuariosAdmins() {
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
+	const [editar, setEditar] = useState(false);
 	const [currentUserState, setCurrentUserState] = useState("pending");
 
 	//Edit Profile
-	const [currentNombre, setCurrentNombre] = useState("");
 	const [currentEmail, setCurrentEmail] = useState("");
-	const [cerrar, setCerrar] = useState(false);
 
 	const handleModalStatus = (name, state) => {
 		setCurrentName(name);
@@ -49,10 +48,10 @@ function ListaUsuariosAdmins() {
 		setEliminar(true);
 	};
 
-	const handleModalEdit = (nombre, email) => {
-		setCurrentNombre(nombre);
+	const handleModalEdit = (name, email) => {
+		setCurrentName(name);
 		setCurrentEmail(email);
-		setCerrar(true);
+		setEditar(true);
 	};
 
 	const updateDelete = (user) => {
@@ -66,7 +65,7 @@ function ListaUsuariosAdmins() {
 	const updateUserData = (newName, newEmail) => {
 		setDataUsers(
 			dataUsers.map((item) =>
-				item.nombre === currentNombre || item.email === currentEmail
+				item.nombre === currentName || item.email === currentEmail
 					? {...item, nombre: newName, email: newEmail}
 					: item
 			)
@@ -144,7 +143,7 @@ function ListaUsuariosAdmins() {
 							}
 						></FontAwesomeIcon>
 					</button>
-					<button onClick={() => handleModalEdit(row.nombre, row.email)}>
+					<button onClick={() => handleModalEdit(row.nombre, row.email, row.id)}>
 						<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
 					</button>
 					<button onClick={() => handleModalDelete(row)}>
@@ -186,12 +185,12 @@ function ListaUsuariosAdmins() {
 				updateDelete={updateDelete}
 			/>
 			<EditProfile
-				currentNombre={currentNombre}
+				currentNombre={currentName}
 				currentEmail={currentEmail}
-				currentUser={eliminar}
-				active={cerrar}
-				hideModal={() => setCerrar(false)}
+				active={editar}
+				hideModal={() => setEditar(false)}
 				updateUserData={updateUserData}
+				setCurrentNombre={setCurrentName}
 				// updateCerrar={updateCerrar}
 			/>
 		</Body>
