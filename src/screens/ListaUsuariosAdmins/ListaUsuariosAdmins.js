@@ -32,7 +32,6 @@ function ListaUsuariosAdmins() {
 	// Current user
 	const [currentName, setCurrentName] = useState("");
 	const [editar, setEditar] = useState(false);
-	const [currentId, setCurrentId] = useState("");
 	const [currentUserState, setCurrentUserState] = useState("pending");
 
 	//Edit Profile
@@ -49,10 +48,9 @@ function ListaUsuariosAdmins() {
 		setEliminar(true);
 	};
 
-	const handleModalEdit = (name, email, id) => {
+	const handleModalEdit = (name, email) => {
 		setCurrentName(name);
 		setCurrentEmail(email);
-		setCurrentId(id);
 		setEditar(true);
 	};
 
@@ -64,9 +62,14 @@ function ListaUsuariosAdmins() {
 		setDataUsers(newUsers);
 	};
 
-	const updateUserData = (value, currentId) => {
-		console.log(value, currentId, "final");
-		setDataUsers(dataUsers.map((t) => (t.id === currentId ? {...t, nombre: value} : t)));
+	const updateUserData = (newName, newEmail) => {
+		setDataUsers(
+			dataUsers.map((item) =>
+				item.nombre === currentName || item.email === currentEmail
+					? {...item, nombre: newName, email: newEmail}
+					: item
+			)
+		);
 	};
 
 	const updateUserStatus = (val, nombreUsuario) => {
@@ -182,13 +185,12 @@ function ListaUsuariosAdmins() {
 				updateDelete={updateDelete}
 			/>
 			<EditProfile
-				currentName={currentName}
+				currentNombre={currentName}
 				currentEmail={currentEmail}
-				currentId={currentId}
 				active={editar}
 				hideModal={() => setEditar(false)}
 				updateUserData={updateUserData}
-				setCurrentName={setCurrentName}
+				setCurrentNombre={setCurrentName}
 				// updateCerrar={updateCerrar}
 			/>
 		</Body>
