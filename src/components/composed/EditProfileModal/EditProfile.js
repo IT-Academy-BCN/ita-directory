@@ -29,11 +29,13 @@ const validatePassword = (password) => PASSWORD_REGEX.test(password);
 const EditProfile = ({
 	// updateCerrar,
 	// currentUserState,
-	currentNombre,
+	currentName,
 	currentEmail,
+	currentId,
 	active,
 	hideModal,
-	updateUser,
+	updateUserData,
+	setCurrentName,
 }) => {
 	const [password, setPassword] = useState("");
 	// const [password2, setPassword2] = useState("");
@@ -43,12 +45,8 @@ const EditProfile = ({
 	// const [check, setCheck] = useState("");
 
 	// MODIFY USERNAME / EMAIL
-	const [newName, setNewName] = useState(currentNombre);
 
 	// Aquí actualizamos el estado cuando cambian las props.
-	useEffect(() => {
-		setNewName(currentNombre);
-	}, [currentNombre]);
 
 	// const handleSelect = (val) => {
 	//     setNewName(val);
@@ -64,8 +62,14 @@ const EditProfile = ({
 	//     hideModal();
 	// };
 
+	const [newName, setSelectName] = useState(currentName);
+
+	useEffect(() => {
+		setSelectName(newName);
+	}, [newName]);
+
 	const handleNameChange = (newName) => {
-		setNewName(newName);
+		setCurrentName(newName);
 	};
 
 	// PASSWORD
@@ -88,19 +92,14 @@ const EditProfile = ({
 	// 	setCheck("Escribe una contraseña valida");
 	// };
 
-	const actualizar = (value) => {
-		// if (password.length === 0 || password2.length === 0 || password !== password2) {
-		// 	agregar();
-		// } else {
-		// 	// updateCerrar(e);
-		// 	console.log(newName);
-		// 	hideModal();
-		// }
-		if (newName === "") {
-			alert("Debes rellenar el nombre de usuario");
-		}
+	const actualizar = (val, currentId) => {
+		updateUserData(val, currentId);
+		closeModal();
+	};
 
-		updateUser(value);
+	const closeModal = () => {
+		setSelectName(newName);
+		hideModal();
 	};
 
 	const resetForm = () => {
@@ -149,7 +148,7 @@ const EditProfile = ({
 						iconPosition="right"
 						type="submit"
 						className="darkBlue"
-						onClick={actualizar}
+						onClick={() => actualizar(currentName, currentId)}
 						buttonStyles={{marginRight: 0}}
 						// onClick={() => handleClick(newName)}
 					/>
@@ -184,8 +183,8 @@ const EditProfile = ({
 							name="userName"
 							label="Nuevo usuario"
 							type="text"
-							placeholder="Introduce nombre de usuario"
-							value={newName}
+							value={currentName}
+							placeholder={currentName}
 							onChange={(e) => handleNameChange(e.target.value)}
 							className="errorProfile"
 							// error={isPassError}
@@ -195,7 +194,13 @@ const EditProfile = ({
 					</StyledLabel>
 					<StyledLabel>
 						<label htmlFor="email">Email</label>
-						<Input id="email" name="email" placeholder={currentEmail} disabled={true} />
+						<Input
+							id="email"
+							name="email"
+							placeholder={currentEmail}
+							disabled={true}
+							value={currentEmail}
+						/>
 						{/* <StyledTextProfile>El email no se puede modificar. Ponte en contacto si necesitas</StyledTextProfile> */}
 					</StyledLabel>
 				</StyledInputsWrapper>
@@ -233,7 +238,7 @@ const EditProfile = ({
 					</StyledLabel>
 				</StyledInputsWrapper>
 				<Button
-					onClick={actualizar}
+					onClick={() => actualizar(currentName, currentId)}
 					text="Guardar"
 					type="submit"
 					className="greenGradient"

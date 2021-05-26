@@ -31,12 +31,12 @@ function ListaUsuariosAdmins() {
 
 	// Current user
 	const [currentName, setCurrentName] = useState("");
+	const [editar, setEditar] = useState(false);
+	const [currentId, setCurrentId] = useState("");
 	const [currentUserState, setCurrentUserState] = useState("pending");
 
 	//Edit Profile
-	const [currentNombre, setCurrentNombre] = useState("");
 	const [currentEmail, setCurrentEmail] = useState("");
-	const [cerrar, setCerrar] = useState(false);
 
 	const handleModalStatus = (name, state) => {
 		setCurrentName(name);
@@ -49,10 +49,11 @@ function ListaUsuariosAdmins() {
 		setEliminar(true);
 	};
 
-	const handleModalEdit = (nombre, email) => {
-		setCurrentNombre(nombre);
+	const handleModalEdit = (name, email, id) => {
+		setCurrentName(name);
 		setCurrentEmail(email);
-		setCerrar(true);
+		setCurrentId(id);
+		setEditar(true);
 	};
 
 	const updateDelete = (user) => {
@@ -63,10 +64,9 @@ function ListaUsuariosAdmins() {
 		setDataUsers(newUsers);
 	};
 
-	const updateUserData = (value, nombreUsuario) => {
-		setDataUsers(
-			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, nombre: value} : t))
-		);
+	const updateUserData = (value, currentId) => {
+		console.log(value, currentId, "final");
+		setDataUsers(dataUsers.map((t) => (t.id === currentId ? {...t, nombre: value} : t)));
 	};
 
 	const updateUserStatus = (val, nombreUsuario) => {
@@ -140,7 +140,7 @@ function ListaUsuariosAdmins() {
 							}
 						></FontAwesomeIcon>
 					</button>
-					<button onClick={() => handleModalEdit(row.nombre, row.email)}>
+					<button onClick={() => handleModalEdit(row.nombre, row.email, row.id)}>
 						<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
 					</button>
 					<button onClick={() => handleModalDelete(row)}>
@@ -182,12 +182,13 @@ function ListaUsuariosAdmins() {
 				updateDelete={updateDelete}
 			/>
 			<EditProfile
-				currentNombre={currentNombre}
+				currentName={currentName}
 				currentEmail={currentEmail}
-				currentUser={eliminar}
-				active={cerrar}
-				hideModal={() => setCerrar(false)}
+				currentId={currentId}
+				active={editar}
+				hideModal={() => setEditar(false)}
 				updateUserData={updateUserData}
+				setCurrentName={setCurrentName}
 				// updateCerrar={updateCerrar}
 			/>
 		</Body>
