@@ -3,6 +3,7 @@ import Colors from "theme/Colors";
 import SelectArrow from "assets/images/select-arrow.svg";
 
 export const CardChart = styled.div`
+	width: 50% !important;
 	box-shadow: 0px 3px 6px #00000029;
 	border: 1px solid ${Colors.extraLightGrey};
 	border-radius: 6px;
@@ -81,6 +82,8 @@ export const CardContainer = styled.div`
 `;
 
 export const CardBody = styled.div`
+	padding-top: 2rem;
+	justify-items: center;
 	width: 100%;
-	height: 40vh;
+	height: 50vh;
 `;
