@@ -19,6 +19,7 @@ import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/gen
 function BarChart({data, hideModal, active, size}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
+
 	useEffect(() => {
 		if (chartRef !== null && curChart === undefined) {
 			setCurChart(echarts.init(chartRef.current));

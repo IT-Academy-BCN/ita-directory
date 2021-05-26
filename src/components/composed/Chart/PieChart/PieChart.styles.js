@@ -82,5 +82,53 @@ export const CardContainer = styled.div`
 
 export const CardBody = styled.div`
 	width: 100%;
-	height: 40vh;
+	height: 45vh;
+`;
+
+export const CardSelector = styled.select`
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-right: 12px;
+	width: 94px;
+	height: 35px;
+	box-shadow: 0 3px 6px #00000029;
+	border: none;
+	border-radius: 4px;
+	color: #e22e2e;
+	font: normal normal normal 16px/18px Arial;
+	background-image: url(${SelectArrow});
+	background-position: 95% 50%;
+	background-repeat: no-repeat;
+	background-size: 15px 12px;
+	background-color: #fff;
+`;
+
+export const CardOpenModal = styled.button`
+	border-radius: 90px;
+	background: #fff;
+	border: none;
+	height: 35px;
+	width: 35px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #e22e2e;
+`;
+
+export const Chart = styled.div`
+	padding: 10px;
+	width: 100%;
+	height: 100%;
+`;
+
+export const CardTitle = styled.h2`
+	font: normal normal normal 16px/18px Arial;
+	color: white;
+`;
+
+export const CardSelectorWrapper = styled.div`
+	display: flex;
+	align-items: center;
 `;
