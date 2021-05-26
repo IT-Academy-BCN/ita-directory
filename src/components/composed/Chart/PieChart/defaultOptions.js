@@ -31,7 +31,7 @@ export const options = {
 		{
 			name: "Garages",
 			type: "pie",
-			radius: "50%",
+			radius: "60%",
 			label: labelOption,
 			data: [220, 182, 191, 234, 290],
 			emphasis: {
@@ -45,7 +45,7 @@ export const options = {
 		{
 			name: "Pisos",
 			type: "pie",
-			radius: "50%",
+			radius: "60%",
 			barGap: 0,
 			label: labelOption,
 			data: [320, 332, 301, 334, 390],
@@ -61,7 +61,7 @@ export const options = {
 		{
 			name: "Locales",
 			type: "pie",
-			radius: "50%",
+			radius: "60%",
 			label: labelOption,
 			emphasis: {
 				itemStyle: {
@@ -75,7 +75,7 @@ export const options = {
 		{
 			name: "Chalets",
 			type: "pie",
-			radius: "50%",
+			radius: "60%",
 			label: labelOption,
 			emphasis: {
 				itemStyle: {
