@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
 
 export const StyledWrapper = styled.div`
 	display: flex;
@@ -41,22 +40,6 @@ export const StyledWrapper = styled.div`
 			}
 		}
 	}
-`;
-
-export const StyledSpan = styled.span`
-	color: ${(props) =>
-		props.colorIcono === "rejected"
-			? Colors.redColor
-			: props.colorIcono === "aprobado"
-			? Colors.darkGreen
-			: props.colorIcono === "pending"
-			? Colors.grey
-			: props.colorIcono};
-	padding: ${(props) => props.paddingL};
-	padding-right: ${(props) => props.paddingL};
-	padding-left: ${(props) => props.paddingL};
-	font-size: 24px;
-	max-size: 24px;
 `;
 
 export const StyledImage = styled.img`

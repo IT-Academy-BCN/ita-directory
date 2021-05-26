@@ -63,7 +63,11 @@ function ListaUsuariosAdmins() {
 		setDataUsers(newUsers);
 	};
 
-	const updateUserData = (value) => {};
+	const updateUserData = (value, nombreUsuario) => {
+		setDataUsers(
+			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, nombre: value} : t))
+		);
+	};
 
 	const updateUserStatus = (val, nombreUsuario) => {
 		setDataUsers(
@@ -87,6 +91,7 @@ function ListaUsuariosAdmins() {
 			sortable: true,
 			compact: true,
 			minWidth: "32px",
+			hide: 600,
 		},
 		{
 			name: (
@@ -126,13 +131,20 @@ function ListaUsuariosAdmins() {
 									? faUserCheck
 									: faUserClock
 							}
-						/>
+							color={
+								row.acciones === "rejected"
+									? Colors.redColor
+									: row.acciones === "aprobado"
+									? Colors.darkGreen
+									: Colors.grey
+							}
+						></FontAwesomeIcon>
 					</button>
 					<button onClick={() => handleModalEdit(row.nombre, row.email)}>
-						<FontAwesomeIcon icon={faEye} style={{color: "blue"}} />
+						<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
 					</button>
 					<button onClick={() => handleModalDelete(row)}>
-						<FontAwesomeIcon icon={faTrash} style={{color: "red"}} />
+						<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
 					</button>
 				</div>
 			),
@@ -147,7 +159,7 @@ function ListaUsuariosAdmins() {
 			color_letra={Colors.white}
 			justifyTitle="flex-start"
 			paddingTitle="0px"
-			paddingTitle2="70px"
+			paddingTitle2="73px"
 			isLoggedIn="true"
 		>
 			<Container row>
