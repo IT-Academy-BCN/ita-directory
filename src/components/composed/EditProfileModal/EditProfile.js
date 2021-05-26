@@ -32,6 +32,10 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 		setNewEmail(currentEmail);
 	}, [currentNombre, currentEmail]);
 
+	useEffect(() => {
+		setNewName(newName);
+	}, [newName]);
+
 	const handleNameChange = (newName) => {
 		setNewName(newName);
 	};
@@ -107,7 +111,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 						iconPosition="right"
 						type="submit"
 						className="darkBlue"
-						onClick={actualizar}
+						onClick={() => actualizar(currentNombre)}
 						buttonStyles={{marginRight: 0}}
 						// onClick={() => handleClick(newName)}
 					/>
@@ -140,8 +144,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							name="userName"
 							label="Nuevo usuario"
 							type="text"
-							placeholder="Introduce nombre de usuario"
-							value={newName}
+							value={currentNombre}
+							placeholder={currentNombre}
 							onChange={(e) => handleNameChange(e.target.value)}
 							className="errorProfile"
 							// error={isPassError}
@@ -195,7 +199,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 					</StyledLabel>
 				</InputsWrapper>
 				<Button
-					onClick={actualizar}
+					onClick={() => actualizar(currentNombre)}
 					text="Guardar"
 					type="submit"
 					className="greenGradient"

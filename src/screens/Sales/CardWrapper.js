@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import BarChart from "components/composed/Chart/BarChart/BarChart";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
-import {generateData} from "utils/generateData";
+import {generateData, daysBetween} from "utils/generateData1";
 
-const data = generateData("2012-01-01", "2016-12-31", [10, 20]);
+const initialDate = "2012-01-01";
+const days = daysBetween(initialDate, "2016-12-31");
+const data = generateData(new Date(initialDate), days, [30, 80]);
 
 function CardWrapper() {
 	const [active, setActive] = useState(false);

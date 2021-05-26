@@ -3,7 +3,7 @@ import React from "react";
 import Body from "components/layout/Body/Body";
 import CardWrapper from "./CardWrapper";
 
-function Sales() {
+function SalesByType() {
 	return (
 		<Body title="Ventas por categoría" isLoggedIn={true}>
 			<CardWrapper />
@@ -11,4 +11,4 @@ function Sales() {
 	);
 }
 
-export default Sales;
+export default SalesByType;
