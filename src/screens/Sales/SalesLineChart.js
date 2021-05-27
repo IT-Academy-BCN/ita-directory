@@ -6,9 +6,15 @@ const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
 const data = generateDataLine(new Date(initialDate), days, [30, 80]);
 
-function SalesLineChart() {
+function SalesLineChart(ocultarHeader, dashboard) {
 	return (
-		<Body title="Ventas mensuales" isLoggedIn={true} style={{fontSize: "5rem"}}>
+		<Body
+			ocultarHeader={ocultarHeader}
+			dashboard={dashboard}
+			title="Ventas mensuales"
+			isLoggedIn={true}
+			style={{fontSize: "5rem"}}
+		>
 			<LineChart data={data} />
 		</Body>
 	);
