@@ -20,7 +20,7 @@ function SalesByMonth() {
 		let windowW = window.innerWidth;
 		let graphW = windowW - windowW * 0.1;
 		let graphH;
-		active ? (graphH = windowH - windowH * 0.5) : (graphH = windowH - windowH * 0.5);
+		active ? (graphH = windowH - windowH * 0.6) : (graphH = windowH - windowH * 0.6);
 		setGraphSize([graphW, graphH]);
 		console.log("active changed", graphSize);
 		// eslint-disable-next-line

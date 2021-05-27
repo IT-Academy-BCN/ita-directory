@@ -93,7 +93,7 @@ function PieChart({data, hideModal, active, size}) {
 
 	return (
 		<Container>
-			<CardChart style={{marginTop: 20, marginBottom: 40, width: "100%"}}>
+			<CardChart style={{marginTop: 10, marginBottom: 20, width: "100%"}}>
 				<CardHeader>
 					<h3>Ventas anuales {selectedYear}</h3>
 					<CardSelectorWrapper>
@@ -106,7 +106,6 @@ function PieChart({data, hideModal, active, size}) {
 					</CardSelectorWrapper>
 				</CardHeader>
 				<CardBody>
-					{" "}
 					{active ? (
 						<Chart
 							style={{width: `${size[0]}px`, height: `${size[1]}px`}}
