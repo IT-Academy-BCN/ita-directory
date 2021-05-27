@@ -2,13 +2,12 @@
 import React, {useState, useEffect} from "react";
 import Body from "components/layout/Body/Body";
 import PieChart from "components/composed/Chart/PieChart/PieChart";
-import {generateData, daysBetween} from "utils/generateData1";
+import {generateData, daysBetween} from "utils/generateData";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
-import Modal from "components/composed/Modal/Modal";
 
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
-const data = generateData(new Date(initialDate), days, [1, 50]);
+const data = generateData(new Date(initialDate), days, [30, 80]);
 
 function SalesByMonth() {
 	const [active, setActive] = useState(false);
