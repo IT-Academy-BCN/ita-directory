@@ -2,22 +2,23 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {
-	daysBetween,
-	getDaysInMonth,
-	groupByFilter,
-	groupByType,
-	groupByTypeMonth,
-	groupByYear,
-} from "utils/generateData1";
-import {CardChart, CardHeader, CardBody, CardContainer} from "./PieChart.styles";
-import {Container} from "theme/GlobalStyles";
-import {options} from "./defaultOptions";
+	CardHeader,
+	CardSelector,
+	Chart,
+	CardSelectorWrapper,
+	CardOpenModal,
+	CardChart,
+	CardBody,
+} from "./PieChart.styles";
+import {options, optionsB} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Container} from "theme/GlobalStyles";
 
-function PieChart({data, active, hideModal}) {
-	const chartRef = useRef(null);
-	const [curChart, setCurChart] = useState(undefined);
+function PieChart({data, hideModal, active, size}) {
+	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
+	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
+
 	useEffect(() => {
 		if (chartRef !== null && curChart === undefined) {
 			setCurChart(echarts.init(chartRef.current));
@@ -25,8 +26,8 @@ function PieChart({data, active, hideModal}) {
 		// eslint-disable-next-line
 	}, [chartRef]);
 
-	const [selectedYear, setSelectedYear] = useState("2016");
-	const [selectedMonth] = useState("all");
+	const [selectedYear, setSelectedYear] = useState("2012");
+
 	const startYear = 2012;
 	const endYear = 2016;
 	const yearDifference = endYear - startYear;
@@ -39,38 +40,38 @@ function PieChart({data, active, hideModal}) {
 			</option>
 		);
 	}
+
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
-			const daysLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
-			const groupFilterMonthYear = groupByFilter(selectedMonth, selectedYear, data);
-			const groupFilterYear = groupByYear(selectedYear, data);
-			let daysYearData;
 			let customOptions;
+			const optionsC = optionsB;
 
-			if (groupFilterMonthYear === -1) {
-				daysYearData = data.slice(groupFilterYear, groupFilterYear + daysLength);
-				customOptions = groupByType(daysYearData);
-			} else {
-				daysYearData = data.slice(
-					groupFilterMonthYear,
-					groupFilterMonthYear + getDaysInMonth(selectedMonth, selectedYear)
-				);
-				customOptions = groupByTypeMonth(daysYearData);
+			if (selectedYear === "2012") {
+				customOptions = _.filter(options.series, options.series[0]);
+			}
+			if (selectedYear === "2013") {
+				customOptions = _.filter(options.series, options.series[1]);
+				console.log("entro aquí");
+			}
+			if (selectedYear === "2014") {
+				customOptions = _.filter(options.series, options.series[2]);
+			}
+			if (selectedYear === "2015") {
+				customOptions = _.filter(options.series, options.series[3]);
+			}
+			if (selectedYear === "2016") {
+				customOptions = _.filter(options.series, options.series[4]);
 			}
 
-			options.series = _.merge(options.series, customOptions);
-
-			curChart.setOption({...options});
+			console.log(selectedYear);
+			console.log(customOptions);
+			optionsC.series = _.merge(optionsC.series, customOptions);
+			console.log(optionsC);
+			curChart.setOption({...optionsC});
 		}
-		// eslint-disable-next-line
-	}, [curChart, selectedMonth, selectedYear, data]);
+	}, [curChart, selectedYear, data]);
 
-	const resizeChart = () => {
-		curChart.resize();
-	};
-
-	// Resize the chart when window resizes
 	useEffect(() => {
 		if (curChart !== undefined) {
 			window.addEventListener("resize", resizeChart);
@@ -79,29 +80,41 @@ function PieChart({data, active, hideModal}) {
 			};
 		}
 		// eslint-disable-next-line
-	}, [curChart]);
+	}, [curChart, selectedYear]);
+
+	const resizeChart = () => {
+		curChart.resize();
+	};
+
+	// handlers
+	const handleYearChange = (e) => {
+		setSelectedYear(e.target.value);
+	};
 
 	return (
 		<Container>
-			<CardChart style={{marginTop: 20, marginBottom: 40, width: "30%"}}>
+			<CardChart style={{marginTop: 10, marginBottom: 20, width: "100%"}}>
 				<CardHeader>
 					<h3>Ventas anuales {selectedYear}</h3>
-					<CardContainer>
-						<select
-							defaultValue={selectedYear}
-							onChange={(e) => setSelectedYear(e.target.value)}
-						>
+					<CardSelectorWrapper>
+						<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
 							{optionsSelectYear}
-						</select>
-						<button className="open-modal" onClick={() => hideModal()}>
-							<FontAwesomeIcon
-								icon={active ? faTimes : faExternalLinkAlt}
-								style={{color: "#e22e2e"}}
-							/>
-						</button>
-					</CardContainer>
+						</CardSelector>
+						<CardOpenModal onClick={hideModal}>
+							<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+						</CardOpenModal>
+					</CardSelectorWrapper>
 				</CardHeader>
-				<CardBody ref={chartRef}></CardBody>
+				<CardBody>
+					{active ? (
+						<Chart
+							style={{width: `${size[0]}px`, height: `${size[1]}px`}}
+							ref={chartRef}
+						></Chart>
+					) : (
+						<Chart ref={chartRef}></Chart>
+					)}
+				</CardBody>
 			</CardChart>
 		</Container>
 	);

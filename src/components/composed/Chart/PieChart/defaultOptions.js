@@ -1,24 +1,3 @@
-let config = {
-	align: "left",
-	verticalAlign: "middle",
-	position: "insideBottom",
-	distance: 15,
-};
-
-let labelOption = {
-	show: true,
-	position: config.position,
-	distance: config.distance,
-	align: config.align,
-	verticalAlign: config.verticalAlign,
-	rotate: config.rotate,
-	formatter: "{c}  {name|{a}}",
-	fontSize: 16,
-	rich: {
-		name: {},
-	},
-};
-
 export const options = {
 	tooltip: {
 		trigger: "item",
@@ -27,64 +6,137 @@ export const options = {
 		data: ["Pisos", "Garages", "Locales", "Chalets"],
 	},
 
+	toolbox: {
+		show: true,
+		orient: "vertical",
+		left: "left",
+		top: "center",
+		feature: {
+			dataView: {show: true, readOnly: false},
+			restore: {show: true},
+			saveAsImage: {show: true},
+		},
+	},
+	dataset: {
+		source: [
+			["product", "2012", "2013", "2014", "2015", "2016"],
+			["Pisos", 320, 332, 301, 334, 390],
+			["Garages", 220, 182, 191, 234, 290],
+			["Locales", 150, 232, 201, 154, 190],
+			["Chalets", 98, 77, 101, 99, 40],
+		],
+	},
 	series: [
 		{
-			name: "Garages",
 			type: "pie",
-			radius: "60%",
-			label: labelOption,
-			data: [220, 182, 191, 234, 290],
-			emphasis: {
-				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: "rgba(0, 0, 0, 0.5)",
-				},
+			radius: "50%",
+			center: ["50%", "50%"],
+			encode: {
+				itemName: "product",
+				value: "2012",
 			},
 		},
 		{
-			name: "Pisos",
 			type: "pie",
-			radius: "60%",
-			barGap: 0,
-			label: labelOption,
-			data: [320, 332, 301, 334, 390],
-			emphasis: {
-				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: "rgba(0, 0, 0, 0.5)",
-				},
+			radius: "50%",
+			center: ["50%", "50%"],
+			encode: {
+				itemName: "product",
+				value: "2013",
 			},
 		},
-
 		{
-			name: "Locales",
 			type: "pie",
-			radius: "60%",
-			label: labelOption,
-			emphasis: {
-				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: "rgba(0, 0, 0, 0.5)",
-				},
+			radius: "50%",
+			center: ["50%", "50%"],
+			encode: {
+				itemName: "product",
+				value: "2014",
 			},
-			data: [150, 232, 201, 154, 190],
 		},
 		{
-			name: "Chalets",
 			type: "pie",
-			radius: "60%",
-			label: labelOption,
-			emphasis: {
-				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: "rgba(0, 0, 0, 0.5)",
-				},
+			radius: "50%",
+			center: ["50%", "50%"],
+			encode: {
+				itemName: "product",
+				value: "2015",
 			},
-			data: [98, 77, 101, 99, 40],
+		},
+		{
+			type: "pie",
+			radius: "50%",
+			center: ["50%", "50%"],
+			encode: {
+				itemName: "product",
+				value: "2016",
+			},
 		},
 	],
 };
+
+export const optionsB = {
+	tooltip: {
+		trigger: "item",
+	},
+	legend: {
+		data: ["Pisos", "Garages", "Locales", "Chalets"],
+	},
+
+	toolbox: {
+		show: true,
+		orient: "vertical",
+		left: "left",
+		top: "center",
+		feature: {
+			dataView: {show: true, readOnly: false},
+			restore: {show: true},
+			saveAsImage: {show: true},
+		},
+	},
+	dataset: {
+		source: [
+			["product", "2012", "2013", "2014", "2015", "2016"],
+			["Pisos", 320, 332, 301, 334, 390],
+			["Garages", 220, 182, 191, 234, 290],
+			["Locales", 150, 232, 201, 154, 190],
+			["Chalets", 98, 77, 101, 99, 40],
+		],
+	},
+	series: [],
+};
+
+export const allMonths = {
+	0: {name: "January", shortName: "Jan"},
+	1: {name: "February", shortName: "Feb"},
+	2: {name: "March", shortName: "Mar"},
+	3: {name: "April", shortName: "Apr"},
+	4: {name: "May", shortName: "May"},
+	5: {name: "June", shortName: "Jun"},
+	6: {name: "July", shortName: "Jul"},
+	7: {name: "August", shortName: "Feb"},
+	8: {name: "September", shortName: "Sep"},
+	9: {name: "Octubre", shortName: "Oct"},
+	10: {name: "November", shortName: "Nov"},
+	11: {name: "December", shortName: "Dec"},
+};
+
+export const returnMonthsData = (months, key) => {
+	const data = [];
+	for (let i = 0; i < Object.entries(months).length; i++) {
+		const element = allMonths[i];
+		data.push(element[key]);
+	}
+	return data;
+};
+
+export const optionsSelectMonth = [];
+
+for (let i = 0; i < Object.entries(allMonths).length; i++) {
+	const el = allMonths[i].name;
+	optionsSelectMonth.push(
+		<option key={i} value={i}>
+			{el}
+		</option>
+	);
+}

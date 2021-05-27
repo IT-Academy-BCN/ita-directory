@@ -19,11 +19,6 @@ import SalesByType from "screens/Sales/SalesByType";
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
 
-// import CardWrapper from "screens/Sales/CardWrapper";
-import SalesByMonth from "screens/Sales/SalesByMonth";
-import SalesByType from "screens/Sales/SalesByType";
-import SalesLineChart from "screens/Sales/SalesLineChart";
-
 const App = () => {
 	return (
 		<>
@@ -38,11 +33,10 @@ const App = () => {
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/go-to-map" component={GoToMap} />
 				<Route exact path="/map" component={MapView} />
-				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />		
+				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/sales-line-chart" component={SalesLineChart} />
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} />
-
 			</Switch>
 		</>
 	);
