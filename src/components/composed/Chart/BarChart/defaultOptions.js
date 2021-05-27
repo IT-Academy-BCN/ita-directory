@@ -72,7 +72,6 @@ export const options = {
 		{
 			name: "Pisos",
 			type: "bar",
-			barGap: 0,
 			label: labelOption,
 			emphasis: {
 				focus: "series",
