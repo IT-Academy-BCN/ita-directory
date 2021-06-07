@@ -13,21 +13,29 @@ const Body = ({
 	justifyTitle,
 	paddingTitle,
 	paddingTitle2,
+	ocultarHeader,
+	ocultarFooter,
+	dashboard,
 }) => {
 	return (
 		<StyledBody>
-			<Header
-				title={title}
-				color_logo={color_logo}
-				color_header={color_header}
-				color_letra={color_letra}
-				isLoggedIn={isLoggedIn}
-				justifyTitle={justifyTitle}
-				paddingTitle={paddingTitle}
-				paddingTitle2={paddingTitle2}
-			/>
+			{ocultarHeader && dashboard ? (
+				""
+			) : (
+				<Header
+					title={title}
+					color_logo={color_logo}
+					color_header={color_header}
+					color_letra={color_letra}
+					isLoggedIn={isLoggedIn}
+					justifyTitle={justifyTitle}
+					paddingTitle={paddingTitle}
+					paddingTitle2={paddingTitle2}
+				/>
+			)}
+
 			<Childrens>{children}</Childrens>
-			<Footer />
+			{ocultarFooter && dashboard ? "" : <Footer />}
 		</StyledBody>
 	);
 };
