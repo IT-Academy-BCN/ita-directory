@@ -47,7 +47,8 @@ const AdList = () => {
 			<Container row>
 				<StyledAdList>
 					<StyledTreeSearch>
-						<label>Madrid</label> > <label>Alquiler</label>
+						<label>Madrid</label>
+						<label>Alquiler</label>
 					</StyledTreeSearch>
 					<RowWrapper>
 						<StyledTitle>Listado de pisos</StyledTitle>

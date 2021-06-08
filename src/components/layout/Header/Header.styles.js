@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 
 export const HeaderWrapper = styled.header`
 	width: 100%;
@@ -9,14 +10,16 @@ export const HeaderWrapper = styled.header`
 
 export const StyledHeader = styled.header`
 	display: flex;
-	justify-content: center;
+	justify-content: ${(props) => (props.justifyTitle ? props.justifyTitle : "center")};
+	padding-left: ${(props) => (props.paddingTitle2 ? props.paddingTitle2 : 0)};
 	align-items: center;
 	left: 0px;
 	font: normal normal normal 26px/32px Helvetica Neue;
 	letter-spacing: 0px;
-	color: #7d868b;
+	color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 	background: var(--unnamed-color-e6f2f2) 0% 0% no-repeat padding-box;
-	background: #e6f2f2 0% 0% no-repeat padding-box;
+	background: ${(props) => (props.color_header ? props.color_header : "#e6f2f2")} 0% 0% no-repeat
+		padding-box;
 	opacity: 1;
 	border: 1px solid #b5dddd;
 	max-width: 100%;
@@ -25,7 +28,7 @@ export const StyledHeader = styled.header`
 		text-align: center;
 		font: normal normal normal 30px/36px Helvetica Neue;
 		letter-spacing: 0px;
-		color: #7d868b;
+		color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 		opacity: 1;
 	}
 
@@ -36,11 +39,12 @@ export const StyledHeader = styled.header`
 
 export const Logo = styled.div`
 	display: flex;
-	justify-content: center;
+	justify-content: ${(props) => (props.justifyTitle ? props.justifyTitle : "center")};
+	padding-left: ${(props) => (props.paddingTitle ? props.paddingTitle : 0)};
 	align-items: center;
 	width: 100%;
 	height: 5rem;
-	color: #823434;
+	color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 	font: normal normal normal 15px/15px Korb-Bold;
 	letter-spacing: 0px;
 	text-transform: uppercase;
@@ -57,16 +61,19 @@ export const StyledMiPerfil = styled.div`
 `;
 
 export const StyledLogo = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 	text-align: left;
 	max-width: 50%;
-	font: normal normal normal 18px Korb-Bold;
-	letter-spacing: 0px;
-	color: #005593;
-	text-transform: uppercase;
+	color: ${Colors.grey};
+	text-transform: none;
 	opacity: 1;
-	justify-content: flex-end;
-	min-width: 10rem;
-	padding-top: 1rem;
+	border-radius: 10px;
+	border: 0px 1px 1px 1px solid #b0b0b0;
+	box-shadow: 1px 4px 8px 0 rgba(0, 0, 0, 0.2), 1px 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding: 6px;
+	margin-left: 1060px;
 `;
 
 export const StyledImg = styled.img`
@@ -146,4 +153,8 @@ export const StyledButton = styled.button`
 	min-width: 6rem;
 	width: 120px;
 	height: 50px;
+`;
+
+export const StyledImage = styled.img`
+	border-radius: 50%;
 `;

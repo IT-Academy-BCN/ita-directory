@@ -8,7 +8,7 @@ export const ModalBlock = styled.div`
 	justify-content: center;
 	left: 0;
 	overflow: hidden;
-	padding: 0.4rem;
+	padding: 0.2rem;
 	position: fixed;
 	right: 0;
 	top: 0;
@@ -53,8 +53,8 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalBody = styled.div`
-	overflow-y: auto;
 	padding: 22px 0px;
+	overflow-y: auto;
 	position: relative;
 	font-family: Arial;
 	font-size: 1rem;
@@ -70,9 +70,9 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModalTitle = styled.span`
-	font-size: 30px;
+	font-size: 5px;
 	font-weight: 500;
-	color: ${Colors.darkRed};
+	color: ${(props) => (props.colorModalTitle ? props.colorModalTitle : Colors.darkRed)};
 	font: normal normal bold 24px/20px Arial;
 	padding-left: 0px;
 `;

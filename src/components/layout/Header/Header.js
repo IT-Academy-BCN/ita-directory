@@ -17,7 +17,16 @@ import {Container} from "theme/GlobalStyles";
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 
-const Header = ({isLoggedIn, title}) => {
+const Header = ({
+	isLoggedIn,
+	title,
+	color_logo,
+	color_header,
+	color_letra,
+	justifyTitle,
+	paddingTitle,
+	paddingTitle2,
+}) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
@@ -27,10 +36,10 @@ const Header = ({isLoggedIn, title}) => {
 
 	const handleClickTwo = (e) => {
 		/*  const rect = e.getBoundingClientRect()
-        console.log(rect)
+		console.log(rect)
 		
-        const right = rect.right
-        console.log(right) 
+		const right = rect.right
+		console.log(right) 
 		 */
 	};
 
@@ -39,7 +48,14 @@ const Header = ({isLoggedIn, title}) => {
 			<>
 				<Container>
 					<HeaderWrapper>
-						<Logo className={`logged`}>Logo Empresa</Logo>
+						<Logo
+							className={`logged`}
+							color_logo={color_logo}
+							justifyTitle={justifyTitle}
+							paddingTitle={paddingTitle}
+						>
+							Logo Empresa
+						</Logo>
 						<StyledMiPerfil>
 							<StyledButton onClick={handleClick} ref={handleClickTwo}>
 								<StyledImg src={profilePicture} alt="profile" />
@@ -67,18 +83,36 @@ const Header = ({isLoggedIn, title}) => {
 					</HeaderWrapper>
 				</Container>
 
-				<StyledHeader className={`logged`}>
-					<Container>
-						<h1>{title}</h1>
-					</Container>
+				<StyledHeader
+					className={`logged`}
+					color_header={color_header}
+					color_letra={color_letra}
+					justifyTitle={justifyTitle}
+					paddingTitle2={paddingTitle2}
+				>
+					<h1>{title}</h1>
 				</StyledHeader>
 			</>
 		);
 	} else {
 		return (
 			<div>
-				<Logo> Mi Empresa</Logo>
-				<StyledHeader>
+				<div>
+					<Logo
+						color_logo={color_logo}
+						justifyTitle={justifyTitle}
+						paddingTitle={paddingTitle}
+					>
+						{" "}
+						Mi Empresa
+					</Logo>
+				</div>
+				<StyledHeader
+					color_header={color_header}
+					color_letra={color_letra}
+					justifyTitle={justifyTitle}
+					paddingTitle={paddingTitle}
+				>
 					<h1>{title}</h1>
 				</StyledHeader>
 			</div>

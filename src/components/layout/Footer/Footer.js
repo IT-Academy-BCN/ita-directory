@@ -1,7 +1,7 @@
 import React from "react";
 
 // Styles
-import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./styles";
+import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./Footer.styles";
 import {Container} from "theme/GlobalStyles";
 
 const Footer = () => {

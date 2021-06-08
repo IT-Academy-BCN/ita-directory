@@ -40,6 +40,13 @@ const StyledButton = styled.button`
 		color: ${Colors.white};
 		width: 9rem;
 	}
+	&.darkRed {
+		background: transparent
+			linear-gradient(98deg, ${Colors.redColor} 0%, ${Colors.redColor} 100%) 0% 0% no-repeat
+			padding-box;
+		color: ${Colors.white};
+		width: 9rem;
+	}
 	&.darkBlue {
 		width: 7rem;
 		height: 37px;

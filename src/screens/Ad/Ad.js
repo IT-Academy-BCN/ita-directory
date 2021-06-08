@@ -25,6 +25,7 @@ import {
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
+import Colors from "theme/Colors";
 
 const LIST_ICONS = [
 	{name: "Madrid", icon: faMapMarkerAlt},
@@ -60,7 +61,12 @@ const Ad = ({icon}) => {
 
 	return (
 		<>
-			<Body title="Anuncio">
+			<Body
+				title="Anuncio"
+				color_logo={Colors.darkRed}
+				color_header="#e6f2f2"
+				color_letra="#7d868b"
+			>
 				<StyledAd>
 					<StyledTitle>Título de mi anuncio</StyledTitle>
 					<Gallery images={images} />
