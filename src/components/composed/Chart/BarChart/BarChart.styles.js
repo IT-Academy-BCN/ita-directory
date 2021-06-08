@@ -27,10 +27,11 @@ export const CardHeader = styled.div`
 `;
 
 export const CardTitle = styled.h2`
-	font: normal normal normal 16px/18px Arial;
+	font-weight: 400;
 	color: white;
 `;
 
+//Afecta a los selectores de los modals
 export const CardSelector = styled.select`
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -50,26 +51,26 @@ export const CardSelector = styled.select`
 	background-color: #fff;
 `;
 
-export const Chart = styled.div`
-	padding: 20px;
-	width: 100%;
-	height: 100%;
-`;
-
 export const CardSelectorWrapper = styled.div`
 	display: flex;
 	align-items: center;
 `;
 
 export const CardOpenModal = styled.button`
-	border-radius: 90px;
-	background: #fff;
-	border: none;
+	display: inline-flex;
 	height: 35px;
 	width: 35px;
-	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	cursor: pointer;
+	border-radius: 90px;
 	color: #e22e2e;
+	background: #fff;
+	border: none;
+	cursor: pointer;
+`;
+
+export const Chart = styled.div`
+	width: 100%;
+	height: 50vh;
+	margin: 12px;
 `;

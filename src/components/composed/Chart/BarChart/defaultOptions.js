@@ -3,7 +3,8 @@ let config = {
 	align: "left",
 	verticalAlign: "middle",
 	position: "insideBottom",
-	distance: 15,
+	distance: 20,
+	color: "black",
 };
 
 let labelOption = {
@@ -14,7 +15,8 @@ let labelOption = {
 	verticalAlign: config.verticalAlign,
 	rotate: config.rotate,
 	formatter: "{c}  {name|{a}}",
-	fontSize: 16,
+	fontSize: 14,
+	color: config.color,
 	rich: {
 		name: {},
 	},
@@ -31,7 +33,7 @@ export const options = {
 		data: ["Pisos", "Garages", "Locales", "Chalets"],
 	},
 	toolbox: {
-		show: true,
+		show: false,
 		orient: "vertical",
 		left: "right",
 		top: "center",
