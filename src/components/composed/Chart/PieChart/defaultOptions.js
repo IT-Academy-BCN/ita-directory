@@ -84,7 +84,7 @@ export const optionsB = {
 	},
 
 	toolbox: {
-		show: true,
+		show: false,
 		orient: "vertical",
 		left: "left",
 		top: "center",
