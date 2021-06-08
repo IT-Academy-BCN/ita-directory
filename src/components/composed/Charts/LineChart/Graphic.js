@@ -5,10 +5,16 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
-import {CardChart, CardHeader, CardBody, CardContainer} from "./LineChart.styles";
-import {Container} from "theme/GlobalStyles";
-
-import {options} from "./options";
+import {
+	CardChart,
+	CardHeader,
+	Chart,
+	CardSelectorWrapper,
+	CardTitle,
+	CardSelector,
+	CardOpenModal,
+} from "./LineChart.styles";
+import {options} from "./defaultOptions";
 
 //eslint-disable-next-line
 const monthNames = {
@@ -159,32 +165,30 @@ function LineChart({data, active, hideModal}) {
 	}, [curChart]);
 
 	return (
-		<Container>
-			<CardChart style={{marginTop: 20, marginBottom: 40, width: "100%"}}>
-				<CardHeader>
-					<h3>Ventas mensuales {selectedYear}</h3>
-					<CardContainer>
-						<select defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
-							<option value="all">All</option>
-							{optionsSelectMonth}
-						</select>
-						<select
-							defaultValue={selectedYear}
-							onChange={(e) => setSelectedYear(e.target.value)}
-						>
-							{optionsSelectYear}
-						</select>
-						<button className="open-modal" onClick={() => hideModal()}>
-							<FontAwesomeIcon
-								icon={active ? faTimes : faExternalLinkAlt}
-								style={{color: "#e22e2e"}}
-							/>
-						</button>
-					</CardContainer>
-				</CardHeader>
-				<CardBody ref={lineChartRef}></CardBody>
-			</CardChart>
-		</Container>
+		<CardChart>
+			<CardHeader>
+				<CardTitle>Ventas anuales continuas {selectedYear}</CardTitle>
+				<CardSelectorWrapper>
+					<CardSelector defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
+						<option value="all">All</option>
+						{optionsSelectMonth}
+					</CardSelector>
+					<CardSelector
+						defaultValue={selectedYear}
+						onChange={(e) => setSelectedYear(e.target.value)}
+					>
+						{optionsSelectYear}
+					</CardSelector>
+					<CardOpenModal onClick={hideModal}>
+						<FontAwesomeIcon
+							icon={active ? faTimes : faExternalLinkAlt}
+							style={{color: "#e22e2e"}}
+						/>
+					</CardOpenModal>
+				</CardSelectorWrapper>
+			</CardHeader>
+			<Chart ref={lineChartRef}></Chart>
+		</CardChart>
 	);
 }
 
