@@ -10,6 +10,7 @@
 		"bootstrap": "^5.0.1",
 		"chokidar": "^2.1.8",
 		"cra-template": "1.1.1",
+		"echarts": "^5.1.1",
 		"leaflet": "^1.7.1",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.1",
