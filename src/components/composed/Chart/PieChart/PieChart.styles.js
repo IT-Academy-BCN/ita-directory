@@ -3,7 +3,7 @@ import Colors from "theme/Colors";
 import SelectArrow from "assets/images/select-arrow.svg";
 
 export const CardChart = styled.div`
-	width: 90%;
+	width: 100%;
 	box-shadow: 0px 3px 6px #00000029;
 	border: 1px solid ${Colors.extraLightGrey};
 	border-radius: 6px;
@@ -14,8 +14,7 @@ export const CardChart = styled.div`
 `;
 
 export const CardHeader = styled.div`
-	height: 51px;
-	width: 100%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -24,13 +23,7 @@ export const CardHeader = styled.div`
 	background-color: #e12d2d;
 	font-size: 16px;
 	border-radius: 6px 6px 0px 0px;
-
-	h3 {
-		letter-spacing: 0px;
-		font-weight: 400;
-		padding-left: 17px;
-		font: normal normal normal 15px/20px Helvetica Neue;
-	}
+	padding-bottom: 1rem;
 
 	select {
 		-webkit-appearance: none;
@@ -92,14 +85,14 @@ export const CardSelector = styled.select`
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	margin-right: 12px;
-	width: 94px;
-	height: 35px;
+	margin-right: 0.3rem;
+	padding-left: 0.5rem;
+	width: 90px;
+	height: 30px;
 	box-shadow: 0 3px 6px #00000029;
 	border: none;
 	border-radius: 4px;
 	color: #e22e2e;
-	font: normal normal normal 16px/18px Arial;
 	background-image: url(${SelectArrow});
 	background-position: 95% 50%;
 	background-repeat: no-repeat;
