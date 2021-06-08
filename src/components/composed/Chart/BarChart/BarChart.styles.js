@@ -22,7 +22,7 @@ export const CardHeader = styled.div`
 
 	@media (min-width: 768px) {
 		flex-direction: row;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem 2rem;
 	}
 `;
 
@@ -36,14 +36,14 @@ export const CardSelector = styled.select`
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	margin-right: 12px;
-	width: 94px;
-	height: 35px;
+	margin-right: 0.3rem;
+	padding-left: 0.5rem;
+	width: 90px;
+	height: 30px;
 	box-shadow: 0 3px 6px #00000029;
 	border: none;
 	border-radius: 4px;
 	color: #e22e2e;
-	font: normal normal normal 16px/18px Arial;
 	background-image: url(${SelectArrow});
 	background-position: 95% 50%;
 	background-repeat: no-repeat;

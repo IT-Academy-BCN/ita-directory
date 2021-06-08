@@ -116,7 +116,7 @@ function BarChart({data, hideModal, active, size}) {
 		<>
 			<Card>
 				<CardHeader>
-					<CardTitle> Ventas del año {selectedYear} </CardTitle>
+					<CardTitle> Ventas anuales por tipo </CardTitle>
 					<CardSelectorWrapper>
 						<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
 							<option value="all">All</option>

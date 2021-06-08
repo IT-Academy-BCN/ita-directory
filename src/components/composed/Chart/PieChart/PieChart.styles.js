@@ -3,26 +3,22 @@ import Colors from "theme/Colors";
 import SelectArrow from "assets/images/select-arrow.svg";
 
 export const CardChart = styled.div`
-	width: 100%;
+	min-width: 100%;
+	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0px 3px 6px #00000029;
-	border: 1px solid ${Colors.extraLightGrey};
+	border: 1px solid #ddd;
 	border-radius: 6px;
-	opacity: 1;
-	font: normal normal normal 15px/20px Helvetica Neue;
-	justify-content: center;
+	overflow: hidden;
 	background: ${Colors.white};
 `;
 
 export const CardHeader = styled.div`
 	height: auto;
+	background-color: #e22e2e;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
-	color: #ffffff;
-	background-color: #e12d2d;
-	font-size: 16px;
-	border-radius: 6px 6px 0px 0px;
+	justify-content: space-between;
 	padding-bottom: 1rem;
 
 	select {
@@ -62,23 +58,15 @@ export const CardHeader = styled.div`
 		cursor: pointer;
 	}
 
-	@media only screen and (min-width: 768px) {
+	@media (min-width: 768px) {
 		flex-direction: row;
-		padding: 1rem 1rem;
+		padding: 0.5rem 2rem;
 	}
 `;
 
-export const CardContainer = styled.div`
-	display: flex;
-	justify-content: start;
-	align-items: center;
-`;
-
-export const CardBody = styled.div`
-	padding-top: 2rem;
-	justify-items: center;
-	width: 100%;
-	height: 40vh;
+export const CardTitle = styled.h2`
+	font-weight: 400;
+	color: white;
 `;
 
 export const CardSelector = styled.select`
@@ -100,6 +88,10 @@ export const CardSelector = styled.select`
 	background-color: #fff;
 `;
 
+export const CardSelectorWrapper = styled.div`
+	display: flex;
+	align-items: center;
+`;
 export const CardOpenModal = styled.button`
 	border-radius: 90px;
 	background: #fff;
@@ -119,12 +111,15 @@ export const Chart = styled.div`
 	height: 100%;
 `;
 
-export const CardTitle = styled.h2`
-	font: normal normal normal 16px/18px Arial;
-	color: white;
+export const CardContainer = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
 `;
 
-export const CardSelectorWrapper = styled.div`
-	display: flex;
-	align-items: center;
+export const CardBody = styled.div`
+	padding-top: 2rem;
+	justify-items: center;
+	width: 100%;
+	height: 40vh;
 `;

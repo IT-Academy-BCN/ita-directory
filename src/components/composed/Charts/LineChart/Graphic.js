@@ -167,7 +167,7 @@ function LineChart({data, active, hideModal}) {
 	return (
 		<CardChart>
 			<CardHeader>
-				<CardTitle>Ventas anuales continuas {selectedYear}</CardTitle>
+				<CardTitle>Ventas anuales continuas</CardTitle>
 				<CardSelectorWrapper>
 					<CardSelector defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
 						<option value="all">All</option>
