@@ -30,6 +30,7 @@ export const StyledHeader = styled.header`
 		letter-spacing: 0px;
 		color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 		opacity: 1;
+		padding-left: 5rem;
 	}
 
 	&.logged {
