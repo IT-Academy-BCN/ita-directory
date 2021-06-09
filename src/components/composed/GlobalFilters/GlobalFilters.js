@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import {
 	Card,
@@ -9,10 +9,7 @@ import {
 } from "./GlobalFilters.styles";
 import {optionsSelectMonth} from "./defaultOptions";
 
-function GlobalFilters() {
-	const [selectedYear, setSelectedYear] = useState("2016");
-	const [selectedMonth, setSelectedMonth] = useState("all");
-
+function GlobalFilters({onYearChange, onMonthChange}) {
 	const startYear = 2012;
 	const endYear = 2016;
 	const yearDifference = endYear - startYear;
@@ -28,11 +25,11 @@ function GlobalFilters() {
 
 	// handlers
 	const handleYearChange = (e) => {
-		setSelectedYear(e.target.value);
+		onYearChange(e.target.value);
 	};
 
 	const handleMonthChange = (e) => {
-		setSelectedMonth(e.target.value);
+		onMonthChange(e.target.value);
 	};
 
 	return (
@@ -41,11 +38,11 @@ function GlobalFilters() {
 				<CardHeader>
 					<CardTitle> Aplicar filtros globales: </CardTitle>
 					<CardSelectorWrapper>
-						<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
+						<CardSelector defaultValue={"all"} onChange={handleMonthChange}>
 							<option value="all">All</option>
 							{optionsSelectMonth}
 						</CardSelector>
-						<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
+						<CardSelector defaultValue={"2016"} onChange={handleYearChange}>
 							{optionsSelectYear}
 						</CardSelector>
 					</CardSelectorWrapper>

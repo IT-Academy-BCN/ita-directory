@@ -16,8 +16,7 @@ export const CardHeader = styled.div`
 	background-color: #292929;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
+
 	padding-bottom: 1rem;
 
 	@media (min-width: 768px) {
@@ -29,6 +28,7 @@ export const CardHeader = styled.div`
 export const CardTitle = styled.h2`
 	font-weight: 400;
 	color: white;
+	padding-right: 2rem;
 `;
 
 //Afecta a los selectores de los modals

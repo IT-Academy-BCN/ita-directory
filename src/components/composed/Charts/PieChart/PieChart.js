@@ -2,7 +2,7 @@ import {useState} from "react";
 import PieGraphic from "./PieGraphic";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
 
-export const PieChart = ({data, size}) => {
+export const PieChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
@@ -10,7 +10,13 @@ export const PieChart = ({data, size}) => {
 
 	return (
 		<div>
-			<PieGraphic data={data} size={size} active={active} hideModal={() => hideModal()} />
+			<PieGraphic
+				data={data}
+				size={size}
+				active={active}
+				hideModal={() => hideModal()}
+				year={year}
+			/>
 			<ModalGraphic
 				active={active}
 				hideModal={hideModal}
@@ -20,6 +26,7 @@ export const PieChart = ({data, size}) => {
 						size={size}
 						active={active}
 						hideModal={() => hideModal()}
+						year={year}
 					/>
 				}
 			/>

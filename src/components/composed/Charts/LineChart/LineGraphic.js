@@ -143,8 +143,8 @@ function LineChart({data, active, hideModal, size}) {
 
 			options.series[0].data = detail === "all" ? monthValues : dayValues;
 			options.xAxis.data = xAxis;
-			const lineChart = echarts.init(lineChartRef.current);
-			lineChart.setOption({...options});
+			/* const lineChart = echarts.init(lineChartRef.current); */
+			curChart.setOption({...options});
 		}
 		// eslint-disable-next-line
 	}, [curChart, data, selectedYear, detail]);
@@ -162,7 +162,7 @@ function LineChart({data, active, hideModal, size}) {
 			};
 		}
 		// eslint-disable-next-line
-	}, [curChart]);
+	}, [curChart, size]);
 	return (
 		<Fragment>
 			<CardChart>
