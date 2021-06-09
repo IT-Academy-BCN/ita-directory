@@ -3,6 +3,7 @@ import * as echarts from "echarts";
 import _ from "lodash";
 import {
 	CardHeader,
+	CardTitle,
 	CardSelector,
 	Chart,
 	CardSelectorWrapper,
@@ -95,7 +96,7 @@ function PieChart({data, hideModal, active, size}) {
 		<Container>
 			<CardChart style={{marginTop: 10, marginBottom: 20, width: "100%"}}>
 				<CardHeader>
-					<h3>Ventas anuales {selectedYear}</h3>
+					<CardTitle>Vista global</CardTitle>
 					<CardSelectorWrapper>
 						<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
 							{optionsSelectYear}
