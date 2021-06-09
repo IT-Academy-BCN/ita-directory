@@ -6,6 +6,10 @@ export const StyledDashboard = styled.div`
 	max-width: 80%;
 	justify-content: center;
 
+	.marginBottom {
+		margin-bottom: 2rem;
+	}
+
 	.row {
 		display: flex;
 		flex-flow: row nowrap;

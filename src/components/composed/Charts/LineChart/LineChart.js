@@ -2,7 +2,7 @@ import {useState} from "react";
 import LineGraphic from "./LineGraphic";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
 
-export const LineChart = ({data, size}) => {
+export const LineChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
@@ -10,7 +10,14 @@ export const LineChart = ({data, size}) => {
 
 	return (
 		<div>
-			<LineGraphic data={data} active={active} size={size} hideModal={() => hideModal()} />
+			<LineGraphic
+				data={data}
+				active={active}
+				size={size}
+				hideModal={() => hideModal()}
+				year={year}
+				month={month}
+			/>
 			<ModalGraphic
 				active={active}
 				hideModal={hideModal}
@@ -20,6 +27,8 @@ export const LineChart = ({data, size}) => {
 						active={active}
 						size={size}
 						hideModal={() => hideModal()}
+						year={year}
+						month={month}
 					/>
 				}
 			/>

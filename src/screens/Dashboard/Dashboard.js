@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {generateData, daysBetween} from "utils/generateData";
+
+import GlobalFilters from "components/composed/GlobalFilters/GlobalFilters";
+
 import BarChart from "components/composed/Charts/BarChart/BarChart";
 import LineChart from "components/composed/Charts/LineChart/LineChart";
 import PieChart from "components/composed/Charts/PieChart/PieChart";
@@ -16,6 +19,8 @@ function Dashboard() {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 	const [graphSize, setGraphSize] = useState([]);
+	const [globalYear, setGlobalYear] = useState("2016");
+	const [globalMonth, setGlobalMonth] = useState("all");
 
 	useEffect(() => {
 		let windowH = window.innerHeight;
@@ -31,7 +36,20 @@ function Dashboard() {
 	return (
 		<Body title="Control de ventas" isLoggedIn={true}>
 			<StyledDashboard>
-				<BarChart data={data} active={active} hideModal={hideModal} size={graphSize} />
+				<div className="marginBottom">
+					<GlobalFilters
+						onYearChange={(year) => setGlobalYear(year)}
+						onMonthChange={(month) => setGlobalMonth(month)}
+					/>
+				</div>
+				<BarChart
+					data={data}
+					active={active}
+					hideModal={hideModal}
+					size={graphSize}
+					month={globalMonth}
+					year={globalYear}
+				/>
 				<div className="row">
 					<div className="graphicMargin">
 						<LineChart
@@ -39,6 +57,8 @@ function Dashboard() {
 							active={active}
 							hideModal={hideModal}
 							size={graphSize}
+							month={globalMonth}
+							year={globalYear}
 						/>
 					</div>
 
@@ -48,6 +68,7 @@ function Dashboard() {
 							active={active}
 							hideModal={hideModal}
 							size={graphSize}
+							year={globalYear}
 						/>
 					</div>
 				</div>
