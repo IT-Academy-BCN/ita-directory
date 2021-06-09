@@ -113,7 +113,7 @@ function BarChart({data, hideModal, active, size}) {
 	};
 
 	return (
-		<>
+		<React.Fragment>
 			<Card>
 				<CardHeader>
 					<CardTitle> Ventas anuales por tipo </CardTitle>
@@ -139,7 +139,7 @@ function BarChart({data, hideModal, active, size}) {
 					<Chart ref={chartRef}></Chart>
 				)}
 			</Card>
-		</>
+		</React.Fragment>
 	);
 }
 

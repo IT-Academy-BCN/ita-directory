@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
 
 export const Card = styled.div`
-	min-width: 90%;
+	min-width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
@@ -69,6 +69,7 @@ export const CardOpenModal = styled.button`
 	cursor: pointer;
 `;
 
+//Propiedades dentro de la gráfica
 export const Chart = styled.div`
 	width: 100%;
 	height: 50vh;

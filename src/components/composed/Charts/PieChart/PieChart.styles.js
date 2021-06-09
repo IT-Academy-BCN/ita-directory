@@ -13,50 +13,13 @@ export const CardChart = styled.div`
 `;
 
 export const CardHeader = styled.div`
+	display: flex;
 	height: auto;
 	background-color: #e22e2e;
-	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
 	padding-bottom: 1rem;
-
-	select {
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-		width: 90px;
-		border: none;
-		background-color: #fff !important;
-		color: #e12d2d;
-		height: 30px;
-		box-shadow: 0px 3px 6px #00000029;
-		border-radius: 4px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-right: 10px;
-		padding-left: 0.5rem;
-		position: relative;
-		background: url(${SelectArrow});
-		background-repeat: no-repeat;
-		background-position: 95% 50%;
-		background-size: 14px 8px;
-	}
-
-	button.open-modal {
-		width: 35px;
-		height: 35px;
-		border-radius: 90px;
-		border: none;
-		background: #ffffff;
-		color: #e22e2e;
-		box-shadow: 0px 3px 6px #00000029;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-	}
 
 	@media (min-width: 768px) {
 		flex-direction: row;
@@ -69,6 +32,7 @@ export const CardTitle = styled.h2`
 	color: white;
 `;
 
+//Afecta a los selectores de los modals
 export const CardSelector = styled.select`
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -93,22 +57,28 @@ export const CardSelectorWrapper = styled.div`
 	align-items: center;
 `;
 export const CardOpenModal = styled.button`
-	border-radius: 90px;
-	background: #fff;
-	border: none;
+	display: inline-flex;
 	height: 35px;
 	width: 35px;
-	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	cursor: pointer;
+	border-radius: 90px;
 	color: #e22e2e;
+	background: #fff;
+	border: none;
+	cursor: pointer;
 `;
 
+//Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	padding: 10px;
-	width: 100%;
-	height: 100%;
+	width: 120%;
+	height: 45vh;
+	margin: 12px;
+
+	@media (max-width: 900px) {
+		width: 100%;
+		height: 50vh;
+	}
 `;
 
 export const CardContainer = styled.div`
@@ -120,6 +90,7 @@ export const CardContainer = styled.div`
 export const CardBody = styled.div`
 	padding-top: 2rem;
 	justify-items: center;
+	justify-content: center;
 	width: 100%;
-	height: 40vh;
+	height: auto;
 `;

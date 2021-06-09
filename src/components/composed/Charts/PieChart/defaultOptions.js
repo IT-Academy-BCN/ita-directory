@@ -8,7 +8,7 @@ export const options = {
 
 	toolbox: {
 		show: true,
-		orient: "vertical",
+		orient: "row",
 		left: "left",
 		top: "center",
 		feature: {
@@ -85,7 +85,7 @@ export const optionsB = {
 
 	toolbox: {
 		show: false,
-		orient: "vertical",
+		orient: "row",
 		left: "left",
 		top: "center",
 		feature: {

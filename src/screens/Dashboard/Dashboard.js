@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {generateData, daysBetween} from "utils/generateData";
-import PieChart from "components/composed/Chart/PieChart/PieChart";
-import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
-import SalesLineChart from "screens/Sales/SalesLineChart";
-import SalesByType from "screens/Sales/SalesByType";
+import BarChart from "components/composed/Charts/BarChart/BarChart";
+import LineChart from "components/composed/Charts/LineChart/LineChart";
+import PieChart from "components/composed/Charts/PieChart/PieChart";
+
+// STYLES
+import {StyledDashboard} from "./Dashboard.style";
+import Body from "components/layout/Body/Body";
 
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
@@ -26,24 +29,30 @@ function Dashboard() {
 	}, [active]);
 
 	return (
-		<div>
-			<SalesByType ocultarFooter={true} dashboard={true} />
+		<Body title="Control de ventas" isLoggedIn={true}>
+			<StyledDashboard>
+				<BarChart data={data} active={active} hideModal={hideModal} size={graphSize} />
+				<div className="row">
+					<div className="graphicMargin">
+						<LineChart
+							data={data}
+							active={active}
+							hideModal={hideModal}
+							size={graphSize}
+						/>
+					</div>
 
-			<PieChart data={data} active={active} hideModal={hideModal} size={graphSize} />
-			<ModalGraphic
-				active={active}
-				hideModal={() => setActive(!active)}
-				children={
-					<PieChart
-						data={data}
-						active={active}
-						hideModal={() => setActive(!active)}
-						size={graphSize}
-					/>
-				}
-			/>
-			<SalesLineChart ocultarHeader={true} dashboard={true} />
-		</div>
+					<div className="">
+						<PieChart
+							data={data}
+							active={active}
+							hideModal={hideModal}
+							size={graphSize}
+						/>
+					</div>
+				</div>
+			</StyledDashboard>
+		</Body>
 	);
 }
 
