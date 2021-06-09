@@ -4,6 +4,7 @@ import PieChart from "components/composed/Chart/PieChart/PieChart";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
 import SalesLineChart from "screens/Sales/SalesLineChart";
 import SalesByType from "screens/Sales/SalesByType";
+import GlobalFilters from "components/composed/GlobalFilters/GlobalFilters";
 
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
@@ -27,8 +28,8 @@ function Dashboard() {
 
 	return (
 		<div>
-			<SalesByType ocultarFooter={true} dashboard={true} />
-
+			<GlobalFilters />
+			<SalesByType ocultarHeader={true} ocultarFooter={true} dashboard={true} />
 			<PieChart data={data} active={active} hideModal={hideModal} size={graphSize} />
 			<ModalGraphic
 				active={active}
