@@ -3,10 +3,10 @@ import React from "react";
 import Body from "components/layout/Body/Body";
 import CardWrapper from "./CardWrapper";
 
-function SalesByType(ocultarFooter, dashboard) {
+function SalesByType(hideFooter, dashboard) {
 	return (
 		<Body
-			ocultarFooter={ocultarFooter}
+			hideFooter={hideFooter}
 			dashboard={dashboard}
 			title="Ventas por categoría"
 			isLoggedIn={true}
