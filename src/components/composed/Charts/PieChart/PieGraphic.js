@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, Fragment} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {
@@ -14,7 +14,7 @@ import {
 import {options, optionsB} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Container} from "theme/GlobalStyles";
+// import {Container} from "theme/GlobalStyles";
 
 function PieChart({data, hideModal, active, size}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
@@ -93,8 +93,8 @@ function PieChart({data, hideModal, active, size}) {
 	};
 
 	return (
-		<Container>
-			<CardChart style={{marginTop: 10, marginBottom: 20, width: "100%"}}>
+		<Fragment>
+			<CardChart>
 				<CardHeader>
 					<CardTitle>Vista global</CardTitle>
 					<CardSelectorWrapper>
@@ -117,7 +117,7 @@ function PieChart({data, hideModal, active, size}) {
 					)}
 				</CardBody>
 			</CardChart>
-		</Container>
+		</Fragment>
 	);
 }
 
