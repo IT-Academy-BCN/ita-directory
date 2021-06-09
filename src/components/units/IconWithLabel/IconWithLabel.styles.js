@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
 
 export const StyledIconWithLabel = styled.div`
 	padding-top: 0.3rem;
@@ -11,8 +10,9 @@ export const StyledIconWithLabel = styled.div`
 	flex-wrap: nowrap;
 
 	white-space: nowrap;
-	&:hover {
-		color: ${Colors.darkBlue};
+	&.hoveredOver {
+		background: green;
+		color: red;
 	}
 `;
 

@@ -24,7 +24,7 @@ export const StyledFooter = styled.footer`
 	justify-content: space-between;
 	border-top: 1px solid ${Colors.grey};
 	width: 100%;
-	margin: 1rem 3rem;
+	margin: 1rem 0rem;
 	padding-top: 1rem;
 
 	@media only screen and (max-width: 468px) {
@@ -34,7 +34,7 @@ export const StyledFooter = styled.footer`
 	}
 
 	@media only screen and (max-width: 600px) {
-		margin: 2rem;
+		margin: 0.5rem;
 	}
 `;
 

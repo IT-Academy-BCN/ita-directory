@@ -1,10 +1,19 @@
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
-import {Link} from "react-router-dom";
-import {StyledAd, StyledUl, StyledTitle, StyledText, StyledBottomDiv} from "./Ad.styles";
+
+import {
+	StyledAd,
+	StyledUl,
+	StyledTitle,
+	StyledText,
+	StyledBottomDiv,
+	StyledStreet,
+	StyledItems,
+} from "./Ad.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
+import ContactModal from "components/composed/ContactModal/ContactModal.js";
 import {
 	adImage1,
 	adImage2,
@@ -14,6 +23,9 @@ import {
 	adThumbnail3,
 } from "assets/images";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
+import "components/composed/Map/Map.css";
+import Map from "components/composed/Map/Map";
+import Colors from "theme/Colors";
 
 const LIST_ICONS = [
 	{name: "Madrid", icon: faMapMarkerAlt},
@@ -24,19 +36,8 @@ const LIST_ICONS = [
 ];
 
 const Ad = ({icon}) => {
-	const [disabled, setIsDisabled] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-	const handleClick = (e) => {
-		e.preventDefault();
-		setIsDisabled(true);
-		setIsLoading(true);
-		console.log("cargando");
-		setTimeout(() => {
-			setIsDisabled(false);
-			setIsLoading(false);
-			console.log("finalizado");
-		}, 3000);
-	};
+	const [active, setActive] = useState(false);
+
 	const images = [
 		{
 			original: adImage1,
@@ -60,20 +61,31 @@ const Ad = ({icon}) => {
 
 	return (
 		<>
-			<Body title="Anuncio">
+			<Body
+				title="Anuncio"
+				color_logo={Colors.darkRed}
+				color_header="#e6f2f2"
+				color_letra="#7d868b"
+			>
 				<StyledAd>
 					<StyledTitle>Título de mi anuncio</StyledTitle>
 					<Gallery images={images} />
 					<StyledBottomDiv>
 						<StyledUl>
 							{LIST_ICONS.map((el, index) => {
-								return <IconWithLabel key={index} icon={el.icon} text={el.name} />;
+								return (
+									<StyledItems>
+										<IconWithLabel key={index} icon={el.icon} text={el.name} />
+									</StyledItems>
+								);
 							})}
 						</StyledUl>
+
 						<StyledText>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at
-								tincidunt urna. Aenean eu ullamcorper eros, blandit volutpat turpis.
+								Lorem ipsum dolor sit amet, consectetur gadipiscing elit. Praesent
+								at tincidunt urna. Aenean eu ullamcorper eros, blandit volutpat
+								turpis.
 							</p>
 							<p>
 								Quisque feugiat tincidunt lectus, vel congue eros sollicitudin ut.
@@ -83,21 +95,25 @@ const Ad = ({icon}) => {
 								eget condimentum congue.
 							</p>
 						</StyledText>
-
-						<Link to="/">
-							{" "}
-							{/* //contacto */}
-							<Button
-								buttonStyles={{width: "5rem", fontsize: "12px", height: "2rem"}}
-								text="Contacto"
-								className="blueGradient"
-								loadingText="Cargando"
-								type="submit"
-								isLoading={isLoading}
-								disabled={disabled}
-								onClick={handleClick}
-							/>
-						</Link>
+						<Map />
+						<StyledStreet>
+							<a href="https://cibernarium.barcelonactiva.cat/">
+								Dirección: Carrer de Roc Boronat, 117, 08018 Barcelona{" "}
+							</a>
+						</StyledStreet>
+						<Button
+							buttonStyles={{
+								width: "7.5rem",
+								fontsize: "12px",
+								height: "2.2rem",
+								marginTop: "0rem",
+							}}
+							text="Contacto"
+							className="blueGradient"
+							type="button"
+							onClick={() => setActive(true)}
+						/>
+						<ContactModal active={active} hideModal={() => setActive(false)} />
 					</StyledBottomDiv>
 				</StyledAd>
 			</Body>

@@ -1,13 +1,12 @@
 import React from "react";
 
 // Styles
-import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./styles";
-import {Wrapper} from "theme/GlobalStyles";
+import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./Footer.styles";
+import {Container} from "theme/GlobalStyles";
 
 const Footer = () => {
 	return (
-		<Wrapper>
-			<hr />
+		<Container column>
 			<StyledFooter>
 				<Logo>LOGO EMPRESA</Logo>
 				<Information>
@@ -19,7 +18,7 @@ const Footer = () => {
 					</Legal>
 				</Information>
 			</StyledFooter>
-		</Wrapper>
+		</Container>
 	);
 };
 

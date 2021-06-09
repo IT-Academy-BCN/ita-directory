@@ -5,6 +5,7 @@ const Colors = {
 	redColor: "rgba(193, 12, 12, 1)",
 	lightBlue: "#46C1F7",
 	darkBlue: "#0073E6",
+	frenchBlue: "#0077B3",
 	lightOrange: "#F76546",
 	darkOrange: "#E62900",
 	lightGreen: "#6DD364",
@@ -12,6 +13,10 @@ const Colors = {
 	darkRed: "#823434",
 	grey: "#707070",
 	lightGrey: "#999999",
+	lightGray: "#B0B0B0",
+	strongBlue: "#006BB9",
+	extraLightGrey: "D8D8D8",
+	extraDarkBlue: "#074C84",
 };
 
 export default Colors;
