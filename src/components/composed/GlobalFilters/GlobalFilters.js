@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 
 import {
 	Card,
@@ -33,10 +33,10 @@ function GlobalFilters({onYearChange, onMonthChange}) {
 	};
 
 	return (
-		<>
+		<Fragment>
 			<Card>
 				<CardHeader>
-					<CardTitle> Aplicar filtros globales: </CardTitle>
+					<CardTitle> Aplicar filtros globales:</CardTitle>
 					<CardSelectorWrapper>
 						<CardSelector defaultValue={"all"} onChange={handleMonthChange}>
 							<option value="all">All</option>
@@ -48,7 +48,7 @@ function GlobalFilters({onYearChange, onMonthChange}) {
 					</CardSelectorWrapper>
 				</CardHeader>
 			</Card>
-		</>
+		</Fragment>
 	);
 }
 

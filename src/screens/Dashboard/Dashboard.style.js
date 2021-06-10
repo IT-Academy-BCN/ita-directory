@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledDashboard = styled.div`
 	display: flex;
 	flex-direction: column;
-	max-width: 80%;
+	width: 90vw;
 	justify-content: center;
 
 	.marginBottom {
@@ -12,23 +12,23 @@ export const StyledDashboard = styled.div`
 
 	.row {
 		display: flex;
+		width: 100%;
 		flex-flow: row nowrap;
-		margin-top: 3rem;
+		justify-content: space-between;
+		margin-top: 2rem;
 		margin-bottom: 5rem;
 
-		@media (max-width: 900px) {
+		@media (max-width: 1025px) {
 			display: flex;
 			width: 100%;
 			justify-content: center;
 			flex-direction: column;
-			padding: 0.5rem 2rem;
 		}
 	}
 	.graphicMargin {
-		margin-right: 1.5rem;
-
-		@media (max-width: 900px) {
+		@media (max-width: 1025px) {
 			margin-bottom: 3rem;
+			margin-top: 2rem;
 			margin-right: 0;
 		}
 	}
