@@ -1,8 +1,8 @@
 import {useState} from "react";
-import LineGraphic from "./LineGraphic";
+import BarGraphic from "./BarGraphic";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
 
-export const LineChart = ({data, size, year, month}) => {
+export const BarChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
@@ -10,7 +10,7 @@ export const LineChart = ({data, size, year, month}) => {
 
 	return (
 		<div>
-			<LineGraphic
+			<BarGraphic
 				data={data}
 				active={active}
 				size={size}
@@ -22,10 +22,10 @@ export const LineChart = ({data, size, year, month}) => {
 				active={active}
 				hideModal={hideModal}
 				children={
-					<LineGraphic
+					<BarGraphic
 						data={data}
-						active={active}
 						size={size}
+						active={active}
 						hideModal={() => hideModal()}
 						year={year}
 						month={month}
@@ -35,4 +35,4 @@ export const LineChart = ({data, size, year, month}) => {
 		</div>
 	);
 };
-export default LineChart;
+export default BarChart;

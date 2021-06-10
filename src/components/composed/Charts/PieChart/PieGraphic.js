@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, Fragment} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {
@@ -14,9 +14,9 @@ import {
 import {options, optionsB} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Container} from "theme/GlobalStyles";
+// import {Container} from "theme/GlobalStyles";
 
-function PieChart({data, hideModal, active, size}) {
+function PieChart({data, hideModal, active, size, year}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 
@@ -27,7 +27,13 @@ function PieChart({data, hideModal, active, size}) {
 		// eslint-disable-next-line
 	}, [chartRef]);
 
-	const [selectedYear, setSelectedYear] = useState("2012");
+	const [selectedYear, setSelectedYear] = useState(year);
+
+	useEffect(() => {
+		setSelectedYear(year);
+
+		// eslint-disable-next-line
+	}, [year]);
 
 	const startYear = 2012;
 	const endYear = 2016;
@@ -93,12 +99,12 @@ function PieChart({data, hideModal, active, size}) {
 	};
 
 	return (
-		<Container>
-			<CardChart style={{marginTop: 10, marginBottom: 20, width: "100%"}}>
+		<Fragment>
+			<CardChart>
 				<CardHeader>
 					<CardTitle>Vista global</CardTitle>
 					<CardSelectorWrapper>
-						<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
+						<CardSelector value={selectedYear} onChange={handleYearChange}>
 							{optionsSelectYear}
 						</CardSelector>
 						<CardOpenModal onClick={hideModal}>
@@ -117,7 +123,7 @@ function PieChart({data, hideModal, active, size}) {
 					)}
 				</CardBody>
 			</CardChart>
-		</Container>
+		</Fragment>
 	);
 }
 

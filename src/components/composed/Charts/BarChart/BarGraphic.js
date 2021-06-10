@@ -16,7 +16,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 
-function BarChart({data, hideModal, active, size}) {
+function BarChart({data, hideModal, active, size, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 
@@ -27,8 +27,14 @@ function BarChart({data, hideModal, active, size}) {
 		// eslint-disable-next-line
 	}, [chartRef]);
 
-	const [selectedYear, setSelectedYear] = useState("2016");
-	const [selectedMonth, setSelectedMonth] = useState("all");
+	const [selectedYear, setSelectedYear] = useState(year);
+	const [selectedMonth, setSelectedMonth] = useState(month);
+
+	useEffect(() => {
+		setSelectedYear(year);
+		setSelectedMonth(month);
+		// eslint-disable-next-line
+	}, [year, month]);
 
 	const returnOptionsSelectYear = (startYear, lastYear) => {
 		const years = [];
@@ -113,16 +119,16 @@ function BarChart({data, hideModal, active, size}) {
 	};
 
 	return (
-		<>
+		<React.Fragment>
 			<Card>
 				<CardHeader>
 					<CardTitle> Ventas anuales por tipo </CardTitle>
 					<CardSelectorWrapper>
-						<CardSelector defaultValue={selectedMonth} onChange={handleMonthChange}>
+						<CardSelector value={selectedMonth} onChange={handleMonthChange}>
 							<option value="all">All</option>
 							{optionsSelectMonth}
 						</CardSelector>
-						<CardSelector defaultValue={selectedYear} onChange={handleYearChange}>
+						<CardSelector value={selectedYear} onChange={handleYearChange}>
 							{optionsSelectYear}
 						</CardSelector>
 						<CardOpenModal onClick={hideModal}>
@@ -139,7 +145,7 @@ function BarChart({data, hideModal, active, size}) {
 					<Chart ref={chartRef}></Chart>
 				)}
 			</Card>
-		</>
+		</React.Fragment>
 	);
 }
 

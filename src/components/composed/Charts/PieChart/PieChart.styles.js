@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import SelectArrow from "assets/images/select-arrow.svg";
 import Colors from "theme/Colors";
+import SelectArrow from "assets/images/select-arrow.svg";
 
 export const CardChart = styled.div`
 	min-width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
-	box-shadow: 0 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	overflow: hidden;
@@ -13,8 +13,8 @@ export const CardChart = styled.div`
 `;
 
 export const CardHeader = styled.div`
-	height: auto;
 	display: flex;
+	height: auto;
 	background-color: #e22e2e;
 	flex-direction: column;
 	align-items: center;
@@ -56,7 +56,6 @@ export const CardSelectorWrapper = styled.div`
 	display: flex;
 	align-items: center;
 `;
-
 export const CardOpenModal = styled.button`
 	display: inline-flex;
 	height: 35px;
@@ -70,14 +69,28 @@ export const CardOpenModal = styled.button`
 	cursor: pointer;
 `;
 
-//Propiedades de la gráfica
+//Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	width: 100%;
-	height: 50vh;
+	width: 120%;
+	height: 45vh;
 	margin: 12px;
 
 	@media (max-width: 900px) {
 		width: 100%;
 		height: 50vh;
 	}
+`;
+
+export const CardContainer = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
+`;
+
+export const CardBody = styled.div`
+	padding-top: 2rem;
+	justify-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
 `;

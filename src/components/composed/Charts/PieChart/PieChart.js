@@ -1,8 +1,8 @@
 import {useState} from "react";
-import LineGraphic from "./LineGraphic";
+import PieGraphic from "./PieGraphic";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
 
-export const LineChart = ({data, size, year, month}) => {
+export const PieChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
@@ -10,29 +10,27 @@ export const LineChart = ({data, size, year, month}) => {
 
 	return (
 		<div>
-			<LineGraphic
+			<PieGraphic
 				data={data}
-				active={active}
 				size={size}
+				active={active}
 				hideModal={() => hideModal()}
 				year={year}
-				month={month}
 			/>
 			<ModalGraphic
 				active={active}
 				hideModal={hideModal}
 				children={
-					<LineGraphic
+					<PieGraphic
 						data={data}
-						active={active}
 						size={size}
+						active={active}
 						hideModal={() => hideModal()}
 						year={year}
-						month={month}
 					/>
 				}
 			/>
 		</div>
 	);
 };
-export default LineChart;
+export default PieChart;

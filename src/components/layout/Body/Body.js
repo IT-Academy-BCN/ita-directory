@@ -13,13 +13,13 @@ const Body = ({
 	justifyTitle,
 	paddingTitle,
 	paddingTitle2,
-	ocultarHeader,
-	ocultarFooter,
+	hideHeader,
+	hideFooter,
 	dashboard,
 }) => {
 	return (
 		<StyledBody>
-			{ocultarHeader && dashboard ? (
+			{hideHeader && dashboard ? (
 				""
 			) : (
 				<Header
@@ -35,7 +35,7 @@ const Body = ({
 			)}
 
 			<Childrens>{children}</Childrens>
-			{ocultarFooter && dashboard ? "" : <Footer />}
+			{hideFooter ? "" : <Footer />}
 		</StyledBody>
 	);
 };

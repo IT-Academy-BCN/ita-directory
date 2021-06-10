@@ -3,7 +3,7 @@ import SelectArrow from "assets/images/select-arrow.svg";
 
 export const Card = styled.div`
 	min-width: 90%;
-	min-height: calc(90vh - 10rem - 120px);
+	height: auto;
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
@@ -13,11 +13,10 @@ export const Card = styled.div`
 
 export const CardHeader = styled.div`
 	height: auto;
-	background-color: #e22e2e;
+	background-color: #292929;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
+
 	padding-bottom: 1rem;
 
 	@media (min-width: 768px) {
@@ -29,6 +28,7 @@ export const CardHeader = styled.div`
 export const CardTitle = styled.h2`
 	font-weight: 400;
 	color: white;
+	padding-right: 2rem;
 `;
 
 //Afecta a los selectores de los modals

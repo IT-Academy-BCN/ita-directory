@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from "react";
 import {generateData, daysBetween} from "utils/generateData";
-import PieChart from "components/composed/Chart/PieChart/PieChart";
-import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
-import SalesLineChart from "screens/Sales/SalesLineChart";
-import SalesByType from "screens/Sales/SalesByType";
+
+import GlobalFilters from "components/composed/GlobalFilters/GlobalFilters";
+
+import BarChart from "components/composed/Charts/BarChart/BarChart";
+import LineChart from "components/composed/Charts/LineChart/LineChart";
+import PieChart from "components/composed/Charts/PieChart/PieChart";
+
+// STYLES
+import {StyledDashboard} from "./Dashboard.style";
+import Body from "components/layout/Body/Body";
 
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
@@ -13,6 +19,8 @@ function Dashboard() {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 	const [graphSize, setGraphSize] = useState([]);
+	const [globalYear, setGlobalYear] = useState("2016");
+	const [globalMonth, setGlobalMonth] = useState("all");
 
 	useEffect(() => {
 		let windowH = window.innerHeight;
@@ -26,24 +34,46 @@ function Dashboard() {
 	}, [active]);
 
 	return (
-		<div>
-			<SalesByType ocultarFooter={true} dashboard={true} />
-
-			<PieChart data={data} active={active} hideModal={hideModal} size={graphSize} />
-			<ModalGraphic
-				active={active}
-				hideModal={() => setActive(!active)}
-				children={
-					<PieChart
-						data={data}
-						active={active}
-						hideModal={() => setActive(!active)}
-						size={graphSize}
+		<Body title="Control de ventas" isLoggedIn={true}>
+			<StyledDashboard>
+				<div className="marginBottom">
+					<GlobalFilters
+						onYearChange={(year) => setGlobalYear(year)}
+						onMonthChange={(month) => setGlobalMonth(month)}
 					/>
-				}
-			/>
-			<SalesLineChart ocultarHeader={true} dashboard={true} />
-		</div>
+				</div>
+				<BarChart
+					data={data}
+					active={active}
+					hideModal={hideModal}
+					size={graphSize}
+					month={globalMonth}
+					year={globalYear}
+				/>
+				<div className="row">
+					<div className="graphicMargin">
+						<LineChart
+							data={data}
+							active={active}
+							hideModal={hideModal}
+							size={graphSize}
+							month={globalMonth}
+							year={globalYear}
+						/>
+					</div>
+
+					<div className="">
+						<PieChart
+							data={data}
+							active={active}
+							hideModal={hideModal}
+							size={graphSize}
+							year={globalYear}
+						/>
+					</div>
+				</div>
+			</StyledDashboard>
+		</Body>
 	);
 }
 
