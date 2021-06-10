@@ -13,8 +13,8 @@ export const CardChart = styled.div`
 `;
 
 export const CardHeader = styled.div`
-	height: auto;
 	display: flex;
+	height: auto;
 	background-color: #e22e2e;
 	flex-direction: column;
 	align-items: center;
@@ -70,13 +70,13 @@ export const CardOpenModal = styled.button`
 	cursor: pointer;
 `;
 
-//Propiedades de la gráfica
+//Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	width: 100%;
+	width: 53vw;
 	height: 50vh;
 	margin: 12px;
 
-	@media (max-width: 900px) {
+	@media (max-width: 1025px) {
 		width: 100%;
 		height: 50vh;
 	}

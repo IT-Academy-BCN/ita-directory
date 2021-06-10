@@ -13,10 +13,11 @@ export const Card = styled.div`
 
 export const CardHeader = styled.div`
 	height: auto;
-	background-color: #292929;
+	background-color: black;
 	display: flex;
 	flex-direction: column;
-
+	align-items: center;
+	justify-content: space-between;
 	padding-bottom: 1rem;
 
 	@media (min-width: 768px) {
