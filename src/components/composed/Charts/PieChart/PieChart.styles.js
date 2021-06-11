@@ -1,20 +1,21 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 import SelectArrow from "assets/images/select-arrow.svg";
 
-export const Card = styled.div`
-	min-width: 90%;
+export const CardChart = styled.div`
+	min-width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
-	box-shadow: 0 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	overflow: hidden;
-	background: #fff;
+	background: ${Colors.white};
 `;
 
 export const CardHeader = styled.div`
+	display: flex;
 	height: auto;
 	background-color: #e22e2e;
-	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
@@ -22,7 +23,7 @@ export const CardHeader = styled.div`
 
 	@media (min-width: 768px) {
 		flex-direction: row;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem 2rem;
 	}
 `;
 
@@ -36,14 +37,14 @@ export const CardSelector = styled.select`
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	margin-right: 12px;
-	width: 94px;
-	height: 35px;
+	margin-right: 0.3rem;
+	padding-left: 0.5rem;
+	width: 90px;
+	height: 30px;
 	box-shadow: 0 3px 6px #00000029;
 	border: none;
 	border-radius: 4px;
 	color: #e22e2e;
-	font: normal normal normal 16px/18px Arial;
 	background-image: url(${SelectArrow});
 	background-position: 95% 50%;
 	background-repeat: no-repeat;
@@ -55,7 +56,6 @@ export const CardSelectorWrapper = styled.div`
 	display: flex;
 	align-items: center;
 `;
-
 export const CardOpenModal = styled.button`
 	display: inline-flex;
 	height: 35px;
@@ -69,8 +69,28 @@ export const CardOpenModal = styled.button`
 	cursor: pointer;
 `;
 
+//Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	width: 100%;
-	height: 50vh;
+	width: 30vw;
+	height: 46vh;
 	margin: 12px;
+
+	@media (max-width: 1025px) {
+		width: 100%;
+		height: 50vh;
+	}
+`;
+
+export const CardContainer = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
+`;
+
+export const CardBody = styled.div`
+	padding-top: 2rem;
+	justify-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
 `;

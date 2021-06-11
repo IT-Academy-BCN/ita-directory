@@ -1,21 +1,20 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
-import Colors from "theme/Colors";
 
-export const CardChart = styled.div`
+export const Card = styled.div`
 	min-width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	overflow: hidden;
-	background: ${Colors.white};
+	background: #fff;
 `;
 
 export const CardHeader = styled.div`
-	display: flex;
 	height: auto;
 	background-color: #e22e2e;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
@@ -72,12 +71,7 @@ export const CardOpenModal = styled.button`
 
 //Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	width: 53vw;
+	width: 100%;
 	height: 50vh;
 	margin: 12px;
-
-	@media (max-width: 1025px) {
-		width: 100%;
-		height: 50vh;
-	}
 `;
