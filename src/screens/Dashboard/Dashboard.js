@@ -34,7 +34,13 @@ function Dashboard() {
 	}, [active]);
 
 	return (
-		<Body title="Control de ventas" isLoggedIn={true}>
+		<Body
+			title="Control de ventas"
+			justifyTitle="flex-start"
+			paddingTitle="0px"
+			paddingTitle2="5vw"
+			isLoggedIn="true"
+		>
 			<StyledDashboard>
 				<div className="marginBottom">
 					<GlobalFilters

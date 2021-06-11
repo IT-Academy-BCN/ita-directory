@@ -71,11 +71,11 @@ export const CardOpenModal = styled.button`
 
 //Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	width: 120%;
-	height: 45vh;
+	width: 30vw;
+	height: 46vh;
 	margin: 12px;
 
-	@media (max-width: 900px) {
+	@media (max-width: 1025px) {
 		width: 100%;
 		height: 50vh;
 	}

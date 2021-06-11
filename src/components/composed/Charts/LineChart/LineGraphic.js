@@ -1,8 +1,9 @@
-import React, {useState, useRef, useEffect, Fragment} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 // import styles
 import {
 	CardChart,
@@ -14,7 +15,6 @@ import {
 	CardOpenModal,
 } from "./LineChart.styles";
 import {options} from "./defaultOptions";
-// import {Container} from "theme/GlobalStyles";
 
 //eslint-disable-next-line
 const monthNames = {
@@ -63,7 +63,7 @@ for (let i = 0; i < yearDifference + 1; i++) {
 	);
 }
 
-function LineChart({data, active, hideModal, size}) {
+function LineChart({data, active, hideModal}) {
 	const lineChartRef = useRef(null);
 	const [curChart, setCurChart] = useState(undefined);
 
@@ -143,8 +143,8 @@ function LineChart({data, active, hideModal, size}) {
 
 			options.series[0].data = detail === "all" ? monthValues : dayValues;
 			options.xAxis.data = xAxis;
-			/* const lineChart = echarts.init(lineChartRef.current); */
-			curChart.setOption({...options});
+			const lineChart = echarts.init(lineChartRef.current);
+			lineChart.setOption({...options});
 		}
 		// eslint-disable-next-line
 	}, [curChart, data, selectedYear, detail]);
@@ -162,37 +162,33 @@ function LineChart({data, active, hideModal, size}) {
 			};
 		}
 		// eslint-disable-next-line
-	}, [curChart, size]);
+	}, [curChart]);
+
 	return (
-		<Fragment>
-			<CardChart>
-				<CardHeader>
-					<CardTitle>Ventas anuales continuas</CardTitle>
-					<CardSelectorWrapper>
-						<CardSelector
-							defaultValue={detail}
-							onChange={(e) => setDetail(e.target.value)}
-						>
-							<option value="all">All</option>
-							{optionsSelectMonth}
-						</CardSelector>
-						<CardSelector
-							defaultValue={selectedYear}
-							onChange={(e) => setSelectedYear(e.target.value)}
-						>
-							{optionsSelectYear}
-						</CardSelector>
-						<CardOpenModal onClick={hideModal}>
-							<FontAwesomeIcon
-								icon={active ? faTimes : faExternalLinkAlt}
-								style={{color: "#e22e2e"}}
-							/>
-						</CardOpenModal>
-					</CardSelectorWrapper>
-				</CardHeader>
-				<Chart ref={lineChartRef}></Chart>
-			</CardChart>
-		</Fragment>
+		<CardChart>
+			<CardHeader>
+				<CardTitle>Ventas anuales continuas</CardTitle>
+				<CardSelectorWrapper>
+					<CardSelector defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
+						<option value="all">All</option>
+						{optionsSelectMonth}
+					</CardSelector>
+					<CardSelector
+						defaultValue={selectedYear}
+						onChange={(e) => setSelectedYear(e.target.value)}
+					>
+						{optionsSelectYear}
+					</CardSelector>
+					<CardOpenModal onClick={hideModal}>
+						<FontAwesomeIcon
+							icon={active ? faTimes : faExternalLinkAlt}
+							style={{color: "#e22e2e"}}
+						/>
+					</CardOpenModal>
+				</CardSelectorWrapper>
+			</CardHeader>
+			<Chart ref={lineChartRef}></Chart>
+		</CardChart>
 	);
 }
 
