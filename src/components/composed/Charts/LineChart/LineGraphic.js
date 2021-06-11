@@ -63,7 +63,7 @@ for (let i = 0; i < yearDifference + 1; i++) {
 	);
 }
 
-function LineChart({data, active, hideModal}) {
+function LineChart({data, active, hideModal, year, month}) {
 	const lineChartRef = useRef(null);
 	const [curChart, setCurChart] = useState(undefined);
 
@@ -73,8 +73,16 @@ function LineChart({data, active, hideModal}) {
 		// eslint-disable-next-line
 	}, [lineChartRef]);
 
-	const [selectedYear, setSelectedYear] = useState("2016");
-	const [detail, setDetail] = useState("all");
+	const [selectedYear, setSelectedYear] = useState(year);
+	const [selectedMonth, setSelectedMonth] = useState(month);
+	const [detail, setDetail] = useState(month);
+
+	useEffect(() => {
+		setSelectedYear(year);
+		setDetail(month);
+		setSelectedMonth(month);
+		// eslint-disable-next-line
+	}, [year, month]);
 
 	useEffect(() => {
 		if (curChart !== undefined) {
@@ -147,7 +155,7 @@ function LineChart({data, active, hideModal}) {
 			lineChart.setOption({...options});
 		}
 		// eslint-disable-next-line
-	}, [curChart, data, selectedYear, detail]);
+	}, [curChart, data, selectedMonth, selectedYear, detail]);
 
 	const resizeChart = () => {
 		curChart.resize();
@@ -169,12 +177,12 @@ function LineChart({data, active, hideModal}) {
 			<CardHeader>
 				<CardTitle>Ventas anuales continuas</CardTitle>
 				<CardSelectorWrapper>
-					<CardSelector defaultValue={detail} onChange={(e) => setDetail(e.target.value)}>
+					<CardSelector value={detail} onChange={(e) => setDetail(e.target.value)}>
 						<option value="all">All</option>
 						{optionsSelectMonth}
 					</CardSelector>
 					<CardSelector
-						defaultValue={selectedYear}
+						value={selectedYear}
 						onChange={(e) => setSelectedYear(e.target.value)}
 					>
 						{optionsSelectYear}
