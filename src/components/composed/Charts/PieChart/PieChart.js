@@ -16,6 +16,7 @@ export const PieChart = ({data, size, year, month}) => {
 				active={active}
 				hideModal={() => hideModal()}
 				year={year}
+				month={month}
 			/>
 			<ModalGraphic
 				active={active}
@@ -27,6 +28,7 @@ export const PieChart = ({data, size, year, month}) => {
 						active={active}
 						hideModal={() => hideModal()}
 						year={year}
+						month={month}
 					/>
 				}
 			/>

@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect, Fragment} from "react";
 import * as echarts from "echarts";
-import _ from "lodash";
+import {groupByTypeYearPie, groupByTypeMonthPie, daysBetween} from "utils/generateData";
 import {
 	CardHeader,
 	CardTitle,
@@ -11,12 +11,13 @@ import {
 	CardChart,
 	CardBody,
 } from "./PieChart.styles";
-import {options, optionsB} from "./defaultOptions";
+import {options, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 // import {Container} from "theme/GlobalStyles";
 
-function PieChart({data, hideModal, active, size, year}) {
+function PieChart({data, hideModal, active, size, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 
@@ -28,12 +29,13 @@ function PieChart({data, hideModal, active, size, year}) {
 	}, [chartRef]);
 
 	const [selectedYear, setSelectedYear] = useState(year);
+	const [selectedMonth, setSelectedMonth] = useState(month);
 
 	useEffect(() => {
 		setSelectedYear(year);
-
+		setSelectedMonth(month);
 		// eslint-disable-next-line
-	}, [year]);
+	}, [year, month]);
 
 	const startYear = 2012;
 	const endYear = 2016;
@@ -51,8 +53,7 @@ function PieChart({data, hideModal, active, size, year}) {
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
-			let customOptions;
-			const optionsC = optionsB;
+			/* 			let customOptions;
 
 			if (selectedYear === "2012") {
 				customOptions = _.filter(options.series, options.series[0]);
@@ -69,15 +70,37 @@ function PieChart({data, hideModal, active, size, year}) {
 			}
 			if (selectedYear === "2016") {
 				customOptions = _.filter(options.series, options.series[4]);
+			} */
+
+			let customOptions;
+
+			let yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
+			const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear));
+			const yearToFilterData = data.slice(
+				parseInt(startingCut),
+				parseInt(startingCut) + parseInt(yearToFilterLength)
+			);
+
+			let monthToFilterLength = getMonthLength(selectedYear, selectedMonth);
+			const corteInicialMes = startingCutPerMonth(
+				parseInt(selectedYear),
+				parseInt(selectedMonth)
+			);
+			const monthToFilterData = yearToFilterData.slice(
+				parseInt(corteInicialMes),
+				parseInt(corteInicialMes) + parseInt(monthToFilterLength)
+			);
+
+			if (selectedMonth === "all") {
+				customOptions = groupByTypeYearPie(yearToFilterData);
+			} else {
+				customOptions = groupByTypeMonthPie(monthToFilterData);
 			}
 
-			console.log(selectedYear);
-			console.log(customOptions);
-			optionsC.series = _.merge(optionsC.series, customOptions);
-			console.log(optionsC);
-			curChart.setOption({...optionsC});
+			options.series[0].data = customOptions;
+			curChart.setOption({...options});
 		}
-	}, [curChart, selectedYear, data]);
+	}, [curChart, selectedMonth, selectedYear, data]);
 
 	useEffect(() => {
 		if (curChart !== undefined) {
@@ -97,6 +120,9 @@ function PieChart({data, hideModal, active, size, year}) {
 	const handleYearChange = (e) => {
 		setSelectedYear(e.target.value);
 	};
+	const handleMonthChange = (e) => {
+		setSelectedMonth(e.target.value);
+	};
 
 	return (
 		<Fragment>
@@ -104,6 +130,10 @@ function PieChart({data, hideModal, active, size, year}) {
 				<CardHeader>
 					<CardTitle>Vista global</CardTitle>
 					<CardSelectorWrapper>
+						<CardSelector value={selectedMonth} onChange={handleMonthChange}>
+							<option value="all">All</option>
+							{optionsSelectMonth}
+						</CardSelector>
 						<CardSelector value={selectedYear} onChange={handleYearChange}>
 							{optionsSelectYear}
 						</CardSelector>
