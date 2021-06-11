@@ -74,6 +74,7 @@ function Dashboard() {
 							active={active}
 							hideModal={hideModal}
 							size={graphSize}
+							month={globalMonth}
 							year={globalYear}
 						/>
 					</div>
