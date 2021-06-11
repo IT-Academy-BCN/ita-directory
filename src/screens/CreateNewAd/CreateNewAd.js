@@ -97,7 +97,13 @@ const CreateNewAd = () => {
 
 	return (
 		<>
-			<Body title="Publicar anuncio" isLoggedIn={true}>
+			<Body
+				title="Publicar anuncio"
+				justifyTitle="flex-start"
+				paddingTitle="0px"
+				paddingTitle2="5vw"
+				isLoggedIn="true"
+			>
 				<Container>
 					<Wrapper>
 						<form onSubmit={handleSubmit}>
