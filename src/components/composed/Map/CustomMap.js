@@ -4,7 +4,7 @@ import L from "leaflet";
 import "./CustomMap.css";
 
 import "leaflet/dist/leaflet.css";
-
+let layer;
 const icon = L.icon({
 	iconSize: [25, 41],
 	iconAnchor: [10, 41],
@@ -17,7 +17,8 @@ function Marcador({saveMarkers}) {
 	const map = useMapEvents({
 		click: (e) => {
 			const {lat, lng} = e.latlng;
-			L.marker([lat, lng], {icon}).addTo(map);
+			if (layer) layer.removeFrom(map);
+			layer = L.marker([lat, lng], {icon}).addTo(map);
 			saveMarkers([lat, lng]);
 		},
 	});
