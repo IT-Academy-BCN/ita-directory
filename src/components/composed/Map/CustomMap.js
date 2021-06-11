@@ -4,7 +4,7 @@ import L from "leaflet";
 import "./CustomMap.css";
 
 import "leaflet/dist/leaflet.css";
-
+let layer;
 const icon = L.icon({
 	iconSize: [25, 41],
 	iconAnchor: [10, 41],
@@ -17,8 +17,10 @@ function Marcador({saveMarkers}) {
 	const map = useMapEvents({
 		click: (e) => {
 			const {lat, lng} = e.latlng;
-			L.marker([lat, lng], {icon}).addTo(map);
+			if (layer) layer.removeFrom(map);
+			layer = L.marker([lat, lng], {icon}).addTo(map);
 			saveMarkers([lat, lng]);
+			map.panTo(e.latlng);
 		},
 	});
 	return null;
@@ -29,13 +31,13 @@ class CustomMap extends Component {
 		super(props);
 		this.state = {
 			markers: [[41.3879, 2.16992]],
-			data: [],
+			//	data: [],
 		};
 	}
 
 	saveMarkers = (newMarkerCoords) => {
-		const data = [...this.state.data, newMarkerCoords];
-		this.setState((prevState) => ({...prevState, data}));
+		const markers = [...this.state.markers, newMarkerCoords];
+		this.setState((prevState) => ({...prevState, markers}));
 	};
 
 	render() {
@@ -43,7 +45,10 @@ class CustomMap extends Component {
 			<div className="Mapa">
 				<MapContainer
 					className="Container"
-					center={{lat: 41.3879, lng: 2.16992}}
+					center={{
+						lat: 41.3879,
+						lng: 2.16992,
+					}}
 					zoom={18}
 					scrollWheelZoom={false}
 				>
