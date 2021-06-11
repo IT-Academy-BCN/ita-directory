@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect, Fragment} from "react";
 import * as echarts from "echarts";
-import {groupByTypeYearPie, groupByTypeMonthPie, daysBetween} from "utils/generateData";
+import {groupByTypePie, daysBetween} from "utils/generateData";
 import {
 	CardHeader,
 	CardTitle,
@@ -53,25 +53,6 @@ function PieChart({data, hideModal, active, size, year, month}) {
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
-			/* 			let customOptions;
-
-			if (selectedYear === "2012") {
-				customOptions = _.filter(options.series, options.series[0]);
-			}
-			if (selectedYear === "2013") {
-				customOptions = _.filter(options.series, options.series[1]);
-				console.log("entro aquí");
-			}
-			if (selectedYear === "2014") {
-				customOptions = _.filter(options.series, options.series[2]);
-			}
-			if (selectedYear === "2015") {
-				customOptions = _.filter(options.series, options.series[3]);
-			}
-			if (selectedYear === "2016") {
-				customOptions = _.filter(options.series, options.series[4]);
-			} */
-
 			let customOptions;
 
 			let yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
@@ -92,9 +73,9 @@ function PieChart({data, hideModal, active, size, year, month}) {
 			);
 
 			if (selectedMonth === "all") {
-				customOptions = groupByTypeYearPie(yearToFilterData);
+				customOptions = groupByTypePie(yearToFilterData);
 			} else {
-				customOptions = groupByTypeMonthPie(monthToFilterData);
+				customOptions = groupByTypePie(monthToFilterData);
 			}
 
 			options.series[0].data = customOptions;

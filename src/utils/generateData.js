@@ -133,27 +133,7 @@ export const groupByTypeMonth = (monthData) => {
 	];
 };
 
-export const groupByTypeMonthPie = (monthData) => {
-	let totalpisos = 0;
-	let totallocales = 0;
-	let totalgarages = 0;
-	let totalchalets = 0;
-	for (let i = 0; i < monthData.length; i++) {
-		const el = monthData[i];
-		totalpisos += el.pisos;
-		totallocales += el.locales;
-		totalgarages += el.garages;
-		totalchalets += el.chalets;
-	}
-	return [
-		{value: totalpisos, name: "Pisos"},
-		{value: totallocales, name: "Locales"},
-		{value: totalgarages, name: "Garages"},
-		{value: totalchalets, name: "Chalets"},
-	];
-};
-
-export const groupByTypeYearPie = (yearlyData) => {
+export const groupByTypePie = (yearlyData) => {
 	let totalpisos = 0;
 	let totallocales = 0;
 	let totalgarages = 0;
