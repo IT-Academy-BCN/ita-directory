@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {generateData, daysBetween} from "utils/generateData";
+import {generateData, generateDataLine, daysBetween} from "utils/generateData";
 
 import GlobalFilters from "components/composed/GlobalFilters/GlobalFilters";
 
@@ -14,6 +14,7 @@ import Body from "components/layout/Body/Body";
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
 const data = generateData(new Date(initialDate), days, [30, 80]);
+const dataline = generateDataLine(new Date(initialDate), days, [30, 80]);
 
 function Dashboard() {
 	const [active, setActive] = useState(false);
@@ -59,7 +60,7 @@ function Dashboard() {
 				<div className="row">
 					<div className="graphicMargin">
 						<LineChart
-							data={data}
+							data={dataline}
 							active={active}
 							hideModal={hideModal}
 							size={graphSize}
