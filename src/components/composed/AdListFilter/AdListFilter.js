@@ -8,9 +8,13 @@ import {
 	CardSelectorWrapper,
 	CardCheckbox,
 	FilterHr,
+	Button,
 } from "./AdListFilter.style";
 
 function AdFilters() {
+	const filtrar = () => {
+		console.log("dff");
+	};
 	return (
 		<Fragment>
 			<Card>
@@ -30,6 +34,7 @@ function AdFilters() {
 						<CardCheckbox type="checkbox" />
 						Gastos Incluidos
 					</CardSelectorWrapper>
+					<Button onClick={() => filtrar()}>Filtrar</Button>
 				</CardHeader>
 			</Card>
 		</Fragment>

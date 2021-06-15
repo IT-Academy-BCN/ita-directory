@@ -7,7 +7,7 @@ import Colors from "theme/Colors";
 import Card from "components/composed/Card/Card";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
 
-const AdCard = ({image, title, price, surface, includedExpenses, description, rooms}) => {
+const AdCard = ({image, title, price, m2, gastosIncluidos, desc, habitaciones}) => {
 	const [active, setActive] = useState(false);
 
 	return (
@@ -16,15 +16,15 @@ const AdCard = ({image, title, price, surface, includedExpenses, description, ro
 			title={title}
 			description={
 				<>
-					<StyledPrice>{price}</StyledPrice>
-					<StyledP>{rooms}</StyledP>
-					<StyledP>{surface}</StyledP>
+					<StyledPrice>{price}€/mes</StyledPrice>
+					<StyledP>{habitaciones} Habitaciones</StyledP>
+					<StyledP>{m2}m2</StyledP>
 					<StyledP>
-						{includedExpenses ? "Gastos incluidos" : "Gastos no incluidos"}
+						{gastosIncluidos ? "Gastos incluidos" : "Gastos no incluidos"}
 					</StyledP>
 				</>
 			}
-			text={description}
+			text={desc}
 			footer={
 				<>
 					<Button

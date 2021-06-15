@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
-import {adCardImage} from "assets/images";
 import AdListFilter from "components/composed/AdListFilter/AdListFilter";
 import {FilterDiv, AdListStyled, WrapperStyled} from "./AdList.style.js";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
@@ -9,10 +8,11 @@ import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import MapView from "components/composed/Map/MapView.js";
+import axios from "axios";
 
 const AdList = () => {
 	const [mapView, setMapView] = useState(false);
-	const adList = [
+	/* 	const adList = [
 		{
 			image: {src: {adCardImage}, alt: "Casa Piscina"},
 			title: "Piso en calle Ángel Puech, Valdeacederas, Madrid ",
@@ -23,8 +23,27 @@ const AdList = () => {
 			description:
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
 		},
-	];
-	const [ad] = adList;
+	]; */
+
+	const [adList, setAdList] = useState([]);
+	useEffect(() => {
+		const fetchAds = async () => {
+			const result = await axios("https://api-casas.kevinmamaqi.com/api-casas");
+
+			setAdList(result.data);
+			console.log(adList);
+		};
+
+		fetchAds();
+		// eslint-disable-next-line
+	}, []);
+
+	const renderList = adList.map((e) => (
+		<div className="CardWrapper">
+			<AdCard {...e} />
+		</div>
+	));
+
 	const buttonStyle = {
 		display: "flex",
 		alignItems: "center",
@@ -95,17 +114,7 @@ const AdList = () => {
 							<MapView />
 						</div>
 					) : (
-						<WrapperStyled>
-							<div className="CardWrapper">
-								<AdCard {...ad} />
-							</div>
-							<div className="CardWrapper">
-								<AdCard {...ad} />
-							</div>
-							<div className="CardWrapper">
-								<AdCard {...ad} />
-							</div>
-						</WrapperStyled>
+						<WrapperStyled>{renderList}</WrapperStyled>
 					)}
 				</AdListStyled>
 			</Container>

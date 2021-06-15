@@ -83,3 +83,14 @@ export const Chart = styled.div`
 export const FilterHr = styled.hr`
 	width: "100%";
 `;
+
+export const Button = styled.button`
+	height: 35px;
+	box-shadow: 0 3px 6px #00000029;
+	border: none;
+	border-radius: 4px;
+	background: #006bb9;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: white;
+`;
