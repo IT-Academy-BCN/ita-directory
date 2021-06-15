@@ -1,6 +1,6 @@
 import React from "react";
 import {
-	Container,
+	CardBox,
 	CardInfo,
 	StyledTitle,
 	StyledImage,
@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 const Card = ({image, title, description, text, footer}) => {
 	return (
-		<Container>
+		<CardBox>
 			<StyledImage {...image} />
 			<CardInfo>
 				<StyledTitle>{title}</StyledTitle>
@@ -20,7 +20,7 @@ const Card = ({image, title, description, text, footer}) => {
 				<StyledText>{text}</StyledText>
 				<StyledFooter>{footer}</StyledFooter>
 			</CardInfo>
-		</Container>
+		</CardBox>
 	);
 };
 Card.propTypes = {
