@@ -18,6 +18,8 @@ import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
+import MapView from "components/composed/Map/MapView.js";
+
 const AdList = () => {
 	const [mapView, setMapView] = useState(false);
 	const adList = [
@@ -96,17 +98,24 @@ const AdList = () => {
 								/>
 							)}
 						</RowWrapper>
-						<StyledWrapper>
-							<StyledCard>
-								<AdCard {...ad} />
-							</StyledCard>
-							<StyledCard>
-								<AdCard {...ad} />
-							</StyledCard>
-							<StyledCard>
-								<AdCard {...ad} />
-							</StyledCard>
-						</StyledWrapper>
+
+						{mapView ? (
+							<RowWrapper>
+								<MapView />
+							</RowWrapper>
+						) : (
+							<StyledWrapper>
+								<StyledCard>
+									<AdCard {...ad} />
+								</StyledCard>
+								<StyledCard>
+									<AdCard {...ad} />
+								</StyledCard>
+								<StyledCard>
+									<AdCard {...ad} />
+								</StyledCard>
+							</StyledWrapper>
+						)}
 					</StyledAdList>
 				</FilterDiv>
 			</Container>
