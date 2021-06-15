@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
 import {adCardImage} from "assets/images";
+import AdListFilter from "components/composed/AdListFilter/AdListFilter";
 import {
 	StyledTitle,
 	StyledWrapper,
@@ -9,6 +10,8 @@ import {
 	StyledTreeSearch,
 	StyledCard,
 	StyledAdList,
+	StyledWrapperFilter,
+	StyledCardFilter,
 } from "./AdList.style.js";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
@@ -43,53 +46,68 @@ const AdList = () => {
 		paddingRight: 0,
 	};
 	return (
-		<Body title="Pisos en Alquiler en Madrid">
+		<Body
+			title="Pisos en Alquiler en Madrid"
+			isLoggedIn="true"
+			justifyTitle="flex-start"
+			paddingTitle="0px"
+			paddingTitle2="5vw"
+		>
 			<Container row>
-				<StyledAdList>
-					<StyledTreeSearch>
-						<label>Madrid</label>
-						<label>Alquiler</label>
-					</StyledTreeSearch>
-					<RowWrapper>
-						<StyledTitle>Listado de pisos</StyledTitle>
-						{mapView ? (
-							<Button
-								text="Vista de detalles"
-								icon={faBars}
-								iconPosition="left"
-								iconStyles={{
-									marginRight: 5,
-									paddingLeft: 0,
-								}}
-								onClick={() => setMapView(!mapView)}
-								buttonStyles={buttonStyle}
-							/>
-						) : (
-							<Button
-								text="Vista de mapa"
-								icon={faMapMarkerAlt}
-								iconPosition="left"
-								iconStyles={{
-									marginRight: 5,
-									paddingLeft: 0,
-								}}
-								onClick={() => setMapView(!mapView)}
-								buttonStyles={buttonStyle}
-							/>
-						)}
-					</RowWrapper>
-					<StyledWrapper>
-						<StyledCard>
-							<AdCard {...ad} />
-						</StyledCard>
-						<StyledCard>
-							<AdCard {...ad} />
-						</StyledCard>
-						<StyledCard>
-							<AdCard {...ad} />
-						</StyledCard>
-					</StyledWrapper>
-				</StyledAdList>
+				<div style={{width: "20%"}}>
+					<StyledWrapperFilter>
+						<StyledCardFilter>
+							<AdListFilter />
+						</StyledCardFilter>
+					</StyledWrapperFilter>
+				</div>
+				<div style={{width: "80%"}}>
+					<StyledAdList>
+						<StyledTreeSearch>
+							<label>Madrid</label>
+							<label>Alquiler</label>
+						</StyledTreeSearch>
+						<RowWrapper>
+							<StyledTitle>Listado de pisos</StyledTitle>
+							{mapView ? (
+								<Button
+									text="Vista de detalles"
+									icon={faBars}
+									iconPosition="left"
+									iconStyles={{
+										marginRight: 5,
+										paddingLeft: 0,
+									}}
+									onClick={() => setMapView(!mapView)}
+									buttonStyles={buttonStyle}
+								/>
+							) : (
+								<Button
+									text="Vista de mapa"
+									icon={faMapMarkerAlt}
+									iconPosition="left"
+									iconStyles={{
+										marginRight: 5,
+										paddingLeft: 0,
+									}}
+									onClick={() => setMapView(!mapView)}
+									buttonStyles={buttonStyle}
+								/>
+							)}
+						</RowWrapper>
+						<StyledWrapper>
+							<StyledCard>
+								<AdCard {...ad} />
+							</StyledCard>
+							<StyledCard>
+								<AdCard {...ad} />
+							</StyledCard>
+							<StyledCard>
+								<AdCard {...ad} />
+							</StyledCard>
+						</StyledWrapper>
+					</StyledAdList>
+				</div>
 			</Container>
 		</Body>
 	);

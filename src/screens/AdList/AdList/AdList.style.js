@@ -19,9 +19,23 @@ export const StyledWrapper = styled.div`
 	padding-bottom: 1.5rem;
 `;
 
+export const StyledWrapperFilter = styled.div`
+	display: flex;
+	flex-direction: column;
+
+	padding-bottom: 1.5rem;
+	padding-right: 1.5rem;
+	display: flex;
+`;
+
 export const StyledCard = styled.div`
 	padding-top: 1rem;
 	padding-bottom: 1rem;
+`;
+
+export const StyledCardFilter = styled.div`
+	padding-bottom: 1rem;
+	flex-direction: column;
 `;
 
 export const RowWrapper = styled.div`

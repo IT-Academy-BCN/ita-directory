@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const Container = styled.div`
-	width: 43rem;
+	/* 	width: 43rem; */
 	height: 14rem;
 	display: flex;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
