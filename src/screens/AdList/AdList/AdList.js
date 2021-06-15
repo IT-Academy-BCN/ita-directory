@@ -12,6 +12,7 @@ import {
 	StyledAdList,
 	StyledWrapperFilter,
 	StyledCardFilter,
+	FilterDiv,
 } from "./AdList.style.js";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
@@ -54,14 +55,14 @@ const AdList = () => {
 			paddingTitle2="5vw"
 		>
 			<Container row>
-				<div style={{width: "20%"}}>
+				<FilterDiv>
 					<StyledWrapperFilter>
 						<StyledCardFilter>
 							<AdListFilter />
 						</StyledCardFilter>
 					</StyledWrapperFilter>
-				</div>
-				<div style={{width: "80%"}}>
+				</FilterDiv>
+				<FilterDiv>
 					<StyledAdList>
 						<StyledTreeSearch>
 							<label>Madrid</label>
@@ -107,7 +108,7 @@ const AdList = () => {
 							</StyledCard>
 						</StyledWrapper>
 					</StyledAdList>
-				</div>
+				</FilterDiv>
 			</Container>
 		</Body>
 	);

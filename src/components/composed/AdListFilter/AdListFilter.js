@@ -7,6 +7,7 @@ import {
 	CardInput,
 	CardSelectorWrapper,
 	CardCheckbox,
+	FilterHr,
 } from "./AdListFilter.style";
 
 function AdFilters() {
@@ -15,7 +16,7 @@ function AdFilters() {
 			<Card>
 				<CardHeader>
 					<CardTitle>Filtros</CardTitle>
-					<hr style={{width: "100%"}} /> Precio
+					<FilterHr style={{width: "100%"}} /> Precio
 					<CardSelectorWrapper>
 						<CardInput placeholder="Min"></CardInput>
 						<CardInput placeholder="Max"></CardInput>

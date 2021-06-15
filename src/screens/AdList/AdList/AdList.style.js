@@ -51,3 +51,7 @@ export const StyledTreeSearch = styled.div`
 	color: ${Colors.ligthGray};
 	opacity: 1;
 `;
+
+export const FilterDiv = styled.div`
+	width: ${(props) => props.width};
+`;

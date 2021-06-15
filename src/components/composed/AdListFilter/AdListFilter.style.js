@@ -79,3 +79,7 @@ export const Chart = styled.div`
 	height: 50vh;
 	margin: 12px;
 `;
+
+export const FilterHr = styled.hr`
+	width: "100%";
+`;
