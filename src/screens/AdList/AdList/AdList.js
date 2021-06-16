@@ -9,37 +9,42 @@ import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import MapView from "components/composed/Map/MapView.js";
 import axios from "axios";
+import _ from "lodash";
 
 const AdList = () => {
 	const [mapView, setMapView] = useState(false);
-	/* 	const adList = [
-		{
-			image: {src: {adCardImage}, alt: "Casa Piscina"},
-			title: "Piso en calle Ángel Puech, Valdeacederas, Madrid ",
-			price: "990 €/mes",
-			rooms: "3 habitaciones",
-			surface: "95m2",
-			includedExpenses: true,
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-		},
-	]; */
-
+	const [filteredAdList, setFilteredAdlist] = useState([]);
 	const [adList, setAdList] = useState([]);
+	const [filtro, setFiltro] = useState();
+
 	useEffect(() => {
 		const fetchAds = async () => {
 			const result = await axios("https://api-casas.kevinmamaqi.com/api-casas");
-
 			setAdList(result.data);
-			console.log(adList);
 		};
-
 		fetchAds();
 		// eslint-disable-next-line
 	}, []);
 
-	const renderList = adList.map((e) => (
-		<div className="CardWrapper">
+	useEffect(() => {
+		let _filteredAds = [];
+		_filteredAds =
+			filtro === undefined
+				? adList
+				: _.filter(adList, function (e) {
+						return (
+							(filtro.gastosInc ? e.gastosIncluidos : e) &&
+							e.price <= filtro.maxPrice &&
+							e.price >= filtro.minPrice &&
+							e.m2 <= filtro.maxSize &&
+							e.m2 >= filtro.minSize
+						);
+				  });
+		setFilteredAdlist(_filteredAds);
+	}, [filtro, adList]);
+
+	const renderList = filteredAdList.map((e, index) => (
+		<div className="CardWrapper" key={index}>
 			<AdCard {...e} />
 		</div>
 	));
@@ -69,7 +74,7 @@ const AdList = () => {
 				<FilterDiv>
 					<div className="WrapperFilter">
 						<div className="CardFilter">
-							<AdListFilter />
+							<AdListFilter filtrar={(data) => setFiltro(data)} />
 						</div>
 					</div>
 				</FilterDiv>
@@ -111,7 +116,7 @@ const AdList = () => {
 
 					{mapView ? (
 						<div className="RowWrapper">
-							<MapView />
+							<MapView filteredAds={filteredAdList} />
 						</div>
 					) : (
 						<WrapperStyled>{renderList}</WrapperStyled>

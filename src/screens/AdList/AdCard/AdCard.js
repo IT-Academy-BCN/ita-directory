@@ -7,13 +7,13 @@ import Colors from "theme/Colors";
 import Card from "components/composed/Card/Card";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
 
-const AdCard = ({image, title, price, m2, gastosIncluidos, desc, habitaciones}) => {
+const AdCard = ({image, name, price, m2, gastosIncluidos, desc, habitaciones}) => {
 	const [active, setActive] = useState(false);
 
 	return (
 		<Card
 			image={{src: adCardImage, alt: "Casa Piscina"}}
-			title={title}
+			title={name}
 			description={
 				<>
 					<StyledPrice>{price}€/mes</StyledPrice>
