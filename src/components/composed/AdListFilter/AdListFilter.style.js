@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-	min-width: 90%;
+	width: 100%;
 	height: auto;
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
@@ -9,23 +9,32 @@ export const Card = styled.div`
 	overflow: hidden;
 	background: #f4f4f4;
 	display: flex;
+	flex-direction: column;
+	padding: 0.7rem 0.7rem;
 `;
-
-export const CardHeader = styled.div`
-	height: auto;
+export const CardBody = styled.div`
 	background-color: #f4f4f4;
 	display: flex;
 	flex-direction: column;
 	align-items: left;
-	justify-content: space-between;
-	padding-bottom: 1rem;
-	padding: 0.5rem 2rem;
+	@media only screen and (max-width: 1024px) {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+`;
+
+export const CardHeader = styled.div`
+	background-color: #f4f4f4;
+	@media only screen and (max-width: 1024px) {
+		justify-content: center;
+	}
 `;
 
 export const CardTitle = styled.h2`
 	font-weight: 400;
 	color: black;
-	padding-right: 2rem;
+	margin: 0;
 `;
 
 //Afecta a los selectores de los modals

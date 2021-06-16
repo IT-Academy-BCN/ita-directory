@@ -13,7 +13,6 @@ export const StyledPrice = styled.label`
 `;
 
 export const StyledP = styled.label`
-	font: normal normal normal 14px/16px Arial;
 	text-align: left;
 	letter-spacing: 0px;
 	opacity: 1;
