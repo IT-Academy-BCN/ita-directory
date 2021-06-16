@@ -106,7 +106,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 	};
 
 	return (
-		<Fragment>
+		<>
 			<CardChart>
 				<CardHeader>
 					<CardTitle>Vista global</CardTitle>
@@ -134,7 +134,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 					)}
 				</CardBody>
 			</CardChart>
-		</Fragment>
+		</>
 	);
 }
 

@@ -9,11 +9,11 @@ export const FilterDiv = styled.div`
 		flex-direction: column;
 		padding-bottom: 1.5rem;
 		padding-right: 1.5rem;
+	}
 
-		.CardFilter {
-			padding-bottom: 1rem;
-			flex-direction: column;
-		}
+	.CardFilter {
+		padding-bottom: 1rem;
+		flex-direction: column;
 	}
 `;
 

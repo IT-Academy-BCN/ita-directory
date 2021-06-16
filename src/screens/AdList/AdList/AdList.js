@@ -44,9 +44,9 @@ const AdList = () => {
 			isLoggedIn="true"
 			justifyTitle="flex-start"
 			paddingTitle="0px"
-			paddingTitle2="5vw"
+			paddingTitle2="15vw"
 		>
-			<Container>
+			<Container row>
 				<FilterDiv>
 					<div className="WrapperFilter">
 						<div className="CardFilter">
