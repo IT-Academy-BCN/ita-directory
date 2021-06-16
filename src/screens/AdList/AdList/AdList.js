@@ -1,30 +1,45 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
-import {adCardImage} from "assets/images";
 import AdListFilter from "components/composed/AdListFilter/AdListFilter";
-import {AdListDiv, FilterDiv, AdListStyled, WrapperStyled} from "./AdList.style.js";
+import {FilterDiv, AdListStyled, WrapperStyled} from "./AdList.style.js";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import MapView from "components/composed/Map/MapView.js";
+import axios from "axios";
+import _ from "lodash";
 
 const AdList = () => {
+	const [filtro, setFiltro] = useState();
 	const [mapView, setMapView] = useState(false);
-	const adList = [
-		{
-			image: {src: {adCardImage}, alt: "Casa Piscina"},
-			title: "Piso en calle Ángel Puech, Valdeacederas, Madrid ",
-			price: "990 €/mes",
-			rooms: "3 habitaciones",
-			surface: "95m2",
-			includedExpenses: true,
-			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-		},
-	];
-	const [ad] = adList;
+	const [filteredAdList, setFilteredAdlist] = useState([]);
+	const [adList, setAdList] = useState([]);
+
+	useEffect(() => {
+		const fetchAds = async () => {
+			const result = await axios("https://api-casas.kevinmamaqi.com/api-casas");
+			setAdList(result.data);
+		};
+		fetchAds();
+		// eslint-disable-next-line
+	}, []);
+
+	useEffect(() => {
+		/* 	console.log(filtro.gastosInc, "Filtro"); */
+		let _filteredAds = [];
+		_filteredAds = filtro ? _.filter(adList, ["gastosIncluidos", true]) : adList;
+
+		setFilteredAdlist(_filteredAds);
+	}, [filtro, adList]);
+
+	const renderList = filteredAdList.map((e, index) => (
+		<div className="CardWrapper" key={index}>
+			<AdCard {...e} />
+		</div>
+	));
+
 	const buttonStyle = {
 		display: "flex",
 		alignItems: "center",
@@ -44,72 +59,62 @@ const AdList = () => {
 			isLoggedIn="true"
 			justifyTitle="flex-start"
 			paddingTitle="0px"
-			paddingTitle2="15vw"
+			paddingTitle2="5vw"
 		>
 			<Container>
-				<AdListDiv>
-					<FilterDiv>
-						<div className="WrapperFilter">
-							<div className="CardFilter">
-								<AdListFilter />
-							</div>
+				<FilterDiv>
+					<div className="WrapperFilter">
+						<div className="CardFilter">
+							<AdListFilter
+								filtrar={(gastosInc, maxPrice) => setFiltro(gastosInc, maxPrice)}
+							/>
 						</div>
-					</FilterDiv>
+					</div>
+				</FilterDiv>
 
-					<AdListStyled>
-						<div className="TreeSearch">
-							<label>Madrid - </label>
-							<label>Alquiler</label>
-						</div>
+				<AdListStyled>
+					<div className="TreeSearch">
+						<label>Madrid - </label>
+						<label>Alquiler</label>
+					</div>
 
-						<div className="RowWrapper">
-							<div className="h3">Listado de pisos</div>
-							{mapView ? (
-								<Button
-									text="Vista de detalles"
-									icon={faBars}
-									iconPosition="left"
-									iconStyles={{
-										marginRight: 5,
-										paddingLeft: 0,
-									}}
-									onClick={() => setMapView(!mapView)}
-									buttonStyles={buttonStyle}
-								/>
-							) : (
-								<Button
-									text="Vista de mapa"
-									icon={faMapMarkerAlt}
-									iconPosition="left"
-									iconStyles={{
-										marginRight: 5,
-										paddingLeft: 0,
-									}}
-									onClick={() => setMapView(!mapView)}
-									buttonStyles={buttonStyle}
-								/>
-							)}
-						</div>
-
+					<div className="RowWrapper">
+						<div className="h3">Listado de pisos</div>
 						{mapView ? (
-							<div>
-								<MapView />
-							</div>
+							<Button
+								text="Vista de detalles"
+								icon={faBars}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
+							/>
 						) : (
-							<WrapperStyled>
-								<div className="CardWrapper">
-									<AdCard {...ad} />
-								</div>
-								<div className="CardWrapper">
-									<AdCard {...ad} />
-								</div>
-								<div className="CardWrapper">
-									<AdCard {...ad} />
-								</div>
-							</WrapperStyled>
+							<Button
+								text="Vista de mapa"
+								icon={faMapMarkerAlt}
+								iconPosition="left"
+								iconStyles={{
+									marginRight: 5,
+									paddingLeft: 0,
+								}}
+								onClick={() => setMapView(!mapView)}
+								buttonStyles={buttonStyle}
+							/>
 						)}
-					</AdListStyled>
-				</AdListDiv>
+					</div>
+
+					{mapView ? (
+						<div className="RowWrapper">
+							<MapView filteredAds={filteredAdList} />
+						</div>
+					) : (
+						<WrapperStyled>{renderList}</WrapperStyled>
+					)}
+				</AdListStyled>
 			</Container>
 		</Body>
 	);
