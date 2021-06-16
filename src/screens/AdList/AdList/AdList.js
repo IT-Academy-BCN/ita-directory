@@ -19,8 +19,10 @@ const AdList = () => {
 
 	useEffect(() => {
 		const fetchAds = async () => {
-			const result = await axios("https://api-casas.kevinmamaqi.com/api-casas");
-			setAdList(result.data);
+			const result = await axios("https://api-casas.kevinmamaqi.com/api-casas", {
+				params: {_limit: 10}, //parece no estar implemententado en el api de casas
+			});
+			setAdList(result.data.slice(0, 10));
 		};
 		fetchAds();
 		// eslint-disable-next-line
