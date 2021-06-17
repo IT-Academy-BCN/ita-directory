@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, {useEffect, useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
 import AdListFilter from "components/composed/AdListFilter/AdListFilter";
-import {FilterDiv, AdListStyled, WrapperStyled} from "./AdList.style.js";
+import {AdListStyled} from "./AdList.style.js";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
@@ -45,11 +46,11 @@ const AdList = () => {
 		setFilteredAdlist(_filteredAds);
 	}, [filtro, adList]);
 
-	const renderList = filteredAdList.map((e, index) => (
-		<div className="CardWrapper" key={index}>
-			<AdCard {...e} />
-		</div>
-	));
+	// const renderList = filteredAdList.map((e, index) => (
+	// 	<div className="CardWrapper" key={index}>
+	// 		<AdCard {...e} />
+	// 	</div>
+	// ));
 
 	const buttonStyle = {
 		display: "flex",
@@ -70,24 +71,17 @@ const AdList = () => {
 			isLoggedIn="true"
 			justifyTitle="flex-start"
 			paddingTitle="0px"
-			paddingTitle2="5vw"
+			paddingTitle2="15vw"
 		>
-			<Container>
-				<FilterDiv>
-					<div className="WrapperFilter">
-						<div className="CardFilter">
-							<AdListFilter filtrar={(data) => setFiltro(data)} />
-						</div>
-					</div>
-				</FilterDiv>
+			<Container row>
+				<div className="wrapper-filter">
+					<AdListFilter filtrar={(data) => setFiltro(data)} />
+				</div>
 
 				<AdListStyled>
-					<div className="TreeSearch">
-						<label>Madrid - </label>
-						<label>Alquiler</label>
-					</div>
+					<div className="tree-search">Madrid - Alquiler</div>
 
-					<div className="RowWrapper">
+					<div className="row-wrapper">
 						<div className="h3">Listado de pisos</div>
 						{mapView ? (
 							<Button
@@ -117,11 +111,19 @@ const AdList = () => {
 					</div>
 
 					{mapView ? (
-						<div className="RowWrapper">
-							<MapView filteredAds={filteredAdList} />
-						</div>
+						<MapView />
 					) : (
-						<WrapperStyled>{renderList}</WrapperStyled>
+						<div>
+							{/* <div className="card-wrapper">
+									<AdCard {...ad} />
+								</div>
+								<div className="card-wrapper">
+									<AdCard {...ad} />
+								</div>
+								<div className="card-wrapper">
+									<AdCard {...ad} />
+								</div> */}
+						</div>
 					)}
 				</AdListStyled>
 			</Container>

@@ -11,14 +11,13 @@ import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList/AdList";
 import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
-
-import SalesLineChart from "screens/Sales/SalesLineChart";
-import SalesByMonth from "screens/Sales/SalesByMonth";
-import SalesByType from "screens/Sales/SalesByType";
 import Dashboard from "screens/Dashboard/Dashboard";
-
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
+
+// import SalesLineChart from "screens/Sales/SalesLineChart";
+// import SalesByMonth from "screens/Sales/SalesByMonth";
+// import SalesByType from "screens/Sales/SalesByType";
 
 const App = () => {
 	return (
@@ -35,15 +34,10 @@ const App = () => {
 				<Route exact path="/go-to-map" component={GoToMap} />
 				<Route exact path="/map" component={MapView} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
-				<Route
-					exact
-					path="/sales-line-chart"
-					component={SalesLineChart}
-					dashboard={false}
-				/>
-				<Route exact path="/sales-by-month" component={SalesByMonth} />
-				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} />
 				<Route exact path="/dashboard" component={Dashboard} />
+				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
+				<Route exact path="/sales-by-month" component={SalesByMonth} />
+				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}
 			</Switch>
 		</>
 	);
