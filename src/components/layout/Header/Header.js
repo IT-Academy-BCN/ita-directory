@@ -1,17 +1,8 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {
-	Logo,
-	StyledHeader,
-	StyledImg,
-	StyledDropdown,
-	StyledLi,
-	StyledButton,
-	StyledMiPerfil,
-	StyledText,
-	StyledUl,
-	HeaderWrapper,
-} from "./Header.styles";
+
+// Styles
+import {HeaderStyled} from "./Header.styles";
 import {Container} from "theme/GlobalStyles";
 
 const profilePicture =
@@ -23,101 +14,56 @@ const Header = ({
 	color_logo,
 	color_header,
 	color_letra,
-	justifyTitle,
-	paddingTitle,
-	paddingTitle2,
+	centerTitle = false,
 }) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
-		console.log("profile clicked");
 		setDropdownVisible(!dropdownVisible);
 	};
 
-	const handleClickTwo = (e) => {
-		/*  const rect = e.getBoundingClientRect()
-		console.log(rect)
-		
-		const right = rect.right
-		console.log(right) 
-		 */
-	};
-
-	if (isLoggedIn) {
-		return (
-			<>
-				<Container>
-					<HeaderWrapper>
-						<Logo
-							className={`logged`}
-							color_logo={color_logo}
-							justifyTitle={justifyTitle}
-							paddingTitle={paddingTitle}
-						>
-							Logo Empresa
-						</Logo>
-						<StyledMiPerfil>
-							<StyledButton onClick={handleClick} ref={handleClickTwo}>
-								<StyledImg src={profilePicture} alt="profile" />
-								<StyledText>Mi perfil</StyledText>
-							</StyledButton>
+	return (
+		<HeaderStyled centerTitle={centerTitle}>
+			<Container>
+				<div className="top-header">
+					<h2 className="logo" color_logo={color_logo}>
+						Logo Empresa
+					</h2>
+					{isLoggedIn ? (
+						<div className="profile">
+							<button className="profile" onClick={handleClick}>
+								<img src={profilePicture} alt="Profile" />
+								<span>Mi perfil</span>
+							</button>
 							{dropdownVisible ? (
-								<StyledDropdown>
-									<StyledUl>
-										<Link to="/Profile">
-											<StyledLi>Editar perfil</StyledLi>
-										</Link>
-										<Link to="/Ad">
-											<StyledLi>Mis Anuncios</StyledLi>
-										</Link>
-										<Link to="/CreateNewAd">
-											<StyledLi>Publicar Anuncio</StyledLi>
-										</Link>
-										<Link to="/">
-											<StyledLi>Cerrar sesión</StyledLi>
-										</Link>
-									</StyledUl>
-								</StyledDropdown>
+								<div className="dropdown">
+									<ul>
+										<li>
+											<Link to="/Profile">Editar perfil</Link>
+										</li>
+										<li>
+											<Link to="/Ad">Mis Anuncios</Link>
+										</li>
+										<li>
+											<Link to="/CreateNewAd">Publicar Anuncio</Link>
+										</li>
+										<li>
+											<Link to="/">Cerrar sesión</Link>
+										</li>
+									</ul>
+								</div>
 							) : null}
-						</StyledMiPerfil>
-					</HeaderWrapper>
-				</Container>
-
-				<StyledHeader
-					className={`logged`}
-					color_header={color_header}
-					color_letra={color_letra}
-					justifyTitle={justifyTitle}
-					paddingTitle2={paddingTitle2}
-				>
-					<h1>{title}</h1>
-				</StyledHeader>
-			</>
-		);
-	} else {
-		return (
-			<div>
-				<div>
-					<Logo
-						color_logo={color_logo}
-						justifyTitle={justifyTitle}
-						paddingTitle={paddingTitle}
-					>
-						{" "}
-						Mi Empresa
-					</Logo>
+						</div>
+					) : null}
 				</div>
-				<StyledHeader
-					color_header={color_header}
-					color_letra={color_letra}
-					justifyTitle={justifyTitle}
-					paddingTitle={paddingTitle}
-				>
+			</Container>
+			<div className="sub-header">
+				<Container>
 					<h1>{title}</h1>
-				</StyledHeader>
+				</Container>
 			</div>
-		);
-	}
+		</HeaderStyled>
+	);
 };
 
 export default Header;

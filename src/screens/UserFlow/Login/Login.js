@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
@@ -5,6 +6,7 @@ import AsyncButton from "components/units/Button/Button";
 import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
 
+// eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
@@ -75,7 +77,7 @@ const Login = ({onLogin}) => {
 		}
 	};
 	return (
-		<Body title="Acceso" isLoggedIn={false}>
+		<Body title="Acceso" isLoggedIn={false} centerTitle>
 			<Container>
 				<Form onSubmit={handleSubmit}>
 					<div className="classInput">

@@ -10,9 +10,7 @@ const Body = ({
 	color_header,
 	color_letra,
 	isLoggedIn,
-	justifyTitle,
-	paddingTitle,
-	paddingTitle2,
+	centerTitle,
 	hideHeader,
 	hideFooter,
 	dashboard,
@@ -28,9 +26,7 @@ const Body = ({
 					color_header={color_header}
 					color_letra={color_letra}
 					isLoggedIn={isLoggedIn}
-					justifyTitle={justifyTitle}
-					paddingTitle={paddingTitle}
-					paddingTitle2={paddingTitle2}
+					centerTitle={centerTitle}
 				/>
 			)}
 
