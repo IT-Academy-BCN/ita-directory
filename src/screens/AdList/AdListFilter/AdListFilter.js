@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {
 	Card,
 	CardHeader,
-	CardBody,
+	// CardBody,
 	CardTitle,
 	CardInput,
 	CardSelectorWrapper,
@@ -58,26 +58,6 @@ function AdFilters({filtrar}) {
 					Filtrar
 				</Button>
 			</CardHeader>
-			<CardBody>
-				<div>
-					Precio
-					<CardSelectorWrapper>
-						<CardInput placeholder="Min"></CardInput>
-						<CardInput placeholder="Max"></CardInput>
-					</CardSelectorWrapper>
-				</div>
-				<div>
-					Tamaño
-					<CardSelectorWrapper>
-						<CardInput placeholder="Min"></CardInput>
-						<CardInput placeholder="Max"></CardInput>
-					</CardSelectorWrapper>
-				</div>
-			</CardBody>
-			<CardSelectorWrapper style={{width: "100%"}}>
-				<CardCheckbox type="checkbox" />
-				Gastos Incluidos
-			</CardSelectorWrapper>
 		</Card>
 	);
 }

@@ -9,7 +9,7 @@ import Login from "screens/UserFlow/Login/Login";
 import Registration from "screens/UserFlow/Registration/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
-import AdList from "screens/AdList/AdList/AdList";
+import AdList from "screens/AdList/AdList";
 import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
 import Dashboard from "screens/Dashboard/Dashboard";
 import GoToMap from "components/composed/Map/GoToMap";
