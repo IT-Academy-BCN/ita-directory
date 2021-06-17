@@ -4,7 +4,6 @@ import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
-import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import MapView from "components/composed/Map/MapView.js";
 import axios from "axios";
@@ -13,10 +12,11 @@ import AdListFilter from "screens/AdList/AdListFilter/AdListFilter";
 
 // Styles
 import {AdListStyled} from "./AdList.style.js";
+import {Container} from "theme/GlobalStyles.js";
 
 const AdList = () => {
 	const [filtro, setFiltro] = useState();
-	const [mapView, setMapView] = useState(false);
+	const [mapView, setMapView] = useState(true);
 	const [filteredAdList, setFilteredAdlist] = useState([]);
 	const [adList, setAdList] = useState([]);
 
@@ -64,13 +64,7 @@ const AdList = () => {
 		paddingRight: 0,
 	};
 	return (
-		<Body
-			title="Pisos en Alquiler en Madrid"
-			isLoggedIn="true"
-			justifyTitle="flex-start"
-			paddingTitle="0px"
-			paddingTitle2="5vw"
-		>
+		<Body title="Pisos en Alquiler en Madrid" isLoggedIn="true" justifyTitle="flex-start">
 			<AdListStyled>
 				<Container row>
 					<AdListFilter filtrar={(data) => setFiltro(data)} />
@@ -105,7 +99,7 @@ const AdList = () => {
 							)}
 						</div>
 
-						{mapView ? <MapView /> : renderList}
+						{mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
 					</div>
 				</Container>
 			</AdListStyled>
