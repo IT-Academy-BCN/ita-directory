@@ -1,12 +1,18 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const AdListDiv = styled.div`
+	display: flex;
+
+	@media only screen and (max-width: 1024px) {
+		flex-direction: column;
+	}
+`;
+
 export const FilterDiv = styled.div`
 	width: ${(props) => props.width};
-
+	display: inline-block;
 	.WrapperFilter {
-		display: flex;
-		flex-direction: column;
 		padding-bottom: 1.5rem;
 		padding-right: 1.5rem;
 	}
@@ -18,12 +24,8 @@ export const FilterDiv = styled.div`
 `;
 
 export const AdListStyled = styled.div`
-	display: flex;
-	flex-direction: column;
-
 	.TreeSearch {
 		text-align: left;
-		font: italic normal normal 14px/20px Arial;
 		letter-spacing: 0px;
 		color: ${Colors.ligthGray};
 		opacity: 1;

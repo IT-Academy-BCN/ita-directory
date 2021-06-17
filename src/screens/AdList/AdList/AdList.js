@@ -3,7 +3,7 @@ import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
 import {adCardImage} from "assets/images";
 import AdListFilter from "components/composed/AdListFilter/AdListFilter";
-import {FilterDiv, AdListStyled, WrapperStyled} from "./AdList.style.js";
+import {AdListDiv, FilterDiv, AdListStyled, WrapperStyled} from "./AdList.style.js";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import {Container} from "theme/GlobalStyles.js";
@@ -52,62 +52,62 @@ const AdList = () => {
 						<div className="CardFilter">
 							<AdListFilter />
 						</div>
-					</div>
-				</FilterDiv>
+					</FilterDiv>
 
-				<AdListStyled>
-					<div className="TreeSearch">
-						<label>Madrid - </label>
-						<label>Alquiler</label>
-					</div>
-
-					<div className="RowWrapper">
-						<div className="h3">Listado de pisos</div>
-						{mapView ? (
-							<Button
-								text="Vista de detalles"
-								icon={faBars}
-								iconPosition="left"
-								iconStyles={{
-									marginRight: 5,
-									paddingLeft: 0,
-								}}
-								onClick={() => setMapView(!mapView)}
-								buttonStyles={buttonStyle}
-							/>
-						) : (
-							<Button
-								text="Vista de mapa"
-								icon={faMapMarkerAlt}
-								iconPosition="left"
-								iconStyles={{
-									marginRight: 5,
-									paddingLeft: 0,
-								}}
-								onClick={() => setMapView(!mapView)}
-								buttonStyles={buttonStyle}
-							/>
-						)}
-					</div>
-
-					{mapView ? (
-						<div className="RowWrapper">
-							<MapView />
+					<AdListStyled>
+						<div className="TreeSearch">
+							<label>Madrid - </label>
+							<label>Alquiler</label>
 						</div>
-					) : (
-						<WrapperStyled>
-							<div className="CardWrapper">
-								<AdCard {...ad} />
+
+						<div className="RowWrapper">
+							<div className="h3">Listado de pisos</div>
+							{mapView ? (
+								<Button
+									text="Vista de detalles"
+									icon={faBars}
+									iconPosition="left"
+									iconStyles={{
+										marginRight: 5,
+										paddingLeft: 0,
+									}}
+									onClick={() => setMapView(!mapView)}
+									buttonStyles={buttonStyle}
+								/>
+							) : (
+								<Button
+									text="Vista de mapa"
+									icon={faMapMarkerAlt}
+									iconPosition="left"
+									iconStyles={{
+										marginRight: 5,
+										paddingLeft: 0,
+									}}
+									onClick={() => setMapView(!mapView)}
+									buttonStyles={buttonStyle}
+								/>
+							)}
+						</div>
+
+						{mapView ? (
+							<div>
+								<MapView />
 							</div>
-							<div className="CardWrapper">
-								<AdCard {...ad} />
-							</div>
-							<div className="CardWrapper">
-								<AdCard {...ad} />
-							</div>
-						</WrapperStyled>
-					)}
-				</AdListStyled>
+						) : (
+							<WrapperStyled>
+								<div className="CardWrapper">
+									<AdCard {...ad} />
+								</div>
+								<div className="CardWrapper">
+									<AdCard {...ad} />
+								</div>
+								<div className="CardWrapper">
+									<AdCard {...ad} />
+								</div>
+							</WrapperStyled>
+						)}
+					</AdListStyled>
+				</AdListDiv>
 			</Container>
 		</Body>
 	);
