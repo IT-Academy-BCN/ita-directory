@@ -1,10 +1,11 @@
 import styled from "styled-components";
 // import Colors from "theme/Colors";
 
-export const StyledBodyWrapper = styled.div`
+export const BodyWrapper = styled.div`
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	flex-direction: column;
+	width: 100%;
 	height: 40rem;
 	margin: 2rem;
 `;
@@ -13,13 +14,12 @@ export const StyledFormProfile = styled.form`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	font: normal normal normal 16px/24px Helvetica Neue;
 	background: #f7f7f7 0% 0% no-repeat padding-box;
 	border-radius: 6px;
 	opacity: 1;
 	padding-right: 3.5rem;
 	padding-left: 3.5rem;
-	width: 50rem;
+	width: 100%;
 	color: #4a4a4a;
 `;
 
@@ -69,5 +69,6 @@ export const StyledLabel = styled.label`
 	p {
 		margin-top: 0;
 		font-style: italic;
+		font-size: 12px;
 	}
 `;

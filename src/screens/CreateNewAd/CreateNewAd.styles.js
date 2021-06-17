@@ -20,4 +20,12 @@ export const Wrapper = styled.div`
 
 export const MapText = styled.p`
 	margin-top: 3%;
+	font-style: italic;
+	color: grey;
+	font-size: 12px;
+`;
+
+export const MapBox = styled.div`
+	width: 210%;
+	justify-content: center;
 `;

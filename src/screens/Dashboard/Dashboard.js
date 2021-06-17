@@ -9,6 +9,7 @@ import PieChart from "components/composed/Charts/PieChart/PieChart";
 
 // STYLES
 import {StyledDashboard} from "./Dashboard.style";
+import {Container} from "theme/GlobalStyles";
 import Body from "components/layout/Body/Body";
 
 const initialDate = "2012-01-01";
@@ -39,38 +40,19 @@ function Dashboard() {
 			title="Control de ventas"
 			justifyTitle="flex-start"
 			paddingTitle="0px"
-			paddingTitle2="5vw"
+			paddingTitle2="15vw"
 			isLoggedIn="true"
 		>
-			<StyledDashboard>
-				<div className="marginBottom">
-					<GlobalFilters
-						onYearChange={(year) => setGlobalYear(year)}
-						onMonthChange={(month) => setGlobalMonth(month)}
-					/>
-				</div>
-				<BarChart
-					data={data}
-					active={active}
-					hideModal={hideModal}
-					size={graphSize}
-					month={globalMonth}
-					year={globalYear}
-				/>
-				<div className="row">
-					<div className="graphicMargin">
-						<LineChart
-							data={dataline}
-							active={active}
-							hideModal={hideModal}
-							size={graphSize}
-							month={globalMonth}
-							year={globalYear}
+			<Container>
+				<StyledDashboard>
+					<div className="marginBottom">
+						<GlobalFilters
+							onYearChange={(year) => setGlobalYear(year)}
+							onMonthChange={(month) => setGlobalMonth(month)}
 						/>
 					</div>
-
-					<div className="">
-						<PieChart
+					<div className="marginTop">
+						<BarChart
 							data={data}
 							active={active}
 							hideModal={hideModal}
@@ -79,8 +61,32 @@ function Dashboard() {
 							year={globalYear}
 						/>
 					</div>
-				</div>
-			</StyledDashboard>
+
+					<div className="row">
+						<div className="marginBottom">
+							<LineChart
+								data={dataline}
+								active={active}
+								hideModal={hideModal}
+								size={graphSize}
+								month={globalMonth}
+								year={globalYear}
+							/>
+						</div>
+
+						<div className="row">
+							<PieChart
+								data={data}
+								active={active}
+								hideModal={hideModal}
+								size={graphSize}
+								month={globalMonth}
+								year={globalYear}
+							/>
+						</div>
+					</div>
+				</StyledDashboard>
+			</Container>
 		</Body>
 	);
 }

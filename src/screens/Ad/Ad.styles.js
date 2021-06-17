@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledAd = styled.div`
+export const AdStyled = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
+	align-items: right;
+
 	@media only screen and (min-width: 1020px) {
 		display: flex;
 		flex-direction: column;
@@ -22,34 +25,96 @@ export const StyledAd = styled.div`
 		margin-left: 1rem;
 		margin-right: 1.5rem;
 	}
+
+	.Title {
+		@media only screen and (min-width: 1020px) {
+			color: ${Colors.darkRed};
+			padding-top: 0.5rem;
+			padding-bottom: 1.5rem;
+			font-weight: bold;
+			font-size: 36px;
+			text-align: center;
+		}
+		@media only screen and (max-width: 1019px) {
+			color: ${Colors.darkRed};
+			padding-top: 0.5rem;
+			padding-bottom: 1.5rem;
+			font-weight: bold;
+			font-size: 36px;
+			text-align: center;
+		}
+		@media only screen and (max-width: 468px) {
+			color: ${Colors.darkRed};
+			padding-top: 0.5rem;
+			padding-bottom: 1.5rem;
+			font-weight: bold;
+			font-size: 36px;
+			text-align: center;
+		}
+
+		.Bottom {
+			display: flex;
+			flex-direction: row;
+			align-items: space-between;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			font-size: 16px;
+			padding-right: 1.5rem;
+			margin-top: 1rem;
+
+			@media only screen and (min-width: 1020px) {
+				display: flex;
+				flex-direction: column;
+				width: 60%;
+				padding-bottom: 3rem;
+				padding-top: 2rem;
+			}
+			@media only screen and (max-width: 1019px) {
+				display: flex;
+				flex-direction: column;
+				width: 60%;
+				padding-bottom: 3rem;
+				padding-top: 2rem;
+			}
+			@media only screen and (max-width: 468px) {
+				display: flex;
+				flex-direction: column;
+				width: 90%;
+				padding-bottom: 3rem;
+				padding-top: 2rem;
+				padding-left: 2rem;
+				padding-right: 2rem;
+			}
+		}
+	}
 `;
 
-export const StyledTitle = styled.div`
-	@media only screen and (min-width: 1020px) {
-		color: ${Colors.darkRed};
-		padding-top: 0.5rem;
-		padding-bottom: 1.5rem;
-		font-weight: bold;
-		font-size: 36px;
-		text-align: center;
-	}
-	@media only screen and (max-width: 1019px) {
-		color: ${Colors.darkRed};
-		padding-top: 0.5rem;
-		padding-bottom: 1.5rem;
-		font-weight: bold;
-		font-size: 36px;
-		text-align: center;
-	}
-	@media only screen and (max-width: 468px) {
-		color: ${Colors.darkRed};
-		padding-top: 0.5rem;
-		padding-bottom: 1.5rem;
-		font-weight: bold;
-		font-size: 36px;
-		text-align: center;
-	}
-`;
+// export const StyledTitle = styled.div`
+// 	@media only screen and (min-width: 1020px) {
+// 		color: ${Colors.darkRed};
+// 		padding-top: 0.5rem;
+// 		padding-bottom: 1.5rem;
+// 		font-weight: bold;
+// 		font-size: 36px;
+// 		text-align: center;
+// 	}
+// 	@media only screen and (max-width: 1019px) {
+// 		color: ${Colors.darkRed};
+// 		padding-top: 0.5rem;
+// 		padding-bottom: 1.5rem;
+// 		font-weight: bold;
+// 		font-size: 36px;
+// 		text-align: center;
+// 	}
+// 	@media only screen and (max-width: 468px) {
+// 		color: ${Colors.darkRed};
+// 		padding-top: 0.5rem;
+// 		padding-bottom: 1.5rem;
+// 		font-weight: bold;
+// 		font-size: 36px;
+// 		text-align: center;
+// 	}
+// `;
 
 export const StyledUl = styled.ul`
 	@media only screen and (min-width: 1020px) {
@@ -103,7 +168,16 @@ export const StyledText = styled.div`
 	}
 `;
 
-export const StyledBottomDiv = styled.div`
+export const BottomDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: space-between;
+	justify-content: right;
+	flex-wrap: wrap;
+	font-size: 16px;
+	padding-right: 1.5rem;
+	margin-top: 1rem;
+
 	@media only screen and (min-width: 1020px) {
 		display: flex;
 		flex-direction: column;
@@ -127,15 +201,6 @@ export const StyledBottomDiv = styled.div`
 		padding-left: 2rem;
 		padding-right: 2rem;
 	}
-
-	display: flex;
-	flex-direction: row;
-	align-items: space-between;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	font-size: 16px;
-	padding-right: 1.5rem;
-	margin-top: 1rem;
 `;
 
 export const SyledButton = styled.button`

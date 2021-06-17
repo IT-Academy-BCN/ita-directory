@@ -46,13 +46,11 @@ const AdList = () => {
 			paddingTitle="0px"
 			paddingTitle2="15vw"
 		>
-			<Container>
-				<AdListDiv>
-					<FilterDiv>
-						<div className="WrapperFilter">
-							<div className="CardFilter">
-								<AdListFilter />
-							</div>
+			<Container row>
+				<FilterDiv>
+					<div className="WrapperFilter">
+						<div className="CardFilter">
+							<AdListFilter />
 						</div>
 					</FilterDiv>
 

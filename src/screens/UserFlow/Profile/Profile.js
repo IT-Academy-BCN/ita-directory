@@ -10,9 +10,10 @@ import {
 	StyledSaveWrapper,
 	ImageWrapper,
 	StyledLabel,
-	StyledBodyWrapper,
+	BodyWrapper,
 	// StyledError,
 } from "./Profile.styles";
+import {Container} from "theme/GlobalStyles";
 
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
@@ -57,95 +58,104 @@ const Profile = () => {
 	};
 
 	return (
-		<Body title="Editar perfil" isLoggedIn={true}>
-			<StyledBodyWrapper>
-				<StyledFormProfile onSubmit={handleSubmit}>
-					<StyledPhotoWrapper>
-						<ImageWrapper>
-							<img src={image} alt={"Foto"} width="200" />
-						</ImageWrapper>
-						<StyleUploadPhotoWrapper>
-							<p>Fotografía de perfil</p>
-							<p>
-								Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato
-								.JPG, .JPEG, .PNG, y .GIF.
-							</p>
+		<Body
+			title="Editar perfil"
+			justifyTitle="flex-start"
+			paddingTitle="0px"
+			paddingTitle2="15vw"
+			isLoggedIn="true"
+		>
+			<Container>
+				<BodyWrapper>
+					<StyledFormProfile onSubmit={handleSubmit}>
+						<StyledPhotoWrapper>
+							<ImageWrapper>
+								<img src={image} alt={"Foto"} width="200" />
+							</ImageWrapper>
+							<StyleUploadPhotoWrapper>
+								<p>Fotografía de perfil</p>
+								<p>
+									Sube tu fotografía de perfil, tamaño recomendado 1000x1000.
+									Formato .JPG, .JPEG, .PNG, y .GIF.
+								</p>
+								<AsyncButton
+									text="Subir"
+									loadingText="Subiendo"
+									type="submit"
+									className="blueGradientProfile"
+									isLoading={false}
+								/>
+							</StyleUploadPhotoWrapper>
+						</StyledPhotoWrapper>
+					</StyledFormProfile>
+
+					<StyledFormProfile onSubmit={handleSubmit2}>
+						<StyledInputsWrapper>
+							<StyledLabel>
+								<label htmlFor="username">Nombre de usuario</label>
+								<Input
+									id="username"
+									name="username"
+									placeholder="Introducir nombre de usuario"
+									disabled={true}
+								/>
+								<p>El nombre de usuario no se puede modificar</p>
+							</StyledLabel>
+							<StyledLabel>
+								<label htmlFor="email">Email</label>
+								<Input
+									id="email"
+									name="email"
+									placeholder="Introducir email"
+									disabled={true}
+								/>
+								<p>
+									El email no se puede modificar. Ponte en contacto si necesitas
+									actualizarlo.
+								</p>
+							</StyledLabel>
+						</StyledInputsWrapper>
+						<StyledInputsWrapper>
+							<StyledLabel>
+								<label htmlFor="passName">Nueva Constraseña</label>
+								<Input
+									type="password"
+									placeholder="Introducir contraseña"
+									onChange={(e) => handlePasswordChange(e.target.value)}
+									className="errorProfile"
+									id="passName"
+									name="passName"
+									error={isPassError}
+									errorText="The password to contain more than 6 characters and a uppercase letter"
+									minLength={6}
+								/>
+							</StyledLabel>
+							<StyledLabel>
+								<label htmlFor="confirmPassName">Confirmar Constraseña</label>
+								<Input
+									type="password"
+									placeholder="Confirma tu contraseña"
+									onChange={(e) => handlePasswordChange2(e.target.value)}
+									className="errorProfile"
+									id="confirmPassName"
+									name="confirmPassName"
+									error={isPassError2}
+									errorText="Both passwords must be equal"
+									minLength={6}
+								/>
+							</StyledLabel>
+						</StyledInputsWrapper>
+						<StyledSaveWrapper>
 							<AsyncButton
-								text="Subir"
-								loadingText="Subiendo"
+								text="Guardar"
+								loadingText="Guardando"
 								type="submit"
-								className="blueGradientProfile"
-								isLoading={false}
+								className="greenGradient"
 							/>
-						</StyleUploadPhotoWrapper>
-					</StyledPhotoWrapper>
-				</StyledFormProfile>
-				<StyledFormProfile onSubmit={handleSubmit2}>
-					<StyledInputsWrapper>
-						<StyledLabel>
-							<label htmlFor="username">Nombre de usuario</label>
-							<Input
-								id="username"
-								name="username"
-								placeholder="Introducir nombre de usuario"
-								disabled={true}
-							/>
-							<p>El nombre de usuario no se puede modificar</p>
-						</StyledLabel>
-						<StyledLabel>
-							<label htmlFor="email">Email</label>
-							<Input
-								id="email"
-								name="email"
-								placeholder="Introducir email"
-								disabled={true}
-							/>
-							<p>
-								El email no se puede modificar. Ponte en contacto si necesitas
-								actualizarlo.
-							</p>
-						</StyledLabel>
-					</StyledInputsWrapper>
-					<StyledInputsWrapper>
-						<StyledLabel>
-							<label htmlFor="passName">Nueva Constraseña</label>
-							<Input
-								type="password"
-								placeholder="Introducir contraseña"
-								onChange={(e) => handlePasswordChange(e.target.value)}
-								className="errorProfile"
-								id="passName"
-								name="passName"
-								error={isPassError}
-								errorText="The password to contain more than 6 characters and a uppercase letter"
-								minLength={6}
-							/>
-						</StyledLabel>
-						<StyledLabel>
-							<label htmlFor="confirmPassName">Confirmar Constraseña</label>
-							<Input
-								type="password"
-								placeholder="Confirma tu contraseña"
-								onChange={(e) => handlePasswordChange2(e.target.value)}
-								className="errorProfile"
-								id="confirmPassName"
-								name="confirmPassName"
-								error={isPassError2}
-								errorText="Both passwords must be equal"
-								minLength={6}
-							/>
-						</StyledLabel>
-					</StyledInputsWrapper>
-					<StyledSaveWrapper>
-						<AsyncButton
-							text="Guardar"
-							loadingText="Guardando"
-							type="submit"
-							className="greenGradient"
-						/>
-					</StyledSaveWrapper>
-				</StyledFormProfile>
-			</StyledBodyWrapper>
+						</StyledSaveWrapper>
+					</StyledFormProfile>
+				</BodyWrapper>
+			</Container>
 		</Body>
 	);
 };

@@ -15,13 +15,11 @@ export const FilterDiv = styled.div`
 	.WrapperFilter {
 		padding-bottom: 1.5rem;
 		padding-right: 1.5rem;
-		@media only screen and (max-width: 1024px) {
-			padding: 0;
-		}
+	}
 
-		.CardFilter {
-			padding-bottom: 1rem;
-		}
+	.CardFilter {
+		padding-bottom: 1rem;
+		flex-direction: column;
 	}
 `;
 
