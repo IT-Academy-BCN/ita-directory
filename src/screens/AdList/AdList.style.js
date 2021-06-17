@@ -24,6 +24,7 @@ export const FilterDiv = styled.div`
 `;
 
 export const AdListStyled = styled.div`
+	width: 100%;
 	.TreeSearch {
 		text-align: left;
 		letter-spacing: 0px;

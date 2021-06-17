@@ -1,16 +1,14 @@
 import React from "react";
 import {Marker} from "react-leaflet";
 import {icon} from "./MapIcon";
-import MapPopup from "./MapPopup";
+// import MapPopup from "./MapPopup";
 
 const MapMarkers = ({apartments}) => {
 	const markers = apartments.map((apartment, i) => (
-		<Marker key={i} position={apartment.geometry} icon={icon}>
-			<MapPopup data={apartment} />
-		</Marker>
+		<Marker key={i} position={[apartment.lat, apartment.long]} icon={icon} />
 	));
 
-	return <>{markers}</>;
+	return markers;
 };
 
 export default MapMarkers;

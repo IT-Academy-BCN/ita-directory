@@ -7,7 +7,7 @@ export const StyledPopup = styled.div`
 export const StyledImage = styled.img`
 	border-radius: 12px;
 	height: 100%;
-	width: 14vw;
+	width: 200px;
 `;
 
 export const StyledPopupData = styled.div`
