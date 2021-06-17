@@ -7,7 +7,7 @@ import Button from "components/units/Button/Button";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 
 // Styles
-import {Wrapper, MapText} from "./CreateNewAd.styles";
+import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap";
 
@@ -101,7 +101,7 @@ const CreateNewAd = () => {
 				title="Publicar anuncio"
 				justifyTitle="flex-start"
 				paddingTitle="0px"
-				paddingTitle2="5vw"
+				paddingTitle2="15vw"
 				isLoggedIn="true"
 			>
 				<Container>
@@ -127,9 +127,15 @@ const CreateNewAd = () => {
 							<MapText>
 								Índica la dirección de la propiedad pinchando sobre el mapa.
 							</MapText>
-							<CustomMap />
+							<MapBox>
+								<CustomMap />
+							</MapBox>
 							<Button
-								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
+								buttonStyles={{
+									width: "7.25rem",
+									height: "2.125rem",
+									marginBottom: "2rem",
+								}}
 								text="Enviar"
 								type="normal"
 								className="blueGradient"

@@ -3,7 +3,7 @@ import SelectArrow from "assets/images/select-arrow.svg";
 import Colors from "theme/Colors";
 
 export const CardChart = styled.div`
-	min-width: 100%;
+	width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
@@ -14,7 +14,8 @@ export const CardChart = styled.div`
 
 export const CardHeader = styled.div`
 	display: flex;
-	height: auto;
+	width: 100%;
+	height: 50%;
 	background-color: #e22e2e;
 	flex-direction: column;
 	align-items: center;
@@ -29,6 +30,7 @@ export const CardHeader = styled.div`
 
 export const CardTitle = styled.h2`
 	font-weight: 400;
+	margin: 1rem;
 	color: white;
 `;
 
@@ -72,12 +74,7 @@ export const CardOpenModal = styled.button`
 
 //Propiedades dentro de la gráfica
 export const Chart = styled.div`
-	width: 53vw;
+	width: 100%;
 	height: 50vh;
-	margin: 12px;
-
-	@media (max-width: 1025px) {
-		width: 100%;
-		height: 50vh;
-	}
+	margin-top: 2rem;
 `;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const Checkbox = styled.div`
-	margin: 0.12rem;
+	margin: 1rem;
 	width: 100%;
 
 	& > input {
