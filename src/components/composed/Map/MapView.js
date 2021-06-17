@@ -1,68 +1,76 @@
-import React from "react";
-import {MapContainer, TileLayer} from "react-leaflet";
+import React, {useState, useEffect} from "react";
+import {MapContainer, TileLayer, useMap} from "react-leaflet";
 import MapMarkers from "./MapMarkers";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
+function getMaxMin(ads, prop) {
+	let minLat = undefined;
+	let maxLat = undefined;
+	let minLong = undefined;
+	let maxLong = undefined;
+	for (let i = 0; i < ads.length; i++) {
+		const ad = ads[i];
+		const adLat = parseFloat(ad.lat);
+		const adLong = parseFloat(ad.long);
+
+		if (minLat) {
+			minLat = minLat > adLat ? adLat : minLat;
+		} else {
+			minLat = adLat;
+		}
+
+		if (maxLat) {
+			maxLat = maxLat < adLat ? adLat : maxLat;
+		} else {
+			maxLat = adLat;
+		}
+
+		if (minLong) {
+			minLong = minLong > adLong ? adLong : minLong;
+		} else {
+			minLong = adLong;
+		}
+
+		if (maxLong) {
+			maxLong = maxLong < adLong ? adLong : maxLong;
+		} else {
+			maxLong = adLong;
+		}
+	}
+
+	// // Latitud = horizontal, longitud = vertical
+	return {
+		topLeft: [minLat, maxLong],
+		bottomRight: [maxLat, minLong],
+	};
+}
+
+function SetBounds({bounds}) {
+	const map = useMap();
+	map.fitBounds([bounds.topLeft, bounds.bottomRight]);
+	return null;
+}
+
 const MapView = ({filteredAds}) => {
-	const dataMarkers = filteredAds;
-	console.log(dataMarkers);
+	const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(getMaxMin(filteredAds));
 
-	function getMax(dataMarkers, prop) {
-		let max;
-		for (let i = 0; i < dataMarkers.length; i++) {
-			if (max == null || parseFloat(dataMarkers[i][prop]) > parseFloat(max[prop]))
-				max = dataMarkers[i];
-		}
-		return max;
-	}
-
-	let maxLat = getMax(dataMarkers, "lat");
-	console.log(maxLat);
-	let maxLong = getMax(dataMarkers, "long");
-	console.log(maxLong);
-
-	function getMin(dataMarkers, prop) {
-		let min;
-		for (let i = 0; i < dataMarkers.length; i++) {
-			if (min == null || parseFloat(dataMarkers[i][prop]) < parseFloat(min[prop]))
-				min = dataMarkers[i];
-		}
-		return min;
-	}
-	let minLat = getMin(dataMarkers, "lat");
-	console.log(minLat);
-	let minLong = getMin(dataMarkers, "long");
-	console.log(minLong);
-
-	const outer = [maxLat, minLat, maxLong, minLong];
-	console.log(outer);
-
-	//AQUI COMENZAMOS A PLANTEAR EL BOUND, NO ESTÁ DESARROLLADO
-	// function getBoundView(outer){
-	// const [bounds, setBounds] = useState(outer);
-	//   const map = useMap();
-	//   setBounds(innerBounds)
-	//   map.fitBounds(innerBounds)
-
-	// }
-
-	// const [bounds, setBounds] = useState(outer);
-
-	// // eslint-disable-next-line no-unused-vars
-	// const onClickOuter = () => {
-	// 	setBounds({bounds: outer});
-	// };
-	// // eslint-disable-next-line
+	useEffect(() => {
+		setFitBoundsCoordinates(getMaxMin(filteredAds));
+	}, [filteredAds]);
 
 	return (
 		<MapContainer
 			className="Container-View"
-			// center={state.currentLocation}
-			// zoom={state.zoom}
-			// bound={bounds}
+			bounds={[fitBoundsCoordinates.topLeft, fitBoundsCoordinates.bottomRight]}
+			boundsOptions={{padding: [0, 0]}}
+			style={{height: 400, width: "100%"}}
 		>
-			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+			<TileLayer
+				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+			/>
+			<SetBounds bounds={fitBoundsCoordinates} />
 			<MapMarkers apartments={filteredAds} />
 		</MapContainer>
 	);
