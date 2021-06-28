@@ -1,21 +1,11 @@
-import React, {useState, useRef, useEffect, Fragment} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {groupByTypePie, daysBetween} from "utils/generateData";
-import {
-	CardHeader,
-	CardTitle,
-	CardSelector,
-	Chart,
-	CardSelectorWrapper,
-	CardOpenModal,
-	CardChart,
-	CardBody,
-} from "./PieChart.styles";
+import {CardChart} from "./PieChart.styles";
 import {options, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
-// import {Container} from "theme/GlobalStyles";
 
 function PieChart({data, hideModal, active, size, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
@@ -106,35 +96,34 @@ function PieChart({data, hideModal, active, size, year, month}) {
 	};
 
 	return (
-		<>
-			<CardChart>
-				<CardHeader>
-					<CardTitle>Vista global</CardTitle>
-					<CardSelectorWrapper>
-						<CardSelector value={selectedMonth} onChange={handleMonthChange}>
-							<option value="all">All</option>
-							{optionsSelectMonth}
-						</CardSelector>
-						<CardSelector value={selectedYear} onChange={handleYearChange}>
-							{optionsSelectYear}
-						</CardSelector>
-						<CardOpenModal onClick={hideModal}>
-							<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
-						</CardOpenModal>
-					</CardSelectorWrapper>
-				</CardHeader>
-				<CardBody>
-					{active ? (
-						<Chart
-							style={{width: `${size[0]}px`, height: `${size[1]}px`}}
-							ref={chartRef}
-						></Chart>
-					) : (
-						<Chart ref={chartRef}></Chart>
-					)}
-				</CardBody>
-			</CardChart>
-		</>
+		<CardChart>
+			<div className="cardHeader">
+				<h2>Vista global</h2>
+				<div className="selectorWrapper">
+					<select value={selectedMonth} onChange={handleMonthChange}>
+						<option value="all">All</option>
+						{optionsSelectMonth}
+					</select>
+					<select value={selectedYear} onChange={handleYearChange}>
+						{optionsSelectYear}
+					</select>
+					<button onClick={hideModal}>
+						<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+					</button>
+				</div>
+			</div>
+			<div className="cardBody">
+				{active ? (
+					<div
+						className="chart"
+						style={{width: `${size[0]}px`, height: `${size[1]}px`}}
+						ref={chartRef}
+					></div>
+				) : (
+					<div className="chart" ref={chartRef}></div>
+				)}
+			</div>
+		</CardChart>
 	);
 }
 
