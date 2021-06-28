@@ -15,6 +15,16 @@ export const CardStyled = styled.div`
 		align-items: center;
 	}
 
+	img {
+		min-width: 35%;
+		overflow: hidden;
+		border-radius: 6px;
+
+		@media only screen and (max-width: 1024px) {
+			min-width: 40%;
+		}
+	}
+
 	.info {
 		margin-left: 0.75;
 		padding: 1rem;
@@ -28,37 +38,29 @@ export const CardStyled = styled.div`
 		letter-spacing: 0px;
 		opacity: 1;
 	}
-`;
 
-export const StyledImage = styled.img`
-	min-width: 35%;
-	overflow: hidden;
-	border-radius: 6px;
-	@media only screen and (max-width: 1024px) {
-		min-width: 40%;
+	.description {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin-right: 0.2rem;
+
+		@media only screen and (max-width: 1280px) {
+			flex-direction: column;
+			align-items: flex-start;
+		}
 	}
-`;
 
-export const StyledDescription = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	margin-right: 0.2rem;
-
-	@media only screen and (max-width: 1280px) {
-		flex-direction: column;
-		align-items: flex-start;
+	p {
+		text-align: left;
+		display: flex;
+		letter-spacing: 0px;
+		opacity: 1;
+		padding-bottom: 0;
 	}
-`;
-export const StyledText = styled.p`
-	text-align: left;
-	display: flex;
-	letter-spacing: 0px;
-	opacity: 1;
-	padding-bottom: 0;
-`;
 
-export const StyledFooter = styled.div`
-	display: flex;
+	.footer {
+		display: flex;
+	}
 `;
