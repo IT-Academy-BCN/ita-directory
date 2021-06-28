@@ -2,15 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
-import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardSelector,
-	Chart,
-	CardSelectorWrapper,
-	CardOpenModal,
-} from "./BarChart.styles";
+import {Card} from "./BarGraphic.styles";
 import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -121,28 +113,29 @@ function BarChart({data, hideModal, active, size, year, month}) {
 	return (
 		<React.Fragment>
 			<Card>
-				<CardHeader>
-					<CardTitle> Ventas anuales por tipo </CardTitle>
-					<CardSelectorWrapper>
-						<CardSelector value={selectedMonth} onChange={handleMonthChange}>
+				<div className="header">
+					<h2> Ventas anuales por tipo </h2>
+					<div className="selectorWrapper">
+						<select value={selectedMonth} onChange={handleMonthChange}>
 							<option value="all">All</option>
 							{optionsSelectMonth}
-						</CardSelector>
-						<CardSelector value={selectedYear} onChange={handleYearChange}>
+						</select>
+						<select value={selectedYear} onChange={handleYearChange}>
 							{optionsSelectYear}
-						</CardSelector>
-						<CardOpenModal onClick={hideModal}>
+						</select>
+						<button onClick={hideModal}>
 							<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
-						</CardOpenModal>
-					</CardSelectorWrapper>
-				</CardHeader>
+						</button>
+					</div>
+				</div>
 				{active ? (
-					<Chart
+					<div
+						className="chart"
 						style={{width: `${size[0]}px`, height: `${size[1]}px`}}
 						ref={chartRef}
-					></Chart>
+					></div>
 				) : (
-					<Chart ref={chartRef}></Chart>
+					<div className="chart" ref={chartRef}></div>
 				)}
 			</Card>
 		</React.Fragment>
