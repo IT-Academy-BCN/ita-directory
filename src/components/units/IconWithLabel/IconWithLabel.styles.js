@@ -14,8 +14,8 @@ export const StyledIconWithLabel = styled.div`
 		background: green;
 		color: red;
 	}
-`;
 
-export const StyledLabel = styled.div`
-	padding-left: 0.5rem;
+	.styledLabel {
+		padding-left: 0.5rem;
+	}
 `;
