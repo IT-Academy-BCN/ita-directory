@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
-import StyledButton from "./styles";
+import StyledButton from "./Button.styles";
 
 const Button = ({
 	type,

@@ -1,8 +1,6 @@
 import React from "react";
 import {
-	CardBox,
-	CardInfo,
-	StyledTitle,
+	CardStyled,
 	StyledImage,
 	StyledText,
 	StyledDescription,
@@ -12,15 +10,15 @@ import PropTypes from "prop-types";
 
 const Card = ({image, title, description, text, footer}) => {
 	return (
-		<CardBox>
+		<CardStyled>
 			<StyledImage {...image} />
-			<CardInfo>
-				<StyledTitle>{title}</StyledTitle>
+			<div className="info">
+				<h3>{title}</h3>
 				<StyledDescription>{description}</StyledDescription>
 				<StyledText>{text}</StyledText>
 				<StyledFooter>{footer}</StyledFooter>
-			</CardInfo>
-		</CardBox>
+			</div>
+		</CardStyled>
 	);
 };
 Card.propTypes = {

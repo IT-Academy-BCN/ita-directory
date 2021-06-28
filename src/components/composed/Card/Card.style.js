@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const CardBox = styled.div`
+export const CardStyled = styled.div`
 	display: flex;
 	background: ${Colors.white} 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;
@@ -14,20 +14,20 @@ export const CardBox = styled.div`
 		flex-direction: column;
 		align-items: center;
 	}
-`;
 
-export const CardInfo = styled.div`
-	margin-left: 0.75;
-	padding: 1rem;
-`;
+	.info {
+		margin-left: 0.75;
+		padding: 1rem;
+	}
 
-export const StyledTitle = styled.div`
-	color: ${Colors.grey};
-	font-size: 16px;
-	text-align: left;
-	padding-bottom: 1rem;
-	letter-spacing: 0px;
-	opacity: 1;
+	h3 {
+		color: ${Colors.grey};
+		font-size: 16px;
+		text-align: left;
+		padding-bottom: 1rem;
+		letter-spacing: 0px;
+		opacity: 1;
+	}
 `;
 
 export const StyledImage = styled.img`
