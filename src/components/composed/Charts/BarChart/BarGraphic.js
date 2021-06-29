@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
-import {Card} from "./BarGraphic.styles";
+import {BarGraphicStyled} from "./BarGraphic.styles";
 import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -111,34 +111,32 @@ function BarChart({data, hideModal, active, size, year, month}) {
 	};
 
 	return (
-		<React.Fragment>
-			<Card>
-				<div className="header">
-					<h2> Ventas anuales por tipo </h2>
-					<div className="selectorWrapper">
-						<select value={selectedMonth} onChange={handleMonthChange}>
-							<option value="all">All</option>
-							{optionsSelectMonth}
-						</select>
-						<select value={selectedYear} onChange={handleYearChange}>
-							{optionsSelectYear}
-						</select>
-						<button onClick={hideModal}>
-							<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
-						</button>
-					</div>
+		<BarGraphicStyled>
+			<div className="header">
+				<h2> Ventas anuales por tipo </h2>
+				<div className="selectorWrapper">
+					<select value={selectedMonth} onChange={handleMonthChange}>
+						<option value="all">All</option>
+						{optionsSelectMonth}
+					</select>
+					<select value={selectedYear} onChange={handleYearChange}>
+						{optionsSelectYear}
+					</select>
+					<button onClick={hideModal}>
+						<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+					</button>
 				</div>
-				{active ? (
-					<div
-						className="chart"
-						style={{width: `${size[0]}px`, height: `${size[1]}px`}}
-						ref={chartRef}
-					></div>
-				) : (
-					<div className="chart" ref={chartRef}></div>
-				)}
-			</Card>
-		</React.Fragment>
+			</div>
+			{active ? (
+				<div
+					className="chart"
+					style={{width: `${size[0]}px`, height: `${size[1]}px`}}
+					ref={chartRef}
+				></div>
+			) : (
+				<div className="chart" ref={chartRef}></div>
+			)}
+		</BarGraphicStyled>
 	);
 }
 
