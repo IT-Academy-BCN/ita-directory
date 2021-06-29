@@ -1,15 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-	StyledError,
-	StyledInput,
-	StyledContainer,
-	StyledIcon,
-	StyledLabel,
-	StyledMainContainer,
-	StyledContainerInputError,
-} from "./stylesInputNumber";
+import {InputNumberStyled, StyledError, StyledInput, StyledContainer} from "./InputNumber.styles";
 
 const InputNumber = ({
 	placeholder,
@@ -50,43 +42,41 @@ const InputNumber = ({
 	};
 
 	return (
-		<React.Fragment>
-			<StyledMainContainer>
-				<StyledLabel htmlFor={id}>{label}</StyledLabel>
-				<StyledContainerInputError>
-					<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
-						<StyledIcon>
-							<FontAwesomeIcon icon={icon} />
-						</StyledIcon>
-						<StyledInput
-							type="number"
-							placeholder={placeholder}
-							value={value}
-							onChange={handleOnChange}
-							onFocus={onFocus}
-							onBlur={onBlur}
-							className={`${className} ${isInvalid ? "error" : ""}`}
-							id={id}
-							name={name}
-							min={min}
-							max={max}
-							disabled={disabled}
-							step={step}
-							textStyles={textStyles}
-							inputStyles={inputStyles}
-							labelStyles={labelStyles}
-							size={size}
-							errorStyles={errorStyles}
-							required={required}
-						/>
-					</StyledContainer>
-					<StyledError
-						dangerouslySetInnerHTML={{__html: isInvalid ? errorText : null}}
-						className={className}
+		<InputNumberStyled>
+			<label htmlFor={id}>{label}</label>
+			<div className="inputsContainer">
+				<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
+					<div className="styledIcon">
+						<FontAwesomeIcon icon={icon} />
+					</div>
+					<StyledInput
+						type="number"
+						placeholder={placeholder}
+						value={value}
+						onChange={handleOnChange}
+						onFocus={onFocus}
+						onBlur={onBlur}
+						className={`${className} ${isInvalid ? "error" : ""}`}
+						id={id}
+						name={name}
+						min={min}
+						max={max}
+						disabled={disabled}
+						step={step}
+						textStyles={textStyles}
+						inputStyles={inputStyles}
+						labelStyles={labelStyles}
+						size={size}
+						errorStyles={errorStyles}
+						required={required}
 					/>
-				</StyledContainerInputError>
-			</StyledMainContainer>
-		</React.Fragment>
+				</StyledContainer>
+				<StyledError
+					dangerouslySetInnerHTML={{__html: isInvalid ? errorText : null}}
+					className={className}
+				/>
+			</div>
+		</InputNumberStyled>
 	);
 };
 
