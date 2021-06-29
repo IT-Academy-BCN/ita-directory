@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const Checkbox = styled.div`
+export const CheckboxStyled = styled.div`
 	margin: 1rem;
 	width: 100%;
 
 	& > input {
 		margin: 0 0.7rem 0 0;
 	}
-`;
 
-export const Label = styled.label`
-	display: inline-block;
-	margin-bottom: 0.5rem;
+	label {
+		display: inline-block;
+		margin-bottom: 0.5rem;
+	}
 `;
 
 export const Anchor = styled.a`

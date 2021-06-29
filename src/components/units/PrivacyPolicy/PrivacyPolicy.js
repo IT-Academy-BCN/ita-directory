@@ -1,14 +1,14 @@
 import React from "react";
-import {Checkbox, Anchor, Label} from "./styles";
+import {CheckboxStyled, Anchor} from "./PrivacyPolicy.styles";
 
 const PrivacyPolicy = () => {
 	return (
-		<Checkbox>
+		<CheckboxStyled>
 			<input type="checkbox" id="check" value="0" required name="privacy" />
-			<Label>
+			<label>
 				Acepto<Anchor href="#">politica de Privacidad</Anchor>
-			</Label>
-		</Checkbox>
+			</label>
+		</CheckboxStyled>
 	);
 };
 
