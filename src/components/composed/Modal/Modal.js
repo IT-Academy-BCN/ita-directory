@@ -1,14 +1,5 @@
 import React, {Fragment} from "react";
-import {
-	ModalBlock,
-	ModalBody,
-	ModalClose,
-	ModalContainer,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	ModalTitle,
-} from "./Modal.styles";
+import {ModalBlock} from "./Modal.styles";
 import PropTypes from "prop-types";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -18,17 +9,17 @@ const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) =>
 		<Fragment>
 			{active && (
 				<ModalBlock>
-					<ModalOverlay onClick={() => hideModal()}></ModalOverlay>
-					<ModalContainer>
-						<ModalHeader>
-							<ModalTitle colorModalTitle={colorModalTitle}>{title}</ModalTitle>
-							<ModalClose onClick={() => hideModal()}>
+					<button className="modalOverlay" onClick={() => hideModal()}></button>
+					<div className="modalContainer">
+						<div className="modalHeader">
+							<span colorModalTitle={colorModalTitle}>{title}</span>
+							<button className="modalClose" onClick={() => hideModal()}>
 								<FontAwesomeIcon icon={faTimes} style={{height: "1rem"}} />
-							</ModalClose>
-						</ModalHeader>
-						<ModalBody>{children}</ModalBody>
-						<ModalFooter>{footer}</ModalFooter>
-					</ModalContainer>
+							</button>
+						</div>
+						<div className="modalBody">{children}</div>
+						<div className="modalFooter">{footer}</div>
+					</div>
 				</ModalBlock>
 			)}
 		</Fragment>

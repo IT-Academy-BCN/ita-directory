@@ -1,13 +1,31 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledLabel = styled.label`
-	display: flex;
-	flex-direction: row;
-	padding: 3px 45px 0 0;
-	color: ${Colors.lightGray};
+export const TextAreaStyled = styled.div`
+	&.textAreaCreateNewAd {
+		display: flex;
+		@media screen and (max-width: 600px) {
+			flex-direction: column;
+		}
+		margin-bottom: 15px;
+	}
+
+	label {
+		display: flex;
+		flex-direction: row;
+		padding: 3px 45px 0 0;
+		color: ${Colors.lightGray};
+	}
 `;
-export const StyledTextArea = styled.textarea`
+
+export const TextAreaError = styled.div`
+	&.textAreaCreateNewAd {
+		border: 1px solid #707070;
+		border-radius: 5px;
+	}
+`;
+
+export const TextAreaInput = styled.textarea`
 	width: 18.6rem;
 	height: 8.6rem;
 	border-radius: 5px;
@@ -32,22 +50,5 @@ export const StyledError = styled.small`
 
 	&.errorProfile {
 		position: static;
-	}
-`;
-
-export const StyledContainer = styled.div`
-	&.textAreaCreateNewAd {
-		display: flex;
-		@media screen and (max-width: 600px) {
-			flex-direction: column;
-		}
-		margin-bottom: 15px;
-	}
-`;
-
-export const StyledTextAreaError = styled.div`
-	&.textAreaCreateNewAd {
-		border: 1px solid #707070;
-		border-radius: 5px;
 	}
 `;

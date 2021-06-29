@@ -1,22 +1,16 @@
 import React from "react";
-import {
-	CardStyled,
-	StyledImage,
-	StyledText,
-	StyledDescription,
-	StyledFooter,
-} from "./Card.style.js";
+import {CardStyled} from "./Card.style.js";
 import PropTypes from "prop-types";
 
 const Card = ({image, title, description, text, footer}) => {
 	return (
 		<CardStyled>
-			<StyledImage {...image} />
+			<img {...image} alt="Card" />
 			<div className="info">
 				<h3>{title}</h3>
-				<StyledDescription>{description}</StyledDescription>
-				<StyledText>{text}</StyledText>
-				<StyledFooter>{footer}</StyledFooter>
+				<div className="description">{description}</div>
+				<p>{text}</p>
+				<div className="footer">{footer}</div>
 			</div>
 		</CardStyled>
 	);
