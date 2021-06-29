@@ -1,15 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-	StyledError,
-	StyledInput,
-	StyledLabel,
-	StyledContainer,
-	StyledIconInput,
-	StyledIcon,
-	StyledContainerInputError,
-} from "./styles";
+import {InputStyled, StyledError, StyledInput, StyledIconInput} from "./Input.styles";
 
 const Input = ({
 	type,
@@ -40,45 +32,43 @@ const Input = ({
 	const hasIcon = icon ? true : false;
 
 	return (
-		<>
-			<StyledContainer className={inputContainerClassName}>
-				<StyledLabel htmlFor={id} style={labelStyles}>
-					{label}
-				</StyledLabel>
-				<StyledContainerInputError>
-					<StyledIconInput className={inputContainerClassName}>
-						{hasIcon && (
-							<StyledIcon>
-								<FontAwesomeIcon icon={icon} />
-							</StyledIcon>
-						)}
-						<StyledInput
-							type={type}
-							placeholder={placeholder}
-							value={value}
-							onChange={onChange}
-							onFocus={onFocus}
-							onBlur={onBlur}
-							className={`${className} ${error ? "error" : ""}`}
-							id={id}
-							name={name}
-							disabled={disabled}
-							minLength={minlength}
-							maxLength={maxlength}
-							size={size}
-							success={success}
-							required={required}
-							style={inputStyles}
-						/>
-					</StyledIconInput>
-					<StyledError
-						dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-						className={className}
-						styles={errorStyles}
+		<InputStyled className={inputContainerClassName}>
+			<label htmlFor={id} style={labelStyles}>
+				{label}
+			</label>
+			<div className="inputsContainer">
+				<StyledIconInput className={inputContainerClassName}>
+					{hasIcon && (
+						<div className="styledIcon">
+							<FontAwesomeIcon icon={icon} />
+						</div>
+					)}
+					<StyledInput
+						type={type}
+						placeholder={placeholder}
+						value={value}
+						onChange={onChange}
+						onFocus={onFocus}
+						onBlur={onBlur}
+						className={`${className} ${error ? "error" : ""}`}
+						id={id}
+						name={name}
+						disabled={disabled}
+						minLength={minlength}
+						maxLength={maxlength}
+						size={size}
+						success={success}
+						required={required}
+						style={inputStyles}
 					/>
-				</StyledContainerInputError>
-			</StyledContainer>
-		</>
+				</StyledIconInput>
+				<StyledError
+					dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+					className={className}
+					styles={errorStyles}
+				/>
+			</div>
+		</InputStyled>
 	);
 };
 

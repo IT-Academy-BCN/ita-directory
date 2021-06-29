@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledContainer = styled.div`
+export const InputStyled = styled.div`
 	&.createNewAd {
 		display: flex;
 		@media screen and (max-width: 600px) {
@@ -9,16 +9,16 @@ export const StyledContainer = styled.div`
 		}
 		margin-bottom: 15px;
 	}
-`;
 
-export const StyledLabel = styled.label`
-	padding: 3px 45px 0 0;
-	color: #999999;
-`;
+	label {
+		padding: 3px 45px 0 0;
+		color: #999999;
+	}
 
-export const StyledContainerInputError = styled.div`
-	display: flex;
-	flex-direction: column;
+	.inputsContainer {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 export const StyledIconInput = styled.div`
@@ -42,13 +42,13 @@ export const StyledIconInput = styled.div`
 	&.createNewAd {
 		border: 1px solid #707070;
 	}
-`;
 
-export const StyledIcon = styled.div`
-	display: flex;
-	margin-right: 6px;
-	color: #999999;
-	flex-basis: 20px;
+	.styledIcon {
+		display: flex;
+		margin-right: 6px;
+		color: #999999;
+		flex-basis: 20px;
+	}
 `;
 
 export const StyledInput = styled.input`
