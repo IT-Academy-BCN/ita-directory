@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const ButtonWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+`;
+
 export const Wrapper = styled.div`
 	margin-bottom: 25px;
 	p {
 		color: ${Colors.grey};
-		fontsize: 0.95rem;
-		fontfamily: "Arial";
+		font-size: 0.95rem;
+		font-family: "Arial";
 		width: auto;
 		letter-spacing: 0px;
 		opacity: 1;
 		width: auto;
 	}
 
-	.inputContainer :nth-child(2) div {
+	.input-container {
 		width: 100%;
 	}
 
@@ -25,9 +31,4 @@ export const Wrapper = styled.div`
 
 export const StyledSmall = styled.small`
 	color: ${Colors.redColor};
-`;
-export const ButtonWrapper = styled.div`
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
 `;

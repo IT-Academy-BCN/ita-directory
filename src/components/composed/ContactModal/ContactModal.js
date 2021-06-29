@@ -123,7 +123,7 @@ const ContactModal = ({id, active, hideModal}) => {
 					name="name"
 					label="Nombre"
 					{...bindName}
-					inputContainerClassName="inputContainer"
+					inputContainerClassName="input-container"
 				/>
 			</Wrapper>
 
@@ -133,7 +133,7 @@ const ContactModal = ({id, active, hideModal}) => {
 					name="email"
 					label="Email"
 					{...bindEmail}
-					inputContainerClassName="inputContainer"
+					inputContainerClassName="input-container"
 				/>
 			</Wrapper>
 
