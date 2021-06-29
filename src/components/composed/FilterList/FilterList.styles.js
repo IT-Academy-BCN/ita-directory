@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledContainer = styled.div`
+export const FilterListSyled = styled.div`
 	font-family: Arial, bold;
 	background: #f4f4f4 0% 0% no-repeat padding-box;
 	box-shadow: 0px 3px 6px #00000029;

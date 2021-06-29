@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {groupByTypePie, daysBetween} from "utils/generateData";
-import {CardChart} from "./PieChart.styles";
+import {PieGraphicStyled} from "./PieChart.styles";
 import {options, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -96,7 +96,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 	};
 
 	return (
-		<CardChart>
+		<PieGraphicStyled>
 			<div className="cardHeader">
 				<h2>Vista global</h2>
 				<div className="selectorWrapper">
@@ -123,7 +123,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 					<div className="chart" ref={chartRef}></div>
 				)}
 			</div>
-		</CardChart>
+		</PieGraphicStyled>
 	);
 }
 

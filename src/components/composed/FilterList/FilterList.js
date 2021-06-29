@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import Button from "components/units/Button/Button";
-import {StyledContainer} from "./FilterList.styles";
+import {FilterListStyled} from "./FilterList.styles";
 
 function FilterList(props) {
 	const noFilters = {
@@ -33,7 +33,7 @@ function FilterList(props) {
 	};
 
 	return (
-		<StyledContainer className="styleFilter">
+		<FilterListStyled className="styleFilter">
 			<form onSubmit={handleSubmit} id="filterList">
 				<h3>Filtros</h3>
 				<label>Precio</label>
@@ -99,7 +99,7 @@ function FilterList(props) {
 					onClick={handleReset}
 				/>
 			</form>
-		</StyledContainer>
+		</FilterListStyled>
 	);
 }
 

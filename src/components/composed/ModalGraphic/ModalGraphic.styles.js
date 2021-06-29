@@ -1,7 +1,7 @@
 import styled, {keyframes} from "styled-components";
 import {fadeIn} from "react-animations";
 
-export const ModalBlock = styled.div`
+export const ModalGraphicStyled = styled.div`
 	align-items: center;
 	bottom: 0;
 	justify-content: center;

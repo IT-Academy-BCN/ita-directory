@@ -5,7 +5,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
-import {CardChart} from "./LineChart.styles";
+import {LineGraphicStyled} from "./LineChart.styles";
 import {options} from "./defaultOptions";
 
 //eslint-disable-next-line
@@ -165,7 +165,7 @@ function LineChart({data, active, hideModal, year, month}) {
 	}, [curChart]);
 
 	return (
-		<CardChart>
+		<LineGraphicStyled>
 			<div className="cardHeader">
 				<h2>Ventas anuales continuas</h2>
 				<div className="selectorWrapper">
@@ -185,7 +185,7 @@ function LineChart({data, active, hideModal, year, month}) {
 				</div>
 			</div>
 			<div className="chart" ref={lineChartRef}></div>
-		</CardChart>
+		</LineGraphicStyled>
 	);
 }
 

@@ -1,5 +1,5 @@
-import React, {Fragment} from "react";
-import {Card} from "./GlobalFilters.styles";
+import React from "react";
+import {GlobalFiltersStyled} from "./GlobalFilters.styles";
 import {optionsSelectMonth} from "./defaultOptions";
 
 function GlobalFilters({onYearChange, onMonthChange}) {
@@ -26,22 +26,20 @@ function GlobalFilters({onYearChange, onMonthChange}) {
 	};
 
 	return (
-		<Fragment>
-			<Card>
-				<div className="header">
-					<h2> Aplicar filtros globales:</h2>
-					<div className="selectorWrapper">
-						<select defaultValue={"all"} onChange={handleMonthChange}>
-							<option value="all">All</option>
-							{optionsSelectMonth}
-						</select>
-						<select defaultValue={"2016"} onChange={handleYearChange}>
-							{optionsSelectYear}
-						</select>
-					</div>
+		<GlobalFiltersStyled>
+			<div className="header">
+				<h2> Aplicar filtros globales:</h2>
+				<div className="selectorWrapper">
+					<select defaultValue={"all"} onChange={handleMonthChange}>
+						<option value="all">All</option>
+						{optionsSelectMonth}
+					</select>
+					<select defaultValue={"2016"} onChange={handleYearChange}>
+						{optionsSelectYear}
+					</select>
 				</div>
-			</Card>
-		</Fragment>
+			</div>
+		</GlobalFiltersStyled>
 	);
 }
 

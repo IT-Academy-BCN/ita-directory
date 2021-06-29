@@ -1,12 +1,12 @@
 import React from "react";
-import {ModalBlock} from "./ModalGraphic.styles";
+import {ModalGraphicStyled} from "./ModalGraphic.styles";
 
 const ModalGraphic = ({children, active, hideModal}) => {
 	return active ? (
-		<ModalBlock>
+		<ModalGraphicStyled>
 			<button className="modalOverlay" onClick={() => hideModal()}></button>
 			<div className="modalBody">{children}</div>
-		</ModalBlock>
+		</ModalGraphicStyled>
 	) : (
 		<></>
 	);

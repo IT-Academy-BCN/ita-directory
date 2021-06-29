@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
 
-export const Card = styled.div`
+export const GlobalFiltersStyled = styled.div`
 	min-width: 90%;
 	height: auto;
 	box-shadow: 0 3px 6px #00000029;

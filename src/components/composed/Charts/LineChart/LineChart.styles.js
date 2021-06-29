@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
 import Colors from "theme/Colors";
 
-export const CardChart = styled.div`
+export const LineGraphicStyled = styled.div`
 	width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
