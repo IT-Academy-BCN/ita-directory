@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const CheckboxStyled = styled.div`
+export const PrivacyPolicyStyled = styled.div`
 	margin: 1rem;
 	width: 100%;
 

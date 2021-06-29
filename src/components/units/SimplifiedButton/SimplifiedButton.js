@@ -1,17 +1,14 @@
-import React from 'react'
-import {StyledButton} from "./SimplifiedButton.styles"
+import React from "react";
+import {SimplifiedButtonStyled} from "./SimplifiedButton.styles";
 import PropTypes from "prop-types";
 
 const SimplifiedButton = ({text, loadingText, type, isLoading, disabled}) => {
-    return (
-        <StyledButton type={type}
-        disabled={disabled}
-       >
-       <span>{isLoading? loadingText : text}</span>
-       </StyledButton>
-    )
-}
-
+	return (
+		<SimplifiedButtonStyled type={type} disabled={disabled}>
+			<span>{isLoading ? loadingText : text}</span>
+		</SimplifiedButtonStyled>
+	);
+};
 
 SimplifiedButton.propTypes = {
 	type: PropTypes.string.isRequired,
@@ -27,6 +24,4 @@ SimplifiedButton.propTypes = {
 	disabled: PropTypes.bool,
 };
 
-export default SimplifiedButton
-
-
+export default SimplifiedButton;

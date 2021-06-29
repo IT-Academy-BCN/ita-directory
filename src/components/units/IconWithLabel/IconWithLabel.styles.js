@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledIconWithLabel = styled.div`
+export const IconWithLabelStyled = styled.div`
 	padding-top: 0.3rem;
 	padding-bottom: 0.2rem;
 	padding-left: 0.3rem;
