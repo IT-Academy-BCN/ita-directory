@@ -83,3 +83,15 @@ export const ModalBlock = styled.div`
 		}
 	}
 `;
+
+export const Button = styled.button`
+	background: ${Colors.darkBlue};
+	color: ${Colors.white};
+	font-size: 1em;
+	font-family: Arial;
+	margin: 10px;
+	padding: 5px 10px;
+	border: 2px solid ${Colors.darkBlue};
+	border-radius: 3px;
+	cursor: pointer;
+`;
