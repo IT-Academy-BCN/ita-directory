@@ -68,7 +68,6 @@ const AdList = () => {
 
 	return (
 		<Body title="Pisos en Alquiler en Madrid" isLoggedIn="true" justifyTitle="flex-start">
-			<Container row className="probando" />
 			<AdListStyled>
 				<Container row className="probando">
 					{!loading ? (
