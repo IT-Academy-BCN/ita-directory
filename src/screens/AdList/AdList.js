@@ -75,8 +75,8 @@ const AdList = () => {
 							<AdListFilter filtrar={(data) => setFiltro(data)} />
 							<div className="ads">
 								<div className="tree-search">Madrid - Alquiler</div>
-								<div className="row-wrapper">
-									<div className="h3">Listado de pisos</div>
+								<div className="h3">Mapa de pisos</div>
+								<div className="rowWrapper">
 									{mapView ? (
 										<Button
 											text="Vista de detalles"
@@ -103,8 +103,8 @@ const AdList = () => {
 										/>
 									)}
 								</div>
+								{mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
 							</div>
-							{mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
 						</>
 					) : (
 						<p>Loading...</p>

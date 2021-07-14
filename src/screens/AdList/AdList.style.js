@@ -3,6 +3,7 @@ import Colors from "theme/Colors";
 
 export const AdListDiv = styled.div`
 	display: flex;
+	flex-direction: row;
 
 	@media only screen and (max-width: 1024px) {
 		flex-direction: column;
@@ -34,15 +35,20 @@ export const AdListStyled = styled.div`
 
 	.h3 {
 		color: ${Colors.redColor};
+		font-size: 1.5rem;
 		text-align: left;
 		letter-spacing: 0px;
 		margin-bottom: 0;
 	}
 
-	.RowWrapper {
+	.rowWrapper {
 		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
+		justify-content: right;
+		align-items: stretch;
+	}
+
+	.ads {
+		width: 100%;
 	}
 `;
 
