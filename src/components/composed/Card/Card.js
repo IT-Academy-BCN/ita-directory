@@ -2,10 +2,10 @@ import React from "react";
 import {CardStyled} from "./Card.style.js";
 import PropTypes from "prop-types";
 
-const Card = ({image, title, description, text, footer}) => {
+const Card = ({image, title, description, text, footer, name}) => {
 	return (
 		<CardStyled>
-			<img src={image} alt="Card" />
+			<img src={`${process.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
 			<div className="info">
 				<h3>{title}</h3>
 				<div className="description">{description}</div>

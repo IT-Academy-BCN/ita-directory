@@ -16,18 +16,28 @@ export const CardStyled = styled.div`
 	}
 
 	img {
-		min-width: 35%;
-		overflow: hidden;
+		width: 100%;
+		max-width: 300px;
+		height: auto;
+		object-fit: cover;
 		border-radius: 6px;
-
-		@media only screen and (max-width: 1024px) {
-			min-width: 40%;
+		margin-left: 0.5rem;
+		@media only screen and (max-width: 768px) {
+			margin-left: 0;
+			margin-top: 0.5rem;
+		}
+		@media only screen and (min-width: 768px) and (max-width: 1024px) {
+			width: auto;
+			height: 100%;
 		}
 	}
 
 	.info {
-		margin-left: 0.75;
+		margin-left: 3rem;
 		padding: 1rem;
+		@media only screen and (max-width: 768px) {
+			margin-left: 0.5rem;
+		}
 	}
 
 	h3 {
@@ -45,6 +55,7 @@ export const CardStyled = styled.div`
 		justify-content: space-between;
 		align-items: center;
 		margin-right: 0.2rem;
+		max-width: 60%;
 
 		@media only screen and (max-width: 1280px) {
 			flex-direction: column;
@@ -53,9 +64,11 @@ export const CardStyled = styled.div`
 	}
 
 	p {
+		margin-top: 1rem;
 		text-align: left;
 		display: flex;
 		letter-spacing: 0px;
+		line-height: normal;
 		opacity: 1;
 		padding-bottom: 0;
 	}
