@@ -70,45 +70,47 @@ const AdList = () => {
 		<Body title="Pisos en Alquiler en Madrid" isLoggedIn="true" justifyTitle="flex-start">
 			<Container row className="probando" />
 			<AdListStyled>
-				{!loading ? (
-					<>
-						<AdListFilter filtrar={(data) => setFiltro(data)} />
-						<div className="ads">
-							<div className="tree-search">Madrid - Alquiler</div>
-							<div className="row-wrapper">
-								<div className="h3">Listado de pisos</div>
-								{mapView ? (
-									<Button
-										text="Vista de detalles"
-										icon={faBars}
-										iconPosition="left"
-										iconStyles={{
-											marginRight: 5,
-											paddingLeft: 0,
-										}}
-										onClick={() => setMapView(!mapView)}
-										buttonStyles={buttonStyle}
-									/>
-								) : (
-									<Button
-										text="Vista de mapa"
-										icon={faMapMarkerAlt}
-										iconPosition="left"
-										iconStyles={{
-											marginRight: 5,
-											paddingLeft: 0,
-										}}
-										onClick={() => setMapView(!mapView)}
-										buttonStyles={buttonStyle}
-									/>
-								)}
+				<Container row className="probando">
+					{!loading ? (
+						<>
+							<AdListFilter filtrar={(data) => setFiltro(data)} />
+							<div className="ads">
+								<div className="tree-search">Madrid - Alquiler</div>
+								<div className="h3">Mapa de pisos</div>
+								<div className="rowWrapper">
+									{mapView ? (
+										<Button
+											text="Vista de detalles"
+											icon={faBars}
+											iconPosition="left"
+											iconStyles={{
+												marginRight: 5,
+												paddingLeft: 0,
+											}}
+											onClick={() => setMapView(!mapView)}
+											buttonStyles={buttonStyle}
+										/>
+									) : (
+										<Button
+											text="Vista de mapa"
+											icon={faMapMarkerAlt}
+											iconPosition="left"
+											iconStyles={{
+												marginRight: 5,
+												paddingLeft: 0,
+											}}
+											onClick={() => setMapView(!mapView)}
+											buttonStyles={buttonStyle}
+										/>
+									)}
+								</div>
+								{mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
 							</div>
-						</div>
-						{mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
-					</>
-				) : (
-					<p>Loading...</p>
-				)}
+						</>
+					) : (
+						<p>Loading...</p>
+					)}
+				</Container>
 			</AdListStyled>
 		</Body>
 	);
