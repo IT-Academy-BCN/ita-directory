@@ -1,37 +1,52 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 
-export const StyledPopup = styled.div`
+export const PopupStyled = styled.div`
 	display: flex;
+	width: 124px;
+	height: 180px;
+	border-radius: 6px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+	img {
+		width: 100%;
+		object-fit: cover;
+		border-radius: 6px;
+	}
 `;
 
-export const StyledImage = styled.img`
-	border-radius: 12px;
-	height: 100%;
-	width: 200px;
+export const Content = styled.div`
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	padding: 0 1rem;
 `;
 
-export const StyledPopupData = styled.div`
-	padding: 14px;
+export const Adress = styled.div`
+	font-size: 16px;
+	color: #666;
 `;
 
-export const StyledPhone = styled.div`
-	padding-left: 7px;
+export const PropertyData = styled.div`
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	flex-direction: column;
+
+	.property-data-extra {
+		display: flex;
+		flex-direction: row;
+	}
 `;
 
-export const StyledChar = styled.div`
-	padding-left: 7px;
+export const Span = styled.div`
+	font-size: 14px;
+	font-weight: normal;
+	margin: 5px;
 `;
 
-export const StyledContact = styled.div`
-	padding-left: 7px;
-`;
-
-export const StyledPrice = styled.div`
-	padding-left: 7px;
-	color: red;
-`;
-
-export const StyledDescription = styled.div`
-	padding-left: 7px;
-	color: grey;
+export const Price = styled.div`
+	color: ${Colors.darkOrange};
+	font-weight: bold;
+	font-size: 16px;
 `;
