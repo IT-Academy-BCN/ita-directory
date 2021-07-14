@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledAdList = styled.div`
+export const StyledUserAds = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding-top: 3rem;
