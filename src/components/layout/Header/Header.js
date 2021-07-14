@@ -42,6 +42,9 @@ const Header = ({
 											<Link to="/Profile">Editar perfil</Link>
 										</li>
 										<li>
+											<Link to="/my-bills">Mis facturas</Link>
+										</li>
+										<li>
 											<Link to="/Ad">Mis Anuncios</Link>
 										</li>
 										<li>
