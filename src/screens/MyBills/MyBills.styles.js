@@ -6,10 +6,9 @@ export const StyledWrapper = styled.div`
 	justify-content: space-around;
 	margin: 20px 0px;
 	font: normal normal normal 14px/18px Arial;
-	width: 80%;
+	width: 100%;
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid #b0b0b0;
-	padding: 0.5rem;
 
 	@media only screen and (max-width: 650px) {
 		width: 100%;
@@ -43,7 +42,7 @@ export const StyledWrapper = styled.div`
 export const StyledDiv = styled.div`
 	color: ${(props) => props.color};
 	font-size: 14px;
-	text-align: left;
+	text-align: center;
 	font-weight: bold;
 	padding: 5px 0px;
 
