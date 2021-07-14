@@ -12,6 +12,7 @@ import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList";
 import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
 import Dashboard from "screens/Dashboard/Dashboard";
+import MyBills from "screens/MyBills/MyBills";
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
 
@@ -35,6 +36,7 @@ const App = () => {
 				<Route exact path="/map" component={MapView} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/my-bills" component={MyBills} />
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}
