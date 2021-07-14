@@ -21,11 +21,11 @@ const MyBills = () => {
 				</StyledDiv>
 			),
 			selector: "id",
-			cell: (row) => <StyledDiv color={Colors.grey}>{row.id}</StyledDiv>,
+			cell: (row) => <StyledDiv color={Colors.lightGrey}>{row.id}</StyledDiv>,
 			sortable: true,
 			compact: true,
 			width: "100px",
-			center: true,
+			left: true,
 			hide: 600,
 		},
 		{
@@ -39,11 +39,12 @@ const MyBills = () => {
 			sortable: true,
 			compact: true,
 			width: "100px",
-			center: true,
+			left: true,
 		},
+
 		{
 			name: (
-				<StyledDiv color={Colors.frenchBlue} paddingL="0px">
+				<StyledDiv color={Colors.frenchBlue} paddingL="6px">
 					Coste sin IVA
 				</StyledDiv>
 			),
@@ -55,13 +56,13 @@ const MyBills = () => {
 				</div>
 			),
 			sortable: true,
-			compact: true,
+			compact: false,
 			width: "150px",
-			right: true,
+			center: true,
 		},
 		{
 			name: (
-				<StyledDiv color={Colors.frenchBlue} paddingL="0px">
+				<StyledDiv color={Colors.frenchBlue} paddingL="6px">
 					IVA
 				</StyledDiv>
 			),
@@ -74,12 +75,12 @@ const MyBills = () => {
 			),
 			sortable: true,
 			compact: true,
-			width: "150px",
+			width: "100px",
 			center: true,
 		},
 		{
 			name: (
-				<StyledDiv color={Colors.frenchBlue} paddingL="0px">
+				<StyledDiv color={Colors.frenchBlue} paddingL="6px">
 					Total
 				</StyledDiv>
 			),
@@ -92,8 +93,8 @@ const MyBills = () => {
 			),
 			sortable: true,
 			compact: true,
-			width: "150px",
-			left: true,
+			width: "100px",
+			center: true,
 		},
 		{
 			name: <StyledDiv color={Colors.frenchBlue}>Acciones</StyledDiv>,
@@ -122,8 +123,6 @@ const MyBills = () => {
 			color_header={Colors.lightBlue}
 			color_letra={Colors.grey}
 			justifyTitle="flex-start"
-			paddingTitle="0px"
-			paddingTitle2="73px"
 			isLoggedIn="true"
 		>
 			<Container row>
