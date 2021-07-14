@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Card = ({image, title, description, text, footer}) => {
 	return (
 		<CardStyled>
-			<img {...image} alt="Card" />
+			<img src={image} alt="Card" />
 			<div className="info">
 				<h3>{title}</h3>
 				<div className="description">{description}</div>

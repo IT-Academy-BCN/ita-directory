@@ -11,11 +11,7 @@ const AdCard = ({ad, containerClassName}) => {
 			titleClassName="titleClassName"
 			containerClassName={containerClassName}
 			descriptionClassName="descriptionContainer"
-			image={
-				<>
-					<img src={image} alt={name} />
-				</>
-			}
+			image={image}
 			title={name}
 			description={
 				<>
