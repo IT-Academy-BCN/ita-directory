@@ -9,7 +9,7 @@ export const StyledAdList = styled.div`
 
 export const StyledCard = styled.div`
 	padding-top: 1rem;
-	paddingbottom: 0.75rem;
+	padding-bottom: 0.75rem;
 
 	.cardContainer {
 		background: ${Colors.white};
