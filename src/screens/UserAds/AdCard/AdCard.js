@@ -7,6 +7,7 @@ import EditAdModal from "screens/UserAds/EditAdModal/EditAdModal";
 
 const AdCard = ({ad, containerClassName}) => {
 	const {name, m2, desc, habitaciones, image, id} = ad;
+	console.log(ad);
 	const [active, setActive] = useState(false);
 	return (
 		<Card
@@ -66,7 +67,7 @@ const AdCard = ({ad, containerClassName}) => {
 						onClick={() => setActive(true)}
 					/>
 
-					<EditAdModal active={active} hideModal={() => setActive(false)} />
+					<EditAdModal ad={ad} active={active} hideModal={() => setActive(false)} />
 				</>
 			}
 		/>

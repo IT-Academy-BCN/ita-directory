@@ -27,6 +27,9 @@ export const Wrapper = styled.div`
 		padding-right: 0;
 		width: auto;
 	}
+	.Map-container {
+		min-width: 300px;
+	}
 `;
 
 export const StyledSmall = styled.small`
