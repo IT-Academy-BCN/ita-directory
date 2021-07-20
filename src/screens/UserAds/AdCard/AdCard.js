@@ -5,22 +5,22 @@ import Button from "components/units/Button/Button";
 import Card from "components/composed/Card/Card";
 
 const AdCard = ({ad, containerClassName}) => {
-	const {id, url, alt, title, city, squareMeters, description, numRooms, userId} = ad;
+	const {name, m2, desc, habitaciones, image, id, userId} = ad;
 	return (
 		<Card
 			titleClassName="titleClassName"
 			containerClassName={containerClassName}
 			descriptionClassName="descriptionContainer"
-			image={{src: url, alt: alt}}
-			title={title}
+			image={image}
+			title={name}
 			description={
 				<>
-					<StyledCity>{city}</StyledCity>
-					<StyledP>{`${squareMeters} m\u00B2`}</StyledP>
-					<StyledP>{`${numRooms} habitaciones`}</StyledP>
+					<StyledCity>Barcelona</StyledCity>
+					<StyledP>{`${m2} m\u00B2`}</StyledP>
+					<StyledP>{`${habitaciones} habitaciones`}</StyledP>
 				</>
 			}
-			text={description}
+			text={desc}
 			footer={
 				<>
 					<Link
