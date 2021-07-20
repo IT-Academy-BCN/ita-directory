@@ -1,0 +1,115 @@
+ [
+        {   "id": 2021000631,
+            "header": {
+                "logoCompany": "logoCompany.png",
+                "invoiceID": 2021000631
+            },
+    
+            "emisorReceiver": {
+                "emisor": {
+                    "emName": "Anne Shinozaki",
+                    "emPosition": "Supervisor of Rhodes Corporate",
+                    "emAddress": "26 Soekarno Street, Depok. West Java 35111 | (+62) 812 3456 1234"
+                },
+                "receiver": {
+                    "reName": "Thamuz Smith",
+                    "rePosition": "HR Directur",
+                    "reAddress": "19 Soeharto Street, Bandar Lampung. Lampung 357111 | (+62) 822 3456 1234"
+                }
+    
+            },
+    
+            "tradeData": {
+                "items": [
+                    {"itemID":"01","itemTitle":"Logo Design","itemPrice": 90, "itemQuant":1},
+                    {"itemID":"02", "itemTitle":"Business Magazine Design","itemPrice":70, "itemQuant":1},
+                    {"itemID":"03", "itemTitle":"Custom Font Design", "itemPrice":25, "itemQuant":1},
+                    {"itemID":"04", "itemTitle":"Business Card Design", "itemPrice":30, "itemQuant":5},
+                    {"itemID":"05", "itemTitle":"Website Business Design", "itemPrice":40, "itemQuant":4}
+                ]
+            },
+    
+            "taxes": {
+                "tax": 5,
+                "discount": 10
+            },
+    
+            "termsConditions": {
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
+            
+            "payment": {
+                "bank": {
+                    "accountID":8765432123456789,
+                    "accountName": "Thamuz Smith"
+                },
+                "paypal": {
+                    "paypalID": "AS9213XA",
+                    "account": "Thamuz Smith"
+                }
+            },
+            "signature": {
+                "image": "signatue.png"
+            }
+        },
+    
+        {
+            "id": 2021000632,
+            "header": {
+                "logoCompany": "logoCompany.png",
+                "invoiceID": 2021000632
+            }
+            ,
+    
+            "emisorReceiver": {
+                "emisor": {
+                    "emName": "Anne Shinozaki",
+                    "emPosition": "Supervisor of Rhodes Corporate",
+                    "emAddress": "26 Soekarno Street, Depok. West Java 35111 | (+62) 812 3456 1234"
+                },
+                "receiver": {
+                    "reName": "Thamuz Smith",
+                    "rePosition": "HR Directur",
+                    "reAddress": "19 Soeharto Street, Bandar Lampung. Lampung 357111 | (+62) 822 3456 1234"
+                }
+    
+            },
+    
+            "tradeData": {
+                "items": [
+                    {"itemID":"01","itemTitle":"Logo Design","itemPrice": 90, "itemQuant":1},
+                    {"itemID":"02", "itemTitle":"Business Magazine Design","itemPrice":70, "itemQuant":1},
+                    {"itemID":"03", "itemTitle":"Custom Font Design", "itemPrice":25, "itemQuant":1},
+                    {"itemID":"04", "itemTitle":"Business Card Design", "itemPrice":30, "itemQuant":5},
+                    {"itemID":"05", "itemTitle":"Website Business Design", "itemPrice":40, "itemQuant":4}
+                ]
+            },
+    
+            "taxes": {
+                "tax": 5,
+                "discount": 10
+            },
+    
+            "termsConditions": {
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
+            
+            "payment": {
+                "bank": {
+                    "accountID":8765432123456789,
+                    "accountName": "Thamuz Smith"
+                },
+                "paypal": {
+                    "paypalID": "AS9213XA",
+                    "account": "Thamuz Smith"
+                }
+            },
+            "signature": {
+                "image": "signatue.png"
+            }
+        }
+    ]   
+
+
+
+    
