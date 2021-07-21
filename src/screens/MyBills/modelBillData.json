@@ -1,20 +1,22 @@
  [
-        {   "id": 2021000631,
+        {   "id": 202100031,
             "header": {
                 "logoCompany": "logoCompany.png",
-                "invoiceID": 2021000631
+                "invoiceID": 202100031
             },
     
             "emisorReceiver": {
                 "emisor": {
                     "emName": "Anne Shinozaki",
                     "emPosition": "Supervisor of Rhodes Corporate",
-                    "emAddress": "26 Soekarno Street, Depok. West Java 35111 | (+62) 812 3456 1234"
+                    "emStreet": "26 Soekarno Street, Depok.",
+                    "emContact": "West Java 35111 | (+62) 812 3456 1234"
                 },
                 "receiver": {
                     "reName": "Thamuz Smith",
                     "rePosition": "HR Directur",
-                    "reAddress": "19 Soeharto Street, Bandar Lampung. Lampung 357111 | (+62) 822 3456 1234"
+                    "reStreet": "19 Soeharto Street, Bandar Lampung.",
+                    "reContact":"Lampung 357111 | (+62) 822 3456 1234"
                 }
     
             },
@@ -29,9 +31,8 @@
                 ]
             },
     
-            "taxes": {
-                "tax": 5,
-                "discount": 10
+            "calculation": {
+               "calcs": [{"tax": 5,"discount": 10}]
             },
     
             "termsConditions": {
@@ -49,15 +50,19 @@
                 }
             },
             "signature": {
-                "image": "signatue.png"
+                "image": "signature.png"
+            },
+
+            "footer": {
+                "thankyou": "Thank Your For Our Business. We make it easy for your problems."
             }
         },
     
         {
-            "id": 2021000632,
+            "id": 202100032,
             "header": {
                 "logoCompany": "logoCompany.png",
-                "invoiceID": 2021000632
+                "invoiceID": 202100032
             }
             ,
     
@@ -65,12 +70,14 @@
                 "emisor": {
                     "emName": "Anne Shinozaki",
                     "emPosition": "Supervisor of Rhodes Corporate",
-                    "emAddress": "26 Soekarno Street, Depok. West Java 35111 | (+62) 812 3456 1234"
+                    "emStreet": "26 Soekarno Street, Depok.",
+                    "emContact": "West Java 35111 | (+62) 812 3456 1234"
                 },
                 "receiver": {
                     "reName": "Thamuz Smith",
                     "rePosition": "HR Directur",
-                    "reAddress": "19 Soeharto Street, Bandar Lampung. Lampung 357111 | (+62) 822 3456 1234"
+                    "reStreet": "19 Soeharto Street, Bandar Lampung.",
+                    "reContact":"Lampung 357111 | (+62) 822 3456 1234"
                 }
     
             },
@@ -85,10 +92,9 @@
                 ]
             },
     
-            "taxes": {
-                "tax": 5,
-                "discount": 10
-            },
+            "calculation": {
+                "calcs": [{"tax": 5,"discount": 10}]
+             },
     
             "termsConditions": {
                 "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -104,8 +110,13 @@
                     "account": "Thamuz Smith"
                 }
             },
+
             "signature": {
-                "image": "signatue.png"
+                "image": "signature.png"
+            },
+
+            "footer": {
+                "thankyou": "Thank Your For Our Business. We make it easy for your problems."
             }
         }
     ]   
