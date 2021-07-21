@@ -13,6 +13,7 @@ import AdList from "screens/AdList/AdList";
 import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
 import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
+import Bill from "screens/MyBills/Bill";
 import GoToMap from "components/composed/Map/GoToMap";
 import MapView from "components/composed/Map/MapView";
 import UserAds from "screens/UserAds/UserAds";
@@ -39,6 +40,8 @@ const App = () => {
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/user-ads" component={UserAds} />
 				<Route exact path="/my-bills" component={MyBills} />
+				<Route path="/bill-detail/:id" children={<Bill />} />
+
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}

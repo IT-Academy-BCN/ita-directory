@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
 import {faDownload, faEye} from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +8,7 @@ import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import DataTable from "react-data-table-component";
 import bills from "./billsData.json";
+import {Link} from "react-router-dom";
 import {StyledWrapper, StyledDiv} from "./MyBills.styles";
 
 const MyBills = () => {
@@ -105,9 +108,10 @@ const MyBills = () => {
 			minWidth: "140px",
 			cell: (row) => (
 				<div className="actions-column">
-					<button>
+					<Link to={`/bill-detail/${row.id}`}>
 						<FontAwesomeIcon icon={faEye} color={Colors.grey} />
-					</button>
+					</Link>
+
 					<button>
 						<FontAwesomeIcon icon={faDownload} color={Colors.grey} />
 					</button>
