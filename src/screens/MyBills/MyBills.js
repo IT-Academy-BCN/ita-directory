@@ -108,13 +108,11 @@ const MyBills = () => {
 			minWidth: "140px",
 			cell: (row) => (
 				<div className="actions-column">
-					<Link to={`/bill-detail/${row.id}`}>
+					<Link to={`/my-bills/${row.id}`}>
 						<FontAwesomeIcon icon={faEye} color={Colors.grey} />
 					</Link>
 
-					<button>
-						<FontAwesomeIcon icon={faDownload} color={Colors.grey} />
-					</button>
+					<FontAwesomeIcon icon={faDownload} color={Colors.grey} />
 				</div>
 			),
 		},
