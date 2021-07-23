@@ -1,5 +1,4 @@
 import {useState} from "react";
-import DownLoadButton from "components/units/Button/Button";
 import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
@@ -249,23 +248,14 @@ const Bill = (color_logo) => {
 	});
 
 	// PDF
-	function handlePDF() {
-		console.log("click");
-		return <DownloadPDF data={generatedBill} />;
-	}
+	const [isClicked] = useState(true);
 
 	return (
 		<BillComponentStyled>
 			<h2 className="logo" color_logo={color_logo}>
 				LOGO EMPRESA
 			</h2>
-
-			<DownLoadButton
-				text="Descargar"
-				className="blueGradient"
-				type="button"
-				onClick={handlePDF}
-			/>
+			{isClicked && <DownloadPDF data={selectedBill} />}
 			{generatedBill}
 		</BillComponentStyled>
 	);
