@@ -20,6 +20,7 @@ import MapView from "components/composed/Map/MapView";
 // import SalesByType from "screens/Sales/SalesByType";
 
 const App = () => {
+	console.log("hello");
 	return (
 		<>
 			<Switch>
