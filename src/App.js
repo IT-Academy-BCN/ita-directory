@@ -24,7 +24,7 @@ import UserAds from "screens/UserAds/UserAds";
 const noExiste = () => {
 	console.log("no existe de verdad");
 };
-const yaLlego = () => {
+const yaLlegoo = () => {
 	console.log("Carlos Pérez");
 };
 
@@ -48,7 +48,7 @@ const App = () => {
 				<Route exact path="/my-bills" component={MyBills} />
 				<Route path="/my-bills/:id" children={<Bill />} />
 				<Route path="mi-ruta" children={noExiste} />
-				<Route path="/carlos-perez" children={yaLlego} />
+				<Route path="/carlos-perez" children={yaLlegoo} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />

@@ -6,7 +6,7 @@
     },
     "[javascript]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
   
