@@ -40,7 +40,7 @@ const App = () => {
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/user-ads" component={UserAds} />
 				<Route exact path="/my-bills" component={MyBills} />
-				<Route path="/bill-detail/:id" children={<Bill />} />
+				<Route path="/my-bills/:id" children={<Bill />} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
