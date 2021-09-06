@@ -22,7 +22,7 @@ import UserAds from "screens/UserAds/UserAds";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
 // import SalesByType from "screens/Sales/SalesByType";
 const noExiste = () => {
-	console.log("no existe de verdad");
+	console.log("Prueba pull request");
 };
 
 const App = () => {
@@ -45,6 +45,7 @@ const App = () => {
 				<Route exact path="/user-ads" component={UserAds} />
 				<Route exact path="/my-bills" component={MyBills} />
 				<Route path="/my-bills/:id" children={<Bill />} />
+
 				<Route path="mi-ruta" children={noExiste} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
