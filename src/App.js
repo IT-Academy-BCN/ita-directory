@@ -35,6 +35,7 @@ const App = () => {
 				<Route exact path="/map" component={MapView} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/dashboard" component={Dashboard} />
+				<Route exact path="/test-route" />
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}
