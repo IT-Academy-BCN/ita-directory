@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-	width: 100%;
-	height: auto;
+	width: 35%;
+	height: 50%;
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
@@ -11,6 +11,20 @@ export const Card = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 0.7rem 0.7rem;
+	margin-right: 0.9rem;
+
+	@media (max-width: 768px) {
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+	}
+
+	@media (max-width: 1400px) {
+		display: flex;
+		width: 40%;
+		flex-direction: column;
+		justify-content: space-between;
+	}
 `;
 export const CardBody = styled.div`
 	background-color: #f4f4f4;

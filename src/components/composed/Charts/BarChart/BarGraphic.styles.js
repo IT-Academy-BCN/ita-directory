@@ -1,21 +1,19 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
-import Colors from "theme/Colors";
 
-export const LineGraphicStyled = styled.div`
-	width: 100%;
+export const BarGraphicStyled = styled.div`
+	min-width: 100%;
 	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	overflow: hidden;
-	background: ${Colors.white};
+	background: #fff;
 
-	.cardHeader {
-		display: flex;
-		width: 100%;
-		height: 50%;
+	.header {
+		height: auto;
 		background-color: #e22e2e;
+		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
@@ -28,7 +26,6 @@ export const LineGraphicStyled = styled.div`
 
 		h2 {
 			font-weight: 400;
-			margin: 1rem;
 			color: white;
 		}
 
@@ -73,7 +70,7 @@ export const LineGraphicStyled = styled.div`
 	.chart {
 		width: 100%;
 		height: 50vh;
-		margin-top: 2rem;
+		margin: 12px;
 	}
 `;
 

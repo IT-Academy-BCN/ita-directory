@@ -1,14 +1,7 @@
 import React, {useState} from "react";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import Button from "components/units/Button/Button";
-import {
-	StyledContainer,
-	StyledLabel,
-	StyledCheckbox,
-	StyledFiltros,
-	StyledContainerInputs,
-	StyledContainerCheckbox,
-} from "./FilterList.styles";
+import {FilterListStyled} from "./FilterList.styles";
 
 function FilterList(props) {
 	const noFilters = {
@@ -40,11 +33,11 @@ function FilterList(props) {
 	};
 
 	return (
-		<StyledContainer className="styleFilter">
+		<FilterListStyled className="styleFilter">
 			<form onSubmit={handleSubmit} id="filterList">
-				<StyledFiltros>Filtros</StyledFiltros>
-				<StyledLabel>Precio</StyledLabel>
-				<StyledContainerInputs>
+				<h3>Filtros</h3>
+				<label>Precio</label>
+				<div className="styledContainerInputs">
 					<InputNumber
 						name="priceMin"
 						type="number"
@@ -61,9 +54,9 @@ function FilterList(props) {
 						placeholder="Máx"
 						className="styleFilterList"
 					/>
-				</StyledContainerInputs>
-				<StyledLabel>Tamaño</StyledLabel>
-				<StyledContainerInputs>
+				</div>
+				<label>Tamaño</label>
+				<div className="styledContainerInputs">
 					<InputNumber
 						name="sizeMin"
 						type="number"
@@ -80,17 +73,18 @@ function FilterList(props) {
 						placeholder="Máx"
 						className="styleFilterList"
 					/>
-				</StyledContainerInputs>
-				<StyledContainerCheckbox>
-					<StyledCheckbox
+				</div>
+				<div className="styledContainerCheckbox">
+					<input
+						className="styledCheckbox"
 						type="checkbox"
 						id="check"
 						checked={filters.billsIncluded}
 						onChange={handleChange}
 						name="billsIncluded"
 					/>
-					<StyledLabel>Gastos incluidos</StyledLabel>
-				</StyledContainerCheckbox>
+					<label>Gastos incluidos</label>
+				</div>
 				<Button
 					buttonStyles={{width: "100%", height: "2.125rem", margin: "2rem 0 0.5rem 0"}}
 					text="Aplicar filtros"
@@ -105,7 +99,7 @@ function FilterList(props) {
 					onClick={handleReset}
 				/>
 			</form>
-		</StyledContainer>
+		</FilterListStyled>
 	);
 }
 

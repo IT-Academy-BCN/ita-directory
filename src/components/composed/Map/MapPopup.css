@@ -1,0 +1,9 @@
+.leaflet-popup-content {
+    display: flex;
+    width: 441px !important;
+    /* height: 180px; */
+}
+
+.leaflet-popup-content p {
+    margin: 0 0 5px 0;
+}

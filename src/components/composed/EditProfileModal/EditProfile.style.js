@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledBodyWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	height: 40rem;
-	margin: 2rem;
-`;
-
 export const EditModalStyled = styled.form`
 	display: flex;
 	/* height: auto; */
@@ -19,6 +11,23 @@ export const EditModalStyled = styled.form`
 	border-radius: 6px;
 	opacity: 1;
 	color: #4a4a4a;
+
+	.inputsWrapper {
+		display: flex;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+
+		label {
+			display: flex;
+			flex-direction: row;
+			margin-right: 3rem;
+			margin-bottom: 0.5rem;
+			p {
+				margin-top: 0;
+				font-style: italic;
+			}
+		}
+	}
 `;
 
 // BOX PHOTO
@@ -63,23 +72,6 @@ export const PhotoWrapper = styled.div`
 		background: 0% 0% no-repeat padding-box;
 		color: #4a4a4a;
 		line-height: 2rem;
-	}
-`;
-
-export const InputsWrapper = styled.div`
-	display: flex;
-	margin-top: 0.5rem;
-	margin-bottom: 0.5rem;
-`;
-
-export const StyledLabel = styled.label`
-	display: flex;
-	flex-direction: row;
-	margin-right: 3rem;
-	margin-bottom: 0.5rem;
-	p {
-		margin-top: 0;
-		font-style: italic;
 	}
 `;
 

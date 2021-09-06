@@ -2,15 +2,7 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
-import {
-	Card,
-	CardHeader,
-	CardTitle,
-	CardSelector,
-	Chart,
-	CardSelectorWrapper,
-	CardOpenModal,
-} from "./BarChart.styles";
+import {BarGraphicStyled} from "./BarGraphic.styles";
 import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -119,33 +111,32 @@ function BarChart({data, hideModal, active, size, year, month}) {
 	};
 
 	return (
-		<React.Fragment>
-			<Card>
-				<CardHeader>
-					<CardTitle> Ventas anuales por tipo </CardTitle>
-					<CardSelectorWrapper>
-						<CardSelector value={selectedMonth} onChange={handleMonthChange}>
-							<option value="all">All</option>
-							{optionsSelectMonth}
-						</CardSelector>
-						<CardSelector value={selectedYear} onChange={handleYearChange}>
-							{optionsSelectYear}
-						</CardSelector>
-						<CardOpenModal onClick={hideModal}>
-							<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
-						</CardOpenModal>
-					</CardSelectorWrapper>
-				</CardHeader>
-				{active ? (
-					<Chart
-						style={{width: `${size[0]}px`, height: `${size[1]}px`}}
-						ref={chartRef}
-					></Chart>
-				) : (
-					<Chart ref={chartRef}></Chart>
-				)}
-			</Card>
-		</React.Fragment>
+		<BarGraphicStyled>
+			<div className="header">
+				<h2> Ventas anuales por tipo </h2>
+				<div className="selectorWrapper">
+					<select value={selectedMonth} onChange={handleMonthChange}>
+						<option value="all">All</option>
+						{optionsSelectMonth}
+					</select>
+					<select value={selectedYear} onChange={handleYearChange}>
+						{optionsSelectYear}
+					</select>
+					<button onClick={hideModal}>
+						<FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+					</button>
+				</div>
+			</div>
+			{active ? (
+				<div
+					className="chart"
+					style={{width: `${size[0]}px`, height: `${size[1]}px`}}
+					ref={chartRef}
+				></div>
+			) : (
+				<div className="chart" ref={chartRef}></div>
+			)}
+		</BarGraphicStyled>
 	);
 }
 

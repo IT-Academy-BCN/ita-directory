@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledAdList = styled.div`
+export const StyledUserAds = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding-top: 3rem;
@@ -9,7 +9,7 @@ export const StyledAdList = styled.div`
 
 export const StyledCard = styled.div`
 	padding-top: 1rem;
-	paddingbottom: 0.75rem;
+	padding-bottom: 0.75rem;
 
 	.cardContainer {
 		background: ${Colors.white};
