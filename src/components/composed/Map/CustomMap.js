@@ -3,19 +3,22 @@ import {MapContainer, TileLayer, useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import "./CustomMap.css";
 import IconSelector from "./IconSelector/IconSelector";
-
 import {customIcons} from "./CustomIcons";
-console.log(customIcons);
+
+let currentIcon = customIcons[1].url;
+const handelOnClickIcon = (icon) => {
+	currentIcon = icon;
+};
 
 let layer;
-const icon = L.icon({
-	iconAnchor: [10, 41],
-	popupAnchor: [2, -40],
-	iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
-	// shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
-});
 
 function Marcador({saveMarkers}) {
+	const icon = L.icon({
+		iconAnchor: [10, 41],
+		popupAnchor: [2, -40],
+		iconUrl: currentIcon,
+		// shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
+	});
 	const map = useMapEvents({
 		click: (e) => {
 			const {lat, lng} = e.latlng;
@@ -45,8 +48,6 @@ class CustomMap extends Component {
 	handleOnClick = () => {
 		this.iconSelection = !this.iconSelection;
 		this.setState((prevState) => ({...prevState, iconSelection: this.iconSelection}));
-		console.log("click");
-		console.log(this.iconSelection);
 	};
 
 	render() {
@@ -68,12 +69,15 @@ class CustomMap extends Component {
 					<Marcador saveMarkers={this.saveMarkers} />
 				</MapContainer>
 				<button className="ButtonIcons" type="button" onClick={this.handleOnClick}>
-					{/*icono seleccionado */}
+					<img className="IconIMG" src={currentIcon} alt="" />
 				</button>
 
 				{this.iconSelection ? (
 					<div>
-						<IconSelector />
+						<IconSelector
+							customIcons={customIcons}
+							handelOnClickIcon={handelOnClickIcon}
+						/>
 					</div>
 				) : (
 					<div></div>
