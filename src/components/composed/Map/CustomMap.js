@@ -5,7 +5,6 @@ import "./CustomMap.css";
 import IconSelector from "./IconSelector/IconSelector";
 
 import {customIcons} from "./CustomIcons";
-console.log(customIcons);
 
 let layer;
 const icon = L.icon({
@@ -45,8 +44,12 @@ class CustomMap extends Component {
 	handleOnClick = () => {
 		this.iconSelection = !this.iconSelection;
 		this.setState((prevState) => ({...prevState, iconSelection: this.iconSelection}));
+		// console.log("click");
+		// console.log(this.iconSelection);
+	};
+
+	handelOnClickIcon = () => {
 		console.log("click");
-		console.log(this.iconSelection);
 	};
 
 	render() {
@@ -73,7 +76,10 @@ class CustomMap extends Component {
 
 				{this.iconSelection ? (
 					<div>
-						<IconSelector />
+						<IconSelector
+							customIcons={customIcons}
+							handelOnClickIcon={this.handelOnClickIcon}
+						/>
 					</div>
 				) : (
 					<div></div>
