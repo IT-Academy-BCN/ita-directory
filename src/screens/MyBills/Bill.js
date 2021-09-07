@@ -10,7 +10,7 @@ const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
 	const [data] = useState(modelBill); // Fake data from JSON modelBillData
 
-	const indexOfId = data.findIndex((i) => id === toString(i.id));
+	const indexOfId = data.findIndex((i) => id === String(i.id));
 
 	// Selecting the right bill...
 	const selectedBill = data.filter((selected) => {
