@@ -48,7 +48,7 @@ const Header = ({
 											<Link to="/Ad">Mis Anuncios</Link>
 										</li>
 										<li>
-											<Link to="/CreateNewAd">Publicar Anuncio</Link>
+											<Link to="/new-ad">Publicar Anuncio</Link>
 										</li>
 										<li>
 											<Link to="/">Cerrar sesión</Link>
