@@ -102,6 +102,10 @@ export const BillStyled = styled.div`
 		flex-direction: row;
 		justify-content: space-between;
 
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
+
 		.pay {
 			display: flex;
 			flex-direction: column;
@@ -116,12 +120,15 @@ export const BillStyled = styled.div`
 		flex-direction: column;
 
 		p {
-			text-align: center;
+			text-align: left;
 			font-weight: bold;
 		}
 
 		.signature {
 			height: 80%;
+			@media (max-width: 768px) {
+				margin-bottom: 3rem;
+			}
 		}
 	}
 
