@@ -26,9 +26,9 @@ const Header = ({
 		<HeaderStyled centerTitle={centerTitle}>
 			<Container>
 				<div className="top-header">
-					<h2 className="logo" color_logo={color_logo}>
-						Logo Empresa
-					</h2>
+					<Link className="logo" to="/ads">
+						<h2 color_logo={color_logo}>Logo Empresa</h2>
+					</Link>
 					{isLoggedIn ? (
 						<div className="profile">
 							<button className="profile" onClick={handleClick}>

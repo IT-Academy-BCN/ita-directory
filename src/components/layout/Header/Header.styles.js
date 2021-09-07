@@ -25,6 +25,7 @@ export const HeaderStyled = styled.header`
 			letter-spacing: 0px;
 			text-transform: uppercase;
 			opacity: 1;
+			text-decoration: none; //Para eliminar el subrayado del link
 		}
 
 		.profile {
