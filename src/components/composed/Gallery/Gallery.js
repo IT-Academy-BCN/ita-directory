@@ -1,7 +1,7 @@
 import React from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import {Container} from "./Gallery.styles.js";
+import {GalleryStyled} from "./Gallery.styles.js";
 import PropTypes from "prop-types";
 
 const Gallery = ({
@@ -20,7 +20,7 @@ const Gallery = ({
 	startIndex = 0,
 }) => {
 	return (
-		<Container>
+		<GalleryStyled>
 			<ImageGallery
 				items={images}
 				showFullscreenButton={showFullscreenButton}
@@ -37,7 +37,7 @@ const Gallery = ({
 				startIndex={startIndex}
 				useBrowserFullscreen={false}
 			/>
-		</Container>
+		</GalleryStyled>
 	);
 };
 

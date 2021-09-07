@@ -5,15 +5,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 // import styles
-import {
-	CardChart,
-	CardHeader,
-	Chart,
-	CardSelectorWrapper,
-	CardTitle,
-	CardSelector,
-	CardOpenModal,
-} from "./LineChart.styles";
+import {LineGraphicStyled} from "./LineChart.styles";
 import {options} from "./defaultOptions";
 
 //eslint-disable-next-line
@@ -173,30 +165,27 @@ function LineChart({data, active, hideModal, year, month}) {
 	}, [curChart]);
 
 	return (
-		<CardChart>
-			<CardHeader>
-				<CardTitle>Ventas anuales continuas</CardTitle>
-				<CardSelectorWrapper>
-					<CardSelector value={detail} onChange={(e) => setDetail(e.target.value)}>
+		<LineGraphicStyled>
+			<div className="cardHeader">
+				<h2>Ventas anuales continuas</h2>
+				<div className="selectorWrapper">
+					<select value={detail} onChange={(e) => setDetail(e.target.value)}>
 						<option value="all">All</option>
 						{optionsSelectMonth}
-					</CardSelector>
-					<CardSelector
-						value={selectedYear}
-						onChange={(e) => setSelectedYear(e.target.value)}
-					>
+					</select>
+					<select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
 						{optionsSelectYear}
-					</CardSelector>
-					<CardOpenModal onClick={hideModal}>
+					</select>
+					<button onClick={hideModal}>
 						<FontAwesomeIcon
 							icon={active ? faTimes : faExternalLinkAlt}
 							style={{color: "#e22e2e"}}
 						/>
-					</CardOpenModal>
-				</CardSelectorWrapper>
-			</CardHeader>
-			<Chart ref={lineChartRef}></Chart>
-		</CardChart>
+					</button>
+				</div>
+			</div>
+			<div className="chart" ref={lineChartRef}></div>
+		</LineGraphicStyled>
 	);
 }
 

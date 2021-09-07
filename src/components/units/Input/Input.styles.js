@@ -1,19 +1,27 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const StyledMainContainer = styled.div`
-	display: flex;
-	@media screen and (max-width: 600px) {
+export const InputStyled = styled.div`
+	&.createNewAd {
+		display: flex;
+		@media screen and (max-width: 600px) {
+			flex-direction: column;
+		}
+		margin-bottom: 15px;
+	}
+
+	label {
+		padding: 3px 45px 0 0;
+		color: #999999;
+	}
+
+	.inputsContainer {
+		display: flex;
 		flex-direction: column;
 	}
 `;
 
-export const StyledContainerInputError = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-export const StyledContainer = styled.div`
+export const StyledIconInput = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -23,48 +31,46 @@ export const StyledContainer = styled.div`
 	width: 18.6rem;
 	height: 2.6rem;
 	padding: 5px;
-	&.error {
-		border: 1px solid ${Colors.redColor};
-		color: #7d868b;
-	}
 	&:focus-within {
 		outline: 0 none;
 		border: 3px solid #000 !important;
 	}
-	&.styleInputCreateNewAd {
+	&.error {
+		border: 1px solid ${Colors.redColor};
+		color: #7d868b;
+	}
+	&.createNewAd {
 		border: 1px solid #707070;
 	}
-`;
 
-export const StyledIcon = styled.div`
-	display: flex;
-	margin-right: 6px;
-	color: #999999;
-	flex-basis: 20px;
+	.styledIcon {
+		display: flex;
+		margin-right: 6px;
+		color: #999999;
+		flex-basis: 20px;
+	}
 `;
 
 export const StyledInput = styled.input`
 	width: 18.6rem;
-	height: 2rem;
 	border: none;
 	display: flex;
 	font: normal normal normal 16px/32px Helvetica Neue;
 	font-size: 14px;
 	color: #393939;
 	padding: 0.75rem;
+	max-height: 80%;
 	::-webkit-outer-spin-button,
 	::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
-	}
-	&[type="number"] {
-		-moz-appearance: textfield;
 	}
 	&:focus-within {
 		outline: 0 none;
 		border: none;
 	}
 	&.error {
+		color: ${Colors.redColor};
 		border: none;
 		outline: 0 none;
 	}
@@ -72,18 +78,10 @@ export const StyledInput = styled.input`
 
 export const StyledError = styled.small`
 	color: #e74c3c;
+	position: absolute;
 	left: 0;
-	top: 0;
 	visibility: visible;
-	margin-bottom: 15px;
 	&.errorProfile {
 		position: static;
 	}
-`;
-
-export const StyledLabel = styled.label`
-	display: flex;
-	flex-direction: row;
-	padding: 3px 45px 0 0;
-	color: #999999;
 `;

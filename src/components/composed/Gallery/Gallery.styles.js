@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const GalleryStyled = styled.div`
 	width: 80%;
 	padding-right: 3rem;
 	padding-left: 3rem;

@@ -7,8 +7,6 @@ import {
 	ButtonWrapper,
 	EditModalStyled,
 	PhotoWrapper,
-	StyledLabel,
-	InputsWrapper,
 } from "components/composed/EditProfileModal/EditProfile.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
@@ -137,8 +135,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 					</div>
 				</PhotoWrapper>
 
-				<InputsWrapper>
-					<StyledLabel>
+				<div className="inputsWrapper">
+					<label>
 						<Input
 							id="userName"
 							name="userName"
@@ -152,9 +150,9 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							// errorText="The password to contain more than 6 characters and a uppercase letter"
 							// minLength={6}
 						/>
-					</StyledLabel>
+					</label>
 
-					<StyledLabel>
+					<label>
 						{/* <label htmlFor="email">Email</label> */}
 						<Input
 							id="email"
@@ -165,11 +163,11 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							value={newEmail}
 							onChange={(e) => handleEmailChange(e.target.value)}
 						/>
-					</StyledLabel>
-				</InputsWrapper>
+					</label>
+				</div>
 
-				<InputsWrapper>
-					<StyledLabel>
+				<div className="inputsWrapper">
+					<label>
 						<Input
 							label="Nueva contraseña"
 							type="password"
@@ -182,8 +180,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							errorText="The password to contain more than 6 characters and a uppercase letter"
 							minLength={6}
 						/>
-					</StyledLabel>
-					<StyledLabel>
+					</label>
+					<label>
 						<Input
 							label="Confirmar contraseña"
 							type="password"
@@ -196,8 +194,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							errorText="Both passwords must be equal"
 							minLength={6}
 						/>
-					</StyledLabel>
-				</InputsWrapper>
+					</label>
+				</div>
 				<Button
 					onClick={() => actualizar(currentNombre)}
 					text="Guardar"

@@ -1,26 +1,18 @@
 import React from "react";
-import {
-	CardBox,
-	CardInfo,
-	StyledTitle,
-	StyledImage,
-	StyledText,
-	StyledDescription,
-	StyledFooter,
-} from "./Card.style.js";
+import {CardStyled} from "./Card.style.js";
 import PropTypes from "prop-types";
 
-const Card = ({image, title, description, text, footer}) => {
+const Card = ({image, title, description, text, footer, name}) => {
 	return (
-		<CardBox>
-			<StyledImage {...image} />
-			<CardInfo>
-				<StyledTitle>{title}</StyledTitle>
-				<StyledDescription>{description}</StyledDescription>
-				<StyledText>{text}</StyledText>
-				<StyledFooter>{footer}</StyledFooter>
-			</CardInfo>
-		</CardBox>
+		<CardStyled>
+			<img src={`${process.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
+			<div className="info">
+				<h3>{title}</h3>
+				<div className="description">{description}</div>
+				<p>{text}</p>
+				<div className="footer">{footer}</div>
+			</div>
+		</CardStyled>
 	);
 };
 Card.propTypes = {
