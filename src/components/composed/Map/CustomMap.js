@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {MapContainer, TileLayer, useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import "./CustomMap.css";
-
+import IconSelector from "./IconSelector/IconSelector";
 import "leaflet/dist/leaflet.css";
 let layer;
 const icon = L.icon({
@@ -32,12 +32,19 @@ class CustomMap extends Component {
 		this.state = {
 			markers: [[41.3879, 2.16992]],
 			//	data: [],
+			iconSelection: false,
 		};
 	}
 
 	saveMarkers = (newMarkerCoords) => {
 		const markers = [...this.state.markers, newMarkerCoords];
 		this.setState((prevState) => ({...prevState, markers}));
+	};
+	handleOnClick = () => {
+		this.iconSelection = !this.iconSelection;
+		this.setState((prevState) => ({...prevState, iconSelection: this.iconSelection}));
+		console.log("click");
+		console.log(this.iconSelection);
 	};
 
 	render() {
@@ -58,6 +65,17 @@ class CustomMap extends Component {
 					/>
 					<Marcador saveMarkers={this.saveMarkers} />
 				</MapContainer>
+				<button className="ButtonIcons" type="button" onClick={this.handleOnClick}>
+					{/*icono seleccionado */}
+				</button>
+
+				{this.iconSelection ? (
+					<div>
+						<IconSelector />
+					</div>
+				) : (
+					<div></div>
+				)}
 			</div>
 		);
 	}

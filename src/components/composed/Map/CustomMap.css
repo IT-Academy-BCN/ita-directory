@@ -2,9 +2,25 @@
 	width: 95%;
 	height: 285px;
 	margin-top: 1%;
+	z-index: 0;
 }
 
 .Container {
 	width: 50%;
 	height: 90%;
+}
+
+.ButtonIcons{
+width: 30px;
+height: 30px;
+line-height: 30px;
+transform:translate(0, -40px);
+z-index: 999;
+position: absolute;
+background-color: #fff;
+margin:0 10px ;
+border: 1px solid #f4f4f4;
+}
+.ButtonIcons:hover{
+	background-color: #f4f4f4;
 }
