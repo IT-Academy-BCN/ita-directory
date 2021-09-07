@@ -35,6 +35,10 @@ export const BillStyled = styled.div`
 	display: flex;
 	flex-direction: column;
 
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+
 	header,
 	section {
 		display: flex;
@@ -42,6 +46,9 @@ export const BillStyled = styled.div`
 		flex-wrap: nowrap;
 		justify-content: space-between;
 		padding: 0 4rem 0 4rem;
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	section {
@@ -60,17 +67,32 @@ export const BillStyled = styled.div`
 	.tableWrapper {
 		margin-top: 3rem;
 		border-top: 2px solid ${(props) => props.color};
+		@media (max-width: 768px) {
+			transform: scale(0.8);
+		}
 	}
 
 	.termsAndCalc {
 		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
+		flex-direction: column-reverse;
+		align-items: flex-start;
+		margin-top: 3.5rem;
+		@media (max-width: 768px) {
+		}
 	}
 
 	.terms {
-		width: 40%;
 		margin-top: 3.5rem;
+		padding: 0 3.5rem;
+	}
+
+	.calcs {
+		padding: 0 3.5rem;
+		@media (max-width: 768px) {
+			transform: scale(0.8);
+			padding-right: 0;
+			padding-left: 1rem;
+		}
 	}
 
 	.payAndSign {
@@ -79,6 +101,10 @@ export const BillStyled = styled.div`
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 
 		.pay {
 			display: flex;
@@ -94,12 +120,15 @@ export const BillStyled = styled.div`
 		flex-direction: column;
 
 		p {
-			text-align: center;
+			text-align: left;
 			font-weight: bold;
 		}
 
 		.signature {
 			height: 80%;
+			@media (max-width: 768px) {
+				margin-bottom: 3rem;
+			}
 		}
 	}
 

@@ -16,7 +16,6 @@ const Bill = (color_logo) => {
 	});
 
 	// Columns for datatables
-
 	const tradeColumns = [
 		{
 			name: <div>#</div>,
@@ -212,7 +211,7 @@ const Bill = (color_logo) => {
 							tempor incididunt ut labore et dolore
 						</small>
 					</div>
-					<div>
+					<div className="calcs">
 						<DataTable
 							columns={calcColumns}
 							noHeader={true}
