@@ -42,6 +42,9 @@ export const BillStyled = styled.div`
 		flex-wrap: nowrap;
 		justify-content: space-between;
 		padding: 0 4rem 0 4rem;
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	section {
@@ -60,6 +63,9 @@ export const BillStyled = styled.div`
 	.tableWrapper {
 		margin-top: 3rem;
 		border-top: 2px solid ${(props) => props.color};
+		@media (max-width: 768px) {
+			transform: scale(0.8);
+		}
 	}
 
 	.termsAndCalc {

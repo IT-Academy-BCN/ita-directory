@@ -16,7 +16,6 @@ const Bill = (color_logo) => {
 	});
 
 	// Columns for datatables
-
 	const tradeColumns = [
 		{
 			name: <div>#</div>,
