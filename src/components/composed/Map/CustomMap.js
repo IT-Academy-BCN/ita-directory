@@ -3,10 +3,14 @@ import {MapContainer, TileLayer, useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import "./CustomMap.css";
 
+import {customIcons} from "./Icons";
+
 import "leaflet/dist/leaflet.css";
+
+console.log(customIcons);
+
 let layer;
 const icon = L.icon({
-	iconSize: [25, 41],
 	iconAnchor: [10, 41],
 	popupAnchor: [2, -40],
 	iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
