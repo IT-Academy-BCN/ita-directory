@@ -3,7 +3,7 @@ import {MapContainer, TileLayer, useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import "./CustomMap.css";
 import IconSelector from "./IconSelector/IconSelector";
-import {customIcons} from "./CustomIcons";
+import {customIcons} from "./CustomMapIcons";
 
 let currentIcon = customIcons[1].url;
 const handelOnClickIcon = (icon) => {
