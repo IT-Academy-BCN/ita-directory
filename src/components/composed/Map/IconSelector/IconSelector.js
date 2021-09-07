@@ -7,7 +7,11 @@ const IconSelector = (props) => {
 		<IconContainer>
 			{customIcons.map((icono) => {
 				return (
-					<CustomIcon key={icono.key} icono={icono} handleOnClick={handelOnClickIcon} />
+					<CustomIcon
+						key={icono.key}
+						icono={icono}
+						handelOnClickIcon={handelOnClickIcon}
+					/>
 				);
 			})}
 		</IconContainer>

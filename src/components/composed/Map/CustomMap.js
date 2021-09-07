@@ -8,6 +8,7 @@ import {customIcons} from "./CustomIcons";
 let currentIcon = customIcons[1].url;
 const handelOnClickIcon = (icon) => {
 	currentIcon = icon;
+	console.log(icon);
 };
 
 let layer;
