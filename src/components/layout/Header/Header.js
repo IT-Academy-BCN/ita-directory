@@ -45,10 +45,10 @@ const Header = ({
 											<Link to="/my-bills">Mis facturas</Link>
 										</li>
 										<li>
-											<Link to="/Ad">Mis Anuncios</Link>
+											<Link to="/user-ads">Mis Anuncios</Link>
 										</li>
 										<li>
-											<Link to="/CreateNewAd">Publicar Anuncio</Link>
+											<Link to="/new-ad">Publicar Anuncio</Link>
 										</li>
 										<li>
 											<Link to="/">Cerrar sesión</Link>
