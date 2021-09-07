@@ -1,0 +1,18 @@
+import React from "react";
+import {IconImg} from "../IconsSelector.styles";
+
+const CustomIcon = ({icono, handelOnClickIcon, reRender}) => {
+	return (
+		<IconImg
+			key={icono.key}
+			onClick={() => {
+				handelOnClickIcon(icono.url);
+				reRender();
+			}}
+		>
+			<img src={icono.url} alt={icono.key} />
+		</IconImg>
+	);
+};
+
+export default CustomIcon;

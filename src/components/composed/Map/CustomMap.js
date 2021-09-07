@@ -39,8 +39,13 @@ class CustomMap extends Component {
 			markers: [[41.3879, 2.16992]],
 			//	data: [],
 			iconSelection: false,
+			currentIconState: currentIcon,
 		};
 	}
+	reRender = () => {
+		// calling the forceUpdate() method
+		this.forceUpdate();
+	};
 
 	saveMarkers = (newMarkerCoords) => {
 		const markers = [...this.state.markers, newMarkerCoords];
@@ -78,6 +83,7 @@ class CustomMap extends Component {
 						<IconSelector
 							customIcons={customIcons}
 							handelOnClickIcon={handelOnClickIcon}
+							reRender={this.reRender}
 						/>
 					</div>
 				) : (
