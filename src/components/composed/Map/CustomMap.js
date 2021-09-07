@@ -5,20 +5,13 @@ import "./CustomMap.css";
 import IconSelector from "./IconSelector/IconSelector";
 import {customIcons} from "./CustomMapIcons";
 
-let currentIcon = customIcons[1].url;
-const handelOnClickIcon = (icon) => {
-	currentIcon = icon;
-	console.log(icon);
-};
-
 let layer;
 
-function Marcador({saveMarkers}) {
+function Marcador({saveMarkers, currentIcon}) {
 	const icon = L.icon({
 		iconAnchor: [10, 41],
 		popupAnchor: [2, -40],
 		iconUrl: currentIcon,
-		// shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
 	});
 	const map = useMapEvents({
 		click: (e) => {
@@ -37,11 +30,15 @@ class CustomMap extends Component {
 		super(props);
 		this.state = {
 			markers: [[41.3879, 2.16992]],
-			//	data: [],
 			iconSelection: false,
-			currentIconState: currentIcon,
+			currentIconState: customIcons[1].url,
 		};
 	}
+
+	handelOnClickIcon = (icon) => {
+		this.setState((prevState) => ({...prevState, currentIconState: icon}));
+	};
+
 	reRender = () => {
 		// calling the forceUpdate() method
 		this.forceUpdate();
@@ -72,17 +69,20 @@ class CustomMap extends Component {
 						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 						url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					/>
-					<Marcador saveMarkers={this.saveMarkers} />
+					<Marcador
+						saveMarkers={this.saveMarkers}
+						currentIcon={this.state.currentIconState}
+					/>
 				</MapContainer>
 				<button className="ButtonIcons" type="button" onClick={this.handleOnClick}>
-					<img className="IconIMG" src={currentIcon} alt="" />
+					<img className="IconIMG" src={this.state.currentIconState} alt="" />
 				</button>
 
 				{this.iconSelection ? (
 					<div>
 						<IconSelector
 							customIcons={customIcons}
-							handelOnClickIcon={handelOnClickIcon}
+							handelOnClickIcon={this.handelOnClickIcon}
 							reRender={this.reRender}
 						/>
 					</div>
