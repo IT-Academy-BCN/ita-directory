@@ -90,7 +90,8 @@ export const BillStyled = styled.div`
 		padding: 0 3.5rem;
 		@media (max-width: 768px) {
 			transform: scale(0.8);
-			padding: 0;
+			padding-right: 0;
+			padding-left: 1rem;
 		}
 	}
 
