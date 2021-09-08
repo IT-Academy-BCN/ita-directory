@@ -26,9 +26,9 @@ const Header = ({
 		<HeaderStyled centerTitle={centerTitle}>
 			<Container>
 				<div className="top-header">
-					<h2 className="logo" color_logo={color_logo}>
-						Logo Empresa
-					</h2>
+					<Link className="logo" to="/ads">
+						<h2 color_logo={color_logo}>Logo Empresa</h2>
+					</Link>
 					{isLoggedIn ? (
 						<div className="profile">
 							<button className="profile" onClick={handleClick}>
@@ -45,10 +45,10 @@ const Header = ({
 											<Link to="/my-bills">Mis facturas</Link>
 										</li>
 										<li>
-											<Link to="/Ad">Mis Anuncios</Link>
+											<Link to="/user-ads">Mis Anuncios</Link>
 										</li>
 										<li>
-											<Link to="/CreateNewAd">Publicar Anuncio</Link>
+											<Link to="/new-ad">Publicar Anuncio</Link>
 										</li>
 										<li>
 											<Link to="/">Cerrar sesión</Link>

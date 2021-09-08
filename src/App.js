@@ -24,9 +24,6 @@ import UserAds from "screens/UserAds/UserAds";
 const noExiste = () => {
 	console.log("Branch 34-mapa-con-marcador-personalizado");
 };
-const yaLlego = () => {
-	console.log("Carlos Pérez");
-};
 
 const App = () => {
 	return (
@@ -48,7 +45,6 @@ const App = () => {
 				<Route exact path="/my-bills" component={MyBills} />
 				<Route path="/my-bills/:id" children={<Bill />} />
 				<Route path="mi-ruta" children={noExiste} />
-				<Route path="/carlos-perez" children={yaLlego} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
