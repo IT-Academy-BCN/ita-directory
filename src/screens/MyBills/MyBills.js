@@ -17,6 +17,10 @@ const MyBills = () => {
 	//Get the fake JSON data
 	const [billsData] = useState(bills);
 
+	/*const billExist = () => {
+		if(!billsData[0].id && billsData[1].id)
+	}*/
+
 	//Build the columns table
 	const columns = [
 		{
