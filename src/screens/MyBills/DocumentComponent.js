@@ -9,7 +9,7 @@ import {PDFDownloadLink} from "@react-pdf/renderer";
 // Create styles
 const styles = StyleSheet.create({
 	body: {
-		padding: "1.5rem 2rem 0 2rem",
+		padding: "5rem 2rem 0 2rem",
 		backgroundColor: "#ffffff",
 		fontSize: "10pt",
 	},
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
-		padding: "0 4rem 0 4rem",
+		padding: "24px 50px 0 50px",
 		marginTop: "3.8rem",
 	},
 
@@ -27,11 +27,17 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
-		padding: "0 4rem 0 4rem",
+		padding: "24px 50px 0 50px",
+		marginTop: "10rem",
+	},
+	section2: {
+		display: "flex",
+		flexDirection: "column",
+		padding: "24px 50px 0 50px",
 		marginTop: "10rem",
 	},
 	table: {
-		marginTop: "10rem",
+		marginTop: 30,
 		padding: "0 5rem 0 5rem",
 		display: "table",
 		width: "100%",
@@ -54,35 +60,56 @@ const styles = StyleSheet.create({
 	terms: {
 		width: "65%",
 	},
+	margin: {
+		marginTop: 60,
+	},
+	marginTop: {
+		marginTop: 10,
+	},
+	marginBottom: {
+		marginBottom: 10,
+	},
+	text: {
+		fontSize: 25,
+		fontWeight: 700,
+	},
+	font: {
+		fontSize: 20,
+		fontWeight: 700,
+		marginBottom: 10,
+	},
+	smallFont: {
+		fontSize: 12,
+	},
 });
 
-const PdfDocument = ({data}) => {
-	return (
-		<Document>
-			<Page size="A4" orientation="portrait" style={styles.body}>
-				<View>
-					<View style={styles.header}>
-						<Text>{data.header.logoCompany}</Text>
-						<Text>{data.header.invoiceID}</Text>
-					</View>
-					<View style={styles.section}>
-						<View>
-							<Text>Invoice to: </Text>
-							<Text>{data.emisorReceiver.emisor.emName}</Text>
-							<Text>{data.emisorReceiver.emisor.emPosition}</Text>
-							<Text>Address:</Text>
-							<Text>{data.emisorReceiver.emisor.emStreet}</Text>
-							<Text>{data.emisorReceiver.emisor.emContact}</Text>
-						</View>
 
-						<View>
-							<Text>Invoice from:</Text>
-							<Text>{data.emisorReceiver.receiver.reName}</Text>
-							<Text>{data.emisorReceiver.receiver.rePosition}</Text>
-							<Text>Address:</Text>
-							<Text>{data.emisorReceiver.receiver.reStreet}</Text>
-							<Text>{data.emisorReceiver.receiver.reContact}</Text>
-						</View>
+const PdfDocument = ({data}) => (
+	<Document>
+		<Page size="A4" orientation="portrait" style={styles.body}>
+			<View>
+				<View style={styles.header}>
+					<Text style={styles.text}>{data.header.logoCompany}</Text>
+					<Text style={styles.text}>{data.header.invoiceID}</Text>
+				</View>
+				<View style={styles.section}>
+					<View>
+						<Text>Invoice to: </Text>
+						<Text style={styles.text}>{data.emisorReceiver.emisor.emName}</Text>
+						<Text>{data.emisorReceiver.emisor.emPosition}</Text>
+						<Text style={styles.margin}>Address:</Text>
+						<Text>{data.emisorReceiver.emisor.emStreet}</Text>
+						<Text>{data.emisorReceiver.emisor.emContact}</Text>
+					</View>
+
+					<View>
+						<Text>Invoice from:</Text>
+						<Text style={styles.text}>{data.emisorReceiver.receiver.reName}</Text>
+						<Text>{data.emisorReceiver.receiver.rePosition}</Text>
+						<Text style={styles.margin}>Address:</Text>
+						<Text>{data.emisorReceiver.receiver.reStreet}</Text>
+						<Text>{data.emisorReceiver.receiver.reContact}</Text>
+
 					</View>
 				</View>
 
@@ -242,29 +269,28 @@ const PdfDocument = ({data}) => {
 					</View>
 				</View>
 
-				<View style={styles.section}>
-					<View style={styles.terms}>
-						<View>
-							<Text>Terms & Conditions</Text>
-							<Text>{data.termsConditions.text}</Text>
-						</View>
-					</View>
 
-					<View style={styles.calcTable}>
-						<View style={styles.table}>
-							<View style={styles.tableRow}>
-								<View style={styles.tableCol}>
-									<Text style={styles.tableCell}>Sub total</Text>
-								</View>
-								<View style={styles.tableCol}>
-									<Text style={styles.tableCell}>Tax(5%)</Text>
-								</View>
-								<View style={styles.tableCol}>
-									<Text style={styles.tableCell}>Discount(10%)</Text>
-								</View>
-								<View style={styles.tableCol}>
-									<Text style={styles.tableCell}>GRAND TOTAL</Text>
-								</View>
+			<View style={styles.section}>
+				<View style={styles.calcTable}>
+					<View style={styles.table}>
+						<View style={styles.tableRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>Sub total</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>Tax(5%)</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>Discount(10%)</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>GRAND TOTAL</Text>
+							</View>
+						</View>
+						<View style={styles.tableRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>Subtotal</Text>
+
 							</View>
 							<View style={styles.tableRow}>
 								<View style={styles.tableCol}>
@@ -284,23 +310,36 @@ const PdfDocument = ({data}) => {
 					</View>
 				</View>
 
-				<View style={styles.section}>
+			<View style={styles.section2}>
+				<View style={styles.terms}>
 					<View>
-						<Text>Payment Method</Text>
-						<Text>Bank</Text>
-						<Text>Account ID: {data.payment.bank.accountID}</Text>
-						<Text>Account Name: {data.payment.bank.accountName}</Text>
-						<Text>Paypal</Text>
-						<Text>Paypal ID: {data.payment.paypal.paypalID}</Text>
-						<Text>Account Name: {data.payment.paypal.account}</Text>
+						<Text style={styles.font}>Terms & Conditions</Text>
+						<Text>{data.termsConditions.text}</Text>
 					</View>
+				</View>
+			</View>
+			<View style={styles.section}>
+				<View>
+					<Text style={styles.font}>Payment Method</Text>
+					<Text style={styles.smallFont}>Bank</Text>
+					<Text style={styles.marginTop}>Account ID: {data.payment.bank.accountID}</Text>
+					<Text style={styles.marginBottom}>
+						Account Name: {data.payment.bank.accountName}
+					</Text>
+					<Text style={styles.smallFont}>Paypal</Text>
+					<Text style={styles.marginTop}>Paypal ID: {data.payment.paypal.paypalID}</Text>
+					<Text>Account Name: {data.payment.paypal.account}</Text>
+				</View>
+
 
 					<View>
-						<View>
-							<Text>{data.signature.image}</Text>
-							<Text>{data.emisorReceiver.receiver.reName}</Text>
-							<Text>{data.emisorReceiver.receiver.rePosition}</Text>
-						</View>
+
+						<Text style={styles.marginBottom}>{data.signature.image}</Text>
+						<Text style={styles.font}>{data.emisorReceiver.receiver.reName}</Text>
+						<Text style={styles.smallFont}>
+							{data.emisorReceiver.receiver.rePosition}
+						</Text>
+
 					</View>
 				</View>
 			</Page>

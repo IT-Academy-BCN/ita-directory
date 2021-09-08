@@ -252,7 +252,7 @@ const Bill = (color_logo) => {
 
 	if (indexOfId !== -1) {
 		error = generatedBill;
-		downloadBtn = <DownloadPDF data={selectedBill} />;
+		downloadBtn = <DownloadPDF data={selectedBill} type={"button"} />;
 	} else {
 		error = <Error>There are no bills available</Error>;
 	}
@@ -262,9 +262,6 @@ const Bill = (color_logo) => {
 			<h2 className="logo" color_logo={color_logo}>
 				LOGO EMPRESA
 			</h2>
-
-			{<DownloadPDF data={selectedBill} type={"button"} />}
-			{generatedBill}
 			{downloadBtn}
 			{error}
 		</BillComponentStyled>
