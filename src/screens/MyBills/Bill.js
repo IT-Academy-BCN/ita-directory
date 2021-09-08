@@ -262,8 +262,12 @@ const Bill = (color_logo) => {
 			<h2 className="logo" color_logo={color_logo}>
 				LOGO EMPRESA
 			</h2>
-			{downloadBtn}
+
+			{isClicked && <DownloadPDF data={selectedBill} type={"button"} />}
+			{generatedBill}
+      {downloadBtn}
 			{error}
+
 		</BillComponentStyled>
 	);
 };
