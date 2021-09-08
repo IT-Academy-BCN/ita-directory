@@ -1,7 +1,7 @@
 import CustomIcon from "./CustomIcon/CustomIcon";
 import {IconContainer} from "./IconsSelector.styles";
 
-const IconSelector = ({customIcons, handelOnClickIcon, reRender}) => {
+const IconSelector = ({customIcons, handelOnClickIcon}) => {
 	return (
 		<IconContainer>
 			{customIcons.map((icono) => {
@@ -10,7 +10,6 @@ const IconSelector = ({customIcons, handelOnClickIcon, reRender}) => {
 						key={icono.key}
 						icono={icono}
 						handelOnClickIcon={handelOnClickIcon}
-						reRender={reRender}
 					/>
 				);
 			})}
