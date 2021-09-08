@@ -14,8 +14,6 @@ import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins
 import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
 import Bill from "screens/MyBills/Bill";
-import GoToMap from "components/composed/Map/GoToMap";
-import MapView from "components/composed/Map/MapView";
 import UserAds from "screens/UserAds/UserAds";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
@@ -37,8 +35,6 @@ const App = () => {
 				<Route exact path="/profile" component={Profile} />
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
-				<Route exact path="/go-to-map" component={GoToMap} />
-				<Route exact path="/map" component={MapView} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/user-ads" component={UserAds} />
