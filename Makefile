@@ -5,7 +5,7 @@ build: ## build docker image
 
 dev: ## launch docker dev
 	if [docker image ls -a "$$IMAGE_NAME" | grep -Fq "$$IMAGE_NAME" 1>/dev/null]; then \
-		echo "could found image $$IMAGE_NAME..."; \
+		echo "could found image $$IMAGE_NAME...", try running make build first; \
 	fi; \
 	docker run -it --rm \
 	-v ${PWD}:/app \
