@@ -2,13 +2,15 @@ import {useState} from "react";
 import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
-import {BillComponentStyled, BillStyled} from "./Bill.styles";
+import {BillComponentStyled, BillStyled, Error} from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
 
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
 	const [data] = useState(modelBill); // Fake data from JSON modelBillData
+
+	const indexOfId = data.findIndex((i) => id === String(i.id));
 
 	// Selecting the right bill...
 	const selectedBill = data.filter((selected) => {
@@ -246,16 +248,22 @@ const Bill = (color_logo) => {
 		);
 	});
 
-	// PDF
-	const [isClicked] = useState(true);
+	let error, downloadBtn;
+
+	if (indexOfId !== -1) {
+		error = generatedBill;
+		downloadBtn = <DownloadPDF data={selectedBill} type={"button"} />;
+	} else {
+		error = <Error>There are no bills available</Error>;
+	}
 
 	return (
 		<BillComponentStyled>
 			<h2 className="logo" color_logo={color_logo}>
 				LOGO EMPRESA
 			</h2>
-			{isClicked && <DownloadPDF data={selectedBill} />}
-			{generatedBill}
+			{downloadBtn}
+			{error}
 		</BillComponentStyled>
 	);
 };
