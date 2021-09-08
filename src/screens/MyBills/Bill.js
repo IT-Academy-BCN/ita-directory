@@ -252,7 +252,7 @@ const Bill = (color_logo) => {
 
 	if (indexOfId !== -1) {
 		error = generatedBill;
-		downloadBtn = <DownloadPDF data={selectedBill} />;
+		downloadBtn = <DownloadPDF data={selectedBill} type={"button"} />;
 	} else {
 		error = <Error>There are no bills available</Error>;
 	}

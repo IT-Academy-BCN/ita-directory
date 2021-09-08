@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, {useState} from "react";
 import Body from "components/layout/Body/Body";
-import {faDownload, faEye} from "@fortawesome/free-solid-svg-icons";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
@@ -10,10 +10,16 @@ import DataTable from "react-data-table-component";
 import bills from "./billsData.json";
 import {Link} from "react-router-dom";
 import {StyledWrapper, StyledDiv} from "./MyBills.styles";
+import DownloadPDF from "./DocumentComponent";
+import modelBill from "./modelBillData.json";
 
 const MyBills = () => {
 	//Get the fake JSON data
 	const [billsData] = useState(bills);
+
+	/*const billExist = () => {
+		if(!billsData[0].id && billsData[1].id)
+	}*/
 
 	//Build the columns table
 	const columns = [
@@ -108,11 +114,16 @@ const MyBills = () => {
 			minWidth: "140px",
 			cell: (row) => (
 				<div className="actions-column">
-					<Link to={`/my-bills/${row.id}`}>
+					<Link to={`/my-bills/${row.id}`} title="Ver factura">
 						<FontAwesomeIcon icon={faEye} color={Colors.grey} />
 					</Link>
 
-					<FontAwesomeIcon icon={faDownload} color={Colors.grey} />
+					{modelBill.map(
+						(invoice) =>
+							invoice.id === row.id && (
+								<DownloadPDF key={invoice.id} data={[invoice]} type={"icon"} />
+							)
+					)}
 				</div>
 			),
 		},

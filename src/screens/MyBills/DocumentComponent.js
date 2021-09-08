@@ -1,5 +1,9 @@
+import React from "react";
 import {Page, Text, View, Document, StyleSheet} from "@react-pdf/renderer";
 import DownLoadButton from "components/units/Button/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import Colors from "theme/Colors";
 import {PDFDownloadLink} from "@react-pdf/renderer";
 
 // Create styles
@@ -79,6 +83,7 @@ const styles = StyleSheet.create({
 	},
 });
 
+
 const PdfDocument = ({data}) => (
 	<Document>
 		<Page size="A4" orientation="portrait" style={styles.body}>
@@ -104,130 +109,166 @@ const PdfDocument = ({data}) => (
 						<Text style={styles.margin}>Address:</Text>
 						<Text>{data.emisorReceiver.receiver.reStreet}</Text>
 						<Text>{data.emisorReceiver.receiver.reContact}</Text>
-					</View>
-				</View>
-			</View>
 
-			<View style={styles.table}>
-				<View style={styles.tableRow}>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>#</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>ITEM</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>PRICE</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>QUANTITY</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>AMOUNT</Text>
 					</View>
 				</View>
 
-				<View style={styles.tableRow}>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
+				<View style={styles.table}>
+					<View style={styles.tableRow}>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>#</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>ITEM</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>PRICE</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>QUANTITY</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>AMOUNT</Text>
+						</View>
 					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[0].itemTitle}</Text>
+
+					<View style={styles.tableRow}>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[0].itemTitle}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[0].itemPrice}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[0].itemQuant}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[0].itemPrice *
+									data.tradeData.items[0].itemQuant}
+							</Text>
+						</View>
 					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[0].itemPrice}</Text>
+
+					<View style={styles.tableRow}>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>{data.tradeData.items[1].itemID}</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[1].itemTitle}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[1].itemPrice}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[1].itemQuant}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[1].itemPrice *
+									data.tradeData.items[1].itemQuant}
+							</Text>
+						</View>
 					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[0].itemQuant}</Text>
+
+					<View style={styles.tableRow}>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[2].itemTitle}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[2].itemPrice}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[2].itemQuant}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[2].itemPrice *
+									data.tradeData.items[2].itemQuant}
+							</Text>
+						</View>
 					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>
-							{data.tradeData.items[0].itemPrice * data.tradeData.items[0].itemQuant}
-						</Text>
+
+					<View style={styles.tableRow}>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>{data.tradeData.items[3].itemID}</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[3].itemTitle}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[3].itemPrice}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[3].itemQuant}
+							</Text>
+						</View>
+
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[3].itemPrice *
+									data.tradeData.items[3].itemQuant}
+							</Text>
+						</View>
+					</View>
+
+					<View style={styles.tableRow}>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[4].itemTitle}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[4].itemPrice}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[4].itemQuant}
+							</Text>
+						</View>
+						<View style={styles.tableCol}>
+							<Text style={styles.tableCell}>
+								{data.tradeData.items[4].itemPrice *
+									data.tradeData.items[4].itemQuant}
+							</Text>
+						</View>
 					</View>
 				</View>
 
-				<View style={styles.tableRow}>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[1].itemID}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[1].itemTitle}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[1].itemPrice}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[1].itemQuant}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>
-							{data.tradeData.items[1].itemPrice * data.tradeData.items[1].itemQuant}
-						</Text>
-					</View>
-				</View>
-
-				<View style={styles.tableRow}>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[2].itemTitle}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[2].itemPrice}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[2].itemQuant}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>
-							{data.tradeData.items[2].itemPrice * data.tradeData.items[2].itemQuant}
-						</Text>
-					</View>
-				</View>
-
-				<View style={styles.tableRow}>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[3].itemID}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[3].itemTitle}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[3].itemPrice}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[3].itemQuant}</Text>
-					</View>
-
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>
-							{data.tradeData.items[3].itemPrice * data.tradeData.items[3].itemQuant}
-						</Text>
-					</View>
-				</View>
-
-				<View style={styles.tableRow}>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[4].itemTitle}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[4].itemPrice}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>{data.tradeData.items[4].itemQuant}</Text>
-					</View>
-					<View style={styles.tableCol}>
-						<Text style={styles.tableCell}>
-							{data.tradeData.items[4].itemPrice * data.tradeData.items[4].itemQuant}
-						</Text>
-					</View>
-				</View>
-			</View>
 
 			<View style={styles.section}>
 				<View style={styles.calcTable}>
@@ -249,20 +290,25 @@ const PdfDocument = ({data}) => (
 						<View style={styles.tableRow}>
 							<View style={styles.tableCol}>
 								<Text style={styles.tableCell}>Subtotal</Text>
+
 							</View>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>tasa</Text>
-							</View>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>descuento</Text>
-							</View>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>total</Text>
+							<View style={styles.tableRow}>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>Subtotal</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>tasa</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>descuento</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>total</Text>
+								</View>
 							</View>
 						</View>
 					</View>
 				</View>
-			</View>
 
 			<View style={styles.section2}>
 				<View style={styles.terms}>
@@ -285,24 +331,30 @@ const PdfDocument = ({data}) => (
 					<Text>Account Name: {data.payment.paypal.account}</Text>
 				</View>
 
-				<View>
+
 					<View>
+
 						<Text style={styles.marginBottom}>{data.signature.image}</Text>
 						<Text style={styles.font}>{data.emisorReceiver.receiver.reName}</Text>
 						<Text style={styles.smallFont}>
 							{data.emisorReceiver.receiver.rePosition}
 						</Text>
+
 					</View>
 				</View>
-			</View>
-		</Page>
-	</Document>
-);
+			</Page>
+		</Document>
+	);
+};
 
-const DownloadPDF = ({data}) => {
+const DownloadPDF = ({data, type}) => {
 	return (
 		<PDFDownloadLink document={<PdfDocument data={data[0]} />} fileName="bill.pdf">
-			<DownLoadButton text="Descargar" className="blueGradient" type="button" />
+			{type === "button" ? (
+				<DownLoadButton text="Descargar" className="blueGradient" type="button" />
+			) : type === "icon" ? (
+				<FontAwesomeIcon icon={faDownload} color={Colors.grey} title="Descargar factura" />
+			) : null}
 		</PDFDownloadLink>
 	);
 };
