@@ -54,11 +54,6 @@ const styles = StyleSheet.create({
 });
 
 const PdfDocument = ({data}) => {
-	if (!data) {
-		return <p>Doesn't exist</p>;
-	} else {
-		console.log("Exist");
-	}
 	return (
 		<Document>
 			<Page size="A4" orientation="portrait" style={styles.body}>
