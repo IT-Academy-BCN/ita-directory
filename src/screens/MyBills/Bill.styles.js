@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const Error = styled.div`
+	border: 1px solid;
+	margin: auto;
+	text-align: center;
+	padding: 15px 10px 15px 15px;
+	background-position: 10px center;
+	max-width: 460px;
+	color: #d8000c;
+	background-color: #ffbaba;
+	font-size: 24px;
+`;
+
 export const BillComponentStyled = styled.div`
 	display: flex;
 	flex-direction: column;
