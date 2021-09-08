@@ -22,7 +22,7 @@ import UserAds from "screens/UserAds/UserAds";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
 // import SalesByType from "screens/Sales/SalesByType";
 const noExiste = () => {
-	console.log("no existe de verdad");
+	console.log("Branch 34-mapa-con-marcador-personalizado");
 };
 
 const App = () => {
