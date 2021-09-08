@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
 	},
 });
 
-
 const PdfDocument = ({data}) => (
 	<Document>
 		<Page size="A4" orientation="portrait" style={styles.body}>
@@ -109,10 +108,8 @@ const PdfDocument = ({data}) => (
 						<Text style={styles.margin}>Address:</Text>
 						<Text>{data.emisorReceiver.receiver.reStreet}</Text>
 						<Text>{data.emisorReceiver.receiver.reContact}</Text>
-
 					</View>
 				</View>
-
 				<View style={styles.table}>
 					<View style={styles.tableRow}>
 						<View style={styles.tableCol}>
@@ -131,7 +128,6 @@ const PdfDocument = ({data}) => (
 							<Text style={styles.tableCell}>AMOUNT</Text>
 						</View>
 					</View>
-
 					<View style={styles.tableRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
@@ -158,7 +154,6 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-
 					<View style={styles.tableRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[1].itemID}</Text>
@@ -185,7 +180,6 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-
 					<View style={styles.tableRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
@@ -212,7 +206,6 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-
 					<View style={styles.tableRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[3].itemID}</Text>
@@ -232,7 +225,6 @@ const PdfDocument = ({data}) => (
 								{data.tradeData.items[3].itemQuant}
 							</Text>
 						</View>
-
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>
 								{data.tradeData.items[3].itemPrice *
@@ -240,7 +232,6 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-
 					<View style={styles.tableRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
@@ -269,28 +260,22 @@ const PdfDocument = ({data}) => (
 					</View>
 				</View>
 
-
-			<View style={styles.section}>
-				<View style={styles.calcTable}>
-					<View style={styles.table}>
-						<View style={styles.tableRow}>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>Sub total</Text>
-							</View>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>Tax(5%)</Text>
-							</View>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>Discount(10%)</Text>
-							</View>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>GRAND TOTAL</Text>
-							</View>
-						</View>
-						<View style={styles.tableRow}>
-							<View style={styles.tableCol}>
-								<Text style={styles.tableCell}>Subtotal</Text>
-
+				<View style={styles.section}>
+					<View style={styles.calcTable}>
+						<View style={styles.table}>
+							<View style={styles.tableRow}>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>Sub total</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>Tax(5%)</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>Discount(10%)</Text>
+								</View>
+								<View style={styles.tableCol}>
+									<Text style={styles.tableCell}>GRAND TOTAL</Text>
+								</View>
 							</View>
 							<View style={styles.tableRow}>
 								<View style={styles.tableCol}>
@@ -310,42 +295,45 @@ const PdfDocument = ({data}) => (
 					</View>
 				</View>
 
-			<View style={styles.section2}>
-				<View style={styles.terms}>
+				<View style={styles.section2}>
+					<View style={styles.terms}>
+						<View>
+							<Text style={styles.font}>Terms & Conditions</Text>
+							<Text>{data.termsConditions.text}</Text>
+						</View>
+					</View>
+				</View>
+				<View style={styles.section}>
 					<View>
-						<Text style={styles.font}>Terms & Conditions</Text>
-						<Text>{data.termsConditions.text}</Text>
+						<Text style={styles.font}>Payment Method</Text>
+						<Text style={styles.smallFont}>Bank</Text>
+						<Text style={styles.marginTop}>
+							Account ID: {data.payment.bank.accountID}
+						</Text>
+						<Text style={styles.marginBottom}>
+							Account Name: {data.payment.bank.accountName}
+						</Text>
+						<Text style={styles.smallFont}>Paypal</Text>
+						<Text style={styles.marginTop}>
+							Paypal ID: {data.payment.paypal.paypalID}
+						</Text>
+						<Text>Account Name: {data.payment.paypal.account}</Text>
+					</View>
+
+					<View>
+						<View>
+							<Text style={styles.marginBottom}>{data.signature.image}</Text>
+							<Text style={styles.font}>{data.emisorReceiver.receiver.reName}</Text>
+							<Text style={styles.smallFont}>
+								{data.emisorReceiver.receiver.rePosition}
+							</Text>
+						</View>
 					</View>
 				</View>
 			</View>
-			<View style={styles.section}>
-				<View>
-					<Text style={styles.font}>Payment Method</Text>
-					<Text style={styles.smallFont}>Bank</Text>
-					<Text style={styles.marginTop}>Account ID: {data.payment.bank.accountID}</Text>
-					<Text style={styles.marginBottom}>
-						Account Name: {data.payment.bank.accountName}
-					</Text>
-					<Text style={styles.smallFont}>Paypal</Text>
-					<Text style={styles.marginTop}>Paypal ID: {data.payment.paypal.paypalID}</Text>
-					<Text>Account Name: {data.payment.paypal.account}</Text>
-				</View>
-
-
-					<View>
-
-						<Text style={styles.marginBottom}>{data.signature.image}</Text>
-						<Text style={styles.font}>{data.emisorReceiver.receiver.reName}</Text>
-						<Text style={styles.smallFont}>
-							{data.emisorReceiver.receiver.rePosition}
-						</Text>
-
-					</View>
-				</View>
-			</Page>
-		</Document>
-	);
-};
+		</Page>
+	</Document>
+);
 
 const DownloadPDF = ({data, type}) => {
 	return (
