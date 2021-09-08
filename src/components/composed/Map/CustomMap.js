@@ -7,9 +7,7 @@ import {customIcons} from "./CustomMapIcons";
 
 let layer;
 
-const Marcador = ({currentIcon}) => {
-	// const [markers, setMarkers] = useState([[41.3879, 2.16992]]);
-
+const Marcador = ({setMarkers, currentIcon}) => {
 	const icon = L.icon({
 		iconAnchor: [10, 41],
 		popupAnchor: [2, -40],
@@ -20,7 +18,7 @@ const Marcador = ({currentIcon}) => {
 			const {lat, lng} = e.latlng;
 			if (layer) layer.removeFrom(map);
 			layer = L.marker([lat, lng], {icon}).addTo(map);
-			// setMarkers([lat, lng]);
+			setMarkers([lat, lng]);
 			map.panTo(e.latlng);
 		},
 	});
@@ -28,8 +26,11 @@ const Marcador = ({currentIcon}) => {
 };
 
 const CustomMap = () => {
+	const [markers, setMarkers] = useState([41.3879, 2.16992]);
 	const [iconSelection, setIconSelection] = useState(false);
 	const [iconState, setIconState] = useState(customIcons[1].url);
+
+	const [lat, lng] = markers;
 
 	const handelOnClickIcon = (icon) => {
 		setIconState(icon);
@@ -44,8 +45,8 @@ const CustomMap = () => {
 			<MapContainer
 				className="Container"
 				center={{
-					lat: 41.3879,
-					lng: 2.16992,
+					lat: lat,
+					lng: lng,
 				}}
 				zoom={18}
 				scrollWheelZoom={false}
@@ -54,7 +55,7 @@ const CustomMap = () => {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-				<Marcador currentIcon={iconState} />
+				<Marcador setMarkers={setMarkers} currentIcon={iconState} />
 			</MapContainer>
 			<button className="ButtonIcons" type="button" onClick={handleOnClick}>
 				<img className="IconIMG" src={iconState} alt="" />
