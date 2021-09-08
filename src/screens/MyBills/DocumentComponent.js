@@ -1,9 +1,6 @@
 import React from "react";
 import {Page, Text, View, Document, StyleSheet} from "@react-pdf/renderer";
 import DownLoadButton from "components/units/Button/Button";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDownload} from "@fortawesome/free-solid-svg-icons";
-import Colors from "theme/Colors";
 import {PDFDownloadLink} from "@react-pdf/renderer";
 
 // Create styles
@@ -308,14 +305,10 @@ const PdfDocument = ({data}) => {
 	);
 };
 
-const DownloadPDF = ({data, type}) => {
+const DownloadPDF = ({data}) => {
 	return (
 		<PDFDownloadLink document={<PdfDocument data={data[0]} />} fileName="bill.pdf">
-			{type === "button" ? (
-				<DownLoadButton text="Descargar" className="blueGradient" type="button" />
-			) : type === "icon" ? (
-				<FontAwesomeIcon icon={faDownload} color={Colors.grey} title="Descargar factura" />
-			) : null}
+			<DownLoadButton text="Descargar" className="blueGradient" type="button" />
 		</PDFDownloadLink>
 	);
 };
