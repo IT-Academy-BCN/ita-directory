@@ -3,7 +3,13 @@ import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
 import {BarGraphicStyled} from "./BarGraphic.styles";
-import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
+import {
+	options,
+	labelOption,
+	allMonths,
+	returnMonthsData,
+	optionsSelectMonth,
+} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
@@ -75,7 +81,18 @@ function BarChart({data, hideModal, active, size, year, month}) {
 				customOptions = groupByTypeMonth(monthToFilterData);
 			}
 
-			options.series = _.merge(options.series, customOptions);
+			//Hide labels if display width is smaller than 800px
+			let currentWidth = window.innerWidth;
+			labelOption.show = currentWidth > 800 || selectedMonth !== "all" ? true : false;
+			options.series = _.merge(options.series, labelOption);
+
+			//Change labels to display when only a month is selected
+			if (selectedMonth !== "all") {
+				options.series = customOptions;
+			} else {
+				options.series = _.merge(options.series, customOptions);
+			}
+
 			options.xAxis[0].data =
 				selectedMonth === "all"
 					? returnMonthsData(allMonths, "shortName")

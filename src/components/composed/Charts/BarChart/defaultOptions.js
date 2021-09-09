@@ -7,7 +7,7 @@ let config = {
 	color: "black",
 };
 
-let labelOption = {
+export let labelOption = {
 	show: true,
 	position: config.position,
 	distance: config.distance,
