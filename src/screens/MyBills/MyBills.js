@@ -114,9 +114,11 @@ const MyBills = () => {
 			selector: "total",
 			cell: (row) => (
 				<div color={Colors.grey}>
-					{row.costeSinIVA -
-						(row.costeSinIVA * row.descuento) / 100 +
-						(row.costeSinIVA * row.IVA) / 100}
+					{row.descuento
+						? row.costeSinIVA -
+						  (row.costeSinIVA * row.descuento) / 100 +
+						  (row.costeSinIVA * row.IVA) / 100
+						: row.costeSinIVA + (row.costeSinIVA * row.IVA) / 100}
 					<span>€</span>
 				</div>
 			),
