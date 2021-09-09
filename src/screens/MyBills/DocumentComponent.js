@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 	},
 	tableRow: {
 		flexDirection: "row",
-		borderTop: "1px solid #d3d3d3",
+		borderTop: "1px solid #efeeea",
 	},
 	tableCol: {
 		width: "20%",
@@ -128,7 +128,13 @@ const PdfDocument = ({data}) => (
 							<Text style={styles.tableCell}>AMOUNT</Text>
 						</View>
 					</View>
-					<View style={styles.tableRow}>
+					<View
+						style={{
+							flexDirection: "row",
+							borderTop: "1px solid #efeeea",
+							backgroundColor: "#efeeea",
+						}}
+					>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
 						</View>
@@ -180,7 +186,13 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-					<View style={styles.tableRow}>
+					<View
+						style={{
+							flexDirection: "row",
+							borderTop: "1px solid #efeeea",
+							backgroundColor: "#efeeea",
+						}}
+					>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
 						</View>
@@ -232,7 +244,13 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-					<View style={styles.tableRow}>
+					<View
+						style={{
+							flexDirection: "row",
+							borderTop: "1px solid #efeeea",
+							backgroundColor: "#efeeea",
+						}}
+					>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
 						</View>
