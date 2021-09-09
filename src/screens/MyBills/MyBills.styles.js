@@ -21,7 +21,7 @@ export const StyledWrapper = styled.div`
 	.actions-column {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: end;
 		width: 40px;
 
 		button {
