@@ -341,7 +341,12 @@ const DownloadPDF = ({data, type}) => {
 			{type === "button" ? (
 				<DownLoadButton text="Descargar" className="blueGradient" type="button" />
 			) : type === "icon" ? (
-				<FontAwesomeIcon icon={faDownload} color={Colors.grey} title="Descargar factura" />
+				<FontAwesomeIcon
+					style={{marginLeft: "12px"}}
+					icon={faDownload}
+					color={Colors.grey}
+					title="Descargar factura"
+				/>
 			) : null}
 		</PDFDownloadLink>
 	);
