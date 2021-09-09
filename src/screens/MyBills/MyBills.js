@@ -79,7 +79,25 @@ const MyBills = () => {
 			cell: (row) => (
 				<div color={Colors.grey}>
 					{row.IVA}
-					<span>€</span>
+					<span>%</span>
+				</div>
+			),
+			sortable: true,
+			compact: true,
+			width: "100px",
+			center: true,
+		},
+		{
+			name: (
+				<StyledDiv color={Colors.frenchBlue} paddingL="6px">
+					Descuento
+				</StyledDiv>
+			),
+			selector: "descuento",
+			cell: (row) => (
+				<div color={Colors.grey}>
+					{row.descuento}
+					{row.descuento ? <span>%</span> : <span>-</span>}
 				</div>
 			),
 			sortable: true,
@@ -96,7 +114,9 @@ const MyBills = () => {
 			selector: "total",
 			cell: (row) => (
 				<div color={Colors.grey}>
-					{(row.costeSinIVA * row.IVA) / 100 + row.costeSinIVA}
+					{row.costeSinIVA -
+						(row.costeSinIVA * row.descuento) / 100 +
+						(row.costeSinIVA * row.IVA) / 100}
 					<span>€</span>
 				</div>
 			),
