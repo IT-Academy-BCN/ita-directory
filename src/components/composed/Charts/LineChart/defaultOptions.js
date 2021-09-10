@@ -1,5 +1,5 @@
 //Check if device is moible
-let isMobile = window.innerWidth < 480 ? true : false;
+let isMobile = window.innerWidth <= 550 ? true : false;
 
 let config = {
 	rotate: 90,
@@ -37,10 +37,12 @@ export const options = {
 	},
 	yAxis: {
 		//If device is mobile, we rotate labels and reduce size
-		axisLabel: {
-			fontSize: isMobile && 8,
-			rotate: isMobile && 90,
-		},
+		axisLabel: isMobile
+			? {
+					fontSize: 8,
+					rotate: 90,
+			  }
+			: {},
 	},
 	series: [
 		{
