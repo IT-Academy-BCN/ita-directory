@@ -3,43 +3,18 @@ import * as echarts from "echarts";
 import {daysBetween, groupByMonth, getByDays} from "utils/generateData";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 // import styles
 import {LineGraphicStyled} from "./LineChart.styles";
 import {options} from "./defaultOptions";
-
+import {allMonths} from "consts/allMonth";
 //eslint-disable-next-line
-const monthNames = {
-	0: {name: "January", shortName: "Jan"},
-	1: {name: "February", shortName: "Feb"},
-	2: {name: "March", shortName: "Mar"},
-	3: {name: "April", shortName: "Apr"},
-	4: {name: "May", shortName: "May"},
-	5: {name: "Juny", shortName: "Jun"},
-	6: {name: "July", shortName: "Jul"},
-	7: {name: "August", shortName: "Aug"},
-	8: {name: "September", shortName: "Sep"},
-	9: {name: "October", shortName: "Oct"},
-	10: {name: "November", shortName: "Nov"},
-	11: {name: "December", shortName: "Dec"},
-};
 
 // month label for x axis
 const monthsLabel = [];
-Object.entries(monthNames).map((month) => monthsLabel.push(month[1].shortName));
+Object.entries(allMonths).map((month) => monthsLabel.push(month[1].shortName));
 
 // option with months for select input
-let optionsSelectMonth = [];
-const monthKeys = Object.keys(monthNames);
-
-for (let i = 0; i < monthKeys.length; i++) {
-	const el = monthNames[monthKeys[i]];
-	optionsSelectMonth.push(
-		<option value={i} key={el.shortName}>
-			{el.name}
-		</option>
-	);
-}
 
 // options with years for select input
 const startYear = 2012;
@@ -171,7 +146,7 @@ function LineChart({data, active, hideModal, year, month}) {
 				<div className="selectorWrapper">
 					<select value={detail} onChange={(e) => setDetail(e.target.value)}>
 						<option value="all">All</option>
-						{optionsSelectMonth}
+						{useOptionSelectMonth()}
 					</select>
 					<select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
 						{optionsSelectYear}
