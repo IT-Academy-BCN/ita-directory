@@ -4,14 +4,16 @@
 		"fecha": "19/03/2019",
 		"costeSinIVA": 100,
 		"IVA": 21,
-		"acciones": "pending"
+		"acciones": "pending",
+		"descuento": 10
 	},
 	{
 		"id": 202100032,
 		"fecha": "19/04/2019",
 		"costeSinIVA": 100,
 		"IVA": 21,
-		"acciones": "pending"
+		"acciones": "pending",
+		"descuento": 5
 	},
 	{
 		"id": 202100033,
