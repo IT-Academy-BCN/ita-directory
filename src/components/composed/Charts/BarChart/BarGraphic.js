@@ -110,21 +110,15 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			options.series[i].label = labelOption;
 		}
 		curChart.setOption({...options});
-		curChart.resize();
+		resizeChart();
 	};
 
-	// Resize the chart when window resizes
+	// Handle label display and resize the chart when window resizes
 	useEffect(() => {
 		if (curChart !== undefined) {
-			window.addEventListener("resize", () => {
-				handleLabelDisplay();
-				resizeChart();
-			});
+			window.addEventListener("resize", handleLabelDisplay);
 			return () => {
-				window.removeEventListener("resize", () => {
-					handleLabelDisplay();
-					resizeChart();
-				});
+				window.removeEventListener("resize", handleLabelDisplay);
 			};
 		}
 		// eslint-disable-next-line
