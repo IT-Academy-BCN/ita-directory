@@ -56,8 +56,8 @@ function BarChart({data, hideModal, active, size, year, month}) {
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
+			handleLabelDisplay();
 			let customOptions;
-
 			let yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 			const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear));
 
@@ -93,8 +93,6 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			} else {
 				options.series = _.merge(options.series, customOptions);
 			}
-			handleLabelDisplay();
-
 			curChart.setOption({...options});
 		}
 		// eslint-disable-next-line
@@ -112,6 +110,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			options.series[i].label = labelOption;
 		}
 		curChart.setOption({...options});
+		curChart.resize();
 	};
 
 	// Resize the chart when window resizes
