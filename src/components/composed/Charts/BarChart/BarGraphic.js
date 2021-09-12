@@ -53,6 +53,22 @@ function BarChart({data, hideModal, active, size, year, month}) {
 		data[data.length - 1].day.getFullYear()
 	);
 
+	//Hide labels if display width is smaller than 768px
+	useEffect(() => {
+		const handleLabelsOnResize = () => {
+			let currentWidth = window.innerWidth;
+			labelOption.show = currentWidth >= 768 ? true : false;
+			for (let i = 0; i < options.series.length; i++) {
+				options.series[i].label = labelOption;
+			}
+			curChart.setOption({...options});
+		};
+		window.addEventListener("resize", handleLabelsOnResize);
+		return () => {
+			window.removeEventListener("resize", handleLabelsOnResize);
+		};
+	}, [curChart, selectedMonth]);
+
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
@@ -60,6 +76,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 
 			let yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 			const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear));
+
 			const yearToFilterData = data.slice(
 				parseInt(startingCut),
 				parseInt(startingCut) + parseInt(yearToFilterLength)
@@ -81,10 +98,10 @@ function BarChart({data, hideModal, active, size, year, month}) {
 				customOptions = groupByTypeMonth(monthToFilterData);
 			}
 
-			//Hide labels if display width is smaller than 800px
-			let currentWidth = window.innerWidth;
-			labelOption.show = currentWidth > 800 || selectedMonth !== "all" ? true : false;
-			options.series = _.merge(options.series, labelOption);
+			options.xAxis[0].data =
+				selectedMonth === "all"
+					? returnMonthsData(allMonths, "shortName")
+					: [returnMonthsData(allMonths, "shortName")[selectedMonth]];
 
 			//Change labels to display when only a month is selected
 			if (selectedMonth !== "all") {
@@ -92,11 +109,6 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			} else {
 				options.series = _.merge(options.series, customOptions);
 			}
-
-			options.xAxis[0].data =
-				selectedMonth === "all"
-					? returnMonthsData(allMonths, "shortName")
-					: [returnMonthsData(allMonths, "shortName")[selectedMonth]];
 
 			curChart.setOption({...options});
 		}
