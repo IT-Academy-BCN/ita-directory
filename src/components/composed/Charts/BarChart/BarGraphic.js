@@ -53,22 +53,6 @@ function BarChart({data, hideModal, active, size, year, month}) {
 		data[data.length - 1].day.getFullYear()
 	);
 
-	//Hide labels if display width is smaller than 768px
-	useEffect(() => {
-		const handleLabelsOnResize = () => {
-			let currentWidth = window.innerWidth;
-			labelOption.show = currentWidth >= 768 ? true : false;
-			for (let i = 0; i < options.series.length; i++) {
-				options.series[i].label = labelOption;
-			}
-			curChart.setOption({...options});
-		};
-		window.addEventListener("resize", handleLabelsOnResize);
-		return () => {
-			window.removeEventListener("resize", handleLabelsOnResize);
-		};
-	}, [curChart, selectedMonth]);
-
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
@@ -109,6 +93,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			} else {
 				options.series = _.merge(options.series, customOptions);
 			}
+			handleLabelDisplay();
 
 			curChart.setOption({...options});
 		}
@@ -119,12 +104,28 @@ function BarChart({data, hideModal, active, size, year, month}) {
 		curChart.resize();
 	};
 
+	//Hide labels if display width is smaller than 768px
+	const handleLabelDisplay = () => {
+		let currentWidth = window.innerWidth;
+		labelOption.show = currentWidth >= 768 ? true : false;
+		for (let i = 0; i < options.series.length; i++) {
+			options.series[i].label = labelOption;
+		}
+		curChart.setOption({...options});
+	};
+
 	// Resize the chart when window resizes
 	useEffect(() => {
 		if (curChart !== undefined) {
-			window.addEventListener("resize", resizeChart);
+			window.addEventListener("resize", () => {
+				handleLabelDisplay();
+				resizeChart();
+			});
 			return () => {
-				window.removeEventListener("resize", resizeChart);
+				window.removeEventListener("resize", () => {
+					handleLabelDisplay();
+					resizeChart();
+				});
 			};
 		}
 		// eslint-disable-next-line
