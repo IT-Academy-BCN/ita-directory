@@ -53,6 +53,19 @@ const AdList = () => {
 			filtro === undefined
 				? adList
 				: _.filter(adList, function (e) {
+						if (filtro.maxPrice === "") {
+							return (
+								(filtro.gastosInc ? e.gastosIncluidos : e) &&
+								e.m2 <= filtro.maxSize &&
+								e.m2 >= filtro.minSize
+							);
+						} else if (filtro.maxSize === "") {
+							return (
+								(filtro.gastosInc ? e.gastosIncluidos : e) &&
+								e.price <= filtro.maxPrice &&
+								e.price >= filtro.minPrice
+							);
+						}
 						return (
 							(filtro.gastosInc ? e.gastosIncluidos : e) &&
 							e.price <= filtro.maxPrice &&

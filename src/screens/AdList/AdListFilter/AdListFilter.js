@@ -13,17 +13,17 @@ import {
 } from "./AdListFilter.style";
 
 function AdFilters({filtrar}) {
-	const [maxPrice, setMaxPrice] = useState("999999999");
-	const [maxSize, setMaxSize] = useState("999999999");
-	const [minPrice, setMinPrice] = useState("0");
-	const [minSize, setMinSize] = useState("0");
+	const [maxPrice, setMaxPrice] = useState("");
+	const [maxSize, setMaxSize] = useState("");
+	const [minPrice, setMinPrice] = useState("");
+	const [minSize, setMinSize] = useState("");
 	const [gastosInc, setGastosInc] = useState(false);
 
 	function ClearFilter() {
-		setMaxPrice("999999999");
-		setMaxSize("999999999");
-		setMinPrice("0");
-		setMinSize("0");
+		setMaxPrice("");
+		setMaxSize("");
+		setMinPrice("");
+		setMinSize("");
 		setGastosInc(false);
 		filtrar(undefined);
 	}
