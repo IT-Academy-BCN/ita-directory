@@ -1,16 +1,24 @@
 import React from "react";
-import {Page, Text, View, Document, StyleSheet} from "@react-pdf/renderer";
+import {Page, Text, View, Document, StyleSheet, Font} from "@react-pdf/renderer";
 import DownLoadButton from "components/units/Button/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 import {PDFDownloadLink} from "@react-pdf/renderer";
+import interRegular from "../../assets/fonts/Inter/Inter-Regular.ttf";
+import interSemiBold from "../../assets/fonts/Inter/Inter-SemiBold.ttf";
 
 // Create styles
+Font.register({
+	family: "Inter",
+	fonts: [{src: interRegular}, {src: interSemiBold}],
+});
+
 const styles = StyleSheet.create({
 	body: {
-		padding: "5rem 2rem 0 2rem",
+		padding: "28px 42px 4px 42px",
 		backgroundColor: "#ffffff",
+		fontFamily: "Inter",
 		fontSize: "10pt",
 	},
 	header: {
@@ -18,8 +26,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
-		padding: "24px 50px 0 50px",
-		marginTop: "3.8rem",
 	},
 
 	section: {
@@ -27,14 +33,10 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
-		padding: "24px 50px 0 50px",
-		marginTop: "10rem",
 	},
 	section2: {
 		display: "flex",
 		flexDirection: "column",
-		padding: "24px 50px 0 50px",
-		marginTop: "10rem",
 	},
 	totalsSection: {
 		display: "flex",
@@ -42,20 +44,30 @@ const styles = StyleSheet.create({
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
 		width: "200%",
-		padding: "24px 50px 0 50px",
+
 		marginTop: "10rem",
 	},
 	table: {
 		marginTop: 30,
-		padding: "0 5rem 0 5rem",
 		display: "table",
 		width: "100%",
 		borderTop: "solid",
 		fontSize: "9pt",
 	},
 	tableRow: {
+		display: "flex",
 		flexDirection: "row",
+		alignItems: "center",
 		borderTop: "1px solid #efeeea",
+		height: "35px",
+	},
+	tableStripedRow: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		borderTop: "1px solid #efeeea",
+		backgroundColor: "#efeeea",
+		height: "35px",
 	},
 	tableCol: {
 		width: "20%",
@@ -79,7 +91,7 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	text: {
-		fontSize: 25,
+		fontSize: 16,
 		fontWeight: 700,
 	},
 	font: {
@@ -137,13 +149,7 @@ const PdfDocument = ({data}) => (
 							<Text style={styles.tableCell}>AMOUNT</Text>
 						</View>
 					</View>
-					<View
-						style={{
-							flexDirection: "row",
-							borderTop: "1px solid #efeeea",
-							backgroundColor: "#efeeea",
-						}}
-					>
+					<View style={styles.tableStripedRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
 						</View>
@@ -195,13 +201,7 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-					<View
-						style={{
-							flexDirection: "row",
-							borderTop: "1px solid #efeeea",
-							backgroundColor: "#efeeea",
-						}}
-					>
+					<View style={styles.tableStripedRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
 						</View>
@@ -253,13 +253,7 @@ const PdfDocument = ({data}) => (
 							</Text>
 						</View>
 					</View>
-					<View
-						style={{
-							flexDirection: "row",
-							borderTop: "1px solid #efeeea",
-							backgroundColor: "#efeeea",
-						}}
-					>
+					<View style={styles.tableStripedRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
 						</View>
@@ -343,12 +337,7 @@ const PdfDocument = ({data}) => (
 										Discount(10%)
 									</Text>
 								</View>
-								<View
-									style={{
-										borderTop: "1px solid #efeeea",
-										backgroundColor: "#efeeea",
-									}}
-								>
+								<View style={styles.tableStripedRow}>
 									<Text
 										style={{
 											textAlign: "left",
@@ -398,12 +387,7 @@ const PdfDocument = ({data}) => (
 										descuento
 									</Text>
 								</View>
-								<View
-									style={{
-										borderTop: "1px solid #efeeea",
-										backgroundColor: "#efeeea",
-									}}
-								>
+								<View style={styles.tableStripedRow}>
 									<Text
 										style={{
 											textAlign: "right",
