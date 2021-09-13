@@ -14,7 +14,7 @@ import {
 
 function AdFilters({filtrar}) {
 	const [maxPrice, setMaxPrice] = useState(99999999999);
-	const [maxSize, setMaxSize] = useState(9999999999);
+	const [maxSize, setMaxSize] = useState(99999999999);
 	const [minPrice, setMinPrice] = useState(0);
 	const [minSize, setMinSize] = useState(0);
 	const [gastosInc, setGastosInc] = useState(false);
