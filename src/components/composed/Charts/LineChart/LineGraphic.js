@@ -7,7 +7,7 @@ import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 // import styles
 import {LineGraphicStyled} from "./LineChart.styles";
 import {options} from "./defaultOptions";
-import {allMonths} from "consts/allMonth";
+import {allMonths} from "utils/constant";
 //eslint-disable-next-line
 
 // month label for x axis

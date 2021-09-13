@@ -1,4 +1,4 @@
-import {allMonths} from "consts/allMonth";
+import {allMonths} from "utils/constant";
 let config = {
 	rotate: 90,
 	align: "left",

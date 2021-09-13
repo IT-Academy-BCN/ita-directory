@@ -4,7 +4,7 @@ import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
 import {BarGraphicStyled} from "./BarGraphic.styles";
 import {options, returnMonthsData} from "./defaultOptions";
-import {allMonths} from "consts/allMonth";
+import {allMonths} from "utils/constant";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";

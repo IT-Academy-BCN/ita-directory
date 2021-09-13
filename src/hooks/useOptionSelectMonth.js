@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {allMonths} from "consts/allMonth";
+import {allMonths} from "utils/constant";
 
 /* 
 	Carga la selección de meses para todas las graficas. Dependiendo de window.innerWidth <= 800
