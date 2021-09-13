@@ -13,20 +13,19 @@ import {
 } from "./AdListFilter.style";
 
 function AdFilters({filtrar}) {
-	const [maxPrice, setMaxPrice] = useState(99999999999);
-	const [maxSize, setMaxSize] = useState(9999999999);
-	const [minPrice, setMinPrice] = useState(0);
-	const [minSize, setMinSize] = useState(0);
+	const [maxPrice, setMaxPrice] = useState("");
+	const [maxSize, setMaxSize] = useState("");
+	const [minPrice, setMinPrice] = useState("");
+	const [minSize, setMinSize] = useState("");
 	const [gastosInc, setGastosInc] = useState(false);
 
 	function ClearFilter() {
-		setMaxPrice(99999999999);
-		setMaxSize(9999999999);
-		setMinPrice(0);
-		setMinSize(0);
+		setMaxPrice("");
+		setMaxSize("");
+		setMinPrice("");
+		setMinSize("");
 		setGastosInc(false);
-		filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize});
-		console.log(maxSize);
+		filtrar(undefined);
 	}
 
 	return (
@@ -37,26 +36,32 @@ function AdFilters({filtrar}) {
 				<FilterHr style={{width: "100%"}} /> Precio
 				<CardSelectorWrapper>
 					<CardInput
-						className="Minprice"
-						placeholder="Min"
+						type="number"
+						placeholder="Mín"
+						value={minPrice}
 						onChange={(e) => setMinPrice(e.target.value)}
-					></CardInput>
-
+					/>
 					<CardInput
-						placeholder="Max"
+						type="number"
+						placeholder="Máx"
+						value={maxPrice}
 						onChange={(e) => setMaxPrice(e.target.value)}
-					></CardInput>
+					/>
 				</CardSelectorWrapper>
 				Tamaño
 				<CardSelectorWrapper>
 					<CardInput
-						placeholder="Min"
+						type="number"
+						placeholder="Mín"
+						value={minSize}
 						onChange={(e) => setMinSize(e.target.value)}
-					></CardInput>
+					/>
 					<CardInput
-						placeholder="Max"
+						type="number"
+						placeholder="Máx"
+						value={maxSize}
 						onChange={(e) => setMaxSize(e.target.value)}
-					></CardInput>
+					/>
 				</CardSelectorWrapper>
 				<CardSelectorWrapper>
 					<CardCheckbox
