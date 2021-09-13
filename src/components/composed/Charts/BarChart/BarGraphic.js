@@ -3,10 +3,12 @@ import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
 import {BarGraphicStyled} from "./BarGraphic.styles";
-import {options, allMonths, returnMonthsData, optionsSelectMonth} from "./defaultOptions";
+import {options, returnMonthsData} from "./defaultOptions";
+import {allMonths} from "utils/constant";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
+import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 
 function BarChart({data, hideModal, active, size, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
@@ -117,7 +119,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 				<div className="selectorWrapper">
 					<select value={selectedMonth} onChange={handleMonthChange}>
 						<option value="all">All</option>
-						{optionsSelectMonth}
+						{useOptionSelectMonth()}
 					</select>
 					<select value={selectedYear} onChange={handleYearChange}>
 						{optionsSelectYear}

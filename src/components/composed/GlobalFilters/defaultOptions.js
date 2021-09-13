@@ -133,14 +133,3 @@ export const returnMonthsData = (months, key) => {
 	}
 	return data;
 };
-
-export const optionsSelectMonth = [];
-
-for (let i = 0; i < Object.entries(allMonths).length; i++) {
-	const el = allMonths[i].name;
-	optionsSelectMonth.push(
-		<option key={i} value={i}>
-			{el}
-		</option>
-	);
-}

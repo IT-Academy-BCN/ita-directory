@@ -1,7 +1,6 @@
 import React from "react";
 import {GlobalFiltersStyled} from "./GlobalFilters.styles";
-import {optionsSelectMonth} from "./defaultOptions";
-
+import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 function GlobalFilters({onYearChange, onMonthChange}) {
 	const startYear = 2012;
 	const endYear = 2016;
@@ -32,7 +31,7 @@ function GlobalFilters({onYearChange, onMonthChange}) {
 				<div className="selectorWrapper">
 					<select defaultValue={"all"} onChange={handleMonthChange}>
 						<option value="all">All</option>
-						{optionsSelectMonth}
+						{useOptionSelectMonth()}
 					</select>
 					<select defaultValue={"2016"} onChange={handleYearChange}>
 						{optionsSelectYear}

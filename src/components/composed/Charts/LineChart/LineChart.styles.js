@@ -42,7 +42,7 @@ export const LineGraphicStyled = styled.div`
 				appearance: none;
 				margin-right: 0.3rem;
 				padding-left: 0.5rem;
-				width: 90px;
+				width: 110px;
 				height: 30px;
 				box-shadow: 0 3px 6px #00000029;
 				border: none;
@@ -53,6 +53,9 @@ export const LineGraphicStyled = styled.div`
 				background-repeat: no-repeat;
 				background-size: 15px 12px;
 				background-color: #fff;
+				@media (max-width: 768px) {
+					width: 90px;
+				}
 			}
 
 			button {
