@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 
 import {
+	CardOpenModal,
 	Card,
 	CardHeader,
-	// CardBody,
+	CardBody,
 	CardTitle,
 	CardInput,
 	CardSelectorWrapper,
@@ -12,7 +13,9 @@ import {
 	Button,
 } from "./AdListFilter.style";
 
-function AdFilters({filtrar}) {
+import {maxPriceValue, minPriceValue} from "../../AdList.js";
+
+function AdFilters({filtrar, maxPriceValue, minPriceValue}) {
 	const [maxPrice, setMaxPrice] = useState(99999999999);
 	const [maxSize, setMaxSize] = useState(9999999999);
 	const [minPrice, setMinPrice] = useState(0);
@@ -41,6 +44,7 @@ function AdFilters({filtrar}) {
 						placeholder="Min"
 						onChange={(e) => setMinPrice(e.target.value)}
 					></CardInput>
+					<CardOpenModal>{(maxPriceValue, minPriceValue)}</CardOpenModal>
 
 					<CardInput
 						placeholder="Max"
