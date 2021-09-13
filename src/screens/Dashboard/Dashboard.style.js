@@ -20,6 +20,7 @@ export const StyledDashboard = styled.div`
 
 	.marginTop {
 		margin-bottom: 2rem;
+		flex-grow: 1;
 	}
 
 	.marginBottom {

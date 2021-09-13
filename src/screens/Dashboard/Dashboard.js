@@ -73,17 +73,15 @@ function Dashboard() {
 							/>
 						</div>
 
-						<div className="row">
-							<div className="marginBottom marginLeft">
-								<PieChart
-									data={data}
-									active={active}
-									hideModal={hideModal}
-									size={graphSize}
-									month={globalMonth}
-									year={globalYear}
-								/>
-							</div>
+						<div className="marginBottom marginLeft">
+							<PieChart
+								data={data}
+								active={active}
+								hideModal={hideModal}
+								size={graphSize}
+								month={globalMonth}
+								year={globalYear}
+							/>
 						</div>
 					</div>
 				</StyledDashboard>

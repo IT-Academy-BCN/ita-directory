@@ -23,7 +23,7 @@ export const PieGraphicStyled = styled.div`
 
 		@media (min-width: 768px) {
 			flex-direction: row;
-			padding: 0 2rem;
+			padding: 0.5rem 2rem;
 		}
 
 		h2 {
@@ -71,8 +71,8 @@ export const PieGraphicStyled = styled.div`
 	}
 
 	.cardBody {
-		width: 95%;
-		height: 50vh;
+		width: 100%;
+		height: 51.75vh;
 
 		.chart {
 			width: 100%;
