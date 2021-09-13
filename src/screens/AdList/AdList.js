@@ -61,7 +61,6 @@ const AdList = () => {
 						) {
 							return filtro.gastosInc ? e.gastosIncluidos : e;
 						} else if (filtro.maxPrice === "" && filtro.minPrice === "") {
-							console.log(filtro.gastosInc);
 							return (
 								(filtro.gastosInc ? e.gastosIncluidos : e) &&
 								e.m2 <= filtro.maxSize &&
