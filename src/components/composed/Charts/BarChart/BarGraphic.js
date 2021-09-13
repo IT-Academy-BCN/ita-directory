@@ -93,7 +93,6 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			} else {
 				options.series = _.merge(options.series, customOptions);
 			}
-			handleLabelDisplay();
 			curChart.setOption({...options});
 		}
 		// eslint-disable-next-line

@@ -144,7 +144,6 @@ function LineChart({data, active, hideModal, year, month, size}) {
 			options.series[0].data = detail === "all" ? monthValues : dayValues;
 			options.xAxis.data = xAxis;
 			const lineChart = echarts.init(lineChartRef.current);
-			handleLabelDisplay();
 			lineChart.setOption({...options});
 		}
 		// eslint-disable-next-line
