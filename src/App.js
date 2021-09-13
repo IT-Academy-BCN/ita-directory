@@ -14,18 +14,13 @@ import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins
 import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
 import Bill from "screens/MyBills/Bill";
-import GoToMap from "components/composed/Map/GoToMap";
-import MapView from "components/composed/Map/MapView";
 import UserAds from "screens/UserAds/UserAds";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
 // import SalesByType from "screens/Sales/SalesByType";
 const noExiste = () => {
-	console.log("no existe de verdad");
-};
-const yaLlego = () => {
-	console.log("Carlos Pérez");
+	console.log("Branch 34-mapa-con-marcador-personalizado");
 };
 
 const App = () => {
@@ -40,15 +35,12 @@ const App = () => {
 				<Route exact path="/profile" component={Profile} />
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
-				<Route exact path="/go-to-map" component={GoToMap} />
-				<Route exact path="/map" component={MapView} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/user-ads" component={UserAds} />
 				<Route exact path="/my-bills" component={MyBills} />
 				<Route path="/my-bills/:id" children={<Bill />} />
 				<Route path="mi-ruta" children={noExiste} />
-				<Route path="/carlos-perez" children={yaLlego} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />

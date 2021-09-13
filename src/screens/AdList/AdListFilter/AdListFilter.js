@@ -19,13 +19,25 @@ function AdFilters({filtrar}) {
 	const [minSize, setMinSize] = useState(0);
 	const [gastosInc, setGastosInc] = useState(false);
 
+	function ClearFilter() {
+		setMaxPrice(99999999999);
+		setMaxSize(9999999999);
+		setMinPrice(0);
+		setMinSize(0);
+		setGastosInc(false);
+		filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize});
+		console.log(maxSize);
+	}
+
 	return (
 		<Card>
 			<CardHeader>
 				<CardTitle>Filtros</CardTitle>
+				<Button onClick={() => ClearFilter()}>Limpiar busqueda</Button>
 				<FilterHr style={{width: "100%"}} /> Precio
 				<CardSelectorWrapper>
 					<CardInput
+						className="Minprice"
 						placeholder="Min"
 						onChange={(e) => setMinPrice(e.target.value)}
 					></CardInput>

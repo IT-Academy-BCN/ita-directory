@@ -38,6 +38,13 @@ function getMaxMin(ads, prop) {
 			maxLong = adLong;
 		}
 	}
+	// Este condicional añade coordenadas en el caso de que la busqueda no devuelva resultados
+	if (!ads.legth) {
+		return {
+			topLeft: [41.478316, 2.073087],
+			bottomRight: [41.351637, 2.267592],
+		};
+	}
 
 	// // Latitud = horizontal, longitud = vertical
 	return {
@@ -54,7 +61,6 @@ function SetBounds({bounds}) {
 
 const MapView = ({filteredAds}) => {
 	const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(getMaxMin(filteredAds));
-
 	useEffect(() => {
 		setFitBoundsCoordinates(getMaxMin(filteredAds));
 	}, [filteredAds]);

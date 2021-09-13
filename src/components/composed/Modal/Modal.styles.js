@@ -14,7 +14,7 @@ export const ModalBlock = styled.div`
 	top: 0;
 	display: flex;
 	opacity: 1;
-	z-index: 400;
+	z-index: 1000;
 
 	.modalOverlay {
 		background: rgba(0, 0, 0, 0.75);
