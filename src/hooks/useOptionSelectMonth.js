@@ -5,7 +5,7 @@ import {allMonths} from "utils/constant";
 	Carga la selección de meses para todas las graficas. Dependiendo de window.innerWidth <= 800
 	utiliza la abreviatura o la forma completa.
  	Se utiliza en: GlobalFilter, BarGraphic, LineGraphic, PieGraphic.  */
-const getIsMobile = () => window.innerWidth <= 800;
+const getIsMobile = () => window.innerWidth <= 768;
 export const useOptionSelectMonth = () => {
 	const [isMobile, setIsMobile] = useState(getIsMobile());
 	const [optionMonth, setOptionMonth] = useState();
