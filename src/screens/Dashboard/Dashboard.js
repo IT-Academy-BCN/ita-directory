@@ -8,8 +8,7 @@ import LineChart from "components/composed/Charts/LineChart/LineChart";
 import PieChart from "components/composed/Charts/PieChart/PieChart";
 
 // STYLES
-import {StyledDashboard} from "./Dashboard.style";
-import {Container} from "theme/GlobalStyles";
+import {StyledDashboard, DashboardContainer} from "./Dashboard.style";
 import Body from "components/layout/Body/Body";
 
 const initialDate = "2012-01-01";
@@ -43,7 +42,7 @@ function Dashboard() {
 			paddingTitle2="15vw"
 			isLoggedIn="true"
 		>
-			<Container>
+			<DashboardContainer>
 				<StyledDashboard>
 					<div className="marginBottom">
 						<GlobalFilters
@@ -75,18 +74,20 @@ function Dashboard() {
 						</div>
 
 						<div className="row">
-							<PieChart
-								data={data}
-								active={active}
-								hideModal={hideModal}
-								size={graphSize}
-								month={globalMonth}
-								year={globalYear}
-							/>
+							<div className="marginLeft">
+								<PieChart
+									data={data}
+									active={active}
+									hideModal={hideModal}
+									size={graphSize}
+									month={globalMonth}
+									year={globalYear}
+								/>
+							</div>
 						</div>
 					</div>
 				</StyledDashboard>
-			</Container>
+			</DashboardContainer>
 		</Body>
 	);
 }

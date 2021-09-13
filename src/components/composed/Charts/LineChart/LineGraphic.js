@@ -55,7 +55,7 @@ for (let i = 0; i < yearDifference + 1; i++) {
 	);
 }
 
-function LineChart({data, active, hideModal, year, month}) {
+function LineChart({data, active, hideModal, year, month, size}) {
 	const lineChartRef = useRef(null);
 	const [curChart, setCurChart] = useState(undefined);
 
@@ -144,6 +144,7 @@ function LineChart({data, active, hideModal, year, month}) {
 			options.series[0].data = detail === "all" ? monthValues : dayValues;
 			options.xAxis.data = xAxis;
 			const lineChart = echarts.init(lineChartRef.current);
+			handleLabelDisplay();
 			lineChart.setOption({...options});
 		}
 		// eslint-disable-next-line
@@ -153,16 +154,30 @@ function LineChart({data, active, hideModal, year, month}) {
 		curChart.resize();
 	};
 
-	// Resize the chart when window resizes
+	const handleLabelDisplay = () => {
+		let currentWidth = window.innerWidth;
+		//Handle yaxis labels when display is smaller than 600px
+		options.yAxis = {
+			...options.yAxis,
+			axisLabel: {
+				fontSize: currentWidth < 600 ? 8 : "",
+				// rotate: currentWidth < 600 ? 90 : 0,
+			},
+		};
+		curChart.setOption({...options});
+		resizeChart();
+	};
+
+	// Handle label display and resize the chart when window resizes
 	useEffect(() => {
 		if (curChart !== undefined) {
-			window.addEventListener("resize", resizeChart);
+			window.addEventListener("resize", handleLabelDisplay);
 			return () => {
-				window.removeEventListener("resize", resizeChart);
+				window.removeEventListener("resize", handleLabelDisplay);
 			};
 		}
 		// eslint-disable-next-line
-	}, [curChart]);
+	}, [curChart, size]);
 
 	return (
 		<LineGraphicStyled>

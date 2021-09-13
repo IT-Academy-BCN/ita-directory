@@ -1,4 +1,16 @@
 import styled from "styled-components";
+import {Container} from "theme/GlobalStyles";
+export const DashboardContainer = styled(Container)`
+	@media (max-width: 600px) {
+		max-width: 95%;
+	}
+	@media (min-width: 481px) and (max-width: 768px) {
+		max-width: 85%;
+	}
+	@media (min-width: 768px) and (max-width: 1400px) {
+		max-width: 70%;
+	}
+`;
 
 export const StyledDashboard = styled.div`
 	display: flex;
@@ -12,6 +24,13 @@ export const StyledDashboard = styled.div`
 
 	.marginBottom {
 		margin-bottom: 2rem;
+		flex-grow: 1;
+	}
+	.marginLeft {
+		@media (min-width: 1400px) {
+			padding-left: 2rem;
+		}
+		flex-grow: 1;
 	}
 
 	.row {

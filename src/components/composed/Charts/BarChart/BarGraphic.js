@@ -93,6 +93,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			} else {
 				options.series = _.merge(options.series, customOptions);
 			}
+			handleLabelDisplay();
 			curChart.setOption({...options});
 		}
 		// eslint-disable-next-line
@@ -102,13 +103,21 @@ function BarChart({data, hideModal, active, size, year, month}) {
 		curChart.resize();
 	};
 
-	//Hide labels if display width is smaller than 768px
 	const handleLabelDisplay = () => {
+		//Hide labels if display width is smaller than 992px
 		let currentWidth = window.innerWidth;
-		labelOption.show = currentWidth >= 768 ? true : false;
+		labelOption.show = currentWidth >= 992 ? true : false;
 		for (let i = 0; i < options.series.length; i++) {
 			options.series[i].label = labelOption;
 		}
+		//Handle yaxis labels when display is smaller than 600px
+		options.yAxis = {
+			...options.yAxis,
+			axisLabel: {
+				fontSize: currentWidth < 600 ? 8 : "",
+				// rotate: currentWidth < 600 ? 90 : 0,
+			},
+		};
 		curChart.setOption({...options});
 		resizeChart();
 	};
