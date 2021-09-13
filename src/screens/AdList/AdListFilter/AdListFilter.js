@@ -22,10 +22,10 @@ function AdFilters({filtrar}) {
 	function ClearFilter() {
 		setMaxPrice(99999999999);
 		setMaxSize(9999999999);
-		setMinPrice(0);
+		setMinPrice("");
 		setMinSize(0);
 		setGastosInc(false);
-		filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize});
+		filtrar(undefined);
 		console.log(maxSize);
 	}
 
@@ -37,26 +37,18 @@ function AdFilters({filtrar}) {
 				<FilterHr style={{width: "100%"}} /> Precio
 				<CardSelectorWrapper>
 					<CardInput
-						className="Minprice"
+						type="number"
+						className="min-price"
 						placeholder="Min"
+						value={minPrice}
 						onChange={(e) => setMinPrice(e.target.value)}
-					></CardInput>
-
-					<CardInput
-						placeholder="Max"
-						onChange={(e) => setMaxPrice(e.target.value)}
-					></CardInput>
+					/>
+					<CardInput placeholder="Max" onChange={(e) => setMaxPrice(e.target.value)} />
 				</CardSelectorWrapper>
 				Tamaño
 				<CardSelectorWrapper>
-					<CardInput
-						placeholder="Min"
-						onChange={(e) => setMinSize(e.target.value)}
-					></CardInput>
-					<CardInput
-						placeholder="Max"
-						onChange={(e) => setMaxSize(e.target.value)}
-					></CardInput>
+					<CardInput placeholder="Min" onChange={(e) => setMinSize(e.target.value)} />
+					<CardInput placeholder="Max" onChange={(e) => setMaxSize(e.target.value)} />
 				</CardSelectorWrapper>
 				<CardSelectorWrapper>
 					<CardCheckbox
