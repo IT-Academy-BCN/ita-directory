@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
+		marginBottom: 60,
 	},
 
 	section: {
@@ -34,18 +35,24 @@ const styles = StyleSheet.create({
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
 	},
-	section2: {
+	termsConditionsSection: {
 		display: "flex",
 		flexDirection: "column",
+		marginLeft: 20,
+		width: "50%",
+	},
+	termsAndTotalsContainer: {
+		display: "flex",
+		flexDirection: "row-reverse",
+		alignItems: "center",
 	},
 	totalsSection: {
 		display: "flex",
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
-		width: "200%",
-
 		marginTop: "10rem",
+		width: "50%",
 	},
 	table: {
 		marginTop: 30,
@@ -58,31 +65,44 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
-		borderTop: "1px solid #efeeea",
 		height: "35px",
 	},
 	tableStripedRow: {
 		display: "flex",
 		flexDirection: "row",
 		alignItems: "center",
-		borderTop: "1px solid #efeeea",
 		backgroundColor: "#efeeea",
 		height: "35px",
 	},
 	tableCol: {
-		width: "20%",
+		width: "15%",
+		paddingLeft: 20,
 	},
+	tableColTotals: {
+		width: "15%",
+	},
+	tableColItem: {
+		width: "40%",
+	},
+
 	tableCell: {
 		margin: "auto",
+		width: "100%",
+		marginTop: 5,
+		marginBottom: 5,
+		fontSize: 10,
+		textAlign: "left",
+	},
+	tableCellTotals: {
+		textAlign: "left",
 		width: "auto",
 		marginTop: 5,
 		marginBottom: 5,
+		paddingLeft: "40px",
 	},
-	terms: {
-		width: "65%",
-	},
+
 	margin: {
-		marginTop: 60,
+		marginTop: 20,
 	},
 	marginTop: {
 		marginTop: 10,
@@ -132,28 +152,28 @@ const PdfDocument = ({data}) => (
 					</View>
 				</View>
 				<View style={styles.table}>
-					<View style={styles.tableRow}>
+					<View style={[styles.tableRow, {borderTop: "1px solid #efeeea"}]}>
 						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>#</Text>
+							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>#</Text>
+						</View>
+						<View style={styles.tableColItem}>
+							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>ITEM</Text>
 						</View>
 						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>ITEM</Text>
+							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>PRICE</Text>
 						</View>
 						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>PRICE</Text>
+							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>QUANTITY</Text>
 						</View>
 						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>QUANTITY</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>AMOUNT</Text>
+							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>AMOUNT</Text>
 						</View>
 					</View>
 					<View style={styles.tableStripedRow}>
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
 						</View>
-						<View style={styles.tableCol}>
+						<View style={styles.tableColItem}>
 							<Text style={styles.tableCell}>
 								{data.tradeData.items[0].itemTitle}
 							</Text>
@@ -179,7 +199,7 @@ const PdfDocument = ({data}) => (
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[1].itemID}</Text>
 						</View>
-						<View style={styles.tableCol}>
+						<View style={styles.tableColItem}>
 							<Text style={styles.tableCell}>
 								{data.tradeData.items[1].itemTitle}
 							</Text>
@@ -205,7 +225,7 @@ const PdfDocument = ({data}) => (
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
 						</View>
-						<View style={styles.tableCol}>
+						<View style={styles.tableColItem}>
 							<Text style={styles.tableCell}>
 								{data.tradeData.items[2].itemTitle}
 							</Text>
@@ -231,7 +251,7 @@ const PdfDocument = ({data}) => (
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[3].itemID}</Text>
 						</View>
-						<View style={styles.tableCol}>
+						<View style={styles.tableColItem}>
 							<Text style={styles.tableCell}>
 								{data.tradeData.items[3].itemTitle}
 							</Text>
@@ -257,7 +277,7 @@ const PdfDocument = ({data}) => (
 						<View style={styles.tableCol}>
 							<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
 						</View>
-						<View style={styles.tableCol}>
+						<View style={styles.tableColItem}>
 							<Text style={styles.tableCell}>
 								{data.tradeData.items[4].itemTitle}
 							</Text>
@@ -280,140 +300,47 @@ const PdfDocument = ({data}) => (
 						</View>
 					</View>
 				</View>
-				<View
-					style={{
-						display: "flex",
-						flexDirection: "row-reverse",
-						alignItems: "center",
-					}}
-				>
+				<View style={styles.termsAndTotalsContainer}>
 					<View style={styles.totalsSection}>
-						<View
-							style={{
-								display: "flex",
-								flexDirection: "row",
-								justifyContent: "flex-end",
-								marginTop: 30,
-								padding: "0 5rem 0 5rem",
-								width: "100%",
-								borderTop: "solid",
-								fontSize: "9pt",
-							}}
-						>
-							<View style={styles.tableCol}>
-								<View style={styles.tableRow}>
-									<Text
-										style={{
-											textAlign: "left",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										Sub total
-									</Text>
-								</View>
-								<View style={styles.tableRow}>
-									<Text
-										style={{
-											textAlign: "left",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										Tax(5%)
-									</Text>
-								</View>
-								<View style={styles.tableRow}>
-									<Text
-										style={{
-											textAlign: "left",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										Discount(10%)
-									</Text>
-								</View>
-								<View style={styles.tableStripedRow}>
-									<Text
-										style={{
-											textAlign: "left",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										GRAND TOTAL
-									</Text>
-								</View>
+						<View style={[styles.tableColTotals, {width: "100%"}]}>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableCellTotals}>Sub total</Text>
 							</View>
-							<View style={styles.tableCol}>
-								<View style={styles.tableRow}>
-									<Text
-										style={{
-											textAlign: "right",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										Subtotal
-									</Text>
-								</View>
-								<View style={styles.tableRow}>
-									<Text
-										style={{
-											textAlign: "right",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										tasa
-									</Text>
-								</View>
-								<View style={styles.tableRow}>
-									<Text
-										style={{
-											textAlign: "right",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										descuento
-									</Text>
-								</View>
-								<View style={styles.tableStripedRow}>
-									<Text
-										style={{
-											textAlign: "right",
-											width: "auto",
-											marginTop: 5,
-											marginBottom: 5,
-										}}
-									>
-										$total
-									</Text>
-								</View>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableCellTotals}>Tax(5%)</Text>
+							</View>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableCellTotals}>Discount(10%)</Text>
+							</View>
+							<View style={styles.tableStripedRow}>
+								<Text style={styles.tableCellTotals}>GRAND TOTAL</Text>
+							</View>
+						</View>
+						<View style={[styles.tableColTotals, {width: "100%"}]}>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableCellTotals}>Subtotal</Text>
+							</View>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableCellTotals}>tasa</Text>
+							</View>
+							<View style={styles.tableRow}>
+								<Text style={styles.tableCellTotals}>descuento</Text>
+							</View>
+							<View style={styles.tableStripedRow}>
+								<Text style={styles.tableCellTotals}>$total</Text>
 							</View>
 						</View>
 					</View>
 
-					<View style={styles.section2}>
-						<View style={styles.terms}>
-							<View>
-								<Text style={styles.font}>Terms & Conditions</Text>
-								<Text style={{width: "70%"}}>{data.termsConditions.text}</Text>
-							</View>
-						</View>
+					<View style={styles.termsConditionsSection}>
+						<Text style={{fontSize: 12, fontWeight: "bold"}}>Terms & Conditions</Text>
+						<Text style={{width: "70%", fontSize: 8, marginTop: 15}}>
+							{data.termsConditions.text}
+						</Text>
 					</View>
 				</View>
 
-				<View style={styles.section}>
+				<View style={[styles.section, {marginTop: 50}]}>
 					<View>
 						<Text style={styles.font}>Payment Method</Text>
 						<Text style={styles.smallFont}>Bank</Text>
@@ -431,7 +358,7 @@ const PdfDocument = ({data}) => (
 					</View>
 
 					<View>
-						<View>
+						<View style={{marginRight: 70}}>
 							<Text style={styles.marginBottom}>{data.signature.image}</Text>
 							<Text style={styles.font}>{data.emisorReceiver.receiver.reName}</Text>
 							<Text style={styles.smallFont}>
