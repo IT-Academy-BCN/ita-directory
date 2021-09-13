@@ -27,10 +27,10 @@ export const StyledDashboard = styled.div`
 		flex-grow: 1;
 	}
 	.marginLeft {
+		flex-grow: 1;
 		@media (min-width: 1400px) {
 			padding-left: 2rem;
 		}
-		flex-grow: 1;
 	}
 
 	.row {

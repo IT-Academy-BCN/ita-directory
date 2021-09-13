@@ -74,7 +74,7 @@ function Dashboard() {
 						</div>
 
 						<div className="row">
-							<div className="marginLeft">
+							<div className="marginBottom marginLeft">
 								<PieChart
 									data={data}
 									active={active}
