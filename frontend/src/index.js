@@ -6,6 +6,7 @@ import "assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
 import "assets/css/normalize.css";
 import App from "./App";
 import axios from "axios";
+import "./index.css";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 

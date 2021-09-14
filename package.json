@@ -1,69 +1,37 @@
 {
-	"name": "frontend",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.34",
-		"@fortawesome/free-solid-svg-icons": "^5.15.2",
-		"@fortawesome/react-fontawesome": "^0.1.14",
-		"@react-pdf/renderer": "^2.0.16",
-		"axios": "^0.21.1",
-		"bootstrap": "^5.0.1",
-		"chokidar": "^2.1.8",
-		"cra-template": "1.1.1",
-		"echarts": "^5.1.2",
-		"leaflet": "^1.7.1",
-		"prop-types": "^15.7.2",
-		"react": "^17.0.1",
-		"react-animations": "^1.0.0",
-		"react-data-table-component": "^6.11.7",
-		"react-dom": "^17.0.1",
-		"react-image-gallery": "^1.0.9",
-		"react-leaflet": "^3.1.0",
-		"react-pdf": "^5.3.2",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "4.0.1",
-		"styled-components": "^5.3.0"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"dev": "env FAST_REFRESH=false react-scripts start",
-		"postinstall": "husky install",
-		"prepare": "husky install"
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"devDependencies": {
-		"babel-eslint": "^10.1.0",
-		"babel-plugin-styled-components": "^1.12.0",
-		"eslint": "^7.21.0",
-		"eslint-config-prettier": "^8.1.0",
-		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-react": "^7.22.0",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"husky": "^5.1.2",
-		"lint-staged": "^10.5.4",
-		"prettier": "2.3.2"
-	},
-	"lint-staged": {
-		"*.js": [
-			"eslint --cache --fix",
-			"./node_modules/.bin/eslint --max-warnings=0",
-			"./node_modules/.bin/prettier --write",
-			"git add"
-		]
-	}
+  "name": "ita-directory",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "documentation"
+  ],
+  "version": "1.0.0",
+  "description": "## Develop",
+  "scripts": {
+    "backend": "yarn workspace graphile dev",
+    "frontend": "yarn workspace frontend start",
+    "lint-frontend": "yarn workspace frontend run lint-staged",
+    "postinstall": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/it-academyproject/ita-directory-frontend.git"
+  },
+  "keywords": [
+    "react",
+    "node.js",
+    "prisma",
+    "directory"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/it-academyproject/ita-directory-frontend/issues"
+  },
+  "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
+  "devDependencies": {
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2"
+  }
 }

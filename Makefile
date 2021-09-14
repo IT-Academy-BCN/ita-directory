@@ -1,15 +1,6 @@
-IMAGE_NAME = ita-frontend-container:dev
+SOURCE := $(shell git rev-parse --show-toplevel)
 
-build: ## build docker image
-	docker build -t $(IMAGE_NAME) .
-
-dev: ## launch docker dev
-	if [docker image ls -a "$$IMAGE_NAME" | grep -Fq "$$IMAGE_NAME" 1>/dev/null]; then \
-		echo "could found image $$IMAGE_NAME...", try running make build first; \
-	fi; \
-	docker run -it --rm \
-	-v ${PWD}:/app \
-	-v /app/node_modules \
-	-p 3001:3000 \
-	-e CHOKIDAR_USEPOLLING=true \
-	$(IMAGE_NAME)
+include $(SOURCE)/scripts/make/build.mk
+include $(SOURCE)/scripts/make/dev.mk
+include $(SOURCE)/scripts/make/test.mk
+include $(SOURCE)/scripts/make/migrate.mk
