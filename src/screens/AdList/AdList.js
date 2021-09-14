@@ -34,6 +34,7 @@ const AdList = () => {
 	const [filteredAdList, setFilteredAdlist] = useState([]);
 	const [adList, setAdList] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [maxPriceValue, setMaxPriceValue] = useState();
 
 	useEffect(() => {
 		const fetchAds = async () => {
@@ -69,17 +70,24 @@ const AdList = () => {
 	useEffect(() => {
 		if (loading === false) {
 			let priceValue = Array.from(renderList, (o) => o.props.price);
-			let maxPriceValue = Math.min(...priceValue);
+			let mpv = Math.max(...priceValue);
+			setMaxPriceValue(mpv);
 		}
-		return console.log(maxPriceValue);
 	}, [renderList]);
+
+	// useEffect(() => {
+	// 	if (loading === true) {
+	// 		adList;
+	// 	} else {
+	// 		let priceValue = Array.from(renderList, (o) => o.props.price);
+	// 		let maxPriceValue = Math.max(...priceValue);
+	// 	}
+	// 	return maxPriceValue;
+	// }, [renderList]);
 
 	// console.log(renderList);
 	// console.log(priceValue);
-	//
 	// console.log(minPriceValue);
-
-	//
 	// console.log(m2Value);
 	// let maxM2Value = Math.max(...m2Value);
 	// console.log(maxM2Value);
