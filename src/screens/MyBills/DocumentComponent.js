@@ -9,10 +9,6 @@ import interRegular from "../../assets/fonts/Inter/Inter-Regular.ttf";
 import interSemiBold from "../../assets/fonts/Inter/Inter-SemiBold.ttf";
 
 // Create styles
-Font.register({
-	family: "Inter",
-	fonts: [{src: interRegular}, {src: interSemiBold}],
-});
 
 const styles = StyleSheet.create({
 	body: {
@@ -131,6 +127,10 @@ const styles = StyleSheet.create({
 });
 
 const PdfDocument = ({data}) => {
+	Font.register({
+		family: "Inter",
+		fonts: [{src: interRegular}, {src: interSemiBold}],
+	});
 	const subtotal = data.tradeData.items.reduce((acc, item) => {
 		const {itemPrice, itemQuant} = item;
 		const amount = itemPrice * itemQuant;
