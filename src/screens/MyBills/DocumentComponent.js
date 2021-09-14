@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "column",
 		marginLeft: 20,
-		width: "50%",
+		width: "45%",
 	},
 	termsAndTotalsContainer: {
 		display: "flex",
@@ -52,7 +52,13 @@ const styles = StyleSheet.create({
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
 		marginTop: "10rem",
-		width: "50%",
+		width: "55%",
+	},
+	footerSection: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		marginTop: 35,
 	},
 	table: {
 		marginTop: 30,
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
 		width: "auto",
 		marginTop: 5,
 		marginBottom: 5,
-		paddingLeft: "40px",
+		paddingLeft: 50,
 	},
 
 	margin: {
@@ -313,21 +319,51 @@ const PdfDocument = ({data}) => (
 								<Text style={styles.tableCellTotals}>Discount(10%)</Text>
 							</View>
 							<View style={styles.tableStripedRow}>
-								<Text style={styles.tableCellTotals}>GRAND TOTAL</Text>
+								<Text
+									style={[
+										styles.tableCellTotals,
+										{fontSize: 12, fontWeight: "bold"},
+									]}
+								>
+									GRAND TOTAL
+								</Text>
 							</View>
 						</View>
 						<View style={[styles.tableColTotals, {width: "100%"}]}>
 							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>Subtotal</Text>
+								<Text style={styles.tableCellTotals}>
+									{data.tradeData.items.reduce((acc, item) => {
+										const {itemPrice, itemQuant} = item;
+										const amount = itemPrice * itemQuant;
+										acc = acc + amount;
+										return acc;
+									}, 0)}
+								</Text>
 							</View>
 							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>tasa</Text>
+								<Text style={styles.tableCellTotals}>
+									{data.tradeData.items
+										.reduce((acc, item) => {
+											const {itemPrice, itemQuant} = item;
+											const amount = itemPrice * itemQuant;
+											acc = acc + amount;
+											return acc;
+										}, 0)
+										.toFixed(2)}
+								</Text>
 							</View>
 							<View style={styles.tableRow}>
 								<Text style={styles.tableCellTotals}>descuento</Text>
 							</View>
 							<View style={styles.tableStripedRow}>
-								<Text style={styles.tableCellTotals}>$total</Text>
+								<Text
+									style={[
+										styles.tableCellTotals,
+										{fontSize: 12, fontWeight: "bold"},
+									]}
+								>
+									$total
+								</Text>
 							</View>
 						</View>
 					</View>
@@ -340,32 +376,44 @@ const PdfDocument = ({data}) => (
 					</View>
 				</View>
 
-				<View style={[styles.section, {marginTop: 50}]}>
+				<View style={[styles.section, {marginTop: 50, marginLeft: 20}]}>
 					<View>
-						<Text style={styles.font}>Payment Method</Text>
-						<Text style={styles.smallFont}>Bank</Text>
-						<Text style={styles.marginTop}>
+						<Text style={{fontSize: 12, fontWeight: "bold", marginBottom: 10}}>
+							Payment Method
+						</Text>
+						<Text style={{fontSize: 8, fontWeight: "bold"}}>Bank</Text>
+						<Text style={{marginTop: 10, fontSize: 8}}>
 							Account ID: {data.payment.bank.accountID}
 						</Text>
-						<Text style={styles.marginBottom}>
+						<Text style={{fontSize: 8, marginBottom: 10}}>
 							Account Name: {data.payment.bank.accountName}
 						</Text>
-						<Text style={styles.smallFont}>Paypal</Text>
-						<Text style={styles.marginTop}>
+						<Text style={{fontSize: 8, fontWeight: "bold"}}>Paypal</Text>
+						<Text style={{marginTop: 10, fontSize: 8}}>
 							Paypal ID: {data.payment.paypal.paypalID}
 						</Text>
-						<Text>Account Name: {data.payment.paypal.account}</Text>
+						<Text style={{fontSize: 8}}>
+							Account Name: {data.payment.paypal.account}
+						</Text>
 					</View>
 
 					<View>
 						<View style={{marginRight: 70}}>
 							<Text style={styles.marginBottom}>{data.signature.image}</Text>
-							<Text style={styles.font}>{data.emisorReceiver.receiver.reName}</Text>
+							<Text style={{fontSize: 8, fontWeight: "bold"}}>
+								{data.emisorReceiver.receiver.reName}
+							</Text>
 							<Text style={styles.smallFont}>
 								{data.emisorReceiver.receiver.rePosition}
 							</Text>
 						</View>
 					</View>
+				</View>
+				<View style={styles.footerSection}>
+					<Text style={{fontSize: 12, fontWeight: "bold"}}>
+						Thank You For Your Business
+					</Text>
+					<Text style={{fontSize: 8}}>We help you solve your problems</Text>
 				</View>
 			</View>
 		</Page>
