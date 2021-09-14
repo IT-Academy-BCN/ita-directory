@@ -13,14 +13,14 @@ import {
 	Button,
 } from "./AdListFilter.style";
 
-function AdFilters({filtrar, maxPriceValue}) {
+function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 	const [maxPrice, setMaxPrice] = useState(99999999999);
 	const [maxSize, setMaxSize] = useState(9999999999);
 	const [minPrice, setMinPrice] = useState(0);
 	const [minSize, setMinSize] = useState(0);
 	const [gastosInc, setGastosInc] = useState(false);
 
-	console.log(maxPriceValue);
+	console.log(maxPriceValue, minPriceValue, maxM2, minM2);
 
 	function ClearFilter() {
 		setMaxPrice(99999999999);
@@ -50,7 +50,6 @@ function AdFilters({filtrar, maxPriceValue}) {
 						onChange={(e) => setMaxPrice(e.target.value)}
 					></CardInput>
 				</CardSelectorWrapper>
-				Tamaño
 				<CardSelectorWrapper>
 					<CardInput
 						placeholder="Min"
