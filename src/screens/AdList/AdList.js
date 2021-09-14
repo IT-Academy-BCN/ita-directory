@@ -66,20 +66,25 @@ const AdList = () => {
 
 	const renderList = filteredAdList.map((e, index) => <AdCard {...e} key={index} />);
 
-	console.log(renderList);
-	let priceValue = Array.from(renderList, (o) => o.props.price);
-	console.log(priceValue);
-	let maxPriceValue = Math.max(...priceValue);
-	console.log(maxPriceValue);
-	let minPriceValue = Math.min(...priceValue);
-	console.log(minPriceValue);
+	useEffect(() => {
+		if (loading === false) {
+			let priceValue = Array.from(renderList, (o) => o.props.price);
+			let maxPriceValue = Math.min(...priceValue);
+		}
+		return console.log(maxPriceValue);
+	}, [renderList]);
 
-	let m2Value = Array.from(renderList, (o) => o.props.m2);
-	console.log(m2Value);
-	let maxM2Value = Math.max(...m2Value);
-	console.log(maxM2Value);
-	let minM2Value = Math.min(...m2Value);
-	console.log(minM2Value);
+	// console.log(renderList);
+	// console.log(priceValue);
+	//
+	// console.log(minPriceValue);
+
+	//
+	// console.log(m2Value);
+	// let maxM2Value = Math.max(...m2Value);
+	// console.log(maxM2Value);
+	// let minM2Value = Math.min(...m2Value);
+	// console.log(minM2Value);
 
 	return (
 		<Body title="Pisos en Alquiler en Madrid" isLoggedIn="true" justifyTitle="flex-start">
@@ -87,7 +92,10 @@ const AdList = () => {
 				<Container row className="probando">
 					{!loading ? (
 						<>
-							<AdListFilter filtrar={(data) => setFiltro(data)} />
+							<AdListFilter
+								filtrar={(data) => setFiltro(data)}
+								maxPriceValue={maxPriceValue}
+							/>
 							<div className="ads">
 								<div className="tree-search">Madrid - Alquiler</div>
 								<div className="h3">Mapa de pisos</div>
