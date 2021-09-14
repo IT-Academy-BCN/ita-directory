@@ -157,11 +157,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 				</div>
 			</div>
 			{active ? (
-				<div
-					className="chart"
-					style={{width: `${size[0]}px`, height: `${size[1]}px`}}
-					ref={chartRef}
-				></div>
+				<div className="chart" ref={chartRef}></div>
 			) : (
 				<div className="chart" ref={chartRef}></div>
 			)}
