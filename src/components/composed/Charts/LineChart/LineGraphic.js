@@ -134,7 +134,7 @@ function LineChart({data, active, hideModal, year, month, size}) {
 		options.yAxis = {
 			...options.yAxis,
 			axisLabel: {
-				fontSize: currentWidth < 600 ? 8 : "",
+				fontSize: currentWidth < 600 ? 8 : null,
 				// rotate: currentWidth < 600 ? 90 : 0,
 			},
 		};

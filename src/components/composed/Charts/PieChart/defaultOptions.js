@@ -1,6 +1,10 @@
+import {tooltipFormatter} from "../ChartFormatter";
+
 export const options = {
 	tooltip: {
 		trigger: "item",
+		extraCssText: "width: 150px;",
+		formatter: tooltipFormatter,
 	},
 	legend: {
 		data: ["Pisos", "Garages", "Locales", "Chalets"],
@@ -23,7 +27,6 @@ export const options = {
 			type: "pie",
 			radius: "50%",
 			center: ["50%", "50%"],
-
 			data: [
 				{value: 1048, name: "Pisos"},
 				{value: 735, name: "Garages"},

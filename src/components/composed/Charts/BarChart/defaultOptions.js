@@ -1,4 +1,6 @@
+import {thousandFormatter, tooltipFormatter} from "../ChartFormatter";
 import {allMonths} from "utils/constant";
+
 let config = {
 	rotate: 90,
 	align: "left",
@@ -26,6 +28,8 @@ export let labelOption = {
 export const options = {
 	tooltip: {
 		trigger: "axis",
+		formatter: tooltipFormatter,
+		extraCssText: "width:150px;",
 		axisPointer: {
 			type: "shadow",
 		},
@@ -69,6 +73,9 @@ export const options = {
 	yAxis: [
 		{
 			type: "value",
+			axisLabel: {
+				formatter: thousandFormatter,
+			},
 		},
 	],
 	series: [
