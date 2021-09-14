@@ -1,3 +1,5 @@
+import {thousandFormatter} from "../ChartFormatter";
+
 let config = {
 	rotate: 90,
 	align: "left",
@@ -32,7 +34,11 @@ export const options = {
 		axisTick: {show: false},
 		data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	},
-	yAxis: {},
+	yAxis: {
+		axisLabel: {
+			formatter: thousandFormatter,
+		},
+	},
 	series: [
 		{
 			name: "Sales",
