@@ -3,6 +3,7 @@ import SelectArrow from "assets/images/select-arrow.svg";
 
 export const BarGraphicStyled = styled.div`
 	min-width: 100%;
+	margin: auto;
 	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
