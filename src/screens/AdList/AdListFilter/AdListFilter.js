@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 
 import {
-	CardOpenModal,
+	// CardOpenModal,
 	Card,
 	CardHeader,
-	CardBody,
+	CardValue,
+	// CardBody,
 	CardTitle,
 	CardInput,
 	CardSelectorWrapper,
@@ -29,7 +30,6 @@ function AdFilters({filtrar, maxPriceValue}) {
 		setMinSize(0);
 		setGastosInc(false);
 		filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize});
-		console.log(maxSize);
 	}
 
 	return (
@@ -37,6 +37,12 @@ function AdFilters({filtrar, maxPriceValue}) {
 			<CardHeader>
 				<CardTitle>Filtros</CardTitle>
 				<Button onClick={() => ClearFilter()}>Limpiar busqueda</Button>
+				<CardValue>
+					Precio mín y máx: {maxPriceValue} {maxPriceValue}
+				</CardValue>
+				<CardValue>
+					Tamaño mín y máx: {maxPriceValue} {maxPriceValue}
+				</CardValue>
 				<FilterHr style={{width: "100%"}} /> Precio
 				<CardSelectorWrapper>
 					<CardInput

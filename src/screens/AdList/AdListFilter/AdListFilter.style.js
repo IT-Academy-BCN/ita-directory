@@ -51,6 +51,10 @@ export const CardTitle = styled.h2`
 	margin: 0;
 `;
 
+export const CardValue = styled.div`
+	font-size: 12px;
+`;
+
 //Afecta a los selectores de los modals
 export const CardInput = styled.input`
 	-webkit-appearance: none;
