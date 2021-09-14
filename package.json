@@ -10,19 +10,28 @@
   "description": "## Develop",
   "scripts": {
     "backend": "yarn workspace graphile dev",
-    "frontend": "yarn workspace admin start",
-    "lint-front": "yarn workspace admin run lint-staged",
+    "frontend": "yarn workspace frontend start",
+    "lint-frontend": "yarn workspace frontend run lint-staged",
     "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/it-academyproject/ita-directory-frontend.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "node.js",
+    "prisma",
+    "directory"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/it-academyproject/ita-directory-frontend/issues"
   },
-  "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme"
+  "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
+  "devDependencies": {
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2"
+  }
 }
