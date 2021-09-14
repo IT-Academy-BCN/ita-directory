@@ -105,13 +105,13 @@
 				{
 					"itemID": "02",
 					"itemTitle": "Business Magazine Design",
-					"itemPrice": 70,
+					"itemPrice": 100,
 					"itemQuant": 1
 				},
 				{
 					"itemID": "03",
 					"itemTitle": "Custom Font Design",
-					"itemPrice": 25,
+					"itemPrice": 250,
 					"itemQuant": 1
 				},
 				{
@@ -123,14 +123,14 @@
 				{
 					"itemID": "05",
 					"itemTitle": "Website Business Design",
-					"itemPrice": 40,
+					"itemPrice": 4000,
 					"itemQuant": 4
 				}
 			]
 		},
 
 		"calculation": {
-			"calcs": [{"tax": 5, "discount": 10}]
+			"calcs": [{"tax": 21, "discount": 5}]
 		},
 
 		"termsConditions": {

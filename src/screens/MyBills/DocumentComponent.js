@@ -130,295 +130,309 @@ const styles = StyleSheet.create({
 	},
 });
 
-const PdfDocument = ({data}) => (
-	<Document>
-		<Page size="A4" orientation="portrait" style={styles.body}>
-			<View>
-				<View style={styles.header}>
-					<Text style={styles.text}>{data.header.logoCompany}</Text>
-					<Text style={styles.text}>{data.header.invoiceID}</Text>
-				</View>
-				<View style={styles.section}>
-					<View>
-						<Text>Invoice to: </Text>
-						<Text style={styles.text}>{data.emisorReceiver.emisor.emName}</Text>
-						<Text>{data.emisorReceiver.emisor.emPosition}</Text>
-						<Text style={styles.margin}>Address:</Text>
-						<Text>{data.emisorReceiver.emisor.emStreet}</Text>
-						<Text>{data.emisorReceiver.emisor.emContact}</Text>
-					</View>
+const PdfDocument = ({data}) => {
+	const subtotal = data.tradeData.items.reduce((acc, item) => {
+		const {itemPrice, itemQuant} = item;
+		const amount = itemPrice * itemQuant;
+		acc = acc + amount;
+		return acc;
+	}, 0);
+	const tax = (subtotal * data.calculation.calcs[0].tax) / 100;
+	const discount = (subtotal * data.calculation.calcs[0].discount) / 100;
+	const grandTotal = subtotal - tax + discount;
 
-					<View>
-						<Text>Invoice from:</Text>
-						<Text style={styles.text}>{data.emisorReceiver.receiver.reName}</Text>
-						<Text>{data.emisorReceiver.receiver.rePosition}</Text>
-						<Text style={styles.margin}>Address:</Text>
-						<Text>{data.emisorReceiver.receiver.reStreet}</Text>
-						<Text>{data.emisorReceiver.receiver.reContact}</Text>
+	return (
+		<Document>
+			<Page size="A4" orientation="portrait" style={styles.body}>
+				<View>
+					<View style={styles.header}>
+						<Text style={styles.text}>{data.header.logoCompany}</Text>
+						<Text style={styles.text}>{data.header.invoiceID}</Text>
 					</View>
-				</View>
-				<View style={styles.table}>
-					<View style={[styles.tableRow, {borderTop: "1px solid #efeeea"}]}>
-						<View style={styles.tableCol}>
-							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>#</Text>
+					<View style={styles.section}>
+						<View>
+							<Text>Invoice to: </Text>
+							<Text style={styles.text}>{data.emisorReceiver.emisor.emName}</Text>
+							<Text>{data.emisorReceiver.emisor.emPosition}</Text>
+							<Text style={styles.margin}>Address:</Text>
+							<Text>{data.emisorReceiver.emisor.emStreet}</Text>
+							<Text>{data.emisorReceiver.emisor.emContact}</Text>
 						</View>
-						<View style={styles.tableColItem}>
-							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>ITEM</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>PRICE</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>QUANTITY</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={[styles.tableCell, {fontWeight: "bold"}]}>AMOUNT</Text>
-						</View>
-					</View>
-					<View style={styles.tableStripedRow}>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>{data.tradeData.items[0].itemID}</Text>
-						</View>
-						<View style={styles.tableColItem}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[0].itemTitle}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[0].itemPrice}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[0].itemQuant}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[0].itemPrice *
-									data.tradeData.items[0].itemQuant}
-							</Text>
+
+						<View>
+							<Text>Invoice from:</Text>
+							<Text style={styles.text}>{data.emisorReceiver.receiver.reName}</Text>
+							<Text>{data.emisorReceiver.receiver.rePosition}</Text>
+							<Text style={styles.margin}>Address:</Text>
+							<Text>{data.emisorReceiver.receiver.reStreet}</Text>
+							<Text>{data.emisorReceiver.receiver.reContact}</Text>
 						</View>
 					</View>
-					<View style={styles.tableRow}>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>{data.tradeData.items[1].itemID}</Text>
-						</View>
-						<View style={styles.tableColItem}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[1].itemTitle}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[1].itemPrice}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[1].itemQuant}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[1].itemPrice *
-									data.tradeData.items[1].itemQuant}
-							</Text>
-						</View>
-					</View>
-					<View style={styles.tableStripedRow}>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>{data.tradeData.items[2].itemID}</Text>
-						</View>
-						<View style={styles.tableColItem}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[2].itemTitle}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[2].itemPrice}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[2].itemQuant}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[2].itemPrice *
-									data.tradeData.items[2].itemQuant}
-							</Text>
-						</View>
-					</View>
-					<View style={styles.tableRow}>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>{data.tradeData.items[3].itemID}</Text>
-						</View>
-						<View style={styles.tableColItem}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[3].itemTitle}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[3].itemPrice}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[3].itemQuant}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[3].itemPrice *
-									data.tradeData.items[3].itemQuant}
-							</Text>
-						</View>
-					</View>
-					<View style={styles.tableStripedRow}>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>{data.tradeData.items[4].itemID}</Text>
-						</View>
-						<View style={styles.tableColItem}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[4].itemTitle}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[4].itemPrice}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[4].itemQuant}
-							</Text>
-						</View>
-						<View style={styles.tableCol}>
-							<Text style={styles.tableCell}>
-								{data.tradeData.items[4].itemPrice *
-									data.tradeData.items[4].itemQuant}
-							</Text>
-						</View>
-					</View>
-				</View>
-				<View style={styles.termsAndTotalsContainer}>
-					<View style={styles.totalsSection}>
-						<View style={[styles.tableColTotals, {width: "100%"}]}>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>Sub total</Text>
+					<View style={styles.table}>
+						<View style={[styles.tableRow, {borderTop: "1px solid #efeeea"}]}>
+							<View style={styles.tableCol}>
+								<Text style={[styles.tableCell, {fontWeight: "bold"}]}>#</Text>
 							</View>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>Tax(5%)</Text>
+							<View style={styles.tableColItem}>
+								<Text style={[styles.tableCell, {fontWeight: "bold"}]}>ITEM</Text>
 							</View>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>Discount(10%)</Text>
+							<View style={styles.tableCol}>
+								<Text style={[styles.tableCell, {fontWeight: "bold"}]}>PRICE</Text>
 							</View>
-							<View style={styles.tableStripedRow}>
-								<Text
-									style={[
-										styles.tableCellTotals,
-										{fontSize: 12, fontWeight: "bold"},
-									]}
-								>
-									GRAND TOTAL
+							<View style={styles.tableCol}>
+								<Text style={[styles.tableCell, {fontWeight: "bold"}]}>
+									QUANTITY
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={[styles.tableCell, {fontWeight: "bold"}]}>AMOUNT</Text>
+							</View>
+						</View>
+						<View style={styles.tableStripedRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[0].itemID}
+								</Text>
+							</View>
+							<View style={styles.tableColItem}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[0].itemTitle}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[0].itemPrice}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[0].itemQuant}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[0].itemPrice *
+										data.tradeData.items[0].itemQuant}
 								</Text>
 							</View>
 						</View>
-						<View style={[styles.tableColTotals, {width: "100%"}]}>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>
-									{data.tradeData.items.reduce((acc, item) => {
-										const {itemPrice, itemQuant} = item;
-										const amount = itemPrice * itemQuant;
-										acc = acc + amount;
-										return acc;
-									}, 0)}
+						<View style={styles.tableRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[1].itemID}
 								</Text>
 							</View>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>
-									{data.tradeData.items
-										.reduce((acc, item) => {
-											const {itemPrice, itemQuant} = item;
-											const amount = itemPrice * itemQuant;
-											acc = acc + amount;
-											return acc;
-										}, 0)
-										.toFixed(2)}
+							<View style={styles.tableColItem}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[1].itemTitle}
 								</Text>
 							</View>
-							<View style={styles.tableRow}>
-								<Text style={styles.tableCellTotals}>descuento</Text>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[1].itemPrice}
+								</Text>
 							</View>
-							<View style={styles.tableStripedRow}>
-								<Text
-									style={[
-										styles.tableCellTotals,
-										{fontSize: 12, fontWeight: "bold"},
-									]}
-								>
-									$total
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[1].itemQuant}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[1].itemPrice *
+										data.tradeData.items[1].itemQuant}
+								</Text>
+							</View>
+						</View>
+						<View style={styles.tableStripedRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[2].itemID}
+								</Text>
+							</View>
+							<View style={styles.tableColItem}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[2].itemTitle}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[2].itemPrice}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[2].itemQuant}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[2].itemPrice *
+										data.tradeData.items[2].itemQuant}
+								</Text>
+							</View>
+						</View>
+						<View style={styles.tableRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[3].itemID}
+								</Text>
+							</View>
+							<View style={styles.tableColItem}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[3].itemTitle}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[3].itemPrice}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[3].itemQuant}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[3].itemPrice *
+										data.tradeData.items[3].itemQuant}
+								</Text>
+							</View>
+						</View>
+						<View style={styles.tableStripedRow}>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[4].itemID}
+								</Text>
+							</View>
+							<View style={styles.tableColItem}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[4].itemTitle}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[4].itemPrice}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[4].itemQuant}
+								</Text>
+							</View>
+							<View style={styles.tableCol}>
+								<Text style={styles.tableCell}>
+									{data.tradeData.items[4].itemPrice *
+										data.tradeData.items[4].itemQuant}
 								</Text>
 							</View>
 						</View>
 					</View>
+					<View style={styles.termsAndTotalsContainer}>
+						<View style={styles.totalsSection}>
+							<View style={[styles.tableColTotals, {width: "100%"}]}>
+								<View style={styles.tableRow}>
+									<Text style={styles.tableCellTotals}>Sub total</Text>
+								</View>
+								<View style={styles.tableRow}>
+									<Text
+										style={styles.tableCellTotals}
+									>{`Tax(${data.calculation.calcs[0].tax}%)`}</Text>
+								</View>
+								<View style={styles.tableRow}>
+									<Text
+										style={styles.tableCellTotals}
+									>{`Discount(${data.calculation.calcs[0].discount}%)`}</Text>
+								</View>
+								<View style={styles.tableStripedRow}>
+									<Text
+										style={[
+											styles.tableCellTotals,
+											{fontSize: 12, fontWeight: "bold"},
+										]}
+									>
+										GRAND TOTAL
+									</Text>
+								</View>
+							</View>
+							<View style={[styles.tableColTotals, {width: "100%"}]}>
+								<View style={styles.tableRow}>
+									<Text style={styles.tableCellTotals}>{"$ " + subtotal}</Text>
+								</View>
+								<View style={styles.tableRow}>
+									<Text style={styles.tableCellTotals}>{"$ " + tax}</Text>
+								</View>
+								<View style={styles.tableRow}>
+									<Text style={styles.tableCellTotals}>{"$ " + discount}</Text>
+								</View>
+								<View style={styles.tableStripedRow}>
+									<Text
+										style={[
+											styles.tableCellTotals,
+											{fontSize: 12, fontWeight: "bold"},
+										]}
+									>
+										{"$ " + grandTotal}
+									</Text>
+								</View>
+							</View>
+						</View>
 
-					<View style={styles.termsConditionsSection}>
-						<Text style={{fontSize: 12, fontWeight: "bold"}}>Terms & Conditions</Text>
-						<Text style={{width: "70%", fontSize: 8, marginTop: 15}}>
-							{data.termsConditions.text}
-						</Text>
-					</View>
-				</View>
-
-				<View style={[styles.section, {marginTop: 50, marginLeft: 20}]}>
-					<View>
-						<Text style={{fontSize: 12, fontWeight: "bold", marginBottom: 10}}>
-							Payment Method
-						</Text>
-						<Text style={{fontSize: 8, fontWeight: "bold"}}>Bank</Text>
-						<Text style={{marginTop: 10, fontSize: 8}}>
-							Account ID: {data.payment.bank.accountID}
-						</Text>
-						<Text style={{fontSize: 8, marginBottom: 10}}>
-							Account Name: {data.payment.bank.accountName}
-						</Text>
-						<Text style={{fontSize: 8, fontWeight: "bold"}}>Paypal</Text>
-						<Text style={{marginTop: 10, fontSize: 8}}>
-							Paypal ID: {data.payment.paypal.paypalID}
-						</Text>
-						<Text style={{fontSize: 8}}>
-							Account Name: {data.payment.paypal.account}
-						</Text>
-					</View>
-
-					<View>
-						<View style={{marginRight: 70}}>
-							<Text style={styles.marginBottom}>{data.signature.image}</Text>
-							<Text style={{fontSize: 8, fontWeight: "bold"}}>
-								{data.emisorReceiver.receiver.reName}
+						<View style={styles.termsConditionsSection}>
+							<Text style={{fontSize: 12, fontWeight: "bold"}}>
+								Terms & Conditions
 							</Text>
-							<Text style={styles.smallFont}>
-								{data.emisorReceiver.receiver.rePosition}
+							<Text style={{width: "70%", fontSize: 8, marginTop: 15}}>
+								{data.termsConditions.text}
 							</Text>
 						</View>
 					</View>
+
+					<View style={[styles.section, {marginTop: 50, marginLeft: 20}]}>
+						<View>
+							<Text style={{fontSize: 12, fontWeight: "bold", marginBottom: 10}}>
+								Payment Method
+							</Text>
+							<Text style={{fontSize: 8, fontWeight: "bold"}}>Bank</Text>
+							<Text style={{marginTop: 10, fontSize: 8}}>
+								Account ID: {data.payment.bank.accountID}
+							</Text>
+							<Text style={{fontSize: 8, marginBottom: 10}}>
+								Account Name: {data.payment.bank.accountName}
+							</Text>
+							<Text style={{fontSize: 8, fontWeight: "bold"}}>Paypal</Text>
+							<Text style={{marginTop: 10, fontSize: 8}}>
+								Paypal ID: {data.payment.paypal.paypalID}
+							</Text>
+							<Text style={{fontSize: 8}}>
+								Account Name: {data.payment.paypal.account}
+							</Text>
+						</View>
+
+						<View>
+							<View style={{marginRight: 70}}>
+								<Text style={styles.marginBottom}>{data.signature.image}</Text>
+								<Text style={{fontSize: 8, fontWeight: "bold"}}>
+									{data.emisorReceiver.receiver.reName}
+								</Text>
+								<Text style={styles.smallFont}>
+									{data.emisorReceiver.receiver.rePosition}
+								</Text>
+							</View>
+						</View>
+					</View>
+					<View style={styles.footerSection}>
+						<Text style={{fontSize: 12, fontWeight: "bold"}}>
+							Thank You For Your Business
+						</Text>
+						<Text style={{fontSize: 8}}>We help you solve your problems</Text>
+					</View>
 				</View>
-				<View style={styles.footerSection}>
-					<Text style={{fontSize: 12, fontWeight: "bold"}}>
-						Thank You For Your Business
-					</Text>
-					<Text style={{fontSize: 8}}>We help you solve your problems</Text>
-				</View>
-			</View>
-		</Page>
-	</Document>
-);
+			</Page>
+		</Document>
+	);
+};
 
 const DownloadPDF = ({data, type}) => {
 	return (
