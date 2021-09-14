@@ -3,11 +3,8 @@ import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
 import {BarGraphicStyled} from "./BarGraphic.styles";
-
-import {allMonths} from "utils/constant";
-
 import {options, labelOption, returnMonthsData} from "./defaultOptions";
-
+import {allMonths} from "utils/constant";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
@@ -88,10 +85,12 @@ function BarChart({data, hideModal, active, size, year, month}) {
 
 			//Change labels to display when only a month is selected
 			if (selectedMonth !== "all") {
-				options.series = customOptions;
-			} else {
-				options.series = _.merge(options.series, customOptions);
+				for (let i = 0; i < options.series.length; i++) {
+					options.series[i].data = customOptions[i];
+				}
 			}
+
+			options.series = _.merge(options.series, customOptions);
 			curChart.setOption({...options});
 		}
 		// eslint-disable-next-line
