@@ -1,24 +1,24 @@
-name: DEVELOPMENT ITA BUILD AND TEST
+# name: DEVELOPMENT ITA BUILD AND TEST
 
-on:
-  push:
-    branches:
-      - develop
+# on:
+#   push:
+#     branches:
+#       - develop
 
-jobs:
-  test:
+# jobs:
+#   test:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: "14.x"
-    - name: npm install, and test
-      run: |
-        npm install
-        npm test
-      env:
-        CI: true
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Use Node.js 14.x
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: "14.x"
+#     - name: npm install, and test
+#       run: |
+#         npm install
+#         npm test
+#       env:
+#         CI: true
