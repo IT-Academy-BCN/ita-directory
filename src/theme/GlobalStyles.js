@@ -7,4 +7,8 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	flex-direction: ${(props) => (props.column ? "column" : "row")};
+
+	@media (max-width: 1024px) {
+		flex-direction: column;
+	}
 `;

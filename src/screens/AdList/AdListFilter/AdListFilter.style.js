@@ -19,9 +19,9 @@ export const Card = styled.div`
 		flex-direction: column;
 	}
 
-	@media (max-width: 1400px) {
+	@media (max-width: 1240px) {
 		display: flex;
-		width: 40%;
+		width: 100%;
 		flex-direction: column;
 		justify-content: space-between;
 	}
