@@ -76,7 +76,8 @@ export const LineGraphicStyled = styled.div`
 	.chart {
 		width: 100%;
 		height: 50vh;
-		margin-top: 2rem;
+		margin: 12px;
+		transform: translate(2%, 0);
 	}
 `;
 
