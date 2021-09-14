@@ -17,37 +17,66 @@ const Bill = (color_logo) => {
 		return selected.id === parseInt(id, 10);
 	});
 
+	//Custom styles
+
+	const customStyles = {
+		rows: {
+			style: {
+				height: "47px",
+			},
+		},
+		cells: {
+			style: {
+				paddingLeft: "0",
+				paddingRight: "0",
+			},
+		},
+	};
+
+	const conditionalRowStyles = [
+		{
+			when: (row) => row.itemID === "01" || row.itemID === "03" || row.itemID === "05",
+			style: {
+				backgroundColor: "#efeeea",
+			},
+		},
+	];
+
 	// Columns for datatables
 	const tradeColumns = [
 		{
 			name: <div>#</div>,
-			selector: "itemID",
+			selector: (row) => row.itemID,
 			cell: (row) => <div>{row.itemID}</div>,
 			center: true,
 			hide: 600,
+			grow: 1.15,
 		},
 		{
 			name: <div>ITEM</div>,
 			selector: "itemTitle",
-			cell: (row) => <div>{row.itemTitle}</div>,
+			cell: (row) => <div className="cell-item">{row.itemTitle}</div>,
 			left: true,
+			grow: 2.4,
 		},
 		{
 			name: <div>PRICE</div>,
 			selector: "itemPrice",
 			cell: (row) => (
-				<div>
+				<div className="cell-price">
 					<span>€ </span>
 					{row.itemPrice}
 				</div>
 			),
-			center: true,
+			left: true,
+			grow: 0,
 		},
 		{
 			name: <div>QUANTITY</div>,
 			selector: "itemQuant",
-			cell: (row) => <div>{row.itemQuant}</div>,
+			cell: (row) => <div className="cell-quantity">{row.itemQuant}</div>,
 			center: true,
+			grow: 0,
 		},
 		{
 			name: <div>AMOUNT</div>,
@@ -59,115 +88,7 @@ const Bill = (color_logo) => {
 				</div>
 			),
 			center: true,
-		},
-	];
-
-	const calcColumns = [
-		{
-			name: <div>Sub Total</div>,
-			selector: "subTotal",
-			cell: (row) => (
-				<div>
-					<div>
-						€{" "}
-						{selectedBill.map((amount) => {
-							let itemsArr = amount.tradeData.items;
-							const itemsAmount = itemsArr.map((it) => {
-								return it.itemPrice * it.itemQuant;
-							});
-							let sum = 0;
-							itemsAmount.map((i) => (sum += i));
-							return sum;
-						})}
-					</div>
-				</div>
-			),
-			compact: true,
-			width: "100px",
-			left: true,
-		},
-		{
-			name: <div>Tax(5%)</div>,
-			selector: "tax",
-			cell: (row) => (
-				<div>
-					<div>
-						€{" "}
-						{selectedBill.map((amount) => {
-							let itemsArr = amount.tradeData.items;
-							const itemsAmount = itemsArr.map((it) => {
-								return it.itemPrice * it.itemQuant;
-							});
-							let sum = 0;
-							itemsAmount.map((i) => (sum += i));
-							let tax = amount.calculation.calcs;
-							let taxItem = tax.map((t) => t.tax);
-							let taxCalc = (taxItem / 100) * sum;
-							return taxCalc.toFixed();
-						})}
-					</div>
-				</div>
-			),
-			compact: true,
-			width: "100px",
-			left: true,
-		},
-		{
-			name: <div>Discount(10%)</div>,
-			selector: "discount",
-			cell: (row) => (
-				<div>
-					<div>
-						€{" "}
-						{selectedBill.map((amount) => {
-							let itemsArr = amount.tradeData.items;
-							const itemsAmount = itemsArr.map((it) => {
-								return it.itemPrice * it.itemQuant;
-							});
-							let sum = 0;
-							itemsAmount.map((i) => (sum += i));
-							let tax = amount.calculation.calcs;
-							let taxItem = tax.map((t) => t.tax);
-							let taxCalc = sum + (taxItem / 100) * sum;
-							let disc = tax.map((t) => t.discount);
-							let discCalc = (disc / 100) * taxCalc;
-							return discCalc.toFixed();
-						})}
-					</div>
-				</div>
-			),
-			compact: true,
-			width: "100px",
-			left: true,
-		},
-		{
-			name: <div>GRAND TOTAL</div>,
-			selector: "grandTotal",
-			cell: (row) => (
-				<div>
-					<div>
-						€{" "}
-						{selectedBill.map((amount) => {
-							let itemsArr = amount.tradeData.items;
-							const itemsAmount = itemsArr.map((it) => {
-								return it.itemPrice * it.itemQuant;
-							});
-							let sum = 0;
-							itemsAmount.map((i) => (sum += i));
-							let tax = amount.calculation.calcs;
-							let taxItem = tax.map((t) => t.tax);
-							let taxCalc = (taxItem / 100) * sum;
-							let disc = tax.map((t) => t.discount);
-							let discCalc = (disc / 100) * taxCalc;
-							const grandTotal = sum + taxCalc + discCalc;
-							return grandTotal.toFixed();
-						})}
-					</div>
-				</div>
-			),
-			compact: true,
-			width: "100px",
-			left: true,
+			grow: 1.2,
 		},
 	];
 
@@ -184,7 +105,7 @@ const Bill = (color_logo) => {
 						<h2 className="marg">{bill.emisorReceiver.emisor.emName}</h2>
 						<small>{bill.emisorReceiver.emisor.emPosition}</small>
 					</div>
-					<div>
+					<div className="separation">
 						<p>Invoice from:</p>
 						<h2 className="marg">{bill.emisorReceiver.receiver.reName}</h2>
 						<small>{bill.emisorReceiver.receiver.rePosition}</small>
@@ -197,13 +118,19 @@ const Bill = (color_logo) => {
 						<p>{bill.emisorReceiver.emisor.emContact}</p>
 					</div>
 					<div>
-						<small>Address:</small>
+						<p>Address:</p>
 						<p>{bill.emisorReceiver.receiver.reStreet}</p>
 						<p>{bill.emisorReceiver.receiver.reContact}</p>
 					</div>
 				</section>
 				<div className="tableWrapper">
-					<DataTable columns={tradeColumns} noHeader={true} data={bill.tradeData.items} />
+					<DataTable
+						columns={tradeColumns}
+						noHeader={true}
+						data={bill.tradeData.items}
+						customStyles={customStyles}
+						conditionalRowStyles={conditionalRowStyles}
+					/>
 				</div>
 				<div className="termsAndCalc">
 					<div className="terms">
@@ -214,34 +141,114 @@ const Bill = (color_logo) => {
 						</small>
 					</div>
 					<div className="calcs">
-						<DataTable
-							columns={calcColumns}
-							noHeader={true}
-							data={bill.calculation.calcs}
-							striped={true}
-						/>
+						<table className="columns">
+							<tbody>
+								<tr>
+									<th>Sub Total</th>
+									<td>
+										€{" "}
+										{selectedBill.map((amount) => {
+											let itemsArr = amount.tradeData.items;
+											const itemsAmount = itemsArr.map((it) => {
+												return it.itemPrice * it.itemQuant;
+											});
+											let sum = 0;
+											itemsAmount.map((i) => (sum += i));
+											return sum;
+										})}
+									</td>
+								</tr>
+								<tr>
+									<th>Tax(5%)</th>
+									<td>
+										€{" "}
+										{selectedBill.map((amount) => {
+											let itemsArr = amount.tradeData.items;
+											const itemsAmount = itemsArr.map((it) => {
+												return it.itemPrice * it.itemQuant;
+											});
+											let sum = 0;
+											itemsAmount.map((i) => (sum += i));
+											let tax = amount.calculation.calcs;
+											let taxItem = tax.map((t) => t.tax);
+											let taxCalc = (taxItem / 100) * sum;
+											return taxCalc.toFixed();
+										})}
+									</td>
+								</tr>
+								<tr>
+									<th>Discount(10%)</th>
+									<td>
+										€{" "}
+										{selectedBill.map((amount) => {
+											let itemsArr = amount.tradeData.items;
+											const itemsAmount = itemsArr.map((it) => {
+												return it.itemPrice * it.itemQuant;
+											});
+											let sum = 0;
+											itemsAmount.map((i) => (sum += i));
+											let tax = amount.calculation.calcs;
+											let taxItem = tax.map((t) => t.tax);
+											let taxCalc = sum + (taxItem / 100) * sum;
+											let disc = tax.map((t) => t.discount);
+											let discCalc = (disc / 100) * taxCalc;
+											return discCalc.toFixed();
+										})}
+									</td>
+								</tr>
+								<tr>
+									<th className="bold">Grand Total</th>
+									<td className="bold">
+										€{" "}
+										{selectedBill.map((amount) => {
+											let itemsArr = amount.tradeData.items;
+											const itemsAmount = itemsArr.map((it) => {
+												return it.itemPrice * it.itemQuant;
+											});
+											let sum = 0;
+											itemsAmount.map((i) => (sum += i));
+											let tax = amount.calculation.calcs;
+											let taxItem = tax.map((t) => t.tax);
+											let taxCalc = (taxItem / 100) * sum;
+											let disc = tax.map((t) => t.discount);
+											let discCalc = (disc / 100) * taxCalc;
+											const grandTotal = sum + taxCalc + discCalc;
+											return grandTotal.toFixed();
+										})}
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 				<div className="payAndSign">
 					<div>
 						<h3>Payment Method</h3>
 						<div className="pay">
-							<h4>Bank</h4>
+							<h5>Bank</h5>
 							<small>Account ID: {bill.payment.bank.accountID}</small>
 							<small>Account Name: {bill.payment.bank.accountName}</small>
 						</div>
 						<div className="pay">
-							<h4>Paypal</h4>
+							<h5>Paypal</h5>
 							<small>Paypal ID: {bill.payment.paypal.accountName}</small>
 							<small>Account Name: {bill.payment.paypal.account}</small>
 						</div>
 					</div>
 					<div className="signWrapper">
-						<div className="signature">{bill.signature.image}</div>
 						<div>
+							<div className="signature">{bill.signature.image}</div>
+
 							<p>{bill.emisorReceiver.receiver.reName}</p>
+
 							<p className="position">{bill.emisorReceiver.receiver.rePosition}</p>
 						</div>
+					</div>
+				</div>
+				<div className="footer">
+					<div>
+						<h4>Thank You For Our Business</h4>
+						<p>We make it easy for your problems.</p>
 					</div>
 				</div>
 			</BillStyled>
