@@ -2,11 +2,11 @@ import React, {useState, useRef, useEffect} from "react";
 import * as echarts from "echarts";
 import {groupByTypePie, daysBetween} from "utils/generateData";
 import {PieGraphicStyled} from "./PieChart.styles";
-import {options, optionsSelectMonth} from "./defaultOptions";
+import {options} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
-
+import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 function PieChart({data, hideModal, active, size, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
@@ -102,7 +102,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 				<div className="selectorWrapper">
 					<select value={selectedMonth} onChange={handleMonthChange}>
 						<option value="all">All</option>
-						{optionsSelectMonth}
+						{useOptionSelectMonth()}
 					</select>
 					<select value={selectedYear} onChange={handleYearChange}>
 						{optionsSelectYear}

@@ -1,3 +1,4 @@
+import {allMonths} from "utils/constant";
 let config = {
 	rotate: 90,
 	align: "left",
@@ -7,7 +8,7 @@ let config = {
 	color: "black",
 };
 
-let labelOption = {
+export let labelOption = {
 	show: true,
 	position: config.position,
 	distance: config.distance,
@@ -50,18 +51,18 @@ export const options = {
 			type: "category",
 			axisTick: {show: false},
 			data: [
-				"Jan",
+				"Ene",
 				"Feb",
 				"Mar",
-				"Apr",
+				"Abr",
 				"May",
 				"Jun",
 				"Jul",
-				"Aug",
+				"Ago",
 				"Sep",
 				"Oct",
 				"Nov",
-				"Dec",
+				"Dic",
 			],
 		},
 	],
@@ -110,21 +111,6 @@ export const options = {
 	],
 };
 
-export const allMonths = {
-	0: {name: "January", shortName: "Jan"},
-	1: {name: "February", shortName: "Feb"},
-	2: {name: "March", shortName: "Mar"},
-	3: {name: "April", shortName: "Apr"},
-	4: {name: "May", shortName: "May"},
-	5: {name: "June", shortName: "Jun"},
-	6: {name: "July", shortName: "Jul"},
-	7: {name: "August", shortName: "Feb"},
-	8: {name: "September", shortName: "Sep"},
-	9: {name: "Octubre", shortName: "Oct"},
-	10: {name: "November", shortName: "Nov"},
-	11: {name: "December", shortName: "Dec"},
-};
-
 export const returnMonthsData = (months, key) => {
 	const data = [];
 	for (let i = 0; i < Object.entries(months).length; i++) {
@@ -133,14 +119,3 @@ export const returnMonthsData = (months, key) => {
 	}
 	return data;
 };
-
-export const optionsSelectMonth = [];
-
-for (let i = 0; i < Object.entries(allMonths).length; i++) {
-	const el = allMonths[i].name;
-	optionsSelectMonth.push(
-		<option key={i} value={i}>
-			{el}
-		</option>
-	);
-}

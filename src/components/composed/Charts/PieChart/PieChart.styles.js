@@ -42,7 +42,7 @@ export const PieGraphicStyled = styled.div`
 				appearance: none;
 				margin-right: 0.3rem;
 				padding-left: 0.5rem;
-				width: 90px;
+				width: 110px;
 				height: 30px;
 				box-shadow: 0 3px 6px #00000029;
 				border: none;
@@ -53,6 +53,9 @@ export const PieGraphicStyled = styled.div`
 				background-repeat: no-repeat;
 				background-size: 15px 12px;
 				background-color: #fff;
+				@media (max-width: 768px) {
+					width: 90px;
+				}
 			}
 
 			button {
@@ -72,12 +75,12 @@ export const PieGraphicStyled = styled.div`
 
 	.cardBody {
 		width: 100%;
-		height: 50vh;
+		height: 51.75vh;
 
 		.chart {
 			width: 100%;
-			height: 50vh;
-			margin-top: 2rem;
+			height: 100%;
+			margin: 12px;
 		}
 	}
 `;
