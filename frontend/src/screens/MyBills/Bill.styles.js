@@ -41,14 +41,16 @@ export const BillComponentStyled = styled.div`
 `;
 
 export const BillStyled = styled.div`
+	width: 75%;
 	padding: 1.5rem 2rem 0 2rem;
 	background-color: #ffffff;
-	border: 1px solid black;
 	display: flex;
 	flex-direction: column;
+	font-family: "Inter", sans-serif;
 
 	@media (max-width: 768px) {
 		padding: 0;
+		width: 100%;
 	}
 
 	header,
@@ -72,6 +74,10 @@ export const BillStyled = styled.div`
 		font-size: small;
 	}
 
+	.separation {
+		margin-right: 64px;
+	}
+
 	.marg {
 		margin: 0;
 	}
@@ -86,20 +92,41 @@ export const BillStyled = styled.div`
 
 	.termsAndCalc {
 		display: flex;
-		flex-direction: column-reverse;
-		align-items: flex-start;
-		margin-top: 3.5rem;
+		align-items: center;
 		@media (max-width: 768px) {
+			flex-direction: column-reverse;
 		}
 	}
 
 	.terms {
-		margin-top: 3.5rem;
+		margin-top: 2.5rem;
 		padding: 0 3.5rem;
+		width: 400px;
+		height: 88px;
 	}
 
 	.calcs {
-		padding: 0 3.5rem;
+		padding: 5px 0 0 5.3rem;
+		table {
+			border-collapse: collapse;
+		}
+		td,
+		th {
+			height: 47px;
+			font-size: 13px;
+		}
+		th {
+			text-align: left;
+			font-weight: normal;
+			padding-left: 27px;
+		}
+		.bold {
+			font-weight: bold;
+			background-color: #efeeea;
+		}
+		td {
+			padding: 0 64px 0 186px;
+		}
 		@media (max-width: 768px) {
 			transform: scale(0.8);
 			padding-right: 0;
@@ -107,8 +134,12 @@ export const BillStyled = styled.div`
 		}
 	}
 
+	.rdt_TableHead {
+		padding-right: 11px;
+	}
+
 	.payAndSign {
-		margin: 3.5rem 0;
+		margin: 2.5rem 0 4rem 0;
 		padding: 0 3.5rem;
 		display: flex;
 		flex-direction: row;
@@ -118,9 +149,21 @@ export const BillStyled = styled.div`
 			flex-direction: column;
 		}
 
+		h3 {
+			margin: 10px 0;
+		}
+
 		.pay {
 			display: flex;
 			flex-direction: column;
+
+			h4 {
+				margin: 10px 0;
+			}
+
+			small {
+				line-height: 1.5;
+			}
 		}
 	}
 
@@ -128,11 +171,12 @@ export const BillStyled = styled.div`
 		margin-top: 1.8rem;
 		margin-right: 3.5rem;
 		width: 30%;
+		text-align: center;
 		display: flex;
 		flex-direction: column;
 
 		p {
-			text-align: left;
+			margin: 0;
 			font-weight: bold;
 		}
 
@@ -144,9 +188,23 @@ export const BillStyled = styled.div`
 		}
 	}
 
-	.position {
+	.footer {
+		display: flex;
+		justify-content: center;
 		text-align: center;
+		margin-bottom: 5px;
+
+		h4 {
+			margin: 0;
+		}
+
+		p {
+			font-size: small;
+		}
+	}
+
+	.position {
 		font-size: small;
-		font-weight: lighter;
+		font-weight: lighter !important;
 	}
 `;

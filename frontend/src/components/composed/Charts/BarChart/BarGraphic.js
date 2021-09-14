@@ -9,6 +9,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
+import {thousandFormatter} from "../ChartFormatter";
 
 function BarChart({data, hideModal, active, size, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
@@ -111,8 +112,8 @@ function BarChart({data, hideModal, active, size, year, month}) {
 		options.yAxis = {
 			...options.yAxis,
 			axisLabel: {
-				fontSize: currentWidth < 600 ? 8 : "",
-				// rotate: currentWidth < 600 ? 90 : 0,
+				formatter: thousandFormatter,
+				fontSize: currentWidth < 600 ? 8 : null,
 			},
 		};
 		curChart.setOption({...options});
