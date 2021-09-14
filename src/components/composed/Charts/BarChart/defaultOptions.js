@@ -29,6 +29,7 @@ export const options = {
 	tooltip: {
 		trigger: "axis",
 		formatter: tooltipFormatter,
+		extraCssText: "width:150px;",
 		axisPointer: {
 			type: "shadow",
 		},
