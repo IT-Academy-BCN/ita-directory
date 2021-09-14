@@ -53,12 +53,32 @@ const AdList = () => {
 			filtro === undefined
 				? adList
 				: _.filter(adList, function (e) {
+						if (
+							filtro.maxPrice === "" &&
+							filtro.minPrice === "" &&
+							filtro.maxSize === "" &&
+							filtro.maxSize === ""
+						) {
+							return filtro.gastosInc ? e.gastosIncluidos : e;
+						} else if (filtro.maxPrice === "" && filtro.minPrice === "") {
+							return (
+								(filtro.gastosInc ? e.gastosIncluidos : e) &&
+								e.m2 <= filtro.maxSize &&
+								e.m2 >= filtro.minSize
+							);
+						} else if (filtro.maxSize === "" && filtro.maxSize === "") {
+							return (
+								(filtro.gastosInc ? e.gastosIncluidos : e) &&
+								e.price <= filtro.maxPrice &&
+								e.price >= filtro.minPrice
+							);
+						}
 						return (
 							(filtro.gastosInc ? e.gastosIncluidos : e) &&
-							e.price <= filtro.maxPrice &&
-							e.price >= filtro.minPrice &&
 							e.m2 <= filtro.maxSize &&
-							e.m2 >= filtro.minSize
+							e.m2 >= filtro.minSize &&
+							e.price <= filtro.maxPrice &&
+							e.price >= filtro.minPrice
 						);
 				  });
 		setFilteredAdlist(_filteredAds);
