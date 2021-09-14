@@ -1,0 +1,7 @@
+FROM node:14
+ENV NODE_ENV=development
+WORKDIR /usr/src/admin
+COPY package.json ./
+RUN npm install
+COPY . .
+# CMD ["yarn", "start"]

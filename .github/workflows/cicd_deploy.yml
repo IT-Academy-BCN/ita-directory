@@ -1,0 +1,42 @@
+# name: ITA DEPLOY TO PRODUCTION
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   test:
+
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Use Node.js 14.x
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: "14.x"
+#     - name: npm install, and test
+#       run: |
+#         npm install
+#         npm test
+#       env:
+#         CI: true
+
+#   deploy:
+#     needs: [test]
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: SSH and deploy node app
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.SSH_HOST }}
+#         username: ${{ secrets.SSH_USERNAME }}
+#         key: ${{ secrets.SSH_KEY }}
+#         port: ${{ secrets.SSH_PORT }}
+#         script: |
+#           cd /var/www/ita/backend/node
+#           git pull origin main
+#           npm install --production
+#           pm2 restart server

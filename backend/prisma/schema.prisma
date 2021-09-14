@@ -1,0 +1,106 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+model user_role {
+  id         Int     @id @default(autoincrement())
+  name       String
+  admin      Boolean @default(false)
+  manager    Boolean @default(false)
+  registered Boolean @default(false)
+  user       user[]
+}
+
+model user_status {
+  id        Int     @id @default(autoincrement())
+  name      String
+  active    Boolean @default(false)
+  pending   Boolean @default(false)
+  suspended Boolean @default(false)
+  deleted   Boolean @default(false)
+  user      user[]
+}
+
+model user {
+  id               Int                @id @default(autoincrement())
+  name             String
+  lastnames        String
+  email            String             @unique
+  password         String
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @default(now())
+  user_status      user_status        @relation(fields: [user_status_id], references: [id])
+  user_status_id   Int
+  user_role        user_role          @relation(fields: [user_role_id], references: [id])
+  user_role_id     Int
+  refresh_token    String
+  acces_log        acces_log[]
+  recover_password recover_password[]
+  media            media[]
+  ads              ads[]
+}
+
+model acces_log {
+  id      Int      @id @default(autoincrement())
+  login   DateTime
+  logout  DateTime
+  user    user     @relation(fields: [user_id], references: [id])
+  user_id Int
+}
+
+model recover_password {
+  id          Int      @id @default(autoincrement())
+  hash        String
+  expire_time DateTime
+  user        user     @relation(fields: [user_id], references: [id])
+  user_id     Int
+}
+
+model media {
+  id        Int    @id @default(autoincrement())
+  path      String
+  mime_type String
+  file_size String
+  user      user   @relation(fields: [user_id], references: [id])
+  user_id   Int
+}
+
+// TODO: Figure out the user - conversation - message schemas in prisma.
+// model conversation {
+//   user_id_one Int
+//   user_id_two Int
+//   created_at  DateTime
+// }
+
+// model message {
+//   id                       Int          @id @default(autoincrement())
+//   content                  String
+//   created_at               DateTime
+//   conversation             conversation @relation(fields: [conversation_user_id_one], references: [id])
+//   conversation_user_id_one Int
+//   conversation             conversation @relation(fields: [conversation_user_id_two], references: [id])
+//   conversation_user_id_two Int
+//   user                     user         @relation(fields: [user_id], references: [id])
+//   user_id                  Int
+// }
+
+model ads {
+  id            Int     @id @default(autoincrement())
+  user          user    @relation(fields: [user_id], references: [id])
+  user_id       Int
+  title         String
+  description   String
+  city          String
+  n_rooms       Int
+  price         Int
+  square_meters Int
+  n_bathrooms   Int
+  map_lat       Decimal
+  map_lon       Decimal
+}
