@@ -1,0 +1,69 @@
+version: "3.8"
+
+services:
+  ita-db:
+    image: postgres:13.4
+    container_name: itadb-dev-data
+    volumes:
+      - itadb-dev-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    networks:
+      - ita-net
+    ports:
+      - "10090:5432"
+
+  ita-redis:
+    image: redis:6
+    container_name: redis-dev-data
+    command: redis-server --requirepass $REDIS_PASSWORD --appendonly yes
+    networks:
+      - backend
+
+  ita-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: ita-api:dev
+    container_name: ita-api-dev
+    platform: linux/x86_64
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - backend
+    depends_on:
+      - db
+      - redis
+
+  ita-frontend:
+    env_file: .env
+    image: ita-frontend:dev
+    container_name: ita-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend/:/usr/src/frontend
+      - /usr/src/frontend/node_modules
+    depends_on:
+      - ita-db
+      - ita-redis
+      - ita-api
+    networks:
+      - ita-net
+    ports:
+      - "10092:3000"
+
+volumes:
+  itadb-dev-data:
+    name: itadb-dev-data
+
+networks:
+  ita-net:
+    name: ita-net
+    driver: bridge
