@@ -18,10 +18,10 @@ export const thousandFormatter = (value) => value;
 - Devolvemos todos los valores y evitamos la , al tener un valor mayor a 999
 */
 export const tooltipFormatter = (params) => {
-	console.log(params);
+	//Si recibimos un array de elementos
+	let message = "";
 	if (params instanceof Array) {
 		if (params.length) {
-			let message = "";
 			if (params[0].axisValueLabel)
 				message += `<b>${getMonthName(params[0].axisValueLabel)}</b>`;
 			params.forEach((param) => {
@@ -33,8 +33,8 @@ export const tooltipFormatter = (params) => {
 		} else {
 			return null;
 		}
+		//Si recibimos solo un elemento
 	} else {
-		let message = "";
 		if (params.axisValueLabel) message += `${getMonthName(params.axisValueLabel)}<br/>`;
 		message += `${params.marker}${params.name}: <span style="float:right;"><b>${
 			params.value
