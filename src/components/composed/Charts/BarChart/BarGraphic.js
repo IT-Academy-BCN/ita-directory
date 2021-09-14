@@ -113,7 +113,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 			...options.yAxis,
 			axisLabel: {
 				formatter: thousandFormatter,
-				fontSize: currentWidth < 600 ? 8 : "",
+				fontSize: currentWidth < 600 ? 8 : null,
 			},
 		};
 		curChart.setOption({...options});
