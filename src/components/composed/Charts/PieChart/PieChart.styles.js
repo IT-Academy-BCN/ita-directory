@@ -75,12 +75,12 @@ export const PieGraphicStyled = styled.div`
 
 	.cardBody {
 		width: 100%;
-		height: 50vh;
+		height: 51.75vh;
 
 		.chart {
 			width: 100%;
-			height: 50vh;
-			margin-top: 2rem;
+			height: 100%;
+			margin: 12px;
 		}
 	}
 `;

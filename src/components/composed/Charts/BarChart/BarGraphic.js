@@ -3,7 +3,7 @@ import * as echarts from "echarts";
 import _ from "lodash";
 import {groupByTypeYear, groupByTypeMonth, daysBetween} from "utils/generateData";
 import {BarGraphicStyled} from "./BarGraphic.styles";
-import {options, returnMonthsData} from "./defaultOptions";
+import {options, labelOption, returnMonthsData} from "./defaultOptions";
 import {allMonths} from "utils/constant";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -52,10 +52,11 @@ function BarChart({data, hideModal, active, size, year, month}) {
 	// Set graph options and data based on filters
 	useEffect(() => {
 		if (curChart !== undefined) {
+			handleLabelDisplay();
 			let customOptions;
-
 			let yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`);
 			const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear));
+
 			const yearToFilterData = data.slice(
 				parseInt(startingCut),
 				parseInt(startingCut) + parseInt(yearToFilterLength)
@@ -77,12 +78,19 @@ function BarChart({data, hideModal, active, size, year, month}) {
 				customOptions = groupByTypeMonth(monthToFilterData);
 			}
 
-			options.series = _.merge(options.series, customOptions);
 			options.xAxis[0].data =
 				selectedMonth === "all"
 					? returnMonthsData(allMonths, "shortName")
 					: [returnMonthsData(allMonths, "shortName")[selectedMonth]];
 
+			//Change labels to display when only a month is selected
+			if (selectedMonth !== "all") {
+				for (let i = 0; i < options.series.length; i++) {
+					options.series[i].data = customOptions[i];
+				}
+			}
+
+			options.series = _.merge(options.series, customOptions);
 			curChart.setOption({...options});
 		}
 		// eslint-disable-next-line
@@ -92,12 +100,31 @@ function BarChart({data, hideModal, active, size, year, month}) {
 		curChart.resize();
 	};
 
-	// Resize the chart when window resizes
+	const handleLabelDisplay = () => {
+		//Hide labels if display width is smaller than 992px
+		let currentWidth = window.innerWidth;
+		labelOption.show = currentWidth >= 992 ? true : false;
+		for (let i = 0; i < options.series.length; i++) {
+			options.series[i].label = labelOption;
+		}
+		//Handle yaxis labels when display is smaller than 600px
+		options.yAxis = {
+			...options.yAxis,
+			axisLabel: {
+				fontSize: currentWidth < 600 ? 8 : "",
+				// rotate: currentWidth < 600 ? 90 : 0,
+			},
+		};
+		curChart.setOption({...options});
+		resizeChart();
+	};
+
+	// Handle label display and resize the chart when window resizes
 	useEffect(() => {
 		if (curChart !== undefined) {
-			window.addEventListener("resize", resizeChart);
+			window.addEventListener("resize", handleLabelDisplay);
 			return () => {
-				window.removeEventListener("resize", resizeChart);
+				window.removeEventListener("resize", handleLabelDisplay);
 			};
 		}
 		// eslint-disable-next-line
@@ -130,11 +157,7 @@ function BarChart({data, hideModal, active, size, year, month}) {
 				</div>
 			</div>
 			{active ? (
-				<div
-					className="chart"
-					style={{width: `${size[0]}px`, height: `${size[1]}px`}}
-					ref={chartRef}
-				></div>
+				<div className="chart" ref={chartRef}></div>
 			) : (
 				<div className="chart" ref={chartRef}></div>
 			)}
