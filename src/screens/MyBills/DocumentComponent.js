@@ -10,6 +10,11 @@ import interSemiBold from "../../assets/fonts/Inter/Inter-SemiBold.ttf";
 
 // Create styles
 
+Font.register({
+	family: "Inter",
+	fonts: [{src: interRegular}, {src: interSemiBold}],
+});
+
 const styles = StyleSheet.create({
 	body: {
 		padding: "28px 42px 4px 42px",
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
 		display: "flex",
 		flexDirection: "column",
 		marginLeft: 20,
-		width: "45%",
+		width: "50%",
 	},
 	termsAndTotalsContainer: {
 		display: "flex",
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
 		flexWrap: "nowrap",
 		justifyContent: "space-between",
 		marginTop: "10rem",
-		width: "55%",
+		width: "50%",
 	},
 	footerSection: {
 		display: "flex",
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
 		width: "15%",
 	},
 	tableColItem: {
-		width: "40%",
+		width: "37%",
 	},
 
 	tableCell: {
@@ -100,7 +105,6 @@ const styles = StyleSheet.create({
 		width: "auto",
 		marginTop: 5,
 		marginBottom: 5,
-		paddingLeft: 50,
 	},
 
 	margin: {
@@ -127,10 +131,6 @@ const styles = StyleSheet.create({
 });
 
 const PdfDocument = ({data}) => {
-	Font.register({
-		family: "Inter",
-		fonts: [{src: interRegular}, {src: interSemiBold}],
-	});
 	const subtotal = data.tradeData.items.reduce((acc, item) => {
 		const {itemPrice, itemQuant} = item;
 		const amount = itemPrice * itemQuant;
@@ -333,23 +333,25 @@ const PdfDocument = ({data}) => {
 						<View style={styles.totalsSection}>
 							<View style={[styles.tableColTotals, {width: "100%"}]}>
 								<View style={styles.tableRow}>
-									<Text style={styles.tableCellTotals}>Sub total</Text>
+									<Text style={[styles.tableCellTotals, {paddingLeft: 19}]}>
+										Sub total
+									</Text>
 								</View>
 								<View style={styles.tableRow}>
 									<Text
-										style={styles.tableCellTotals}
+										style={[styles.tableCellTotals, {paddingLeft: 19}]}
 									>{`Tax(${data.calculation.calcs[0].tax}%)`}</Text>
 								</View>
 								<View style={styles.tableRow}>
 									<Text
-										style={styles.tableCellTotals}
+										style={[styles.tableCellTotals, {paddingLeft: 19}]}
 									>{`Discount(${data.calculation.calcs[0].discount}%)`}</Text>
 								</View>
 								<View style={styles.tableStripedRow}>
 									<Text
 										style={[
 											styles.tableCellTotals,
-											{fontSize: 12, fontWeight: "bold"},
+											{fontSize: 12, fontWeight: "bold", paddingLeft: 19},
 										]}
 									>
 										GRAND TOTAL
@@ -358,19 +360,25 @@ const PdfDocument = ({data}) => {
 							</View>
 							<View style={[styles.tableColTotals, {width: "100%"}]}>
 								<View style={styles.tableRow}>
-									<Text style={styles.tableCellTotals}>{"$ " + subtotal}</Text>
+									<Text style={[styles.tableCellTotals, {paddingLeft: 51}]}>
+										{"$ " + subtotal}
+									</Text>
 								</View>
 								<View style={styles.tableRow}>
-									<Text style={styles.tableCellTotals}>{"$ " + tax}</Text>
+									<Text style={[styles.tableCellTotals, {paddingLeft: 51}]}>
+										{"$ " + tax}
+									</Text>
 								</View>
 								<View style={styles.tableRow}>
-									<Text style={styles.tableCellTotals}>{"$ " + discount}</Text>
+									<Text style={[styles.tableCellTotals, {paddingLeft: 51}]}>
+										{"$ " + discount}
+									</Text>
 								</View>
 								<View style={styles.tableStripedRow}>
 									<Text
 										style={[
 											styles.tableCellTotals,
-											{fontSize: 12, fontWeight: "bold"},
+											{fontSize: 12, fontWeight: "bold", paddingLeft: 51},
 										]}
 									>
 										{"$ " + grandTotal}
