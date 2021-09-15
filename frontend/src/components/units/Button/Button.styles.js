@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import tw, {theme} from "twin.macro";
 
-const StyledButton = styled.button`
-	box-shadow: 0px 2px 4px #00000029;
-	border: none;
+const StyledButton = styled.button.attrs({
+	className: "font-bold py-2 px-4 rounded mt-2 shadow",
+})`
+	box-shadow: ${theme`boxShadow.button-shadow`};
+	/*border: none;
 	border-radius: 6px;
 	opacity: 1;
 	cursor: pointer;
@@ -13,12 +16,9 @@ const StyledButton = styled.button`
 	width: 18.6rem;
 	height: 2.6rem;
 	margin: 0.5rem 0 0 0;
-	text-align: center;
+	text-align: center; */
 	&.blueGradient {
-		background: transparent
-			linear-gradient(98deg, ${Colors.lightBlue} 0%, ${Colors.darkBlue} 100%) 0% 0% no-repeat
-			padding-box;
-		color: ${Colors.white};
+		${tw`text-white bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-600 hover:to-blue-800`}
 	}
 	&.orangeGradient {
 		background: transparent
