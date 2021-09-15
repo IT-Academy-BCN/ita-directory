@@ -38,10 +38,10 @@ function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 				<CardTitle>Filtros</CardTitle>
 				<Button onClick={() => ClearFilter()}>Limpiar busqueda</Button>
 				<CardValue>
-					Precio mín y máx: {minPriceValue} {maxPriceValue}
+					Precio mín y máx: {minPriceValue} - {maxPriceValue}
 				</CardValue>
 				<CardValue>
-					Tamaño mín y máx: {minM2} {maxM2}
+					Tamaño mín y máx: {minM2} - {maxM2}
 				</CardValue>
 				<FilterHr style={{width: "100%"}} /> Precio
 				<CardSelectorWrapper>
