@@ -1,63 +1,28 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import tw, {theme} from "twin.macro";
 
-const StyledButton = styled.button`
-	box-shadow: 0px 2px 4px #00000029;
-	border: none;
-	border-radius: 6px;
-	opacity: 1;
-	cursor: pointer;
-	text-align: left;
-	font: normal normal normal 15px/22px Helvetica Neue;
-	letter-spacing: 0px;
-	width: 18.6rem;
-	height: 2.6rem;
-	margin: 0.5rem 0 0 0;
-	text-align: center;
+const StyledButton = styled.button.attrs({
+	className: "font-bold py-2 px-4 rounded mt-2 shadow",
+})`
+	box-shadow: ${theme`boxShadow.button-shadow`};
+
 	&.blueGradient {
-		background: transparent
-			linear-gradient(98deg, ${Colors.lightBlue} 0%, ${Colors.darkBlue} 100%) 0% 0% no-repeat
-			padding-box;
-		color: ${Colors.white};
+		${tw`text-white bg-gradient-to-r from-sky-400 to-sky-600 hover:from-sky-500 hover:to-sky-700 p-1`}
 	}
 	&.orangeGradient {
-		background: transparent
-			linear-gradient(98deg, ${Colors.lightOrange} 0%, ${Colors.darkOrange} 100%) 0% 0%
-			no-repeat padding-box;
-		color: ${Colors.white};
+		${tw`text-white bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 p-1`}
 	}
 	&.blueGradientProfile {
-		background: transparent
-			linear-gradient(98deg, ${Colors.lightBlue} 0%, ${Colors.darkBlue} 100%) 0% 0% no-repeat
-			padding-box;
-		color: ${Colors.white};
-		width: 7rem;
+		${tw`w-28 text-white bg-gradient-to-r from-sky-400 to-sky-600 hover:from-sky-500 hover:to-sky-700 p-1`}
 	}
 	&.greenGradient {
-		background: transparent
-			linear-gradient(98deg, ${Colors.lightGreen} 0%, ${Colors.darkGreen} 100%) 0% 0%
-			no-repeat padding-box;
-		color: ${Colors.white};
-		width: 9rem;
+		${tw`w-36 text-white bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 p-1`}
 	}
 	&.darkRed {
-		background: transparent
-			linear-gradient(98deg, ${Colors.redColor} 0%, ${Colors.redColor} 100%) 0% 0% no-repeat
-			padding-box;
-		color: ${Colors.white};
-		width: 9rem;
+		${tw`w-36 text-white bg-gradient-to-r from-red-400 to-red-600 hover:from-red-500 hover:to-red-700 p-1`}
 	}
 	&.darkBlue {
-		width: 7rem;
-		height: 37px;
-		background: ${Colors.extraDarkBlue};
-		color: ${Colors.white};
-		margin: 10px;
-		padding: 5px 10px;
-		border: 2px solid ${Colors.extraDarkBlue};
-		border-radius: 6px;
-		cursor: pointer;
-		box-shadow: 0px 3px 6px #00000029;
+		${tw`w-28 text-white bg-blue-800 hover:bg-blue-600 m-1 py-1 px-2`}
 	}
 	&.disabled {
 		cursor: not-allowed;
