@@ -84,17 +84,8 @@ export const CardSelectorWrapper = styled.div`
 	padding-top: 1rem;
 `;
 
-export const CardOpenModal = styled.button`
-	display: inline-flex;
-	height: 35px;
-	width: 35px;
-	align-items: center;
-	justify-content: center;
-	border-radius: 90px;
-	color: #e22e2e;
-	background: #fff;
-	border: none;
-	cursor: pointer;
+export const CardValue = styled.div`
+	font-size: 12px;
 `;
 
 export const Chart = styled.div`
