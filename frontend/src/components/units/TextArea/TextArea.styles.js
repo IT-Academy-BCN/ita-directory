@@ -1,54 +1,55 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import tw from "twin.macro";
 
-export const TextAreaStyled = styled.div`
-	&.textAreaCreateNewAd {
-		display: flex;
-		@media screen and (max-width: 600px) {
-			flex-direction: column;
+export const TextAreaStyled = styled.div.attrs({
+	className: "flex text-grey",
+})`
+	& {
+		&.textAreaCreateNewAd {
+			${tw`mb-4 max-w-xl `}
+			@media screen and (max-width: 600px) {
+				${tw`flex-col`}
+			}
 		}
-		margin-bottom: 15px;
-	}
 
-	label {
-		display: flex;
-		flex-direction: row;
-		padding: 3px 45px 0 0;
-		color: ${Colors.lightGray};
+		label {
+			${tw`py-3 pr-14 flex-grow text-grey font-bold`}
+		}
 	}
 `;
 
-export const TextAreaError = styled.div`
+export const TextAreaError = styled.div.attrs({
+	className: `w-full`,
+})`
 	&.textAreaCreateNewAd {
-		border: 1px solid #707070;
-		border-radius: 5px;
+		${tw`border rounded text-grey`}
 	}
 `;
 
-export const TextAreaInput = styled.textarea`
-	width: 18.6rem;
-	height: 8.6rem;
-	border-radius: 5px;
-	border: 1px solid #dddddd;
-	display: block;
-	font: normal normal normal 16px/32px Helvetica Neue;
-	font-size: 14px;
-	color: #393939;
-	padding: 0.75rem;
-	resize: none;
+export const TextAreaInput = styled.textarea.attrs({
+	rows: 8,
+	className: `textarea
+				border
+				w-full
+				rounded
+				block
+				text-xs
+				text-1x2
+				p-3
+				overflow-y-auto
+				resize-none
+				text-darkGray
+				`,
+})`
 	&.error {
-		border: 1px solid ${Colors.redColor};
-		color: #7d868b;
+		${tw`border rounded text-grey border-redColor`}
 	}
 `;
 
-export const StyledError = styled.small`
-	color: #e74c3c;
-	position: absolute;
-	left: 0;
-	visibility: visible;
-
+export const StyledError = styled.small.attrs({
+	className: `absolute left - 0 visible color: #e74c3c`,
+})`
 	&.errorProfile {
-		position: static;
+		${tw`static`};
 	}
 `;

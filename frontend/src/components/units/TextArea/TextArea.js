@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {TextAreaStyled, TextAreaError, TextAreaInput, StyledError} from "./TextArea.styles.js";
+import {TextAreaStyled, TextAreaError, TextAreaInput, StyledError} from "./TextArea.styles";
 
 const TextArea = ({
 	placeholder,
@@ -27,7 +27,9 @@ const TextArea = ({
 }) => {
 	return (
 		<TextAreaStyled className={inputContainerClassName}>
-			<label style={labelStyles}>{label}</label>
+			<label style={labelStyles} htmlFor={id}>
+				{label}
+			</label>
 			<TextAreaError className={inputContainerClassName}>
 				<TextAreaInput
 					style={textAreaStyles}
