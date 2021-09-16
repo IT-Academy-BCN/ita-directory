@@ -7,22 +7,22 @@ const StyledButton = styled.button.attrs({
 	box-shadow: ${theme`boxShadow.button-shadow`};
 
 	&.blueGradient {
-		${tw`text-white bg-gradient-to-r from-sky-400 to-sky-600 hover:from-sky-500 hover:to-sky-700 p-1`}
+		${tw`text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90  p-1`}
 	}
 	&.orangeGradient {
-		${tw`text-white bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 p-1`}
+		${tw`text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90  p-1`}
 	}
 	&.blueGradientProfile {
-		${tw`w-28 text-white bg-gradient-to-r from-sky-400 to-sky-600 hover:from-sky-500 hover:to-sky-700 p-1`}
+		${tw`w-28 text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90  p-1`}
 	}
 	&.greenGradient {
-		${tw`w-36 text-white bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 p-1`}
+		${tw`w-36 text-white opacity-100 bg-gradient-to-r from-lightGreen to-darkGreen hover:opacity-90  p-1`}
 	}
 	&.darkRed {
-		${tw`w-36 text-white bg-gradient-to-r from-red-400 to-red-600 hover:from-red-500 hover:to-red-700 p-1`}
+		${tw`w-36 text-white opacity-100 bg-darkRed hover:opacity-90  p-1`}
 	}
 	&.darkBlue {
-		${tw`w-28 text-white bg-blue-800 hover:bg-blue-600 m-1 py-1 px-2`}
+		${tw`w-28 text-white opacity-100 bg-darkBlue hover:opacity-90 m-1 py-1 px-2`}
 	}
 	&.disabled {
 		cursor: not-allowed;
