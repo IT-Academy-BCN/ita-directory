@@ -47,7 +47,7 @@ export const TextAreaInput = styled.textarea.attrs({
 `;
 
 export const StyledError = styled.small.attrs({
-	className: `absolute left - 0 visible color: #e74c3c`,
+	className: `absolute left-0 visible text-redColor`,
 })`
 	&.errorProfile {
 		${tw`static`};
