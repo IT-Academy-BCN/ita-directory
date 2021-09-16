@@ -20,28 +20,27 @@ services:
     container_name: redis-dev-data
     command: redis-server --requirepass $REDIS_PASSWORD --appendonly yes
     networks:
-      - backend
+      - ita-net
 
   ita-api:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile.dev
     image: ita-api:dev
     container_name: ita-api-dev
     platform: linux/x86_64
     volumes:
+      - ./backend/:/home/node/app
       - /home/node/app/node_modules
-      - .:/home/node/app
     ports:
       - ${PORT}:${PORT}
     networks:
-      - backend
+      - ita-net
     depends_on:
-      - db
-      - redis
+      - ita-db
+      - ita-redis
 
   ita-frontend:
-    env_file: .env
     image: ita-frontend:dev
     container_name: ita-frontend
     build:
