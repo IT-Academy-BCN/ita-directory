@@ -1,4 +1,4 @@
-.PHONY: build rebuild
+.PHONY: build rebuild dev
 
 dev:
 	rm -f .env
