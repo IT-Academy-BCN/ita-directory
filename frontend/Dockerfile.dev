@@ -1,7 +1,6 @@
 FROM node:14
-ENV NODE_ENV=development
 WORKDIR /usr/src/admin
 COPY package.json ./
-RUN npm install
+RUN yarn install --production=false
 COPY . .
-# CMD ["yarn", "start"]
+CMD ["yarn", "start"]
