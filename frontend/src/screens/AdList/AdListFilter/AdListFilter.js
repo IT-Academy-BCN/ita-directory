@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {
 	Card,
 	CardHeader,
-	// CardBody,
+	CardValue,
 	CardTitle,
 	CardInput,
 	CardSelectorWrapper,
@@ -12,7 +12,7 @@ import {
 	Button,
 } from "./AdListFilter.style";
 
-function AdFilters({filtrar}) {
+function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 	const [maxPrice, setMaxPrice] = useState("");
 	const [maxSize, setMaxSize] = useState("");
 	const [minPrice, setMinPrice] = useState("");
@@ -33,6 +33,12 @@ function AdFilters({filtrar}) {
 			<CardHeader>
 				<CardTitle>Filtros</CardTitle>
 				<Button onClick={() => ClearFilter()}>Limpiar busqueda</Button>
+				<CardValue>
+					Precio mín y máx: {minPriceValue} {maxPriceValue}
+				</CardValue>
+				<CardValue>
+					Tamaño mín y máx: {minM2} {maxM2}
+				</CardValue>
 				<FilterHr style={{width: "100%"}} /> Precio
 				<CardSelectorWrapper>
 					<CardInput
