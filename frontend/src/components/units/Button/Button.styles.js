@@ -7,22 +7,22 @@ const StyledButton = styled.button.attrs({
 	box-shadow: ${theme`boxShadow.button-shadow`};
 
 	&.blueGradient {
-		${tw`text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90  p-1`}
+		${tw`text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
 	}
 	&.orangeGradient {
-		${tw`text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90  p-1`}
+		${tw`text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90`}
 	}
 	&.blueGradientProfile {
-		${tw`w-28 text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90  p-1`}
+		${tw`w-28 text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
 	}
 	&.greenGradient {
-		${tw`w-36 text-white opacity-100 bg-gradient-to-r from-lightGreen to-darkGreen hover:opacity-90  p-1`}
+		${tw`w-36 text-white opacity-100 bg-gradient-to-r from-lightGreen to-darkGreen hover:opacity-90`}
 	}
 	&.darkRed {
-		${tw`w-36 text-white opacity-100 bg-darkRed hover:opacity-90  p-1`}
+		${tw`w-36 text-white opacity-100 bg-darkRed hover:opacity-90`}
 	}
 	&.darkBlue {
-		${tw`w-28 text-white opacity-100 bg-darkBlue hover:opacity-90 m-1 py-1 px-2`}
+		${tw`w-28 text-white opacity-100 bg-darkBlue hover:opacity-90 m-1`}
 	}
 	&.disabled {
 		cursor: not-allowed;

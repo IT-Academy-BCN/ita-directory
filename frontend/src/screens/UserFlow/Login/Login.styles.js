@@ -8,7 +8,6 @@ export const Container = styled.div`
 	box-shadow: 0px 3px 6px #00000029;
 	overflow: hidden;
 	max-width: 22rem;
-	height: 22.7rem;
 	margin: 1rem;
 `;
 
@@ -17,7 +16,7 @@ export const Form = styled.form`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2.19rem;
+	padding: 2rem;
 
 	& > .classInput {
 		margin-bottom: 1.69rem;

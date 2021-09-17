@@ -7,7 +7,8 @@ import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from
 import Body from "components/layout/Body/Body";
 
 // eslint-disable-next-line no-useless-escape
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REGEX =
+	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
@@ -81,7 +82,7 @@ const Login = ({onLogin}) => {
 			<Container>
 				<Form onSubmit={handleSubmit}>
 					<div className="classInput">
-						<label>Email</label>
+						{/* <label>Email</label> */}
 						<Input
 							type="email"
 							placeholder="Introduce tu email"
@@ -92,10 +93,11 @@ const Login = ({onLogin}) => {
 							error={isEmailError}
 							errorText="Enter a valid email address..."
 							disabled={disabled}
+							label={"Email"}
 						/>
 					</div>
 					<div className="classInput">
-						<label>Password</label>
+						{/* <label>Password</label> */}
 						<Input
 							type="password"
 							placeholder="Introduce tu contraseña"
@@ -107,6 +109,7 @@ const Login = ({onLogin}) => {
 							errorText="The password to contain more than 6 characters and a uppercase letter"
 							disabled={disabled}
 							minLength={6}
+							label={"Password"}
 						/>
 					</div>
 					<ChangePassword>
@@ -124,8 +127,7 @@ const Login = ({onLogin}) => {
 						loadingText="Accediendo"
 						iconPosition="left"
 						type="submit"
-						className="blueGradient"
-						textStyles={{marginLeft: 10}}
+						className="blueGradient mt-4"
 						isLoading={isLoading}
 						animated="yes"
 						disabled={disabled}
