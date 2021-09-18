@@ -22,7 +22,7 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
+[![GitHub issues open](https://img.shields.io/github/issues/network-tools/shconfparser.svg?)](https://github.com/it-academyproject/ita-directory/issues)
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
