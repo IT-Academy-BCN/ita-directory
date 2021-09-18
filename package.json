@@ -4,13 +4,14 @@
   "workspaces": [
     "frontend",
     "backend",
-    "documentation"
+    "documents"
   ],
   "version": "1.0.0",
   "description": "## Develop",
   "scripts": {
     "backend": "yarn workspace graphile dev",
     "frontend": "yarn workspace frontend start",
+    "docs": "yarn workspace documents start",
     "lint-frontend": "yarn workspace frontend run lint-staged",
     "postinstall": "husky install"
   },

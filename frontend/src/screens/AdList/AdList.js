@@ -34,6 +34,10 @@ const AdList = () => {
 	const [filteredAdList, setFilteredAdlist] = useState([]);
 	const [adList, setAdList] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [maxPriceValue, setMaxPriceValue] = useState();
+	const [minPriceValue, setMinPriceValue] = useState();
+	const [maxM2, setMaxM2] = useState();
+	const [minM2, setMinM2] = useState();
 
 	useEffect(() => {
 		const fetchAds = async () => {
@@ -86,13 +90,35 @@ const AdList = () => {
 
 	const renderList = filteredAdList.map((e, index) => <AdCard {...e} key={index} />);
 
+	useEffect(() => {
+		if (loading === false) {
+			let priceValue = Array.from(renderList, (o) => o.props.price);
+			let maxPV = Math.max(...priceValue);
+			let minPV = Math.min(...priceValue);
+			let sizeValue = Array.from(renderList, (o) => o.props.m2);
+			let mxM2 = Math.max(...sizeValue);
+			let mnM2 = Math.min(...sizeValue);
+
+			setMaxPriceValue(maxPV);
+			setMinPriceValue(minPV);
+			setMaxM2(mxM2);
+			setMinM2(mnM2);
+		}
+	}, [renderList, loading]);
+
 	return (
 		<Body title="Pisos en Alquiler en Madrid" isLoggedIn="true" justifyTitle="flex-start">
 			<AdListStyled>
 				<Container row className="probando">
 					{!loading ? (
 						<>
-							<AdListFilter filtrar={(data) => setFiltro(data)} />
+							<AdListFilter
+								filtrar={(data) => setFiltro(data)}
+								maxPriceValue={maxPriceValue}
+								minPriceValue={minPriceValue}
+								maxM2={maxM2}
+								minM2={minM2}
+							/>
 							<div className="ads">
 								<div className="tree-search">Madrid - Alquiler</div>
 								<div className="h3">Mapa de pisos</div>

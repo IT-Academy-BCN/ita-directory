@@ -1,4 +1,8 @@
-.PHONY: build rebuild
+.PHONY: build rebuild dev
+
+dev:
+	rm -f .env
+	cp .env.development .env
 
 build: ## Build docker image
 	docker-compose build
