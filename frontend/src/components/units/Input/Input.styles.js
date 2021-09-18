@@ -28,7 +28,6 @@ export const StyledIconInput = styled.div`
 	flex-wrap: nowrap;
 	border-radius: 5px;
 	border: 1px solid #dddddd;
-	width: 18.6rem;
 	height: 2.6rem;
 	padding: 5px;
 	&:focus-within {
@@ -52,7 +51,7 @@ export const StyledIconInput = styled.div`
 `;
 
 export const StyledInput = styled.input`
-	width: 18.6rem;
+	/* width: 18.6rem; */
 	border: none;
 	display: flex;
 	font: normal normal normal 16px/32px Helvetica Neue;
