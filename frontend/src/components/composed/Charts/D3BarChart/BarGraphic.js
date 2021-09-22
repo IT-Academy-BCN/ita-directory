@@ -110,7 +110,12 @@ const BarGraphic = ({data, hideModal, active, size, year, month}) => {
 					</button>
 				</div>
 			</div>
-			<D3BarChart data={customData} size={size} selectedMonth={selectedMonth} />
+			<D3BarChart
+				active={active}
+				data={customData}
+				size={size}
+				selectedMonth={selectedMonth}
+			/>
 		</BarGraphicStyled>
 	);
 };

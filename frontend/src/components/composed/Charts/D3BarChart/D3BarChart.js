@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import {barColors, returnChartSize, returnLegendData} from "./barGraphicConst";
 import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
 
-const D3BarChart = ({data, size, selectedMonth}) => {
+const D3BarChart = ({data, active, size, selectedMonth}) => {
 	const [chartWidth, setChartWidth] = useState();
 	const [chartHeight, setChartHeight] = useState();
 
@@ -15,7 +15,7 @@ const D3BarChart = ({data, size, selectedMonth}) => {
 		setLabels(window.innerWidth < 992 ? false : true);
 		reloadChart();
 		// eslint-disable-next-line
-	}, [data, chartWidth, chartHeight]);
+	}, [data, active, chartWidth, chartHeight]);
 
 	//Resize chart
 	useEffect(() => {
@@ -27,7 +27,9 @@ const D3BarChart = ({data, size, selectedMonth}) => {
 	}, []);
 
 	const reloadChart = () => {
-		const [width, height] = returnChartSize([window.innerWidth, window.innerHeight]);
+		const [width, height] = !active
+			? returnChartSize([window.innerWidth, window.innerHeight])
+			: [size[0], size[1]];
 		setChartWidth(width - chartMargin.left - chartMargin.right);
 		setChartHeight(height - chartMargin.top - chartMargin.bottom);
 		clearChart();
@@ -35,13 +37,13 @@ const D3BarChart = ({data, size, selectedMonth}) => {
 	};
 
 	const clearChart = () => {
-		d3.select("#bar-chart").selectAll("*").remove();
+		d3.selectAll(".bar-chart").selectAll("*").remove();
 	};
 
 	const drawLegend = (d) => {
 		//Draw legend
 		const listItems = d3
-			.select("#chart-legend")
+			.selectAll(".chart-legend")
 			.select("ul")
 			.selectAll("li")
 			.data(d)
@@ -87,7 +89,7 @@ const D3BarChart = ({data, size, selectedMonth}) => {
 	const drawChart = () => {
 		if (data) {
 			const ChartContainer = d3
-				.select("#bar-chart")
+				.selectAll(".bar-chart")
 				.attr("width", chartWidth + chartMargin.left + chartMargin.left)
 				.attr("height", chartHeight + chartMargin.top + chartMargin.bottom)
 				.classed("chart", true);
@@ -207,8 +209,8 @@ const D3BarChart = ({data, size, selectedMonth}) => {
 
 	return (
 		<D3SvgChartContainer>
-			<StyledSvg id="bar-chart" />
-			<ChartLegend id="chart-legend" className="chart">
+			<StyledSvg className="bar-chart" />
+			<ChartLegend className="chart-legend">
 				<ul />
 			</ChartLegend>
 		</D3SvgChartContainer>

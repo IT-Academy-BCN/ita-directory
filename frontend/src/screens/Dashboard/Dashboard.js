@@ -23,27 +23,14 @@ function Dashboard() {
 	const [globalYear, setGlobalYear] = useState("2016");
 	const [globalMonth, setGlobalMonth] = useState("all");
 
-	const setChartSize = () => {
+	useEffect(() => {
 		let windowH = window.innerHeight;
 		let windowW = window.innerWidth;
 		let graphW = windowW - windowW * 0.1;
 		let graphH;
 		active ? (graphH = windowH - windowH * 0.6) : (graphH = windowH - windowH * 0.6);
-		setGraphSize([graphW, graphH]);
-	};
-
-	useEffect(() => {
-		setChartSize();
-		// eslint-disable-next-line
+		setGraphSize([graphW, graphH]); // eslint-disable-next-line
 	}, [active]);
-
-	useEffect(() => {
-		window.addEventListener("resize", setChartSize());
-		return () => {
-			window.removeEventListener("resize", setChartSize());
-		};
-		// eslint-disable-next-line
-	}, []);
 
 	return (
 		<Body
