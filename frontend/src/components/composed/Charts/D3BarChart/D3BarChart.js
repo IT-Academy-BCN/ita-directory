@@ -29,7 +29,7 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 	const reloadChart = () => {
 		const [width, height] = !active
 			? returnChartSize([window.innerWidth, window.innerHeight])
-			: [size[0], size[1]];
+			: [window.innerWidth * 0.95, window.innerHeight * 0.6];
 		setChartWidth(width - chartMargin.left - chartMargin.right);
 		setChartHeight(height - chartMargin.top - chartMargin.bottom);
 		clearChart();
