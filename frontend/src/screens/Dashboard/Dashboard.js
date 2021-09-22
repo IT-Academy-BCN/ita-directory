@@ -3,7 +3,7 @@ import {generateData, generateDataLine, daysBetween} from "utils/generateData";
 
 import GlobalFilters from "components/composed/GlobalFilters/GlobalFilters";
 
-import BarChart from "components/composed/Charts/BarChart/BarChart";
+import BarChart from "components/composed/Charts/D3BarChart/BarChart";
 import LineChart from "components/composed/Charts/LineChart/LineChart";
 import PieChart from "components/composed/Charts/PieChart/PieChart";
 
@@ -23,16 +23,27 @@ function Dashboard() {
 	const [globalYear, setGlobalYear] = useState("2016");
 	const [globalMonth, setGlobalMonth] = useState("all");
 
-	useEffect(() => {
+	const setChartSize = () => {
 		let windowH = window.innerHeight;
 		let windowW = window.innerWidth;
 		let graphW = windowW - windowW * 0.1;
 		let graphH;
 		active ? (graphH = windowH - windowH * 0.6) : (graphH = windowH - windowH * 0.6);
 		setGraphSize([graphW, graphH]);
-		console.log("active changed", graphSize);
+	};
+
+	useEffect(() => {
+		setChartSize();
 		// eslint-disable-next-line
 	}, [active]);
+
+	useEffect(() => {
+		window.addEventListener("resize", setChartSize());
+		return () => {
+			window.removeEventListener("resize", setChartSize());
+		};
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<Body
