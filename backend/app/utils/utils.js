@@ -2,6 +2,7 @@ const Joi = require("joi");
 const JWT = require("jsonwebtoken");
 const Hashids = require("hashids");
 const {getRedisClient} = require("../utils/initRedis");
+const argon2 = require("argon2");
 
 const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
 
@@ -54,6 +55,14 @@ const signRefreshToken = (userid, maxAge = 86400) => {
 	return token;
 };
 
+const hashPassword = async (password) =>
+	await argon2.hash(password, {
+		type: argon2.argon2id,
+		memoryCost: 15360,
+		timeCost: 2,
+		parallelism: 1,
+	});
+
 module.exports = {
 	// generateBlob,
 	apiResponse,
@@ -62,4 +71,5 @@ module.exports = {
 	AdByIdParamSchema,
 	signToken,
 	signRefreshToken,
+	hashPassword,
 };

@@ -1,7 +1,6 @@
 const {PrismaClient} = require("@prisma/client");
+const {hashPassword} = require("../app/utils/utils");
 const prisma = new PrismaClient();
-
-console.log("PROCESS ENV DATABASE_URL", process.env.DATABASE_URL);
 
 const user_roles = [
 	{
@@ -44,6 +43,18 @@ const user_status = [
 	},
 ];
 
+const users = [
+	{
+		id: 1,
+		name: "test",
+		lastnames: "test test",
+		email: "test@test.test",
+		user_status: 1,
+		user_role: 3,
+		password: "test",
+	},
+];
+
 async function main() {
 	for (let i = 0; i < user_roles.length; i++) {
 		const ur = user_roles[i];
@@ -66,6 +77,19 @@ async function main() {
 			},
 		});
 	}
+
+	// @todo: fix by students
+	// for (let i = 0; i < users.length; i++) {
+	// 	const user = users[i];
+	// 	await prisma.user.upsert({
+	// 		where: {id: user.id},
+	// 		update: {},
+	// 		create: {
+	// 			...user,
+	// 			password: await hashPassword(user.password),
+	// 		},
+	// 	});
+	// }
 }
 
 main()

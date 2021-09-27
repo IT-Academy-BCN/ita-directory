@@ -7,7 +7,7 @@ FROM node:14 as builder
 WORKDIR /app
 
 COPY ./package.json prisma ./
-RUN npm install
+RUN npm install && npm uninstall argon2 && npm install argon2 --build-from-source
 
 # stage two
 FROM node:14
