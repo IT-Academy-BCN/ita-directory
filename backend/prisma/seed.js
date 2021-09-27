@@ -1,6 +1,8 @@
 const {PrismaClient} = require("@prisma/client");
 const prisma = new PrismaClient();
 
+console.log("PROCESS ENV DATABASE_URL", process.env.DATABASE_URL);
+
 const user_roles = [
 	{
 		id: 1,
