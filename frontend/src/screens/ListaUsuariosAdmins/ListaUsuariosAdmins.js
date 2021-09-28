@@ -91,13 +91,13 @@ function ListaUsuariosAdmins() {
 					</StyledDiv>
 				),
 				accessor: "foto",
-				/*
-				Cell: (row) => (
+
+				Cell: ({row}) => (
 					<StyledDiv>
 						{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
 					</StyledDiv>
 				),
-				*/
+
 				//sortable: true,
 				//compact: true,
 				minWidth: "32px",
@@ -110,7 +110,7 @@ function ListaUsuariosAdmins() {
 					</StyledDiv>
 				),
 				accessor: "nombre",
-				//Cell: (row) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
+				//Cell: ({row}) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
 				//sortable: true,
 				//compact: true,
 				minWidth: "40px",
@@ -118,7 +118,7 @@ function ListaUsuariosAdmins() {
 			{
 				Header: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
 				accessor: "email",
-				//Cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
+				//Cell: ({row}) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
 				//sortable: true,
 				//compact: true,
 				minWidth: "60px",
@@ -130,7 +130,7 @@ function ListaUsuariosAdmins() {
 				//compact: true,
 				//right: true,
 				minWidth: "140px",
-				Cell: (row) => (
+				Cell: ({row}) => (
 					<div className="actions-column">
 						<button onClick={() => handleModalStatus(row.nombre, row.acciones)}>
 							<FontAwesomeIcon
