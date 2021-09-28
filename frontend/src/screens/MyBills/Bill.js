@@ -43,8 +43,20 @@ const Bill = (color_logo) => {
 	];
 
 	// Columns for datatables
+	/*const penguin = ({row}) => {
+		`${row.itemID}`;
+	};*/
+	const penguin = () => {
+		console.log("penguin testing");
+		return "202100031";
+	};
+
 	const columns = useMemo(
 		() => [
+			{
+				Header: <div>#</div>,
+				accessor: "202100031",
+			},
 			/*{
 				Header: <div>#</div>,
 				accessor: ({row}) => row.itemID,
