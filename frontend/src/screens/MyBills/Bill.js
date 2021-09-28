@@ -6,6 +6,8 @@ import {BillComponentStyled, BillStyled, Error} from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
 
+// import {useTable} from "react-table";
+
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
 	const [data] = useState(modelBill); // Fake data from JSON modelBillData
