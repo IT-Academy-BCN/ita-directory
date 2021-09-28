@@ -26,7 +26,8 @@ function ListaUsuariosAdmins() {
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
-	const data = useMemo(() => dataUsers, []);
+	const data = useMemo(() => [...dataUsers], [dataUsers]);
+	console.log("data + " + data[0].email);
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -107,7 +108,7 @@ function ListaUsuariosAdmins() {
 					</StyledDiv>
 				),
 				accessor: "nombre",
-				Cell: (row) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
+				//Cell: (row) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
 				//sortable: true,
 				//compact: true,
 				minWidth: "40px",
@@ -115,7 +116,7 @@ function ListaUsuariosAdmins() {
 			{
 				name: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
 				accessor: "email",
-				Cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
+				//Cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
 				//sortable: true,
 				//compact: true,
 				minWidth: "60px",
@@ -157,7 +158,7 @@ function ListaUsuariosAdmins() {
 				),
 			},
 		],
-		[]
+		[images]
 	);
 
 	const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
