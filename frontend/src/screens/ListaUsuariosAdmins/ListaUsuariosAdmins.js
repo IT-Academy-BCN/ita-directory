@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useMemo, useCallback} from "react";
 import {useTable} from "react-table";
 import {
 	faUserClock,
@@ -41,32 +41,32 @@ function ListaUsuariosAdmins() {
 	//Edit Profile
 	const [currentEmail, setCurrentEmail] = useState("");
 
-	const handleModalStatus = (name, state) => {
+	const handleModalStatus = useCallback((name, state) => {
 		setCurrentName(name);
 		setCurrentUserState(state);
 		setActive(true);
-	};
+	}, []);
 
-	const handleModalDelete = (row) => {
+	const handleModalDelete = useCallback((row) => {
 		setCurrentColum(row);
 		setEliminar(true);
-	};
+	}, []);
 
-	const handleModalEdit = (name, email) => {
+	const handleModalEdit = useCallback((name, email) => {
 		setCurrentName(name);
 		setCurrentEmail(email);
 		setEditar(true);
-	};
+	}, []);
 
-	const updateDelete = (user) => {
+	const updateDelete = useCallback((user) => {
 		const newUsers = dataUsers.filter(function (user) {
 			return user !== currentColum;
 		});
 
 		setDataUsers(newUsers);
-	};
+	}, []);
 
-	const updateUserData = (newName, newEmail) => {
+	const updateUserData = useCallback((newName, newEmail) => {
 		setDataUsers(
 			dataUsers.map((item) =>
 				item.nombre === currentName || item.email === currentEmail
@@ -74,13 +74,13 @@ function ListaUsuariosAdmins() {
 					: item
 			)
 		);
-	};
+	}, []);
 
-	const updateUserStatus = (val, nombreUsuario) => {
+	const updateUserStatus = useCallback((val, nombreUsuario) => {
 		setDataUsers(
 			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
 		);
-	};
+	}, []);
 
 	const columns = useMemo(
 		() => [
