@@ -108,10 +108,11 @@ exports.getUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
 	try {
 		//Checking if valid email, password and privacy policy.
-		const {name, lastnames, ...userDTO} = req.body;
+		const {...userDTO} = req.body;
 		const validFields = await registerSchema.validateAsync(userDTO);
 
-		const doesExist = await prisma.user.findOne({where: {email: req.body.email}});
+		const doesExist = await prisma.user.findUnique({where: {email: req.body.email,},});
+		
 		if (doesExist !== null) {
 			res.status(400).json(
 				apiResponse({
@@ -121,7 +122,16 @@ exports.registerUser = async (req, res) => {
 			);
 		}
 		const {privacy, ...userDTO2} = req.body;
-		const newUser = await prisma.user.create({...req.body});
+		//Creating user without name or lastnames
+		const newUser = await prisma.user.create(
+			{data: {
+					email: req.body.email,
+					password: req.body.password,
+					user_status_id: 1,
+					user_role_id: 3,
+					refresh_token: "20"
+				},
+			});
 		res.status(200).json(
 			apiResponse({
 				message: "User registered correctly.",
