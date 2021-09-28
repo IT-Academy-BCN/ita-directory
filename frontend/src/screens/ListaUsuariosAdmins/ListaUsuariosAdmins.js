@@ -91,11 +91,13 @@ function ListaUsuariosAdmins() {
 					</StyledDiv>
 				),
 				accessor: "foto",
+				/*
 				Cell: (row) => (
 					<StyledDiv>
 						{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
 					</StyledDiv>
 				),
+				*/
 				//sortable: true,
 				//compact: true,
 				minWidth: "32px",
@@ -114,7 +116,7 @@ function ListaUsuariosAdmins() {
 				minWidth: "40px",
 			},
 			{
-				name: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
+				Header: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
 				accessor: "email",
 				//Cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
 				//sortable: true,
