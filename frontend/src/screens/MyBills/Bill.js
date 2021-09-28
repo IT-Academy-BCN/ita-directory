@@ -1,4 +1,3 @@
-/*
 import {useState} from "react";
 import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
@@ -279,5 +278,3 @@ const Bill = (color_logo) => {
 };
 
 export default Bill;
-
-*/
