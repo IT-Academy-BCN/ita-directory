@@ -5,7 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const expressJSDocSwagger = require("express-jsdoc-swagger");
 const options = require("./utils/swaggerOptions");
-// const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/users");
 // const constantsRoute = require("./routes/constants");
 // const adsRoutes = require("./routes/ads");
 // const authenticateToken = require("./middleware/verifyToken");
@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 // Routes
 // app.use("/", constantsRoute);
 // app.use("/ads", adsRoutes);
-// app.use("/users", userRoutes);
+app.use("/users", userRoutes);
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
