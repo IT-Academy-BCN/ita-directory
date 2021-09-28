@@ -1,11 +1,12 @@
-import {useState, useMemo, useCallback} from "react";
-import {useTable} from "react-table";
-//import DataTable from "react-data-table-component";
+import {useState} from "react";
+import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
 import {BillComponentStyled, BillStyled, Error} from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
+
+// import {useTable} from "react-table";
 
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
@@ -19,6 +20,7 @@ const Bill = (color_logo) => {
 	});
 
 	//Custom styles
+
 	const customStyles = {
 		rows: {
 			style: {
@@ -43,63 +45,55 @@ const Bill = (color_logo) => {
 	];
 
 	// Columns for datatables
-	const columns = useMemo(
-		() => [
-			/*{
-				Header: <div>#</div>,
-				accessor: ({row}) => row.itemID,
-				Cell: ({row}) => <div>{row.values.itemID}</div>,
-				//center: true,
-				//hide: 600,
-				//grow: 1.15,
-			},*/
-			{
-				Header: <div>ITEM</div>,
-				accessor: "itemTitle",
-				//Cell: ({row}) => <div className="cell-item">{row.values.itemTitle}</div>,
-				//left: true,
-				//grow: 2.4,
-			},
-			{
-				Header: <div>PRICE</div>,
-				accessor: "itemPrice",
-				/*Cell: ({row}) => (
-					<div className="cell-price">
-						<span>€ </span>
-						{row.values.itemPrice}
-					</div>
-				),
-				*/
-				//left: true,
-				//grow: 0,
-			},
-			{
-				Header: <div>QUANTITY</div>,
-				accessor: "itemQuant",
-				//Cell: ({row}) => <div className="cell-quantity">{row.values.itemQuant}</div>,
-				//center: true,
-				//grow: 0,
-			},
-			{
-				Header: <div>AMOUNT</div>,
-				accessor: "amount",
-				/*Cell: ({row}) => (
-					<div>
-						<span>€ </span>
-						{row.values.itemPrice * row.values.itemQuant}
-					</div>
-				), */
-				//center: true,
-				//grow: 1.2,
-			},
-		],
-		[]
-	);
+	const tradeColumns = [
+		{
+			name: <div>#</div>,
+			selector: (row) => row.itemID,
+			cell: (row) => <div>{row.itemID}</div>,
+			center: true,
+			hide: 600,
+			grow: 1.15,
+		},
+		{
+			name: <div>ITEM</div>,
+			selector: "itemTitle",
+			cell: (row) => <div className="cell-item">{row.itemTitle}</div>,
+			left: true,
+			grow: 2.4,
+		},
+		{
+			name: <div>PRICE</div>,
+			selector: "itemPrice",
+			cell: (row) => (
+				<div className="cell-price">
+					<span>€ </span>
+					{row.itemPrice}
+				</div>
+			),
+			left: true,
+			grow: 0,
+		},
+		{
+			name: <div>QUANTITY</div>,
+			selector: "itemQuant",
+			cell: (row) => <div className="cell-quantity">{row.itemQuant}</div>,
+			center: true,
+			grow: 0,
+		},
+		{
+			name: <div>AMOUNT</div>,
+			selector: "amount",
+			cell: (row) => (
+				<div>
+					<span>€ </span>
+					{row.itemPrice * row.itemQuant}
+				</div>
+			),
+			center: true,
+			grow: 1.2,
+		},
+	];
 
-	const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
-		columns,
-		data,
-	});
 	const generatedBill = selectedBill.map((bill) => {
 		return (
 			<BillStyled key={bill.id} color={Colors.lightGray}>
@@ -132,43 +126,13 @@ const Bill = (color_logo) => {
 					</div>
 				</section>
 				<div className="tableWrapper">
-					{/*
 					<DataTable
 						columns={tradeColumns}
 						noHeader={true}
 						data={bill.tradeData.items}
 						customStyles={customStyles}
 						conditionalRowStyles={conditionalRowStyles}
-					/>*/}
-					<table {...getTableProps()}>
-						<thead>
-							{headerGroups.map((headerGroup) => (
-								<tr {...headerGroup.getHeaderGroupProps()}>
-									{headerGroup.headers.map((column) => (
-										<th {...column.getHeaderProps()}>
-											{column.render("Header")}
-										</th>
-									))}
-								</tr>
-							))}
-						</thead>
-						<tbody {...getTableBodyProps()}>
-							{rows.map((row) => {
-								prepareRow(row);
-								return (
-									<tr {...row.getRowProps()}>
-										{row.cells.map((cell) => {
-											return (
-												<td {...cell.getCellProps()}>
-													{cell.render("Cell")}
-												</td>
-											);
-										})}
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
+					/>
 				</div>
 				<div className="termsAndCalc">
 					<div className="terms">
@@ -285,8 +249,8 @@ const Bill = (color_logo) => {
 				</div>
 				<div className="footer">
 					<div>
-						<h4>Thank You For Doing Business With Us.</h4>
-						<p>We aim to provide easy solutions for your problems.</p>
+						<h4>Thank You For Our Business</h4>
+						<p>We make it easy for your problems.</p>
 					</div>
 				</div>
 			</BillStyled>
@@ -313,4 +277,4 @@ const Bill = (color_logo) => {
 	);
 };
 
-export default Bill;
+//export default Bill;
