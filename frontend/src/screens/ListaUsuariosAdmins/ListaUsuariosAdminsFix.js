@@ -9,8 +9,7 @@ import {
 import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
-//import DataTable from "react-data-table-component";
-import ReactTable from "./ReactTable";
+import ReactTable from "../../components/composed/Table/ReactTable";
 import usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

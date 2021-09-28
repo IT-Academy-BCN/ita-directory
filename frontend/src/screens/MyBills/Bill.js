@@ -1,5 +1,5 @@
 import {useState, useMemo, useCallback, useEffect} from "react";
-import {useTable} from "react-table";
+import ReactTable from "../../components/composed/Table/ReactTable";
 //import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
@@ -134,10 +134,6 @@ const Bill = (color_logo) => {
 		[]
 	);
 
-	const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
-		columns,
-		data,
-	});
 	const generatedBill = selectedBill.map((bill) => {
 		return (
 			<BillStyled key={bill.id} color={Colors.lightGray}>
@@ -170,43 +166,7 @@ const Bill = (color_logo) => {
 					</div>
 				</section>
 				<div className="tableWrapper">
-					{/*
-					<DataTable
-						columns={tradeColumns}
-						noHeader={true}
-						data={bill.tradeData.items}
-						customStyles={customStyles}
-						conditionalRowStyles={conditionalRowStyles}
-					/>*/}
-					<table {...getTableProps()}>
-						<thead>
-							{headerGroups.map((headerGroup) => (
-								<tr {...headerGroup.getHeaderGroupProps()}>
-									{headerGroup.headers.map((column) => (
-										<th {...column.getHeaderProps()}>
-											{column.render("Header")}
-										</th>
-									))}
-								</tr>
-							))}
-						</thead>
-						<tbody {...getTableBodyProps()}>
-							{rows.map((row) => {
-								prepareRow(row);
-								return (
-									<tr {...row.getRowProps()}>
-										{row.cells.map((cell) => {
-											return (
-												<td {...cell.getCellProps()}>
-													{cell.render("Cell")}
-												</td>
-											);
-										})}
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
+					<ReactTable columns={columns} data={data} />
 				</div>
 				<div className="termsAndCalc">
 					<div className="terms">
