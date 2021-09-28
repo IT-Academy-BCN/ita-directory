@@ -81,7 +81,8 @@ exports.getUser = async (req, res) => {
 		res.status(400).send("Request is empty.");
 	}
 	try {
-		const USER = await prisma.user.findUnique({where: {id: req.body.id}});
+		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id),},});
+		console.log("user", USER);
 		if (USER === null) {
 			res.status(204).json({
 				success: "false",
