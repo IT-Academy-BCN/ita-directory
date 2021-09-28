@@ -110,7 +110,9 @@ function ListaUsuariosAdmins() {
 					</StyledDiv>
 				),
 				accessor: "nombre",
-				//Cell: ({row}) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
+				Cell: ({row}) => (
+					<StyledDiv color={Colors.frenchBlue}>{row.values.nombre}</StyledDiv>
+				),
 				//sortable: true,
 				//compact: true,
 				minWidth: "40px",
@@ -118,7 +120,9 @@ function ListaUsuariosAdmins() {
 			{
 				Header: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
 				accessor: "email",
-				//Cell: ({row}) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
+				Cell: ({row}) => (
+					<StyledDiv color={Colors.extraDarkBlue}>{row.values.email}</StyledDiv>
+				),
 				//sortable: true,
 				//compact: true,
 				minWidth: "60px",
@@ -132,28 +136,36 @@ function ListaUsuariosAdmins() {
 				minWidth: "140px",
 				Cell: ({row}) => (
 					<div className="actions-column">
-						<button onClick={() => handleModalStatus(row.nombre, row.acciones)}>
+						<button
+							onClick={() =>
+								handleModalStatus(row.values.nombre, row.values.acciones)
+							}
+						>
 							<FontAwesomeIcon
 								icon={
-									row.acciones === "rejected"
+									row.values.acciones === "rejected"
 										? faUserAltSlash
-										: row.acciones === "aprobado"
+										: row.values.acciones === "aprobado"
 										? faUserCheck
 										: faUserClock
 								}
 								color={
-									row.acciones === "rejected"
+									row.values.acciones === "rejected"
 										? Colors.redColor
-										: row.acciones === "aprobado"
+										: row.values.acciones === "aprobado"
 										? Colors.darkGreen
 										: Colors.grey
 								}
 							></FontAwesomeIcon>
 						</button>
-						<button onClick={() => handleModalEdit(row.nombre, row.email, row.id)}>
+						<button
+							onClick={() =>
+								handleModalEdit(row.values.nombre, row.values.email, row.values.id)
+							}
+						>
 							<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
 						</button>
-						<button onClick={() => handleModalDelete(row)}>
+						<button onClick={() => handleModalDelete({row})}>
 							<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
 						</button>
 					</div>
