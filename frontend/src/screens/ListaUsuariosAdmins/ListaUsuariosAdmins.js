@@ -115,7 +115,7 @@ function ListaUsuariosAdmins() {
 				),
 				//sortable: true,
 				//compact: true,
-				minWidth: "40px",
+				minWidth: "60px",
 			},
 			{
 				Header: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
@@ -128,12 +128,16 @@ function ListaUsuariosAdmins() {
 				minWidth: "60px",
 			},
 			{
-				Header: <StyledDiv color={Colors.frenchBlue}>Acciones</StyledDiv>,
+				Header: (
+					<StyledDiv color={Colors.frenchBlue} justify={"flex-end"}>
+						Acciones
+					</StyledDiv>
+				),
 				accessor: "acciones",
 				//sortable: true,
 				//compact: true,
 				//right: true,
-				minWidth: "140px",
+				minWidth: "60px",
 				Cell: ({row}) => (
 					<div className="actions-column">
 						<button
@@ -165,7 +169,7 @@ function ListaUsuariosAdmins() {
 						>
 							<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
 						</button>
-						<button onClick={() => handleModalDelete({row})}>
+						<button onClick={() => handleModalDelete(row)}>
 							<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
 						</button>
 					</div>
@@ -193,19 +197,12 @@ function ListaUsuariosAdmins() {
 		>
 			<Container row>
 				<StyledWrapper>
-					<table {...getTableProps()} style={{border: "solid 1px blue"}}>
+					<table {...getTableProps()}>
 						<thead>
 							{headerGroups.map((headerGroup) => (
 								<tr {...headerGroup.getHeaderGroupProps()}>
 									{headerGroup.headers.map((column) => (
-										<th
-											{...column.getHeaderProps()}
-											style={{
-												background: "white",
-												color: "#0077B3",
-												fontWeight: "bold",
-											}}
-										>
+										<th {...column.getHeaderProps()}>
 											{column.render("Header")}
 										</th>
 									))}
@@ -219,14 +216,7 @@ function ListaUsuariosAdmins() {
 									<tr {...row.getRowProps()}>
 										{row.cells.map((cell) => {
 											return (
-												<td
-													{...cell.getCellProps()}
-													style={{
-														padding: "10px",
-														/*borderBottom: "solid 1px gray",*/
-														background: "white",
-													}}
-												>
+												<td {...cell.getCellProps()}>
 													{cell.render("Cell")}
 												</td>
 											);
