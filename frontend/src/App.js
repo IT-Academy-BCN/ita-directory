@@ -10,7 +10,8 @@ import Registration from "screens/UserFlow/Registration/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList";
-import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
+import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdminDev";
+import ListaUsuariosAdminsFix from "screens/ListaUsuariosAdmins/ListaUsuariosAdminsFix";
 import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
 import Bill from "screens/MyBills/Bill";
@@ -36,6 +37,7 @@ const App = () => {
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
+				<Route exact path="/lista-usuarios-admins2" component={ListaUsuariosAdminsFix} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/user-ads" component={UserAds} />
 				<Route exact path="/my-bills" component={MyBills} />
