@@ -43,9 +43,9 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
         navbar: {
-          title: "My Site",
+          title: "ITA Directory",
           logo: {
-            alt: "My Site Logo",
+            alt: "ITA Directory",
             src: "img/logo.svg",
           },
           items: [
@@ -57,7 +57,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             },
             { to: "/blog", label: "Blog", position: "left" },
             {
-              href: "https://github.com/facebook/docusaurus",
+              href: "https://github.com/it-academyproject/ita-directory",
               label: "GitHub",
               position: "right",
             },

@@ -148,7 +148,7 @@ exports.registerUser = async (req, res) => {
 //get all users (FOR TESTING PURPOSE)
 exports.getAllUsers = async (req, res) => {
 	try {
-		const users = await prisma.user.findAll();
+		const users = await prisma.user.findMany();
 		res.status(200).json(users);
 	} catch (err) {
 		console.error(err);
