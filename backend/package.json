@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "dev": "export NODE_ENV=development && nodemon server.js",
-    "dev-windows": "set NODE_ENV=development&& nodemon server.js",
-    "dev:migrate": "npx prisma generate && npx prisma migrate dev --name init && npx prisma db seed --preview-feature",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate-dev": "prisma migrate dev",
+    "prisma:seed": "npx prisma db seed --preview-feature",
+    "start:dev": "npm run prisma:generate && npm run prisma:migrate-dev && npm run prisma:seed && npm run dev",
     "test": "test"
   },
   "keywords": [

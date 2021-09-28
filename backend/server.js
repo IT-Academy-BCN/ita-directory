@@ -15,6 +15,6 @@ const io = socketio(server, {
 require("./app/config/sockets")(io);
 
 server.listen(process.env.PORT, () => {
-	console.log(`Server is running on port ${process.env.PORT}.`);
+	console.log(`Server is running on port and working ${process.env.PORT}.`);
 	console.log(`Visit: http://localhost:${process.env.PORT}/`);
 });
