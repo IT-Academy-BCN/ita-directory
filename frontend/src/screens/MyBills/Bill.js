@@ -1,4 +1,4 @@
-import {useState, useMemo, useCallback} from "react";
+import {useState, useMemo, useCallback, useEffect} from "react";
 import {useTable} from "react-table";
 //import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
@@ -9,13 +9,28 @@ import DownloadPDF from "./DocumentComponent";
 
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
-	const [data] = useState(modelBill); // Fake data from JSON modelBillData
+	//const [data] = useState(modelBill); // Fake data from JSON modelBillData
+	const [billData] = useState(modelBill);
 
-	const indexOfId = data.findIndex((i) => id === String(i.id));
+	const indexOfId = billData.findIndex((i) => id === String(i.id));
+	console.log("indexOfId" + indexOfId);
+
+	const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+
+	const data = useMemo(() => [...chosenBill], [chosenBill]);
+
+	useEffect(() => {
+		let yo = chosenBill ? JSON.stringify(chosenBill) : "not receiving";
+		localStorage.setItem("data", "test");
+		localStorage.setItem("datareal", yo);
+	}, [billData]);
 
 	// Selecting the right bill...
-	const selectedBill = data.filter((selected) => {
-		return selected.id === parseInt(id, 10);
+	const selectedBill = billData.filter((selected) => {
+		let res = selected.id === parseInt(id, 10);
+		localStorage.setItem("selectedBill", JSON.stringify(res));
+		return res;
+		//return selected.id === parseInt(id, 10);
 	});
 
 	//Custom styles
@@ -48,16 +63,27 @@ const Bill = (color_logo) => {
 	};*/
 	const penguin = () => {
 		console.log("penguin testing");
+
 		return "202100031";
 	};
 
+	const penguinItem = ({row}) => {
+		/*({row}) => <div className="cell-item">{row.values.itemTitle}</div>*/
+		console.log("penguinItems testing");
+		localStorage.setItem("testing", JSON.stringify(row.values.itemTitle));
+		localStorage.setItem("testing", JSON.stringify(row.itemTitle));
+		//localStorage.setItem("testing2", JSON.stringify(row));
+		return <div>penguin item test</div>;
+	};
 	const columns = useMemo(
 		() => [
 			{
 				Header: <div>#</div>,
-				accessor: "202100031",
+				accessor: "itemID",
+				Cell: ({row}) => <div>{row.original.itemID}</div>,
 			},
 			/*{
+				accessor: "202100031",
 				Header: <div>#</div>,
 				accessor: ({row}) => row.itemID,
 				Cell: ({row}) => <div>{row.values.itemID}</div>,
@@ -68,39 +94,39 @@ const Bill = (color_logo) => {
 			{
 				Header: <div>ITEM</div>,
 				accessor: "itemTitle",
-				//Cell: ({row}) => <div className="cell-item">{row.values.itemTitle}</div>,
+				Cell: ({row}) => <div className="cell-item">{row.original.itemTitle}</div>,
 				//left: true,
 				//grow: 2.4,
 			},
 			{
 				Header: <div>PRICE</div>,
 				accessor: "itemPrice",
-				/*Cell: ({row}) => (
+				Cell: ({row}) => (
 					<div className="cell-price">
 						<span>€ </span>
-						{row.values.itemPrice}
+						{row.original.itemPrice}
 					</div>
 				),
-				*/
+
 				//left: true,
 				//grow: 0,
 			},
 			{
 				Header: <div>QUANTITY</div>,
 				accessor: "itemQuant",
-				//Cell: ({row}) => <div className="cell-quantity">{row.values.itemQuant}</div>,
+				Cell: ({row}) => <div className="cell-quantity">{row.original.itemQuant}</div>,
 				//center: true,
 				//grow: 0,
 			},
 			{
 				Header: <div>AMOUNT</div>,
 				accessor: "amount",
-				/*Cell: ({row}) => (
+				Cell: ({row}) => (
 					<div>
 						<span>€ </span>
-						{row.values.itemPrice * row.values.itemQuant}
+						{row.original.itemPrice * row.original.itemQuant}
 					</div>
-				), */
+				),
 				//center: true,
 				//grow: 1.2,
 			},
