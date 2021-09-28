@@ -1,5 +1,5 @@
 const {PrismaClient} = require("@prisma/client");
-const {hashPassword} = require("../app/utils/utils");
+// const {hashPassword} = require("../app/utils/utils");
 const prisma = new PrismaClient();
 
 const user_roles = [
@@ -98,5 +98,6 @@ main()
 		process.exit(1);
 	})
 	.finally(async () => {
+		console.log("disconnect Prisma");
 		await prisma.$disconnect();
 	});
