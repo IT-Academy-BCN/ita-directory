@@ -50,7 +50,6 @@ export const StyledCell = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: ${(props) => (props.justify ? props.justify : "start")};
-	//justify-content: flex-end;
 	color: ${(props) => props.color};
 	font-weight: bold;
 	padding: 10px 0px;

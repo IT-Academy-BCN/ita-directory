@@ -51,8 +51,6 @@ const ListaUsuariosAdmins = () => {
 	const handleModalDelete = useCallback(
 		(row) => {
 			setCurrentColum((prev) => row);
-			localStorage.setItem("currentColP", JSON.stringify("penguinsRgo"));
-			localStorage.setItem("currentCol", JSON.stringify(row));
 			setEliminar((prev) => true);
 		},
 		[currentColum, eliminar]
@@ -104,14 +102,14 @@ const ListaUsuariosAdmins = () => {
 	);
 
 	const customRowStyle = (row) => {
-		return {borderTop: "1px solid #b0b0b0"};
+		return {borderTop: `1px solid ${Colors.lightGray}`};
 	};
 
 	const columns = useMemo(
 		() => [
 			{
 				Header: (
-					<StyledCell color={Colors.frenchBlue} paddingL="0px">
+					<StyledCell color={Colors.bahamaBlue} paddingL="0px">
 						Foto
 					</StyledCell>
 				),
@@ -126,27 +124,27 @@ const ListaUsuariosAdmins = () => {
 			},
 			{
 				Header: (
-					<StyledCell color={Colors.frenchBlue} padding="0">
+					<StyledCell color={Colors.bahamaBlue} padding="0">
 						Nombre
 					</StyledCell>
 				),
 				accessor: "nombre",
 				Cell: ({row}) => (
-					<StyledCell color={Colors.frenchBlue}>{row.values.nombre}</StyledCell>
+					<StyledCell color={Colors.bahamaBlue}>{row.values.nombre}</StyledCell>
 				),
 				minWidth: "60px",
 			},
 			{
-				Header: <StyledCell color={Colors.frenchBlue}>Email</StyledCell>,
+				Header: <StyledCell color={Colors.bahamaBlue}>Email</StyledCell>,
 				accessor: "email",
 				Cell: ({row}) => (
-					<StyledCell color={Colors.extraDarkBlue}>{row.values.email}</StyledCell>
+					<StyledCell color={Colors.prussianBlue}>{row.values.email}</StyledCell>
 				),
 				minWidth: "60px",
 			},
 			{
 				Header: (
-					<StyledCell color={Colors.frenchBlue} justify={"flex-end"}>
+					<StyledCell color={Colors.bahamaBlue} justify={"flex-end"}>
 						Acciones
 					</StyledCell>
 				),
@@ -181,7 +179,7 @@ const ListaUsuariosAdmins = () => {
 								handleModalEdit(row.values.nombre, row.values.email, row.values.id)
 							}
 						>
-							<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
+							<FontAwesomeIcon icon={faEye} color={Colors.prussianBlue} />
 						</button>
 						<button onClick={() => handleModalDelete(row.values)}>
 							<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
