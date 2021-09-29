@@ -122,11 +122,7 @@ const ListaUsuariosAdmins = () => {
 						{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
 					</StyledDiv>
 				),
-
-				//sortable: true,
-				//compact: true,
 				minWidth: "32px",
-				//hide: 600,
 			},
 			{
 				Header: (
@@ -138,8 +134,6 @@ const ListaUsuariosAdmins = () => {
 				Cell: ({row}) => (
 					<StyledDiv color={Colors.frenchBlue}>{row.values.nombre}</StyledDiv>
 				),
-				//sortable: true,
-				//compact: true,
 				minWidth: "60px",
 			},
 			{
@@ -148,8 +142,6 @@ const ListaUsuariosAdmins = () => {
 				Cell: ({row}) => (
 					<StyledDiv color={Colors.extraDarkBlue}>{row.values.email}</StyledDiv>
 				),
-				//sortable: true,
-				//compact: true,
 				minWidth: "60px",
 			},
 			{
@@ -159,9 +151,6 @@ const ListaUsuariosAdmins = () => {
 					</StyledDiv>
 				),
 				accessor: "acciones",
-				//sortable: true,
-				//compact: true,
-				//right: true,
 				minWidth: "60px",
 				Cell: ({row}) => (
 					<div className="actions-column">
@@ -204,7 +193,6 @@ const ListaUsuariosAdmins = () => {
 		[images]
 	);
 
-	//data: dataUsers
 	return (
 		<Body
 			title="Usuarios registrados"

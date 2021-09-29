@@ -9,7 +9,6 @@ import DownloadPDF from "./DocumentComponent";
 
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
-	//const [data] = useState(modelBill); // Fake data from JSON modelBillData
 	const [billData] = useState(modelBill);
 
 	const indexOfId = billData.findIndex((i) => id === String(i.id));
@@ -34,7 +33,6 @@ const Bill = (color_logo) => {
 	};
 
 	// Columns for datatables
-
 	const columns = useMemo(
 		() => [
 			{
@@ -226,7 +224,7 @@ const Bill = (color_logo) => {
 				<div className="footer">
 					<div>
 						<h4>Thank You For Doing Business With Us.</h4>
-						<p>We aim to provide easy solutions for your problems.</p>
+						<p>We aim to provide simple solutions for your business problems.</p>
 					</div>
 				</div>
 			</BillStyled>

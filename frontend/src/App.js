@@ -10,13 +10,10 @@ import Registration from "screens/UserFlow/Registration/Registration";
 import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
 import Profile from "screens/UserFlow/Profile/Profile";
 import AdList from "screens/AdList/AdList";
-import ListaUsuariosAdminsDev from "screens/ListaUsuariosAdmins/ListaUsuariosAdminDev";
 import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
 import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
-import MyBillsDev from "screens/MyBills/Billdev";
 import Bill from "screens/MyBills/Bill";
-import Billdev from "screens/MyBills/Billdev";
 import UserAds from "screens/UserAds/UserAds";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
@@ -39,13 +36,10 @@ const App = () => {
 				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
-				<Route exact path="/lista-usuarios-admins-dev" component={ListaUsuariosAdminsDev} />
 				<Route exact path="/dashboard" component={Dashboard} />
 				<Route exact path="/user-ads" component={UserAds} />
 				<Route exact path="/my-bills" component={MyBills} />
-				<Route exact path="/my-bills-dev" component={MyBillsDev} />
 				<Route path="/my-bills/:id" children={<Bill />} />
-				<Route path="/my-bills-dev/:id" children={<Billdev />} />
 				<Route path="mi-ruta" children={noExiste} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
