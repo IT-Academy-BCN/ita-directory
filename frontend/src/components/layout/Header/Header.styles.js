@@ -112,7 +112,7 @@ export const HeaderStyled = styled.header`
 export const StyledSubHeader = styled.div`
 	width: 100%;
 	background-color: ${(props) => (props.color_header ? props.color_header : "#e6f2f2")}; //t
-	//border: 1px solid #b5dddd;
+	border: ${(props) => (props.color_header ? `` : "1px solid #b5dddd")};
 	border-left: none;
 	border-right: none;
 	margin-bottom: 2rem;
