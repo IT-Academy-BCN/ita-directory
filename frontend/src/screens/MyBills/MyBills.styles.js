@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
-export const StyledWrapper = styled.div`
+export const MyTableStyle = styled.table`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	margin: 20px 0px;
-	font: normal normal normal 14px/18px Arial;
 	width: 100%;
+	max-width: 70%;
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid #b0b0b0;
+
+
 
 	@media only screen and (max-width: 650px) {
 		width: 100%;
@@ -18,11 +20,12 @@ export const StyledWrapper = styled.div`
 		width: 100%;
 	}
 
-	.actions-column {
-		display: flex;
-		align-items: center;
-		justify-content: end;
-		width: 40px;
+
+	// .actions-column {
+	// 	display: flex;
+	// 	align-items: center;
+	// 	justify-content: end;
+	// 	width: 40px;
 
 		button {
 			width: 42px;
@@ -45,7 +48,39 @@ export const StyledDiv = styled.div`
 	font-size: 14px;
 	text-align: center;
 	font-weight: bold;
-	padding: 5px 0px;
+	padding: 10px 0px;
+
+	padding-left: ${(props) => props.paddingL};
+	@media only screen and (max-width: 650px) {
+		font-size: 14px;
+	}
+	@media only screen and (max-width: 450px) {
+		font-size: 14px;
+	}
+`;
+
+export const RowTableStyle = styled.div`
+	color: ${(props) => props.color};
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+	padding: 10px 0px;
+
+	padding-left: ${(props) => props.paddingL};
+	@media only screen and (max-width: 650px) {
+		font-size: 14px;
+	}
+	@media only screen and (max-width: 450px) {
+		font-size: 14px;
+	}
+`;
+
+export const HeaderTableStyle = styled.div`
+	color: ${(props) => props.color};
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+	padding: 10px 0px;
 
 	padding-left: ${(props) => props.paddingL};
 	@media only screen and (max-width: 650px) {

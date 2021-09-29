@@ -1,5 +1,6 @@
-import {useState} from "react";
-import DataTable from "react-data-table-component";
+import {useState, useMemo, useCallback, useEffect} from "react";
+import ReactTable from "../../components/composed/Table/ReactTable";
+//import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
 import {BillComponentStyled, BillStyled, Error} from "./Bill.styles";
@@ -8,89 +9,70 @@ import DownloadPDF from "./DocumentComponent";
 
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
-	const [data] = useState(modelBill); // Fake data from JSON modelBillData
+	const [billData] = useState(modelBill);
 
-	const indexOfId = data.findIndex((i) => id === String(i.id));
+	const indexOfId = billData.findIndex((i) => id === String(i.id));
+	console.log("indexOfId" + indexOfId);
 
-	// Selecting the right bill...
-	const selectedBill = data.filter((selected) => {
-		return selected.id === parseInt(id, 10);
+	const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+
+	const data = useMemo(() => [...chosenBill], [chosenBill]);
+
+	// Selecting the right bill... <- Maria says this doesn't seem to have any relevance any longer
+	const selectedBill = billData.filter((selected) => {
+		let res = selected.id === parseInt(id, 10);
+		return res;
 	});
 
-	//Custom styles
-
-	const customStyles = {
-		rows: {
-			style: {
-				height: "47px",
-			},
-		},
-		cells: {
-			style: {
-				paddingLeft: "0",
-				paddingRight: "0",
-			},
-		},
+	//Custom styles for rows needs implementation - at the moment not working
+	const customRowStyle = (row) => {
+		if (Number(row.original.itemID) % 2 === 0) {
+			return {backgroundColor: "white"};
+		}
+		return {backgroundColor: "#efeeea"};
 	};
 
-	const conditionalRowStyles = [
-		{
-			when: (row) => row.itemID === "01" || row.itemID === "03" || row.itemID === "05",
-			style: {
-				backgroundColor: "#efeeea",
-			},
-		},
-	];
-
 	// Columns for datatables
-	const tradeColumns = [
-		{
-			name: <div>#</div>,
-			selector: (row) => row.itemID,
-			cell: (row) => <div>{row.itemID}</div>,
-			center: true,
-			hide: 600,
-			grow: 1.15,
-		},
-		{
-			name: <div>ITEM</div>,
-			selector: "itemTitle",
-			cell: (row) => <div className="cell-item">{row.itemTitle}</div>,
-			left: true,
-			grow: 2.4,
-		},
-		{
-			name: <div>PRICE</div>,
-			selector: "itemPrice",
-			cell: (row) => (
-				<div className="cell-price">
-					<span>€ </span>
-					{row.itemPrice}
-				</div>
-			),
-			left: true,
-			grow: 0,
-		},
-		{
-			name: <div>QUANTITY</div>,
-			selector: "itemQuant",
-			cell: (row) => <div className="cell-quantity">{row.itemQuant}</div>,
-			center: true,
-			grow: 0,
-		},
-		{
-			name: <div>AMOUNT</div>,
-			selector: "amount",
-			cell: (row) => (
-				<div>
-					<span>€ </span>
-					{row.itemPrice * row.itemQuant}
-				</div>
-			),
-			center: true,
-			grow: 1.2,
-		},
-	];
+	const columns = useMemo(
+		() => [
+			{
+				Header: <div>#</div>,
+				accessor: "itemID",
+				Cell: ({row}) => <div>{row.original.itemID}</div>,
+			},
+			{
+				Header: <div>ITEM</div>,
+				accessor: "itemTitle",
+				Cell: ({row}) => <div>{row.original.itemTitle}</div>,
+			},
+			{
+				Header: <div>PRICE</div>,
+				accessor: "itemPrice",
+				Cell: ({row}) => (
+					<div>
+						<span>€ </span>
+						{row.original.itemPrice}
+					</div>
+				),
+			},
+			{
+				Header: <div>QUANTITY</div>,
+				accessor: "itemQuant",
+				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
+			},
+			{
+				Header: <div>AMOUNT</div>,
+				accessor: "amount",
+				Cell: ({row}) => (
+					<div className={customRowStyle}>
+						<span>€ </span>
+						{row.original.itemPrice * row.original.itemQuant}
+					</div>
+				),
+			},
+		],
+		[]
+	);
 
 	const generatedBill = selectedBill.map((bill) => {
 		return (
@@ -124,13 +106,7 @@ const Bill = (color_logo) => {
 					</div>
 				</section>
 				<div className="tableWrapper">
-					<DataTable
-						columns={tradeColumns}
-						noHeader={true}
-						data={bill.tradeData.items}
-						customStyles={customStyles}
-						conditionalRowStyles={conditionalRowStyles}
-					/>
+					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</div>
 				<div className="termsAndCalc">
 					<div className="terms">
@@ -247,8 +223,8 @@ const Bill = (color_logo) => {
 				</div>
 				<div className="footer">
 					<div>
-						<h4>Thank You For Our Business</h4>
-						<p>We make it easy for your problems.</p>
+						<h4>Thank You For Doing Business With Us.</h4>
+						<p>We aim to provide simple solutions for your business problems.</p>
 					</div>
 				</div>
 			</BillStyled>
