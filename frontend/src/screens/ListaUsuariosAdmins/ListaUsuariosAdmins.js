@@ -18,7 +18,7 @@ import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 
 // Styles
-import {StyledWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
+import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
 const ListaUsuariosAdmins = () => {
 	const images = [people1b, people4b, people13b];
@@ -205,9 +205,9 @@ const ListaUsuariosAdmins = () => {
 			isLoggedIn="true"
 		>
 			<Container row>
-				<StyledWrapper>
+				<StyledTableWrapper>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
-				</StyledWrapper>
+				</StyledTableWrapper>
 			</Container>
 			<UserModal
 				nombreUsuario={currentName}
