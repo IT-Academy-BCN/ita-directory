@@ -104,7 +104,7 @@ const ListaUsuariosAdmins = () => {
 	);
 
 	const customRowStyle = (row) => {
-		return;
+		return {borderTop: "1px solid #b0b0b0"};
 	};
 
 	const columns = useMemo(
