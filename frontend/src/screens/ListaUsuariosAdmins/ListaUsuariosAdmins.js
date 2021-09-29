@@ -18,7 +18,7 @@ import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 
 // Styles
-import {StyledWrapper, StyledImage, StyledDiv} from "./ListaUsuariosAdmins.style";
+import {StyledWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
 const ListaUsuariosAdmins = () => {
 	const images = [people1b, people4b, people13b];
@@ -111,44 +111,44 @@ const ListaUsuariosAdmins = () => {
 		() => [
 			{
 				Header: (
-					<StyledDiv color={Colors.frenchBlue} paddingL="0px">
+					<StyledCell color={Colors.frenchBlue} paddingL="0px">
 						Foto
-					</StyledDiv>
+					</StyledCell>
 				),
 				accessor: "foto",
 
 				Cell: ({row}) => (
-					<StyledDiv>
-						{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
-					</StyledDiv>
+					<StyledCell>
+						{<StyledImage src={images[row.id]} alt="foto" width="50px" height="50px" />}
+					</StyledCell>
 				),
 				minWidth: "32px",
 			},
 			{
 				Header: (
-					<StyledDiv color={Colors.frenchBlue} padding="0">
+					<StyledCell color={Colors.frenchBlue} padding="0">
 						Nombre
-					</StyledDiv>
+					</StyledCell>
 				),
 				accessor: "nombre",
 				Cell: ({row}) => (
-					<StyledDiv color={Colors.frenchBlue}>{row.values.nombre}</StyledDiv>
+					<StyledCell color={Colors.frenchBlue}>{row.values.nombre}</StyledCell>
 				),
 				minWidth: "60px",
 			},
 			{
-				Header: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
+				Header: <StyledCell color={Colors.frenchBlue}>Email</StyledCell>,
 				accessor: "email",
 				Cell: ({row}) => (
-					<StyledDiv color={Colors.extraDarkBlue}>{row.values.email}</StyledDiv>
+					<StyledCell color={Colors.extraDarkBlue}>{row.values.email}</StyledCell>
 				),
 				minWidth: "60px",
 			},
 			{
 				Header: (
-					<StyledDiv color={Colors.frenchBlue} justify={"flex-end"}>
+					<StyledCell color={Colors.frenchBlue} justify={"flex-end"}>
 						Acciones
-					</StyledDiv>
+					</StyledCell>
 				),
 				accessor: "acciones",
 				minWidth: "60px",
