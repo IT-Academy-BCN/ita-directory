@@ -8,7 +8,7 @@ import DownloadPDF from "./DocumentComponent";
 
 // import {useTable} from "react-table";
 
-const Bill = (color_logo) => {
+const Billdev = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
 	const [data] = useState(modelBill); // Fake data from JSON modelBillData
 
@@ -277,4 +277,4 @@ const Bill = (color_logo) => {
 	);
 };
 
-//export default Bill;
+export default Billdev;

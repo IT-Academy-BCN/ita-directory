@@ -20,7 +20,7 @@ import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 // Styles
 import {StyledWrapper, StyledImage, StyledDiv} from "./ListaUsuariosAdmins.style";
 
-function ListaUsuariosAdmins() {
+function ListaUsuariosAdminsDev() {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
 	const [dataUsers, setDataUsers] = useState(usuarios);
@@ -196,4 +196,4 @@ function ListaUsuariosAdmins() {
 		</Body>
 	);
 }
-export default ListaUsuariosAdmins;
+export default ListaUsuariosAdminsDev;
