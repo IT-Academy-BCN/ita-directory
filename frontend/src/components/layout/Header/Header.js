@@ -23,11 +23,11 @@ const Header = ({
 	};
 
 	return (
-		<HeaderStyled centerTitle={centerTitle}>
+		<HeaderStyled centerTitle={centerTitle} color_logo={color_logo}>
 			<Container>
 				<div className="top-header">
 					<Link className="logo" to="/ads">
-						<h2 color_logo={color_logo}>Logo Empresa</h2>
+						<h2>Logo Empresa</h2>
 					</Link>
 					{isLoggedIn ? (
 						<div className="profile">
