@@ -13,8 +13,7 @@ import {
 	StyleRedirect,
 	StyledError,
 	StyleNotificationSuccess,
-	StyleNotificationSuccessMessage,
-	StyleNotificationSuccessText,
+	StyleNotificationMessage,
 	StyleNotificationError,
 } from "./Login.styles";
 import Body from "components/layout/Body/Body";
@@ -94,52 +93,26 @@ const Login = ({onLogin}) => {
 	return (
 		<>
 			<StyleNotificationSuccess>
-				<div
-					style={{width: "30px", height: "30px", paddingTop: "16px", paddingLeft: "11px"}}
-				>
-					<FontAwesomeIcon
-						icon={faCheckCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-				</div>
-				<div
-					style={{
-						color: "white",
-						fontFamily: "Helvetica-neue",
-						fontSize: "15px",
-						letterSpacing: "0px",
-						opacity: "1",
-						lineHeight: "1.2",
-						paddingLeft: "20px",
-						paddingTop: "15px",
-					}}
-				>
+				{/* style={{display: "flexbox"}} */}
+				{/* // style={{width: "30px", height: "30px", paddingTop: "16px", paddingLeft: "11px"}} */}
+
+				<FontAwesomeIcon
+					icon={faCheckCircle}
+					style={{color: "white", width: "30px", height: "30px"}}
+				/>
+				<StyleNotificationMessage>
 					Bienvenido de nuevo email@gmail.com. Te estamos redireccionando.
-				</div>
+				</StyleNotificationMessage>
 			</StyleNotificationSuccess>
 			<StyleNotificationError>
-				<div
-					style={{width: "30px", height: "30px", paddingTop: "16px", paddingLeft: "11px"}}
-				>
-					<FontAwesomeIcon
-						icon={faExclamationCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-				</div>
-				<div
-					style={{
-						color: "white",
-						fontFamily: "Helvetica-neue",
-						fontSize: "15px",
-						letterSpacing: "0px",
-						opacity: "1",
-						lineHeight: "1.2",
-						paddingLeft: "20px",
-						paddingTop: "15px",
-					}}
-				>
+				<FontAwesomeIcon
+					icon={faExclamationCircle}
+					style={{color: "white", width: "30px", height: "30px"}}
+				/>
+
+				<StyleNotificationMessage>
 					Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
-				</div>
+				</StyleNotificationMessage>
 			</StyleNotificationError>
 			<Body title="Acceso" isLoggedIn={false} centerTitle>
 				<Container>
