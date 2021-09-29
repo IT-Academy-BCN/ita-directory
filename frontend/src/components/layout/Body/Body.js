@@ -3,8 +3,6 @@ import Header from "components/layout/Header/Header";
 import Footer from "components/layout/Footer/Footer";
 import {Childrens, StyledBody} from "./Body.styles";
 
-console.log("body");
-
 const Body = ({
 	children,
 	title,
@@ -23,8 +21,8 @@ const Body = ({
 				""
 			) : (
 				<Header
-					title={title}
-					color_logo={color_logo}
+					title={"penguin"}
+					color_logo={"#005593"}
 					color_header={color_header}
 					color_letra={color_letra}
 					isLoggedIn={isLoggedIn}
@@ -39,3 +37,17 @@ const Body = ({
 };
 
 export default Body;
+
+/*
+) : (
+				<Header
+					title={title}
+					color_logo={color_logo}
+					color_header={color_header}
+					color_letra={color_letra}
+					isLoggedIn={isLoggedIn}
+					centerTitle={centerTitle}
+				/>
+			)}
+
+*/

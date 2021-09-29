@@ -144,7 +144,7 @@ const ListaUsuariosAdmins = () => {
 			},
 			{
 				Header: (
-					<StyledCell color={Colors.bahamaBlue} justify={"flex-end"}>
+					<StyledCell color={"Colors.bahamaBlue"} justify={"flex-end"}>
 						Acciones
 					</StyledCell>
 				),
@@ -194,8 +194,8 @@ const ListaUsuariosAdmins = () => {
 	return (
 		<Body
 			title="Usuarios registrados"
-			color_logo={Colors.extraDarkBlue}
-			color_header={Colors.extraDarkBlue}
+			color_logo={Colors.bahamaBlue}
+			color_header={Colors.bahamaBlue}
 			color_letra={Colors.white}
 			justifyTitle="flex-start"
 			paddingTitle="0px"
