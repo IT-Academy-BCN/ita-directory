@@ -127,20 +127,27 @@ export const BillStyled = styled.div`
 	.termsAndCalc {
 		display: flex;
 		align-items: center;
-		@media (max-width: 768px) {
-			flex-direction: column-reverse;
+		flex-direction: column-reverse;
+		@media (min-width: 768px) {
+			display: grid;
+			grid-template-columns: 50% 50%;
+			background-color: green;
+		}
+		.terms {
+			margin-top: 2.5rem;
+			padding: 0 3.5rem;
+			//width: 400px;
+			width: auto;
+			background-color: purple;
+			height: 88px;
 		}
 	}
 
-	.terms {
-		margin-top: 2.5rem;
-		padding: 0 3.5rem;
-		width: 400px;
-		height: 88px;
-	}
-
 	.calcs {
-		padding: 5px 0 0 5.3rem;
+		padding: 5px 0 0 auto;
+		background-color: pink;
+		width: 100%;
+
 		table {
 			border-collapse: collapse;
 		}
@@ -158,13 +165,39 @@ export const BillStyled = styled.div`
 			font-weight: bold;
 			background-color: #efeeea;
 		}
-		td {
-			padding: 0 64px 0 186px;
+		tr {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			background-color: yellow;
+			td {
+				background-color: red;
+				padding: 0 20% 0 20%;
+				//padding: 0 64px 0 186px;
+				//display: grid;
+				//grid-template-columns: 2fr 1fr;
+				//flex-grow: 1;
+				font-size: 13px;
+				min-width: 50px;
+				//padding-right: 5rem;
+				display: flex;
+				justify-content: flex-end;
+				@media (min-width: 768px) {
+					//transform: scale(0.8);
+					//padding-right: 0;
+					//padding-left: 1rem;
+					background-color: orange;
+					//justify-content: flex-end;
+					padding: 0 40% 0 auto;
+				}
+			}
 		}
-		@media (max-width: 768px) {
-			transform: scale(0.8);
-			padding-right: 0;
-			padding-left: 1rem;
+		@media (min-width: 768px) {
+			//transform: scale(0.8);
+			//padding-right: 0;
+			//padding-left: 1rem;
+			//background-color: orange;
+			//justify-content: center;
+			//padding: 0 20% 0 60%;
 		}
 	}
 

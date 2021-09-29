@@ -116,65 +116,67 @@ const Bill = (color_logo) => {
 							tempor incididunt ut labore et dolore
 						</small>
 					</div>
-					<div className="calcs">
-						<table className="columns">
-							<tbody>
-								<tr>
-									<th>Sub Total</th>
-									<td>
-										€{" "}
-										{selectedBill.map((amount) => {
-											let itemsArr = amount.tradeData.items;
-											const itemsAmount = itemsArr.map((it) => {
-												return it.itemPrice * it.itemQuant;
-											});
-											let sum = 0;
-											itemsAmount.map((i) => (sum += i));
-											return sum;
-										})}
-									</td>
-								</tr>
-								<tr>
-									<th>Tax(5%)</th>
-									<td>
-										€{" "}
-										{selectedBill.map((amount) => {
-											let itemsArr = amount.tradeData.items;
-											const itemsAmount = itemsArr.map((it) => {
-												return it.itemPrice * it.itemQuant;
-											});
-											let sum = 0;
-											itemsAmount.map((i) => (sum += i));
-											let tax = amount.calculation.calcs;
-											let taxItem = tax.map((t) => t.tax);
-											let taxCalc = (taxItem / 100) * sum;
-											return taxCalc.toFixed();
-										})}
-									</td>
-								</tr>
-								<tr>
-									<th>Discount(10%)</th>
-									<td>
-										€{" "}
-										{selectedBill.map((amount) => {
-											let itemsArr = amount.tradeData.items;
-											const itemsAmount = itemsArr.map((it) => {
-												return it.itemPrice * it.itemQuant;
-											});
-											let sum = 0;
-											itemsAmount.map((i) => (sum += i));
-											let tax = amount.calculation.calcs;
-											let taxItem = tax.map((t) => t.tax);
-											let taxCalc = sum + (taxItem / 100) * sum;
-											let disc = tax.map((t) => t.discount);
-											let discCalc = (disc / 100) * taxCalc;
-											return discCalc.toFixed();
-										})}
-									</td>
-								</tr>
-								<tr>
-									<th className="bold">Grand Total</th>
-									<td className="bold">
+
+					<table className="calcs">
+						<tbody>
+							<tr>
+								<th>Sub Total</th>
+								<td>
+									€{" "}
+									{selectedBill.map((amount) => {
+										let itemsArr = amount.tradeData.items;
+										const itemsAmount = itemsArr.map((it) => {
+											return it.itemPrice * it.itemQuant;
+										});
+										let sum = 0;
+										itemsAmount.map((i) => (sum += i));
+										return sum;
+									})}
+								</td>
+							</tr>
+							<tr>
+								<th>Tax(5%)</th>
+								<td>
+									€{" "}
+									{selectedBill.map((amount) => {
+										let itemsArr = amount.tradeData.items;
+										const itemsAmount = itemsArr.map((it) => {
+											return it.itemPrice * it.itemQuant;
+										});
+										let sum = 0;
+										itemsAmount.map((i) => (sum += i));
+										let tax = amount.calculation.calcs;
+										let taxItem = tax.map((t) => t.tax);
+										let taxCalc = (taxItem / 100) * sum;
+										return taxCalc.toFixed();
+									})}
+								</td>
+							</tr>
+							<tr>
+								<th>Discount(10%)</th>
+								<td>
+									€{" "}
+									{selectedBill.map((amount) => {
+										let itemsArr = amount.tradeData.items;
+										const itemsAmount = itemsArr.map((it) => {
+											return it.itemPrice * it.itemQuant;
+										});
+										let sum = 0;
+										itemsAmount.map((i) => (sum += i));
+										let tax = amount.calculation.calcs;
+										let taxItem = tax.map((t) => t.tax);
+										let taxCalc = sum + (taxItem / 100) * sum;
+										let disc = tax.map((t) => t.discount);
+										let discCalc = (disc / 100) * taxCalc;
+										return discCalc.toFixed();
+									})}
+								</td>
+							</tr>
+							<tr>
+								<th className="bold">Grand Total</th>
+								<td className="bold">
+									<div></div>
+									<div>
 										€{" "}
 										{selectedBill.map((amount) => {
 											let itemsArr = amount.tradeData.items;
@@ -191,11 +193,11 @@ const Bill = (color_logo) => {
 											const grandTotal = sum + taxCalc + discCalc;
 											return grandTotal.toFixed();
 										})}
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div className="payAndSign">
 					<div>
