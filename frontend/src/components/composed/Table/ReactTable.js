@@ -1,5 +1,5 @@
 import {useTable} from "react-table";
-const ReactTable = ({columns, data}) => {
+const ReactTable = ({columns, data, customRowStyle}) => {
 	const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({
 		columns,
 		data,
@@ -19,7 +19,7 @@ const ReactTable = ({columns, data}) => {
 				{rows.map((row) => {
 					prepareRow(row);
 					return (
-						<tr {...row.getRowProps()}>
+						<tr style={customRowStyle(row)} {...row.getRowProps()}>
 							{row.cells.map((cell) => {
 								return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
 							})}

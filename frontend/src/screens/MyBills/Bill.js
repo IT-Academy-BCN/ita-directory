@@ -19,62 +19,22 @@ const Bill = (color_logo) => {
 
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
-	useEffect(() => {
-		let yo = chosenBill ? JSON.stringify(chosenBill) : "not receiving";
-		localStorage.setItem("data", "test");
-		localStorage.setItem("datareal", yo);
-	}, [billData]);
-
-	// Selecting the right bill...
+	// Selecting the right bill... <- Maria says this doesn't seem to have any relevance any longer
 	const selectedBill = billData.filter((selected) => {
 		let res = selected.id === parseInt(id, 10);
-		localStorage.setItem("selectedBill", JSON.stringify(res));
 		return res;
-		//return selected.id === parseInt(id, 10);
 	});
 
-	//Custom styles
-	const customStyles = {
-		rows: {
-			style: {
-				height: "47px",
-			},
-		},
-		cells: {
-			style: {
-				paddingLeft: "0",
-				paddingRight: "0",
-			},
-		},
+	//Custom styles for rows needs implementation - at the moment not working
+	const customRowStyle = (row) => {
+		if (Number(row.original.itemID) % 2 === 0) {
+			return {backgroundColor: "white"};
+		}
+		return {backgroundColor: "#efeeea"};
 	};
-
-	const conditionalRowStyles = [
-		{
-			when: (row) => row.itemID === "01" || row.itemID === "03" || row.itemID === "05",
-			style: {
-				backgroundColor: "#efeeea",
-			},
-		},
-	];
 
 	// Columns for datatables
-	/*const penguin = ({row}) => {
-		`${row.itemID}`;
-	};*/
-	const penguin = () => {
-		console.log("penguin testing");
 
-		return "202100031";
-	};
-
-	const penguinItem = ({row}) => {
-		/*({row}) => <div className="cell-item">{row.values.itemTitle}</div>*/
-		console.log("penguinItems testing");
-		localStorage.setItem("testing", JSON.stringify(row.values.itemTitle));
-		localStorage.setItem("testing", JSON.stringify(row.itemTitle));
-		//localStorage.setItem("testing2", JSON.stringify(row));
-		return <div>penguin item test</div>;
-	};
 	const columns = useMemo(
 		() => [
 			{
@@ -82,53 +42,35 @@ const Bill = (color_logo) => {
 				accessor: "itemID",
 				Cell: ({row}) => <div>{row.original.itemID}</div>,
 			},
-			/*{
-				accessor: "202100031",
-				Header: <div>#</div>,
-				accessor: ({row}) => row.itemID,
-				Cell: ({row}) => <div>{row.values.itemID}</div>,
-				//center: true,
-				//hide: 600,
-				//grow: 1.15,
-			},*/
 			{
 				Header: <div>ITEM</div>,
 				accessor: "itemTitle",
-				Cell: ({row}) => <div className="cell-item">{row.original.itemTitle}</div>,
-				//left: true,
-				//grow: 2.4,
+				Cell: ({row}) => <div>{row.original.itemTitle}</div>,
 			},
 			{
 				Header: <div>PRICE</div>,
 				accessor: "itemPrice",
 				Cell: ({row}) => (
-					<div className="cell-price">
+					<div>
 						<span>€ </span>
 						{row.original.itemPrice}
 					</div>
 				),
-
-				//left: true,
-				//grow: 0,
 			},
 			{
 				Header: <div>QUANTITY</div>,
 				accessor: "itemQuant",
-				Cell: ({row}) => <div className="cell-quantity">{row.original.itemQuant}</div>,
-				//center: true,
-				//grow: 0,
+				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
 				Header: <div>AMOUNT</div>,
 				accessor: "amount",
 				Cell: ({row}) => (
-					<div>
+					<div className={customRowStyle}>
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
 				),
-				//center: true,
-				//grow: 1.2,
 			},
 		],
 		[]
@@ -166,7 +108,7 @@ const Bill = (color_logo) => {
 					</div>
 				</section>
 				<div className="tableWrapper">
-					<ReactTable columns={columns} data={data} />
+					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</div>
 				<div className="termsAndCalc">
 					<div className="terms">
