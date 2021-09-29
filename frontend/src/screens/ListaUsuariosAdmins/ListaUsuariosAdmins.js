@@ -102,7 +102,7 @@ const ListaUsuariosAdmins = () => {
 	);
 
 	const customRowStyle = (row) => {
-		return {borderTop: `1px solid ${Colors.lightGray}`};
+		return {borderTop: `0.9px solid ${Colors.bahamaBlue}`};
 	};
 
 	const columns = useMemo(
@@ -144,7 +144,7 @@ const ListaUsuariosAdmins = () => {
 			},
 			{
 				Header: (
-					<StyledCell color={"Colors.bahamaBlue"} justify={"flex-end"}>
+					<StyledCell color={Colors.bahamaBlue} justify={"flex-end"}>
 						Acciones
 					</StyledCell>
 				),

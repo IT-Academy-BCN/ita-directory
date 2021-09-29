@@ -37,17 +37,3 @@ const Body = ({
 };
 
 export default Body;
-
-/*
-) : (
-				<Header
-					title={title}
-					color_logo={color_logo}
-					color_header={color_header}
-					color_letra={color_letra}
-					isLoggedIn={isLoggedIn}
-					centerTitle={centerTitle}
-				/>
-			)}
-
-*/
