@@ -26,7 +26,6 @@ const ListaUsuariosAdmins = () => {
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
 	const data = useMemo(() => [...dataUsers], [dataUsers]);
-	console.log("data + " + data[0].email);
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -52,6 +51,8 @@ const ListaUsuariosAdmins = () => {
 	const handleModalDelete = useCallback(
 		(row) => {
 			setCurrentColum((prev) => row);
+			localStorage.setItem("currentColP", JSON.stringify("penguinsRgo"));
+			localStorage.setItem("currentCol", JSON.stringify(row));
 			setEliminar((prev) => true);
 		},
 		[currentColum, eliminar]
@@ -68,13 +69,16 @@ const ListaUsuariosAdmins = () => {
 
 	const updateDelete = useCallback(
 		(user) => {
-			const newUsers = dataUsers.filter(function (user) {
-				return user !== currentColum;
+			const newUsers = dataUsers.filter((user) => {
+				if (user.email.localeCompare(currentColum.email) !== 0) {
+					return true;
+				} else {
+					return false;
+				}
 			});
-
 			setDataUsers((prev) => newUsers);
 		},
-		[dataUsers]
+		[dataUsers, currentColum, eliminar]
 	);
 
 	const updateUserData = useCallback(
@@ -87,7 +91,7 @@ const ListaUsuariosAdmins = () => {
 				)
 			);
 		},
-		[dataUsers, currentName, currentEmail]
+		[dataUsers, currentName, currentEmail, eliminar, currentColum]
 	);
 
 	const updateUserStatus = useCallback(
@@ -190,7 +194,7 @@ const ListaUsuariosAdmins = () => {
 						>
 							<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
 						</button>
-						<button onClick={() => handleModalDelete(row)}>
+						<button onClick={() => handleModalDelete(row.values)}>
 							<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
 						</button>
 					</div>
@@ -228,7 +232,7 @@ const ListaUsuariosAdmins = () => {
 				columnSelect={currentColum}
 				currentUser={eliminar}
 				active={eliminar}
-				hideModal={() => setEliminar(false)}
+				hideModal={() => setEliminar((prev) => false)}
 				updateDelete={updateDelete}
 			/>
 			<EditProfile
