@@ -42,26 +42,26 @@ const ListaUsuariosAdmins = () => {
 
 	const handleModalStatus = useCallback(
 		(name, state) => {
-			setCurrentName(name);
-			setCurrentUserState(state);
-			setActive(true);
+			setCurrentName((prev) => name);
+			setCurrentUserState((prev) => state);
+			setActive((prev) => true);
 		},
 		[currentName, currentUserState, active]
 	);
 
 	const handleModalDelete = useCallback(
 		(row) => {
-			setCurrentColum(row);
-			setEliminar(true);
+			setCurrentColum((prev) => row);
+			setEliminar((prev) => true);
 		},
 		[currentColum, eliminar]
 	);
 
 	const handleModalEdit = useCallback(
 		(name, email) => {
-			setCurrentName(name);
-			setCurrentEmail(email);
-			setEditar(true);
+			setCurrentName((prev) => name);
+			setCurrentEmail((prev) => email);
+			setEditar((prev) => true);
 		},
 		[currentName, currentEmail, editar]
 	);
@@ -72,7 +72,7 @@ const ListaUsuariosAdmins = () => {
 				return user !== currentColum;
 			});
 
-			setDataUsers(newUsers);
+			setDataUsers((prev) => newUsers);
 		},
 		[dataUsers]
 	);
@@ -87,7 +87,7 @@ const ListaUsuariosAdmins = () => {
 				)
 			);
 		},
-		[dataUsers]
+		[dataUsers, currentName, currentEmail]
 	);
 
 	const updateUserStatus = useCallback(
