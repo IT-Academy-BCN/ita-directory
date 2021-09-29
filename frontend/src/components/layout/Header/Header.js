@@ -60,7 +60,7 @@ const Header = ({
 					) : null}
 				</div>
 			</Container>
-			<StyledSubHeader color_header={color_header}>
+			<StyledSubHeader color_header={color_header} color_letra={color_letra}>
 				<Container>
 					<h1>{title}</h1>
 				</Container>

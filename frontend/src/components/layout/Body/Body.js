@@ -21,8 +21,8 @@ const Body = ({
 				""
 			) : (
 				<Header
-					title={"penguin"}
-					color_logo={"#005593"}
+					title={title}
+					color_logo={color_logo}
 					color_header={color_header}
 					color_letra={color_letra}
 					isLoggedIn={isLoggedIn}
