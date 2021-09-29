@@ -45,7 +45,7 @@ export const StyledDiv = styled.div`
 	font-size: 14px;
 	text-align: center;
 	font-weight: bold;
-	padding: 5px 0px;
+	padding: 10px 0px;
 
 	padding-left: ${(props) => props.paddingL};
 	@media only screen and (max-width: 650px) {
