@@ -60,8 +60,26 @@ export const StyleRedirect = styled.div`
 		color: #7d868b;
 		margin: 0 0 0 0.2rem;
 	}
-
 	& > a:hover {
 		color: blue;
 	}
+`;
+export const StyleNotificationSuccess = styled.div`
+	display: flex;
+	width: 307px;
+	height: 61px;
+	background: #317126 0% 0% no-repeat padding-box;
+	box-shadow: 0px 3px 6px #00000086;
+	border-radius: 6px;
+	opacity: 1;
+`;
+
+export const StyleNotificationError = styled.div`
+	display: flex;
+	width: 307px;
+	height: 61px;
+	background: #bc3434 0% 0% no-repeat padding-box;
+	box-shadow: 0px 3px 6px #00000086;
+	border-radius: 6px;
+	opacity: 1;
 `;

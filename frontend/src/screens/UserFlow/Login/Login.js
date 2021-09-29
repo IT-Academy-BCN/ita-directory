@@ -3,8 +3,22 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
+import {
+	ChangePassword,
+	Container,
+	Form,
+	Label,
+	StyleRedirect,
+	StyledError,
+	StyleNotificationSuccess,
+	StyleNotificationSuccessMessage,
+	StyleNotificationSuccessText,
+	StyleNotificationError,
+} from "./Login.styles";
 import Body from "components/layout/Body/Body";
+import {faCheckCircle, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -78,66 +92,118 @@ const Login = ({onLogin}) => {
 		}
 	};
 	return (
-		<Body title="Acceso" isLoggedIn={false} centerTitle>
-			<Container>
-				<Form onSubmit={handleSubmit}>
-					<div className="classInput">
-						{/* <label>Email</label> */}
-						<Input
-							type="email"
-							placeholder="Introduce tu email"
-							value={email}
-							onChange={(e) => handleEmailChange(e.target.value)}
-							id="emailName"
-							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address..."
-							disabled={disabled}
-							label={"Email"}
-						/>
-					</div>
-					<div className="classInput">
-						{/* <label>Password</label> */}
-						<Input
-							type="password"
-							placeholder="Introduce tu contraseña"
-							value={password}
-							onChange={(e) => handlePasswordChange(e.target.value)}
-							id="passName"
-							name="passName"
-							error={isPassError}
-							errorText="The password to contain more than 6 characters and a uppercase letter"
-							disabled={disabled}
-							minLength={6}
-							label={"Password"}
-						/>
-					</div>
-					<ChangePassword>
-						<Label htmlFor="forgotpassword">
-							<Link to="/recover-password/:hash">Has olvidado tu contraseña?</Link>
-						</Label>
-					</ChangePassword>
-					{error && (
-						<StyledError>
-							<p>{error}</p>
-						</StyledError>
-					)}
-					<AsyncButton
-						text="Acceder"
-						loadingText="Accediendo"
-						iconPosition="left"
-						type="submit"
-						className="blueGradient mt-4"
-						isLoading={isLoading}
-						animated="yes"
-						disabled={disabled}
+		<>
+			<StyleNotificationSuccess>
+				<div
+					style={{width: "30px", height: "30px", paddingTop: "16px", paddingLeft: "11px"}}
+				>
+					<FontAwesomeIcon
+						icon={faCheckCircle}
+						style={{color: "white", width: "30px", height: "30px"}}
 					/>
-					<StyleRedirect>
-						No tienes cuenta? <Link to="/register"> Registrate</Link>
-					</StyleRedirect>
-				</Form>
-			</Container>
-		</Body>
+				</div>
+				<div
+					style={{
+						color: "white",
+						fontFamily: "Helvetica-neue",
+						fontSize: "15px",
+						letterSpacing: "0px",
+						opacity: "1",
+						lineHeight: "1.2",
+						paddingLeft: "20px",
+						paddingTop: "15px",
+					}}
+				>
+					Bienvenido de nuevo email@gmail.com. Te estamos redireccionando.
+				</div>
+			</StyleNotificationSuccess>
+			<StyleNotificationError>
+				<div
+					style={{width: "30px", height: "30px", paddingTop: "16px", paddingLeft: "11px"}}
+				>
+					<FontAwesomeIcon
+						icon={faExclamationCircle}
+						style={{color: "white", width: "30px", height: "30px"}}
+					/>
+				</div>
+				<div
+					style={{
+						color: "white",
+						fontFamily: "Helvetica-neue",
+						fontSize: "15px",
+						letterSpacing: "0px",
+						opacity: "1",
+						lineHeight: "1.2",
+						paddingLeft: "20px",
+						paddingTop: "15px",
+					}}
+				>
+					Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
+				</div>
+			</StyleNotificationError>
+			<Body title="Acceso" isLoggedIn={false} centerTitle>
+				<Container>
+					<Form onSubmit={handleSubmit}>
+						<div className="classInput">
+							{/* <label>Email</label> */}
+							<Input
+								type="email"
+								placeholder="Introduce tu email"
+								value={email}
+								onChange={(e) => handleEmailChange(e.target.value)}
+								id="emailName"
+								name="emailName"
+								error={isEmailError}
+								errorText="Enter a valid email address..."
+								disabled={disabled}
+								label={"Email"}
+							/>
+						</div>
+						<div className="classInput">
+							{/* <label>Password</label> */}
+							<Input
+								type="password"
+								placeholder="Introduce tu contraseña"
+								value={password}
+								onChange={(e) => handlePasswordChange(e.target.value)}
+								id="passName"
+								name="passName"
+								error={isPassError}
+								errorText="The password to contain more than 6 characters and a uppercase letter"
+								disabled={disabled}
+								minLength={6}
+								label={"Password"}
+							/>
+						</div>
+						<ChangePassword>
+							<Label htmlFor="forgotpassword">
+								<Link to="/recover-password/:hash">
+									Has olvidado tu contraseña?
+								</Link>
+							</Label>
+						</ChangePassword>
+						{error && (
+							<StyledError>
+								<p>{error}</p>
+							</StyledError>
+						)}
+						<AsyncButton
+							text="Acceder"
+							loadingText="Accediendo"
+							iconPosition="left"
+							type="submit"
+							className="blueGradient mt-4"
+							isLoading={isLoading}
+							animated="yes"
+							disabled={disabled}
+						/>
+						<StyleRedirect>
+							No tienes cuenta? <Link to="/register"> Registrate</Link>
+						</StyleRedirect>
+					</Form>
+				</Container>
+			</Body>
+		</>
 	);
 };
 
