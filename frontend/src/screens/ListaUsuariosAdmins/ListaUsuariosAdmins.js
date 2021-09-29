@@ -119,7 +119,7 @@ const ListaUsuariosAdmins = () => {
 
 				Cell: ({row}) => (
 					<StyledDiv>
-						{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
+						{<StyledImage src={images[row.id]} alt="foto" width="50px" height="50px" />}
 					</StyledDiv>
 				),
 				minWidth: "32px",
