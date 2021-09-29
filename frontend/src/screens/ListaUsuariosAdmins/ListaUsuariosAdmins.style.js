@@ -46,11 +46,16 @@ export const StyledImage = styled.img`
 	border-radius: 50%;
 `;
 
-export const StyledDiv = styled.div`
+export const StyledCell = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: ${(props) => (props.justify ? props.justify : "start")};
+	//justify-content: flex-end;
 	color: ${(props) => props.color};
 	font-weight: bold;
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
+
 	@media only screen and (max-width: 650px) {
 		font-size: 14px;
 	}
