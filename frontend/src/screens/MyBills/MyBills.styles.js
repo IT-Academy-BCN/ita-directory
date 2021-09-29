@@ -10,8 +10,6 @@ export const MyTableStyle = styled.table`
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid #b0b0b0;
 
-
-
 	@media only screen and (max-width: 650px) {
 		width: 100%;
 		font: normal normal normal 6px/18px Arial;
@@ -20,25 +18,23 @@ export const MyTableStyle = styled.table`
 		width: 100%;
 	}
 
-
 	// .actions-column {
 	// 	display: flex;
 	// 	align-items: center;
 	// 	justify-content: end;
 	// 	width: 40px;
 
-		button {
-			width: 42px;
-			height: 42px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background-color: transparent;
-			border: none;
+	button {
+		width: 42px;
+		height: 42px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		border: none;
 
-			svg {
-				font-size: 17px;
-			}
+		svg {
+			font-size: 17px;
 		}
 	}
 `;
