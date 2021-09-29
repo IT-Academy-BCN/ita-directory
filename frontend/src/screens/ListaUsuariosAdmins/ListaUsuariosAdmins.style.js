@@ -46,7 +46,7 @@ export const StyledImage = styled.img`
 	border-radius: 50%;
 `;
 
-export const StyledDiv = styled.div`
+export const StyledCell = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: ${(props) => (props.justify ? props.justify : "start")};
