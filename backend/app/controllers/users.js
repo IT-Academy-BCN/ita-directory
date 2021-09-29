@@ -3,7 +3,7 @@ const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const {getRedisClient} = require("../utils/initRedis");
 const Hashids = require("hashids");
-const {apiResponse, signToken, signRefreshToken, registerSchema} = require("../utils/utils");
+const {apiResponse, signToken, signRefreshToken, registerSchema, hashPassword} = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
@@ -123,10 +123,11 @@ exports.registerUser = async (req, res) => {
 		}
 		const {privacy, ...userDTO2} = req.body;
 		//Creating user without name or lastnames
+		const passwordHashed = await hashPassword(req.body.password);
 		const newUser = await prisma.user.create(
 			{data: {
 					email: req.body.email,
-					password: req.body.password,
+					password: passwordHashed,
 					user_status_id: 1,
 					user_role_id: 3,
 					refresh_token: "20"
