@@ -3,7 +3,15 @@ import ReactTable from "../../components/composed/Table/ReactTable";
 //import DataTable from "react-data-table-component";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
-import {BillComponentStyled, BillStyled, Error} from "./Bill.styles";
+import {
+	BillComponentStyled,
+	BillStyled,
+	Error,
+	FooterStyled,
+	SignatureStyled,
+	PaymentMethodStyled,
+	PaySignStyled,
+} from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
 
@@ -173,7 +181,7 @@ const Bill = (color_logo) => {
 								</td>
 							</tr>
 							<tr>
-								<th className="bold">Grand Total</th>
+								<th className="bold">GRAND TOTAL</th>
 								<td className="bold">
 									<div></div>
 									<div>
@@ -199,8 +207,8 @@ const Bill = (color_logo) => {
 						</tbody>
 					</table>
 				</div>
-				<div className="payAndSign">
-					<div>
+				<PaySignStyled>
+					<PaymentMethodStyled>
 						<h3>Payment Method</h3>
 						<div className="pay">
 							<h5>Bank</h5>
@@ -212,23 +220,21 @@ const Bill = (color_logo) => {
 							<small>Paypal ID: {bill.payment.paypal.accountName}</small>
 							<small>Account Name: {bill.payment.paypal.account}</small>
 						</div>
-					</div>
-					<div className="signWrapper">
-						<div>
-							<div className="signature">{bill.signature.image}</div>
-
-							<p>{bill.emisorReceiver.receiver.reName}</p>
-
-							<p className="position">{bill.emisorReceiver.receiver.rePosition}</p>
+					</PaymentMethodStyled>
+					<SignatureStyled>
+						<div className="signature-image" role="image">
+							{bill.signature.image}
 						</div>
-					</div>
-				</div>
-				<div className="footer">
-					<div>
-						<h4>Thank You For Doing Business With Us.</h4>
-						<p>We aim to provide simple solutions for your business problems.</p>
-					</div>
-				</div>
+
+						<p>{bill.emisorReceiver.receiver.reName}</p>
+
+						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
+					</SignatureStyled>
+				</PaySignStyled>
+				<FooterStyled>
+					<h4>Thank You For Doing Business With Us.</h4>
+					<p>We aim to provide simple solutions for your business problems.</p>
+				</FooterStyled>
 			</BillStyled>
 		);
 	});

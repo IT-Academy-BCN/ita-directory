@@ -48,6 +48,15 @@ export const BillStyled = styled.div`
 	flex-direction: column;
 	font-family: "Inter", sans-serif;
 
+	h3,
+	h4,
+	h5 {
+		font-weight: bold;
+	}
+
+	h5 {
+		font-size: small;
+	}
 	@media (max-width: 768px) {
 		padding: 0;
 		width: 100%;
@@ -204,78 +213,100 @@ export const BillStyled = styled.div`
 	.rdt_TableHead {
 		padding-right: 11px;
 	}
+`;
 
-	.payAndSign {
-		margin: 2.5rem 0 4rem 0;
-		padding: 0 3.5rem;
-		display: flex;
+export const PaySignStyled = styled.section`
+	margin: 2.5rem 0 4rem 0;
+	padding: 0 0rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	@media (min-width: 768px) {
 		flex-direction: row;
 		justify-content: space-between;
+		align-items: flex-end;
+		margin: 2.5rem 0 4rem 0;
+		padding: 0 0rem;
+		//padding: 0 3.5rem;
+	}
 
-		@media (max-width: 768px) {
-			flex-direction: column;
-		}
+	h3 {
+		margin: 10px 0;
+		padding-bottom: 1rem;
+	}
 
-		h3 {
+	.pay {
+		display: flex;
+		flex-direction: column;
+		padding-bottom: 2rem;
+
+		h4 {
 			margin: 10px 0;
 		}
 
-		.pay {
-			display: flex;
-			flex-direction: column;
-
-			h4 {
-				margin: 10px 0;
-			}
-
-			small {
-				line-height: 1.5;
-			}
+		small {
+			line-height: 1.5;
 		}
 	}
+`;
+export const PaymentMethodStyled = styled.div`
+	@media (min-width: 768px) {
+		padding-left: 5rem;
+	}
+`;
 
-	.signWrapper {
-		margin-top: 1.8rem;
-		margin-right: 3.5rem;
-		width: 30%;
-		text-align: center;
-		display: flex;
-		flex-direction: column;
+export const SignatureStyled = styled.div`
+	margin-top: 1.8rem;
+	width: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 2rem;
 
-		p {
-			margin: 0;
-			font-weight: bold;
-		}
-
-		.signature {
-			height: 80%;
-			@media (max-width: 768px) {
-				margin-bottom: 3rem;
-			}
-		}
+	p {
+		margin: 0;
+		font-weight: bold;
 	}
 
-	.footer {
-		display: flex;
-		justify-content: center;
-		text-align: center;
-		margin-bottom: 5px;
-
-		h4 {
-			margin: 0;
-		}
-
-		p {
-			font-size: small;
-		}
-	}
-
-	.position {
+	h4 {
 		font-size: small;
 		font-weight: lighter !important;
+	}
+
+	.signature-image {
+		height: 80%;
+		margin-bottom: 3rem;
+
+		@media (min-width: 768px) {
+			margin-bottom: 3rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		justify-content: flex-end;
+		width: 30%;
 	}
 `;
 
 export const RowStyled = styled.div`
 	height: "47px";
+`;
+
+export const FooterStyled = styled.footer`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin-top: -3rem;
+	margin-bottom: 20px;
+
+	h4 {
+		margin: 0;
+		font-weight: bold;
+	}
+
+	p {
+		font-size: small;
+	}
 `;
