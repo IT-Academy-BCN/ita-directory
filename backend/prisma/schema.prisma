@@ -29,8 +29,8 @@ model user_status {
 
 model user {
   id               Int                @id @default(autoincrement())
-  name             String
-  lastnames        String
+  name             String?            
+  lastnames        String?            
   email            String             @unique
   password         String
   created_at       DateTime           @default(now())
