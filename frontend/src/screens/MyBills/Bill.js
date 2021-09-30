@@ -11,6 +11,7 @@ import {
 	SignatureStyled,
 	PaymentMethodStyled,
 	PaySignStyled,
+	ColHeadStyled,
 } from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
@@ -44,17 +45,17 @@ const Bill = (color_logo) => {
 	const columns = useMemo(
 		() => [
 			{
-				Header: <div>#</div>,
+				Header: <ColHeadStyled>#</ColHeadStyled>,
 				accessor: "itemID",
 				Cell: ({row}) => <div>{row.original.itemID}</div>,
 			},
 			{
-				Header: <div>ITEM</div>,
+				Header: <ColHeadStyled>ITEM</ColHeadStyled>,
 				accessor: "itemTitle",
 				Cell: ({row}) => <div>{row.original.itemTitle}</div>,
 			},
 			{
-				Header: <div>PRICE</div>,
+				Header: <ColHeadStyled>PRICE</ColHeadStyled>,
 				accessor: "itemPrice",
 				Cell: ({row}) => (
 					<div>
@@ -64,12 +65,12 @@ const Bill = (color_logo) => {
 				),
 			},
 			{
-				Header: <div>QUANTITY</div>,
+				Header: <ColHeadStyled>QUANTITY</ColHeadStyled>,
 				accessor: "itemQuant",
 				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
-				Header: <div>AMOUNT</div>,
+				Header: <ColHeadStyled>AMOUNT</ColHeadStyled>,
 				accessor: "amount",
 				Cell: ({row}) => (
 					<div className={customRowStyle}>
@@ -92,26 +93,26 @@ const Bill = (color_logo) => {
 				<section className="withoutMargin">
 					<div>
 						<p>Invoice to:</p>
-						<h2 className="marg">{bill.emisorReceiver.emisor.emName}</h2>
+						<h2 className="m-0 bold">{bill.emisorReceiver.emisor.emName}</h2>
 						<small>{bill.emisorReceiver.emisor.emPosition}</small>
-					</div>
-					<div className="separation">
-						<p>Invoice from:</p>
-						<h2 className="marg">{bill.emisorReceiver.receiver.reName}</h2>
-						<small>{bill.emisorReceiver.receiver.rePosition}</small>
-					</div>
-				</section>
-				<section className="withoutMargin">
-					<div>
+						<br></br>
 						<p>Address:</p>
 						<p>{bill.emisorReceiver.emisor.emStreet}</p>
 						<p>{bill.emisorReceiver.emisor.emContact}</p>
 					</div>
-					<div>
-						<p>Address:</p>
-						<p>{bill.emisorReceiver.receiver.reStreet}</p>
-						<p>{bill.emisorReceiver.receiver.reContact}</p>
-					</div>
+				</section>
+				<section className="withoutMargin">
+					<article className="mr-m flex-end">
+						<div>
+							<p>Invoice from:</p>
+							<h2 className="m-0 bold">{bill.emisorReceiver.receiver.reName}</h2>
+							<small>{bill.emisorReceiver.receiver.rePosition}</small>
+							<br></br>
+							<p>Address:</p>
+							<p>{bill.emisorReceiver.emisor.emStreet}</p>
+							<p>{bill.emisorReceiver.emisor.emContact}</p>
+						</div>
+					</article>
 				</section>
 				<div className="tableWrapper">
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
@@ -181,8 +182,8 @@ const Bill = (color_logo) => {
 								</td>
 							</tr>
 							<tr>
-								<th className="bold">GRAND TOTAL</th>
-								<td className="bold">
+								<th className="bg-grey bold">GRAND TOTAL</th>
+								<td className="bg-grey bold">
 									<div></div>
 									<div>
 										€{" "}

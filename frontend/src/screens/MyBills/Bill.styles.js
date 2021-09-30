@@ -40,13 +40,21 @@ export const BillComponentStyled = styled.div`
 	}
 `;
 
+export const ColHeadStyled = styled.h4`
+	font-weight: bold;
+`;
+
 export const BillStyled = styled.div`
-	width: 75%;
-	padding: 1.5rem 2rem 0 2rem;
+	width: 100%;
+	padding: 0;
 	background-color: #ffffff;
 	display: flex;
 	flex-direction: column;
 	font-family: "Inter", sans-serif;
+
+	.bold {
+		font-weight: bold;
+	}
 
 	h3,
 	h4,
@@ -57,9 +65,9 @@ export const BillStyled = styled.div`
 	h5 {
 		font-size: small;
 	}
-	@media (max-width: 768px) {
-		padding: 0;
-		width: 100%;
+	@media (min-width: 768px) {
+		padding: 1.5rem 2rem 0 2rem;
+		width: 75%;
 	}
 
 	header,
@@ -69,8 +77,18 @@ export const BillStyled = styled.div`
 		flex-wrap: nowrap;
 		justify-content: space-between;
 		padding: 0 4rem 0 4rem;
-		@media (max-width: 768px) {
+		background-color: yellow;
+		@media (min-width: 768px) {
+			//flex-direction: column;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			column-gap: 5rem;
+		}
+		.flex-end {
+			display: flex;
 			flex-direction: column;
+			align-items: flex-end;
+			background-color: pink;
 		}
 	}
 
@@ -78,16 +96,18 @@ export const BillStyled = styled.div`
 		margin-top: 3.8rem;
 	}
 
-	.withoutMargin p {
-		margin: 0;
-		font-size: small;
+	.withoutMargin {
+		p {
+			margin: 0;
+			font-size: small;
+		}
 	}
 
-	.separation {
-		margin-right: 64px;
+	.mr-m {
+		//margin-right: 64px;
 	}
 
-	.marg {
+	.m-0 {
 		margin: 0;
 	}
 
@@ -170,9 +190,11 @@ export const BillStyled = styled.div`
 			font-weight: normal;
 			padding-left: 27px;
 		}
+		.bg-grey {
+			background-color: #efeeea;
+		}
 		.bold {
 			font-weight: bold;
-			background-color: #efeeea;
 		}
 		tr {
 			display: grid;
