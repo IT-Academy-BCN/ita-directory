@@ -17,7 +17,12 @@ import {
 	StyleNotificationError,
 } from "./Login.styles";
 import Body from "components/layout/Body/Body";
-import {faCheckCircle, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
+import {
+	faCheckCircle,
+	faExclamationCircle,
+	faGlassMartiniAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -26,13 +31,10 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
-
-const users = [
-	{
-		email: "juan@mail.com",
-		password: "Juan1992",
-	},
-];
+const users = {
+	email: "juan@mail.com",
+	password: 123456,
+};
 
 const authenticateUser = (email, password) => {
 	let authenticated = false;
@@ -52,9 +54,25 @@ const Login = ({onLogin}) => {
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [isEmailError, setIsEmailError] = useState(false);
 	const [isPassError, setIsPassError] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [validacionConexion, setValidacionConexion] = useState(false);
+
+	// const sendPostRequest = async () => {
+	// 	try {
+	// 		const resp = await axios.post("", users);
+	// 		console.log(resp.status);
+	// 		return resp.status;
+	// 		if (resp.status === 201) {
+	// 			setValidacionConexion(true);
+	// 		}
+	// 	} catch (err) {
+	// 		// Handle Error Here
+	// 		console.error(err);
+	// 	}
+	// };
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
@@ -68,13 +86,12 @@ const Login = ({onLogin}) => {
 		setIsPassError(!isPass);
 	};
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setAnimatedState(true);
 		setIsDisabled(true);
 		setIsLoading(true);
+		// sendPostRequest();
 		setTimeout(() => {
 			setAnimatedState(false);
 			setIsDisabled(false);
@@ -92,10 +109,8 @@ const Login = ({onLogin}) => {
 	};
 	return (
 		<>
+			{/* {validacionConexion ? ( */}
 			<StyleNotificationSuccess>
-				{/* style={{display: "flexbox"}} */}
-				{/* // style={{width: "30px", height: "30px", paddingTop: "16px", paddingLeft: "11px"}} */}
-
 				<FontAwesomeIcon
 					icon={faCheckCircle}
 					style={{color: "white", width: "30px", height: "30px"}}
@@ -104,16 +119,17 @@ const Login = ({onLogin}) => {
 					Bienvenido de nuevo email@gmail.com. Te estamos redireccionando.
 				</StyleNotificationMessage>
 			</StyleNotificationSuccess>
+			{/* ) : ( */}
 			<StyleNotificationError>
 				<FontAwesomeIcon
 					icon={faExclamationCircle}
 					style={{color: "white", width: "30px", height: "30px"}}
 				/>
-
 				<StyleNotificationMessage>
 					Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
 				</StyleNotificationMessage>
 			</StyleNotificationError>
+			{/* )} */}
 			<Body title="Acceso" isLoggedIn={false} centerTitle>
 				<Container>
 					<Form onSubmit={handleSubmit}>
