@@ -172,11 +172,11 @@ exports.getAllUsers = async (req, res) => {
 
 // Login
 exports.login = async (req, res) => {
-	const name = req.body.name;
-	const email = req.body.username;
-	const password = req.body.password;
+	
+    const { body = {} } = req;
 	// Check that the request isn't empty
-	if (!email || !password) {
+
+	if (!body.email || !body.password) {
 		res.status(400).send({
 			code: "error",
 			message: "Content can not be empty!",
@@ -185,12 +185,8 @@ exports.login = async (req, res) => {
 	}
 
 	try {
-		const USER = await prisma.mec_user.findOne({
-			attributes: ["id", "mec_pwd"],
-			where: prisma.sequelize.where(
-				prisma.sequelize.fn("lower", prisma.sequelize.col("mec_un")),
-				prisma.sequelize.fn("lower", email)
-			),
+		const USER = await prisma.user.findUnique({
+			where: {email: body.email},
 		});
 
 		if (!USER) {
@@ -202,9 +198,9 @@ exports.login = async (req, res) => {
 			return;
 		}
 
-		let value = await USER.validatePassword(password, USER.mec_pwd);
+		let value = await argon2.verify(USER.password, body.password);
 
-		if (!value) {
+		if (value == false) {
 			res.status(200).send({
 				code: "error",
 				header: "Wrong password",
@@ -213,6 +209,7 @@ exports.login = async (req, res) => {
 			});
 		} else {
 			const token = signToken(USER.id);
+			
 			res.status(200).send({
 				code: "success",
 				header: "Welcome back",
@@ -228,7 +225,6 @@ exports.login = async (req, res) => {
 		});
 	}
 };
-
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
 exports.updateUserRole = async (req, res) => {
 	if (!req.body) {
