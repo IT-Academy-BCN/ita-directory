@@ -115,6 +115,7 @@ export const HeaderStyled = styled.header`
 		border-left: none;
 		border-right: none;
 		margin-bottom: 2rem;
+		padding: 20px 0 20px 0;
 
 		h1 {
 			width: 100%;
