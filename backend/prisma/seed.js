@@ -1,5 +1,5 @@
 const {PrismaClient} = require("@prisma/client");
-// const {hashPassword} = require("../app/utils/utils");
+const {hashPassword} = require("../app/utils/utils");
 const prisma = new PrismaClient();
 
 const user_roles = [
@@ -49,9 +49,10 @@ const users = [
 		name: "test",
 		lastnames: "test test",
 		email: "test@test.test",
-		user_status: 1,
-		user_role: 3,
+		user_status_id: 1,
+		user_role_id: 3,
 		password: "test",
+		refresh_token: "20"
 	},
 ];
 
@@ -79,17 +80,17 @@ async function main() {
 	}
 
 	// @todo: fix by students
-	// for (let i = 0; i < users.length; i++) {
-	// 	const user = users[i];
-	// 	await prisma.user.upsert({
-	// 		where: {id: user.id},
-	// 		update: {},
-	// 		create: {
-	// 			...user,
-	// 			password: await hashPassword(user.password),
-	// 		},
-	// 	});
-	// }
+	for (let i = 0; i < users.length; i++) {
+		const user = users[i];
+		await prisma.user.upsert({
+			where: {id: user.id},
+			update: {},
+			create: {
+				...user,
+				password: await hashPassword(user.password),
+			},
+		});
+	}
 }
 
 main()
