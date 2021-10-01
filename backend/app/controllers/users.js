@@ -3,7 +3,7 @@ const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const {getRedisClient} = require("../utils/initRedis");
 const Hashids = require("hashids");
-const {apiResponse, signToken, signRefreshToken, registerSchema} = require("../utils/utils");
+const {apiResponse, signToken, signRefreshToken, registerSchema, hashPassword} = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
@@ -81,7 +81,8 @@ exports.getUser = async (req, res) => {
 		res.status(400).send("Request is empty.");
 	}
 	try {
-		const USER = await prisma.user.findUnique({where: {id: req.body.id}});
+		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id),},});
+		console.log("user", USER);
 		if (USER === null) {
 			res.status(204).json({
 				success: "false",
@@ -107,10 +108,11 @@ exports.getUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
 	try {
 		//Checking if valid email, password and privacy policy.
-		const {name, lastnames, ...userDTO} = req.body;
+		const {...userDTO} = req.body;
 		const validFields = await registerSchema.validateAsync(userDTO);
 
-		const doesExist = await prisma.user.findOne({where: {email: req.body.email}});
+		const doesExist = await prisma.user.findUnique({where: {email: req.body.email,},});
+		
 		if (doesExist !== null) {
 			res.status(400).json(
 				apiResponse({
@@ -120,7 +122,17 @@ exports.registerUser = async (req, res) => {
 			);
 		}
 		const {privacy, ...userDTO2} = req.body;
-		const newUser = await prisma.user.create({...req.body});
+		//Creating user without name or lastnames
+		const passwordHashed = await hashPassword(req.body.password);
+		const newUser = await prisma.user.create(
+			{data: {
+					email: req.body.email,
+					password: passwordHashed,
+					user_status_id: 1,
+					user_role_id: 3,
+					refresh_token: "20"
+				},
+			});
 		res.status(200).json(
 			apiResponse({
 				message: "User registered correctly.",
