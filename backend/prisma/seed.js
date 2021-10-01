@@ -1,5 +1,5 @@
 const {PrismaClient} = require("@prisma/client");
-const {hashPassword} = require("../app/utils/utils");
+// const {hashPassword} = require("../app/utils/utils");
 const prisma = new PrismaClient();
 
 const user_roles = [
@@ -80,17 +80,17 @@ async function main() {
 	}
 
 	// @todo: fix by students
-	for (let i = 0; i < users.length; i++) {
-		const user = users[i];
-		await prisma.user.upsert({
-			where: {id: user.id},
-			update: {},
-			create: {
-				...user,
-				password: await hashPassword(user.password),
-			},
-		});
-	}
+	// for (let i = 0; i < users.length; i++) {
+	// 	const user = users[i];
+	// 	await prisma.user.upsert({
+	// 		where: {id: user.id},
+	// 		update: {},
+	// 		create: {
+	// 			...user,
+	// 			password: await hashPassword(user.password),
+	// 		},
+	// 	});
+	// }
 }
 
 main()
