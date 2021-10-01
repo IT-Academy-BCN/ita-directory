@@ -4,7 +4,7 @@
   "description": "Backend ITAcademy Directory project (react + node tracks)",
   "main": "server.js",
   "scripts": {
-    "dev": "export NODE_ENV=development && nodemon server.js",
+    "dev": "export NODE_ENV=development && nodemon --legacy-watch server.js",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate-dev": "prisma migrate dev",
     "prisma:seed": "npx prisma db seed --preview-feature",
@@ -12,7 +12,7 @@
     "test": "test"
   },
   "keywords": [
-    
+
     "node",
     "sequelize",
     "mysql"

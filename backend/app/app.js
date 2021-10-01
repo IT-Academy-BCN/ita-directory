@@ -9,7 +9,7 @@ const userRoutes = require("./routes/users");
 // const constantsRoute = require("./routes/constants");
 // const adsRoutes = require("./routes/ads");
 // const authenticateToken = require("./middleware/verifyToken");
-// const UsersController = require("./controllers/users");
+ //const UsersController = require("./controllers/users");
 // const {loadConstants} = require("./utils/CONSTANTS");
 const {loadConstants} = require("./utils/CONSTANTS");
 
@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 // app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 
-// app.get("/get-token", UsersController.getToken);
+ //app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
 // 	res.json({message: "Correct Token !", data: {user_id: req.userId}});
 // });
