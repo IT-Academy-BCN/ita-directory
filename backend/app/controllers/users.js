@@ -262,10 +262,10 @@ exports.updateUserRole = async (req, res) => {
 	}
 };
 
-//Update some user field with id_user & newfield (FOR TESTING PURPOSE)
+//Update some user field with id
 exports.updateUser = async (req, res) => {
-	const {user_id, user_role_id, user_status_id} = req.body;
-	if (!user_id) {
+	const {id, user_role_id, user_status_id} = req.body;
+	if (!id) {
 		res.status(400).json(
 			apiResponse({
 				message: "user_id not defined",
@@ -273,16 +273,27 @@ exports.updateUser = async (req, res) => {
 		);
 	}
 
-	if (!user_role_id && !user_status_id) {
-		res.status(400).json(
-			apiResponse({
-				message: "undefined values",
-			})
-		);
-	}
+	// if (!user_role_id && !user_status_id) {
+	// 	res.status(400).json(
+	// 		apiResponse({
+	// 			message: "undefined values",
+	// 		})
+	// 	);
+	// }
 
+	// Updating user using id
 	try {
-		const user = await prisma.user.update({...req.body}, {where: {id: req.body.user_id}});
+		const user = await prisma.user.update(
+			{where: {id: parseInt(req.body.id)},
+			data: {
+				name: req.body.name,
+				lastnames: req.body.lastnames,
+				email: req.body.email,
+				updated_at: new Date(new Date(Date.now()).toISOString().replace('T',' ').replace('Z','')),
+				user_status_id: parseInt(req.body.user_status_id),
+				user_role_id: parseInt(req.body.user_role_id)
+			},
+		});
 		if (user === null) {
 			res.status(204).json(
 				apiResponse({
