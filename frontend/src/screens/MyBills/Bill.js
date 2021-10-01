@@ -12,6 +12,8 @@ import {
 	PaymentMethodStyled,
 	PaySignStyled,
 	ColHeadStyled,
+	InvoiceRecipientStyled,
+	InvoiceSenderStyled,
 } from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
@@ -90,19 +92,19 @@ const Bill = (color_logo) => {
 					<h2>{bill.header.logoCompany}</h2>
 					<h2>{bill.header.invoiceID}</h2>
 				</header>
-				<section className="withoutMargin">
-					<div>
-						<p>Invoice to:</p>
-						<h2 className="m-0 bold">{bill.emisorReceiver.emisor.emName}</h2>
-						<small>{bill.emisorReceiver.emisor.emPosition}</small>
-						<br></br>
-						<p>Address:</p>
-						<p>{bill.emisorReceiver.emisor.emStreet}</p>
-						<p>{bill.emisorReceiver.emisor.emContact}</p>
-					</div>
-				</section>
-				<section className="withoutMargin">
-					<article className="mr-m flex-end">
+				<div className="address-name-wrapper">
+					<InvoiceRecipientStyled>
+						<div>
+							<p>Invoice to:</p>
+							<h2 className="bold">{bill.emisorReceiver.emisor.emName}</h2>
+							<small>{bill.emisorReceiver.emisor.emPosition}</small>
+							<br></br>
+							<p>Address:</p>
+							<p>{bill.emisorReceiver.emisor.emStreet}</p>
+							<p>{bill.emisorReceiver.emisor.emContact}</p>
+						</div>
+					</InvoiceRecipientStyled>
+					<InvoiceSenderStyled>
 						<div>
 							<p>Invoice from:</p>
 							<h2 className="m-0 bold">{bill.emisorReceiver.receiver.reName}</h2>
@@ -112,8 +114,8 @@ const Bill = (color_logo) => {
 							<p>{bill.emisorReceiver.emisor.emStreet}</p>
 							<p>{bill.emisorReceiver.emisor.emContact}</p>
 						</div>
-					</article>
-				</section>
+					</InvoiceSenderStyled>
+				</div>
 				<div className="tableWrapper">
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</div>
@@ -226,9 +228,7 @@ const Bill = (color_logo) => {
 						<div className="signature-image" role="image">
 							{bill.signature.image}
 						</div>
-
 						<p>{bill.emisorReceiver.receiver.reName}</p>
-
 						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
 					</SignatureStyled>
 				</PaySignStyled>

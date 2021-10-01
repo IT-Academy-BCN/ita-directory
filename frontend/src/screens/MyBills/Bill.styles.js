@@ -46,12 +46,25 @@ export const ColHeadStyled = styled.h4`
 
 export const BillStyled = styled.div`
 	width: 100%;
+	transform: scale(0.8);
 	padding: 0;
-	background-color: #ffffff;
+	background-color: ${Colors.lightGrey1};
 	display: flex;
 	flex-direction: column;
 	font-family: "Inter", sans-serif;
+	@media (min-width: 768px) {
+		transform: scale(1);
 
+		//padding-right: 0;
+		//padding-left: 1rem;
+		background-color: orange;
+		//justify-content: center;
+		//padding: 0 20% 0 60%;
+		.address-name-wrapper {
+			display: flex;
+			flex-direction: row;
+		}
+	}
 	.bold {
 		font-weight: bold;
 	}
@@ -70,45 +83,19 @@ export const BillStyled = styled.div`
 		width: 75%;
 	}
 
-	header,
-	section {
+	header {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		justify-content: space-between;
 		padding: 0 4rem 0 4rem;
 		background-color: yellow;
-		@media (min-width: 768px) {
-			//flex-direction: column;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			column-gap: 5rem;
+	}
+	.address-name-wrapper {
+		background-color: pink;
+		justify-content: space-between section {
+			margin-top: 3.8rem;
 		}
-		.flex-end {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-end;
-			background-color: pink;
-		}
-	}
-
-	section {
-		margin-top: 3.8rem;
-	}
-
-	.withoutMargin {
-		p {
-			margin: 0;
-			font-size: small;
-		}
-	}
-
-	.mr-m {
-		//margin-right: 64px;
-	}
-
-	.m-0 {
-		margin: 0;
 	}
 
 	.tableWrapper {
@@ -133,10 +120,10 @@ export const BillStyled = styled.div`
 				height: 47px;
 				width: 100%;
 				.white {
-					background-color: white;
+					background-color: ${Colors.white};
 				}
 				.grey {
-					background-color: #efeeea;
+					background-color: ${Colors.lightGrey0};
 				}
 
 				td {
@@ -191,7 +178,7 @@ export const BillStyled = styled.div`
 			padding-left: 27px;
 		}
 		.bg-grey {
-			background-color: #efeeea;
+			background-color: ${Colors.lightGrey0};
 		}
 		.bold {
 			font-weight: bold;
@@ -222,18 +209,46 @@ export const BillStyled = styled.div`
 				}
 			}
 		}
-		@media (min-width: 768px) {
-			//transform: scale(0.8);
-			//padding-right: 0;
-			//padding-left: 1rem;
-			//background-color: orange;
-			//justify-content: center;
-			//padding: 0 20% 0 60%;
-		}
 	}
 
 	.rdt_TableHead {
 		padding-right: 11px;
+	}
+`;
+export const InvoiceRecipientStyled = styled.section`
+	background-color: green;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	background-color: pink;
+	width: 100%;
+	padding: 0;
+
+	div {
+		width: 100%;
+		padding: 0;
+	}
+	p {
+		font-size: small;
+	}
+	@media (min-width: 768px) {
+		flex-direction: row;
+		align-items: flex-start;
+		//justify-content: flex-end;
+
+		div {
+			display: flex;
+			flex-direction: column;
+			width: auto;
+			padding: 0;
+			background-color: lemonchiffon;
+		}
+	}
+`;
+
+export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
+	@media (min-width: 768px) {
+		justify-content: flex-end;
 	}
 `;
 
