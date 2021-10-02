@@ -14,6 +14,9 @@ import {
 	ColHeadStyled,
 	InvoiceRecipientStyled,
 	InvoiceSenderStyled,
+	TermsAndCalcStyled,
+	CalcTableStyled,
+	TableWrapperStyled,
 } from "./Bill.styles";
 import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
@@ -97,7 +100,7 @@ const Bill = (color_logo) => {
 						<div>
 							<p>Invoice to:</p>
 							<h2 className="bold">{bill.emisorReceiver.emisor.emName}</h2>
-							<small>{bill.emisorReceiver.emisor.emPosition}</small>
+							<p>{bill.emisorReceiver.emisor.emPosition}</p>
 							<br></br>
 							<p>Address:</p>
 							<p>{bill.emisorReceiver.emisor.emStreet}</p>
@@ -108,7 +111,7 @@ const Bill = (color_logo) => {
 						<div>
 							<p>Invoice from:</p>
 							<h2 className="m-0 bold">{bill.emisorReceiver.receiver.reName}</h2>
-							<small>{bill.emisorReceiver.receiver.rePosition}</small>
+							<p>{bill.emisorReceiver.receiver.rePosition}</p>
 							<br></br>
 							<p>Address:</p>
 							<p>{bill.emisorReceiver.emisor.emStreet}</p>
@@ -116,10 +119,10 @@ const Bill = (color_logo) => {
 						</div>
 					</InvoiceSenderStyled>
 				</div>
-				<div className="tableWrapper">
+				<TableWrapperStyled>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
-				</div>
-				<div className="termsAndCalc">
+				</TableWrapperStyled>
+				<TermsAndCalcStyled>
 					<div className="terms">
 						<h3>Terms & Conditions</h3>
 						<small>
@@ -128,7 +131,7 @@ const Bill = (color_logo) => {
 						</small>
 					</div>
 
-					<table className="calcs">
+					<CalcTableStyled>
 						<tbody>
 							<tr>
 								<th>Sub Total</th>
@@ -208,8 +211,8 @@ const Bill = (color_logo) => {
 								</td>
 							</tr>
 						</tbody>
-					</table>
-				</div>
+					</CalcTableStyled>
+				</TermsAndCalcStyled>
 				<PaySignStyled>
 					<PaymentMethodStyled>
 						<h3>Payment Method</h3>

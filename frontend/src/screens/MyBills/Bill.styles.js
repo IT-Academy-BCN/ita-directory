@@ -54,7 +54,6 @@ export const BillStyled = styled.div`
 	font-family: "Inter", sans-serif;
 	@media (min-width: 768px) {
 		transform: scale(1);
-
 		//padding-right: 0;
 		//padding-left: 1rem;
 		background-color: orange;
@@ -86,143 +85,140 @@ export const BillStyled = styled.div`
 	header {
 		display: flex;
 		flex-direction: row;
+		padding: 0 1rem;
 		flex-wrap: nowrap;
 		justify-content: space-between;
-		padding: 0 4rem 0 4rem;
-		background-color: yellow;
+		@media (min-width: 768px) {
+			padding: 0 4rem;
+		}
 	}
 	.address-name-wrapper {
-		background-color: pink;
-		justify-content: space-between section {
-			margin-top: 3.8rem;
-		}
-	}
-
-	.tableWrapper {
-		margin-top: 3rem;
-		border-top: 2px solid ${(props) => props.color};
-		width: 100%;
-
-		table {
-			width: 100%;
-			block-size: fit-content;
-			display: flex;
-			flex-direction: column;
-
-			th {
-				justify-content: center;
-				font-weight: normal;
-				font-size: 13px;
-			}
-			tr {
-				display: grid;
-				grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
-				height: 47px;
-				width: 100%;
-				.white {
-					background-color: ${Colors.white};
-				}
-				.grey {
-					background-color: ${Colors.lightGrey0};
-				}
-
-				td {
-					display: flex;
-					flex-grow: 1;
-					font-size: 13px;
-					min-width: 50px;
-					justify-content: center;
-				}
-			}
-		}
-		@media (max-width: 768px) {
-			transform: scale(0.8);
-		}
-	}
-
-	.termsAndCalc {
-		display: flex;
-		align-items: center;
-		flex-direction: column-reverse;
-		@media (min-width: 768px) {
-			display: grid;
-			grid-template-columns: 50% 50%;
-			background-color: green;
-		}
-		.terms {
-			margin-top: 2.5rem;
-			padding: 0 3.5rem;
-			//width: 400px;
-			width: auto;
-			background-color: purple;
-			height: 88px;
-		}
-	}
-
-	.calcs {
-		padding: 5px 0 0 auto;
-		background-color: pink;
-		width: 100%;
-
-		table {
-			border-collapse: collapse;
-		}
-		td,
-		th {
-			height: 47px;
-			font-size: 13px;
-		}
-		th {
-			text-align: left;
-			font-weight: normal;
-			padding-left: 27px;
-		}
-		.bg-grey {
-			background-color: ${Colors.lightGrey0};
-		}
-		.bold {
-			font-weight: bold;
-		}
-		tr {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			background-color: yellow;
-			td {
-				background-color: red;
-				padding: 0 20% 0 20%;
-				//padding: 0 64px 0 186px;
-				//display: grid;
-				//grid-template-columns: 2fr 1fr;
-				//flex-grow: 1;
-				font-size: 13px;
-				min-width: 50px;
-				//padding-right: 5rem;
-				display: flex;
-				justify-content: flex-end;
-				@media (min-width: 768px) {
-					//transform: scale(0.8);
-					//padding-right: 0;
-					//padding-left: 1rem;
-					background-color: orange;
-					//justify-content: flex-end;
-					padding: 0 40% 0 auto;
-				}
-			}
-		}
+		justify-content: space-between;
 	}
 
 	.rdt_TableHead {
 		padding-right: 11px;
 	}
 `;
+
+export const TableWrapperStyled = styled.div`
+	margin-top: 3rem;
+	border-top: 2px solid ${(props) => props.color};
+	width: 100%;
+
+	table {
+		width: 100%;
+		block-size: fit-content;
+		display: flex;
+		flex-direction: column;
+
+		th {
+			justify-content: center;
+			font-weight: normal;
+			font-size: 13px;
+		}
+		tr {
+			display: grid;
+			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+			height: 47px;
+			width: 100%;
+			.white {
+				background-color: ${Colors.white};
+			}
+			.grey {
+				background-color: ${Colors.lightGrey0};
+			}
+
+			td {
+				display: flex;
+				flex-grow: 1;
+				font-size: 13px;
+				min-width: 50px;
+				justify-content: center;
+			}
+		}
+	}
+	@media (max-width: 768px) {
+		transform: scale(0.8);
+	}
+`;
+
+export const CalcTableStyled = styled.table`
+	padding: 5px 0 0 auto;
+	background-color: pink;
+	width: 100%;
+
+	table {
+		border-collapse: collapse;
+	}
+	td,
+	th {
+		height: 47px;
+		font-size: 13px;
+	}
+	th {
+		text-align: left;
+		font-weight: normal;
+		padding-left: 27px;
+	}
+	.bg-grey {
+		background-color: ${Colors.lightGrey0};
+	}
+	.bold {
+		font-weight: bold;
+	}
+	tr {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		background-color: yellow;
+		td {
+			background-color: red;
+			padding: 0 20% 0 20%;
+			//padding: 0 64px 0 186px;
+			//display: grid;
+			//grid-template-columns: 2fr 1fr;
+			//flex-grow: 1;
+			font-size: 13px;
+			min-width: 50px;
+			//padding-right: 5rem;
+			display: flex;
+			justify-content: flex-end;
+			@media (min-width: 768px) {
+				//transform: scale(0.8);
+				//padding-right: 0;
+				//padding-left: 1rem;
+				background-color: orange;
+				//justify-content: flex-end;
+				padding: 0 40% 0 auto;
+			}
+		}
+	}
+`;
+export const TermsAndCalcStyled = styled.div`
+	display: flex;
+	align-items: center;
+	flex-direction: column-reverse;
+	@media (min-width: 768px) {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		background-color: green;
+	}
+	.terms {
+		margin-top: 2.5rem;
+		padding: 0 3.5rem;
+		//width: 400px;
+		width: auto;
+		background-color: purple;
+		height: 88px;
+	}
+`;
 export const InvoiceRecipientStyled = styled.section`
-	background-color: green;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	background-color: pink;
 	width: 100%;
-	padding: 0;
+	padding: 2rem 2rem 0rem 2rem;
+	background-color: yellow;
 
 	div {
 		width: 100%;
@@ -231,17 +227,17 @@ export const InvoiceRecipientStyled = styled.section`
 	p {
 		font-size: small;
 	}
+
 	@media (min-width: 768px) {
 		flex-direction: row;
 		align-items: flex-start;
-		//justify-content: flex-end;
+		padding: 5rem 8rem 0rem 4rem;
 
 		div {
 			display: flex;
 			flex-direction: column;
 			width: auto;
 			padding: 0;
-			background-color: lemonchiffon;
 		}
 	}
 `;
@@ -264,8 +260,7 @@ export const PaySignStyled = styled.section`
 		justify-content: space-between;
 		align-items: flex-end;
 		margin: 2.5rem 0 4rem 0;
-		padding: 0 0rem;
-		//padding: 0 3.5rem;
+		padding: 0;
 	}
 
 	h3 {
