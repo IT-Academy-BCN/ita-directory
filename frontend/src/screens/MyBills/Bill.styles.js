@@ -94,10 +94,59 @@ export const BillStyled = styled.div`
 	}
 	.address-name-wrapper {
 		justify-content: space-between;
+		margin-top: -12rem;
+
+		@media (min-width: 768px) {
+			margin-top: 0rem;
+		}
 	}
 
 	.rdt_TableHead {
 		padding-right: 11px;
+	}
+`;
+
+export const InvoiceRecipientStyled = styled.section`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	width: 100%;
+	padding: 2rem 2rem 0rem 2rem;
+	background-color: yellow;
+
+	div {
+		width: 100%;
+		padding: 0;
+	}
+	p {
+		font-size: small;
+	}
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+		align-items: flex-start;
+		padding: 5rem 0rem 0rem 0rem;
+
+		div {
+			background-color: red;
+			display: flex;
+			flex-direction: column;
+			width: auto;
+			padding: 0;
+		}
+	}
+	@media (min-width: 893px) {
+		padding: 5rem 2rem 0rem 2rem;
+	}
+
+	@media (min-width: 1230px) {
+		padding: 5rem 8rem 0rem 4rem;
+	}
+`;
+
+export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
+	@media (min-width: 768px) {
+		justify-content: flex-end;
 	}
 `;
 
@@ -210,41 +259,6 @@ export const TermsAndCalcStyled = styled.div`
 		width: auto;
 		background-color: purple;
 		height: 88px;
-	}
-`;
-export const InvoiceRecipientStyled = styled.section`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	width: 100%;
-	padding: 2rem 2rem 0rem 2rem;
-	background-color: yellow;
-
-	div {
-		width: 100%;
-		padding: 0;
-	}
-	p {
-		font-size: small;
-	}
-
-	@media (min-width: 768px) {
-		flex-direction: row;
-		align-items: flex-start;
-		padding: 5rem 8rem 0rem 4rem;
-
-		div {
-			display: flex;
-			flex-direction: column;
-			width: auto;
-			padding: 0;
-		}
-	}
-`;
-
-export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
-	@media (min-width: 768px) {
-		justify-content: flex-end;
 	}
 `;
 
