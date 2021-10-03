@@ -40,10 +40,6 @@ export const BillComponentStyled = styled.div`
 	}
 `;
 
-export const ColHeadStyled = styled.h4`
-	font-weight: bold;
-`;
-
 export const BillStyled = styled.div`
 	width: 100%;
 	transform: scale(0.8);
@@ -59,10 +55,6 @@ export const BillStyled = styled.div`
 		background-color: orange;
 		//justify-content: center;
 		//padding: 0 20% 0 60%;
-		.address-name-wrapper {
-			display: flex;
-			flex-direction: row;
-		}
 	}
 	.bold {
 		font-weight: bold;
@@ -97,6 +89,8 @@ export const BillStyled = styled.div`
 		margin-top: -12rem;
 
 		@media (min-width: 768px) {
+			display: flex;
+			flex-direction: row;
 			margin-top: 0rem;
 		}
 	}
@@ -163,14 +157,19 @@ export const TableWrapperStyled = styled.div`
 
 		th {
 			justify-content: center;
-			font-weight: normal;
+			font-weight: bold;
 			font-size: 13px;
+			align-items: center;
+			padding-top: 12px;
+			min-height: 47px;
 		}
 		tr {
 			display: grid;
 			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
 			height: 47px;
 			width: 100%;
+
+			//padding-top: 12px;
 			.white {
 				background-color: ${Colors.white};
 			}
@@ -202,13 +201,14 @@ export const CalcTableStyled = styled.table`
 	}
 	td,
 	th {
-		height: 47px;
-		font-size: 13px;
-	}
-	th {
 		text-align: left;
 		font-weight: normal;
 		padding-left: 27px;
+		justify-content: center;
+		font-size: 13px;
+		align-items: center;
+		padding-top: 12px;
+		min-height: 47px;
 	}
 	.bg-grey {
 		background-color: ${Colors.lightGrey0};
@@ -255,10 +255,17 @@ export const TermsAndCalcStyled = styled.div`
 	.terms {
 		margin-top: 2.5rem;
 		padding: 0 3.5rem;
-		//width: 400px;
-		width: auto;
+		max-width: 400px;
 		background-color: purple;
 		height: 88px;
+		@media (min-width: 768px) {
+			margin-top: 1rem;
+			padding: 0 1rem;
+			max-width: 400px;
+		}
+		@media (min-width: 1229px) {
+			padding-left: 4rem;
+		}
 	}
 `;
 
@@ -296,6 +303,7 @@ export const PaySignStyled = styled.section`
 		}
 	}
 `;
+
 export const PaymentMethodStyled = styled.div`
 	@media (min-width: 768px) {
 		padding-left: 5rem;
@@ -336,7 +344,8 @@ export const SignatureStyled = styled.div`
 `;
 
 export const RowStyled = styled.div`
-	height: "47px";
+	min-height: "47px";
+	align-items: center;
 `;
 
 export const FooterStyled = styled.footer`

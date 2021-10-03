@@ -1,6 +1,7 @@
 import {useState, useMemo, useCallback, useEffect} from "react";
 import ReactTable from "../../components/composed/Table/ReactTable";
 //import DataTable from "react-data-table-component";
+import Colors from "../../theme/Colors";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
 import {
@@ -11,14 +12,12 @@ import {
 	SignatureStyled,
 	PaymentMethodStyled,
 	PaySignStyled,
-	ColHeadStyled,
 	InvoiceRecipientStyled,
 	InvoiceSenderStyled,
 	TermsAndCalcStyled,
 	CalcTableStyled,
 	TableWrapperStyled,
 } from "./Bill.styles";
-import Colors from "theme/Colors";
 import DownloadPDF from "./DocumentComponent";
 
 const Bill = (color_logo) => {
@@ -41,26 +40,26 @@ const Bill = (color_logo) => {
 	//Custom styles for rows needs implementation - at the moment not working
 	const customRowStyle = (row) => {
 		if (Number(row.original.itemID) % 2 === 0) {
-			return {backgroundColor: "white"};
+			return {backgroundColor: "white", alignItems: "center"};
 		}
-		return {backgroundColor: "#efeeea"};
+		return {backgroundColor: `${Colors.lightGrey0}`, alignItems: "center"};
 	};
 
 	// Columns for datatables
 	const columns = useMemo(
 		() => [
 			{
-				Header: <ColHeadStyled>#</ColHeadStyled>,
+				Header: "#",
 				accessor: "itemID",
 				Cell: ({row}) => <div>{row.original.itemID}</div>,
 			},
 			{
-				Header: <ColHeadStyled>ITEM</ColHeadStyled>,
+				Header: "ITEM",
 				accessor: "itemTitle",
 				Cell: ({row}) => <div>{row.original.itemTitle}</div>,
 			},
 			{
-				Header: <ColHeadStyled>PRICE</ColHeadStyled>,
+				Header: "PRICE",
 				accessor: "itemPrice",
 				Cell: ({row}) => (
 					<div>
@@ -70,12 +69,12 @@ const Bill = (color_logo) => {
 				),
 			},
 			{
-				Header: <ColHeadStyled>QUANTITY</ColHeadStyled>,
+				Header: "QUANTITY",
 				accessor: "itemQuant",
 				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
-				Header: <ColHeadStyled>AMOUNT</ColHeadStyled>,
+				Header: "AMOUNT",
 				accessor: "amount",
 				Cell: ({row}) => (
 					<div className={customRowStyle}>
@@ -123,13 +122,13 @@ const Bill = (color_logo) => {
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</TableWrapperStyled>
 				<TermsAndCalcStyled>
-					<div className="terms">
+					<section className="terms">
 						<h3>Terms & Conditions</h3>
 						<small>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore
 						</small>
-					</div>
+					</section>
 
 					<CalcTableStyled>
 						<tbody>
