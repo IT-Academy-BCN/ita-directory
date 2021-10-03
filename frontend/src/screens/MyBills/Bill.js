@@ -118,7 +118,7 @@ const Bill = (color_logo) => {
 						</div>
 					</InvoiceSenderStyled>
 				</div>
-				<TableWrapperStyled>
+				<TableWrapperStyled borderColor={Colors.lightGrey0}>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</TableWrapperStyled>
 				<TermsAndCalcStyled>

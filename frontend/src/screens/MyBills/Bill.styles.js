@@ -77,10 +77,17 @@ export const BillStyled = styled.div`
 	header {
 		display: flex;
 		flex-direction: row;
-		padding: 0 1rem;
-		flex-wrap: nowrap;
+		padding: 0 2rem;
+		//flex-wrap: nowrap;
 		justify-content: space-between;
+
 		@media (min-width: 768px) {
+			padding: 0;
+		}
+		@media (min-width: 893px) {
+			padding: 0 2rem;
+		}
+		@media (min-width: 1230px) {
 			padding: 0 4rem;
 		}
 	}
@@ -129,6 +136,7 @@ export const InvoiceRecipientStyled = styled.section`
 			padding: 0;
 		}
 	}
+
 	@media (min-width: 893px) {
 		padding: 5rem 2rem 0rem 2rem;
 	}
@@ -146,7 +154,7 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 
 export const TableWrapperStyled = styled.div`
 	margin-top: 3rem;
-	border-top: 2px solid ${(props) => props.color};
+	border-top: 2px solid ${(props) => props.borderColor};
 	width: 100%;
 
 	table {
@@ -186,16 +194,17 @@ export const TableWrapperStyled = styled.div`
 			}
 		}
 	}
-	@media (max-width: 768px) {
-		transform: scale(0.8);
-	}
 `;
 
 export const CalcTableStyled = styled.table`
 	padding: 5px 0 0 auto;
 	background-color: pink;
-	width: 100%;
-
+	width: 50%;
+	margin-left: auto;
+	@media (min-width: 768px) {
+		width: 100%;
+		margin-left: 0;
+	}
 	table {
 		border-collapse: collapse;
 	}
@@ -245,7 +254,7 @@ export const CalcTableStyled = styled.table`
 `;
 export const TermsAndCalcStyled = styled.div`
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	flex-direction: column-reverse;
 	@media (min-width: 768px) {
 		display: grid;
@@ -254,14 +263,19 @@ export const TermsAndCalcStyled = styled.div`
 	}
 	.terms {
 		margin-top: 2.5rem;
-		padding: 0 3.5rem;
+		padding: 0 2rem;
+		//padding: 0 3.5rem;
 		max-width: 400px;
 		background-color: purple;
 		height: 88px;
+
 		@media (min-width: 768px) {
-			margin-top: 1rem;
-			padding: 0 1rem;
+			margin-top: 4rem;
+			padding: 0rem;
 			max-width: 400px;
+		}
+		@media (min-width: 893px) {
+			padding: 0 2rem;
 		}
 		@media (min-width: 1229px) {
 			padding-left: 4rem;
@@ -274,7 +288,7 @@ export const PaySignStyled = styled.section`
 	padding: 0 0rem;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 
 	@media (min-width: 768px) {
 		flex-direction: row;
@@ -285,7 +299,7 @@ export const PaySignStyled = styled.section`
 	}
 
 	h3 {
-		margin: 10px 0;
+		margin: 0.5rem 0;
 		padding-bottom: 1rem;
 	}
 
@@ -295,7 +309,7 @@ export const PaySignStyled = styled.section`
 		padding-bottom: 2rem;
 
 		h4 {
-			margin: 10px 0;
+			margin: 0.5rem 0;
 		}
 
 		small {
@@ -305,18 +319,33 @@ export const PaySignStyled = styled.section`
 `;
 
 export const PaymentMethodStyled = styled.div`
+	padding-left: 2rem;
+
 	@media (min-width: 768px) {
-		padding-left: 5rem;
+		padding-left: 0rem;
+	}
+	@media (min-width: 893px) {
+		padding-left: 2rem;
+	}
+
+	@media (min-width: 1230px) {
+		padding-left: 4rem;
 	}
 `;
 
 export const SignatureStyled = styled.div`
 	margin-top: 1.8rem;
 	width: 100%;
-	text-align: center;
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 2rem;
+	padding-left: 2rem;
+
+	@media (min-width: 768px) {
+		justify-content: flex-end;
+		text-align: center;
+		width: 30%;
+	}
 
 	p {
 		margin: 0;
@@ -335,11 +364,6 @@ export const SignatureStyled = styled.div`
 		@media (min-width: 768px) {
 			margin-bottom: 3rem;
 		}
-	}
-
-	@media (min-width: 768px) {
-		justify-content: flex-end;
-		width: 30%;
 	}
 `;
 
@@ -365,3 +389,12 @@ export const FooterStyled = styled.footer`
 		font-size: small;
 	}
 `;
+
+/*
+	@media (min-width: 768px) {
+		padding-left: 2rem;
+	}
+	@media (min-width: 893px) {
+		padding-left: 2rem;
+	}
+	*/
