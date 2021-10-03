@@ -188,7 +188,6 @@ const Bill = (color_logo) => {
 							<tr>
 								<th className="bg-grey bold">GRAND TOTAL</th>
 								<td className="bg-grey bold">
-									<div></div>
 									<div>
 										€{" "}
 										{selectedBill.map((amount) => {

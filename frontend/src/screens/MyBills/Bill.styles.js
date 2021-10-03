@@ -253,7 +253,7 @@ export const TermsAndCalcStyled = styled.div`
 		@media (min-width: 768px) {
 			margin-top: 4rem;
 			padding: 0rem;
-			max-width: 400px;
+			max-width: 350px;
 		}
 		@media (min-width: 893px) {
 			padding: 0 2rem;
@@ -283,7 +283,7 @@ export const PaySignStyled = styled.section`
 		padding-bottom: 1rem;
 	}
 
-	.pay {
+	div {
 		display: flex;
 		flex-direction: column;
 		padding-bottom: 2rem;
@@ -300,6 +300,14 @@ export const PaySignStyled = styled.section`
 
 export const PaymentMethodStyled = styled.div`
 	padding-left: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+
+	div {
+		padding-bottom: 0;
+		padding-top: 1rem;
+	}
 
 	@media (min-width: 480px) {
 		padding-left: 2rem;
@@ -337,10 +345,10 @@ export const SignatureStyled = styled.div`
 
 	.signature-image {
 		height: 80%;
-		margin-bottom: 3rem;
+		padding-bottom: 3rem;
 
 		@media (min-width: 480px) {
-			margin-bottom: 3rem;
+			padding-bottom: 3rem;
 		}
 	}
 `;
