@@ -56,6 +56,10 @@ export const BillStyled = styled.div`
 		//justify-content: center;
 		//padding: 0 20% 0 60%;
 	}
+	@media (min-width: 768px) {
+		padding: 1.5rem 2rem 0 2rem;
+		width: 75%;
+	}
 	.bold {
 		font-weight: bold;
 	}
@@ -69,19 +73,18 @@ export const BillStyled = styled.div`
 	h5 {
 		font-size: small;
 	}
-	@media (min-width: 768px) {
-		padding: 1.5rem 2rem 0 2rem;
-		width: 75%;
-	}
 
 	header {
 		display: flex;
 		flex-direction: row;
 		padding: 0 2rem;
+		background-color: blue;
+		margin-top: -12rem;
 		//flex-wrap: nowrap;
 		justify-content: space-between;
 
 		@media (min-width: 768px) {
+			margin-top: 0;
 			padding: 0;
 		}
 		@media (min-width: 893px) {
@@ -93,7 +96,7 @@ export const BillStyled = styled.div`
 	}
 	.address-name-wrapper {
 		justify-content: space-between;
-		margin-top: -12rem;
+		//margin-top: -12rem;
 
 		@media (min-width: 768px) {
 			display: flex;
