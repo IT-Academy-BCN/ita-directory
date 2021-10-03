@@ -20,8 +20,9 @@ export const BillComponentStyled = styled.div`
 	justify-content: center;
 	align-content: center;
 	align-items: center;
-	background-color: #eeeeee;
+	background-color: ${Colors.lightGrey2};
 	padding-bottom: 3rem;
+	margin-bottom: -3rem;
 
 	.logo {
 		display: flex;
@@ -50,11 +51,6 @@ export const BillStyled = styled.div`
 	font-family: "Inter", sans-serif;
 	@media (min-width: 768px) {
 		transform: scale(1);
-		//padding-right: 0;
-		//padding-left: 1rem;
-		background-color: orange;
-		//justify-content: center;
-		//padding: 0 20% 0 60%;
 	}
 	@media (min-width: 768px) {
 		padding: 1.5rem 2rem 0 2rem;
@@ -78,12 +74,14 @@ export const BillStyled = styled.div`
 		display: flex;
 		flex-direction: row;
 		padding: 0 2rem;
-		background-color: blue;
-		margin-top: -12rem;
-		//flex-wrap: nowrap;
+		margin-top: -10rem;
+		background-color: ${Colors.white};
+		height: 3rem;
+		align-items: flex-end;
 		justify-content: space-between;
 
 		@media (min-width: 768px) {
+			height: auto;
 			margin-top: 0;
 			padding: 0;
 		}
@@ -95,8 +93,8 @@ export const BillStyled = styled.div`
 		}
 	}
 	.address-name-wrapper {
+		background-color: ${Colors.white};
 		justify-content: space-between;
-		//margin-top: -12rem;
 
 		@media (min-width: 768px) {
 			display: flex;
@@ -116,7 +114,6 @@ export const InvoiceRecipientStyled = styled.section`
 	align-items: flex-end;
 	width: 100%;
 	padding: 2rem 2rem 0rem 2rem;
-	background-color: yellow;
 
 	div {
 		width: 100%;
@@ -132,7 +129,6 @@ export const InvoiceRecipientStyled = styled.section`
 		padding: 5rem 0rem 0rem 0rem;
 
 		div {
-			background-color: red;
 			display: flex;
 			flex-direction: column;
 			width: auto;
@@ -179,8 +175,6 @@ export const TableWrapperStyled = styled.div`
 			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
 			height: 47px;
 			width: 100%;
-
-			//padding-top: 12px;
 			.white {
 				background-color: ${Colors.white};
 			}
@@ -201,7 +195,6 @@ export const TableWrapperStyled = styled.div`
 
 export const CalcTableStyled = styled.table`
 	padding: 5px 0 0 auto;
-	background-color: pink;
 	width: 50%;
 	margin-left: auto;
 	@media (min-width: 768px) {
@@ -231,25 +224,13 @@ export const CalcTableStyled = styled.table`
 	tr {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		background-color: yellow;
 		td {
-			background-color: red;
 			padding: 0 20% 0 20%;
-			//padding: 0 64px 0 186px;
-			//display: grid;
-			//grid-template-columns: 2fr 1fr;
-			//flex-grow: 1;
 			font-size: 13px;
 			min-width: 50px;
-			//padding-right: 5rem;
 			display: flex;
 			justify-content: flex-end;
 			@media (min-width: 768px) {
-				//transform: scale(0.8);
-				//padding-right: 0;
-				//padding-left: 1rem;
-				background-color: orange;
-				//justify-content: flex-end;
 				padding: 0 40% 0 auto;
 			}
 		}
@@ -262,14 +243,11 @@ export const TermsAndCalcStyled = styled.div`
 	@media (min-width: 768px) {
 		display: grid;
 		grid-template-columns: 50% 50%;
-		background-color: green;
 	}
 	.terms {
 		margin-top: 2.5rem;
 		padding: 0 2rem;
-		//padding: 0 3.5rem;
 		max-width: 400px;
-		background-color: purple;
 		height: 88px;
 
 		@media (min-width: 768px) {
@@ -293,12 +271,11 @@ export const PaySignStyled = styled.section`
 	flex-direction: column;
 	align-items: flex-start;
 
-	@media (min-width: 768px) {
+	@media (min-width: 480px) {
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: flex-end;
-		margin: 2.5rem 0 4rem 0;
-		padding: 0;
+		margin: 2.5rem 2rem 4rem 0;
 	}
 
 	h3 {
@@ -324,10 +301,7 @@ export const PaySignStyled = styled.section`
 export const PaymentMethodStyled = styled.div`
 	padding-left: 2rem;
 
-	@media (min-width: 768px) {
-		padding-left: 0rem;
-	}
-	@media (min-width: 893px) {
+	@media (min-width: 480px) {
 		padding-left: 2rem;
 	}
 
@@ -344,7 +318,7 @@ export const SignatureStyled = styled.div`
 	padding-bottom: 2rem;
 	padding-left: 2rem;
 
-	@media (min-width: 768px) {
+	@media (min-width: 480px) {
 		justify-content: flex-end;
 		text-align: center;
 		width: 30%;
@@ -353,6 +327,7 @@ export const SignatureStyled = styled.div`
 	p {
 		margin: 0;
 		font-weight: bold;
+		white-space: nowrap;
 	}
 
 	h4 {
@@ -364,7 +339,7 @@ export const SignatureStyled = styled.div`
 		height: 80%;
 		margin-bottom: 3rem;
 
-		@media (min-width: 768px) {
+		@media (min-width: 480px) {
 			margin-bottom: 3rem;
 		}
 	}
@@ -392,12 +367,3 @@ export const FooterStyled = styled.footer`
 		font-size: small;
 	}
 `;
-
-/*
-	@media (min-width: 768px) {
-		padding-left: 2rem;
-	}
-	@media (min-width: 893px) {
-		padding-left: 2rem;
-	}
-	*/

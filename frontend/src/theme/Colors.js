@@ -15,6 +15,7 @@ const Colors = {
 	white: "white",
 	lightGrey0: "#efeeea",
 	lightGrey1: "#ffffff",
+	lightGrey2: "#eeeeee",
 	lightGrey: "#999999",
 	lightGray: "#B0B0B0",
 	strongBlue: "#006BB9",
