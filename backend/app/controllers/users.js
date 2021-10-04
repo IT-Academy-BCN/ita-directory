@@ -240,7 +240,7 @@ exports.updateUserRole = async (req, res) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-			res.status(204).json({
+			res.status(404).json({
 				success: "false",
 				message: "user not found",
 			});
@@ -290,7 +290,7 @@ exports.updateUser = async (req, res) => {
 			},
 		});
 		if (user === null) {
-			res.status(400).json(
+			res.status(404).json(
 				apiResponse({
 					message: "User not Found.",
 				})
