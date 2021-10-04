@@ -126,16 +126,6 @@ export const StyledSubHeader = styled.div`
 		border-right: none;
 		margin-bottom: 2rem;
 		padding: 20px 0 20px 0;
-
-		h1 {
-			width: 100%;
-			font-size: 26px;
-			line-height: 36px;
-			font-weight: 100;
-			text-align: ${(props) => (props.centerTitle ? "center" : "left")};
-			color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
-		}
-
 	}
 `;
 
