@@ -177,16 +177,19 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // Login
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
 	const {body = {}} = req;
 	// Check that the request isn't empty
 
 	if (!body.email || !body.password) {
-		res.status(400).send({
+		const message = "Content can not be empty!"
+		return next({
 			code: "error",
-			message: "Content can not be empty!",
+			message,
+			statusCode: 400
 		});
-		return;
+		
+		
 	}
 
 	try {
@@ -195,27 +198,29 @@ exports.login = async (req, res) => {
 		});
 
 		if (!USER) {
-			res.status(200).send({
+			return next({
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
+				statusCode: 200,
 			});
-			return;
+			
 		}
 
 		let value = await argon2.verify(USER.password, body.password);
 
 		if (value == false) {
-			res.status(200).send({
+			return next({
 				code: "error",
 				header: "Wrong password",
 				message:
 					"The password you introduced is incorrect, please try again or try to recover your password.",
+				statusCode:200,
 			});
 		} else {
 			const token = signToken(USER.id);
 			const refreshToken = signRefreshToken(USER.id);
-			res.status(200).send({
+			return res.status(200).json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
@@ -224,11 +229,7 @@ exports.login = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({
-			code: "error",
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+		return next(new Error(err))
 	}
 };
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)

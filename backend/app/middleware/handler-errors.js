@@ -3,5 +3,18 @@ const routeFoundHandler = ((req, res, next) => {
     res.json({
         message: 'Error. Route not found',
     })
-}) 
+})
+
+const errorHandler = ((err,req, res, next) => {
+    const {statusCode = 500, code, header, message} = err;
+
+    res.status(statusCode);
+    res.json({
+        code,
+        header,
+        message,
+    })
+})
+
+module.exports ={ routeFoundHandler,errorHandler}
   

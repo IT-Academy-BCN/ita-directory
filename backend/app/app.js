@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const expressJSDocSwagger = require("express-jsdoc-swagger");
 const options = require("./utils/swaggerOptions");
 const userRoutes = require("./routes/users");
-const notFound = require('./middleware/handler-errors')
+
 // const constantsRoute = require("./routes/constants");
 // const adsRoutes = require("./routes/ads");
 // const authenticateToken = require("./middleware/verifyToken");
@@ -36,7 +36,9 @@ app.use(express.static("public"));
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({limit: "50mb", type: "application/json"}));
-app.use(notFound)
+
+
+
 
 // API
 expressJSDocSwagger(app)(options);
