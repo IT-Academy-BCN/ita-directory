@@ -1,9 +1,11 @@
 import {useTable} from "react-table";
 
-/*when you don't want to add a row style -> Simply apply in your component 	
+/* Note: 
+1. when you don't want to add a row style -> Simply apply in your component 	
 const customRowStyle = (row) => {
 		return;
 	};
+2. data must be at row level i.e. [{row1data}, [row2data], [row3data]]
 */
 const ReactTable = ({columns, data, customRowStyle}) => {
 	const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({

@@ -107,8 +107,18 @@ export const HeaderStyled = styled.header`
 			}
 		}
 	}
+`;
 
-	.sub-header {
+export const StyledSubHeader = styled.div`
+	width: 100%;
+	background-color: ${(props) => (props.color_header ? props.color_header : "#e6f2f2")}; //t
+	border: ${(props) => (props.color_header ? `` : "1px solid #b5dddd")};
+	border-left: none;
+	border-right: none;
+	margin-bottom: 2rem;
+	padding: 20px 0 20px 0;
+
+	h1 {
 		width: 100%;
 		background-color: ${(props) => (props.color_header ? props.color_header : "#e6f2f2")};
 		border: 1px solid #b5dddd;
@@ -125,6 +135,7 @@ export const HeaderStyled = styled.header`
 			text-align: ${(props) => (props.centerTitle ? "center" : "left")};
 			color: ${(props) => (props.color_letra ? props.color_letra : "#7d868b")};
 		}
+
 	}
 `;
 
