@@ -55,9 +55,6 @@ export const StyledCell = styled.div`
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
 
-	@media only screen and (max-width: 650px) {
-		font-size: 14px;
-	}
 	@media only screen and (max-width: 450px) {
 		font-size: 14px;
 	}
