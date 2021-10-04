@@ -34,7 +34,7 @@ model user {
   email            String             @unique
   password         String
   created_at       DateTime           @default(now())
-  updated_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
   user_status      user_status        @relation(fields: [user_status_id], references: [id])
   user_status_id   Int
   user_role        user_role          @relation(fields: [user_role_id], references: [id])
