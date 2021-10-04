@@ -3,6 +3,8 @@ const Colors = {
 	black: "#000000",
 	mainColor: "orange",
 	redColor: "rgba(193, 12, 12, 1)",
+	transparentBlue: "#e6f2f2",
+	palerBlue:"#b5dddd",
 	lightBlue: "#46C1F7",
 	darkBlue: "#0073E6",
 	frenchBlue: "#0077B3",
@@ -12,6 +14,7 @@ const Colors = {
 	darkGreen: "#249A36",
 	darkRed: "#823434",
 	grey: "#707070",
+	lighterGrey: "#dddddd",
 	lightGrey: "#999999",
 	lightGray: "#B0B0B0",
 	strongBlue: "#006BB9",
@@ -19,6 +22,10 @@ const Colors = {
 	extraDarkBlue: "#074C84",
 	bahamaBlue: "#005593",
 	prussianBlue: "#00324c",
+	maroon: "#b0b0b0",
+	darkerShadow: "rgba(0, 0, 0, 0.3)",
+	shadow: "rgba(0, 0, 0, 0.2)",
+	lighterShadow: "rgba(0, 0, 0, 0.19)"
 };
 
 export default Colors;
