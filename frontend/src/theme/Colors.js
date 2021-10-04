@@ -13,7 +13,6 @@ const Colors = {
 	darkRed: "#823434",
 	grey: "#707070",
 	white: "white",
-	lightGrey0: "#efeeea",
 	lightGrey1: "#ffffff",
 	lightGrey2: "#eeeeee",
 	lightGrey: "#999999",
