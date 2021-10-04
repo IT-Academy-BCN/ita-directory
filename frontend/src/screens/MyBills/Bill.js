@@ -42,7 +42,7 @@ const Bill = (color_logo) => {
 		if (Number(row.original.itemID) % 2 === 0) {
 			return {backgroundColor: "white", alignItems: "center"};
 		}
-		return {backgroundColor: `${Colors.lightGrey0}`, alignItems: "center"};
+		return {backgroundColor: `${Colors.lightGrey}`, alignItems: "center"};
 	};
 
 	// Columns for datatables
@@ -118,7 +118,7 @@ const Bill = (color_logo) => {
 						</div>
 					</InvoiceSenderStyled>
 				</div>
-				<TableWrapperStyled borderColor={Colors.lightGrey0}>
+				<TableWrapperStyled borderColor={Colors.lightGrey}>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</TableWrapperStyled>
 				<TermsAndCalcStyled>

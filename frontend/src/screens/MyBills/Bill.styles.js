@@ -179,7 +179,7 @@ export const TableWrapperStyled = styled.div`
 				background-color: ${Colors.white};
 			}
 			.grey {
-				background-color: ${Colors.lightGrey0};
+				background-color: ${Colors.lightGrey};
 			}
 
 			td {
@@ -216,7 +216,7 @@ export const CalcTableStyled = styled.table`
 		min-height: 47px;
 	}
 	.bg-grey {
-		background-color: ${Colors.lightGrey0};
+		background-color: ${Colors.lightGrey};
 	}
 	.bold {
 		font-weight: bold;
