@@ -220,7 +220,7 @@ exports.login = async (req, res, next) => {
 		} else {
 			const token = signToken(USER.id);
 			const refreshToken = signRefreshToken(USER.id);
-			return res.status(200).json({
+			return res.json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
