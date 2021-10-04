@@ -14,7 +14,12 @@ const io = socketio(server, {
 });
 require("./app/config/sockets")(io);
 
-app.use(handlerError.routeFoundHandler,handlerError.errorHandler)
+//No route found handler
+app.use(handlerError.routeFoundHandler);
+
+//Error handler
+app.use(handlerError.errorHandler);
+
 
 
 

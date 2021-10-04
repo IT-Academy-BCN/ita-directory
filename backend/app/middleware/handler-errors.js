@@ -1,3 +1,4 @@
+//No route found handler
 const routeFoundHandler = ((req, res, next) => {
     res.status(404);
     res.json({
@@ -5,6 +6,8 @@ const routeFoundHandler = ((req, res, next) => {
     })
 })
 
+
+//Error handler
 const errorHandler = ((err,req, res, next) => {
     const {statusCode = 500, code, header, message} = err;
 
