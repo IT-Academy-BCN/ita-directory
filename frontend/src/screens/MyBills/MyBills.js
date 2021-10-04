@@ -142,12 +142,12 @@ const MyBills = () => {
 		columns,
 		data,
 	});
-
+//#e6f2f2
 	return (
 		<Body
 			title="Mis facturas"
 			color_logo={Colors.darkRed}
-			color_header="#e6f2f2"
+			color_header= {Colors.lightblue} 
 			color_letra={Colors.grey}
 			justifyTitle="flex-start"
 			isLoggedIn="true"
@@ -167,7 +167,7 @@ const MyBills = () => {
 						{rows.map((row) => {
 							prepareRow(row);
 							return (
-								<tr {...row.getRowProps()} style={{borderTop: "solid 1px grey"}}>
+								<tr {...row.getRowProps()} style={{borderTop: `solid 1px ${Colors.grey}`}}>
 									{row.cells.map((cell) => {
 										return (
 											<td {...cell.getCellProps()}>{cell.render("Cell")}</td>
