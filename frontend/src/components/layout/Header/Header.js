@@ -97,7 +97,12 @@ const Header = ({
 	};
 
 	return (
-		<HeaderStyled centerTitle={centerTitle}>
+		<HeaderStyled
+			centerTitle={centerTitle}
+			color_header={color_header}
+			color_logo={color_logo}
+			color_letra={color_letra}
+		>
 			<Container>
 				<div className="top-header">
 					<Link className="logo" to="/ads">
