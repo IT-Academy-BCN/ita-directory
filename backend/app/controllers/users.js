@@ -84,7 +84,7 @@ exports.getToken = async (req, res) => {
 exports.getUser = async (req, res) => {
 	// Check that the request isn't empty
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		res.status(400).json("Request is empty.");
 	}
 	try {
 		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
@@ -104,7 +104,7 @@ exports.getUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -181,7 +181,7 @@ exports.login = async (req, res) => {
 	// Check that the request isn't empty
 
 	if (!body.email || !body.password) {
-		res.status(400).send({
+		res.status(400).json({
 			code: "error",
 			message: "Content can not be empty!",
 		});
@@ -194,7 +194,7 @@ exports.login = async (req, res) => {
 		});
 
 		if (!USER) {
-			res.status(404).send({
+			res.status(404).json({
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
@@ -205,7 +205,7 @@ exports.login = async (req, res) => {
 		const value = await argon2.verify(USER.password, body.password);
 
 		if (value === false) {
-			res.status(200).send({
+			res.status(200).json({
 				code: "error",
 				header: "Wrong password",
 				message:
@@ -214,7 +214,7 @@ exports.login = async (req, res) => {
 		} else {
 			const token = signToken(USER.id);
 			const refreshToken = signRefreshToken(USER.id);
-			res.status(200).send({
+			res.status(200).json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
@@ -224,7 +224,7 @@ exports.login = async (req, res) => {
 		}
 	} catch (err) {
 		
-		res.status(500).send({
+		res.status(500).json({
 			code: "error",
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
@@ -233,7 +233,7 @@ exports.login = async (req, res) => {
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
 exports.updateUserRole = async (req, res) => {
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		res.status(400).json("Request is empty.");
 	}
 	try {
 		const user = await prisma.user.update(
@@ -257,7 +257,7 @@ exports.updateUserRole = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -300,7 +300,7 @@ exports.updateUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -310,7 +310,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
 	// Check that the request isn't empty
 	if (!req.user) {
-		res.status(404).send("User not found.");
+		res.status(404).json("User not found.");
 	}
 	try {
 		const userModel = await prisma.mec_user.findOne({
@@ -344,7 +344,7 @@ exports.deleteUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -380,7 +380,7 @@ exports.forgetPassword = async (req, res) => {
 				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
 			});
 		} else {
-			res.status(404).send({
+			res.status(404).json({
 				code: "not-found",
 				header: "user",
 				message: "Email not found.",
@@ -388,7 +388,7 @@ exports.forgetPassword = async (req, res) => {
 		}
 	} catch (err) {
 		console.log(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred.",
 		});
 	}
