@@ -85,6 +85,40 @@ export const BillStyled = styled.div`
 	.tableWrapper {
 		margin-top: 3rem;
 		border-top: 2px solid ${(props) => props.color};
+		width: 100%;
+
+		table {
+			width: 100%;
+			block-size: fit-content;
+			display: flex;
+			flex-direction: column;
+
+			th {
+				justify-content: center;
+				font-weight: normal;
+				font-size: 13px;
+			}
+			tr {
+				display: grid;
+				grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+				height: 47px;
+				width: 100%;
+				.white {
+					background-color: white;
+				}
+				.grey {
+					background-color: #efeeea;
+				}
+
+				td {
+					display: flex;
+					flex-grow: 1;
+					font-size: 13px;
+					min-width: 50px;
+					justify-content: center;
+				}
+			}
+		}
 		@media (max-width: 768px) {
 			transform: scale(0.8);
 		}
@@ -207,4 +241,8 @@ export const BillStyled = styled.div`
 		font-size: small;
 		font-weight: lighter !important;
 	}
+`;
+
+export const RowStyled = styled.div`
+	height: "47px";
 `;

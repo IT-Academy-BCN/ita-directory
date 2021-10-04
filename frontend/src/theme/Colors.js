@@ -17,6 +17,8 @@ const Colors = {
 	strongBlue: "#006BB9",
 	extraLightGrey: "D8D8D8",
 	extraDarkBlue: "#074C84",
+	bahamaBlue: "#005593",
+	prussianBlue: "#00324c",
 };
 
 export default Colors;
