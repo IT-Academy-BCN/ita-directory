@@ -38,12 +38,11 @@ exports.getRefreshToken = (req, res) => {
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);
-				//refreshToken = await signRefreshToken(userId);
+
 				res.status(200).json(
 					apiResponse({
 						data: {
 							accessToken: accessToken,
-							//refreshToken: refreshToken,
 						},
 					})
 				);
@@ -436,7 +435,6 @@ exports.receiveEmailGetToken = async (req, res) => {
 exports.recoverPassword = async (req, res) => {
 	try {
 		const token = req.params.token;
-		
 
 		if (!token) {
 			res.status(401).json(
@@ -475,7 +473,7 @@ exports.recoverPassword = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
 	try {
-		const {password, user} = req.body;
+		const {password, email} = req.body;
 
 		// Create hook for update password?
 		const hashedPassword = await argon2.hash(password, {
@@ -485,14 +483,14 @@ exports.changePassword = async (req, res) => {
 			parallelism: 1,
 		});
 
-		const passUser = await prisma.user.findUnique({
+		await prisma.user.update({
 			where: {
-				email: user,
+				email: email,
+			},
+			data: {
+				password: hashedPassword,
 			},
 		});
-
-		passUser.password = hashedPassword;
-		passUser.save();
 
 		res.status(200).json(
 			apiResponse({
