@@ -90,7 +90,7 @@ exports.getUser = async (req, res) => {
 		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
 		console.log("user", USER);
 		if (USER === null) {
-			res.status(204).json({
+			res.status(404).json({
 				success: "false",
 				message: "user not found",
 			});
@@ -114,8 +114,7 @@ exports.getUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
 	try {
 		//Checking if valid email, password and privacy policy.
-		const {...userDTO} = req.body;
-		const validFields = await registerSchema.validateAsync(userDTO);
+		
 
 		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
 
@@ -127,10 +126,10 @@ exports.registerUser = async (req, res) => {
 				})
 			);
 		}
-		const {privacy, ...userDTO2} = req.body;
+		
 		//Creating user without name or lastnames
 		const passwordHashed = await hashPassword(req.body.password);
-		const newUser = await prisma.user.create({
+		await prisma.user.create({
 			data: {
 				email: req.body.email,
 				password: passwordHashed,
@@ -195,7 +194,7 @@ exports.login = async (req, res) => {
 		});
 
 		if (!USER) {
-			res.status(200).send({
+			res.status(404).send({
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
@@ -203,9 +202,9 @@ exports.login = async (req, res) => {
 			return;
 		}
 
-		let value = await argon2.verify(USER.password, body.password);
+		const value = await argon2.verify(USER.password, body.password);
 
-		if (value == false) {
+		if (value === false) {
 			res.status(200).send({
 				code: "error",
 				header: "Wrong password",
@@ -224,7 +223,7 @@ exports.login = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		console.log(err);
+		
 		res.status(500).send({
 			code: "error",
 			message: err.message || "Some error ocurred while retrieving your account.",
