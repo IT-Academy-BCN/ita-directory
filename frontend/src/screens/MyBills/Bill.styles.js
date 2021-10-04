@@ -14,7 +14,6 @@ export const Error = styled.div`
 `;
 
 export const BillComponentStyled = styled.div`
-
 	.logo {
 		color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 		font: normal normal normal 15px/15px Korb-Bold;
@@ -27,14 +26,13 @@ export const BillComponentStyled = styled.div`
 `;
 
 export const BillStyled = styled.div`
-	
 	transform: scale(0.8);
 	font-family: "Inter", sans-serif;
 
 	@media (min-width: 768px) {
 		transform: scale(1);
 	}
-		
+
 	.bold,
 	h3,
 	h4,
@@ -226,17 +224,18 @@ export const PaymentMethodStyled = styled.div`
 	div {
 		padding-bottom: 0;
 		padding-top: 1rem;
-	
 	}
+
 	@media (min-width: 480px) {
 		padding-left: 2rem;
 	}
 
 	@media (min-width: 730px) {
 		padding-left: 0;
+	}
 
 	@media (min-width: 893px) {
-		padding-left: 2rem ;
+		padding-left: 2rem;
 	}
 	@media (min-width: 1230px) {
 		padding-left: 4rem;
@@ -264,5 +263,3 @@ export const RowStyled = styled.div`
 	min-height: "47px";
 	align-items: center;
 `;
-
-
