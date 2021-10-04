@@ -165,6 +165,7 @@ export const TableWrapperStyled = styled.div`
 		th {
 			justify-content: center;
 			font-weight: bold;
+			text-transform: uppercase;
 			font-size: 13px;
 			align-items: center;
 			padding-top: 12px;
