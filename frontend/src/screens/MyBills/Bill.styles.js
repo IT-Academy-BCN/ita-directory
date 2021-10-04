@@ -8,31 +8,16 @@ export const Error = styled.div`
 	padding: 15px 10px 15px 15px;
 	background-position: 10px center;
 	max-width: 460px;
-	color: #d8000c;
-	background-color: #ffbaba;
+	color: ${Colors.bloodRed};
+	background-color: ${Colors.paleRed};
 	font-size: 24px;
 `;
 
 export const BillComponentStyled = styled.div`
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-	background-color: ${Colors.lightGrey2};
-	padding-bottom: 3rem;
-	margin-bottom: -3rem;
 
 	.logo {
-		display: flex;
-		align-items: center;
 		color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 		font: normal normal normal 15px/15px Korb-Bold;
-		letter-spacing: 0px;
-		text-transform: uppercase;
-		opacity: 1;
-		margin-top: 1.5rem;
 	}
 
 	.blueGradient {
@@ -42,24 +27,15 @@ export const BillComponentStyled = styled.div`
 `;
 
 export const BillStyled = styled.div`
-	width: 100%;
+	
 	transform: scale(0.8);
-	padding: 0;
-	background-color: ${Colors.lightGrey1};
-	display: flex;
-	flex-direction: column;
 	font-family: "Inter", sans-serif;
+
 	@media (min-width: 768px) {
 		transform: scale(1);
 	}
-	@media (min-width: 768px) {
-		padding: 1.5rem 2rem 0 2rem;
-		width: 75%;
-	}
-	.bold {
-		font-weight: bold;
-	}
-
+		
+	.bold,
 	h3,
 	h4,
 	h5 {
@@ -71,35 +47,11 @@ export const BillStyled = styled.div`
 	}
 
 	header {
-		display: flex;
-		flex-direction: row;
-		padding: 0 2rem;
-		margin-top: -10rem;
-		background-color: ${Colors.white};
-		height: 3rem;
-		align-items: flex-end;
-		justify-content: space-between;
-
-		@media (min-width: 768px) {
-			height: auto;
-			margin-top: 0;
-			padding: 0;
-		}
 		@media (min-width: 893px) {
 			padding: 0 2rem;
 		}
 		@media (min-width: 1230px) {
 			padding: 0 4rem;
-		}
-	}
-	.address-name-wrapper {
-		background-color: ${Colors.white};
-		justify-content: space-between;
-
-		@media (min-width: 768px) {
-			display: flex;
-			flex-direction: row;
-			margin-top: 0rem;
 		}
 	}
 
@@ -152,10 +104,6 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 `;
 
 export const TableWrapperStyled = styled.div`
-	margin-top: 3rem;
-	border-top: 2px solid ${(props) => props.borderColor};
-	width: 100%;
-
 	table {
 		width: 100%;
 		block-size: fit-content;
@@ -195,6 +143,7 @@ export const TableWrapperStyled = styled.div`
 `;
 
 export const CalcTableStyled = styled.table`
+	border-collapse: collapse;
 	padding: 5px 0 0 auto;
 	width: 50%;
 	margin-left: auto;
@@ -202,9 +151,7 @@ export const CalcTableStyled = styled.table`
 		width: 100%;
 		margin-left: 0;
 	}
-	table {
-		border-collapse: collapse;
-	}
+
 	td,
 	th {
 		text-align: left;
@@ -216,12 +163,7 @@ export const CalcTableStyled = styled.table`
 		padding-top: 12px;
 		min-height: 47px;
 	}
-	.bg-grey {
-		background-color: ${Colors.lightGrey};
-	}
-	.bold {
-		font-weight: bold;
-	}
+
 	tr {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -238,9 +180,6 @@ export const CalcTableStyled = styled.table`
 	}
 `;
 export const TermsAndCalcStyled = styled.div`
-	display: flex;
-	align-items: flex-start;
-	flex-direction: column-reverse;
 	@media (min-width: 768px) {
 		display: grid;
 		grid-template-columns: 50% 50%;
@@ -266,33 +205,17 @@ export const TermsAndCalcStyled = styled.div`
 `;
 
 export const PaySignStyled = styled.section`
-	margin: 2.5rem 0 4rem 0;
-	padding: 0 0rem;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-
-	@media (min-width: 480px) {
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-end;
-		margin: 2.5rem 2rem 4rem 0;
-	}
-
 	h3 {
 		margin: 0.5rem 0;
 		padding-bottom: 1rem;
 	}
-
 	div {
 		display: flex;
 		flex-direction: column;
 		padding-bottom: 2rem;
-
 		h4 {
 			margin: 0.5rem 0;
 		}
-
 		small {
 			line-height: 1.5;
 		}
@@ -300,20 +223,21 @@ export const PaySignStyled = styled.section`
 `;
 
 export const PaymentMethodStyled = styled.div`
-	padding-left: 2rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-
 	div {
 		padding-bottom: 0;
 		padding-top: 1rem;
+	
 	}
-
 	@media (min-width: 480px) {
 		padding-left: 2rem;
 	}
 
+	@media (min-width: 730px) {
+		padding-left: 0;
+
+	@media (min-width: 893px) {
+		padding-left: 2rem ;
+	}
 	@media (min-width: 1230px) {
 		padding-left: 4rem;
 	}
@@ -321,26 +245,8 @@ export const PaymentMethodStyled = styled.div`
 
 export const SignatureStyled = styled.div`
 	margin-top: 1.8rem;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	padding-bottom: 2rem;
-	padding-left: 2rem;
-
-	@media (min-width: 480px) {
-		justify-content: flex-end;
-		text-align: center;
-		width: 30%;
-	}
-
-	p {
-		margin: 0;
-		font-weight: bold;
-		white-space: nowrap;
-	}
 
 	h4 {
-		font-size: small;
 		font-weight: lighter !important;
 	}
 
@@ -359,20 +265,4 @@ export const RowStyled = styled.div`
 	align-items: center;
 `;
 
-export const FooterStyled = styled.footer`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	margin-top: -3rem;
-	margin-bottom: 20px;
 
-	h4 {
-		margin: 0;
-		font-weight: bold;
-	}
-
-	p {
-		font-size: small;
-	}
-`;

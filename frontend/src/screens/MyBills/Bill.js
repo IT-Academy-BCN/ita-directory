@@ -1,6 +1,5 @@
 import {useState, useMemo, useCallback, useEffect} from "react";
 import ReactTable from "../../components/composed/Table/ReactTable";
-//import DataTable from "react-data-table-component";
 import Colors from "../../theme/Colors";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
@@ -31,7 +30,7 @@ const Bill = (color_logo) => {
 
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
-	// Selecting the right bill... <- Maria says this doesn't seem to have any relevance any longer
+	// Selecting the right bill... 
 	const selectedBill = billData.filter((selected) => {
 		let res = selected.id === parseInt(id, 10);
 		return res;
@@ -89,12 +88,14 @@ const Bill = (color_logo) => {
 
 	const generatedBill = selectedBill.map((bill) => {
 		return (
-			<BillStyled key={bill.id} color={Colors.lightGray}>
-				<header>
+			<BillStyled 
+			className="flex flex-col w-full p-0 md:w-9/12 md:pt-6 md:pr-8 md:pb-0 md:pl-8 bg-lightGrey1"
+			key={bill.id} color={Colors.lightGray}>
+				<header className="bg-white flex flex-row justify-between items-end h-12 py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0">
 					<h2>{bill.header.logoCompany}</h2>
 					<h2>{bill.header.invoiceID}</h2>
 				</header>
-				<div className="address-name-wrapper">
+				<div className="justify-between bg-white md:flex md:flex-row md:mt-0">
 					<InvoiceRecipientStyled>
 						<div>
 							<p>Invoice to:</p>
@@ -118,10 +119,10 @@ const Bill = (color_logo) => {
 						</div>
 					</InvoiceSenderStyled>
 				</div>
-				<TableWrapperStyled borderColor={Colors.lightGrey}>
+				<TableWrapperStyled  className="mt-12 w-full border-t-2 border-lightGrey">
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</TableWrapperStyled>
-				<TermsAndCalcStyled>
+				<TermsAndCalcStyled className="flex items-start flex-col-reverse">
 					<section className="terms">
 						<h3>Terms & Conditions</h3>
 						<small>
@@ -186,9 +187,9 @@ const Bill = (color_logo) => {
 								</td>
 							</tr>
 							<tr>
-								<th className="bg-grey bold">GRAND TOTAL</th>
-								<td className="bg-grey bold">
-									<div>
+								<th className="bg-lightGrey bold">GRAND TOTAL</th>
+								<td className="bg-lightGrey">
+									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {
 											let itemsArr = amount.tradeData.items;
@@ -211,9 +212,9 @@ const Bill = (color_logo) => {
 						</tbody>
 					</CalcTableStyled>
 				</TermsAndCalcStyled>
-				<PaySignStyled>
-					<PaymentMethodStyled>
-						<h3>Payment Method</h3>
+				<PaySignStyled className="flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end xsm:mr-8">
+					<PaymentMethodStyled className="flex flex-col justify-end pl-8">
+						<h3 className= "whitespace-nowrap pb-4 my-2 mx-0">Payment Method</h3> 
 						<div className="pay">
 							<h5>Bank</h5>
 							<small>Account ID: {bill.payment.bank.accountID}</small>
@@ -225,18 +226,18 @@ const Bill = (color_logo) => {
 							<small>Account Name: {bill.payment.paypal.account}</small>
 						</div>
 					</PaymentMethodStyled>
-					<SignatureStyled>
+					<SignatureStyled className="flex flex-col w-full pb-8 pl-8 xsm:justify-end xsm:text-center xsm:w-4/12">
 						<div className="signature-image" role="image">
 							{bill.signature.image}
 						</div>
-						<p>{bill.emisorReceiver.receiver.reName}</p>
-						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
+						<p className="font-bold m-0 text-nowrap">{bill.emisorReceiver.receiver.reName}</p>
+						<h4 className="text-sm">{bill.emisorReceiver.receiver.rePosition}</h4>
 					</SignatureStyled>
 				</PaySignStyled>
-				<FooterStyled>
-					<h4>Thank You For Doing Business With Us.</h4>
-					<p>We aim to provide simple solutions for your business problems.</p>
-				</FooterStyled>
+				<footer className="flex flex-col justify-center text-center -mt-12 mb-5 px-8 pb-8">
+					<h4 className="m-0 font-bold">Thank You For Doing Business With Us.</h4>
+					<p className="text-sm">We aim to provide simple solutions for your business problems.</p>
+				</footer>
 			</BillStyled>
 		);
 	});
@@ -251,8 +252,8 @@ const Bill = (color_logo) => {
 	}
 
 	return (
-		<BillComponentStyled>
-			<h2 className="logo" color_logo={color_logo}>
+		<BillComponentStyled className="bg-lightGrey2 flex flex-col flex-nowrap justify-center content-center items-center pb-12 -mb-12">
+			<h2 className="logo flex items-center uppercase tracking-normal opacity-100 mt-6" color_logo={color_logo}>
 				LOGO EMPRESA
 			</h2>
 			{downloadBtn}
