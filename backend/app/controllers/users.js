@@ -13,11 +13,16 @@ const {
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
-exports.getRefreshToken = (req, res) => {
+exports.getRefreshToken = (req, res, next) => {
 	let refreshToken = req.headers.refresh;
 
 	if (!refreshToken) {
-		return res.status(400).json(apiResponse({message: "refresh token missing"}));
+		//return res.status(400).json(apiResponse({message: "refresh token missing"}));
+		return next({
+			code: "error",
+			message: "refresh token missing",
+			statusCode: 400,
+		});
 	}
 	JWT.verify(
 		refreshToken,
@@ -39,7 +44,7 @@ exports.getRefreshToken = (req, res) => {
 				}
 				const accessToken = signToken(userId);
 
-				res.status(200).json(
+				return res.status(200).json(
 					apiResponse({
 						data: {
 							accessToken: accessToken,
@@ -47,55 +52,71 @@ exports.getRefreshToken = (req, res) => {
 					})
 				);
 			} catch (err) {
-				res.status(500).json(
+				/*res.status(500).json(
 					apiResponse({
 						message: "Internal server error",
 						error: [err.message],
 					})
-				);
+				);*/
+				return next({
+					code: "error",
+					message: "Internal server error",
+					statusCode: 500,
+				});
 			}
 		}
 	);
 };
 
 // Get token
-exports.getToken = async (req, res) => {
+exports.getToken = async (req, res, next) => {
 	const idUser = "100001";
 	const accessToken = signToken(idUser);
 	try {
 		const refreshToken = await signRefreshToken(idUser);
-		res.status(200).json(
+		return res.status(200).json(
 			apiResponse({
 				message: "Your token",
 				data: {accessToken: accessToken, refreshToken: refreshToken},
 			})
 		);
 	} catch (err) {
-		res.status(500).json(
+		/*res.status(500).json(
 			apiResponse({
 				message: "Internal server error",
 				error: [err.message],
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "Internal server error",
+			statusCode: 500,
+		});
 	}
 };
 
 // Get User (/v1/get_me endPoint)
-exports.getUser = async (req, res) => {
+exports.getUser = async (req, res, next) => {
 	// Check that the request isn't empty
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		return next({
+			code: "error",
+			message: "Request is empty.",
+			statusCode: 400,
+		});
 	}
 	try {
 		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
 		console.log("user", USER);
 		if (USER === null) {
-			res.status(204).json({
+			return next({
+				code: "error",
 				success: "false",
 				message: "user not found",
+				statusCode: 204,
 			});
 		} else {
-			res.status(200).json({
+			return res.status(200).json({
 				// Cambiar por el método API RESPONSE
 				success: "true",
 				name: USER.name,
@@ -104,14 +125,16 @@ exports.getUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
+		return next({
+			code: "error",
+			message: "Some error ocurred while retrieving your account.",
+			statusCode: 500,
 		});
 	}
 };
 
 //User signup
-exports.registerUser = async (req, res) => {
+exports.registerUser = async (req, res, next) => {
 	try {
 		//Checking if valid email, password and privacy policy.
 		const {...userDTO} = req.body;
@@ -120,12 +143,12 @@ exports.registerUser = async (req, res) => {
 		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
 
 		if (doesExist !== null) {
-			res.status(400).json(
-				apiResponse({
-					message: "This email has already been registered.",
-					errors: "Invalid email.",
-				})
-			);
+			return next({
+				code: "error",
+				header: "Invalid email",
+				message: "This email has already been registered.",
+				statusCode: 400,
+			});
 		}
 		const {privacy, ...userDTO2} = req.body;
 		//Creating user without name or lastnames
@@ -139,39 +162,50 @@ exports.registerUser = async (req, res) => {
 				refresh_token: "20",
 			},
 		});
-		res.status(200).json(
+		/*res.status(200).json(
+			apiResponse({
+				message: "User registered correctly.",
+			})
+		);*/
+		return res.status(200).json(
 			apiResponse({
 				message: "User registered correctly.",
 			})
 		);
 	} catch (err) {
 		if (err.isJoi === true) {
-			res.status(422).json(
-				apiResponse({
-					message: "Some error ocurred while creating your account.",
-					errors: err.message,
-				})
-			);
+			return next({
+				code: "error",
+				message: "Some error ocurred while creating your account.",
+				statusCode: 422,
+			});
 		}
 		console.error(err);
-		res.status(500).json(
+		/*res.status(500).json(
 			apiResponse({
 				message: "Some error ocurred while creating your account.",
 				errors: err.message,
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "Some error ocurred while creating your account.",
+			statusCode: 500,
+		});
 	}
 };
 
 //get all users (FOR TESTING PURPOSE)
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req, res, next) => {
 	try {
 		const users = await prisma.user.findMany();
-		res.status(200).json(users);
+		return res.status(200).json(users);
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
+		return next({
+			code: "error",
+			message: "Some error ocurred while retrieving your account.",
+			statusCode: 500,
 		});
 	}
 };
@@ -182,14 +216,12 @@ exports.login = async (req, res, next) => {
 	// Check that the request isn't empty
 
 	if (!body.email || !body.password) {
-		const message = "Content can not be empty!"
+		const message = "Content can not be empty!";
 		return next({
 			code: "error",
 			message,
-			statusCode: 400
+			statusCode: 400,
 		});
-		
-		
 	}
 
 	try {
@@ -204,7 +236,6 @@ exports.login = async (req, res, next) => {
 				message: "There's no user with that email, please try again or get in touch.",
 				statusCode: 200,
 			});
-			
 		}
 
 		let value = await argon2.verify(USER.password, body.password);
@@ -215,7 +246,7 @@ exports.login = async (req, res, next) => {
 				header: "Wrong password",
 				message:
 					"The password you introduced is incorrect, please try again or try to recover your password.",
-				statusCode:200,
+				statusCode: 200,
 			});
 		} else {
 			const token = signToken(USER.id);
@@ -229,13 +260,18 @@ exports.login = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-		return next(new Error(err))
+		return next(new Error(err));
 	}
 };
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
-exports.updateUserRole = async (req, res) => {
+exports.updateUserRole = async (req, res, next) => {
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		//res.status(400).send("Request is empty.");
+		return next({
+			code: "error",
+			message: "Request is empty",
+			statusCode: 400,
+		});
 	}
 	try {
 		const user = await prisma.user.update(
@@ -243,14 +279,20 @@ exports.updateUserRole = async (req, res) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-			res.status(204).json({
+			/*res.status(204).json({
 				success: "false",
 				message: "user not found",
+			});*/
+			return next({
+				code: "error",
+				success: "false",
+				message: "user not found",
+				statusCode: 204,
 			});
 		} else {
 			//make update & return data
 
-			res.status(200).json({
+			return res.status(200).json({
 				success: "true",
 				name: user.name,
 				lastnames: user.lastnames,
@@ -259,42 +301,59 @@ exports.updateUserRole = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
+		return next({
+			code: "error",
+			message: "Some error ocurred while retrieving your account.",
+			statusCode: 500,
 		});
 	}
 };
 
 //Update some user field with id_user & newfield (FOR TESTING PURPOSE)
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res, next) => {
 	const {user_id, user_role_id, user_status_id} = req.body;
 	if (!user_id) {
-		res.status(400).json(
+		/*res.status(400).json(
 			apiResponse({
 				message: "user_id not defined",
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "user_id not identified",
+			statusCode: 400,
+		});
 	}
 
 	if (!user_role_id && !user_status_id) {
-		res.status(400).json(
+		/*res.status(400).json(
 			apiResponse({
 				message: "undefined values",
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "undefined values",
+			statusCode: 400,
+		});
 	}
 
 	try {
 		const user = await prisma.user.update({...req.body}, {where: {id: req.body.user_id}});
 		if (user === null) {
-			res.status(204).json(
+			/*res.status(204).json(
 				apiResponse({
 					message: "User not Found.",
 				})
-			);
+			);*/
+			return next({
+				code: "error",
+				message: "User not found.",
+				statusCode: 204,
+			});
 		} else {
 			// return data
-			res.status(200).json(
+			return res.status(200).json(
 				apiResponse({
 					message: "User updated successfully",
 				})
@@ -302,17 +361,23 @@ exports.updateUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
+		return next({
+			code: "error",
+			message: "Some error ocurred while retrieving your account.",
+			statusCode: 500,
 		});
 	}
 };
 
 // Delete user
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res, next) => {
 	// Check that the request isn't empty
 	if (!req.user) {
-		res.status(404).send("User not found.");
+		return next({
+			code: "error",
+			message: "User not found",
+			statusCode: 404,
+		});
 	}
 	try {
 		const userModel = await prisma.mec_user.findOne({
@@ -338,21 +403,25 @@ exports.deleteUser = async (req, res) => {
 			if (userModel.person.picture) {
 				userModel.person.picture = Buffer.from(userModel.person.picture).toString("base64");
 			}
-			res.status(200).json(userModel);
+			return res.status(200).json(userModel);
 		} else {
-			res.status(404).json({
-				message: "User not found.",
+			return next({
+				code: "error",
+				message: "User not found",
+				statusCode: 404,
 			});
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
+		return next({
+			code: "error",
+			message: "Some error occurred while retrieving your account.",
+			statusCode: 505,
 		});
 	}
 };
 
-exports.forgetPassword = async (req, res) => {
+exports.forgetPassword = async (req, res, next) => {
 	const {email} = req.body;
 	try {
 		const user = await prisma.mec_user.findOne({where: {mec_un: email}});
@@ -375,28 +444,31 @@ exports.forgetPassword = async (req, res) => {
 				token_id: token,
 				password_old: user.password,
 			});
-			res.status(200).json({
+			return res.status(200).json({
 				code: "success",
 				header: "Forget Pass succesful url temp",
 				message: "You have succesfuly forget Pass succesful url temp.",
 				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
 			});
 		} else {
-			res.status(404).send({
-				code: "not-found",
+			return next({
+				code: "error",
 				header: "user",
 				message: "Email not found.",
+				statusCode: 404,
 			});
 		}
 	} catch (err) {
 		console.log(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred.",
+		return next({
+			code: "error",
+			message: "Some error ocurred.",
+			statusCode: 500,
 		});
 	}
 };
 
-exports.receiveEmailGetToken = async (req, res) => {
+exports.receiveEmailGetToken = async (req, res, next) => {
 	try {
 		const user = req.body.email;
 
@@ -409,50 +481,70 @@ exports.receiveEmailGetToken = async (req, res) => {
 		if (passUser) {
 			const accessToken = signToken(passUser, "1h");
 
-			res.status(200).json(
+			return res.status(200).json(
 				apiResponse({
 					message: "Access token granted.",
 					data: accessToken,
 				})
 			);
 		} else {
-			res.status(404).json(
+			/*res.status(404).json(
 				apiResponse({
 					message: "User not found.",
 				})
-			);
+			);*/
+			return next({
+				code: "error",
+				message: "User not found.",
+				statusCode: 404,
+			});
 		}
 	} catch (err) {
 		console.log(err);
-		res.status(500).json(
+		/*res.status(500).json(
 			apiResponse({
 				message: "An error occurred with your query.",
 				errors: err.message,
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "An error occurred with your query.",
+			statusCode: 500,
+		});
 	}
 };
 
-exports.recoverPassword = async (req, res) => {
+exports.recoverPassword = async (req, res, next) => {
 	try {
 		const token = req.params.token;
 
 		if (!token) {
-			res.status(401).json(
+			/*res.status(401).json(
 				apiResponse({
 					message: "Your token is empty.",
 				})
-			);
+			);*/
+			return next({
+				code: "error",
+				message: "Your token is empty",
+				statusCode: 401,
+			});
 		}
 
 		JWT.verify(token, process.env.JWT_SECRET, (err) => {
 			if (err) {
-				res.status(401).json(
+				/*res.status(401).json(
 					apiResponse({
 						message: "Your token has expired!",
 						errors: err.message,
 					})
-				);
+				);*/
+				return next({
+					code: "error",
+					message: "Your token has expired!",
+					statusCode: 401,
+				});
 			}
 
 			res.status(200).json(
@@ -463,16 +555,21 @@ exports.recoverPassword = async (req, res) => {
 		});
 	} catch (err) {
 		console.log(err);
-		res.status(500).json(
+		/*res.status(500).json(
 			apiResponse({
 				message: "An error ocurred.",
 				errors: err.message,
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "An error occurred.",
+			statusCode: 500,
+		});
 	}
 };
 
-exports.changePassword = async (req, res) => {
+exports.changePassword = async (req, res, next) => {
 	try {
 		const {password, email} = req.body;
 
@@ -499,11 +596,16 @@ exports.changePassword = async (req, res) => {
 			})
 		);
 	} catch (err) {
-		res.status(500).json(
+		/*res.status(500).json(
 			apiResponse({
 				message: "An error occurred.",
 				errors: err.message,
 			})
-		);
+		);*/
+		return next({
+			code: "error",
+			message: "An error occurred.",
+			statusCode: 500,
+		});
 	}
 };
