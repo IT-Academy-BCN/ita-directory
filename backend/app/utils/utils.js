@@ -72,5 +72,5 @@ module.exports = {
 	AdByIdParamSchema,
 	signToken,
 	signRefreshToken,
-	hashPassword,
+	hashPassword
 };
