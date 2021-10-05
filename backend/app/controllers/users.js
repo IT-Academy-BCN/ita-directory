@@ -241,7 +241,7 @@ exports.updateUserRole = async (req, res) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-			res.status(204).json({
+			res.status(404).json({
 				success: "false",
 				message: "user not found",
 			});
@@ -263,29 +263,35 @@ exports.updateUserRole = async (req, res) => {
 	}
 };
 
-//Update some user field with id_user & newfield (FOR TESTING PURPOSE)
+//Update some user field with id
 exports.updateUser = async (req, res) => {
-	const {user_id, user_role_id, user_status_id} = req.body;
-	if (!user_id) {
+	const {id, user_role_id, user_status_id} = req.body;
+	if (!id) {
 		res.status(400).json(
 			apiResponse({
-				message: "user_id not defined",
+				message: "User id not defined",
 			})
 		);
 	}
 
-	if (!user_role_id && !user_status_id) {
+	if (!user_status_id && !user_role_id) {
 		res.status(400).json(
 			apiResponse({
-				message: "undefined values",
+				message: "Undefined user status or user role",
 			})
 		);
 	}
 
+	// Updating user using id
 	try {
-		const user = await prisma.user.update({...req.body}, {where: {id: req.body.user_id}});
+		const user = await prisma.user.update(
+			{where: {id: parseInt(req.body.id)},
+			data: {
+				...req.body
+			},
+		});
 		if (user === null) {
-			res.status(204).json(
+			res.status(404).json(
 				apiResponse({
 					message: "User not Found.",
 				})

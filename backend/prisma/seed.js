@@ -49,9 +49,10 @@ const users = [
 		name: "test",
 		lastnames: "test test",
 		email: "test@test.test",
-		user_status: 1,
-		user_role: 3,
+		user_status_id: 1,
+		user_role_id: 3,
 		password: "test",
+		refresh_token: "20"
 	},
 ];
 
