@@ -100,9 +100,6 @@ exports.getUser = async (req, res, next) => {
 
 			return next({
 				code: "error",
-
-		
-
 				success: "false",
 				message: "user not found",
 				statusCode: 204,
@@ -167,7 +164,7 @@ exports.registerUser = async (req, res, next) => {
 				statusCode: 422,
 			});
 		}
-		console.error(err);
+		
 		
 		return next(new Error(err));
 	}
@@ -212,9 +209,6 @@ exports.login = async (req, res, next) => {
 		if (!USER) {
 
 			return next({
-
-			
-
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
@@ -227,9 +221,6 @@ exports.login = async (req, res, next) => {
 		if (value === false) {
 
 			return next({
-
-			
-
 				code: "error",
 				header: "Wrong password",
 				message:
@@ -241,9 +232,6 @@ exports.login = async (req, res, next) => {
 			const refreshToken = signRefreshToken(USER.id);
 
 			return res.json({
-
-			
-
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
@@ -262,8 +250,6 @@ exports.login = async (req, res, next) => {
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
 exports.updateUserRole = async (req, res, next) => {
 	if (!req.body) {
-
-		
 		return next({
 			code: "error",
 			message: "Request is empty",
@@ -277,12 +263,8 @@ exports.updateUserRole = async (req, res, next) => {
 		);
 		if (user === null) {
 
-		
 			return next({
 				code: "error",
-
-			
-
 				success: "false",
 				message: "user not found",
 				statusCode: 204,
@@ -357,15 +339,12 @@ exports.updateUser = async (req, res) => {
 		});
 		if (user === null) {
 
-			
 			return next({
 				code: "error",
 				message: "User not found.",
 				statusCode: 204,
 			});
 
-		
-2
 		} else {
 			// return data
 			return res.status(200).json(
@@ -377,8 +356,6 @@ exports.updateUser = async (req, res) => {
 	} catch (err) {
 
 		return next(new Error(err));
-
-
 	}
 };
 
