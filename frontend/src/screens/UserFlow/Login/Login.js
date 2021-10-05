@@ -24,6 +24,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
+import NotificationsError from "components/units/Notifications/NotificationsError";
+
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
 	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -91,27 +94,18 @@ const Login = ({onLogin}) => {
 	return (
 		<>
 			{error ? (
-				<StyleNotificationError>
-					<FontAwesomeIcon
-						icon={faExclamationCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-					<StyleNotificationMessage>
-						Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
-					</StyleNotificationMessage>
-				</StyleNotificationError>
+				<NotificationsError
+					messageError={
+						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
+					}
+				/>
 			) : null}
 
 			{validacionLogin === 200 ? (
-				<StyleNotificationSuccess>
-					<FontAwesomeIcon
-						icon={faCheckCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-					<StyleNotificationMessage>
-						Bienvenido de nuevo email@gmail.com. Te estamos redireccionando.
-					</StyleNotificationMessage>
-				</StyleNotificationSuccess>
+				<NotificationsSuccess
+					email={email}
+					messageSuccess={":bienvenido de nuevo.Te estamos redireccionando."}
+				/>
 			) : null}
 
 			<Body title="Acceso" isLoggedIn={false} centerTitle>

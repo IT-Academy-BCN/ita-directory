@@ -2,20 +2,12 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-import {
-	Container,
-	Form,
-	StyleRedirect,
-	StyledError,
-	StyleNotificationSuccess,
-	StyleNotificationMessage,
-	StyleNotificationError,
-} from "./Registration.styles";
+import {Container, Form, StyleRedirect, StyledError} from "./Registration.styles";
 import PrivacyPolicy from "components/units/PrivacyPolicy/PrivacyPolicy";
 import Body from "components/layout/Body/Body";
 import axios from "axios";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheckCircle, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
+import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
+import NotificationsError from "components/units/Notifications/NotificationsError";
 
 const EMAIL_REGEX =
 	// eslint-disable-next-line no-useless-escape
@@ -82,26 +74,17 @@ const Register = ({retrieveUser}) => {
 	return (
 		<>
 			{error ? (
-				<StyleNotificationError>
-					<FontAwesomeIcon
-						icon={faExclamationCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-					<StyleNotificationMessage>
-						Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
-					</StyleNotificationMessage>
-				</StyleNotificationError>
+				<NotificationsError
+					messageError={
+						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
+					}
+				/>
 			) : null}
 			{validacionConexion ? (
-				<StyleNotificationSuccess>
-					<FontAwesomeIcon
-						icon={faCheckCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-					<StyleNotificationMessage>
-						{email} has sido registrado. Te estamos redireccionando.
-					</StyleNotificationMessage>
-				</StyleNotificationSuccess>
+				<NotificationsSuccess
+					email={email}
+					messageSuccess={"has sido registrado. Te estamos redireccionando."}
+				/>
 			) : null}
 
 			<Body title="Registro">
