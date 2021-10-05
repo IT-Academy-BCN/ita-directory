@@ -131,7 +131,6 @@ const Bill = (color_logo) => {
 							tempor incididunt ut labore et dolore
 						</small>
 					</TermsStyled>
-
 					<CalcTableStyled>
 						<tbody>
 							<tr>

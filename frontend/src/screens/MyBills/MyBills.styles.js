@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 
 export const MyTableStyle = styled.table`
 	display: flex;
@@ -8,7 +9,7 @@ export const MyTableStyle = styled.table`
 	width: 100%;
 	max-width: 70%;
 	border-radius: 10px;
-	border: 0px 1px 1px 1px solid #b0b0b0;
+	border: 0px 1px 1px 1px solid ${Colors.grey};
 
 	@media only screen and (max-width: 650px) {
 		width: 100%;

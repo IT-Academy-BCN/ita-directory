@@ -32,11 +32,10 @@ export const BillStyled = styled.div.attrs({
 })`
 	transform: scale(0.8);
 	font-family: "Inter", sans-serif;
-
 	@media (min-width: 768px) {
 		transform: scale(1);
 	}
-
+	
 	.bold,
 	h3,
 	h4,
@@ -71,8 +70,7 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 	div {
 		${tw`w-full p-0`}
 	}
-
-	h2 {
+  h2 {
 		font-weight: bold;
 	}
 	p {
@@ -238,7 +236,7 @@ export const SignatureStyled = styled.div.attrs({
 		${tw`font-bold m-0`}
 		white-space: nowrap;
 	}
-
+`;
 	h4 {
 		${tw`text-sm`}
 		font-weight: lighter !important;
