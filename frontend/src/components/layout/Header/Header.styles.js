@@ -19,6 +19,7 @@ export const HeaderStyled = styled.header`
 		.logo {
 			display: flex;
 			align-items: center;
+			justify-content: center; //added
 			width: 100%;
 			color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 			font: normal normal normal 15px/15px Korb-Bold;
@@ -129,7 +130,7 @@ export const HeaderStyled = styled.header`
 `;
 
 export const StyledMiPerfil = styled.div`
-	position: realtive;
+	position: relative;
 	display: inline-block;
 `;
 

@@ -107,7 +107,11 @@ const Login = ({onLogin}) => {
 					messageSuccess={":bienvenido de nuevo.Te estamos redireccionando."}
 				/>
 			) : null}
-
+			<NotificationsError
+				messageError={
+					"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
+				}
+			/>
 			<Body title="Acceso" isLoggedIn={false} centerTitle>
 				<Container>
 					<Form onSubmit={handleSubmit}>

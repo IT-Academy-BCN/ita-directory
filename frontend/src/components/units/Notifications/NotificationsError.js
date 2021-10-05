@@ -1,11 +1,15 @@
 import React from "react";
-import {StyleNotificationMessage, StyleNotificationError} from "./Notifications.styles";
+import {
+	StyledNotificationContainer,
+	StyleNotificationMessage,
+	StyleNotificationError,
+} from "./Notifications.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 
 const NotificationsError = ({messageError}) => {
 	return (
-		<div>
+		<StyledNotificationContainer>
 			<StyleNotificationError>
 				<FontAwesomeIcon
 					icon={faExclamationCircle}
@@ -13,7 +17,7 @@ const NotificationsError = ({messageError}) => {
 				/>
 				<StyleNotificationMessage>{messageError}</StyleNotificationMessage>
 			</StyleNotificationError>
-		</div>
+		</StyledNotificationContainer>
 	);
 };
 
