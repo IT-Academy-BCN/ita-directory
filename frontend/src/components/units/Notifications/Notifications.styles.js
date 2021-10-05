@@ -51,11 +51,13 @@ export const StyleRedirect = styled.div`
 	}
 `;
 export const StyleNotificationSuccess = styled.div`
-	display: flex;
-	align-items: center;
-	float: right;
+	display: inline-flex;
+	padding-top: 14px;
+	padding-left: 11px;
+	position: absolute;
+	z-index: 0;
 	margin-top: 32px;
-	margin-right: 32px;
+	margin-left: 938px;
 	width: 307px;
 	height: 61px;
 	background: #317126 0% 0% no-repeat padding-box;
@@ -66,11 +68,13 @@ export const StyleNotificationSuccess = styled.div`
 `;
 
 export const StyleNotificationError = styled.div`
-	display: flex;
-	align-items: center;
-	float: right;
+	display: inline-flex;
+	padding-top: 14px;
+	padding-left: 11px;
+	position: absolute;
+	z-index: 0;
 	margin-top: 32px;
-	margin-right: 100px;
+	margin-left: 938px;
 	width: 307px;
 	height: 61px;
 	background: #bc3434 0% 0% no-repeat padding-box;
