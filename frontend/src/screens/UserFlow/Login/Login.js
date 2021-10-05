@@ -31,26 +31,9 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
-const users = {
-	email: "juan@mail.com",
-	password: 123456,
-};
-
-const authenticateUser = (email, password) => {
-	let authenticated = false;
-	for (let i = 0; i < users.length; i++) {
-		const user = users[i];
-		if (user.email === email && user.password === password) {
-			authenticated = true;
-			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
-		}
-	}
-	if (authenticated) console.log("the user is correct");
-	else console.error("the user is incorrect");
-};
 
 const Login = ({onLogin}) => {
-	const [error, setError] = useState("");
+	const [error, setError] = useState(false);
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -58,21 +41,19 @@ const Login = ({onLogin}) => {
 	const [isPassError, setIsPassError] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [validacionConexion, setValidacionConexion] = useState(false);
+	const [validacionLogin, setValidacionLogin] = useState();
 
-	// const sendPostRequest = async () => {
-	// 	try {
-	// 		const resp = await axios.post("", users);
-	// 		console.log(resp.status);
-	// 		return resp.status;
-	// 		if (resp.status === 201) {
-	// 			setValidacionConexion(true);
-	// 		}
-	// 	} catch (err) {
-	// 		// Handle Error Here
-	// 		console.error(err);
-	// 	}
-	// };
+	const loginUser = async (user) => {
+		try {
+			const response = await axios.post("http://localhost:5000/users/v1/login", user);
+			console.log(response.status);
+			setValidacionLogin(response.status);
+		} catch (error) {
+			// Handle Error Here
+			console.error(error);
+			setError(true);
+		}
+	};
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
@@ -91,45 +72,48 @@ const Login = ({onLogin}) => {
 		setAnimatedState(true);
 		setIsDisabled(true);
 		setIsLoading(true);
-		// sendPostRequest();
 		setTimeout(() => {
 			setAnimatedState(false);
 			setIsDisabled(false);
 			setIsLoading(false);
-		}, 2000);
-
-		try {
-			authenticateUser(email, password, (error, token) => {
-				if (error) return setError(error.message);
-				onLogin(token);
+			loginUser({
+				email,
+				password,
+				privacy: true,
 			});
-		} catch ({message}) {
-			setError(message);
-		}
+			setTimeout(() => {
+				setAnimatedState(false);
+				setIsDisabled(false);
+				setIsLoading(false);
+			}, 2000);
+		});
 	};
 	return (
 		<>
-			{/* {validacionConexion ? ( */}
-			<StyleNotificationSuccess>
-				<FontAwesomeIcon
-					icon={faCheckCircle}
-					style={{color: "white", width: "30px", height: "30px"}}
-				/>
-				<StyleNotificationMessage>
-					Bienvenido de nuevo email@gmail.com. Te estamos redireccionando.
-				</StyleNotificationMessage>
-			</StyleNotificationSuccess>
-			{/* ) : ( */}
-			<StyleNotificationError>
-				<FontAwesomeIcon
-					icon={faExclamationCircle}
-					style={{color: "white", width: "30px", height: "30px"}}
-				/>
-				<StyleNotificationMessage>
-					Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
-				</StyleNotificationMessage>
-			</StyleNotificationError>
-			{/* )} */}
+			{error ? (
+				<StyleNotificationError>
+					<FontAwesomeIcon
+						icon={faExclamationCircle}
+						style={{color: "white", width: "30px", height: "30px"}}
+					/>
+					<StyleNotificationMessage>
+						Ha habido un error con tu usuario o contraseña. Introducelos de nuevo.
+					</StyleNotificationMessage>
+				</StyleNotificationError>
+			) : null}
+
+			{validacionLogin === 200 ? (
+				<StyleNotificationSuccess>
+					<FontAwesomeIcon
+						icon={faCheckCircle}
+						style={{color: "white", width: "30px", height: "30px"}}
+					/>
+					<StyleNotificationMessage>
+						Bienvenido de nuevo email@gmail.com. Te estamos redireccionando.
+					</StyleNotificationMessage>
+				</StyleNotificationSuccess>
+			) : null}
+
 			<Body title="Acceso" isLoggedIn={false} centerTitle>
 				<Container>
 					<Form onSubmit={handleSubmit}>
