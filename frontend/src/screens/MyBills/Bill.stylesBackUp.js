@@ -1,3 +1,4 @@
+/*
 import styled from "styled-components";
 import tw, {theme} from "twin.macro";
 import Colors from "theme/Colors";
@@ -5,10 +6,13 @@ import Colors from "theme/Colors";
 export const Error = styled.div`
 	border: 1px solid;
 	margin: auto;
+	text-align: center;
 	padding: 15px 10px 15px 15px;
 	background-position: 10px center;
 	max-width: 460px;
-	${tw`bg-paleRed text-center text-2xl text-bloodRed`}
+	color: ${Colors.bloodRed};
+	background-color: ${Colors.paleRed};
+	font-size: 24px;
 `;
 
 export const BillComponentStyled = styled.div.attrs({
@@ -111,17 +115,17 @@ export const TableWrapperStyled = styled.div.attrs({
 	table {
 		${tw`w-full flex flex-col`}
 		block-size: fit-content;
-		th,
-		tr {
-			min-height: 47px;
-		}
 
 		th {
-			${tw`justify-center font-bold items-center uppercase pt-3 text-tiny`}//
+			${tw`justify-center font-bold items-center uppercase pt-3`}
+			font-size: 13px;
+			min-height: 47px;
 		}
 		tr {
 			display: grid;
 			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+			height: 47px;
+			width: 100%;
 			.white {
 				background-color: ${Colors.white};
 			}
@@ -130,7 +134,8 @@ export const TableWrapperStyled = styled.div.attrs({
 			}
 
 			td {
-				${tw`flex justify-center flex-grow text-tiny`}
+				${tw`flex justify-center flex-grow`}
+				font-size: 13px;
 				min-width: 50px;
 			}
 		}
@@ -143,8 +148,14 @@ export const CalcTableStyled = styled.table`
 
 	td,
 	th {
-		${tw`items-center justify-center text-left font-normal pt-3 text-tiny`}
+		//${tw}
+		text-align: left;
+		font-weight: normal;
 		padding-left: 27px;
+		justify-content: center;
+		font-size: 13px;
+		align-items: center;
+		padding-top: 12px;
 		min-height: 47px;
 	}
 
@@ -153,8 +164,10 @@ export const CalcTableStyled = styled.table`
 		grid-template-columns: 1fr 1fr;
 		td {
 			padding: 0 20% 0 20%;
+			font-size: 13px;
 			min-width: 50px;
-			${tw` flex justify-end`}
+			display: flex;
+			justify-content: flex-end;
 			@media (min-width: 768px) {
 				padding: 0 40% 0 auto;
 			}
@@ -265,3 +278,4 @@ export const RowStyled = styled.div`
 	min-height: "47px";
 	align-items: center;
 `;
+*/
