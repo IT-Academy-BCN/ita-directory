@@ -17,7 +17,7 @@ exports.getRefreshToken = (req, res, next) => {
 	let refreshToken = req.headers.refresh;
 
 	if (!refreshToken) {
-		//return res.status(400).json(apiResponse({message: "refresh token missing"}));
+		
 		return next({
 			code: "error",
 			message: "refresh token missing",
@@ -52,17 +52,8 @@ exports.getRefreshToken = (req, res, next) => {
 					})
 				);
 			} catch (err) {
-				/*res.status(500).json(
-					apiResponse({
-						message: "Internal server error",
-						error: [err.message],
-					})
-				);*/
-				return next({
-					code: "error",
-					message: "Internal server error",
-					statusCode: 500,
-				});
+				
+				return next(new Error(err));
 			}
 		}
 	);
@@ -81,17 +72,8 @@ exports.getToken = async (req, res, next) => {
 			})
 		);
 	} catch (err) {
-		/*res.status(500).json(
-			apiResponse({
-				message: "Internal server error",
-				error: [err.message],
-			})
-		);*/
-		return next({
-			code: "error",
-			message: "Internal server error",
-			statusCode: 500,
-		});
+		
+		return next(new Error(err));
 	}
 };
 
@@ -124,12 +106,7 @@ exports.getUser = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-		console.error(err);
-		return next({
-			code: "error",
-			message: "Some error ocurred while retrieving your account.",
-			statusCode: 500,
-		});
+		return next(new Error(err));
 	}
 };
 
@@ -137,8 +114,7 @@ exports.getUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
 	try {
 		//Checking if valid email, password and privacy policy.
-		const {...userDTO} = req.body;
-		const validFields = await registerSchema.validateAsync(userDTO);
+		
 
 		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
 
@@ -150,10 +126,10 @@ exports.registerUser = async (req, res, next) => {
 				statusCode: 400,
 			});
 		}
-		const {privacy, ...userDTO2} = req.body;
+		
 		//Creating user without name or lastnames
 		const passwordHashed = await hashPassword(req.body.password);
-		const newUser = await prisma.user.create({
+		await prisma.user.create({
 			data: {
 				email: req.body.email,
 				password: passwordHashed,
@@ -162,11 +138,7 @@ exports.registerUser = async (req, res, next) => {
 				refresh_token: "20",
 			},
 		});
-		/*res.status(200).json(
-			apiResponse({
-				message: "User registered correctly.",
-			})
-		);*/
+		
 		return res.status(200).json(
 			apiResponse({
 				message: "User registered correctly.",
@@ -181,17 +153,8 @@ exports.registerUser = async (req, res, next) => {
 			});
 		}
 		console.error(err);
-		/*res.status(500).json(
-			apiResponse({
-				message: "Some error ocurred while creating your account.",
-				errors: err.message,
-			})
-		);*/
-		return next({
-			code: "error",
-			message: "Some error ocurred while creating your account.",
-			statusCode: 500,
-		});
+		
+		return next(new Error(err));
 	}
 };
 
@@ -201,12 +164,7 @@ exports.getAllUsers = async (req, res, next) => {
 		const users = await prisma.user.findMany();
 		return res.status(200).json(users);
 	} catch (err) {
-		console.error(err);
-		return next({
-			code: "error",
-			message: "Some error ocurred while retrieving your account.",
-			statusCode: 500,
-		});
+		return next(new Error(err));
 	}
 };
 
@@ -234,13 +192,13 @@ exports.login = async (req, res, next) => {
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
-				statusCode: 200,
+				statusCode: 404,
 			});
 		}
 
-		let value = await argon2.verify(USER.password, body.password);
+		const value = await argon2.verify(USER.password, body.password);
 
-		if (value == false) {
+		if (value === false) {
 			return next({
 				code: "error",
 				header: "Wrong password",
@@ -266,7 +224,7 @@ exports.login = async (req, res, next) => {
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
 exports.updateUserRole = async (req, res, next) => {
 	if (!req.body) {
-		//res.status(400).send("Request is empty.");
+		
 		return next({
 			code: "error",
 			message: "Request is empty",
@@ -279,10 +237,7 @@ exports.updateUserRole = async (req, res, next) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-			/*res.status(204).json({
-				success: "false",
-				message: "user not found",
-			});*/
+		
 			return next({
 				code: "error",
 				success: "false",
@@ -300,12 +255,7 @@ exports.updateUserRole = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-		console.error(err);
-		return next({
-			code: "error",
-			message: "Some error ocurred while retrieving your account.",
-			statusCode: 500,
-		});
+		return next(new Error(err));
 	}
 };
 
@@ -313,11 +263,7 @@ exports.updateUserRole = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
 	const {user_id, user_role_id, user_status_id} = req.body;
 	if (!user_id) {
-		/*res.status(400).json(
-			apiResponse({
-				message: "user_id not defined",
-			})
-		);*/
+		
 		return next({
 			code: "error",
 			message: "user_id not identified",
@@ -326,11 +272,7 @@ exports.updateUser = async (req, res, next) => {
 	}
 
 	if (!user_role_id && !user_status_id) {
-		/*res.status(400).json(
-			apiResponse({
-				message: "undefined values",
-			})
-		);*/
+	
 		return next({
 			code: "error",
 			message: "undefined values",
@@ -341,11 +283,7 @@ exports.updateUser = async (req, res, next) => {
 	try {
 		const user = await prisma.user.update({...req.body}, {where: {id: req.body.user_id}});
 		if (user === null) {
-			/*res.status(204).json(
-				apiResponse({
-					message: "User not Found.",
-				})
-			);*/
+			
 			return next({
 				code: "error",
 				message: "User not found.",
@@ -360,12 +298,7 @@ exports.updateUser = async (req, res, next) => {
 			);
 		}
 	} catch (err) {
-		console.error(err);
-		return next({
-			code: "error",
-			message: "Some error ocurred while retrieving your account.",
-			statusCode: 500,
-		});
+		return next(new Error(err));
 	}
 };
 
@@ -412,12 +345,8 @@ exports.deleteUser = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-		console.error(err);
-		return next({
-			code: "error",
-			message: "Some error occurred while retrieving your account.",
-			statusCode: 505,
-		});
+		
+		return next(new Error(err));
 	}
 };
 
@@ -459,12 +388,7 @@ exports.forgetPassword = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-		console.log(err);
-		return next({
-			code: "error",
-			message: "Some error ocurred.",
-			statusCode: 500,
-		});
+		return next(new Error(err));
 	}
 };
 
@@ -488,11 +412,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 				})
 			);
 		} else {
-			/*res.status(404).json(
-				apiResponse({
-					message: "User not found.",
-				})
-			);*/
+			
 			return next({
 				code: "error",
 				message: "User not found.",
@@ -501,17 +421,8 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 		}
 	} catch (err) {
 		console.log(err);
-		/*res.status(500).json(
-			apiResponse({
-				message: "An error occurred with your query.",
-				errors: err.message,
-			})
-		);*/
-		return next({
-			code: "error",
-			message: "An error occurred with your query.",
-			statusCode: 500,
-		});
+		
+		return next(new Error(err));
 	}
 };
 
@@ -520,11 +431,7 @@ exports.recoverPassword = async (req, res, next) => {
 		const token = req.params.token;
 
 		if (!token) {
-			/*res.status(401).json(
-				apiResponse({
-					message: "Your token is empty.",
-				})
-			);*/
+			
 			return next({
 				code: "error",
 				message: "Your token is empty",
@@ -534,12 +441,7 @@ exports.recoverPassword = async (req, res, next) => {
 
 		JWT.verify(token, process.env.JWT_SECRET, (err) => {
 			if (err) {
-				/*res.status(401).json(
-					apiResponse({
-						message: "Your token has expired!",
-						errors: err.message,
-					})
-				);*/
+				
 				return next({
 					code: "error",
 					message: "Your token has expired!",
@@ -554,18 +456,8 @@ exports.recoverPassword = async (req, res, next) => {
 			);
 		});
 	} catch (err) {
-		console.log(err);
-		/*res.status(500).json(
-			apiResponse({
-				message: "An error ocurred.",
-				errors: err.message,
-			})
-		);*/
-		return next({
-			code: "error",
-			message: "An error occurred.",
-			statusCode: 500,
-		});
+		
+		return next(new Error(err));
 	}
 };
 
@@ -596,16 +488,7 @@ exports.changePassword = async (req, res, next) => {
 			})
 		);
 	} catch (err) {
-		/*res.status(500).json(
-			apiResponse({
-				message: "An error occurred.",
-				errors: err.message,
-			})
-		);*/
-		return next({
-			code: "error",
-			message: "An error occurred.",
-			statusCode: 500,
-		});
+		
+		return next(new Error(err));
 	}
 };
