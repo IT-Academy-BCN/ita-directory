@@ -8,8 +8,8 @@ const options = require("./utils/swaggerOptions");
 const userRoutes = require("./routes/users");
 
 // const constantsRoute = require("./routes/constants");
-// const adsRoutes = require("./routes/ads");
-// const authenticateToken = require("./middleware/verifyToken");
+ const adsRoutes = require("./routes/ads");
+ const authenticateToken = require("./middleware/verifyToken");
 // const UsersController = require("./controllers/users");
 // const {loadConstants} = require("./utils/CONSTANTS");
 const {loadConstants} = require("./utils/CONSTANTS");
@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 
 // Routes
 // app.use("/", constantsRoute);
-// app.use("/ads", adsRoutes);
+ app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 
 // app.get("/get-token", UsersController.getToken);
