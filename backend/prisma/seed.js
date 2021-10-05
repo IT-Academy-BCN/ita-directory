@@ -66,7 +66,7 @@ const ads = [
 		price: 900,
 		square_meters: 80,
 		n_bathrooms: 1,
-		map_lan: 41.385063,
+		map_lat: 41.385063,
 		map_lon: 2.173404,
 	},
 	{
@@ -79,7 +79,7 @@ const ads = [
 		price: 1200,
 		square_meters: 90,
 		n_bathrooms: 2,
-		map_lan: 52.520008,
+		map_lat: 52.520008,
 		map_lon: 13.404954,
 	},
 	{
@@ -92,7 +92,7 @@ const ads = [
 		price: 700,
 		square_meters: 75,
 		n_bathrooms: 1,
-		map_lan: 55.864239,
+		map_lat: 55.864239,
 		map_lon: -4.251806,
 	},
 	{
@@ -105,7 +105,7 @@ const ads = [
 		price: 1000,
 		square_meters: 90,
 		n_bathrooms: 2,
-		map_lan: 51.924419,
+		map_lat: 51.924419,
 		map_lon: 4.477733,
 	},
 	{
@@ -118,7 +118,7 @@ const ads = [
 		price: 700,
 		square_meters: 70,
 		n_bathrooms: 1,
-		map_lan: 39.695263,
+		map_lat: 39.695263,
 		map_lon: 3.017571,
 	},
 	{
@@ -131,7 +131,7 @@ const ads = [
 		price: 900,
 		square_meters: 85,
 		n_bathrooms: 2,
-		map_lan: 45.75667,
+		map_lat: 45.75667,
 		map_lon: 4.831811,
 	},
 	{
@@ -144,7 +144,7 @@ const ads = [
 		price: 800,
 		square_meters: 70,
 		n_bathrooms: 1,
-		map_lan: 41.55013,
+		map_lat: 41.55013,
 		map_lon: -8.427734,
 	},
 	{
@@ -157,7 +157,7 @@ const ads = [
 		price: 900,
 		square_meters: 65,
 		n_bathrooms: 1,
-		map_lan: 40.83607,
+		map_lat: 40.83607,
 		map_lon: 14.249339,
 	},
 	{
@@ -170,7 +170,7 @@ const ads = [
 		price: 1200,
 		square_meters: 80,
 		n_bathrooms: 2,
-		map_lan: 48.834668,
+		map_lat: 48.834668,
 		map_lon: 2.350532,
 	},
 	{
@@ -183,7 +183,7 @@ const ads = [
 		price: 1000,
 		square_meters: 75,
 		n_bathrooms: 1,
-		map_lan: 51.499927,
+		map_lat: 51.499927,
 		map_lon: -0.118429,
 	},
 ];
