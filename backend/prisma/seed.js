@@ -1,5 +1,5 @@
+const argon2 = require("argon2");
 const {PrismaClient} = require("@prisma/client");
-const {hashPassword} = require("../app/utils/utils");
 const prisma = new PrismaClient();
 
 const user_roles = [
@@ -102,3 +102,13 @@ main()
 		console.log("disconnect Prisma");
 		await prisma.$disconnect();
 	});
+
+
+const hashPassword = async (password) => {
+	return await argon2.hash(password, {
+		type: argon2.argon2id,
+		memoryCost: 15360,
+		timeCost: 2,
+		parallelism: 1,
+	});
+};
