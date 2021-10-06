@@ -19,7 +19,7 @@ const router = require("express").Router();
 
 /**
  * POST /ads/v1/post-ad
- * @summary Allows user recover password
+ * @summary Create new ad
  * @tags Ad
  * @param {postAdData} request.body.required - The payload looks like this:
  * @return {object} 200 - Success response - application/json
@@ -42,7 +42,7 @@ const router = require("express").Router();
 }
  */
 
-router.post("/v1/post-ad", authenticateToken, adsController.createAd);
+router.post("/v1/post-ad", adsController.createAd);
 
 /**
  * GET /ads/v1/ads
@@ -58,7 +58,7 @@ router.post("/v1/post-ad", authenticateToken, adsController.createAd);
     {"id": 1,"user_id": 1,"title": "asdf","description": "asf","city": "fff","n_rooms": 1,"price": 2,"square_meters": 3,"n_bathrooms": 4,"map_lat": 3.4,"map_lon": 3.6},
     {"id": 5,"user_id": 1,    "title": "asdf",    "description": "asf",    "city": "fff",    "n_rooms": 1,    "price": 2,    "square_meters": 3,    "n_bathrooms": 4,    "map_lat": 3.4,    "map_lon": 3.6}]}
  */
-router.get("/v1/ads", authenticateToken, adsController.getAllAds);
+router.get("/v1/ads", adsController.getAllAds);
 
 /**
  * GET /ads/v1/ads/:adId
@@ -84,9 +84,33 @@ router.get("/v1/ads", authenticateToken, adsController.getAllAds);
 }
 */
 
-router.get("/v1/ads/:adId", authenticateToken, adsController.getAdById);
+router.get("/v1/ads/:adId", adsController.getAdById);
 
 // TODO: Swagger documentation
-router.delete("/v1/ads/:adId", authenticateToken, adsController.deleteById);
+/**
+ * DELETE /ads/v1/ads/:adId
+ * @summary Delete ad by id
+ * @tags Ad
+ * @param {number} adId.path - Ad id to search in database
+ * @return {object} 200 - Success response - application/json
+ * @return {object} 400 - Bad request response - application/json
+ * @return {object} 404 - Id not found - application/json
+ * @example response - 200 - Example success response
+*{"message":"Ad successfully deleted.","data":{"id":1,"user_id":1,"title":"asdf","description":"asf","city":"fff","n_rooms":1,"price":2,"square_meters":3,"n_bathrooms":4,"map_lat":"3.4","map_lon":"3.6"}} 
+  @example response - 400 - Example bad request response
+{
+    "message": "adId param must be an integer.",
+    "data": {},
+    "errors": []
+} 
+* @example response - 404 - The adId is not in the database
+{
+    "message": "This adId does not exist.",
+    "data": {},
+    "errors": []
+}
+*/
+
+router.delete("/v1/ads/:adId", adsController.deleteById);
 
 module.exports = router;

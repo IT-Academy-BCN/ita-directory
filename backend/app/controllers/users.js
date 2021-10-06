@@ -3,12 +3,19 @@ const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const {getRedisClient} = require("../utils/initRedis");
 const Hashids = require("hashids");
-const {apiResponse, signToken, signRefreshToken, registerSchema, hashPassword} = require("../utils/utils");
+const {
+	apiResponse,
+	signToken,
+	signRefreshToken,
+	registerSchema,
+	hashPassword,
+} = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
 exports.getRefreshToken = (req, res) => {
-	let {refreshToken} = req.body;
+	let refreshToken = req.headers.refresh;
+
 	if (!refreshToken) {
 		return res.status(400).json(apiResponse({message: "refresh token missing"}));
 	}
@@ -31,12 +38,11 @@ exports.getRefreshToken = (req, res) => {
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);
-				refreshToken = await signRefreshToken(userId);
+
 				res.status(200).json(
 					apiResponse({
 						data: {
 							accessToken: accessToken,
-							refreshToken: refreshToken,
 						},
 					})
 				);
@@ -78,13 +84,13 @@ exports.getToken = async (req, res) => {
 exports.getUser = async (req, res) => {
 	// Check that the request isn't empty
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		res.status(400).json("Request is empty.");
 	}
 	try {
-		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id),},});
+		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
 		console.log("user", USER);
 		if (USER === null) {
-			res.status(204).json({
+			res.status(404).json({
 				success: "false",
 				message: "user not found",
 			});
@@ -98,7 +104,7 @@ exports.getUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -108,11 +114,10 @@ exports.getUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
 	try {
 		//Checking if valid email, password and privacy policy.
-		const {...userDTO} = req.body;
-		const validFields = await registerSchema.validateAsync(userDTO);
-
-		const doesExist = await prisma.user.findUnique({where: {email: req.body.email,},});
 		
+
+		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
+
 		if (doesExist !== null) {
 			res.status(400).json(
 				apiResponse({
@@ -121,18 +126,18 @@ exports.registerUser = async (req, res) => {
 				})
 			);
 		}
-		const {privacy, ...userDTO2} = req.body;
+		
 		//Creating user without name or lastnames
 		const passwordHashed = await hashPassword(req.body.password);
-		const newUser = await prisma.user.create(
-			{data: {
-					email: req.body.email,
-					password: passwordHashed,
-					user_status_id: 1,
-					user_role_id: 3,
-					refresh_token: "20"
-				},
-			});
+		await prisma.user.create({
+			data: {
+				email: req.body.email,
+				password: passwordHashed,
+				user_status_id: 1,
+				user_role_id: 3,
+				refresh_token: "20",
+			},
+		});
 		res.status(200).json(
 			apiResponse({
 				message: "User registered correctly.",
@@ -172,12 +177,11 @@ exports.getAllUsers = async (req, res) => {
 
 // Login
 exports.login = async (req, res) => {
-	const name = req.body.name;
-	const email = req.body.username;
-	const password = req.body.password;
+	const {body = {}} = req;
 	// Check that the request isn't empty
-	if (!email || !password) {
-		res.status(400).send({
+
+	if (!body.email || !body.password) {
+		res.status(400).json({
 			code: "error",
 			message: "Content can not be empty!",
 		});
@@ -185,16 +189,12 @@ exports.login = async (req, res) => {
 	}
 
 	try {
-		const USER = await prisma.mec_user.findOne({
-			attributes: ["id", "mec_pwd"],
-			where: prisma.sequelize.where(
-				prisma.sequelize.fn("lower", prisma.sequelize.col("mec_un")),
-				prisma.sequelize.fn("lower", email)
-			),
+		const USER = await prisma.user.findUnique({
+			where: {email: body.email},
 		});
 
 		if (!USER) {
-			res.status(200).send({
+			res.status(404).json({
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
@@ -202,10 +202,10 @@ exports.login = async (req, res) => {
 			return;
 		}
 
-		let value = await USER.validatePassword(password, USER.mec_pwd);
+		const value = await argon2.verify(USER.password, body.password);
 
-		if (!value) {
-			res.status(200).send({
+		if (value === false) {
+			res.status(200).json({
 				code: "error",
 				header: "Wrong password",
 				message:
@@ -213,26 +213,27 @@ exports.login = async (req, res) => {
 			});
 		} else {
 			const token = signToken(USER.id);
-			res.status(200).send({
+			const refreshToken = signRefreshToken(USER.id);
+			res.status(200).json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
 				token,
+				refreshToken,
 			});
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({
+		
+		res.status(500).json({
 			code: "error",
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
 };
-
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
 exports.updateUserRole = async (req, res) => {
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		res.status(400).json("Request is empty.");
 	}
 	try {
 		const user = await prisma.user.update(
@@ -240,7 +241,7 @@ exports.updateUserRole = async (req, res) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-			res.status(204).json({
+			res.status(404).json({
 				success: "false",
 				message: "user not found",
 			});
@@ -256,7 +257,7 @@ exports.updateUserRole = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -305,7 +306,7 @@ exports.updateUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -315,7 +316,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
 	// Check that the request isn't empty
 	if (!req.user) {
-		res.status(404).send("User not found.");
+		res.status(404).json("User not found.");
 	}
 	try {
 		const userModel = await prisma.mec_user.findOne({
@@ -349,7 +350,7 @@ exports.deleteUser = async (req, res) => {
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred while retrieving your account.",
 		});
 	}
@@ -385,7 +386,7 @@ exports.forgetPassword = async (req, res) => {
 				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
 			});
 		} else {
-			res.status(404).send({
+			res.status(404).json({
 				code: "not-found",
 				header: "user",
 				message: "Email not found.",
@@ -393,7 +394,7 @@ exports.forgetPassword = async (req, res) => {
 		}
 	} catch (err) {
 		console.log(err);
-		res.status(500).send({
+		res.status(500).json({
 			message: err.message || "Some error ocurred.",
 		});
 	}
@@ -401,9 +402,9 @@ exports.forgetPassword = async (req, res) => {
 
 exports.receiveEmailGetToken = async (req, res) => {
 	try {
-		const {user} = req.body;
+		const user = req.body.email;
 
-		const passUser = await prisma.user.findOne({
+		const passUser = await prisma.user.findUnique({
 			where: {
 				email: user,
 			},
@@ -448,7 +449,7 @@ exports.recoverPassword = async (req, res) => {
 			);
 		}
 
-		JWT.verify(token, process.env.JWT_SECRET, (err, authData) => {
+		JWT.verify(token, process.env.JWT_SECRET, (err) => {
 			if (err) {
 				res.status(401).json(
 					apiResponse({
@@ -477,7 +478,7 @@ exports.recoverPassword = async (req, res) => {
 
 exports.changePassword = async (req, res) => {
 	try {
-		const {password, user} = req.body;
+		const {password, email} = req.body;
 
 		// Create hook for update password?
 		const hashedPassword = await argon2.hash(password, {
@@ -487,14 +488,14 @@ exports.changePassword = async (req, res) => {
 			parallelism: 1,
 		});
 
-		const passUser = await prisma.user.findOne({
+		await prisma.user.update({
 			where: {
-				email: user,
+				email: email,
+			},
+			data: {
+				password: hashedPassword,
 			},
 		});
-
-		passUser.password = hashedPassword;
-		passUser.save();
 
 		res.status(200).json(
 			apiResponse({

@@ -18,10 +18,11 @@ import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 
 // Styles
-import {StyledWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
+import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
 const ListaUsuariosAdmins = () => {
-	const images = [people1b, people4b, people13b];
+	const [images] = useState([people1b, people4b, people13b]);
+	// const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
@@ -45,17 +46,17 @@ const ListaUsuariosAdmins = () => {
 			setCurrentUserState((prev) => state);
 			setActive((prev) => true);
 		},
-		[currentName, currentUserState, active]
+		[]
+		//[currentName, currentUserState, active]
 	);
 
 	const handleModalDelete = useCallback(
 		(row) => {
 			setCurrentColum((prev) => row);
-			localStorage.setItem("currentColP", JSON.stringify("penguinsRgo"));
-			localStorage.setItem("currentCol", JSON.stringify(row));
 			setEliminar((prev) => true);
 		},
-		[currentColum, eliminar]
+		[]
+		//[currentColum, eliminar]
 	);
 
 	const handleModalEdit = useCallback(
@@ -64,7 +65,8 @@ const ListaUsuariosAdmins = () => {
 			setCurrentEmail((prev) => email);
 			setEditar((prev) => true);
 		},
-		[currentName, currentEmail, editar]
+		[]
+		// [currentName, currentEmail, editar]
 	);
 
 	const updateDelete = useCallback(
@@ -78,7 +80,8 @@ const ListaUsuariosAdmins = () => {
 			});
 			setDataUsers((prev) => newUsers);
 		},
-		[dataUsers, currentColum, eliminar]
+		[dataUsers, currentColum]
+		//[dataUsers, currentColum, eliminar]
 	);
 
 	const updateUserData = useCallback(
@@ -91,7 +94,8 @@ const ListaUsuariosAdmins = () => {
 				)
 			);
 		},
-		[dataUsers, currentName, currentEmail, eliminar, currentColum]
+		[dataUsers, currentName, currentEmail]
+		//[dataUsers, currentName, currentEmail, eliminar, currentColum]
 	);
 
 	const updateUserStatus = useCallback(
@@ -104,14 +108,14 @@ const ListaUsuariosAdmins = () => {
 	);
 
 	const customRowStyle = (row) => {
-		return {borderTop: "1px solid #b0b0b0"};
+		return {borderTop: `0.9px solid ${Colors.bahamaBlue}`};
 	};
 
 	const columns = useMemo(
 		() => [
 			{
 				Header: (
-					<StyledCell color={Colors.frenchBlue} paddingL="0px">
+					<StyledCell color={Colors.bahamaBlue} paddingL="0px">
 						Foto
 					</StyledCell>
 				),
@@ -126,27 +130,27 @@ const ListaUsuariosAdmins = () => {
 			},
 			{
 				Header: (
-					<StyledCell color={Colors.frenchBlue} padding="0">
+					<StyledCell color={Colors.bahamaBlue} padding="0">
 						Nombre
 					</StyledCell>
 				),
 				accessor: "nombre",
 				Cell: ({row}) => (
-					<StyledCell color={Colors.frenchBlue}>{row.values.nombre}</StyledCell>
+					<StyledCell color={Colors.bahamaBlue}>{row.values.nombre}</StyledCell>
 				),
 				minWidth: "60px",
 			},
 			{
-				Header: <StyledCell color={Colors.frenchBlue}>Email</StyledCell>,
+				Header: <StyledCell color={Colors.bahamaBlue}>Email</StyledCell>,
 				accessor: "email",
 				Cell: ({row}) => (
-					<StyledCell color={Colors.extraDarkBlue}>{row.values.email}</StyledCell>
+					<StyledCell color={Colors.prussianBlue}>{row.values.email}</StyledCell>
 				),
 				minWidth: "60px",
 			},
 			{
 				Header: (
-					<StyledCell color={Colors.frenchBlue} justify={"flex-end"}>
+					<StyledCell color={Colors.bahamaBlue} justify={"flex-end"}>
 						Acciones
 					</StyledCell>
 				),
@@ -181,7 +185,7 @@ const ListaUsuariosAdmins = () => {
 								handleModalEdit(row.values.nombre, row.values.email, row.values.id)
 							}
 						>
-							<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
+							<FontAwesomeIcon icon={faEye} color={Colors.prussianBlue} />
 						</button>
 						<button onClick={() => handleModalDelete(row.values)}>
 							<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
@@ -190,14 +194,14 @@ const ListaUsuariosAdmins = () => {
 				),
 			},
 		],
-		[images]
+		[handleModalDelete, handleModalEdit, handleModalStatus, images]
 	);
 
 	return (
 		<Body
 			title="Usuarios registrados"
-			color_logo={Colors.extraDarkBlue}
-			color_header={Colors.extraDarkBlue}
+			color_logo={Colors.bahamaBlue}
+			color_header={Colors.bahamaBlue}
 			color_letra={Colors.white}
 			justifyTitle="flex-start"
 			paddingTitle="0px"
@@ -205,9 +209,9 @@ const ListaUsuariosAdmins = () => {
 			isLoggedIn="true"
 		>
 			<Container row>
-				<StyledWrapper>
+				<StyledTableWrapper>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
-				</StyledWrapper>
+				</StyledTableWrapper>
 			</Container>
 			<UserModal
 				nombreUsuario={currentName}
