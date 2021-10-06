@@ -71,19 +71,19 @@ const Register = ({retrieveUser}) => {
 
 	return (
 		<>
-			{error ? (
+			{true ? (
 				<Notification
 					message={
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
-					isSuccess={"error"}
+					isSuccess={false}
 				/>
 			) : null}
-			{true ? (
+			{false ? (
 				<Notification
 					email={email}
 					message={`${email} has sido registrado. Te estamos redireccionando.`}
-					isSuccess={"success"}
+					isSuccess={true}
 				/>
 			) : null}
 
