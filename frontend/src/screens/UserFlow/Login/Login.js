@@ -96,6 +96,7 @@ const Login = ({onLogin}) => {
 					message={
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
+					isSuccess={false}
 				/>
 			) : null}
 
@@ -103,6 +104,7 @@ const Login = ({onLogin}) => {
 				<Notification
 					email={email}
 					message={":bienvenido de nuevo.Te estamos redireccionando."}
+					isSuccess={true}
 				/>
 			) : null}
 			<Notification

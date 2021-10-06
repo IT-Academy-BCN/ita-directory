@@ -71,7 +71,7 @@ const Register = ({retrieveUser}) => {
 
 	return (
 		<>
-			{true ? (
+			{error ? (
 				<Notification
 					message={
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
@@ -79,7 +79,7 @@ const Register = ({retrieveUser}) => {
 					isSuccess={false}
 				/>
 			) : null}
-			{false ? (
+			{validacionConexion ? (
 				<Notification
 					email={email}
 					message={`${email} has sido registrado. Te estamos redireccionando.`}
