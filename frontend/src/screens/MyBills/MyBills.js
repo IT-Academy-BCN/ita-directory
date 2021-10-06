@@ -146,9 +146,9 @@ const MyBills = () => {
 	return (
 		<Body
 			title="Mis facturas"
-			color_logo={Colors.darkRed}
-			color_header= {Colors.lightblue} 
-			color_letra={Colors.grey}
+			logoColor={Colors.darkRed}
+			headerColor= {Colors.lightblue} 
+			fontColor={Colors.grey}
 			justifyTitle="flex-start"
 			isLoggedIn="true"
 		>
