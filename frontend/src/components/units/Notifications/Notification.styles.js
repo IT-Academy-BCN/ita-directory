@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-// @todo: Modify to implement tailwind
+// @todo: Modify to implement tailwind and add mobile first responsive
 export const NotificationStyled = styled.div`
 	display: flex;
 	justify-content: center;
