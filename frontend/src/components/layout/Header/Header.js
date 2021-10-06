@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 
 // Styles
-import {HeaderStyled} from "./Header.styles";
+import {HeaderStyled, StyledSubHeader} from "./Header.styles";
 import {Container} from "theme/GlobalStyles";
 
 const profilePicture =
@@ -11,10 +11,10 @@ const profilePicture =
 const Header = ({
 	isLoggedIn,
 	title,
-	color_logo,
-	color_header,
-	color_letra,
-	centerTitle = false,
+	logoColor,
+	headerColor,
+	fontColor,
+	justifyTitle = false,
 }) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -23,11 +23,11 @@ const Header = ({
 	};
 
 	return (
-		<HeaderStyled centerTitle={centerTitle}>
+		<HeaderStyled justifyTitle={justifyTitle} logoColor={logoColor}>
 			<Container>
 				<div className="top-header">
 					<Link className="logo" to="/ads">
-						<h2 color_logo={color_logo}>Logo Empresa</h2>
+						<h2>Logo Empresa</h2>
 					</Link>
 					{isLoggedIn ? (
 						<div className="profile">
@@ -60,13 +60,14 @@ const Header = ({
 					) : null}
 				</div>
 			</Container>
-			<div className="sub-header">
+			<StyledSubHeader headerColor={headerColor} fontColor={fontColor}>
 				<Container>
 					<h1>{title}</h1>
 				</Container>
-			</div>
+			</StyledSubHeader>
 		</HeaderStyled>
 	);
 };
 
 export default Header;
+
