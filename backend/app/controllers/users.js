@@ -1,4 +1,4 @@
-// External modules
+
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const {getRedisClient} = require("../utils/initRedis");
@@ -46,6 +46,8 @@ exports.getRefreshToken = (req, res, next) => {
 				}
 				const accessToken = signToken(userId);
 
+
+
 				res.status(200).json(
 
 					apiResponse({
@@ -90,7 +92,6 @@ exports.getUser = async (req, res, next) => {
 			message: "Request is empty.",
 			statusCode: 400,
 		});
-
 
 	}
 	try {
@@ -231,7 +232,7 @@ exports.login = async (req, res, next) => {
 			const token = signToken(USER.id);
 			const refreshToken = signRefreshToken(USER.id);
 
-			return res.json({
+			return res.status(200).json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
@@ -244,7 +245,6 @@ exports.login = async (req, res, next) => {
 		return next(new Error(err));
 
 		
-
 	}
 };
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
@@ -560,3 +560,4 @@ exports.changePassword = async (req, res, next) => {
 		return next(new Error(err));
 	}
 };
+
