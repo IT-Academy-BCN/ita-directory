@@ -9,8 +9,9 @@ import {
 	CardSelectorWrapper,
 	CardCheckbox,
 	FilterHr,
-	Button,
 } from "./AdListFilter.style";
+
+import Button from "../../../components/units/Button/Button.js";
 
 function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 	const [maxPrice, setMaxPrice] = useState("");
@@ -32,7 +33,11 @@ function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 		<Card>
 			<CardHeader>
 				<CardTitle>Filtros</CardTitle>
-				<Button onClick={() => ClearFilter()}>Limpiar busqueda</Button>
+				<Button
+					className="blueGradient"
+					text="Limpiar busqueda"
+					onClick={() => ClearFilter()}
+				></Button>
 				<CardValue>
 					Precio mín y máx: {minPriceValue} {maxPriceValue}
 				</CardValue>
@@ -77,9 +82,11 @@ function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 					/>
 					Gastos Incluidos
 				</CardSelectorWrapper>
-				<Button onClick={() => filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize})}>
-					Filtrar
-				</Button>
+				<Button
+					text="Filtrar"
+					className="blueGradient"
+					onClick={() => filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize})}
+				></Button>
 			</CardHeader>
 		</Card>
 	);
