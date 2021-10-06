@@ -22,7 +22,6 @@ import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins
 
 const ListaUsuariosAdmins = () => {
 	const [images] = useState([people1b, people4b, people13b]);
-	// const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
