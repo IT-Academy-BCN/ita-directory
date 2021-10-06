@@ -6,8 +6,7 @@ import {Container, Form, StyleRedirect, StyledError} from "./Registration.styles
 import PrivacyPolicy from "components/units/PrivacyPolicy/PrivacyPolicy";
 import Body from "components/layout/Body/Body";
 import axios from "axios";
-import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
-import NotificationsError from "components/units/Notifications/Notification";
+import Notification from "components/units/Notifications/Notification";
 
 const EMAIL_REGEX =
 	// eslint-disable-next-line no-useless-escape
@@ -74,16 +73,15 @@ const Register = ({retrieveUser}) => {
 	return (
 		<>
 			{error ? (
-				<NotificationsError
-					messageError={
+				<Notification
+					message={
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
 				/>
 			) : null}
 			{validacionConexion ? (
-				<NotificationsSuccess
-					email={email}
-					messageSuccess={"has sido registrado. Te estamos redireccionando."}
+				<Notification
+					message={`$email={email} has sido registrado. Te estamos redireccionando.`}
 				/>
 			) : null}
 
