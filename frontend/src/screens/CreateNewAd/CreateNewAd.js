@@ -15,13 +15,16 @@ import CustomMap from "components/composed/Map/CustomMap";
 
 const CreateNewAd = () => {
 	const emptyForm = {
+		user_id: "2",
 		title: "",
 		description: "",
 		city: "",
-		rooms: "",
+		n_roms: "",
 		price: "",
-		squareM: "",
-		bathrooms: "",
+		square_meters: "",
+		n_bathrooms: "",
+		map_lat: 34.5,
+		map_lon: 23.4,
 	};
 	const [form, setForm] = useState(emptyForm);
 	const [submittedData, setSubmittedData] = useState("");
@@ -51,6 +54,8 @@ const CreateNewAd = () => {
 		e.preventDefault();
 		setSubmittedData(JSON.stringify(form, 0, 2));
 		setForm(emptyForm);
+		postAd(JSON.stringify(form, 0, 2));
+		console.log(JSON.stringify(form, 0, 2));
 	};
 
 	const inputComponentData = [
@@ -81,7 +86,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "Habitaciones",
-			name: "rooms",
+			name: "n_roms",
 			icon: faBed,
 			inputClassName: "styleInputCreateNewAd",
 		},
@@ -96,7 +101,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "M\u00B2",
-			name: "squareM",
+			name: "square_meters",
 			required: true,
 			icon: faHome,
 			inputClassName: "styleInputCreateNewAd",
@@ -104,7 +109,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "Baños",
-			name: "bathrooms",
+			name: "n_bathrooms",
 			icon: faBath,
 			inputClassName: "styleInputCreateNewAd",
 		},
