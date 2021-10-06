@@ -23,9 +23,7 @@ import {
 	faGlassMartiniAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-
-import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
-import NotificationsError from "components/units/Notifications/Notification";
+import Notification from "components/units/Notifications/Notification";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -50,7 +48,7 @@ const Login = ({onLogin}) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
 			console.log(response.status);
-			setValidacionLogin(response.status);
+			setValidacionLogin(true);
 		} catch (error) {
 			// Handle Error Here
 			console.error(error);
@@ -94,17 +92,17 @@ const Login = ({onLogin}) => {
 	return (
 		<>
 			{error ? (
-				<NotificationsError
-					messageError={
+				<Notification
+					message={
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
 				/>
 			) : null}
 
-			{validacionLogin === 200 ? (
-				<NotificationsSuccess
+			{validacionLogin ? (
+				<Notification
 					email={email}
-					messageSuccess={":bienvenido de nuevo.Te estamos redireccionando."}
+					message={":bienvenido de nuevo.Te estamos redireccionando."}
 				/>
 			) : null}
 			<NotificationsError
