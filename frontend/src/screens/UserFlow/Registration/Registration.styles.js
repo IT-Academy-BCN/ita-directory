@@ -29,13 +29,12 @@ export const Form = styled.form`
 	}
 `;
 
-/*
 export const StyledError = styled.div`
-  color: ${Colors.redColor}
-  font-weight: 800;
-  margin: 0 0 40px 0;
+	color: ${Colors.redColor};
+	font-weight: 800;
+	margin: 0 0 40px 0;
 `;
-*/
+
 export const StyleRedirect = styled.div`
 	display: flex;
 	justify-content: center;

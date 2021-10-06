@@ -66,6 +66,9 @@ export const StyleNotificationSuccess = styled.div`
 	border-radius: 6px;
 	opacity: 1;
 	padding-left: 8px;
+	p {
+		color: "white";
+	}
 `;
 /*Original
 export const StyleNotificationError = styled.div`

@@ -79,8 +79,8 @@ const Register = ({retrieveUser}) => {
 					isSuccess={"error"}
 				/>
 			) : null}
-			{validacionConexion ? (
-				<NotificationsSuccess
+			{true ? (
+				<Notification
 					email={email}
 					message={`${email} has sido registrado. Te estamos redireccionando.`}
 					isSuccess={"success"}
