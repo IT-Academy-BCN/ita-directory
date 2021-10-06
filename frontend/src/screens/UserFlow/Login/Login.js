@@ -25,7 +25,7 @@ import {
 import axios from "axios";
 
 import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
-import NotificationsError from "components/units/Notifications/NotificationsError";
+import NotificationsError from "components/units/Notifications/Notification";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
