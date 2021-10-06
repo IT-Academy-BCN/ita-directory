@@ -1,9 +1,11 @@
 import {useState} from "react";
+import axios from "axios";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
+import Notification from "components/units/Notifications/Notification";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 
 // Styles
@@ -23,6 +25,19 @@ const CreateNewAd = () => {
 	};
 	const [form, setForm] = useState(emptyForm);
 	const [submittedData, setSubmittedData] = useState("");
+	const [error, setError] = useState(false);
+	const [successfulPost, setSuccessfulPost] = useState(false);
+
+	const postAd = async (newAdP) => {
+		try {
+			const res = await axios.post("http://localhost:5000/ads/v1/post-ad", newAdP);
+			console.log(res.status);
+			setSuccessfulPost(true);
+		} catch (error) {
+			console.error(error);
+			setError(true);
+		}
+	};
 
 	const handleChange = (e) => {
 		const {name, value} = e.target;
@@ -97,6 +112,19 @@ const CreateNewAd = () => {
 
 	return (
 		<>
+			{" "}
+			{error && (
+				<Notification
+					message={"Ha habido un error. Vuelve ha intentar ahora o mas tarde"}
+					isSuccess={false}
+				/>
+			)}
+			{successfulPost && (
+				<Notification
+					message={`Tu anuncio ha sido publicado con exito.`}
+					isSuccess={true}
+				/>
+			)}
 			<Body
 				title="Publicar anuncio"
 				justifyTitle="flex-start"
