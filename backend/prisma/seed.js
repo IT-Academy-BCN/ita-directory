@@ -1,5 +1,5 @@
+const argon2 = require("argon2");
 const {PrismaClient} = require("@prisma/client");
-// const {hashPassword} = require("../app/utils/utils");
 const prisma = new PrismaClient();
 
 const user_roles = [
@@ -80,17 +80,17 @@ async function main() {
 	}
 
 	// @todo: fix by students
-	// for (let i = 0; i < users.length; i++) {
-	// 	const user = users[i];
-	// 	await prisma.user.upsert({
-	// 		where: {id: user.id},
-	// 		update: {},
-	// 		create: {
-	// 			...user,
-	// 			password: await hashPassword(user.password),
-	// 		},
-	// 	});
-	// }
+	for (let i = 0; i < users.length; i++) {
+		const user = users[i];
+		await prisma.user.upsert({
+			where: {id: user.id},
+			update: {},
+			create: {
+				...user,
+				password: await hashPassword(user.password),
+			},
+		});
+	}
 }
 
 main()
@@ -102,3 +102,13 @@ main()
 		console.log("disconnect Prisma");
 		await prisma.$disconnect();
 	});
+
+
+const hashPassword = async (password) => {
+	return await argon2.hash(password, {
+		type: argon2.argon2id,
+		memoryCost: 15360,
+		timeCost: 2,
+		parallelism: 1,
+	});
+};
