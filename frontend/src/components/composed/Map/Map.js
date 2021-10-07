@@ -27,6 +27,7 @@ function Map({lat = 41.3879, lng = 2.16992}) {
 		console.log(coords);
 		localStorage.setItem("marker", JSON.stringify(coords));
 	}, [coords]);
+
 	return (
 		<div className="Map">
 			<MapContainer className="Map-container" center={marker} zoom={17}>

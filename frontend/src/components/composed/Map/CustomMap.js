@@ -7,7 +7,7 @@ import {customIcons} from "./CustomMapIcons";
 
 let layer;
 
-const Marcador = ({setMarkers, currentIcon}) => {
+const Marcador = ({setCoordinates, setMarkers, currentIcon}) => {
 	const icon = L.icon({
 		iconAnchor: [10, 41],
 		popupAnchor: [2, -40],
@@ -19,13 +19,16 @@ const Marcador = ({setMarkers, currentIcon}) => {
 			if (layer) layer.removeFrom(map);
 			layer = L.marker([lat, lng], {icon}).addTo(map);
 			setMarkers([lat, lng]);
+			setCoordinates((prev) => [lat, lng]);
 			map.panTo(e.latlng);
+			console.log("hey I'm printing coords" + JSON.stringify([lat, lng])); //@todo - delete
+			localStorage.setItem("coords", JSON.stringify([lat, lng])); //@todo -delete
 		},
 	});
 	return null;
 };
 
-const CustomMap = () => {
+const CustomMap = ({setCoordinates}) => {
 	const [markers, setMarkers] = useState([41.3879, 2.16992]);
 	const [iconSelection, setIconSelection] = useState(false);
 	const [iconState, setIconState] = useState(customIcons[1].url);
@@ -55,7 +58,11 @@ const CustomMap = () => {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-				<Marcador setMarkers={setMarkers} currentIcon={iconState} />
+				<Marcador
+					setCoordinates={setCoordinates}
+					setMarkers={setMarkers}
+					currentIcon={iconState}
+				/>
 			</MapContainer>
 			<button className="ButtonIcons" type="button" onClick={handleOnClick}>
 				<img className="IconIMG" src={iconState} alt="" />

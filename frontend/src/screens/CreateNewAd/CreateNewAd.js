@@ -7,8 +7,6 @@ import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-
-// Styles
 import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap";
@@ -23,13 +21,14 @@ const CreateNewAd = () => {
 		price: "",
 		square_meters: "",
 		n_bathrooms: "",
-		map_lat: 34.5,
-		map_lon: 23.4,
+		map_lat: 0,
+		map_lon: 0,
 	};
 	const [form, setForm] = useState(emptyForm);
-	const [submittedData, setSubmittedData] = useState("");
+	const [submittedData, setSubmittedData] = useState(""); //@todo -> remove -probably unecessary
 	const [error, setError] = useState(false);
 	const [successfulPost, setSuccessfulPost] = useState(false);
+	const [coordinates, setCoordinates] = useState([]);
 
 	const postAd = async (formInfo) => {
 		try {
@@ -54,11 +53,23 @@ const CreateNewAd = () => {
 		setForm({
 			...form,
 			[name]: value,
+			map_lat: Number(coordinates[0]),
+			map_lon: Number(coordinates[1]),
 		});
 	};
+	//	,
+
+	useEffect(() => {
+		setForm({
+			...form,
+			map_lat: Number(coordinates[0]),
+			map_lon: Number(coordinates[1]),
+		});
+	}, [coordinates]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		console.log(JSON.stringify(form));
 		postAd(form);
 		setSubmittedData(JSON.stringify(form, 0, 2));
@@ -171,7 +182,7 @@ const CreateNewAd = () => {
 								Índica la dirección de la propiedad pinchando sobre el mapa.
 							</MapText>
 							<MapBox>
-								<CustomMap />
+								<CustomMap setCoordinates={setCoordinates} />
 							</MapBox>
 							<Button
 								buttonStyles={{
