@@ -130,7 +130,7 @@ async function deleteById(req, res) {
 		if (err.code === "P2025") {
 			res.status(404).json(
 				apiResponse({
-					message: "The id for this ad does not exist.",
+					message: "This adId does not exist.",
 					errors: err.message,
 				})
 			);

@@ -112,8 +112,6 @@ export const HeaderStyled = styled.header`
 
 export const StyledSubHeader = styled.div`
 	width: 100%;
-	display: flex;
-	justify-content: center;
 	background-color: ${(props) =>
 		props.headerColor ? props.headerColor : `${Colors.transparentBlue}`};
 	border: ${(props) => (props.headerColor ? `` : `1px solid ${Colors.palerBlue}`)};
@@ -129,7 +127,6 @@ export const StyledSubHeader = styled.div`
 		font-weight: normal;
 		text-align: ${(props) => (props.justifyTitle ? "center" : "left")};
 		color: ${(props) => (props.fontColor ? props.fontColor : `${Colors.grey}`)};
-		text-align: center;
 	}
 `;
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import tw, {theme} from "twin.macro";
+import tw from "twin.macro";
 import Colors from "theme/Colors";
 
 export const Error = styled.div`
