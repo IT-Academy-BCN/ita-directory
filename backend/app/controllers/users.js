@@ -338,13 +338,11 @@ exports.updateUser = async (req, res) => {
 			},
 		});
 		if (user === null) {
-
 			return next({
 				code: "error",
 				message: "User not found.",
 				statusCode: 204,
 			});
-
 		} else {
 			// return data
 			return res.status(200).json(

@@ -121,11 +121,12 @@ export const StyledSubHeader = styled.div`
 
 	h1 {
 		width: 100%;
-        font-size: 26px;
-        line-height: 36px;
-        font-weight: normal;
-        text-align: ${(props) => (props.justifyTitle ? "center" : "left")};
-        color: ${(props) => (props.fontColor ? props.fontColor : `${Colors.grey}`)};
+    font-size: 26px;
+    line-height: 36px;
+    font-weight: normal;
+    text-align: ${(props) => (props.justifyTitle ? "center" : "left")};
+    color: ${(props) => (props.fontColor ? props.fontColor : `${Colors.grey}`)};
+
 	}
 `;
 

@@ -1,4 +1,4 @@
-import {useState, useMemo, useCallback, useEffect} from "react";
+import {useState, useMemo} from "react";
 import ReactTable from "../../components/composed/Table/ReactTable";
 import Colors from "../../theme/Colors";
 import {useParams} from "react-router-dom";
@@ -28,8 +28,8 @@ const Bill = (color_logo) => {
 
 	const indexOfId = billData.findIndex((i) => id === String(i.id));
 	console.log("indexOfId" + indexOfId);
-
-	const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+	//const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
@@ -227,9 +227,7 @@ const Bill = (color_logo) => {
 						</div>
 					</PaymentMethodStyled>
 					<SignatureStyled>
-						<div className="signature-image" role="image">
-							{bill.signature.image}
-						</div>
+						<div className="signature-image">{bill.signature.image}</div>
 						<p>{bill.emisorReceiver.receiver.reName}</p>
 						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
 					</SignatureStyled>
