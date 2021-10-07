@@ -47,8 +47,7 @@ exports.getRefreshToken = (req, res, next) => {
 				const accessToken = signToken(userId);
 
 
-
-				res.status(200).json(
+				return res.status(200).json(
 
 					apiResponse({
 						data: {
@@ -86,19 +85,16 @@ exports.getToken = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
 	// Check that the request isn't empty
 	if (!req.body) {
-
 		return next({
 			code: "error",
 			message: "Request is empty.",
 			statusCode: 400,
 		});
-
 	}
 	try {
 		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
 		console.log("user", USER);
 		if (USER === null) {
-
 			return next({
 				code: "error",
 				success: "false",
@@ -115,8 +111,6 @@ exports.getUser = async (req, res, next) => {
 		}
 	} catch (err) {
 		return next(new Error(err));
-
-		
 	}
 };
 
@@ -148,11 +142,8 @@ exports.registerUser = async (req, res, next) => {
 				refresh_token: "20",
 			},
 		});
-		
-		
 
-		res.status(200).json(
-
+		return res.status(200).json(
 			apiResponse({
 				message: "User registered correctly.",
 			})
@@ -165,7 +156,6 @@ exports.registerUser = async (req, res, next) => {
 				statusCode: 422,
 			});
 		}
-		
 		
 		return next(new Error(err));
 	}
@@ -182,20 +172,15 @@ exports.getAllUsers = async (req, res, next) => {
 };
 
 // Login
-
 exports.login = async (req, res, next) => {
-
-
-
-	const {body = {}} = req;
+  
+  const {body = {}} = req;
 	// Check that the request isn't empty
 
 	if (!body.email || !body.password) {
 
 		const message = "Content can not be empty!";
-
-		
-     return next({
+		return next({
 			code: "error",
 			message,
 			statusCode: 400,
@@ -208,7 +193,6 @@ exports.login = async (req, res, next) => {
 		});
 
 		if (!USER) {
-
 			return next({
 				code: "error",
 				header: "User doesn't exist",
@@ -217,10 +201,9 @@ exports.login = async (req, res, next) => {
 			});
 		}
 
-		const value = await argon2.verify(USER.password, body.password);
+		const value = await argon2.verify(USER.password, body.password)
 
 		if (value === false) {
-
 			return next({
 				code: "error",
 				header: "Wrong password",
@@ -230,9 +213,9 @@ exports.login = async (req, res, next) => {
 			});
 		} else {
 			const token = signToken(USER.id);
-			const refreshToken = signRefreshToken(USER.id);
+			const refreshToken = signRefreshToken(USER.id)
 
-			return res.json({
+			return res.status(200).json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
@@ -244,7 +227,6 @@ exports.login = async (req, res, next) => {
 
 		return next(new Error(err));
 
-		
 	}
 };
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
@@ -262,7 +244,6 @@ exports.updateUserRole = async (req, res, next) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-
 			return next({
 				code: "error",
 				success: "false",
@@ -280,7 +261,6 @@ exports.updateUserRole = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-
 		return next(new Error(err));
 	}
 };
@@ -295,6 +275,7 @@ exports.updateUser = async (req, res, next) => {
 			message: "user_id not identified",
 			statusCode: 400,
 		});
+
 	}
 
 	if (!user_role_id && !user_status_id) {
@@ -327,6 +308,7 @@ exports.updateUser = async (req, res) => {
 			})
 		);
 
+
 	}
 
 	// Updating user using id
@@ -338,13 +320,11 @@ exports.updateUser = async (req, res) => {
 			},
 		});
 		if (user === null) {
-
 			return next({
 				code: "error",
 				message: "User not found.",
 				statusCode: 204,
 			});
-
 		} else {
 			// return data
 			return res.status(200).json(
@@ -354,7 +334,6 @@ exports.updateUser = async (req, res) => {
 			);
 		}
 	} catch (err) {
-
 		return next(new Error(err));
 	}
 };
@@ -363,7 +342,6 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res, next) => {
 	// Check that the request isn't empty
 	if (!req.user) {
-
 		return next({
 			code: "error",
 			message: "User not found",
@@ -404,9 +382,7 @@ exports.deleteUser = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-
-		
-		return next(new Error(err));
+    return next(new Error(err));
 
 	}
 };
@@ -441,20 +417,14 @@ exports.forgetPassword = async (req, res, next) => {
 				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
 			});
 		} else {
-
-			return next({
+		return next({
 				code: "error",
-
-		
-			
-
-				header: "user",
+    		header: "user",
 				message: "Email not found.",
 				statusCode: 404,
 			});
 		}
 	} catch (err) {
-
 		return next(new Error(err));
 	}
 
@@ -487,9 +457,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 				statusCode: 404,
 			});
 		}
-	} catch (err) {
-		
-		
+	} catch (err) {		
 		return next(new Error(err));
 	}
 };
