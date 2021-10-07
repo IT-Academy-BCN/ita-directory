@@ -1,16 +1,30 @@
-// External modules
+
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const {getRedisClient} = require("../utils/initRedis");
 const Hashids = require("hashids");
-const {apiResponse, signToken, signRefreshToken, registerSchema} = require("../utils/utils");
+const {
+	apiResponse,
+	signToken,
+	signRefreshToken,
+	registerSchema,
+	hashPassword,
+} = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
-exports.getRefreshToken = (req, res) => {
-	let {refreshToken} = req.body;
+
+exports.getRefreshToken = (req, res, next) => {
+
+	let refreshToken = req.headers.refresh;
+
 	if (!refreshToken) {
-		return res.status(400).json(apiResponse({message: "refresh token missing"}));
+		
+		return next({
+			code: "error",
+			message: "refresh token missing",
+			statusCode: 400,
+		});
 	}
 	JWT.verify(
 		refreshToken,
@@ -31,64 +45,68 @@ exports.getRefreshToken = (req, res) => {
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);
-				refreshToken = await signRefreshToken(userId);
+
+
+
 				res.status(200).json(
+
 					apiResponse({
 						data: {
 							accessToken: accessToken,
-							refreshToken: refreshToken,
 						},
 					})
 				);
 			} catch (err) {
-				res.status(500).json(
-					apiResponse({
-						message: "Internal server error",
-						error: [err.message],
-					})
-				);
+				
+				return next(new Error(err));
 			}
 		}
 	);
 };
 
 // Get token
-exports.getToken = async (req, res) => {
+exports.getToken = async (req, res, next) => {
 	const idUser = "100001";
 	const accessToken = signToken(idUser);
 	try {
 		const refreshToken = await signRefreshToken(idUser);
-		res.status(200).json(
+		return res.status(200).json(
 			apiResponse({
 				message: "Your token",
 				data: {accessToken: accessToken, refreshToken: refreshToken},
 			})
 		);
 	} catch (err) {
-		res.status(500).json(
-			apiResponse({
-				message: "Internal server error",
-				error: [err.message],
-			})
-		);
+		
+		return next(new Error(err));
 	}
 };
 
 // Get User (/v1/get_me endPoint)
-exports.getUser = async (req, res) => {
+exports.getUser = async (req, res, next) => {
 	// Check that the request isn't empty
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+
+		return next({
+			code: "error",
+			message: "Request is empty.",
+			statusCode: 400,
+		});
+
 	}
 	try {
-		const USER = await prisma.user.findUnique({where: {id: req.body.id}});
+		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
+		console.log("user", USER);
 		if (USER === null) {
-			res.status(204).json({
+
+			return next({
+				code: "error",
 				success: "false",
 				message: "user not found",
+				statusCode: 204,
 			});
 		} else {
-			res.status(200).json({
+			return res.status(200).json({
 				// Cambiar por el método API RESPONSE
 				success: "true",
 				name: USER.name,
@@ -96,131 +114,147 @@ exports.getUser = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+		return next(new Error(err));
+
+		
 	}
 };
 
 //User signup
-exports.registerUser = async (req, res) => {
+exports.registerUser = async (req, res, next) => {
 	try {
 		//Checking if valid email, password and privacy policy.
-		const {name, lastnames, ...userDTO} = req.body;
-		const validFields = await registerSchema.validateAsync(userDTO);
+		
 
-		const doesExist = await prisma.user.findOne({where: {email: req.body.email}});
+		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
+
 		if (doesExist !== null) {
-			res.status(400).json(
-				apiResponse({
-					message: "This email has already been registered.",
-					errors: "Invalid email.",
-				})
-			);
+			return next({
+				code: "error",
+				header: "Invalid email",
+				message: "This email has already been registered.",
+				statusCode: 400,
+			});
 		}
-		const {privacy, ...userDTO2} = req.body;
-		const newUser = await prisma.user.create({...req.body});
+		
+		//Creating user without name or lastnames
+		const passwordHashed = await hashPassword(req.body.password);
+		await prisma.user.create({
+			data: {
+				email: req.body.email,
+				password: passwordHashed,
+				user_status_id: 1,
+				user_role_id: 3,
+				refresh_token: "20",
+			},
+		});
+		
+		
+
 		res.status(200).json(
+
 			apiResponse({
 				message: "User registered correctly.",
 			})
 		);
 	} catch (err) {
 		if (err.isJoi === true) {
-			res.status(422).json(
-				apiResponse({
-					message: "Some error ocurred while creating your account.",
-					errors: err.message,
-				})
-			);
-		}
-		console.error(err);
-		res.status(500).json(
-			apiResponse({
+			return next({
+				code: "error",
 				message: "Some error ocurred while creating your account.",
-				errors: err.message,
-			})
-		);
+				statusCode: 422,
+			});
+		}
+		
+		
+		return next(new Error(err));
 	}
 };
 
 //get all users (FOR TESTING PURPOSE)
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req, res, next) => {
 	try {
 		const users = await prisma.user.findMany();
-		res.status(200).json(users);
+		return res.status(200).json(users);
 	} catch (err) {
-		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+		return next(new Error(err));
 	}
 };
 
 // Login
-exports.login = async (req, res) => {
-	const name = req.body.name;
-	const email = req.body.username;
-	const password = req.body.password;
+
+exports.login = async (req, res, next) => {
+
+
+
+	const {body = {}} = req;
 	// Check that the request isn't empty
-	if (!email || !password) {
-		res.status(400).send({
+
+	if (!body.email || !body.password) {
+
+		const message = "Content can not be empty!";
+
+		
+     return next({
 			code: "error",
-			message: "Content can not be empty!",
+			message,
+			statusCode: 400,
 		});
-		return;
 	}
 
 	try {
-		const USER = await prisma.mec_user.findOne({
-			attributes: ["id", "mec_pwd"],
-			where: prisma.sequelize.where(
-				prisma.sequelize.fn("lower", prisma.sequelize.col("mec_un")),
-				prisma.sequelize.fn("lower", email)
-			),
+		const USER = await prisma.user.findUnique({
+			where: {email: body.email},
 		});
 
 		if (!USER) {
-			res.status(200).send({
+
+			return next({
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
+				statusCode: 404,
 			});
-			return;
 		}
 
-		let value = await USER.validatePassword(password, USER.mec_pwd);
+		const value = await argon2.verify(USER.password, body.password);
 
-		if (!value) {
-			res.status(200).send({
+		if (value === false) {
+
+			return next({
 				code: "error",
 				header: "Wrong password",
 				message:
 					"The password you introduced is incorrect, please try again or try to recover your password.",
+				statusCode: 200,
 			});
 		} else {
 			const token = signToken(USER.id);
-			res.status(200).send({
+			const refreshToken = signRefreshToken(USER.id);
+
+			return res.status(200).json({
 				code: "success",
 				header: "Welcome back",
 				message: "We are redirecting you to your account.",
 				token,
+				refreshToken,
 			});
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({
-			code: "error",
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+
+		return next(new Error(err));
+
+		
 	}
 };
-
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
-exports.updateUserRole = async (req, res) => {
+exports.updateUserRole = async (req, res, next) => {
 	if (!req.body) {
-		res.status(400).send("Request is empty.");
+		return next({
+			code: "error",
+			message: "Request is empty",
+			statusCode: 400,
+		});
 	}
 	try {
 		const user = await prisma.user.update(
@@ -228,14 +262,17 @@ exports.updateUserRole = async (req, res) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-			res.status(204).json({
+
+			return next({
+				code: "error",
 				success: "false",
 				message: "user not found",
+				statusCode: 204,
 			});
 		} else {
 			//make update & return data
 
-			res.status(200).json({
+			return res.status(200).json({
 				success: "true",
 				name: user.name,
 				lastnames: user.lastnames,
@@ -243,61 +280,96 @@ exports.updateUserRole = async (req, res) => {
 			});
 		}
 	} catch (err) {
-		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+
+		return next(new Error(err));
 	}
 };
 
 //Update some user field with id_user & newfield (FOR TESTING PURPOSE)
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res, next) => {
 	const {user_id, user_role_id, user_status_id} = req.body;
 	if (!user_id) {
-		res.status(400).json(
-			apiResponse({
-				message: "user_id not defined",
-			})
-		);
+		
+		return next({
+			code: "error",
+			message: "user_id not identified",
+			statusCode: 400,
+		});
 	}
 
 	if (!user_role_id && !user_status_id) {
+	
+		return next({
+			code: "error",
+			message: "undefined values",
+			statusCode: 400,
+		});
+
+		
+	}
+};
+
+//Update some user field with id
+exports.updateUser = async (req, res) => {
+	const {id, user_role_id, user_status_id} = req.body;
+	if (!id) {
 		res.status(400).json(
 			apiResponse({
-				message: "undefined values",
+				message: "User id not defined",
 			})
 		);
 	}
 
+	if (!user_status_id && !user_role_id) {
+		res.status(400).json(
+			apiResponse({
+				message: "Undefined user status or user role",
+			})
+		);
+
+	}
+
+	// Updating user using id
 	try {
-		const user = await prisma.user.update({...req.body}, {where: {id: req.body.user_id}});
+		const user = await prisma.user.update(
+			{where: {id: parseInt(req.body.id)},
+			data: {
+				...req.body
+			},
+		});
 		if (user === null) {
-			res.status(204).json(
-				apiResponse({
-					message: "User not Found.",
-				})
-			);
+
+			return next({
+				code: "error",
+				message: "User not found.",
+				statusCode: 204,
+			});
+
 		} else {
 			// return data
-			res.status(200).json(
+			return res.status(200).json(
 				apiResponse({
 					message: "User updated successfully",
 				})
 			);
 		}
 	} catch (err) {
-		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+
+		return next(new Error(err));
 	}
 };
 
 // Delete user
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res, next) => {
 	// Check that the request isn't empty
 	if (!req.user) {
-		res.status(404).send("User not found.");
+
+		return next({
+			code: "error",
+			message: "User not found",
+			statusCode: 404,
+		});
+
 	}
 	try {
 		const userModel = await prisma.mec_user.findOne({
@@ -323,21 +395,23 @@ exports.deleteUser = async (req, res) => {
 			if (userModel.person.picture) {
 				userModel.person.picture = Buffer.from(userModel.person.picture).toString("base64");
 			}
-			res.status(200).json(userModel);
+			return res.status(200).json(userModel);
 		} else {
-			res.status(404).json({
-				message: "User not found.",
+			return next({
+				code: "error",
+				message: "User not found",
+				statusCode: 404,
 			});
 		}
 	} catch (err) {
-		console.error(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred while retrieving your account.",
-		});
+
+		
+		return next(new Error(err));
+
 	}
 };
 
-exports.forgetPassword = async (req, res) => {
+exports.forgetPassword = async (req, res, next) => {
 	const {email} = req.body;
 	try {
 		const user = await prisma.mec_user.findOne({where: {mec_un: email}});
@@ -360,32 +434,37 @@ exports.forgetPassword = async (req, res) => {
 				token_id: token,
 				password_old: user.password,
 			});
-			res.status(200).json({
+			return res.status(200).json({
 				code: "success",
 				header: "Forget Pass succesful url temp",
 				message: "You have succesfuly forget Pass succesful url temp.",
 				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
 			});
 		} else {
-			res.status(404).send({
-				code: "not-found",
+
+			return next({
+				code: "error",
+
+		
+			
+
 				header: "user",
 				message: "Email not found.",
+				statusCode: 404,
 			});
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).send({
-			message: err.message || "Some error ocurred.",
-		});
+
+		return next(new Error(err));
 	}
+
 };
 
-exports.receiveEmailGetToken = async (req, res) => {
+exports.receiveEmailGetToken = async (req, res, next) => {
 	try {
-		const {user} = req.body;
+		const user = req.body.email;
 
-		const passUser = await prisma.user.findOne({
+		const passUser = await prisma.user.findUnique({
 			where: {
 				email: user,
 			},
@@ -394,50 +473,48 @@ exports.receiveEmailGetToken = async (req, res) => {
 		if (passUser) {
 			const accessToken = signToken(passUser, "1h");
 
-			res.status(200).json(
+			return res.status(200).json(
 				apiResponse({
 					message: "Access token granted.",
 					data: accessToken,
 				})
 			);
 		} else {
-			res.status(404).json(
-				apiResponse({
-					message: "User not found.",
-				})
-			);
+			
+			return next({
+				code: "error",
+				message: "User not found.",
+				statusCode: 404,
+			});
 		}
 	} catch (err) {
-		console.log(err);
-		res.status(500).json(
-			apiResponse({
-				message: "An error occurred with your query.",
-				errors: err.message,
-			})
-		);
+		
+		
+		return next(new Error(err));
 	}
 };
 
-exports.recoverPassword = async (req, res) => {
+exports.recoverPassword = async (req, res, next) => {
 	try {
 		const token = req.params.token;
 
 		if (!token) {
-			res.status(401).json(
-				apiResponse({
-					message: "Your token is empty.",
-				})
-			);
+			
+			return next({
+				code: "error",
+				message: "Your token is empty",
+				statusCode: 401,
+			});
 		}
 
-		JWT.verify(token, process.env.JWT_SECRET, (err, authData) => {
+		JWT.verify(token, process.env.JWT_SECRET, (err) => {
 			if (err) {
-				res.status(401).json(
-					apiResponse({
-						message: "Your token has expired!",
-						errors: err.message,
-					})
-				);
+				
+				return next({
+					code: "error",
+					message: "Your token has expired!",
+					statusCode: 401,
+				});
 			}
 
 			res.status(200).json(
@@ -447,19 +524,14 @@ exports.recoverPassword = async (req, res) => {
 			);
 		});
 	} catch (err) {
-		console.log(err);
-		res.status(500).json(
-			apiResponse({
-				message: "An error ocurred.",
-				errors: err.message,
-			})
-		);
+		
+		return next(new Error(err));
 	}
 };
 
-exports.changePassword = async (req, res) => {
+exports.changePassword = async (req, res, next) => {
 	try {
-		const {password, user} = req.body;
+		const {password, email} = req.body;
 
 		// Create hook for update password?
 		const hashedPassword = await argon2.hash(password, {
@@ -469,14 +541,14 @@ exports.changePassword = async (req, res) => {
 			parallelism: 1,
 		});
 
-		const passUser = await prisma.user.findOne({
+		await prisma.user.update({
 			where: {
-				email: user,
+				email: email,
+			},
+			data: {
+				password: hashedPassword,
 			},
 		});
-
-		passUser.password = hashedPassword;
-		passUser.save();
 
 		res.status(200).json(
 			apiResponse({
@@ -484,11 +556,8 @@ exports.changePassword = async (req, res) => {
 			})
 		);
 	} catch (err) {
-		res.status(500).json(
-			apiResponse({
-				message: "An error occurred.",
-				errors: err.message,
-			})
-		);
+		
+		return next(new Error(err));
 	}
 };
+

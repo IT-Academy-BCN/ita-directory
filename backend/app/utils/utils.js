@@ -46,6 +46,7 @@ const signToken = (userid, maxAge = "15m") => {
 
 // maxAge = "1d" => 86400 must be a number for Redis expiration time
 const signRefreshToken = (userid, maxAge = 86400) => {
+	console.log("### REFRESH TOKEN")
 	const hashedId = hashids.encode(userid);
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
 	const secret = process.env.JWT_REFRESH_TOKEN_SECRET;
@@ -55,13 +56,14 @@ const signRefreshToken = (userid, maxAge = 86400) => {
 	return token;
 };
 
-const hashPassword = async (password) =>
-	await argon2.hash(password, {
+const hashPassword = async (password) => {
+	return await argon2.hash(password, {
 		type: argon2.argon2id,
 		memoryCost: 15360,
 		timeCost: 2,
 		parallelism: 1,
 	});
+};
 
 module.exports = {
 	// generateBlob,
@@ -71,5 +73,5 @@ module.exports = {
 	AdByIdParamSchema,
 	signToken,
 	signRefreshToken,
-	hashPassword,
+	hashPassword
 };

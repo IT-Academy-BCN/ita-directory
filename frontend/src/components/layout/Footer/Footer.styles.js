@@ -65,7 +65,7 @@ export const Information = styled.div`
 	letter-spacing: 0;
 	opacity: 1;
 	list-style-type: none;
-	font: normal normal normal 0.9rem Helvetica Neue;
+	font: normal normal normal 0.7rem Arial;
 	margin: 0px;
 	padding-left: 0;
 	color: ${Colors.grey};

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useMemo, useCallback} from "react";
 import {
 	faUserClock,
 	faUserCheck,
@@ -9,7 +9,7 @@ import {
 import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
-import DataTable from "react-data-table-component";
+import ReactTable from "../../components/composed/Table/ReactTable";
 import usuarios from "assets/usuarios.json";
 import {people1b, people4b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -18,12 +18,14 @@ import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 
 // Styles
-import {StyledWrapper, StyledImage, StyledDiv} from "./ListaUsuariosAdmins.style";
+import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
-function ListaUsuariosAdmins() {
+const ListaUsuariosAdmins = () => {
 	const images = [people1b, people4b, people13b];
 	const [active, setActive] = useState(false);
+
 	const [dataUsers, setDataUsers] = useState(usuarios);
+	const data = useMemo(() => [...dataUsers], [dataUsers]);
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -37,138 +39,173 @@ function ListaUsuariosAdmins() {
 	//Edit Profile
 	const [currentEmail, setCurrentEmail] = useState("");
 
-	const handleModalStatus = (name, state) => {
-		setCurrentName(name);
-		setCurrentUserState(state);
-		setActive(true);
-	};
-
-	const handleModalDelete = (row) => {
-		setCurrentColum(row);
-		setEliminar(true);
-	};
-
-	const handleModalEdit = (name, email) => {
-		setCurrentName(name);
-		setCurrentEmail(email);
-		setEditar(true);
-	};
-
-	const updateDelete = (user) => {
-		const newUsers = dataUsers.filter(function (user) {
-			return user !== currentColum;
-		});
-
-		setDataUsers(newUsers);
-	};
-
-	const updateUserData = (newName, newEmail) => {
-		setDataUsers(
-			dataUsers.map((item) =>
-				item.nombre === currentName || item.email === currentEmail
-					? {...item, nombre: newName, email: newEmail}
-					: item
-			)
-		);
-	};
-
-	const updateUserStatus = (val, nombreUsuario) => {
-		setDataUsers(
-			dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
-		);
-	};
-
-	const columns = [
-		{
-			name: (
-				<StyledDiv color={Colors.frenchBlue} paddingL="0px">
-					Foto
-				</StyledDiv>
-			),
-			selector: "foto",
-			cell: (row) => (
-				<StyledDiv>
-					{<StyledImage src={images[row.id]} alt="foto" width="30px" height="30px" />}
-				</StyledDiv>
-			),
-			sortable: true,
-			compact: true,
-			minWidth: "32px",
-			hide: 600,
+	const handleModalStatus = useCallback(
+		(name, state) => {
+			setCurrentName((prev) => name);
+			setCurrentUserState((prev) => state);
+			setActive((prev) => true);
 		},
-		{
-			name: (
-				<StyledDiv color={Colors.frenchBlue} padding="0">
-					Nombre
-				</StyledDiv>
-			),
-			selector: "nombre",
-			cell: (row) => <StyledDiv color={Colors.frenchBlue}>{row.nombre}</StyledDiv>,
-			sortable: true,
-			compact: true,
-			minWidth: "40px",
+		[currentName, currentUserState, active]
+	);
+
+	const handleModalDelete = useCallback(
+		(row) => {
+			setCurrentColum((prev) => row);
+			setEliminar((prev) => true);
 		},
-		{
-			name: <StyledDiv color={Colors.frenchBlue}>Email</StyledDiv>,
-			selector: "email",
-			cell: (row) => <StyledDiv color={Colors.extraDarkBlue}>{row.email}</StyledDiv>,
-			sortable: true,
-			compact: true,
-			minWidth: "60px",
+		[currentColum, eliminar]
+	);
+
+	const handleModalEdit = useCallback(
+		(name, email) => {
+			setCurrentName((prev) => name);
+			setCurrentEmail((prev) => email);
+			setEditar((prev) => true);
 		},
-		{
-			name: <StyledDiv color={Colors.frenchBlue}>Acciones</StyledDiv>,
-			selector: "acciones",
-			sortable: true,
-			compact: true,
-			right: true,
-			minWidth: "140px",
-			cell: (row) => (
-				<div className="actions-column">
-					<button onClick={() => handleModalStatus(row.nombre, row.acciones)}>
-						<FontAwesomeIcon
-							icon={
-								row.acciones === "rejected"
-									? faUserAltSlash
-									: row.acciones === "aprobado"
-									? faUserCheck
-									: faUserClock
+		[currentName, currentEmail, editar]
+	);
+
+	const updateDelete = useCallback(
+		(user) => {
+			const newUsers = dataUsers.filter((user) => {
+				if (user.email.localeCompare(currentColum.email) !== 0) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+			setDataUsers((prev) => newUsers);
+		},
+		[dataUsers, currentColum, eliminar]
+	);
+
+	const updateUserData = useCallback(
+		(newName, newEmail) => {
+			setDataUsers(
+				dataUsers.map((item) =>
+					item.nombre === currentName || item.email === currentEmail
+						? {...item, nombre: newName, email: newEmail}
+						: item
+				)
+			);
+		},
+		[dataUsers, currentName, currentEmail, eliminar, currentColum]
+	);
+
+	const updateUserStatus = useCallback(
+		(val, nombreUsuario) => {
+			setDataUsers(
+				dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
+			);
+		},
+		[dataUsers]
+	);
+
+	const customRowStyle = (row) => {
+		return {borderTop: `0.9px solid ${Colors.bahamaBlue}`};
+	};
+
+	const columns = useMemo(
+		() => [
+			{
+				Header: (
+					<StyledCell color={Colors.bahamaBlue} paddingL="0px">
+						Foto
+					</StyledCell>
+				),
+				accessor: "foto",
+
+				Cell: ({row}) => (
+					<StyledCell>
+						{<StyledImage src={images[row.id]} alt="foto" width="50px" height="50px" />}
+					</StyledCell>
+				),
+				minWidth: "32px",
+			},
+			{
+				Header: (
+					<StyledCell color={Colors.bahamaBlue} padding="0">
+						Nombre
+					</StyledCell>
+				),
+				accessor: "nombre",
+				Cell: ({row}) => (
+					<StyledCell color={Colors.bahamaBlue}>{row.values.nombre}</StyledCell>
+				),
+				minWidth: "60px",
+			},
+			{
+				Header: <StyledCell color={Colors.bahamaBlue}>Email</StyledCell>,
+				accessor: "email",
+				Cell: ({row}) => (
+					<StyledCell color={Colors.prussianBlue}>{row.values.email}</StyledCell>
+				),
+				minWidth: "60px",
+			},
+			{
+				Header: (
+					<StyledCell color={Colors.bahamaBlue} justify={"flex-end"}>
+						Acciones
+					</StyledCell>
+				),
+				accessor: "acciones",
+				minWidth: "60px",
+				Cell: ({row}) => (
+					<div className="actions-column">
+						<button
+							onClick={() =>
+								handleModalStatus(row.values.nombre, row.values.acciones)
 							}
-							color={
-								row.acciones === "rejected"
-									? Colors.redColor
-									: row.acciones === "aprobado"
-									? Colors.darkGreen
-									: Colors.grey
+						>
+							<FontAwesomeIcon
+								icon={
+									row.values.acciones === "rejected"
+										? faUserAltSlash
+										: row.values.acciones === "aprobado"
+										? faUserCheck
+										: faUserClock
+								}
+								color={
+									row.values.acciones === "rejected"
+										? Colors.redColor
+										: row.values.acciones === "aprobado"
+										? Colors.darkGreen
+										: Colors.grey
+								}
+							></FontAwesomeIcon>
+						</button>
+						<button
+							onClick={() =>
+								handleModalEdit(row.values.nombre, row.values.email, row.values.id)
 							}
-						></FontAwesomeIcon>
-					</button>
-					<button onClick={() => handleModalEdit(row.nombre, row.email, row.id)}>
-						<FontAwesomeIcon icon={faEye} color={Colors.extraDarkBlue} />
-					</button>
-					<button onClick={() => handleModalDelete(row)}>
-						<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
-					</button>
-				</div>
-			),
-		},
-	];
+						>
+							<FontAwesomeIcon icon={faEye} color={Colors.prussianBlue} />
+						</button>
+						<button onClick={() => handleModalDelete(row.values)}>
+							<FontAwesomeIcon icon={faTrash} color={Colors.redColor} />
+						</button>
+					</div>
+				),
+			},
+		],
+		[images]
+	);
 
 	return (
 		<Body
 			title="Usuarios registrados"
-			color_logo={Colors.extraDarkBlue}
-			color_header={Colors.extraDarkBlue}
-			color_letra={Colors.white}
+			logoColor={Colors.bahamaBlue}
+			headerColor={Colors.bahamaBlue}
+			fontColor={Colors.white}
 			justifyTitle="flex-start"
 			paddingTitle="0px"
 			paddingTitle2="73px"
 			isLoggedIn="true"
 		>
 			<Container row>
-				<StyledWrapper>
-					<DataTable columns={columns} data={dataUsers} noHeader={true} />
-				</StyledWrapper>
+				<StyledTableWrapper>
+					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
+				</StyledTableWrapper>
 			</Container>
 			<UserModal
 				nombreUsuario={currentName}
@@ -181,7 +218,7 @@ function ListaUsuariosAdmins() {
 				columnSelect={currentColum}
 				currentUser={eliminar}
 				active={eliminar}
-				hideModal={() => setEliminar(false)}
+				hideModal={() => setEliminar((prev) => false)}
 				updateDelete={updateDelete}
 			/>
 			<EditProfile
@@ -195,5 +232,5 @@ function ListaUsuariosAdmins() {
 			/>
 		</Body>
 	);
-}
+};
 export default ListaUsuariosAdmins;
