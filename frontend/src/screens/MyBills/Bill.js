@@ -1,4 +1,5 @@
-import {useState, useMemo, useCallback, useEffect} from "react";
+/* eslint-disable jsx-a11y/aria-role */
+import {useState, useMemo} from "react";
 import ReactTable from "../../components/composed/Table/ReactTable";
 //import DataTable from "react-data-table-component";
 import Colors from "../../theme/Colors";
@@ -27,7 +28,7 @@ const Bill = (color_logo) => {
 	const indexOfId = billData.findIndex((i) => id === String(i.id));
 	console.log("indexOfId" + indexOfId);
 
-	const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
