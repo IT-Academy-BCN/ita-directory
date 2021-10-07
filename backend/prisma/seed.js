@@ -236,7 +236,6 @@ async function main() {
 		});
 	}
 
-
 	for (let i = 0; i < ads.length; i++) {
 		const ad = ads[i];
 		await prisma.ads.upsert({
@@ -248,6 +247,7 @@ async function main() {
 			
 		});
 	}
+
 
 }
 
