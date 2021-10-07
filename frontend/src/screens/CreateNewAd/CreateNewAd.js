@@ -39,9 +39,11 @@ const CreateNewAd = () => {
 			});
 			await console.log(res);
 			await setSuccessfulPost((prev) => true);
+			await setTimeout(() => setSuccessfulPost((prev) => false), 3000);
 		} catch (err) {
 			console.log(err);
 			setError((prev) => true);
+			setTimeout(() => setError((prev) => false), 3000);
 		}
 	};
 
@@ -77,6 +79,7 @@ const CreateNewAd = () => {
 		setForm(emptyForm);
 		setError((prev) => false);
 		setSuccessfulPost((prev) => false);
+		setTimeout(() => setSubmittedData(""), 5000);
 	};
 
 	const inputComponentData = [
