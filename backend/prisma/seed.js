@@ -235,8 +235,6 @@ async function main() {
 			},
 		});
 	}
-<<<<<<< HEAD
-=======
 
 
 	for (let i = 0; i < ads.length; i++) {
@@ -251,7 +249,6 @@ async function main() {
 		});
 	}
 
->>>>>>> develop
 }
 
 main()

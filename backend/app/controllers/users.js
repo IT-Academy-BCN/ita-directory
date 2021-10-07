@@ -313,19 +313,11 @@ exports.updateUser = async (req, res, next) => {
 			},
 		});
 		if (user === null) {
-<<<<<<< HEAD
-			res.status(400).json(
-				apiResponse({
-					message: "User not Found.",
-				})
-			);
-=======
 			return next({
 				code: "error",
 				message: "User not found.",
 				statusCode: 204,
 			});
->>>>>>> develop
 		} else {
 			// return data
 			return res.status(200).json(
