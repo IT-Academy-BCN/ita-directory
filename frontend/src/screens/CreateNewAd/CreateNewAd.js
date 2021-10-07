@@ -1,9 +1,11 @@
 import {useState} from "react";
+import axios from "axios";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
+import Notification from "components/units/Notifications/Notification";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 
 // Styles
@@ -13,16 +15,32 @@ import CustomMap from "components/composed/Map/CustomMap";
 
 const CreateNewAd = () => {
 	const emptyForm = {
+		user_id: "2",
 		title: "",
 		description: "",
 		city: "",
-		rooms: "",
+		n_roms: "",
 		price: "",
-		squareM: "",
-		bathrooms: "",
+		square_meters: "",
+		n_bathrooms: "",
+		map_lat: 34.5,
+		map_lon: 23.4,
 	};
 	const [form, setForm] = useState(emptyForm);
 	const [submittedData, setSubmittedData] = useState("");
+	const [error, setError] = useState(false);
+	const [successfulPost, setSuccessfulPost] = useState(false);
+
+	const postAd = async (newAdP) => {
+		try {
+			const res = await axios.post("http://localhost:5000/ads/v1/post-ad", newAdP);
+			console.log(res.status);
+			setSuccessfulPost(true);
+		} catch (error) {
+			console.error(error);
+			setError(true);
+		}
+	};
 
 	const handleChange = (e) => {
 		const {name, value} = e.target;
@@ -36,6 +54,8 @@ const CreateNewAd = () => {
 		e.preventDefault();
 		setSubmittedData(JSON.stringify(form, 0, 2));
 		setForm(emptyForm);
+		postAd(JSON.stringify(form, 0, 2));
+		console.log(JSON.stringify(form, 0, 2));
 	};
 
 	const inputComponentData = [
@@ -66,7 +86,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "Habitaciones",
-			name: "rooms",
+			name: "n_roms",
 			icon: faBed,
 			inputClassName: "styleInputCreateNewAd",
 		},
@@ -81,7 +101,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "M\u00B2",
-			name: "squareM",
+			name: "square_meters",
 			required: true,
 			icon: faHome,
 			inputClassName: "styleInputCreateNewAd",
@@ -89,7 +109,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "Baños",
-			name: "bathrooms",
+			name: "n_bathrooms",
 			icon: faBath,
 			inputClassName: "styleInputCreateNewAd",
 		},
@@ -97,6 +117,19 @@ const CreateNewAd = () => {
 
 	return (
 		<>
+			{" "}
+			{error && (
+				<Notification
+					message={"Ha habido un error. Vuelve ha intentar ahora o mas tarde"}
+					isSuccess={false}
+				/>
+			)}
+			{successfulPost && (
+				<Notification
+					message={`Tu anuncio ha sido publicado con exito.`}
+					isSuccess={true}
+				/>
+			)}
 			<Body
 				title="Publicar anuncio"
 				justifyTitle="flex-start"

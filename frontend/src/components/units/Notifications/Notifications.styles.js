@@ -16,7 +16,7 @@ export const Form = styled.form`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2rem;
+	padding: 2.19rem;
 
 	& > .classInput {
 		margin-bottom: 1.69rem;
@@ -25,21 +25,6 @@ export const Form = styled.form`
 		& > label {
 			display: inline-block;
 			margin-bottom: 5px;
-		}
-	}
-`;
-
-export const ChangePassword = styled.div`
-	display: inline-block;
-	padding: 0 0 0.5rem 0;
-`;
-export const Label = styled.label`
-	display: inline-block;
-	& > a {
-		color: ${Colors.redColor};
-		text-decoration: none;
-		&:hover {
-			color: blue;
 		}
 	}
 `;
@@ -57,19 +42,22 @@ export const StyleRedirect = styled.div`
 
 	& > a {
 		text-decoration: none;
-		color: #7d868b;
+		color: ${Colors.darkOrange};
 		margin: 0 0 0 0.2rem;
 	}
+
 	& > a:hover {
-		color: blue;
+		color: ${Colors.darkBlue};
 	}
 `;
 export const StyleNotificationSuccess = styled.div`
-	display: flex;
-	align-items: center;
-	float: right;
+	display: inline-flex;
+	padding-top: 14px;
+	padding-left: 11px;
+	position: absolute;
+	z-index: 0;
 	margin-top: 32px;
-	margin-right: 32px;
+	margin-left: 938px;
 	width: 307px;
 	height: 61px;
 	background: #317126 0% 0% no-repeat padding-box;
@@ -79,20 +67,29 @@ export const StyleNotificationSuccess = styled.div`
 	padding-left: 8px;
 `;
 
-export const StyleNotificationError = styled.div`
-	display: flex;
-	align-items: center;
-	float: right;
-	margin-top: 32px;
-	margin-right: 100px;
-	width: 307px;
-	height: 61px;
-	background: #bc3434 0% 0% no-repeat padding-box;
-	box-shadow: 0px 3px 6px #00000086;
+//responsive with tw
+export const StyledNotificationContainer = styled.div.attrs({
+	className: "flex justify-center w-full md:justify-end",
+})``;
+
+//responsive with tw
+export const StyleNotificationError = styled.div.attrs({
+	className: "absolute flex flex-row justify-center items-center h-16 py-0 px-1 z-10 mr-0",
+})`
+	width: min(17rem);
 	border-radius: 6px;
-	opacity: 1;
-	padding-left: 8px;
+	background: #bc3434;
+	margin-top: 6.5rem;
+	margin-left: 1rem;
+	@media (min-width: 768px) {
+		margin-top: 1rem;
+		margin-right: min(2%);
+	}
+	@media (min-width: 931px) {
+		margin-right: min(10%);
+	}
 `;
+
 export const StyleNotificationMessage = styled.div`
 	color: white;
 	font: Helvetica-neue;
