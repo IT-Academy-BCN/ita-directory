@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
@@ -15,11 +15,11 @@ import CustomMap from "components/composed/Map/CustomMap";
 
 const CreateNewAd = () => {
 	const emptyForm = {
-		user_id: "2",
+		user_id: 1,
 		title: "",
 		description: "",
 		city: "",
-		n_roms: "",
+		n_rooms: "",
 		price: "",
 		square_meters: "",
 		n_bathrooms: "",
@@ -31,19 +31,26 @@ const CreateNewAd = () => {
 	const [error, setError] = useState(false);
 	const [successfulPost, setSuccessfulPost] = useState(false);
 
-	const postAd = async (newAdP) => {
+	const postAd = async (formInfo) => {
 		try {
-			const res = await axios.post("http://localhost:5000/ads/v1/post-ad", newAdP);
-			console.log(res.status);
-			setSuccessfulPost(true);
-		} catch (error) {
-			console.error(error);
-			setError(true);
+			const res = await axios({
+				method: "post",
+				url: "http://localhost:5000/ads/v1/post-ad",
+				data: formInfo,
+			});
+			await console.log(res);
+			await setSuccessfulPost((prev) => true);
+		} catch (err) {
+			console.log(err);
+			setError((prev) => true);
 		}
 	};
 
 	const handleChange = (e) => {
-		const {name, value} = e.target;
+		let {name, value} = e.target;
+		if (Number(value)) {
+			value = Number(value);
+		}
 		setForm({
 			...form,
 			[name]: value,
@@ -52,10 +59,13 @@ const CreateNewAd = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(JSON.stringify(form));
+		postAd(form);
 		setSubmittedData(JSON.stringify(form, 0, 2));
+		//variables reset
 		setForm(emptyForm);
-		postAd(JSON.stringify(form, 0, 2));
-		console.log(JSON.stringify(form, 0, 2));
+		setError((prev) => false);
+		setSuccessfulPost((prev) => false);
 	};
 
 	const inputComponentData = [
@@ -86,7 +96,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "Habitaciones",
-			name: "n_roms",
+			name: "n_rooms",
 			icon: faBed,
 			inputClassName: "styleInputCreateNewAd",
 		},
