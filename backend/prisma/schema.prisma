@@ -29,8 +29,8 @@ model user_status {
 
 model user {
   id               Int                @id @default(autoincrement())
-  name             String?            
-  lastnames        String?            
+  name             String?
+  lastnames        String?
   email            String             @unique
   password         String
   created_at       DateTime           @default(now())
@@ -63,12 +63,34 @@ model recover_password {
 }
 
 model media {
-  id        Int    @id @default(autoincrement())
-  path      String
-  mime_type String
-  file_size String
-  user      user   @relation(fields: [user_id], references: [id])
-  user_id   Int
+  id         Int          @id @default(autoincrement())
+  path       String
+  mime_type  String
+  file_size  String
+  user       user         @relation(fields: [user_id], references: [id])
+  user_id    Int
+  media_meta media_meta[]
+}
+
+model media_meta {
+  id            Int        @id @default(autoincrement())
+  path          String
+  mime_type     String
+  file_size     String
+  media         media      @relation(fields: [media_id], references: [id])
+  media_id      Int
+  media_type    media_type @relation(fields: [media_type_id], references: [id])
+  media_type_id Int
+}
+
+model media_type {
+  id         Int          @id @default(autoincrement())
+  name       String
+  thumnail   Int
+  medium     Int
+  large      Int
+  original   Int
+  media_meta media_meta[]
 }
 
 // TODO: Figure out the user - conversation - message schemas in prisma.
