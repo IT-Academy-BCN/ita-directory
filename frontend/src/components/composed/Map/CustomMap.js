@@ -21,14 +21,13 @@ const Marcador = ({setCoordinates, setMarkers, currentIcon}) => {
 			setMarkers([lat, lng]);
 			setCoordinates((prev) => [lat, lng]);
 			map.panTo(e.latlng);
-			console.log("hey I'm printing coords" + JSON.stringify([lat, lng])); //@todo - delete
-			localStorage.setItem("coords", JSON.stringify([lat, lng])); //@todo -delete
 		},
 	});
 	return null;
 };
 
 const CustomMap = ({setCoordinates}) => {
+	//@todo - update props in other components that use CustomMap to include setCoordinates
 	const [markers, setMarkers] = useState([41.3879, 2.16992]);
 	const [iconSelection, setIconSelection] = useState(false);
 	const [iconState, setIconState] = useState(customIcons[1].url);

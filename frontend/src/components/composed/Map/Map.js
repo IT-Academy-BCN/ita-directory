@@ -15,19 +15,6 @@ L.Icon.Default.mergeOptions({
 function Map({lat = 41.3879, lng = 2.16992}) {
 	const marker = {lat, lng};
 
-	//new changes made
-	//@todo -> consult https://leafletjs.com/reference-0.7.7.html#events docs to obtain altitude and latitude values
-	const [coords, setCoords] = useState[{lat: 0, lng: 0}];
-	const generateCoords = (marker) => {
-		setCoords({lat: marker.lat, lng: marker.lng});
-		console.log(marker);
-		localStorage.setItem("marker", JSON.stringify(marker));
-	};
-	useEffect(() => {
-		console.log(coords);
-		localStorage.setItem("marker", JSON.stringify(coords));
-	}, [coords]);
-
 	return (
 		<div className="Map">
 			<MapContainer className="Map-container" center={marker} zoom={17}>
@@ -36,10 +23,7 @@ function Map({lat = 41.3879, lng = 2.16992}) {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
-				<Marker
-					position={[marker.lat, marker.lng]}
-					onClick={() => generateCoords(marker)}
-				></Marker>
+				<Marker position={[marker.lat, marker.lng]}></Marker>
 			</MapContainer>
 		</div>
 	);
