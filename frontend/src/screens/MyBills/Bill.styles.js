@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import tw, {theme} from "twin.macro";
+import tw from "twin.macro";
 import Colors from "theme/Colors";
 
 export const Error = styled.div`
@@ -35,7 +35,7 @@ export const BillStyled = styled.div.attrs({
 	@media (min-width: 768px) {
 		transform: scale(1);
 	}
-	
+
 	.bold,
 	h3,
 	h4,
@@ -70,7 +70,7 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 	div {
 		${tw`w-full p-0`}
 	}
-  h2 {
+	h2 {
 		font-weight: bold;
 	}
 	p {
@@ -236,7 +236,7 @@ export const SignatureStyled = styled.div.attrs({
 		${tw`font-bold m-0`}
 		white-space: nowrap;
 	}
-`;
+
 	h4 {
 		${tw`text-sm`}
 		font-weight: lighter !important;

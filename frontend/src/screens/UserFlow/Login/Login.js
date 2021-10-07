@@ -3,29 +3,10 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
-import {
-	ChangePassword,
-	Container,
-	Form,
-	Label,
-	StyleRedirect,
-	StyledError,
-	StyleNotificationSuccess,
-	StyleNotificationMessage,
-	StyleNotificationError,
-} from "./Login.styles";
+import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
-import {
-	faCheckCircle,
-	faExclamationCircle,
-	faGlassMartiniAlt,
-} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-
-import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
-import NotificationsError from "components/units/Notifications/Notification";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -94,24 +75,13 @@ const Login = ({onLogin}) => {
 	return (
 		<>
 			{error ? (
-				<NotificationsError
-					messageError={
-						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
-					}
-				/>
+				<></> // @todo: update
 			) : null}
 
 			{validacionLogin === 200 ? (
-				<NotificationsSuccess
-					email={email}
-					messageSuccess={":bienvenido de nuevo.Te estamos redireccionando."}
-				/>
+				<></> // @todo: update
 			) : null}
-			<NotificationsError
-				messageError={
-					"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
-				}
-			/>
+
 			<Body title="Acceso" isLoggedIn={false} centerTitle>
 				<Container>
 					<Form onSubmit={handleSubmit}>
