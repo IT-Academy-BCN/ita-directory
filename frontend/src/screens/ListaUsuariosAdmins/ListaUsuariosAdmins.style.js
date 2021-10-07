@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "theme/Colors";
 
 export const StyledTableWrapper = styled.div`
 	display: flex;
@@ -8,8 +9,8 @@ export const StyledTableWrapper = styled.div`
 	font: normal normal normal 14px/18px Arial;
 	width: 100%;
 	border-radius: 10px;
-	border: 0px 1px 1px 1px solid #b0b0b0;
-	box-shadow: 1px 4px 8px 0 rgba(0, 0, 0, 0.2), 1px 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border: 0px 1px 1px 1px solid ${Colors.maroon};
+	box-shadow: 1px 4px 8px 0 ${Colors.shadow}, 1px 6px 20px 0 ${Colors.lighterShadow};
 	flex-wrap: nowrap;
 	padding: 0.5rem 1.8rem;
 
@@ -55,9 +56,6 @@ export const StyledCell = styled.div`
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
 
-	@media only screen and (max-width: 650px) {
-		font-size: 14px;
-	}
 	@media only screen and (max-width: 450px) {
 		font-size: 14px;
 	}
