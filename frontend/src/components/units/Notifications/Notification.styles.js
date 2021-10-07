@@ -1,46 +1,22 @@
 import styled from "styled-components";
 
-// @todo: Modify to implement tailwind and add mobile first responsive
+// @todo: Modify to implement tailwind
 export const NotificationStyled = styled.div`
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	z-index: 990000;
-	@media (min-width: 767px) {
-		justify-content: flex-end;
-	}
-	div {
-		position: fixed;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding: 0rem 1rem 0rem 1rem;
-		width: min(17rem);
-		height: 4rem;
-		border-radius: 6px;
-		background-color: ${(props) => (props.isSuccess ? "#317126" : "#bc3434")};
-		z-index: 70000;
-		margin-top: 1rem;
-		margin-right: min(10%);
+	display: inline-flex;
+	padding-top: 14px;
+	padding-left: 11px;
+	position: absolute;
+	z-index: 0;
+	margin-top: 32px;
+	margin-left: 938px;
+	width: 307px;
+	height: 61px;
+	background: #317126 0% 0% no-repeat padding-box;
+	box-shadow: 0px 3px 6px #00000086;
+	border-radius: 6px;
+	opacity: 1;
+	padding-left: 8px;
 
-		/*
-		margin-top: 6.5rem;
-		margin-right: 0;
-		
-		@media (min-width: 768px) {
-			margin-top: 1rem;
-			margin-right: min(2%);
-		}
-		@media (min-width: 931px) {
-			margin-right: min(10%);
-		}
-
-		*/
-		p {
-			color: white;
-			line-height: 1.2;
-			padding-left: 15px;
-		}
+	.notification--message {
 	}
 `;
