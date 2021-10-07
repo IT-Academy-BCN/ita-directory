@@ -194,9 +194,9 @@ const ListaUsuariosAdmins = () => {
 	return (
 		<Body
 			title="Usuarios registrados"
-			color_logo={Colors.bahamaBlue}
-			color_header={Colors.bahamaBlue}
-			color_letra={Colors.white}
+			logoColor={Colors.bahamaBlue}
+			headerColor={Colors.bahamaBlue}
+			fontColor={Colors.white}
 			justifyTitle="flex-start"
 			paddingTitle="0px"
 			paddingTitle2="73px"

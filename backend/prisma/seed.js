@@ -196,6 +196,7 @@ const ads = [
 		n_bathrooms: 1,
 		map_lat: 51.499927,
 		map_lon: -0.118429,
+
 	},
 ];
 
@@ -235,11 +236,11 @@ async function main() {
 		});
 	}
 
+
 	for (let i = 0; i < ads.length; i++) {
 		const ad = ads[i];
 		await prisma.ads.upsert({
 			where: {id: ad.id},
-			
 			update: {},
 			create: {
 				...ad,
@@ -247,6 +248,7 @@ async function main() {
 			
 		});
 	}
+
 }
 
 main()

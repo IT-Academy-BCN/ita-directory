@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 
 // Routes
 // app.use("/", constantsRoute);
- app.use("/ads", adsRoutes);
+app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 
 // app.get("/get-token", UsersController.getToken);
