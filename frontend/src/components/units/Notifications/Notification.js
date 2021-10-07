@@ -8,7 +8,7 @@ const Notification = ({message, isSuccess}) => {
 		<NotificationStyled className={isSuccess ? "success" : "error"}>
 			<FontAwesomeIcon
 				icon={isSuccess ? faCheckCircle : faExclamationCircle}
-				style={{color: "white", width: "30px", height: "30px"}}
+				style={{color: "grey", width: "30px", height: "30px"}}
 			/>
 			<p className="notification--message">{message}</p>
 		</NotificationStyled>
