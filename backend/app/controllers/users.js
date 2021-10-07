@@ -109,7 +109,19 @@ exports.getUser = async (req, res, next) => {
 
 //User signup
 exports.registerUser = async (req, res, next) => {
+	const password = req.body.password;
+	const regex = /^(?=.*?[A-Z]).{6,}$/;
+
 	try {
+		if (password.match(regex) === null) {
+			return next({
+				code: "error",
+				header: "Invalid password",
+				message: "This password does not meet the requirements.",
+				statusCode: 400,
+			});
+		}
+
 		//Checking if valid email, password and privacy policy.
 
 		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});

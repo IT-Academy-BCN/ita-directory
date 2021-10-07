@@ -51,7 +51,7 @@ const users = [
 		email: "test@test.test",
 		user_status_id: 1,
 		user_role_id: 3,
-		password: "test",
+		password: "Test-test",
 		refresh_token: "20"
 	},
 ];
