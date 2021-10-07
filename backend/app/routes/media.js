@@ -27,7 +27,7 @@ const MediaControllers = require("../controllers/media.js");
 router.post("/v1/uploadMedia", MediaControllers.uploadMedia);
 
 /**
- * POST /media/v1/deleteMedia
+ * DELETE /media/v1/deleteMedia
  * @summary Allows delete media file
  * @tags Media
  * @param {mediaUploadData} request.body.required - The payload looks like this:
