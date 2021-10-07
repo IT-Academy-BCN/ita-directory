@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {InputStyled, StyledError, StyledInput, StyledIconInput} from "./Input.styles";
+import {InputStyled, StyledError, StyledInput} from "./Input.styles";
 
 const Input = ({
 	type,
@@ -33,7 +33,7 @@ const Input = ({
 
 	return (
 		<InputStyled>
-			<StyledIconInput>
+			<div>
 				{hasIcon && <FontAwesomeIcon icon={icon} />}
 				<StyledInput
 					type={type}
@@ -53,7 +53,7 @@ const Input = ({
 					required={required}
 					style={inputStyles}
 				/>
-			</StyledIconInput>
+			</div>
 			<StyledError
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				// className={className}
