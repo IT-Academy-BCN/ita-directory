@@ -1,25 +1,37 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const InputStyled = styled.div`
-	&.createNewAd {
-		display: flex;
-		@media screen and (max-width: 600px) {
-			flex-direction: column;
-		}
-		margin-bottom: 15px;
-	}
+export const InputStyled = styled.div.attrs({
+	className: "my-4 w-full ",
+})``;
 
-	label {
-		padding: 3px 45px 0 0;
-		color: #999999;
-	}
+export const StyledInput = styled.input.attrs({
+	className: `w-full my-4 focus:border-2 focus:border-red-500`,
+})``;
 
-	.inputsContainer {
-		display: flex;
-		flex-direction: column;
-	}
-`;
+export const StyledError = styled.small.attrs({
+	className: `text-red-600`,
+})``;
+
+// export const InputStyled = styled.div`
+// 	&.createNewAd {
+// 		display: flex;
+// 		@media screen and (max-width: 600px) {
+// 			flex-direction: column;
+// 		}
+// 		margin-bottom: 15px;
+// 	}
+
+// 	label {
+// 		padding: 3px 45px 0 0;
+// 		color: #999999;
+// 	}
+
+// 	.inputsContainer {
+// 		display: flex;
+// 		flex-direction: column;
+// 	}
+// `;
 
 export const StyledIconInput = styled.div`
 	display: flex;
@@ -50,37 +62,37 @@ export const StyledIconInput = styled.div`
 	}
 `;
 
-export const StyledInput = styled.input`
-	/* width: 18.6rem; */
-	border: none;
-	display: flex;
-	font: normal normal normal 16px/32px Helvetica Neue;
-	font-size: 14px;
-	color: #393939;
-	padding: 0.75rem;
-	max-height: 80%;
-	::-webkit-outer-spin-button,
-	::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	&:focus-within {
-		outline: 0 none;
-		border: none;
-	}
-	&.error {
-		color: ${Colors.redColor};
-		border: none;
-		outline: 0 none;
-	}
-`;
+// export const StyledInput = styled.input`
+// 	/* width: 18.6rem; */
+// 	border: none;
+// 	display: flex;
+// 	font: normal normal normal 16px/32px Helvetica Neue;
+// 	font-size: 14px;
+// 	color: #393939;
+// 	padding: 0.75rem;
+// 	max-height: 80%;
+// 	::-webkit-outer-spin-button,
+// 	::-webkit-inner-spin-button {
+// 		-webkit-appearance: none;
+// 		margin: 0;
+// 	}
+// 	&:focus-within {
+// 		outline: 0 none;
+// 		border: none;
+// 	}
+// 	&.error {
+// 		color: ${Colors.redColor};
+// 		border: none;
+// 		outline: 0 none;
+// 	}
+// `;
 
-export const StyledError = styled.small`
-	color: #e74c3c;
-	position: absolute;
-	left: 0;
-	visibility: visible;
-	&.errorProfile {
-		position: static;
-	}
-`;
+// export const StyledError = styled.small`
+// 	color: #e74c3c;
+// 	position: absolute;
+// 	left: 0;
+// 	visibility: visible;
+// 	&.errorProfile {
+// 		position: static;
+// 	}
+// `;

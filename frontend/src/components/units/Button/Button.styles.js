@@ -2,12 +2,15 @@ import styled from "styled-components";
 import tw, {theme} from "twin.macro";
 
 const StyledButton = styled.button.attrs({
-	className: "font-bold text-white py-2 px-4 rounded my-2 shadow bg-lightBlue",
+	className: "font-bold text-white py-2 px-6 rounded my-2 shadow bg-lightBlue",
 })`
 	box-shadow: ${theme`boxShadow.button-shadow`};
 
 	&.blueGradient {
-		${tw`font-thin text-xs text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
+		${tw`font-thin text-xs  text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
+	}
+	&.blueGradientFullWidth {
+		${tw`font-thin text-xs w-full text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
 	}
 	&.orangeGradient {
 		${tw`text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90`}

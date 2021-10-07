@@ -18,15 +18,15 @@ export const Form = styled.form`
 	align-items: center;
 	padding: 2rem;
 
-	& > .classInput {
-		margin-bottom: 1.69rem;
-		position: relative;
+	// & > .classInput {
+	// 	margin-bottom: 1.69rem;
+	// 	position: relative;
 
-		& > label {
-			display: inline-block;
-			margin-bottom: 5px;
-		}
-	}
+	// 	& > label {
+	// 		display: inline-block;
+	// 		margin-bottom: 5px;
+	// 	}
+	// }
 `;
 
 export const ChangePassword = styled.div`

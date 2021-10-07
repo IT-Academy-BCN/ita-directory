@@ -2,9 +2,10 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
-import AsyncButton from "components/units/Button/Button";
+// import AsyncButton from "components/units/Button/Button";
 import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
+import Button from "components/units/Button/Button";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -81,37 +82,34 @@ const Login = ({onLogin}) => {
 		<Body title="Acceso" isLoggedIn={false} centerTitle>
 			<Container>
 				<Form onSubmit={handleSubmit}>
-					<div className="classInput">
-						{/* <label>Email</label> */}
-						<Input
-							type="email"
-							placeholder="Introduce tu email"
-							value={email}
-							onChange={(e) => handleEmailChange(e.target.value)}
-							id="emailName"
-							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address..."
-							disabled={disabled}
-							label={"Email"}
-						/>
-					</div>
-					<div className="classInput">
-						{/* <label>Password</label> */}
-						<Input
-							type="password"
-							placeholder="Introduce tu contraseña"
-							value={password}
-							onChange={(e) => handlePasswordChange(e.target.value)}
-							id="passName"
-							name="passName"
-							error={isPassError}
-							errorText="The password to contain more than 6 characters and a uppercase letter"
-							disabled={disabled}
-							minLength={6}
-							label={"Password"}
-						/>
-					</div>
+					{/* <label>Email</label> */}
+					<Input
+						type="email"
+						placeholder="Introduce tu email"
+						value={email}
+						onChange={(e) => handleEmailChange(e.target.value)}
+						id="emailName"
+						name="emailName"
+						error={isEmailError}
+						errorText="Enter a valid email address..."
+						disabled={disabled}
+						label={"Email"}
+					/>
+
+					{/* <label>Password</label> */}
+					<Input
+						type="password"
+						placeholder="Introduce tu contraseña"
+						value={password}
+						onChange={(e) => handlePasswordChange(e.target.value)}
+						id="passName"
+						name="passName"
+						error={isPassError}
+						errorText="The password to contain more than 6 characters and a uppercase letter"
+						disabled={disabled}
+						minLength={6}
+						label={"Password"}
+					/>
 					<ChangePassword>
 						<Label htmlFor="forgotpassword">
 							<Link to="/recover-password/:hash">Has olvidado tu contraseña?</Link>
@@ -122,12 +120,12 @@ const Login = ({onLogin}) => {
 							<p>{error}</p>
 						</StyledError>
 					)}
-					<AsyncButton
+					<Button
+						className="blueGradientFullWidth"
 						text="Acceder"
 						loadingText="Accediendo"
 						iconPosition="left"
 						type="submit"
-						className="blueGradient mt-4"
 						isLoading={isLoading}
 						animated="yes"
 						disabled={disabled}

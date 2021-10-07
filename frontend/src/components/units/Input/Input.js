@@ -32,42 +32,33 @@ const Input = ({
 	const hasIcon = icon ? true : false;
 
 	return (
-		<InputStyled className={inputContainerClassName}>
-			<label htmlFor={id} style={labelStyles}>
-				{label}
-			</label>
-			<div className="inputsContainer">
-				<StyledIconInput className={inputContainerClassName}>
-					{hasIcon && (
-						<div className="styledIcon">
-							<FontAwesomeIcon icon={icon} />
-						</div>
-					)}
-					<StyledInput
-						type={type}
-						placeholder={placeholder}
-						value={value}
-						onChange={onChange}
-						onFocus={onFocus}
-						onBlur={onBlur}
-						className={`${className} ${error ? "error" : ""}`}
-						id={id}
-						name={name}
-						disabled={disabled}
-						minLength={minlength}
-						maxLength={maxlength}
-						size={size}
-						success={success}
-						required={required}
-						style={inputStyles}
-					/>
-				</StyledIconInput>
-				<StyledError
-					dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-					className={className}
-					styles={errorStyles}
+		<InputStyled>
+			<StyledIconInput>
+				{hasIcon && <FontAwesomeIcon icon={icon} />}
+				<StyledInput
+					type={type}
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					className={`${className} ${error ? "error" : ""}`}
+					id={id}
+					name={name}
+					disabled={disabled}
+					minLength={minlength}
+					maxLength={maxlength}
+					size={size}
+					success={success}
+					required={required}
+					style={inputStyles}
 				/>
-			</div>
+			</StyledIconInput>
+			<StyledError
+				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
+				// className={className}
+				styles={errorStyles}
+			/>
 		</InputStyled>
 	);
 };
