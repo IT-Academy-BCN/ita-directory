@@ -1,10 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
+import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
 import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
+import axios from "axios";
+import Notification from "components/units/Notifications/Notification";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -14,34 +16,27 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
-const users = [
-	{
-		email: "juan@mail.com",
-		password: "Juan1992",
-	},
-];
-
-const authenticateUser = (email, password) => {
-	let authenticated = false;
-	for (let i = 0; i < users.length; i++) {
-		const user = users[i];
-		if (user.email === email && user.password === password) {
-			authenticated = true;
-			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
-		}
-	}
-	if (authenticated) console.log("the user is correct");
-	else console.error("the user is incorrect");
-};
-
 const Login = ({onLogin}) => {
-	const [error, setError] = useState("");
-	const [animatedState, setAnimatedState] = useState(false);
+	const [error, setError] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [isEmailError, setIsEmailError] = useState(false);
 	const [isPassError, setIsPassError] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [validacionLogin, setValidacionLogin] = useState();
+
+	const loginUser = async (user) => {
+		try {
+			const response = await axios.post("http://localhost:5000/users/v1/login", user);
+			console.log(response.status);
+			setValidacionLogin(true);
+		} catch (error) {
+			// Handle Error Here
+			console.error(error);
+			setError(true);
+		}
+	};
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
@@ -55,89 +50,108 @@ const Login = ({onLogin}) => {
 		setIsPassError(!isPass);
 	};
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setAnimatedState(true);
 		setIsDisabled(true);
 		setIsLoading(true);
 		setTimeout(() => {
-			setAnimatedState(false);
 			setIsDisabled(false);
 			setIsLoading(false);
-		}, 2000);
-
-		try {
-			authenticateUser(email, password, (error, token) => {
-				if (error) return setError(error.message);
-				onLogin(token);
+			loginUser({
+				email,
+				password,
+				privacy: true,
 			});
-		} catch ({message}) {
-			setError(message);
-		}
+			setTimeout(() => {
+				setIsDisabled(false);
+				setIsLoading(false);
+			}, 2000);
+		});
 	};
 	return (
-		<Body title="Acceso" isLoggedIn={false} centerTitle>
-			<Container>
-				<Form onSubmit={handleSubmit}>
-					<div className="classInput">
-						{/* <label>Email</label> */}
-						<Input
-							type="email"
-							placeholder="Introduce tu email"
-							value={email}
-							onChange={(e) => handleEmailChange(e.target.value)}
-							id="emailName"
-							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address..."
+		<>
+			{error ? (
+				<Notification
+					message={
+						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
+					}
+					isSuccess={false}
+				/>
+			) : null}
+
+			{validacionLogin ? (
+				<Notification
+					email={email}
+					message={":bienvenido de nuevo.Te estamos redireccionando."}
+					isSuccess={true}
+				/>
+			) : null}
+			<Notification
+				message={"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."}
+			/>
+			<Body title="Acceso" isLoggedIn={false} centerTitle>
+				<Container>
+					<Form onSubmit={handleSubmit}>
+						<div className="classInput">
+							{/* <label>Email</label> */}
+							<Input
+								type="email"
+								placeholder="Introduce tu email"
+								value={email}
+								onChange={(e) => handleEmailChange(e.target.value)}
+								id="emailName"
+								name="emailName"
+								error={isEmailError}
+								errorText="Enter a valid email address..."
+								disabled={disabled}
+								label={"Email"}
+							/>
+						</div>
+						<div className="classInput">
+							{/* <label>Password</label> */}
+							<Input
+								type="password"
+								placeholder="Introduce tu contraseña"
+								value={password}
+								onChange={(e) => handlePasswordChange(e.target.value)}
+								id="passName"
+								name="passName"
+								error={isPassError}
+								errorText="The password to contain more than 6 characters and a uppercase letter"
+								disabled={disabled}
+								minLength={6}
+								label={"Password"}
+							/>
+						</div>
+						<ChangePassword>
+							<Label htmlFor="forgotpassword">
+								<Link to="/recover-password/:hash">
+									Has olvidado tu contraseña?
+								</Link>
+							</Label>
+						</ChangePassword>
+						{error && (
+							<StyledError>
+								<p>{error}</p>
+							</StyledError>
+						)}
+						<AsyncButton
+							text="Acceder"
+							loadingText="Accediendo"
+							iconPosition="left"
+							type="submit"
+							className="blueGradient mt-4"
+							isLoading={isLoading}
+							animated="yes"
 							disabled={disabled}
-							label={"Email"}
 						/>
-					</div>
-					<div className="classInput">
-						{/* <label>Password</label> */}
-						<Input
-							type="password"
-							placeholder="Introduce tu contraseña"
-							value={password}
-							onChange={(e) => handlePasswordChange(e.target.value)}
-							id="passName"
-							name="passName"
-							error={isPassError}
-							errorText="The password to contain more than 6 characters and a uppercase letter"
-							disabled={disabled}
-							minLength={6}
-							label={"Password"}
-						/>
-					</div>
-					<ChangePassword>
-						<Label htmlFor="forgotpassword">
-							<Link to="/recover-password/:hash">Has olvidado tu contraseña?</Link>
-						</Label>
-					</ChangePassword>
-					{error && (
-						<StyledError>
-							<p>{error}</p>
-						</StyledError>
-					)}
-					<AsyncButton
-						text="Acceder"
-						loadingText="Accediendo"
-						iconPosition="left"
-						type="submit"
-						className="blueGradient mt-4"
-						isLoading={isLoading}
-						animated="yes"
-						disabled={disabled}
-					/>
-					<StyleRedirect>
-						No tienes cuenta? <Link to="/register"> Registrate</Link>
-					</StyleRedirect>
-				</Form>
-			</Container>
-		</Body>
+						<StyleRedirect>
+							No tienes cuenta? <Link to="/register"> Registrate</Link>
+						</StyleRedirect>
+					</Form>
+				</Container>
+			</Body>
+		</>
 	);
 };
 
