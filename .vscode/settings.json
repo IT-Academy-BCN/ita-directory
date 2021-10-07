@@ -1,13 +1,13 @@
 {
+  "editor.formatOnSave": true,
+  "[json]": {
     "editor.formatOnSave": true,
-    "[json]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
-  
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.workingDirectories": ["frontend", "backend"],
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false
 }
