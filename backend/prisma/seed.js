@@ -52,14 +52,14 @@ const users = [
 		user_status_id: 1,
 		user_role_id: 3,
 		password: "Test-test",
-		refresh_token: "20"
+		refresh_token: "20",
 	},
 ];
 
 const ads = [
 	{
 		id: 1,
-		
+
 		user_id: 1,
 		title: "ad1",
 		description: "ad house 1",
@@ -73,7 +73,7 @@ const ads = [
 	},
 	{
 		id: 2,
-		
+
 		user_id: 1,
 		title: "ad2",
 		description: "ad house 2",
@@ -87,7 +87,7 @@ const ads = [
 	},
 	{
 		id: 3,
-		
+
 		user_id: 1,
 		title: "ad3",
 		description: "ad house 3",
@@ -101,7 +101,7 @@ const ads = [
 	},
 	{
 		id: 4,
-		
+
 		user_id: 1,
 		title: "ad4",
 		description: "ad house 4",
@@ -115,7 +115,7 @@ const ads = [
 	},
 	{
 		id: 5,
-		
+
 		user_id: 1,
 		title: "ad5",
 		description: "ad house 5",
@@ -129,7 +129,7 @@ const ads = [
 	},
 	{
 		id: 6,
-		
+
 		user_id: 1,
 		title: "ad6",
 		description: "ad house 6",
@@ -143,7 +143,7 @@ const ads = [
 	},
 	{
 		id: 7,
-		
+
 		user_id: 1,
 		title: "ad7",
 		description: "ad house 7",
@@ -157,7 +157,7 @@ const ads = [
 	},
 	{
 		id: 8,
-		
+
 		user_id: 1,
 		title: "ad8",
 		description: "ad house 8",
@@ -171,7 +171,7 @@ const ads = [
 	},
 	{
 		id: 9,
-		
+
 		user_id: 1,
 		title: "ad9",
 		description: "ad house 9",
@@ -185,7 +185,7 @@ const ads = [
 	},
 	{
 		id: 10,
-		
+
 		user_id: 1,
 		title: "ad10",
 		description: "ad house 10",
@@ -196,7 +196,6 @@ const ads = [
 		n_bathrooms: 1,
 		map_lat: 51.499927,
 		map_lon: -0.118429,
-
 	},
 ];
 
@@ -244,11 +243,8 @@ async function main() {
 			create: {
 				...ad,
 			},
-			
 		});
 	}
-
-
 }
 
 main()
@@ -260,7 +256,6 @@ main()
 		console.log("disconnect Prisma");
 		await prisma.$disconnect();
 	});
-
 
 const hashPassword = async (password) => {
 	return await argon2.hash(password, {

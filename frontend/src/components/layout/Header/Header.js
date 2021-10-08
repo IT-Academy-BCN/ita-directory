@@ -8,14 +8,7 @@ import {Container} from "theme/GlobalStyles";
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 
-const Header = ({
-	isLoggedIn,
-	title,
-	logoColor,
-	headerColor,
-	fontColor,
-	justifyTitle = false,
-}) => {
+const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTitle = false}) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
@@ -70,4 +63,3 @@ const Header = ({
 };
 
 export default Header;
-

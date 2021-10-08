@@ -5,6 +5,7 @@ export const NotificationStyled = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	z-index: 990000;
 	@media (min-width: 767px) {
 		justify-content: flex-end;
 	}
@@ -19,7 +20,7 @@ export const NotificationStyled = styled.div`
 		height: 4rem;
 		border-radius: 6px;
 		background-color: ${(props) => (props.isSuccess ? "#317126" : "#bc3434")};
-		z-index: 10;
+		z-index: 70000;
 		margin-top: 1rem;
 		margin-right: min(10%);
 

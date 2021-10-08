@@ -316,7 +316,7 @@ exports.updateUser = async (req, res, next) => {
 			return next({
 				code: "error",
 				message: "User not found.",
-				statusCode: 204,
+				statusCode: 204, // @todo: 404 error no 204 si no existe
 			});
 		} else {
 			// return data
