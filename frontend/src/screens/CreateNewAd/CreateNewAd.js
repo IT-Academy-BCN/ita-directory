@@ -67,7 +67,7 @@ const CreateNewAd = () => {
 			map_lat: Number(coordinates[0]),
 			map_lon: Number(coordinates[1]),
 		});
-	}, [coordinates]);
+	}, [coordinates, form]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

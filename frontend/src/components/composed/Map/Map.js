@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import "leaflet/dist/leaflet.css";
 import {MapContainer, TileLayer, Marker} from "react-leaflet";
 import "./Map.css";
@@ -23,7 +23,7 @@ function Map({lat = 41.3879, lng = 2.16992}) {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
-				<Marker position={[marker.lat, marker.lng]}></Marker>
+				<Marker position={[marker.lat, marker.lng]} />
 			</MapContainer>
 		</div>
 	);
