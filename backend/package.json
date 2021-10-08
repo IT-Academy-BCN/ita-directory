@@ -37,6 +37,7 @@
     "redis": "^3.1.2",
     "sequelize": "^6.3.5",
     "sequelize-auto": "^0.8.3",
+    "slugify": "^1.6.1",
     "socket.io": "^4.1.2"
   },
   "devDependencies": {
