@@ -8,11 +8,6 @@ module.exports = {
 		boxShadow: {
 			"button-shadow": "0px 2px 4px #00000029",
 		},
-<<<<<<< HEAD
-		screens: {
-			sm: "640px",
-			// => @media (min-width: 640px) { ... }
-=======
 		fontSize: {
 			xs: ".75rem",
 			sm: ".875rem",
@@ -32,20 +27,6 @@ module.exports = {
 
 			sm: "640px",
 			// => @media (min-width: 640px) { ... }
-
-			md: "768px",
-			// => @media (min-width: 768px) { ... }
-
-			lg: "1024px",
-			// => @media (min-width: 1024px) { ... }
-
-			xl: "1280px",
-			// => @media (min-width: 1280px) { ... }
-
-			"2xl": "1536px",
-			// => @media (min-width: 1536px) { ... }
-		},
->>>>>>> a53b42c3a1cda9bb36d84c0d1ae11d8cec0ab635
 
 			md: "768px",
 			// => @media (min-width: 768px) { ... }

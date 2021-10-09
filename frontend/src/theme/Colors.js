@@ -6,7 +6,7 @@ const Colors = {
 	paleRed: "#FECACA",
 	redColor: "rgba(193, 12, 12, 1)",
 	transparentBlue: "#e6f2f2",
-	palerBlue:"#b5dddd",
+	palerBlue: "#b5dddd",
 	lightBlue: "#46C1F7",
 	darkBlue: "#0073E6",
 	frenchBlue: "#0077B3",
@@ -29,7 +29,7 @@ const Colors = {
 	maroon: "#b0b0b0",
 	darkerShadow: "rgba(0, 0, 0, 0.3)",
 	shadow: "rgba(0, 0, 0, 0.2)",
-	lighterShadow: "rgba(0, 0, 0, 0.19)"
+	lighterShadow: "rgba(0, 0, 0, 0.19)",
 };
 
 export default Colors;

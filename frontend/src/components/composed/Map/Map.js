@@ -14,6 +14,7 @@ L.Icon.Default.mergeOptions({
 
 function Map({lat = 41.3879, lng = 2.16992}) {
 	const marker = {lat, lng};
+
 	return (
 		<div className="Map">
 			<MapContainer className="Map-container" center={marker} zoom={17}>
@@ -22,7 +23,7 @@ function Map({lat = 41.3879, lng = 2.16992}) {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
-				<Marker position={[marker.lat, marker.lng]}></Marker>
+				<Marker position={[marker.lat, marker.lng]} />
 			</MapContainer>
 		</div>
 	);
