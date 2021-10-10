@@ -87,7 +87,7 @@ const Register = ({retrieveUser}) => {
 				/>
 			) : null}
 
-			<Body title="Registro">
+			<Body title="Registro" justifyTitle={"center"}>
 				<Container>
 					<Form onSubmit={handleSubmit}>
 						<div className="classInput">

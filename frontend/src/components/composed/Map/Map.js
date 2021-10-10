@@ -22,7 +22,6 @@ function Map({lat = 41.3879, lng = 2.16992}) {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-
 				<Marker position={[marker.lat, marker.lng]} />
 			</MapContainer>
 		</div>
