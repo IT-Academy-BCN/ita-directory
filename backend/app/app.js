@@ -7,6 +7,7 @@ const expressJSDocSwagger = require("express-jsdoc-swagger");
 const options = require("./utils/swaggerOptions");
 const userRoutes = require("./routes/users");
 const mediaRoutes = require("./routes/media");
+const multer = require ("./middleware/uploadFile");
 
 // const constantsRoute = require("./routes/constants");
  const adsRoutes = require("./routes/ads");
@@ -37,8 +38,6 @@ app.use(express.static("public"));
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({limit: "50mb", type: "application/json"}));
-
-
 
 
 // API
