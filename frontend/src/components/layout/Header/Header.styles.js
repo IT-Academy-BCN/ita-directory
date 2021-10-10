@@ -19,7 +19,7 @@ export const HeaderStyled = styled.header`
 		.logo {
 			display: flex;
 			align-items: center;
-			justify-content: center; //added
+			justify-content: ${(props) => (props.justifyTitle ? "center" : "left")};
 			width: 100%;
 			color: ${(props) => (props.logoColor ? props.logoColor : Colors.darkRed)};
 			font: normal normal normal 15px/15px Korb-Bold;
