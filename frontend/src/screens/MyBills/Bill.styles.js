@@ -101,10 +101,6 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 		}
 		justify-content: flex-end;
 
-		@media (min-width: 893px) {
-			${tw`px-8`}
-		}
-
 		@media (min-width: 1230px) {
 			${tw`pr-16 pl-24`}
 		}
@@ -191,11 +187,13 @@ export const TermsStyled = styled.section.attrs({
 		padding-left: 4rem;
 	}
 `;
-
+//xsm:mr-8
 export const PaySignStyled = styled.section.attrs({
 	className:
-		"flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end xsm:mr-8",
+		"flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
 })`
+	background-color: yellow;
+
 	div {
 		${tw`flex flex-col pb-8`}
 
@@ -239,7 +237,13 @@ export const SignatureStyled = styled.div.attrs({
 	className: "flex flex-col w-full pb-8 pl-8 xsm:justify-end xsm:text-center xsm:w-4/12",
 })`
 	margin-top: 1.8rem;
-
+	width: fit-content;
+	@media (min-width: 893px) {
+		padding-right: 2rem;
+	}
+	@media (min-width: 1230px) {
+		padding-right: 4rem;
+	}
 	p {
 		${tw`font-bold m-0`}
 		white-space: nowrap;
