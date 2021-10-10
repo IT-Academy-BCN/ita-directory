@@ -135,6 +135,7 @@ const Bill = (color_logo) => {
 						<tbody>
 							<tr>
 								<th>Sub Total</th>
+								<td></td>
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -150,6 +151,7 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Tax(5%)</th>
+								<td></td>
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -168,6 +170,7 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Discount(10%)</th>
+								<td></td>
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -188,7 +191,8 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th className="bg-lightGrey bold">GRAND TOTAL</th>
-								<td className="bg-lightGrey">
+								<td className="bg-lightGrey"></td>
+								<td className="bg-lightGrey items-center">
 									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {

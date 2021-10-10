@@ -143,22 +143,24 @@ export const CalcTableStyled = styled.table`
 	border-collapse: collapse;
 	${tw`w-1/2 ml-auto pt-1 pb-0 pr-0 md:w-full md:ml-0`}
 
+	//	${tw`items-center justify-center text-left font-normal pt-3 text-tiny`}
 	td,
 	th {
-		${tw`items-center justify-center text-left font-normal pt-3 text-tiny`}
-		padding-left: 27px;
+		${tw`flex items-center justify-center  font-normal text-tiny`}
+		//padding-left: 27px;
 		min-height: 47px;
 	}
 
 	tr {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		td {
-			padding: 0 20% 0 20%;
+			${tw`flex justify-center items-center flex-grow text-tiny`}
+			//padding: 0 20% 0 20%;
 			min-width: 50px;
-			${tw` flex justify-end`}
+			//${tw` flex justify-end`}
 			@media (min-width: 768px) {
-				padding: 0 40% 0 auto;
+				//padding: 0 40% 0 auto;
 			}
 		}
 	}
@@ -187,13 +189,11 @@ export const TermsStyled = styled.section.attrs({
 		padding-left: 4rem;
 	}
 `;
-//xsm:mr-8
+
 export const PaySignStyled = styled.section.attrs({
 	className:
 		"flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
 })`
-	background-color: yellow;
-
 	div {
 		${tw`flex flex-col pb-8`}
 
