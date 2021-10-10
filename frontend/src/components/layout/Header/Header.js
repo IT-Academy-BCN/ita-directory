@@ -17,6 +17,7 @@ const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTi
 
 	const justifyTitleB = justifyTitle === "center" ? true : false;
 
+	//
 	return (
 		<HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
 			<Container>
