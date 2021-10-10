@@ -76,10 +76,10 @@ const Bill = (color_logo) => {
 				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
-				Header: "Amount",
+				Header: <div className="lastColumn">{"Amount"}</div>,
 				accessor: "amount",
 				Cell: ({row}) => (
-					<div className={customRowStyle}>
+					<div className={`${customRowStyle} lastColumn1`}>
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
