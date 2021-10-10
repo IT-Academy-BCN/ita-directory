@@ -12,7 +12,6 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png",
 });
 
-//
 function Map({lat = 41.3879, lng = 2.16992}) {
 	const marker = {lat, lng};
 
