@@ -100,6 +100,14 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 			margin: 0;
 		}
 		justify-content: flex-end;
+
+		@media (min-width: 893px) {
+			${tw`px-8`}
+		}
+
+		@media (min-width: 1230px) {
+			${tw`pr-16 pl-24`}
+		}
 	}
 `;
 
