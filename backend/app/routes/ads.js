@@ -27,10 +27,10 @@ const router = require("express").Router();
  * @example request - Correct ad payload
  * { "user_id": "1", "title": "Apartment in Barcelona",
  * "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona",
- * "n_roms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}
+ * "n_rooms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}
  * @example response - 200 - Example success response
  * { "message": "Ad created successfully.", "data": { "user_id": "1", "title": "Apartment in Barcelona",
-  "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona", "n_roms": 4,
+  "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona", "n_rooms": 4,
   "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}}
   * @example request - Incorrect ad payload
   { "user_id": "1" }
@@ -52,7 +52,7 @@ router.post("/v1/post-ad", adsController.createAd);
 * @example request - Correct ad payload
  * { "user_id": "1", "title": "Apartment in Barcelona",
  * "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona",
- * "n_roms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}
+ * "n_rooms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}
  * @example response - 200 - Example success response
 * {"message": "Data fetched correctly.","data": [
     {"id": 1,"user_id": 1,"title": "asdf","description": "asf","city": "fff","n_rooms": 1,"price": 2,"square_meters": 3,"n_bathrooms": 4,"map_lat": 3.4,"map_lon": 3.6},

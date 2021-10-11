@@ -13,8 +13,7 @@ exports.uploadMedia = async (req, res) =>{
                     connect: {
                         id: parseInt(req.body.userId)
                     }
-                }
-                
+                }  
             }
         });
         res.status(200).json({

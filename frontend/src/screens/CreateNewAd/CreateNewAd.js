@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
@@ -7,55 +7,79 @@ import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-
-// Styles
 import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap";
 
 const CreateNewAd = () => {
 	const emptyForm = {
-		user_id: "2",
+		user_id: 1,
 		title: "",
 		description: "",
 		city: "",
-		n_roms: "",
+		n_rooms: "",
 		price: "",
 		square_meters: "",
 		n_bathrooms: "",
-		map_lat: 34.5,
-		map_lon: 23.4,
+		map_lat: 0,
+		map_lon: 0,
 	};
 	const [form, setForm] = useState(emptyForm);
-	const [submittedData, setSubmittedData] = useState("");
+	const [submittedData, setSubmittedData] = useState(""); //@todo -> remove -probably unecessary
 	const [error, setError] = useState(false);
 	const [successfulPost, setSuccessfulPost] = useState(false);
+	const [coordinates, setCoordinates] = useState([]);
 
-	const postAd = async (newAdP) => {
+	const postAd = async (formInfo) => {
 		try {
-			const res = await axios.post("http://localhost:5000/ads/v1/post-ad", newAdP);
-			console.log(res.status);
-			setSuccessfulPost(true);
-		} catch (error) {
-			console.error(error);
-			setError(true);
+			const res = await axios({
+				method: "post",
+				url: "http://localhost:5000/ads/v1/post-ad",
+				data: formInfo,
+			});
+			await console.log(res);
+			await setSuccessfulPost((prev) => true);
+			await setTimeout(() => setSuccessfulPost((prev) => false), 3000);
+		} catch (err) {
+			console.log(err);
+			setError((prev) => true);
+			setTimeout(() => setError((prev) => false), 3000);
 		}
 	};
 
 	const handleChange = (e) => {
-		const {name, value} = e.target;
+		let {name, value} = e.target;
+		if (Number(value)) {
+			value = Number(value);
+		}
 		setForm({
 			...form,
 			[name]: value,
+			map_lat: Number(coordinates[0]),
+			map_lon: Number(coordinates[1]),
 		});
 	};
+	//	,
+
+	useEffect(() => {
+		setForm({
+			...form,
+			map_lat: Number(coordinates[0]),
+			map_lon: Number(coordinates[1]),
+		});
+	}, [coordinates, form]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		console.log(JSON.stringify(form));
+		postAd(form);
 		setSubmittedData(JSON.stringify(form, 0, 2));
+		//variables reset
 		setForm(emptyForm);
-		postAd(JSON.stringify(form, 0, 2));
-		console.log(JSON.stringify(form, 0, 2));
+		setError((prev) => false);
+		setSuccessfulPost((prev) => false);
+		setTimeout(() => setSubmittedData(""), 5000);
 	};
 
 	const inputComponentData = [
@@ -86,7 +110,7 @@ const CreateNewAd = () => {
 		{
 			Component: InputNumber,
 			label: "Habitaciones",
-			name: "n_roms",
+			name: "n_rooms",
 			icon: faBed,
 			inputClassName: "styleInputCreateNewAd",
 		},
@@ -161,7 +185,7 @@ const CreateNewAd = () => {
 								Índica la dirección de la propiedad pinchando sobre el mapa.
 							</MapText>
 							<MapBox>
-								<CustomMap />
+								<CustomMap setCoordinates={setCoordinates} />
 							</MapBox>
 							<Button
 								buttonStyles={{
