@@ -39,7 +39,7 @@ const slugName = (fileName, destination) => {
 const checkDupliates = (fileName, destination) => {
 	var slugIsUnique = true;
 	var count = 1;
-	const slug;
+	let slug;
 
 	do {
 		if (fs.existsSync(destination + "/" + fileName)) {

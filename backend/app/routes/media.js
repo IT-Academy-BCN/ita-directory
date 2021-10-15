@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const MediaControllers = require("../controllers/media.js");
+const uploadFile = require("./../middleware/uploadFile");
+
 
 /**
  * Registration data
@@ -24,7 +26,7 @@ const MediaControllers = require("../controllers/media.js");
  * { "errCode":"errCode", "message":"Failed uploading media"}
  */
 
-router.post("/v1/uploadMedia", MediaControllers.uploadMedia);
+router.post("/v1/upload", uploadFile, MediaControllers.uploadMedia);
 
 /**
  * DELETE /media/v1/deleteMedia
@@ -41,7 +43,7 @@ router.post("/v1/uploadMedia", MediaControllers.uploadMedia);
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"Failed deleting file"}
  */
-router.delete("/v1/deleteMedia", MediaControllers.deleteMedia);
+router.delete("/v1/delete", MediaControllers.deleteMedia);
 
 
 
