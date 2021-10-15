@@ -1,4 +1,3 @@
-
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const {getRedisClient} = require("../utils/initRedis");
@@ -15,11 +14,10 @@ const prisma = require("../../prisma/indexPrisma");
 // Refresh token
 
 exports.getRefreshToken = (req, res, next) => {
-
 	let refreshToken = req.headers.refresh;
 
 	if (!refreshToken) {
-		
+
 		return next({
 			code: "error",
 			message: "refresh token missing",
@@ -46,9 +44,7 @@ exports.getRefreshToken = (req, res, next) => {
 				}
 				const accessToken = signToken(userId);
 
-
-
-				res.status(200).json(
+				return res.status(200).json(
 
 					apiResponse({
 						data: {
@@ -57,7 +53,7 @@ exports.getRefreshToken = (req, res, next) => {
 					})
 				);
 			} catch (err) {
-				
+
 				return next(new Error(err));
 			}
 		}
@@ -77,7 +73,7 @@ exports.getToken = async (req, res, next) => {
 			})
 		);
 	} catch (err) {
-		
+
 		return next(new Error(err));
 	}
 };
@@ -116,17 +112,27 @@ exports.getUser = async (req, res, next) => {
 	} catch (err) {
 		return next(new Error(err));
 
-		
 	}
 };
 
 //User signup
 exports.registerUser = async (req, res, next) => {
-	try {
-		//Checking if valid email, password and privacy policy.
-		
+	const password = req.body.password;
+	const regex = /^(?=.*?[A-Z]).{6,}$/;
 
+	try {
+		if (password.match(regex) === null) {
+			return next({
+				code: "error",
+				header: "Invalid password",
+				message: "This password does not meet the requirements.",
+				statusCode: 400,
+			});
+		}
+
+		//Checking if valid email, password and privacy policy.
 		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
+
 
 		if (doesExist !== null) {
 			return next({
@@ -136,7 +142,7 @@ exports.registerUser = async (req, res, next) => {
 				statusCode: 400,
 			});
 		}
-		
+
 		//Creating user without name or lastnames
 		const passwordHashed = await hashPassword(req.body.password);
 		await prisma.user.create({
@@ -148,10 +154,7 @@ exports.registerUser = async (req, res, next) => {
 				refresh_token: "20",
 			},
 		});
-		
-		
-
-		res.status(200).json(
+		return res.status(200).json(
 
 			apiResponse({
 				message: "User registered correctly.",
@@ -165,8 +168,6 @@ exports.registerUser = async (req, res, next) => {
 				statusCode: 422,
 			});
 		}
-		
-		
 		return next(new Error(err));
 	}
 };
@@ -182,20 +183,15 @@ exports.getAllUsers = async (req, res, next) => {
 };
 
 // Login
-
 exports.login = async (req, res, next) => {
-
-
 
 	const {body = {}} = req;
 	// Check that the request isn't empty
 
 	if (!body.email || !body.password) {
-
 		const message = "Content can not be empty!";
+		return next({
 
-		
-     return next({
 			code: "error",
 			message,
 			statusCode: 400,
@@ -208,7 +204,6 @@ exports.login = async (req, res, next) => {
 		});
 
 		if (!USER) {
-
 			return next({
 				code: "error",
 				header: "User doesn't exist",
@@ -218,7 +213,6 @@ exports.login = async (req, res, next) => {
 		}
 
 		const value = await argon2.verify(USER.password, body.password);
-
 		if (value === false) {
 
 			return next({
@@ -241,10 +235,8 @@ exports.login = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-
 		return next(new Error(err));
 
-		
 	}
 };
 //Update role to user with id_user & id_role (FOR TESTING PURPOSE)
@@ -262,7 +254,6 @@ exports.updateUserRole = async (req, res, next) => {
 			{where: {id: req.body.user_id}}
 		);
 		if (user === null) {
-
 			return next({
 				code: "error",
 				success: "false",
@@ -289,7 +280,6 @@ exports.updateUserRole = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
 	const {user_id, user_role_id, user_status_id} = req.body;
 	if (!user_id) {
-		
 		return next({
 			code: "error",
 			message: "user_id not identified",
@@ -298,19 +288,17 @@ exports.updateUser = async (req, res, next) => {
 	}
 
 	if (!user_role_id && !user_status_id) {
-	
 		return next({
 			code: "error",
 			message: "undefined values",
 			statusCode: 400,
 		});
-
-		
 	}
 };
 
 //Update some user field with id
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res, next) => {
+
 	const {id, user_role_id, user_status_id} = req.body;
 	if (!id) {
 		res.status(400).json(
@@ -331,20 +319,18 @@ exports.updateUser = async (req, res) => {
 
 	// Updating user using id
 	try {
-		const user = await prisma.user.update(
-			{where: {id: parseInt(req.body.id)},
+		const user = await prisma.user.update({
+			where: {id: parseInt(req.body.id)},
 			data: {
-				...req.body
+				...req.body,
 			},
 		});
 		if (user === null) {
-
 			return next({
 				code: "error",
 				message: "User not found.",
-				statusCode: 204,
+				statusCode: 204, // @todo: 404 error no 204 si no existe
 			});
-
 		} else {
 			// return data
 			return res.status(200).json(
@@ -404,8 +390,6 @@ exports.deleteUser = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-
-		
 		return next(new Error(err));
 
 	}
@@ -441,12 +425,8 @@ exports.forgetPassword = async (req, res, next) => {
 				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
 			});
 		} else {
-
 			return next({
 				code: "error",
-
-		
-			
 
 				header: "user",
 				message: "Email not found.",
@@ -480,7 +460,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 				})
 			);
 		} else {
-			
+
 			return next({
 				code: "error",
 				message: "User not found.",
@@ -488,8 +468,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
-		
-		
+
 		return next(new Error(err));
 	}
 };
@@ -499,7 +478,7 @@ exports.recoverPassword = async (req, res, next) => {
 		const token = req.params.token;
 
 		if (!token) {
-			
+
 			return next({
 				code: "error",
 				message: "Your token is empty",
@@ -509,7 +488,7 @@ exports.recoverPassword = async (req, res, next) => {
 
 		JWT.verify(token, process.env.JWT_SECRET, (err) => {
 			if (err) {
-				
+
 				return next({
 					code: "error",
 					message: "Your token has expired!",
@@ -524,7 +503,7 @@ exports.recoverPassword = async (req, res, next) => {
 			);
 		});
 	} catch (err) {
-		
+
 		return next(new Error(err));
 	}
 };
@@ -556,7 +535,7 @@ exports.changePassword = async (req, res, next) => {
 			})
 		);
 	} catch (err) {
-		
+
 		return next(new Error(err));
 	}
 };

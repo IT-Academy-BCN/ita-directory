@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import tw, {theme} from "twin.macro";
+import tw from "twin.macro";
 import Colors from "theme/Colors";
 
 export const Error = styled.div`
@@ -35,7 +35,7 @@ export const BillStyled = styled.div.attrs({
 	@media (min-width: 768px) {
 		transform: scale(1);
 	}
-	
+
 	.bold,
 	h3,
 	h4,
@@ -57,6 +57,7 @@ export const HeaderStyled = styled.header.attrs({
 	}
 	@media (min-width: 1230px) {
 		padding: 0 4rem;
+
 	}
 `;
 
@@ -70,8 +71,31 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 	div {
 		${tw`w-full p-0`}
 	}
-  h2 {
+	h2 {
 		font-weight: bold;
+	}
+	p {
+
+		font-size: small;
+	}
+`;
+
+	@media (min-width: 768px) {
+		${tw`flex-row items-start pt-20 pb-0 px-0`}
+
+		div {
+			${tw`flex-row flex-col w-auto`}
+		}
+
+	}
+	@media (min-width: 1230px) {
+		padding: 0 4rem;
+	}
+`;
+
+	@media (min-width: 893px) {
+		${tw`px-8`}
+
 	}
 	p {
 		font-size: small;
@@ -80,17 +104,9 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 	@media (min-width: 768px) {
 		${tw`flex-row items-start pt-20 pb-0 px-0`}
 
-		div {
-			${tw`flex-row flex-col w-auto`}
-		}
-	}
-
-	@media (min-width: 893px) {
-		${tw`px-8`}
-	}
-
 	@media (min-width: 1230px) {
 		${tw`pr-24 pl-16`}
+
 	}
 `;
 
@@ -100,6 +116,10 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 			margin: 0;
 		}
 		justify-content: flex-end;
+
+		@media (min-width: 1230px) {
+			${tw`pr-16 pl-24`}
+		}
 	}
 `;
 
@@ -115,8 +135,35 @@ export const TableWrapperStyled = styled.div.attrs({
 		}
 
 		th {
-			${tw`justify-center font-bold items-center uppercase pt-3 text-tiny`}//
+			${tw` flex justify-center font-bold  uppercase pt-3 text-tiny`}
+
+			&:last-child {
+				@media (max-width: 479px) {
+					display: flex;
+					justify-content: center !important;
+				}
+
+				@media (min-width: 480px) {
+					justify-content: flex-end;
+					padding-right: 2rem;
+				}
+
+				@media (min-width: 692px) {
+					padding-right: 0rem;
+				}
+
+				@media (min-width: 893px) {
+					padding-right: 2rem;
+				}
+				@media (min-width: 1230px) {
+					padding-right: 4rem;
+				}
+			}
+
 		}
+	}
+`;
+
 		tr {
 			display: grid;
 			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
@@ -130,8 +177,20 @@ export const TableWrapperStyled = styled.div.attrs({
 			td {
 				${tw`flex justify-center flex-grow text-tiny`}
 				min-width: 50px;
+
+				&:last-child {
+					@media (min-width: 893px) {
+						padding-right: 2rem;
+						display: flex;
+						justify-content: flex-end;
+					}
+					@media (min-width: 1230px) {
+						padding-right: 4rem;
+					}
+				}
 			}
 		}
+
 	}
 `;
 
@@ -141,22 +200,28 @@ export const CalcTableStyled = styled.table`
 
 	td,
 	th {
-		${tw`items-center justify-center text-left font-normal pt-3 text-tiny`}
-		padding-left: 27px;
+		${tw`flex items-center justify-center  font-normal text-tiny`}
 		min-height: 47px;
 	}
 
 	tr {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		td {
-			padding: 0 20% 0 20%;
+			${tw`flex justify-center items-center flex-grow text-tiny`}
 			min-width: 50px;
-			${tw` flex justify-end`}
-			@media (min-width: 768px) {
-				padding: 0 40% 0 auto;
+			&:last-child {
+				@media (min-width: 893px) {
+					padding-right: 2rem;
+					display: flex;
+					justify-content: flex-end;
+				}
+				@media (min-width: 1230px) {
+					padding-right: 4rem;
+				}
 			}
 		}
+
 	}
 `;
 export const TermsAndCalcStyled = styled.div.attrs({
@@ -186,7 +251,7 @@ export const TermsStyled = styled.section.attrs({
 
 export const PaySignStyled = styled.section.attrs({
 	className:
-		"flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end xsm:mr-8",
+		"flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
 })`
 	div {
 		${tw`flex flex-col pb-8`}
@@ -197,6 +262,7 @@ export const PaySignStyled = styled.section.attrs({
 		small {
 			line-height: 1.5;
 		}
+
 	}
 `;
 
@@ -231,15 +297,22 @@ export const SignatureStyled = styled.div.attrs({
 	className: "flex flex-col w-full pb-8 pl-8 xsm:justify-end xsm:text-center xsm:w-4/12",
 })`
 	margin-top: 1.8rem;
-
+	width: fit-content;
+	@media (min-width: 893px) {
+		padding-right: 2rem;
+	}
+	@media (min-width: 1230px) {
+		padding-right: 4rem;
+	}
 	p {
 		${tw`font-bold m-0`}
 		white-space: nowrap;
 	}
-`;
+
 	h4 {
 		${tw`text-sm`}
 		font-weight: lighter !important;
+
 	}
 
 	.signature-image {
@@ -257,6 +330,11 @@ export const FooterStyled = styled.footer.attrs({
 	p {
 		${tw`text-sm`}
 	}
+`;
+
+export const RowStyled = styled.div`
+	min-height: "47px";
+	align-items: center;
 `;
 
 export const RowStyled = styled.div`

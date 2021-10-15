@@ -8,22 +8,20 @@ import {Container} from "theme/GlobalStyles";
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 
-const Header = ({
-	isLoggedIn,
-	title,
-	logoColor,
-	headerColor,
-	fontColor,
-	justifyTitle = false,
-}) => {
+const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTitle}) => {
+
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
 		setDropdownVisible(!dropdownVisible);
 	};
 
+	const justifyTitleB = justifyTitle === "center" ? true : false;
+
+	//
 	return (
-		<HeaderStyled justifyTitle={justifyTitle} logoColor={logoColor}>
+		<HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
+
 			<Container>
 				<div className="top-header">
 					<Link className="logo" to="/ads">
@@ -60,7 +58,11 @@ const Header = ({
 					) : null}
 				</div>
 			</Container>
-			<StyledSubHeader headerColor={headerColor} fontColor={fontColor}>
+			<StyledSubHeader
+				headerColor={headerColor}
+				fontColor={fontColor}
+				justifyTitle={justifyTitleB}
+			>
 				<Container>
 					<h1>{title}</h1>
 				</Container>
@@ -70,4 +72,3 @@ const Header = ({
 };
 
 export default Header;
-

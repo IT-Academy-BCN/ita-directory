@@ -21,7 +21,8 @@ import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
 const ListaUsuariosAdmins = () => {
-	const images = [people1b, people4b, people13b];
+	const [images] = useState([people1b, people4b, people13b]);
+
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
@@ -45,7 +46,9 @@ const ListaUsuariosAdmins = () => {
 			setCurrentUserState((prev) => state);
 			setActive((prev) => true);
 		},
-		[currentName, currentUserState, active]
+		[]
+		//[currentName, currentUserState, active]
+
 	);
 
 	const handleModalDelete = useCallback(
@@ -53,7 +56,9 @@ const ListaUsuariosAdmins = () => {
 			setCurrentColum((prev) => row);
 			setEliminar((prev) => true);
 		},
-		[currentColum, eliminar]
+		[]
+		//[currentColum, eliminar]
+
 	);
 
 	const handleModalEdit = useCallback(
@@ -62,7 +67,9 @@ const ListaUsuariosAdmins = () => {
 			setCurrentEmail((prev) => email);
 			setEditar((prev) => true);
 		},
-		[currentName, currentEmail, editar]
+		[]
+		// [currentName, currentEmail, editar]
+
 	);
 
 	const updateDelete = useCallback(
@@ -76,7 +83,9 @@ const ListaUsuariosAdmins = () => {
 			});
 			setDataUsers((prev) => newUsers);
 		},
-		[dataUsers, currentColum, eliminar]
+		[dataUsers, currentColum]
+		//[dataUsers, currentColum, eliminar]
+
 	);
 
 	const updateUserData = useCallback(
@@ -89,7 +98,9 @@ const ListaUsuariosAdmins = () => {
 				)
 			);
 		},
-		[dataUsers, currentName, currentEmail, eliminar, currentColum]
+		[dataUsers, currentName, currentEmail]
+		//[dataUsers, currentName, currentEmail, eliminar, currentColum]
+
 	);
 
 	const updateUserStatus = useCallback(
@@ -188,7 +199,8 @@ const ListaUsuariosAdmins = () => {
 				),
 			},
 		],
-		[images]
+		[handleModalDelete, handleModalEdit, handleModalStatus, images]
+
 	);
 
 	return (

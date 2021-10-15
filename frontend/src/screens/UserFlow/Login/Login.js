@@ -1,31 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
-import {
-	ChangePassword,
-	Container,
-	Form,
-	Label,
-	StyleRedirect,
-	StyledError,
-	StyleNotificationSuccess,
-	StyleNotificationMessage,
-	StyleNotificationError,
-} from "./Login.styles";
+import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
-import {
-	faCheckCircle,
-	faExclamationCircle,
-	faGlassMartiniAlt,
-} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import Notification from "components/units/Notifications/Notification";
 
-import NotificationsSuccess from "components/units/Notifications/NotificationsSuccess";
-import NotificationsError from "components/units/Notifications/Notification";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
@@ -37,7 +19,6 @@ const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
 const Login = ({onLogin}) => {
 	const [error, setError] = useState(false);
-	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isEmailError, setIsEmailError] = useState(false);
@@ -50,7 +31,8 @@ const Login = ({onLogin}) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
 			console.log(response.status);
-			setValidacionLogin(response.status);
+			setValidacionLogin(true);
+
 		} catch (error) {
 			// Handle Error Here
 			console.error(error);
@@ -72,11 +54,9 @@ const Login = ({onLogin}) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setAnimatedState(true);
 		setIsDisabled(true);
 		setIsLoading(true);
 		setTimeout(() => {
-			setAnimatedState(false);
 			setIsDisabled(false);
 			setIsLoading(false);
 			loginUser({
@@ -85,7 +65,6 @@ const Login = ({onLogin}) => {
 				privacy: true,
 			});
 			setTimeout(() => {
-				setAnimatedState(false);
 				setIsDisabled(false);
 				setIsLoading(false);
 			}, 2000);
@@ -94,25 +73,24 @@ const Login = ({onLogin}) => {
 	return (
 		<>
 			{error ? (
-				<NotificationsError
-					messageError={
+				<Notification
+					message={
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
+					isSuccess={false}
 				/>
 			) : null}
 
-			{validacionLogin === 200 ? (
-				<NotificationsSuccess
+			{validacionLogin ? (
+				<Notification
 					email={email}
-					messageSuccess={":bienvenido de nuevo.Te estamos redireccionando."}
+					message={":bienvenido de nuevo.Te estamos redireccionando."}
+					isSuccess={true}
 				/>
 			) : null}
-			<NotificationsError
-				messageError={
-					"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
-				}
-			/>
-			<Body title="Acceso" isLoggedIn={false} centerTitle>
+
+			<Body title="Acceso" isLoggedIn={false} justifyTitle={"center"}>
+
 				<Container>
 					<Form onSubmit={handleSubmit}>
 						<div className="classInput">

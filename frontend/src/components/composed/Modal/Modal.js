@@ -1,8 +1,6 @@
 import React, {Fragment} from "react";
 import {ModalBlock} from "./Modal.styles";
 import PropTypes from "prop-types";
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) => {
 	return (

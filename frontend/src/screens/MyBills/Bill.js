@@ -1,4 +1,4 @@
-import {useState, useMemo, useCallback, useEffect} from "react";
+import {useState, useMemo} from "react";
 import ReactTable from "../../components/composed/Table/ReactTable";
 import Colors from "../../theme/Colors";
 import {useParams} from "react-router-dom";
@@ -28,8 +28,9 @@ const Bill = (color_logo) => {
 
 	const indexOfId = billData.findIndex((i) => id === String(i.id));
 	console.log("indexOfId" + indexOfId);
+	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+	//const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
-	const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
@@ -76,10 +77,11 @@ const Bill = (color_logo) => {
 				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
-				Header: "Amount",
+				Header: <div className="lastColumn">{"Amount"}</div>,
 				accessor: "amount",
 				Cell: ({row}) => (
-					<div className={customRowStyle}>
+					<div className={`${customRowStyle} lastColumn1`}>
+
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
@@ -135,6 +137,8 @@ const Bill = (color_logo) => {
 						<tbody>
 							<tr>
 								<th>Sub Total</th>
+								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -150,6 +154,8 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Tax(5%)</th>
+								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -168,6 +174,8 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Discount(10%)</th>
+								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -188,7 +196,9 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th className="bg-lightGrey bold">GRAND TOTAL</th>
-								<td className="bg-lightGrey">
+								<td className="bg-lightGrey"></td>
+								<td className="bg-lightGrey items-center">
+
 									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {
@@ -227,9 +237,8 @@ const Bill = (color_logo) => {
 						</div>
 					</PaymentMethodStyled>
 					<SignatureStyled>
-						<div className="signature-image" role="image">
-							{bill.signature.image}
-						</div>
+						<div className="signature-image">{bill.signature.image}</div>
+
 						<p>{bill.emisorReceiver.receiver.reName}</p>
 						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
 					</SignatureStyled>
