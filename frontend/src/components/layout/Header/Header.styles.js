@@ -20,6 +20,7 @@ export const HeaderStyled = styled.header`
 			display: flex;
 			align-items: center;
 			justify-content: ${(props) => (props.justifyTitle ? "center" : "left")};
+
 			width: 100%;
 			color: ${(props) => (props.logoColor ? props.logoColor : Colors.darkRed)};
 			font: normal normal normal 15px/15px Korb-Bold;
@@ -27,6 +28,7 @@ export const HeaderStyled = styled.header`
 			text-transform: uppercase;
 			opacity: 1;
 			text-decoration: none;
+
 		}
 
 		.profile {
@@ -114,6 +116,7 @@ export const StyledSubHeader = styled.div`
 	width: 100%;
 	background-color: ${(props) =>
 		props.headerColor ? props.headerColor : `${Colors.transparentBlue}`};
+
 	border: ${(props) => (props.headerColor ? `` : `1px solid ${Colors.palerBlue}`)};
 	border-left: none;
 	border-right: none;
@@ -127,6 +130,7 @@ export const StyledSubHeader = styled.div`
 		font-weight: normal;
 		text-align: ${(props) => (props.justifyTitle ? "center" : "left")};
 		color: ${(props) => (props.fontColor ? props.fontColor : `${Colors.grey}`)};
+
 	}
 `;
 

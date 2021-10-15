@@ -8,6 +8,7 @@ import Body from "components/layout/Body/Body";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 
+
 // eslint-disable-next-line no-useless-escape
 const EMAIL_REGEX =
 	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,6 +32,7 @@ const Login = ({onLogin}) => {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
 			console.log(response.status);
 			setValidacionLogin(true);
+
 		} catch (error) {
 			// Handle Error Here
 			console.error(error);
@@ -88,6 +90,7 @@ const Login = ({onLogin}) => {
 			) : null}
 
 			<Body title="Acceso" isLoggedIn={false} justifyTitle={"center"}>
+
 				<Container>
 					<Form onSubmit={handleSubmit}>
 						<div className="classInput">

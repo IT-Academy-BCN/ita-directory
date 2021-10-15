@@ -9,6 +9,7 @@ const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 
 const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTitle}) => {
+
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
@@ -20,6 +21,7 @@ const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTi
 	//
 	return (
 		<HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
+
 			<Container>
 				<div className="top-header">
 					<Link className="logo" to="/ads">

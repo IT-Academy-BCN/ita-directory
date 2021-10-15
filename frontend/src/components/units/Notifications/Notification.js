@@ -13,6 +13,7 @@ const Notification = ({message, isSuccess}) => {
 				/>
 				<p>{message}</p>
 			</div>
+
 		</NotificationStyled>
 	);
 };

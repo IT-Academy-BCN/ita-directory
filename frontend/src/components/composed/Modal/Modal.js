@@ -39,3 +39,29 @@ Modal.propTypes = {
 };
 
 export default Modal;
+
+/* Before removing the 'x'
+
+const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) => {
+	return (
+		<Fragment>
+			{active && (
+				<ModalBlock>
+					<button className="modalOverlay" onClick={() => hideModal()}></button>
+					<div className="modalContainer">
+						<div className="modalHeader">
+							<span colorModalTitle={colorModalTitle}>{title}</span>
+							<button className="modalClose" onClick={() => hideModal()}>
+								<FontAwesomeIcon icon={faTimes} style={{height: "1rem"}} />
+							</button>
+						</div>
+						<div className="modalBody">{children}</div>
+						<div className="modalFooter">{footer}</div>
+					</div>
+				</ModalBlock>
+			)}
+		</Fragment>
+	);
+};
+
+*/

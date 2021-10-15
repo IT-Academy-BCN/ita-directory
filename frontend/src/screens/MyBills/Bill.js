@@ -31,6 +31,7 @@ const Bill = (color_logo) => {
 	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 	//const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
+
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
 	// Selecting the right bill...
@@ -80,6 +81,7 @@ const Bill = (color_logo) => {
 				accessor: "amount",
 				Cell: ({row}) => (
 					<div className={`${customRowStyle} lastColumn1`}>
+
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
@@ -136,6 +138,7 @@ const Bill = (color_logo) => {
 							<tr>
 								<th>Sub Total</th>
 								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -152,6 +155,7 @@ const Bill = (color_logo) => {
 							<tr>
 								<th>Tax(5%)</th>
 								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -171,6 +175,7 @@ const Bill = (color_logo) => {
 							<tr>
 								<th>Discount(10%)</th>
 								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -193,6 +198,7 @@ const Bill = (color_logo) => {
 								<th className="bg-lightGrey bold">GRAND TOTAL</th>
 								<td className="bg-lightGrey"></td>
 								<td className="bg-lightGrey items-center">
+
 									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {
@@ -232,6 +238,7 @@ const Bill = (color_logo) => {
 					</PaymentMethodStyled>
 					<SignatureStyled>
 						<div className="signature-image">{bill.signature.image}</div>
+
 						<p>{bill.emisorReceiver.receiver.reName}</p>
 						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
 					</SignatureStyled>

@@ -11,6 +11,7 @@ const mediaRoutes = require("./routes/media");
 // const constantsRoute = require("./routes/constants");
 const adsRoutes = require("./routes/ads");
 const authenticateToken = require("./middleware/verifyToken");
+
 // const UsersController = require("./controllers/users");
 // const {loadConstants} = require("./utils/CONSTANTS");
 const {loadConstants} = require("./utils/CONSTANTS");
@@ -37,6 +38,9 @@ app.use(express.static("public"));
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({limit: "50mb", type: "application/json"}));
+
+
+
 
 // API
 expressJSDocSwagger(app)(options);

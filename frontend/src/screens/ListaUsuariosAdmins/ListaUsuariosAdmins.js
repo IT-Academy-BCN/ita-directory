@@ -22,6 +22,7 @@ import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins
 
 const ListaUsuariosAdmins = () => {
 	const [images] = useState([people1b, people4b, people13b]);
+
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
@@ -47,6 +48,7 @@ const ListaUsuariosAdmins = () => {
 		},
 		[]
 		//[currentName, currentUserState, active]
+
 	);
 
 	const handleModalDelete = useCallback(
@@ -56,6 +58,7 @@ const ListaUsuariosAdmins = () => {
 		},
 		[]
 		//[currentColum, eliminar]
+
 	);
 
 	const handleModalEdit = useCallback(
@@ -66,6 +69,7 @@ const ListaUsuariosAdmins = () => {
 		},
 		[]
 		// [currentName, currentEmail, editar]
+
 	);
 
 	const updateDelete = useCallback(
@@ -81,6 +85,7 @@ const ListaUsuariosAdmins = () => {
 		},
 		[dataUsers, currentColum]
 		//[dataUsers, currentColum, eliminar]
+
 	);
 
 	const updateUserData = useCallback(
@@ -95,6 +100,7 @@ const ListaUsuariosAdmins = () => {
 		},
 		[dataUsers, currentName, currentEmail]
 		//[dataUsers, currentName, currentEmail, eliminar, currentColum]
+
 	);
 
 	const updateUserStatus = useCallback(
@@ -194,6 +200,7 @@ const ListaUsuariosAdmins = () => {
 			},
 		],
 		[handleModalDelete, handleModalEdit, handleModalStatus, images]
+
 	);
 
 	return (
