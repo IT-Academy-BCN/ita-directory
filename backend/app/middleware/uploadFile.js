@@ -1,5 +1,4 @@
 const multer = require("multer");
-const slugify = require("slugify");
 const fs = require("fs");
 
 const allowMimeType = ["image/jpeg", "image/png"];
@@ -12,7 +11,7 @@ const date = new Date();
 const storage = multer.diskStorage({
 	destination: `public/${date.getFullYear()}/${date.getMonth()}`,
 	filename: (req, file, cb) => {
-		cb(null, Date.now() + slugName(file.originalname, destination));
+		cb(null, Date.now() + titleToSlug(file.originalname, destination));
 	},
 });
 
@@ -22,18 +21,6 @@ const fileFilter = (req, file, cb) => {
 	} else {
 		cb(null, false);
 	}
-};
-
-const slugName = (fileName, destination) => {
-	const slug = slugify(fileName, {
-		replacement: "-",
-		remove: undefined,
-		lower: false,
-		strict: false,
-		locale: "en",
-		trim: true,
-	});
-	return checkDupliates(slug, destination);
 };
 
 const checkDupliates = (fileName, destination) => {
@@ -48,8 +35,31 @@ const checkDupliates = (fileName, destination) => {
 			slug = fileName + "-" + count;
 		}
 	} while (!slugIsUnique);
-	
+
 	return slug;
+};
+
+const titleToSlug = (fileName, destination) => {
+	let slug;
+
+	slug = fileName.toLowerCase();
+
+	slug = slug.replace(
+		/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+		""
+	);
+
+	slug = slug.replace(/ /gi, "-");
+
+	slug = slug.replace(/\-\-\-\-\-/gi, "-");
+	slug = slug.replace(/\-\-\-\-/gi, "-");
+	slug = slug.replace(/\-\-\-/gi, "-");
+	slug = slug.replace(/\-\-/gi, "-");
+
+	slug = "@" + slug + "@";
+	slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+
+	return checkDupliates(slug, destination);
 };
 
 module.exports = multer({storage, fileFilter}).single("image");
