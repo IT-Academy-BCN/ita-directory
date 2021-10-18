@@ -57,7 +57,6 @@ export const HeaderStyled = styled.header.attrs({
 	}
 	@media (min-width: 1230px) {
 		padding: 0 4rem;
-
 	}
 `;
 
@@ -75,38 +74,7 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 		font-weight: bold;
 	}
 	p {
-
 		font-size: small;
-	}
-`;
-
-	@media (min-width: 768px) {
-		${tw`flex-row items-start pt-20 pb-0 px-0`}
-
-		div {
-			${tw`flex-row flex-col w-auto`}
-		}
-
-	}
-	@media (min-width: 1230px) {
-		padding: 0 4rem;
-	}
-`;
-
-	@media (min-width: 893px) {
-		${tw`px-8`}
-
-	}
-	p {
-		font-size: small;
-	}
-
-	@media (min-width: 768px) {
-		${tw`flex-row items-start pt-20 pb-0 px-0`}
-
-	@media (min-width: 1230px) {
-		${tw`pr-24 pl-16`}
-
 	}
 `;
 
@@ -159,38 +127,7 @@ export const TableWrapperStyled = styled.div.attrs({
 					padding-right: 4rem;
 				}
 			}
-
 		}
-	}
-`;
-
-		tr {
-			display: grid;
-			grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
-			.white {
-				background-color: ${Colors.white};
-			}
-			.grey {
-				background-color: ${Colors.lightGrey};
-			}
-
-			td {
-				${tw`flex justify-center flex-grow text-tiny`}
-				min-width: 50px;
-
-				&:last-child {
-					@media (min-width: 893px) {
-						padding-right: 2rem;
-						display: flex;
-						justify-content: flex-end;
-					}
-					@media (min-width: 1230px) {
-						padding-right: 4rem;
-					}
-				}
-			}
-		}
-
 	}
 `;
 
@@ -221,7 +158,6 @@ export const CalcTableStyled = styled.table`
 				}
 			}
 		}
-
 	}
 `;
 export const TermsAndCalcStyled = styled.div.attrs({
@@ -262,7 +198,6 @@ export const PaySignStyled = styled.section.attrs({
 		small {
 			line-height: 1.5;
 		}
-
 	}
 `;
 
@@ -312,7 +247,6 @@ export const SignatureStyled = styled.div.attrs({
 	h4 {
 		${tw`text-sm`}
 		font-weight: lighter !important;
-
 	}
 
 	.signature-image {
@@ -330,11 +264,6 @@ export const FooterStyled = styled.footer.attrs({
 	p {
 		${tw`text-sm`}
 	}
-`;
-
-export const RowStyled = styled.div`
-	min-height: "47px";
-	align-items: center;
 `;
 
 export const RowStyled = styled.div`
