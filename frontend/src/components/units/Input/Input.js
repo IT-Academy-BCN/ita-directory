@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {InputStyled, StyledError} from "./Input.styles";
+import {InputStyled, ErrorStyled} from "./Input.styles";
 
 const Input = ({
 	type,
@@ -49,10 +49,11 @@ const Input = ({
 				maxLength={maxlength}
 				size={size}
 				success={success}
+				error={error}
 				required={required}
 				style={inputStyles}
 			/>
-			<StyledError
+			<ErrorStyled
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				styles={errorStyles}
 			/>
@@ -80,6 +81,7 @@ Input.propTypes = {
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 	error: PropTypes.bool,
+	success: PropTypes.bool,
 	inputContainerClassName: PropTypes.string,
 	required: PropTypes.bool,
 };

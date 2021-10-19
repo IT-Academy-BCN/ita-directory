@@ -8,7 +8,7 @@ export const Container = styled.div`
 	box-shadow: 0 2px 7px ${Colors.darkerShadow};
 	overflow: hidden;
 	max-width: 22rem;
-	margin: 1rem;
+	margin: 8vh 1rem 18vh;
 `;
 
 export const Form = styled.form`
@@ -20,48 +20,15 @@ export const Form = styled.form`
 	width: 22rem;
 
 	& > input {
-		margin-bottom: 1em;
-	}
-	.classInput {
-		width: 100%;
+		margin: 0;
 	}
 
-	// & > .classInput {
-	// 	margin-bottom: 1.69rem;
-	// 	position: relative;
-
-	// 	& > label {
-	// 		display: inline-block;
-	// 		margin-bottom: 5px;
-	// 	}
-	// }
+	& > input:not(:first-of-type) {
+		margin-top: 1.5rem;
+	}
 `;
 
-// export const ChangePassword = styled.div`
-// 	display: inline-block;
-// 	padding: 0 0 0.5rem 0;
-// `;
-
-// export const Label = styled.label`
-// 	display: inline-block;
-
-// 	& > a {
-// 		color: ${Colors.redColor};
-// 		text-decoration: none;
-
-// 		&:hover {
-// 			color: blue;
-// 		}
-// 	}
-// `;
-
-export const StyledError = styled.div`
-	color: ${Colors.redColor};
-	font-weight: 800;
-	margin-bottom: 40px;
-`;
-
-export const StyleRedirect = styled.div`
+export const RedirectStyled = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: center;

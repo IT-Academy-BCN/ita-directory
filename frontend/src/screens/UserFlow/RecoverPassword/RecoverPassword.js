@@ -11,7 +11,7 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
-console.log(validatePassword);
+console.log(validatePassword());
 
 const users = [
 	{
