@@ -19,13 +19,14 @@ export const HeaderStyled = styled.header`
 		.logo {
 			display: flex;
 			align-items: center;
+			justify-content: ${(props) => props.justifyTitle || "flex-start"};
 			width: 100%;
 			color: ${(props) => (props.logoColor ? props.logoColor : Colors.darkRed)};
 			font: normal normal normal 15px/15px Korb-Bold;
 			letter-spacing: 0px;
 			text-transform: uppercase;
 			opacity: 1;
-			text-decoration: none; 
+			text-decoration: none;
 		}
 
 		.profile {
@@ -111,7 +112,8 @@ export const HeaderStyled = styled.header`
 
 export const StyledSubHeader = styled.div`
 	width: 100%;
-	background-color: ${(props) => (props.headerColor ? props.headerColor : `${Colors.transparentBlue}`)}; 
+	background-color: ${(props) =>
+		props.headerColor ? props.headerColor : `${Colors.transparentBlue}`};
 	border: ${(props) => (props.headerColor ? `` : `1px solid ${Colors.palerBlue}`)};
 	border-left: none;
 	border-right: none;
@@ -120,16 +122,16 @@ export const StyledSubHeader = styled.div`
 
 	h1 {
 		width: 100%;
-        font-size: 26px;
-        line-height: 36px;
-        font-weight: normal;
-        text-align: ${(props) => (props.justifyTitle ? "center" : "left")};
-        color: ${(props) => (props.fontColor ? props.fontColor : `${Colors.grey}`)};
+		font-size: 26px;
+		line-height: 36px;
+		font-weight: 300;
+		text-align: ${(props) => (props.justifyTitle ? "center" : "left")};
+		color: ${(props) => (props.fontColor ? props.fontColor : "#7D868A")};
 	}
 `;
 
 export const StyledMiPerfil = styled.div`
-	position: realtive;
+	position: relative;
 	display: inline-block;
 `;
 

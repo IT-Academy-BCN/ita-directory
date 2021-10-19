@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 // import AsyncButton from "components/units/Button/Button";
-import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
+import {ChangePassword, Container, Form, Label, StyledRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
 
@@ -23,16 +23,27 @@ const users = [
 ];
 
 const authenticateUser = (email, password) => {
-	let authenticated = false;
-	for (let i = 0; i < users.length; i++) {
-		const user = users[i];
+	// let authenticated = false;
+	let auth = false;
+
+	users.forEach((user) => {
 		if (user.email === email && user.password === password) {
-			authenticated = true;
 			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
+			auth = true;
 		}
-	}
-	if (authenticated) console.log("the user is correct");
-	else console.error("the user is incorrect");
+	});
+
+	console.log(`the user is ${auth ? "correct" : "incorrect"}`);
+
+	// for (let i = 0; i < users.length; i++) {
+	// 	const user = users[i];
+	// 	if (user.email === email && user.password === password) {
+	// 		authenticated = true;
+	// 		localStorage.setItem("itacademy", "HE ENTRADO!!!!");
+	// 	}
+	// }
+	// if (authenticated) console.log("the user is correct");
+	// else console.error("the user is incorrect");
 };
 
 const Login = ({onLogin}) => {
@@ -40,9 +51,10 @@ const Login = ({onLogin}) => {
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [isEmailError, setIsEmailError] = useState(false);
 	const [isPassError, setIsPassError] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	const handleEmailChange = (value) => {
 		setEmail(value);
@@ -56,8 +68,6 @@ const Login = ({onLogin}) => {
 		setIsPassError(!isPass);
 	};
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setAnimatedState(true);
@@ -78,8 +88,9 @@ const Login = ({onLogin}) => {
 			setError(message);
 		}
 	};
+
 	return (
-		<Body title="Acceso" isLoggedIn={false} centerTitle>
+		<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 			<Container>
 				<Form onSubmit={handleSubmit}>
 					{/* <label>Email</label> */}
@@ -105,7 +116,7 @@ const Login = ({onLogin}) => {
 						id="passName"
 						name="passName"
 						error={isPassError}
-						errorText="The password to contain more than 6 characters and a uppercase letter"
+						errorText="The password have to contain more than 6 characters and a uppercase letter"
 						disabled={disabled}
 						minLength={6}
 						label={"Password"}
@@ -127,12 +138,12 @@ const Login = ({onLogin}) => {
 						iconPosition="left"
 						type="submit"
 						isLoading={isLoading}
-						animated="yes"
+						animated
 						disabled={disabled}
 					/>
-					<StyleRedirect>
-						No tienes cuenta? <Link to="/register"> Registrate</Link>
-					</StyleRedirect>
+					<StyledRedirect>
+						Regístrate <Link to="/register">aquí</Link>.
+					</StyledRedirect>
 				</Form>
 			</Container>
 		</Body>
