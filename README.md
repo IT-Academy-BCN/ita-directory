@@ -41,7 +41,7 @@
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://xd.adobe.com/view/6889eb5a-76b3-4b9d-adcb-0d76da6a8789-3dda/flow/">Visual design</a>
     ·
     <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
     ·
