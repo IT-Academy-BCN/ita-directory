@@ -58,7 +58,7 @@ export const StyledError = styled.div`
 	margin: 0 0 40px 0;
 `;
 
-export const StyledRedirect = styled.div`
+export const StyleRedirect = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 1rem 0 0 0;
@@ -70,8 +70,45 @@ export const StyledRedirect = styled.div`
 		color: ${Colors.darkRed};
 		margin: 0 0 0 0.2rem;
 	}
-
 	& > a:hover {
 		color: blue;
 	}
+`;
+export const StyleNotificationSuccess = styled.div`
+	display: flex;
+	align-items: center;
+	float: right;
+	margin-top: 32px;
+	margin-right: 32px;
+	width: 307px;
+	height: 61px;
+	background: #317126 0% 0% no-repeat padding-box;
+	box-shadow: 0px 3px 6px ${Colors.darkerShadow}; // #00000086;
+	border-radius: 6px;
+	opacity: 1;
+	padding-left: 8px;
+`;
+
+export const StyleNotificationError = styled.div`
+	display: flex;
+	align-items: center;
+	float: right;
+	margin-top: 32px;
+	margin-right: 100px;
+	width: 307px;
+	height: 61px;
+	background: #bc3434 0% 0% no-repeat padding-box;
+	box-shadow: 0px 3px 6px ${Colors.darkerShadow}; // #00000086;
+	border-radius: 6px;
+	opacity: 1;
+	padding-left: 8px;
+`;
+export const StyleNotificationMessage = styled.div`
+	color: white;
+	font: Helvetica-neue;
+	font-size: 12px;
+	letter-spacing: 0px;
+	opacity: 1;
+	line-height: 1.2;
+	padding-left: 15px;
 `;

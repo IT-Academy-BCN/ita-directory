@@ -4,7 +4,7 @@
   "description": "Backend ITAcademy Directory project (react + node tracks)",
   "main": "server.js",
   "scripts": {
-    "dev": "export NODE_ENV=development && nodemon server.js",
+    "dev": "export NODE_ENV=development && nodemon --legacy-watch server.js",
     "prisma:generate": "npx prisma generate",
     "prisma:migrate-dev": "prisma migrate dev",
     "prisma:seed": "npx prisma db seed --preview-feature",
@@ -37,6 +37,7 @@
     "redis": "^3.1.2",
     "sequelize": "^6.3.5",
     "sequelize-auto": "^0.8.3",
+    "slugify": "^1.6.1",
     "socket.io": "^4.1.2"
   },
   "devDependencies": {

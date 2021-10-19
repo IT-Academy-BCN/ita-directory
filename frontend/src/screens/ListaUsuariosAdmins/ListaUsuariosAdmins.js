@@ -21,8 +21,8 @@ import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
 const ListaUsuariosAdmins = () => {
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const images = [people1b, people4b, people13b];
+	const [images] = useState([people1b, people4b, people13b]);
+
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState(usuarios);
@@ -40,22 +40,34 @@ const ListaUsuariosAdmins = () => {
 	//Edit Profile
 	const [currentEmail, setCurrentEmail] = useState("");
 
-	const handleModalStatus = useCallback((name, state) => {
-		setCurrentName((prev) => name);
-		setCurrentUserState((prev) => state);
-		setActive((prev) => true);
-	}, []);
+	const handleModalStatus = useCallback(
+		(name, state) => {
+			setCurrentName((prev) => name);
+			setCurrentUserState((prev) => state);
+			setActive((prev) => true);
+		},
+		[]
+		//[currentName, currentUserState, active]
+	);
 
-	const handleModalDelete = useCallback((row) => {
-		setCurrentColum((prev) => row);
-		setEliminar((prev) => true);
-	}, []);
+	const handleModalDelete = useCallback(
+		(row) => {
+			setCurrentColum((prev) => row);
+			setEliminar((prev) => true);
+		},
+		[]
+		//[currentColum, eliminar]
+	);
 
-	const handleModalEdit = useCallback((name, email) => {
-		setCurrentName((prev) => name);
-		setCurrentEmail((prev) => email);
-		setEditar((prev) => true);
-	}, []);
+	const handleModalEdit = useCallback(
+		(name, email) => {
+			setCurrentName((prev) => name);
+			setCurrentEmail((prev) => email);
+			setEditar((prev) => true);
+		},
+		[]
+		// [currentName, currentEmail, editar]
+	);
 
 	const updateDelete = useCallback(
 		(user) => {
@@ -69,6 +81,7 @@ const ListaUsuariosAdmins = () => {
 			setDataUsers((prev) => newUsers);
 		},
 		[dataUsers, currentColum]
+		//[dataUsers, currentColum, eliminar]
 	);
 
 	const updateUserData = useCallback(
@@ -82,6 +95,7 @@ const ListaUsuariosAdmins = () => {
 			);
 		},
 		[dataUsers, currentName, currentEmail]
+		//[dataUsers, currentName, currentEmail, eliminar, currentColum]
 	);
 
 	const updateUserStatus = useCallback(

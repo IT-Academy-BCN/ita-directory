@@ -6,10 +6,12 @@ import Body from "components/layout/Body/Body";
 
 const EMAIL_REGEX =
 	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-// const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
+const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
 const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
-// const validatePassword = (password) => PASSWORD_REGEX.test(password);
+const validatePassword = (password) => PASSWORD_REGEX.test(password);
+
+console.log(validatePassword);
 
 const users = [
 	{
@@ -47,7 +49,8 @@ const RecoverPassword = ({retrieveUser}) => {
 	};
 
 	const [email, setEmail] = useState("");
-	const [password] = useState("");
+	// const [password, setPassword] = useState("");
+	const password = "";
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setAnimatedState(true);
@@ -70,7 +73,7 @@ const RecoverPassword = ({retrieveUser}) => {
 	};
 
 	return (
-		<Body title="Cambiar contraseña">
+		<Body title="Cambiar contraseña" justifyTitle="center">
 			<Container>
 				<StyledForm onSubmit={handleSubmit}>
 					<div className="classInput">

@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/aria-role */
 import {useState, useMemo} from "react";
 import ReactTable from "../../components/composed/Table/ReactTable";
-//import DataTable from "react-data-table-component";
 import Colors from "../../theme/Colors";
 import {useParams} from "react-router-dom";
 import modelBill from "./modelBillData.json";
@@ -9,6 +7,7 @@ import {
 	BillComponentStyled,
 	BillStyled,
 	Error,
+	HeaderStyled,
 	FooterStyled,
 	SignatureStyled,
 	PaymentMethodStyled,
@@ -18,6 +17,8 @@ import {
 	TermsAndCalcStyled,
 	CalcTableStyled,
 	TableWrapperStyled,
+	AddressesWrapper,
+	TermsStyled,
 } from "./Bill.styles";
 import DownloadPDF from "./DocumentComponent";
 
@@ -27,12 +28,12 @@ const Bill = (color_logo) => {
 
 	const indexOfId = billData.findIndex((i) => id === String(i.id));
 	console.log("indexOfId" + indexOfId);
-
 	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+	//const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
-	// Selecting the right bill... <- Maria says this doesn't seem to have any relevance any longer
+	// Selecting the right bill...
 	const selectedBill = billData.filter((selected) => {
 		let res = selected.id === parseInt(id, 10);
 		return res;
@@ -75,10 +76,10 @@ const Bill = (color_logo) => {
 				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
-				Header: "Amount",
+				Header: <div className="lastColumn">{"Amount"}</div>,
 				accessor: "amount",
 				Cell: ({row}) => (
-					<div className={customRowStyle}>
+					<div className={`${customRowStyle} lastColumn1`}>
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
@@ -91,15 +92,15 @@ const Bill = (color_logo) => {
 	const generatedBill = selectedBill.map((bill) => {
 		return (
 			<BillStyled key={bill.id} color={Colors.lightGray}>
-				<header>
+				<HeaderStyled>
 					<h2>{bill.header.logoCompany}</h2>
 					<h2>{bill.header.invoiceID}</h2>
-				</header>
-				<div className="address-name-wrapper">
+				</HeaderStyled>
+				<AddressesWrapper>
 					<InvoiceRecipientStyled>
 						<div>
 							<p>Invoice to:</p>
-							<h2 className="bold">{bill.emisorReceiver.emisor.emName}</h2>
+							<h2>{bill.emisorReceiver.emisor.emName}</h2>
 							<p>{bill.emisorReceiver.emisor.emPosition}</p>
 							<br></br>
 							<p>Address:</p>
@@ -110,7 +111,7 @@ const Bill = (color_logo) => {
 					<InvoiceSenderStyled>
 						<div>
 							<p>Invoice from:</p>
-							<h2 className="m-0 bold">{bill.emisorReceiver.receiver.reName}</h2>
+							<h2>{bill.emisorReceiver.receiver.reName}</h2>
 							<p>{bill.emisorReceiver.receiver.rePosition}</p>
 							<br></br>
 							<p>Address:</p>
@@ -118,23 +119,24 @@ const Bill = (color_logo) => {
 							<p>{bill.emisorReceiver.emisor.emContact}</p>
 						</div>
 					</InvoiceSenderStyled>
-				</div>
-				<TableWrapperStyled borderColor={Colors.lightGrey}>
+				</AddressesWrapper>
+				<TableWrapperStyled>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</TableWrapperStyled>
 				<TermsAndCalcStyled>
-					<section className="terms">
+					<TermsStyled>
 						<h3>Terms & Conditions</h3>
 						<small>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore
 						</small>
-					</section>
-
+					</TermsStyled>
 					<CalcTableStyled>
 						<tbody>
 							<tr>
 								<th>Sub Total</th>
+								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -150,6 +152,8 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Tax(5%)</th>
+								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -168,6 +172,8 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Discount(10%)</th>
+								<td></td>
+
 								<td>
 									€{" "}
 									{selectedBill.map((amount) => {
@@ -187,9 +193,10 @@ const Bill = (color_logo) => {
 								</td>
 							</tr>
 							<tr>
-								<th className="bg-grey bold">GRAND TOTAL</th>
-								<td className="bg-grey bold">
-									<div>
+								<th className="bg-lightGrey bold">GRAND TOTAL</th>
+								<td className="bg-lightGrey"></td>
+								<td className="bg-lightGrey items-center">
+									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {
 											let itemsArr = amount.tradeData.items;
@@ -215,21 +222,20 @@ const Bill = (color_logo) => {
 				<PaySignStyled>
 					<PaymentMethodStyled>
 						<h3>Payment Method</h3>
-						<div className="pay">
+						<div>
 							<h5>Bank</h5>
 							<small>Account ID: {bill.payment.bank.accountID}</small>
 							<small>Account Name: {bill.payment.bank.accountName}</small>
 						</div>
-						<div className="pay">
+						<div>
 							<h5>Paypal</h5>
 							<small>Paypal ID: {bill.payment.paypal.accountName}</small>
 							<small>Account Name: {bill.payment.paypal.account}</small>
 						</div>
 					</PaymentMethodStyled>
 					<SignatureStyled>
-						<div className="signature-image" role="image">
-							{bill.signature.image}
-						</div>
+						<div className="signature-image">{bill.signature.image}</div>
+
 						<p>{bill.emisorReceiver.receiver.reName}</p>
 						<h4>{bill.emisorReceiver.receiver.rePosition}</h4>
 					</SignatureStyled>
@@ -253,7 +259,7 @@ const Bill = (color_logo) => {
 
 	return (
 		<BillComponentStyled>
-			<h2 className="logo" color_logo={color_logo}>
+			<h2 className="logo " color_logo={color_logo}>
 				LOGO EMPRESA
 			</h2>
 			{downloadBtn}
