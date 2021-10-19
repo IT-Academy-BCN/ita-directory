@@ -42,6 +42,5 @@ export const NotificationStyled = styled.div`
 			line-height: 1.2;
 			padding-left: 15px;
 		}
-
 	}
 `;
