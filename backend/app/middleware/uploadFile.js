@@ -24,21 +24,27 @@ const fileFilter = (req, file, cb) => {
 };
 
 const checkDupliates = (fileName, destination) => {
-	var slugIsUnique = true;
-	var count = 1;
-	let slug;
+	let newName;
 
-	do {
-		if (fs.existsSync(destination + "/" + fileName)) {
-			slugIsUnique = false;
-			count++;
-			slug = fileName + "-" + count;
+	if (fs.existsSync(destination + "/" + fileName)) {
+		let lastChar = fileName.charAt(fileName.length - 1);
+		if (!isNaN(lastChar)) {
+			lastChar++;
+			fileName = fileName.slice(0, -1);
+			newName = fileName + lastChar;
+			checkDupliates(newName);
+		} else {
+			newName = fileName + "-" + 1;
+			checkDupliates(newName);
 		}
-	} while (!slugIsUnique);
+	} else {
+		newName = fileName;
+	}
 
-	return slug;
+	return newName;
 };
 
+//Function from https://www.kindacode.com/article/how-to-generate-slugs-from-titles-in-node-js/
 const titleToSlug = (fileName, destination) => {
 	let slug;
 
