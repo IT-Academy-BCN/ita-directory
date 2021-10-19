@@ -1,6 +1,7 @@
 {
   "name": "ita-directory",
   "private": true,
+  "proxy": "http://localhost:5001",
   "workspaces": [
     "frontend",
     "backend",
