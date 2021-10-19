@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export const InputStyled = styled.div.attrs({
-	className: " w-full ",
-})``;
-
-export const StyledInput = styled.input.attrs({
+export const InputStyled = styled.input.attrs({
 	className: `w-full text-sm py-1.5 px-2 my-4 border rounded-md border-gray-200 hover:opacity-90`,
 })`
 	&:focus {

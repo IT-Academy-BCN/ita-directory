@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
 import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
-import {ChangePassword, Container, Form, Label, StyleRedirect, StyledError} from "./Login.styles";
+import {Container, Form, StyleRedirect, StyledError} from "./Login.styles";
 import Body from "components/layout/Body/Body";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
@@ -122,13 +122,13 @@ const Login = ({onLogin}) => {
 								label={"Password"}
 							/>
 						</div>
-						<ChangePassword>
+						{/* <ChangePassword>
 							<Label htmlFor="forgotpassword">
 								<Link to="/recover-password/:hash">
 									Has olvidado tu contraseña?
 								</Link>
 							</Label>
-						</ChangePassword>
+						</ChangePassword> */}
 						{error && (
 							<StyledError>
 								<p>{error}</p>
@@ -139,14 +139,21 @@ const Login = ({onLogin}) => {
 							loadingText="Accediendo"
 							iconPosition="left"
 							type="submit"
-							className="blueGradient mt-4"
+							className="w-full blueGradient mt-4"
 							isLoading={isLoading}
 							animated
 							disabled={disabled}
 						/>
-						<StyleRedirect>
-							No tienes cuenta? <Link to="/register"> Registrate</Link>
-						</StyleRedirect>
+						<div className="w-full mt-5">
+							<StyleRedirect>
+								Has olvidado tu contraseña?
+								<Link to="/recover-password/:hash">Recupérala</Link>
+							</StyleRedirect>
+							<StyleRedirect>
+								No tienes cuenta?
+								<Link to="/register">Regístrate</Link>
+							</StyleRedirect>
+						</div>
 					</Form>
 				</Container>
 			</Body>
