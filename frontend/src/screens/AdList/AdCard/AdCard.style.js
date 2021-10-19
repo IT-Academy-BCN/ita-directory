@@ -8,7 +8,7 @@ export const AdCardStyled = styled.div`
 	border-radius: 6px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 	margin-bottom: 1.5rem;
-	height: 175px;
+	height: 150px;
 	overflow: hidden;
 
 	img {
