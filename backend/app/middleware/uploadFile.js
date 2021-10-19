@@ -1,5 +1,4 @@
 const multer = require("multer");
-const slugify = require("slugify");
 const fs = require("fs");
 
 const allowMimeType = ["image/jpeg", "image/png"];
@@ -12,7 +11,7 @@ const date = new Date();
 const storage = multer.diskStorage({
 	destination: `public/${date.getFullYear()}/${date.getMonth()}`,
 	filename: (req, file, cb) => {
-		cb(null, Date.now() + slugName(file.originalname, destination));
+		cb(null, Date.now() + titleToSlug(file.originalname, destination));
 	},
 });
 
@@ -24,32 +23,49 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-const slugName = (fileName, destination) => {
-	const slug = slugify(fileName, {
-		replacement: "-",
-		remove: undefined,
-		lower: false,
-		strict: false,
-		locale: "en",
-		trim: true,
-	});
-	return checkDupliates(slug, destination);
+const checkDupliates = (fileName, destination) => {
+	let newName;
+
+	if (fs.existsSync(destination + "/" + fileName)) {
+		let lastChar = fileName.charAt(fileName.length - 1);
+		if (!isNaN(lastChar)) {
+			lastChar++;
+			fileName = fileName.slice(0, -1);
+			newName = fileName + lastChar;
+			checkDupliates(newName);
+		} else {
+			newName = fileName + "-" + 1;
+			checkDupliates(newName);
+		}
+	} else {
+		newName = fileName;
+	}
+
+	return newName;
 };
 
-const checkDupliates = (fileName, destination) => {
-	var slugIsUnique = true;
-	var count = 1;
+//Function from https://www.kindacode.com/article/how-to-generate-slugs-from-titles-in-node-js/
+const titleToSlug = (fileName, destination) => {
 	let slug;
 
-	do {
-		if (fs.existsSync(destination + "/" + fileName)) {
-			slugIsUnique = false;
-			count++;
-			slug = fileName + "-" + count;
-		}
-	} while (!slugIsUnique);
-	
-	return slug;
+	slug = fileName.toLowerCase();
+
+	slug = slug.replace(
+		/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+		""
+	);
+
+	slug = slug.replace(/ /gi, "-");
+
+	slug = slug.replace(/\-\-\-\-\-/gi, "-");
+	slug = slug.replace(/\-\-\-\-/gi, "-");
+	slug = slug.replace(/\-\-\-/gi, "-");
+	slug = slug.replace(/\-\-/gi, "-");
+
+	slug = "@" + slug + "@";
+	slug = slug.replace(/\@\-|\-\@|\@/gi, "");
+
+	return checkDupliates(slug, destination);
 };
 
 module.exports = multer({storage, fileFilter}).single("image");
