@@ -31,7 +31,6 @@ const Bill = (color_logo) => {
 	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 	//const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
-
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
 	// Selecting the right bill...
@@ -81,7 +80,6 @@ const Bill = (color_logo) => {
 				accessor: "amount",
 				Cell: ({row}) => (
 					<div className={`${customRowStyle} lastColumn1`}>
-
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
@@ -198,7 +196,6 @@ const Bill = (color_logo) => {
 								<th className="bg-lightGrey bold">GRAND TOTAL</th>
 								<td className="bg-lightGrey"></td>
 								<td className="bg-lightGrey items-center">
-
 									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {

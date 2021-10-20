@@ -17,7 +17,6 @@ const Bill = (color_logo) => {
 
 	// const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
-
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
 	// Selecting the right bill... <- Maria says this doesn't seem to have any relevance any longer
