@@ -147,11 +147,9 @@ const AdList = () => {
 								minM2={minM2}
 							/>
 							<div className="ads">
-								<div className="tree-search">Madrid // Alquiler</div>
+								<div className="tree-search">Madrid Alquiler</div>
 								<div className="h3">Listado de pisos</div>
 								<div className="rowWrapper"></div>
-								{/*here goes more map material*/}
-								{/*here goes commented map material*/}
 								<div>{renderList}</div>
 							</div>
 						</>
