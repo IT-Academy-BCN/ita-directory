@@ -8,15 +8,13 @@ import Body from "components/layout/Body/Body";
 // Units Components
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-// import PrivacyPolicy from "components/units/PrivacyPolicy/PrivacyPolicy";
 import Notification from "components/units/Notifications/Notification";
 
 // Styles
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 // Utilities
-import * as Utils from "utils/userFlow";
-import {msgs} from "utils/userFlow";
+import {validateEmail, validatePassword, msgs} from "utils/userFlow";
 
 const Register = ({retrieveUser}) => {
 	const [error, setError] = useState(false);
@@ -44,12 +42,12 @@ const Register = ({retrieveUser}) => {
 
 	// valid email?
 	useEffect(() => {
-		setIsEmailError(email !== "" ? !Utils.validateEmail(email) : false);
+		setIsEmailError(email !== "" ? !validateEmail(email) : false);
 	}, [email]);
 
 	// valid password?
 	useEffect(() => {
-		setIsPassError(password !== "" ? !Utils.validatePassword(password) : false);
+		setIsPassError(password !== "" ? !validatePassword(password) : false);
 	}, [password]);
 
 	const handleSubmit = (event) => {
@@ -72,7 +70,9 @@ const Register = ({retrieveUser}) => {
 
 	return (
 		<>
-			{error ? <Notification message={msgs.emailOrPasswordError} isSuccess={false} /> : null}
+			{error ? (
+				<Notification message={msgs.Ns.emailOrPasswordError} isSuccess={false} />
+			) : null}
 			{validacionConexion ? (
 				<Notification
 					email={email}
@@ -86,49 +86,53 @@ const Register = ({retrieveUser}) => {
 					<Form onSubmit={handleSubmit} novalidate>
 						<Input
 							type="email"
-							placeholder="Introduce tu email"
+							placeholder={msgs.placeholderEmail}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							name="emailName"
 							error={isEmailError}
-							errorText={msgs.emailInfo}
+							errorText={msgs.emailError}
 							disabled={disabled}
+							className="w-full"
 						/>
 						<Input
 							type="password"
-							placeholder="Introduce tu contraseña"
+							placeholder={msgs.placeholderPassword}
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							id="passName"
 							name="passName"
 							error={isPassError}
-							errorText={msgs.passwordInfo}
+							errorText={msgs.passwordError}
 							success={!isPassError && password !== ""}
 							disabled={disabled}
 							minLength={6}
+							className="w-full mt-2"
 						/>
-						<Input
-							type="checkbox"
-							label={
-								<RedirectStyled>
-									Acepto la <Link to="#">politica de privacidad</Link>
-								</RedirectStyled>
-							}
-							value={privacy}
-							onChange={() => setPrivacy((prev) => !prev)}
-							id="privacyPolicy"
-							name="privacyPolicy"
-							error={!privacy}
-							errorText={msgs.required}
-						/>
-						{/* <PrivacyPolicy /> */}
+						<div className="w-full mt-2">
+							<Input
+								type="checkbox"
+								label={
+									<RedirectStyled>
+										Acepto la <Link to="#">politica de privacidad</Link>.
+									</RedirectStyled>
+								}
+								value={privacy}
+								onChange={() => setPrivacy((prev) => !prev)}
+								id="privacyPolicy"
+								name="privacyPolicy"
+								error={!privacy}
+								errorText={msgs.required}
+								className="w-full mt-2"
+							/>
+						</div>
 						<AsyncButton
 							text="Registrarme"
 							loadingText="Registrando..."
 							iconPosition="left"
 							type="submit"
-							className="my-6 orangeGradientFullWidth"
+							className="my-8 orangeGradientFullWidth"
 							isLoading={isLoading}
 							animated={animated}
 							disabled={disabled}

@@ -6,9 +6,15 @@ export const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
 export const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
 export const msgs = {
-	emailOrPasswordError: "Ha habido un error con tu usuario o contraseña. Introdúcelos de nuevo.",
-	loginSuccess: ":bienvenido de nuevo. Te estamos redireccionando.",
-	emailInfo: "Introduce un email válido.",
-	passwordInfo: "6 o más caracteres y una Mayúscula.",
+	Ns: {
+		// Notifications
+		emailOrPasswordError:
+			"Ha habido un error con tu usuario o contraseña. Introdúcelos de nuevo.",
+		loginSuccess: "Bienvenido de nuevo. Te estamos redireccionando.",
+	},
+	emailError: "Introduce un email válido.",
+	passwordError: "6 o más caracteres y una Mayúscula.",
 	required: "Necesario",
+	placeholderEmail: "Email",
+	placeholderPassword: "Contraseña",
 };

@@ -2,16 +2,19 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const Container = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 65vh;
+	padding-bottom: 4rem;
+`;
+
+export const Form = styled.form`
 	background: #ffffff 0% 0% no-repeat padding-box;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	box-shadow: 0 2px 7px ${Colors.darkerShadow};
-	overflow: hidden;
-	max-width: 22rem;
-	margin: 8vh 1rem 18vh;
-`;
 
-export const Form = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -44,4 +47,9 @@ export const RedirectStyled = styled.div`
 			color: ${Colors.extraDarkBlue};
 		}
 	}
+`;
+
+export const LabelStyled = styled.label`
+	display: inline-block;
+	font: normal normal 300 14px/18px Helvetica Neue;
 `;

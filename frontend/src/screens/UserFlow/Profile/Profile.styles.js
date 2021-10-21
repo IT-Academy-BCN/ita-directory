@@ -6,8 +6,6 @@ export const BodyWrapper = styled.div`
 	justify-content: space-between;
 	flex-direction: column;
 	width: 100%;
-	height: 40rem;
-	margin: 2rem;
 `;
 
 export const StyledFormProfile = styled.form`
@@ -16,9 +14,7 @@ export const StyledFormProfile = styled.form`
 	flex-direction: column;
 	background: #f7f7f7 0% 0% no-repeat padding-box;
 	border-radius: 6px;
-	opacity: 1;
-	padding-right: 3.5rem;
-	padding-left: 3.5rem;
+	padding: 0 3.5rem;
 	width: 100%;
 	color: #4a4a4a;
 `;
@@ -63,12 +59,11 @@ export const StyledSaveWrapper = styled.div`
 export const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: column;
-	margin-right: 4.5rem;
-	margin-bottom: 0.5rem;
+	width: 50%;
 
 	p {
 		margin-top: 0;
 		font-style: italic;
-		font-size: 12px;
+		font-size: 0.75em;
 	}
 `;

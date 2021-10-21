@@ -9,10 +9,11 @@ import AsyncButton from "components/units/Button/Button";
 // import Notification from "components/units/Notifications/Notification";
 
 // Styles
-import {Container, StyledForm, StyledError} from "./RecoverPassword.styles";
+import {Container, Form, LabelStyled} from "../UserFlow.styles";
 
 // Utilities
 import * as Utils from "utils/userFlow";
+import {msgs} from "utils/userFlow";
 
 console.log(Utils.validatePassword());
 
@@ -38,7 +39,7 @@ const updateUser = (email, password) => {
 };
 
 const RecoverPassword = ({retrieveUser}) => {
-	const [error, setError] = useState("");
+	// const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -68,52 +69,45 @@ const RecoverPassword = ({retrieveUser}) => {
 
 		try {
 			updateUser(email, password, (error, token) => {
-				if (error) return setError(error.message);
+				// if (error) return setError(error.message);
 				retrieveUser(token);
 			});
 		} catch ({message}) {
-			setError(message);
+			// setError(message);
+			console.error(message);
 		}
 	};
 
 	return (
 		<Body title="Cambiar contraseña" justifyTitle="center">
 			<Container>
-				<StyledForm onSubmit={handleSubmit}>
-					<div className="classInput">
-						<label htmlFor="forgetpassword">
-							<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce
-							tu email y te enviaremos una nueva por correo.
-						</label>
-						<Input
-							type="email"
-							placeholder="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							id="emailName"
-							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address..."
-							disabled={disabled}
-						/>
-					</div>
-					{error && (
-						<StyledError>
-							<p>{error}</p>
-						</StyledError>
-					)}
+				<Form onSubmit={handleSubmit}>
+					<LabelStyled>
+						<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu
+						email y te enviaremos una nueva por correo.
+					</LabelStyled>
+					<Input
+						type="email"
+						placeholder={msgs.placeholderEmail}
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						id="emailName"
+						name="emailName"
+						error={isEmailError}
+						errorText={msgs.emailError}
+						disabled={disabled}
+					/>
 					<AsyncButton
 						text="Enviar"
 						loadingText="Enviando"
 						iconPosition="left"
 						type="submit"
-						className="orangeGradient"
-						textStyles={{marginLeft: 10}}
+						className="w-full orangeGradient mt-6"
 						isLoading={isLoading}
 						animated={animatedState}
 						disabled={disabled}
 					/>
-				</StyledForm>
+				</Form>
 			</Container>
 		</Body>
 	);

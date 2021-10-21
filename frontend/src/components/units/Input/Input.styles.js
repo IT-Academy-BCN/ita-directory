@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const InputWrapperStyled = styled.div`
+export const InputContainerStyled = styled.div.attrs({
+	className: `mt-4`,
+})`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -20,7 +22,6 @@ export const InputStyled = styled.input.attrs((props) => ({
 	text-sm 
 	py-1.5 
 	px-2
-	mt-4
 	border 
 	rounded-md 
 	hover:opacity-90 
@@ -38,5 +39,7 @@ export const ErrorStyled = styled.small.attrs({
 })`
 	display: block;
 	height: 0.1rem;
-	font-size: 0.7rem;
+	font-size: 0.6rem;
+	font-style: oblique;
+	text-align: center;
 `;

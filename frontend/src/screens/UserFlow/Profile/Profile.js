@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 import Input from "components/units/Input/Input";
@@ -11,12 +11,11 @@ import {
 	ImageWrapper,
 	StyledLabel,
 	BodyWrapper,
-	// StyledError,
 } from "./Profile.styles";
 import {Container} from "theme/GlobalStyles";
 
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+// Utilities
+import {msgs, validatePassword} from "utils/userFlow";
 
 const profilePicture =
 	"https://imagenes.20minutos.es/files/article_amp/uploads/2018/05/17/Aragorn01.jpg";
@@ -28,34 +27,30 @@ const Profile = () => {
 	const [isPassError2, setIsPassError2] = useState(false);
 	// const [disabled, setIsDisabled] = useState(true);
 	const [image, setImage] = useState(
-		"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg"
+		// "https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg"
+		profilePicture
 	);
 
-	const handleSubmit = (event) => {
+	const submitPhoto = (event) => {
 		event.preventDefault();
 		console.log("profile photo clicked");
 		setImage(profilePicture);
 	};
 
-	const handleSubmit2 = (event) => {
+	const submitUserInfo = (event) => {
 		event.preventDefault();
 		console.log("password saved");
 	};
 
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		const isPass = validatePassword(value);
-		setIsPassError(!isPass);
-	};
+	useEffect(() => {
+		setIsPassError(!validatePassword(password));
+		setPassword2("");
+	}, [password]);
 
-	const handlePasswordChange2 = (value) => {
-		setPassword2(value);
-		if (password === password2) {
-			setIsPassError2(false);
-		} else {
-			setIsPassError2(true);
-		}
-	};
+	useEffect(() => {
+		setIsPassError2(!((password2 !== "") & (password === password2)));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [password2]);
 
 	return (
 		<Body
@@ -67,7 +62,9 @@ const Profile = () => {
 		>
 			<Container>
 				<BodyWrapper>
-					<StyledFormProfile onSubmit={handleSubmit}>
+					<StyledFormProfile onSubmit={submitPhoto}>
+						{" "}
+						{/* FAKE */}
 						<StyledPhotoWrapper>
 							<ImageWrapper>
 								<img src={image} alt={"Foto"} width="200" />
@@ -88,8 +85,9 @@ const Profile = () => {
 							</StyleUploadPhotoWrapper>
 						</StyledPhotoWrapper>
 					</StyledFormProfile>
-
-					<StyledFormProfile onSubmit={handleSubmit2}>
+					<StyledFormProfile onSubmit={submitUserInfo}>
+						{" "}
+						{/* FAKE */}
 						<StyledInputsWrapper>
 							<StyledLabel>
 								<label htmlFor="username">Nombre de usuario</label>
@@ -117,30 +115,38 @@ const Profile = () => {
 						</StyledInputsWrapper>
 						<StyledInputsWrapper>
 							<StyledLabel>
-								<label htmlFor="passName">Nueva Constraseña</label>
+								<label htmlFor="passName">Nueva Contraseña</label>
 								<Input
 									type="password"
+									value={password}
 									placeholder="Introducir contraseña"
-									onChange={(e) => handlePasswordChange(e.target.value)}
+									onChange={(e) => setPassword(e.target.value)}
 									className="errorProfile"
 									id="passName"
 									name="passName"
-									error={isPassError}
-									errorText="The password to contain more than 6 characters and a uppercase letter"
+									error={password !== "" && isPassError}
+									errorText={msgs.passwordError}
+									success={password !== "" && !isPassError}
 									minLength={6}
 								/>
 							</StyledLabel>
 							<StyledLabel>
-								<label htmlFor="confirmPassName">Confirmar Constraseña</label>
+								<label htmlFor="confirmPassName">Confirmar Contraseña</label>
 								<Input
 									type="password"
+									value={password2}
 									placeholder="Confirma tu contraseña"
-									onChange={(e) => handlePasswordChange2(e.target.value)}
+									onChange={(e) => setPassword2(e.target.value)}
+									onBlur={() => {
+										if (isPassError) setPassword2("");
+									}}
 									className="errorProfile"
 									id="confirmPassName"
 									name="confirmPassName"
-									error={isPassError2}
-									errorText="Both passwords must be equal"
+									error={password2 !== "" && isPassError2}
+									errorText="Las 2 contraseñas tienen que ser iguales"
+									success={password2 !== "" && !isPassError2}
+									disabled={isPassError}
 									minLength={6}
 								/>
 							</StyledLabel>
@@ -151,6 +157,7 @@ const Profile = () => {
 								loadingText="Guardando"
 								type="submit"
 								className="greenGradient"
+								disabled={isPassError || isPassError2}
 							/>
 						</StyledSaveWrapper>
 					</StyledFormProfile>
