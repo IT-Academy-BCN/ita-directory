@@ -13,7 +13,7 @@ const Notification = ({message, isSuccess, setError}) => {
 				/>
 				<p>{message}</p>
 
-				<button onClick={() => setError(false)}>X</button>
+				{!isSuccess ? <button onClick={() => setError(false)}>X</button> : null}
 			</div>
 		</NotificationStyled>
 	);
