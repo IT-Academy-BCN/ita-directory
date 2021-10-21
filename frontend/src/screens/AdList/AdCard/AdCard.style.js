@@ -8,10 +8,11 @@ export const AdCardStyled = styled.div`
 	border-radius: 6px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 	margin-bottom: 1.5rem;
+	height: 175px;
+	overflow: hidden;
 
 	img {
-		width: 40%;
-		height: 240px;
+		height: 175px;
 		object-fit: cover;
 		border-radius: 6px;
 	}
@@ -20,33 +21,55 @@ export const AdCardStyled = styled.div`
 		display: flex;
 		flex-direction: column;
 		padding: 1rem 1.5rem;
+		.content-text {
+			p.address {
+				font-size: 14px;
+				color: #666;
+			}
 
-		p.address {
-			font-size: 14px;
-			color: #666;
-		}
+			.property-data {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-wrap: wrap;
 
-		.property-data {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			flex-wrap: wrap;
+				span {
+					font-size: 14px;
+				}
 
-			span {
+				span.price {
+					color: ${Colors.darkOrange};
+					font-weight: bold;
+					font-size: 18px;
+				}
+			}
+
+			.description {
 				font-size: 14px;
 			}
+		}
+	}
+	@media (min-width: 768px) {
+		display: grid;
+		grid-template-columns: 30% 70%;
 
-			span.price {
-				color: ${Colors.darkOrange};
-				font-weight: bold;
-				font-size: 18px;
-			}
+		img {
+			width: 100%;
+			height: 240px;
+			object-fit: cover;
+			border-radius: 6px;
 		}
 
-		.description {
-			font-size: 14px;
-			margin-top: 1.25rem;
-			margin-bottom: 1.25rem;
+		.content {
+			display: flex;
+			flex-direction: column;
+			padding: 1.5rem;
+			height: 100%;
+		}
+
+		.address,
+		.property-data {
+			padding-bottom: 1rem;
 		}
 	}
 `;

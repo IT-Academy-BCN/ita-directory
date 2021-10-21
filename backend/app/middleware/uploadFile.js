@@ -8,10 +8,11 @@ const extToMime = (type) => {
 };
 
 const date = new Date();
+const dest = `public/${date.getFullYear()}/${date.getMonth()}`;
 const storage = multer.diskStorage({
-	destination: `public/${date.getFullYear()}/${date.getMonth()}`,
+	destination: dest,
 	filename: (req, file, cb) => {
-		cb(null, Date.now() + titleToSlug(file.originalname, destination));
+		cb(null, titleToSlug(file.originalname, dest));
 	},
 });
 

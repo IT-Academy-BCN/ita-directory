@@ -9,7 +9,7 @@
     "prisma:migrate-dev": "prisma migrate dev",
     "prisma:seed": "npx prisma db seed --preview-feature",
     "start:dev": "npm run prisma:generate && npm run prisma:migrate-dev && npm run prisma:seed && npm run dev",
-    "test": "test"
+    "test": "jest"
   },
   "keywords": [
     "node",
@@ -27,6 +27,7 @@
     "express-jsdoc-swagger": "^1.6.2",
     "hashids": "^2.2.8",
     "helmet": "^4.6.0",
+    "jest": "^27.3.1",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mariadb": "^2.5.3",
@@ -38,7 +39,8 @@
     "sequelize": "^6.3.5",
     "sequelize-auto": "^0.8.3",
     "slugify": "^1.6.1",
-    "socket.io": "^4.1.2"
+    "socket.io": "^4.1.2",
+    "supertest": "^6.1.6"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

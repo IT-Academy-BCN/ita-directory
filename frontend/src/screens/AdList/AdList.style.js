@@ -26,11 +26,11 @@ export const FilterDiv = styled.div`
 
 export const AdListStyled = styled.div`
 	width: 100%;
-	.TreeSearch {
+	.tree-search {
 		text-align: left;
 		letter-spacing: 0px;
-		color: ${Colors.ligthGray};
-		opacity: 1;
+		color: ${Colors.lightGrey};
+		font-style: italic;
 	}
 
 	.h3 {
