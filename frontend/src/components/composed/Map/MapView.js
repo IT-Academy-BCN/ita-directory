@@ -65,14 +65,12 @@ function SetBounds({bounds}) {
 }
 
 const MapView = ({filteredAds}) => {
-	let maxMinBounds = getMaxMin(filteredAds);
-
+	const maxMinBounds = getMaxMin(filteredAds);
 	const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(maxMinBounds);
 
 	useEffect(() => {
 		setFitBoundsCoordinates(getMaxMin(filteredAds));
 	}, [filteredAds]);
-	console.log("bounds coordinates", fitBoundsCoordinates);
 
 	return (
 		<MapContainer
