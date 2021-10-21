@@ -18,6 +18,10 @@ export const InputStyled = styled.input.attrs((props) => ({
 		border: 1px solid
 			${(props) => (props.error ? "red" : props.success ? "green" : Colors.darkBlue)};
 	}
+
+	& + label {
+		display: inline;
+	}
 `;
 
 export const ErrorStyled = styled.small.attrs({

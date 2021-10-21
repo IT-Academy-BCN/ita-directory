@@ -1,17 +1,20 @@
-import React, {useState} from "react";
-import Input from "components/units/Input/Input";
-import AsyncButton from "components/units/Button/Button";
-import {Container, StyledForm, StyledError} from "./RecoverPassword.styles";
+import {useEffect, useState} from "react";
+
+// Layout Components
 import Body from "components/layout/Body/Body";
 
-const EMAIL_REGEX =
-	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
+// Units Components
+import Input from "components/units/Input/Input";
+import AsyncButton from "components/units/Button/Button";
+// import Notification from "components/units/Notifications/Notification";
 
-const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+// Styles
+import {Container, StyledForm, StyledError} from "./RecoverPassword.styles";
 
-console.log(validatePassword());
+// Utilities
+import * as Utils from "utils/userFlow";
+
+console.log(Utils.validatePassword());
 
 const users = [
 	{
@@ -39,18 +42,19 @@ const RecoverPassword = ({retrieveUser}) => {
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [isEmailError, setIsEmailError] = useState(false);
-
-	const handleEmailChange = (value) => {
-		setEmail(value);
-		const isEmail = validateEmail(value);
-		setIsEmailError(!isEmail);
-	};
-
 	const [email, setEmail] = useState("");
-	// const [password, setPassword] = useState("");
-	const password = "";
+	const [isEmailError, setIsEmailError] = useState(false);
+	const [password, setPassword] = useState("");
+
+	// provisional
+	useEffect(() => {
+		setPassword("");
+	}, []);
+
+	useEffect(() => {
+		setIsEmailError(email !== "" ? !Utils.validateEmail(email) : false);
+	}, [email]);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setAnimatedState(true);
@@ -85,7 +89,7 @@ const RecoverPassword = ({retrieveUser}) => {
 							type="email"
 							placeholder="email"
 							value={email}
-							onChange={(e) => handleEmailChange(e.target.value)}
+							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							name="emailName"
 							error={isEmailError}

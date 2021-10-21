@@ -1,23 +1,25 @@
-import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+
+// Layout Components
+import Body from "components/layout/Body/Body";
+
+// Units Components
 import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
-import {Container, Form, RedirectStyled} from "./Login.styles";
-import Body from "components/layout/Body/Body";
-import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 
-// eslint-disable-next-line no-useless-escape
-const EMAIL_REGEX =
-	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
+// Styles
+import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
-const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+// Utilities
+import * as Utils from "utils/userFlow";
+import {msgs} from "utils/userFlow";
 
 const Login = ({onLogin}) => {
 	const [error, setError] = useState(false);
+	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isEmailError, setIsEmailError] = useState(false);
@@ -40,21 +42,23 @@ const Login = ({onLogin}) => {
 
 	// valid email?
 	useEffect(() => {
-		setIsEmailError(email !== "" ? !validateEmail(email) : false);
+		setIsEmailError(email !== "" ? !Utils.validateEmail(email) : false);
 	}, [email]);
 
 	// valid password?
 	useEffect(() => {
-		setIsPassError(password !== "" ? !validatePassword(password) : false);
+		setIsPassError(password !== "" ? !Utils.validatePassword(password) : false);
 	}, [password]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setIsDisabled(true);
 		setIsLoading(true);
+		setAnimated(true);
 		setTimeout(() => {
 			setIsDisabled(false);
 			setIsLoading(false);
+			setAnimated(false);
 			loginUser({
 				email,
 				password,
@@ -69,26 +73,15 @@ const Login = ({onLogin}) => {
 
 	return (
 		<>
-			{error ? (
-				<Notification
-					message={
-						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
-					}
-					isSuccess={false}
-				/>
-			) : null}
+			{error ? <Notification message={msgs.emailOrPasswordError} isSuccess={false} /> : null}
 
 			{validacionLogin ? (
-				<Notification
-					email={email}
-					message={":bienvenido de nuevo.Te estamos redireccionando."}
-					isSuccess={true}
-				/>
+				<Notification email={email} message={msgs.loginSuccess} isSuccess={true} />
 			) : null}
 
-			<Body title="Acceso" isLoggedIn={false} justifyTitle={"center"}>
+			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
-					<Form onSubmit={handleSubmit}>
+					<Form onSubmit={handleSubmit} novalidate>
 						<Input
 							type="email"
 							placeholder="Introduce tu email"
@@ -97,10 +90,11 @@ const Login = ({onLogin}) => {
 							id="emailName"
 							name="emailName"
 							error={isEmailError}
-							errorText="Enter a valid email address"
+							errorText={msgs.emailInfo}
 							success={!isEmailError && email !== ""}
 							disabled={disabled}
 							label={"Email"}
+							className="w-full"
 						/>
 						<Input
 							type="password"
@@ -110,7 +104,7 @@ const Login = ({onLogin}) => {
 							id="passName"
 							name="passName"
 							error={isPassError}
-							errorText="More than 6 chars and a uppercase letter"
+							errorText={msgs.passwordInfo}
 							success={!isPassError && password !== ""}
 							disabled={disabled}
 							minLength={6}
@@ -122,9 +116,9 @@ const Login = ({onLogin}) => {
 							loadingText="Accediendo"
 							iconPosition="left"
 							type="submit"
-							className="w-full blueGradient my-10"
+							className="blueGradientFullWidthFontNormal my-6"
 							isLoading={isLoading}
-							animated
+							animated={animated}
 							disabled={disabled}
 						/>
 						<div className="w-full">

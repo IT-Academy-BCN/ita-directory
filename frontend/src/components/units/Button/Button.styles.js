@@ -7,13 +7,19 @@ const StyledButton = styled.button.attrs({
 	box-shadow: ${theme`boxShadow.button-shadow`};
 
 	&.blueGradient {
-		${tw`font-thin text-xs  text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
+		${tw`font-thin text-xs text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
 	}
 	&.blueGradientFullWidth {
 		${tw`font-thin text-xs w-full text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
 	}
+	&.blueGradientFullWidthFontNormal {
+		${tw`w-full text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
+	}
 	&.orangeGradient {
 		${tw`text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90`}
+	}
+	&.orangeGradientFullWidth {
+		${tw`w-full text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90`}
 	}
 	&.blueGradientProfile {
 		${tw`w-28 text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}

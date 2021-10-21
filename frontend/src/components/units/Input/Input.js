@@ -34,25 +34,28 @@ const Input = ({
 	return (
 		<>
 			{hasIcon && <FontAwesomeIcon icon={icon} />}
-			<InputStyled
-				type={type}
-				placeholder={placeholder}
-				value={value}
-				onChange={onChange}
-				onFocus={onFocus}
-				onBlur={onBlur}
-				className={`${className} ${error ? "error" : ""}`}
-				id={id}
-				name={name}
-				disabled={disabled}
-				minLength={minlength}
-				maxLength={maxlength}
-				size={size}
-				success={success}
-				error={error}
-				required={required}
-				style={inputStyles}
-			/>
+			<div className="w-full">
+				<InputStyled
+					type={type}
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					className={`${className} ${error ? "error" : ""}`}
+					id={id}
+					name={name}
+					disabled={disabled}
+					minLength={minlength}
+					maxLength={maxlength}
+					size={size}
+					success={success}
+					error={error}
+					required={required}
+					style={inputStyles}
+				/>
+				{label && type === "checkbox" && <label>{label}</label>}
+			</div>
 			<ErrorStyled
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				styles={errorStyles}
