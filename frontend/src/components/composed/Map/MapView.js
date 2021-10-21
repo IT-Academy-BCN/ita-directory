@@ -4,15 +4,17 @@ import MapMarkers from "./MapMarkers";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
-function getMaxMin(ads, prop) {
-	let minLat = undefined;
-	let maxLat = undefined;
-	let minLong = undefined;
-	let maxLong = undefined;
+function getMaxMin(ads) {
+	let minLat = 0;
+	let maxLat = 0;
+	let minLong = 0;
+	let maxLong = 0;
+
 	for (let i = 0; i < ads.length; i++) {
+		//set adLat and AdLong
 		const ad = ads[i];
-		const adLat = parseFloat(ad.lat);
-		const adLong = parseFloat(ad.long);
+		const adLat = parseFloat(ad.map_lat);
+		const adLong = parseFloat(ad.map_lon);
 
 		if (minLat) {
 			minLat = minLat > adLat ? adLat : minLat;
@@ -38,8 +40,10 @@ function getMaxMin(ads, prop) {
 			maxLong = adLong;
 		}
 	}
-	// Este condicional añade coordenadas en el caso de que la busqueda no devuelva resultados
-	if (!ads.legth) {
+
+	//console.log("minlat", minLat);
+
+	if (ads.legth === 0) {
 		return {
 			topLeft: [41.478316, 2.073087],
 			bottomRight: [41.351637, 2.267592],
@@ -47,6 +51,7 @@ function getMaxMin(ads, prop) {
 	}
 
 	// // Latitud = horizontal, longitud = vertical
+	//console.log("MaxMinBounds", minLat, maxLong, maxLat, minLong)
 	return {
 		topLeft: [minLat, maxLong],
 		bottomRight: [maxLat, minLong],
@@ -60,7 +65,9 @@ function SetBounds({bounds}) {
 }
 
 const MapView = ({filteredAds}) => {
-	const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(getMaxMin(filteredAds));
+	const maxMinBounds = getMaxMin(filteredAds);
+	const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(maxMinBounds);
+
 	useEffect(() => {
 		setFitBoundsCoordinates(getMaxMin(filteredAds));
 	}, [filteredAds]);

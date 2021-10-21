@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, {useEffect, useState} from "react";
 import AdCard from "screens/AdList/AdCard/AdCard";
 import Body from "components/layout/Body/Body";
@@ -30,7 +29,7 @@ const buttonStyle = {
 
 const AdList = () => {
 	const [filtro, setFiltro] = useState();
-	const [mapView, setMapView] = useState(true);
+	const [mapView, setMapView] = useState(false);
 	const [filteredAdList, setFilteredAdlist] = useState([]);
 	const [adList, setAdList] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -41,14 +40,11 @@ const AdList = () => {
 
 	useEffect(() => {
 		const fetchAds = async () => {
-			const result = await axios("https://api-casas.kevinmamaqi.com/api-casas", {
-				params: {_limit: 10}, //parece no estar implemententado en el api de casas
-			});
-			setAdList(result.data.slice(0, 50));
+			const result = await axios("http://localhost:5000/ads/v1/ads");
+			setAdList(result.data.data);
 			setLoading(false);
 		};
 		fetchAds();
-		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
