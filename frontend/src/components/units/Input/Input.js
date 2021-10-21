@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {InputStyled, ErrorStyled} from "./Input.styles";
+import {InputStyled, ErrorStyled} from "./Input.styles"; /*InputWrapperStyled*/
 
 const Input = ({
 	type,
@@ -33,29 +33,30 @@ const Input = ({
 
 	return (
 		<>
+			{/* <InputWrapperStyled className="w-full"> */}
 			{hasIcon && <FontAwesomeIcon icon={icon} />}
-			<div className="w-full">
-				<InputStyled
-					type={type}
-					placeholder={placeholder}
-					value={value}
-					onChange={onChange}
-					onFocus={onFocus}
-					onBlur={onBlur}
-					className={`${className} ${error ? "error" : ""}`}
-					id={id}
-					name={name}
-					disabled={disabled}
-					minLength={minlength}
-					maxLength={maxlength}
-					size={size}
-					success={success}
-					error={error}
-					required={required}
-					style={inputStyles}
-				/>
-				{label && type === "checkbox" && <label>{label}</label>}
-			</div>
+			{label && type !== "checkbox" && <label>{label}</label>}
+			<InputStyled
+				type={type}
+				placeholder={placeholder}
+				value={value}
+				onChange={onChange}
+				onFocus={onFocus}
+				onBlur={onBlur}
+				className={`${className} ${error ? "error" : ""}`}
+				id={id}
+				name={name}
+				disabled={disabled}
+				minLength={minlength}
+				maxLength={maxlength}
+				size={size}
+				success={success}
+				error={error}
+				required={required}
+				style={inputStyles}
+			/>
+			{label && type === "checkbox" && <label>{label}</label>}
+			{/* </InputWrapperStyled> */}
 			<ErrorStyled
 				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
 				styles={errorStyles}

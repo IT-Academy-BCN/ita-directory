@@ -93,7 +93,6 @@ const Login = ({onLogin}) => {
 							errorText={msgs.emailInfo}
 							success={!isEmailError && email !== ""}
 							disabled={disabled}
-							label={"Email"}
 							className="w-full"
 						/>
 						<Input
@@ -108,7 +107,6 @@ const Login = ({onLogin}) => {
 							success={!isPassError && password !== ""}
 							disabled={disabled}
 							minLength={6}
-							label={"Password"}
 							className="w-full mt-6"
 						/>
 						<AsyncButton

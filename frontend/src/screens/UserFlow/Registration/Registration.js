@@ -60,7 +60,7 @@ const Register = ({retrieveUser}) => {
 		registerUser({
 			email,
 			password,
-			privacy: true,
+			privacy,
 		});
 
 		setTimeout(() => {
@@ -120,7 +120,7 @@ const Register = ({retrieveUser}) => {
 							id="privacyPolicy"
 							name="privacyPolicy"
 							error={!privacy}
-							errorText="Necesario"
+							errorText={msgs.required}
 						/>
 						{/* <PrivacyPolicy /> */}
 						<AsyncButton

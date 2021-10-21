@@ -1,13 +1,26 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
+export const InputWrapperStyled = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+
+	& input[type="checkbox"] {
+		width: 1rem;
+		margin: 0;
+		margin-right: 0.25rem;
+	}
+`;
+
 export const InputStyled = styled.input.attrs((props) => ({
 	className: `
 	w-full 
 	text-sm 
 	py-1.5 
-	px-2 
-	mt-4 
+	px-2
+	mt-4
 	border 
 	rounded-md 
 	hover:opacity-90 
@@ -17,10 +30,6 @@ export const InputStyled = styled.input.attrs((props) => ({
 		outline: 0 none;
 		border: 1px solid
 			${(props) => (props.error ? "red" : props.success ? "green" : Colors.darkBlue)};
-	}
-
-	& + label {
-		display: inline;
 	}
 `;
 

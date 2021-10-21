@@ -10,4 +10,5 @@ export const msgs = {
 	loginSuccess: ":bienvenido de nuevo. Te estamos redireccionando.",
 	emailInfo: "Introduce un email válido.",
 	passwordInfo: "6 o más caracteres y una Mayúscula.",
+	required: "Necesario",
 };
