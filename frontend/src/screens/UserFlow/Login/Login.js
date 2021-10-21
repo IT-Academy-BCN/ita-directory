@@ -75,6 +75,7 @@ const Login = ({onLogin}) => {
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
 					isSuccess={false}
+					setError={setError}
 				/>
 			) : null}
 

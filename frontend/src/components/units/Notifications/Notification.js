@@ -3,7 +3,7 @@ import {NotificationStyled} from "./Notification.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 
-const Notification = ({message, isSuccess}) => {
+const Notification = ({message, isSuccess, setError}) => {
 	return (
 		<NotificationStyled isSuccess={isSuccess}>
 			<div className="color">
@@ -12,6 +12,8 @@ const Notification = ({message, isSuccess}) => {
 					style={{color: "white", width: "30px", height: "30px"}}
 				/>
 				<p>{message}</p>
+
+				<button onClick={() => setError(false)}>X</button>
 			</div>
 		</NotificationStyled>
 	);
