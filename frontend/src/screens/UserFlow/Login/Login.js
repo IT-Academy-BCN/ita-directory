@@ -24,7 +24,12 @@ const Login = ({onLogin}) => {
 	const [isPassError, setIsPassError] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [validacionLogin, setValidacionLogin] = useState();
+	const [validacionLogin, setValidacionLogin] = useState(false);
+
+	//
+	const closeNotification = () => {
+		return setError(false), setValidacionLogin(false);
+	};
 
 	const loginUser = async (user) => {
 		try {
@@ -75,15 +80,18 @@ const Login = ({onLogin}) => {
 						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
 					}
 					isSuccess={false}
-					setError={setError}
+					closeNotification={closeNotification}
+					autoClose={true}
 				/>
 			) : null}
 
 			{validacionLogin ? (
 				<Notification
 					email={email}
-					message={":bienvenido de nuevo.Te estamos redireccionando."}
+					message={"Bienvenido de nuevo. Te estamos redireccionando."}
 					isSuccess={true}
+					closeNotification={closeNotification}
+					autoClose={true}
 				/>
 			) : null}
 
