@@ -4,18 +4,14 @@ import {useEffect, useState} from "react";
 import Body from "components/layout/Body/Body";
 
 // Units Components
-import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
-// import Notification from "components/units/Notifications/Notification";
+import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Styles
 import {Container, Form, LabelStyled} from "../UserFlow.styles";
 
 // Utilities
-import * as Utils from "utils/userFlow";
 import {msgs} from "utils/userFlow";
-
-console.log(Utils.validatePassword());
 
 const users = [
 	{
@@ -44,17 +40,13 @@ const RecoverPassword = ({retrieveUser}) => {
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
-	const [isEmailError, setIsEmailError] = useState(false);
+	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
 
 	// provisional
 	useEffect(() => {
 		setPassword("");
 	}, []);
-
-	useEffect(() => {
-		setIsEmailError(email !== "" ? !Utils.validateEmail(email) : false);
-	}, [email]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -86,16 +78,15 @@ const RecoverPassword = ({retrieveUser}) => {
 						<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu
 						email y te enviaremos una nueva por correo.
 					</LabelStyled>
-					<Input
+					<InputValidated
 						type="email"
 						placeholder={msgs.placeholderEmail}
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						id="emailName"
 						name="emailName"
-						error={isEmailError}
-						errorText={msgs.emailError}
 						disabled={disabled}
+						valid={setValidEmail}
 					/>
 					<AsyncButton
 						text="Enviar"
@@ -105,7 +96,7 @@ const RecoverPassword = ({retrieveUser}) => {
 						className="w-full orangeGradient mt-6"
 						isLoading={isLoading}
 						animated={animatedState}
-						disabled={disabled}
+						disabled={!validEmail}
 					/>
 				</Form>
 			</Container>

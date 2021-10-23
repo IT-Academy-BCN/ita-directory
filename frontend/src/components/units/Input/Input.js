@@ -28,12 +28,17 @@ const Input = ({
 	inputContainerClassName,
 	required,
 	icon,
+	minMarginTop,
 }) => {
 	const hasIcon = icon ? true : false;
 
 	return (
 		<>
-			<InputContainerStyled className="w-full">
+			<InputContainerStyled
+				className="w-full InputContainer"
+				type={type}
+				minMarginTop={minMarginTop}
+			>
 				{hasIcon && <FontAwesomeIcon icon={icon} />}
 				{label && type !== "checkbox" && <label>{label}</label>}
 				<InputStyled
@@ -88,6 +93,7 @@ Input.propTypes = {
 	success: PropTypes.bool,
 	inputContainerClassName: PropTypes.string,
 	required: PropTypes.bool,
+	minMarginTop: PropTypes.bool,
 };
 
 export default Input;

@@ -1,19 +1,13 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-export const InputContainerStyled = styled.div.attrs({
-	className: `mt-4`,
-})`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-
-	& input[type="checkbox"] {
-		width: 1rem;
-		margin: 0;
-		margin-right: 0.25rem;
-	}
+export const InputContainerStyled = styled.div.attrs((props) => ({
+	className: `${props.minMarginTop ? "mt-0.5" : "mt-4"}`,
+}))`
+	${(props) =>
+		props.type === "checkbox" &&
+		`display: flex;
+		align-items: center;`}
 `;
 
 export const InputStyled = styled.input.attrs((props) => ({

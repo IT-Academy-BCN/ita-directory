@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -6,7 +6,8 @@ import axios from "axios";
 import Body from "components/layout/Body/Body";
 
 // Units Components
-import Input from "components/units/Input/Input";
+import CheckBox from "components/units/CheckBox/CheckBox";
+import InputValidated from "components/units/InputValidated/InputValidated";
 import AsyncButton from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
 
@@ -14,18 +15,18 @@ import Notification from "components/units/Notifications/Notification";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 // Utilities
-import {validateEmail, validatePassword, msgs} from "utils/userFlow";
+import {msgs} from "utils/userFlow";
 
 const Register = ({retrieveUser}) => {
 	const [error, setError] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isEmailError, setIsEmailError] = useState(false);
-	const [isPassError, setIsPassError] = useState(false);
 	const [validacionConexion, setValidacionConexion] = useState(false);
 	const [email, setEmail] = useState("");
+	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
+	const [validPassword, setValidPassword] = useState(false);
 	const [privacy, setPrivacy] = useState(false);
 
 	const registerUser = async (user) => {
@@ -39,16 +40,6 @@ const Register = ({retrieveUser}) => {
 			setError(true);
 		}
 	};
-
-	// valid email?
-	useEffect(() => {
-		setIsEmailError(email !== "" ? !validateEmail(email) : false);
-	}, [email]);
-
-	// valid password?
-	useEffect(() => {
-		setIsPassError(password !== "" ? !validatePassword(password) : false);
-	}, [password]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -84,35 +75,31 @@ const Register = ({retrieveUser}) => {
 			<Body title="Registro" justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>
-						<Input
+						<InputValidated
 							type="email"
 							placeholder={msgs.placeholderEmail}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							name="emailName"
-							error={isEmailError}
-							errorText={msgs.emailError}
 							disabled={disabled}
 							className="w-full"
+							valid={setValidEmail}
 						/>
-						<Input
+						<InputValidated
 							type="password"
 							placeholder={msgs.placeholderPassword}
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							id="passName"
 							name="passName"
-							error={isPassError}
-							errorText={msgs.passwordError}
-							success={!isPassError && password !== ""}
 							disabled={disabled}
 							minLength={6}
 							className="w-full mt-2"
+							valid={setValidPassword}
 						/>
 						<div className="w-full mt-2">
-							<Input
-								type="checkbox"
+							<CheckBox
 								label={
 									<RedirectStyled>
 										Acepto la <Link to="#">politica de privacidad</Link>.
@@ -135,7 +122,7 @@ const Register = ({retrieveUser}) => {
 							className="my-8 orangeGradientFullWidth"
 							isLoading={isLoading}
 							animated={animated}
-							disabled={disabled}
+							disabled={!validEmail || !validPassword || !privacy}
 						/>
 						<RedirectStyled>
 							Tienes una cuenta? <Link to="/login">Inicia sesión</Link>

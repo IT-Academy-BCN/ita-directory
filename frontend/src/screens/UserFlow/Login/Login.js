@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -6,15 +6,14 @@ import axios from "axios";
 import Body from "components/layout/Body/Body";
 
 // Units Components
-import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
+import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Styles
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 // Utilities
-import * as Utils from "utils/userFlow";
 import {msgs} from "utils/userFlow";
 
 const Login = ({onLogin}) => {
@@ -23,10 +22,10 @@ const Login = ({onLogin}) => {
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isEmailError, setIsEmailError] = useState(false);
-	const [isPassError, setIsPassError] = useState(false);
 	const [email, setEmail] = useState("");
+	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
+	const [validPassword, setValidPassword] = useState(false);
 
 	const loginUser = async (user) => {
 		try {
@@ -39,16 +38,6 @@ const Login = ({onLogin}) => {
 			setLoginError(true);
 		}
 	};
-
-	// valid email?
-	useEffect(() => {
-		setIsEmailError(email !== "" ? !Utils.validateEmail(email) : false);
-	}, [email]);
-
-	// valid password?
-	useEffect(() => {
-		setIsPassError(password !== "" ? !Utils.validatePassword(password) : false);
-	}, [password]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -63,6 +52,7 @@ const Login = ({onLogin}) => {
 				email,
 				password,
 				privacy: true,
+				// debe añadirse ChechBox de privacidad?
 			});
 			setTimeout(() => {
 				setIsDisabled(false);
@@ -84,32 +74,28 @@ const Login = ({onLogin}) => {
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>
-						<Input
+						<InputValidated
 							type="email"
 							placeholder="Introduce tu email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							name="emailName"
-							error={isEmailError}
-							errorText={msgs.emailError}
-							success={!isEmailError && email !== ""}
 							disabled={disabled}
 							className="w-full"
+							valid={setValidEmail}
 						/>
-						<Input
+						<InputValidated
 							type="password"
 							placeholder="Introduce tu contraseña"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							id="passName"
 							name="passName"
-							error={isPassError}
-							errorText={msgs.passwordError}
-							success={!isPassError && password !== ""}
 							disabled={disabled}
 							minLength={6}
 							className="w-full mt-2"
+							valid={setValidPassword}
 						/>
 						<AsyncButton
 							text="Acceder"
@@ -119,7 +105,7 @@ const Login = ({onLogin}) => {
 							className="blueGradientFullWidthFontNormal my-8"
 							isLoading={isLoading}
 							animated={animated}
-							disabled={disabled}
+							disabled={!validEmail || !validPassword}
 						/>
 						<div className="w-full">
 							<RedirectStyled>
