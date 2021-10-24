@@ -19,8 +19,14 @@ export const ProfileForm = styled.form`
 	gap: 2rem 2rem;
 	color: #4a4a4a;
 
-	& + div {
-		height: fit-content;
+	& > div,
+	& > button {
+		align-items: center;
+		row-gap: 1.5rem;
+
+		@media only screen and (min-width: 768px) {
+			align-items: flex-start;
+		}
 	}
 
 	&:not(:first-of-type) {
@@ -42,13 +48,8 @@ export const ProfileForm = styled.form`
 			column-gap: 3rem;
 		}
 
-		& > div {
-			align-items: center;
-			row-gap: 1.5rem;
-
-			@media only screen and (min-width: 768px) {
-				align-items: flex-start;
-			}
+		& + div {
+			height: fit-content;
 		}
 
 		& p {

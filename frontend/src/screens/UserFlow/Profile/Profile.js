@@ -135,13 +135,15 @@ const Profile = () => {
 								/>
 							</ProfileLabel>
 						</div>
-						<AsyncButton
-							text="Guardar"
-							loadingText="Guardando"
-							type="submit"
-							className="greenGradient"
-							disabled={!validPassword1 || !validPassword2}
-						/>
+						<div>
+							<AsyncButton
+								text="Guardar"
+								loadingText="Guardando"
+								type="submit"
+								className="greenGradient"
+								disabled={!validPassword1 || !validPassword2}
+							/>
+						</div>
 					</ProfileForm>
 				</ProfileWrapper>
 			</Container>
