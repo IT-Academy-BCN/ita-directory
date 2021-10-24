@@ -8,11 +8,15 @@ const extToMime = (type) => {
 };
 
 const date = new Date();
-const dest = `public/${date.getFullYear()}/${date.getMonth()}`;
+const dest = `public/${date.getFullYear()}/${date.getMonth() + 1}`;
 const storage = multer.diskStorage({
 	destination: dest,
 	filename: (req, file, cb) => {
-		cb(null, titleToSlug(file.originalname, dest));
+		let fileName = file.originalname.split(".").slice(0, -1).join(".");
+		let extArray = file.mimetype.split("/");
+		let extension = extArray[extArray.length - 1];
+		let finalName = titleToSlug(fileName, extension, dest);
+		cb(null, finalName);
 	},
 });
 
@@ -24,29 +28,29 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-const checkDupliates = (fileName, destination) => {
+const checkDupliates = (fileName, ext, destination) => {
 	let newName;
 
-	if (fs.existsSync(destination + "/" + fileName)) {
-		let lastChar = fileName.charAt(fileName.length - 1);
+	if (fs.existsSync(destination + "/" + fileName + "." + ext)) {
+		let lastChar = fileName.substring(fileName.indexOf("-") + 1);
 		if (!isNaN(lastChar)) {
+			let remNum = lastChar.toString().length;
+			fileName = fileName.slice(0, -remNum);
 			lastChar++;
-			fileName = fileName.slice(0, -1);
 			newName = fileName + lastChar;
-			checkDupliates(newName);
 		} else {
 			newName = fileName + "-" + 1;
-			checkDupliates(newName);
 		}
+		return checkDupliates(newName, ext, destination);
 	} else {
-		newName = fileName;
+		newName = fileName + "." + ext;
 	}
 
 	return newName;
 };
 
 //Function from https://www.kindacode.com/article/how-to-generate-slugs-from-titles-in-node-js/
-const titleToSlug = (fileName, destination) => {
+const titleToSlug = (fileName, ext, destination) => {
 	let slug;
 
 	slug = fileName.toLowerCase();
@@ -66,7 +70,7 @@ const titleToSlug = (fileName, destination) => {
 	slug = "@" + slug + "@";
 	slug = slug.replace(/\@\-|\-\@|\@/gi, "");
 
-	return checkDupliates(slug, destination);
+	return checkDupliates(slug, ext, destination);
 };
 
 module.exports = multer({storage, fileFilter}).single("image");
