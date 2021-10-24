@@ -135,7 +135,3 @@ export const ProfileLabel = styled.label`
 		}
 	}
 `;
-
-export const StyledInputsWrapper = styled.div`
-	display: flex;
-`;
