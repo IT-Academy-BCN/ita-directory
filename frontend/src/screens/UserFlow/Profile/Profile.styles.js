@@ -6,33 +6,60 @@ export const ProfileWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	padding: 3rem;
+	padding: 3.5vh;
 	background-color: ${Colors.extraLightGrey};
 	border-radius: 0.5em;
+	margin-bottom: 4vh;
 `;
 
 export const ProfileForm = styled.form`
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-	gap: 2rem 3rem;
+	gap: 2rem 2rem;
 	color: #4a4a4a;
 
+	& + div {
+		height: fit-content;
+	}
+
 	&:not(:first-of-type) {
-		padding-top: 3rem;
+		padding-top: 3vh;
 	}
 
 	&:not(:last-of-type) {
 		border-bottom: 1px solid ${Colors.lightGray};
-		padding-bottom: 3rem;
+		padding-bottom: 3vh;
 	}
 
 	&.profile-photo {
-		justify-content: flex-start;
+		flex-direction: column;
+		align-items: center;
+
+		@media only screen and (min-width: 768px) {
+			flex-direction: row;
+			justify-content: flex-start;
+			column-gap: 3rem;
+		}
+
+		& > div {
+			align-items: center;
+			row-gap: 1.5rem;
+
+			@media only screen and (min-width: 768px) {
+				align-items: flex-start;
+			}
+		}
 
 		& p {
-			font-size: 0.9em;
+			font-size: 0.75em;
 			font-weight: 300;
+			text-align: center;
+
+			@media only screen and (min-width: 768px) {
+				text-align: left;
+				font-size: 0.9em;
+			}
 		}
 	}
 
@@ -41,13 +68,21 @@ export const ProfileForm = styled.form`
 
 		& > div {
 			display: flex;
-			flex-direction: row;
-			column-gap: 2rem;
 			margin: 0;
+
+			flex-direction: column;
+			justify-content: stretch;
+			row-gap: 1rem;
+
+			@media only screen and (min-width: 768px) {
+				flex-direction: row;
+				column-gap: 2rem;
+			}
 		}
 
 		& label,
 		& label p {
+			width: 100%;
 			font-size: 0.8em;
 		}
 
