@@ -1,36 +1,41 @@
-import React, {useState} from "react";
-import InputNumber from "../../components/units/InputNumber/InputNumber";
-import {faEuroSign} from "@fortawesome/free-solid-svg-icons";
-import {Button} from "components/composed/Modal/Modal.styles";
-import Modal from "components/composed/Modal/Modal";
+import {Link} from "react-router-dom";
+
+// Layout Components
+import Body from "components/layout/Body/Body";
+
+// Styles
+import {HomeContainer} from "./Home.styles";
+
+const pages = [
+	{title: "Ad", route: "/ad"},
+	{title: "Admin users' List", route: "/lista-usuarios-admins"},
+	{title: "Ads", route: "/ads"},
+	{title: "Bill", route: "/my-bill/:id"},
+	{title: "Dashboard", route: "/dashboard"},
+	{title: "Home", route: "/"},
+	{title: "Login", route: "/login"},
+	{title: "My Bills", route: "/my-bills"},
+	{title: "New Ad", route: "/new-ad"},
+	{title: "Profile", route: "/profile"},
+	{title: "Recover Password", route: "/recover-password/:hash"},
+	{title: "Register", route: "/register"},
+	{title: "User's Ads", route: "/profile"},
+];
 
 const Home = () => {
-	const [inputNumberValue, setInputNumberValue] = useState("");
-	const [active, setActive] = useState(false);
-	const handleInputNumberChange = (e) => setInputNumberValue(e.target.value);
-
 	return (
 		<>
-			<form>
-				<InputNumber
-					value={inputNumberValue}
-					onChange={handleInputNumberChange}
-					errorText="only valid numbers allowed"
-					icon={faEuroSign}
-					label={"Price"}
-				/>
-			</form>
-			<div>
-				<Button onClick={() => setActive(true)}>Open Modal</Button>
-				<Modal
-					active={active}
-					hideModal={() => setActive(false)}
-					title="Modal title"
-					footer={<Button>Footer Button</Button>}
-				>
-					Modal body..
-				</Modal>
-			</div>
+			<Body title="Home" justifyTitle="center">
+				<HomeContainer>
+					<ul>
+						{pages.map((page) => (
+							<li>
+								<Link to={page.route}>{page.title}</Link>
+							</li>
+						))}
+					</ul>
+				</HomeContainer>
+			</Body>
 		</>
 	);
 };
