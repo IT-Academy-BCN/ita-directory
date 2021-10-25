@@ -9,18 +9,22 @@ export const NotificationStyled = styled.div`
 
 	div {
 		position: fixed;
+		top: 0;
+		right: 0;
+		margin: 2rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
 		padding: 0.5rem 1rem;
-		width: min(20rem);
-		height: min(6rem);
+		width: min(22rem);
+		height: min(4rem);
 		border-radius: 6px;
 		background-color: ${(props) => (props.isSuccess ? "#317126" : "#bc3434")};
-		margin: 136px auto 0;
 
 		p {
+			font-size: 0.9rem;
+			font-weight: 300;
 			color: white;
 			line-height: 1.2;
 			padding-left: 15px;
