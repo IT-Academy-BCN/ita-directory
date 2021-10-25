@@ -89,13 +89,13 @@ function FilterList(props) {
 					buttonStyles={{width: "100%", height: "2.125rem", margin: "2rem 0 0.5rem 0"}}
 					text="Aplicar filtros"
 					type="normal"
-					className="blueGradient"
+					className="blue-gradient"
 				/>
 				<Button
 					text="Reset"
 					buttonStyles={{width: "100%", height: "2.125rem", margin: "1rem 0 0.5rem 0"}}
 					type="normal"
-					className="blueGradient"
+					className="blue-gradient"
 					onClick={handleReset}
 				/>
 			</form>

@@ -35,7 +35,7 @@ const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTi
 								<div className="dropdown">
 									<ul>
 										<li>
-											<Link to="/Profile">Editar perfil</Link>
+											<Link to="/profile">Editar perfil</Link>
 										</li>
 										<li>
 											<Link to="/my-bills">Mis facturas</Link>

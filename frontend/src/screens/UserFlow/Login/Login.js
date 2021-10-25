@@ -1,69 +1,62 @@
-import React, {useState, useEffect} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
-import Input from "components/units/Input/Input";
-import AsyncButton from "components/units/Button/Button";
-import "../../../assets/fonts/HelveticaNeue/Pragmatica-ExtraLight.ttf";
-import {Container, Form, RedirectStyled} from "./Login.styles";
-import Body from "components/layout/Body/Body";
 import axios from "axios";
+
+// Layout Components
+import Body from "components/layout/Body/Body";
+
+// Units Components
+import AsyncButton from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
+import InputValidated from "components/units/InputValidated/InputValidated";
 
-// eslint-disable-next-line no-useless-escape
-const EMAIL_REGEX =
-	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
+// Styles
+import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
-const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+// Utilities
+import {msgs} from "utils/userFlow";
 
 const Login = ({onLogin}) => {
-	const [error, setError] = useState(false);
+	const [loginError, setLoginError] = useState(false);
+	const [loginSuccess, setLoginSuccess] = useState(false);
+	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isEmailError, setIsEmailError] = useState(false);
-	const [isPassError, setIsPassError] = useState(false);
 	const [email, setEmail] = useState("");
+	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
-	const [validacionLogin, setValidacionLogin] = useState(false);
+	const [validPassword, setValidPassword] = useState(false);
 
-	//
 	const closeNotification = () => {
-		return setError(false), setValidacionLogin(false);
+		return setLoginError(false) || setLoginSuccess(false);
 	};
 
 	const loginUser = async (user) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
 			console.log(response.status);
-			setValidacionLogin(true);
+			setLoginSuccess(true);
 		} catch (error) {
 			// Handle Error Here
 			console.error(error);
-			setError(true);
+			setLoginError(true);
 		}
 	};
-
-	// valid email?
-	useEffect(() => {
-		setIsEmailError(email !== "" ? !validateEmail(email) : false);
-	}, [email]);
-
-	// valid password?
-	useEffect(() => {
-		setIsPassError(password !== "" ? !validatePassword(password) : false);
-	}, [password]);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setIsDisabled(true);
 		setIsLoading(true);
+		setAnimated(true);
 		setTimeout(() => {
 			setIsDisabled(false);
 			setIsLoading(false);
+			setAnimated(false);
 			loginUser({
 				email,
 				password,
 				privacy: true,
+				// debe añadirse ChechBox de privacidad?
 			});
 			setTimeout(() => {
 				setIsDisabled(false);
@@ -74,67 +67,60 @@ const Login = ({onLogin}) => {
 
 	return (
 		<>
-			{error ? (
+			{loginError ? (
 				<Notification
-					message={
-						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
-					}
+					message={msgs.Ns.emailOrPasswordError}
 					isSuccess={false}
 					closeNotification={closeNotification}
 					autoClose={true}
 				/>
 			) : null}
 
-			{validacionLogin ? (
+			{loginSuccess ? (
 				<Notification
 					email={email}
-					message={"Bienvenido de nuevo. Te estamos redireccionando."}
+					message={`${email}: ${msgs.Ns.loginSuccess}`}
 					isSuccess={true}
 					closeNotification={closeNotification}
 					autoClose={true}
 				/>
 			) : null}
 
-			<Body title="Acceso" isLoggedIn={false} justifyTitle={"center"}>
+			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
-					<Form onSubmit={handleSubmit}>
-						<Input
+					<Form onSubmit={handleSubmit} novalidate>
+						<InputValidated
 							type="email"
 							placeholder="Introduce tu email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address"
-							success={!isEmailError && email !== ""}
 							disabled={disabled}
-							label={"Email"}
+							className="w-full"
+							valid={setValidEmail}
 						/>
-						<Input
+						<InputValidated
 							type="password"
 							placeholder="Introduce tu contraseña"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							id="passName"
 							name="passName"
-							error={isPassError}
-							errorText="More than 6 chars and a uppercase letter"
-							success={!isPassError && password !== ""}
 							disabled={disabled}
 							minLength={6}
-							label={"Password"}
-							className="w-full mt-6"
+							className="w-full mt-2"
+							valid={setValidPassword}
 						/>
 						<AsyncButton
 							text="Acceder"
 							loadingText="Accediendo"
 							iconPosition="left"
 							type="submit"
-							className="w-full blueGradient my-10"
+							className="blue-gradient w-full my-8"
 							isLoading={isLoading}
-							animated
-							disabled={disabled}
+							animated={animated}
+							disabled={!validEmail || !validPassword}
 						/>
 						<div className="w-full">
 							<RedirectStyled>

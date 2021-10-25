@@ -129,7 +129,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							text="Subir"
 							loadingText="Subiendo"
 							type="submit"
-							className="blueGradientProfile"
+							className="blue-gradient"
 							isLoading={false}
 						/>
 					</div>
@@ -200,7 +200,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 					onClick={() => actualizar(currentNombre)}
 					text="Guardar"
 					type="submit"
-					className="greenGradient"
+					className="green-gradient"
 				/>
 			</EditModalStyled>
 
