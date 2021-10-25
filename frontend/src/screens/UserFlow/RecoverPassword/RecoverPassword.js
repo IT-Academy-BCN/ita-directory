@@ -1,17 +1,17 @@
-import React, {useState} from "react";
-import Input from "components/units/Input/Input";
-import AsyncButton from "components/units/Button/Button";
-import {Container, StyledForm, StyledError} from "./RecoverPassword.styles";
+import {useEffect, useState} from "react";
+
+// Layout Components
 import Body from "components/layout/Body/Body";
 
-const EMAIL_REGEX =
-	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
+// Units Components
+import AsyncButton from "components/units/Button/Button";
+import InputValidated from "components/units/InputValidated/InputValidated";
 
-const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+// Styles
+import {Container, Form, LabelStyled} from "../UserFlow.styles";
 
-console.log(validatePassword());
+// Utilities
+import {msgs} from "utils/userFlow";
 
 const users = [
 	{
@@ -35,22 +35,19 @@ const updateUser = (email, password) => {
 };
 
 const RecoverPassword = ({retrieveUser}) => {
-	const [error, setError] = useState("");
+	// const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [isEmailError, setIsEmailError] = useState(false);
-
-	const handleEmailChange = (value) => {
-		setEmail(value);
-		const isEmail = validateEmail(value);
-		setIsEmailError(!isEmail);
-	};
-
 	const [email, setEmail] = useState("");
-	// const [password, setPassword] = useState("");
-	const password = "";
+	const [validEmail, setValidEmail] = useState(false);
+	const [password, setPassword] = useState("");
+
+	// provisional
+	useEffect(() => {
+		setPassword("");
+	}, []);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setAnimatedState(true);
@@ -64,52 +61,44 @@ const RecoverPassword = ({retrieveUser}) => {
 
 		try {
 			updateUser(email, password, (error, token) => {
-				if (error) return setError(error.message);
+				// if (error) return setError(error.message);
 				retrieveUser(token);
 			});
 		} catch ({message}) {
-			setError(message);
+			// setError(message);
+			console.error(message);
 		}
 	};
 
 	return (
 		<Body title="Cambiar contraseña" justifyTitle="center">
 			<Container>
-				<StyledForm onSubmit={handleSubmit}>
-					<div className="classInput">
-						<label htmlFor="forgetpassword">
-							<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce
-							tu email y te enviaremos una nueva por correo.
-						</label>
-						<Input
-							type="email"
-							placeholder="email"
-							value={email}
-							onChange={(e) => handleEmailChange(e.target.value)}
-							id="emailName"
-							name="emailName"
-							error={isEmailError}
-							errorText="Enter a valid email address..."
-							disabled={disabled}
-						/>
-					</div>
-					{error && (
-						<StyledError>
-							<p>{error}</p>
-						</StyledError>
-					)}
+				<Form onSubmit={handleSubmit}>
+					<LabelStyled>
+						<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu
+						email y te enviaremos una nueva por correo.
+					</LabelStyled>
+					<InputValidated
+						type="email"
+						placeholder={msgs.placeholderEmail}
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						id="emailName"
+						name="emailName"
+						disabled={disabled}
+						valid={setValidEmail}
+					/>
 					<AsyncButton
 						text="Enviar"
 						loadingText="Enviando"
 						iconPosition="left"
 						type="submit"
-						className="orangeGradient"
-						textStyles={{marginLeft: 10}}
+						className="w-full orange-gradient mt-6"
 						isLoading={isLoading}
 						animated={animatedState}
-						disabled={disabled}
+						disabled={!validEmail}
 					/>
-				</StyledForm>
+				</Form>
 			</Container>
 		</Body>
 	);
