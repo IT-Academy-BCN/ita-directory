@@ -28,20 +28,21 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-const checkDupliates = (fileName, ext, destination) => {
+const checkDupliates = (fileName, ext, destination, dup) => {
 	let newName;
 
 	if (fs.existsSync(destination + "/" + fileName + "." + ext)) {
-		let lastChar = fileName.substring(fileName.indexOf("-") + 1);
-		if (!isNaN(lastChar)) {
-			let remNum = lastChar.toString().length;
+		//let lastChar = fileName.slice(-1);
+		if (dup > 0) {
+			let remNum = dup.toString().length;
 			fileName = fileName.slice(0, -remNum);
-			lastChar++;
-			newName = fileName + lastChar;
+			dup++;
+			newName = fileName + dup;
 		} else {
-			newName = fileName + "-" + 1;
+			dup++;
+			newName = fileName + "-" + dup;
 		}
-		return checkDupliates(newName, ext, destination);
+		return checkDupliates(newName, ext, destination, dup);
 	} else {
 		newName = fileName + "." + ext;
 	}
@@ -70,7 +71,7 @@ const titleToSlug = (fileName, ext, destination) => {
 	slug = "@" + slug + "@";
 	slug = slug.replace(/\@\-|\-\@|\@/gi, "");
 
-	return checkDupliates(slug, ext, destination);
+	return checkDupliates(slug, ext, destination, 0);
 };
 
 module.exports = multer({storage, fileFilter}).single("image");
