@@ -107,7 +107,7 @@ const Ad = ({icon}) => {
 									marginTop: "0rem",
 								}}
 								text="Contacto"
-								className="blue-gradient"
+								className="blueGradient"
 								type="button"
 								onClick={() => setActive(true)}
 							/>

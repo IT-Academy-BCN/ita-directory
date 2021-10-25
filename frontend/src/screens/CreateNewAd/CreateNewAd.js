@@ -195,7 +195,7 @@ const CreateNewAd = () => {
 								}}
 								text="Enviar"
 								type="normal"
-								className="blue-gradient"
+								className="blueGradient"
 							/>
 						</form>
 						{submittedData && (

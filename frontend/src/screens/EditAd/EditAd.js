@@ -132,7 +132,7 @@ const EditAd = (props) => {
 								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 								text="Editar"
 								type="normal"
-								className="blue-gradient"
+								className="blueGradient"
 							/>
 							<Button
 								buttonStyles={{
@@ -143,7 +143,7 @@ const EditAd = (props) => {
 								text="Volver"
 								onClick={handleCancel}
 								type="normal"
-								className="orange-gradient"
+								className="orangeGradient"
 							/>
 						</form>
 						{submittedData && (

@@ -446,7 +446,7 @@ const DownloadPDF = ({data, type}) => {
 	return (
 		<PDFDownloadLink document={<PdfDocument data={data[0]} />} fileName="bill.pdf">
 			{type === "button" ? (
-				<DownLoadButton text="Descargar" className="blue-gradient" type="button" />
+				<DownLoadButton text="Descargar" className="blueGradient" type="button" />
 			) : type === "icon" ? (
 				<FontAwesomeIcon
 					style={{marginLeft: "12px"}}

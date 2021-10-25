@@ -21,7 +21,7 @@ export const BillComponentStyled = styled.div.attrs({
 		${tw`flex items-center uppercase tracking-normal opacity-100 mt-6`};
 	}
 
-	.blue-gradient {
+	.blueGradient {
 		width: 7.6rem;
 		margin-bottom: 1.5rem;
 	}

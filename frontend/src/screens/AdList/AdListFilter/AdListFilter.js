@@ -34,7 +34,7 @@ function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 			<CardHeader>
 				<CardTitle>Filtros</CardTitle>
 				<Button
-					className="blue-gradient"
+					className="blueGradient"
 					text="Limpiar busqueda"
 					onClick={() => ClearFilter()}
 				/>
@@ -84,7 +84,7 @@ function AdFilters({filtrar, maxPriceValue, minPriceValue, maxM2, minM2}) {
 				</CardSelectorWrapper>
 				<Button
 					text="Filtrar"
-					className="blue-gradient"
+					className="blueGradient"
 					onClick={() => filtrar({gastosInc, maxPrice, minPrice, maxSize, minSize})}
 				/>
 			</CardHeader>
