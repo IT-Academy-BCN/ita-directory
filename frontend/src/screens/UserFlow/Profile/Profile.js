@@ -67,7 +67,7 @@ const Profile = () => {
 								text="Subir"
 								loadingText="Subiendo"
 								type="submit"
-								className="blueGradientProfile"
+								className="blue-gradient w-28"
 								isLoading={false}
 							/>
 						</ProfileUploadPhoto>
@@ -140,7 +140,7 @@ const Profile = () => {
 								text="Guardar"
 								loadingText="Guardando"
 								type="submit"
-								className="greenGradient"
+								className="green-gradient"
 								disabled={!validPassword1 || !validPassword2}
 							/>
 						</div>

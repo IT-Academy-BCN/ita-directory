@@ -93,7 +93,7 @@ const RecoverPassword = ({retrieveUser}) => {
 						loadingText="Enviando"
 						iconPosition="left"
 						type="submit"
-						className="w-full orangeGradient mt-6"
+						className="w-full orange-gradient mt-6"
 						isLoading={isLoading}
 						animated={animatedState}
 						disabled={!validEmail}

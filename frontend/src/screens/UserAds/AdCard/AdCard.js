@@ -31,7 +31,7 @@ const AdCard = ({ad, containerClassName}) => {
 						to={{pathname: `ad/${id}`, state: {ad: ad}}}
 					>
 						<Button
-							className="blueGradient"
+							className="blue-gradient"
 							text="Ver Anuncio"
 							type="button"
 							buttonStyles={{
@@ -62,7 +62,7 @@ const AdCard = ({ad, containerClassName}) => {
 							fontFamily: "Arial",
 						}}
 						text="Editar"
-						className="orangeGradient"
+						className="orange-gradient"
 						type="button"
 						onClick={() => setActive(true)}
 					/>

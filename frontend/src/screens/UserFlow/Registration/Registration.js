@@ -119,7 +119,7 @@ const Register = ({retrieveUser}) => {
 							loadingText="Registrando..."
 							iconPosition="left"
 							type="submit"
-							className="my-8 orangeGradientFullWidth"
+							className="w-full my-8 orange-gradient"
 							isLoading={isLoading}
 							animated={animated}
 							disabled={!validEmail || !validPassword || !privacy}

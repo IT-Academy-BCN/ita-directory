@@ -102,7 +102,7 @@ const Login = ({onLogin}) => {
 							loadingText="Accediendo"
 							iconPosition="left"
 							type="submit"
-							className="blueGradientFullWidthFontNormal my-8"
+							className="blue-gradient w-full my-8"
 							isLoading={isLoading}
 							animated={animated}
 							disabled={!validEmail || !validPassword}
