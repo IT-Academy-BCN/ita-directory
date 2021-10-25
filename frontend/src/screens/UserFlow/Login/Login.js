@@ -27,6 +27,10 @@ const Login = ({onLogin}) => {
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword] = useState(false);
 
+	const closeNotification = () => {
+		return setLoginError(false) || setLoginSuccess(false);
+	};
+
 	const loginUser = async (user) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
@@ -64,11 +68,22 @@ const Login = ({onLogin}) => {
 	return (
 		<>
 			{loginError ? (
-				<Notification message={msgs.Ns.emailOrPasswordError} isSuccess={false} />
+				<Notification
+					message={msgs.Ns.emailOrPasswordError}
+					isSuccess={false}
+					closeNotification={closeNotification}
+					autoClose={true}
+				/>
 			) : null}
 
 			{loginSuccess ? (
-				<Notification message={`${email}: ${msgs.Ns.loginSuccess}`} isSuccess={true} />
+				<Notification
+					email={email}
+					message={`${email}: ${msgs.Ns.loginSuccess}`}
+					isSuccess={true}
+					closeNotification={closeNotification}
+					autoClose={true}
+				/>
 			) : null}
 
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
