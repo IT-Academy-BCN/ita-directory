@@ -1,33 +1,31 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import axios from "axios";
-
-// Layout Components
-import Body from "components/layout/Body/Body";
-
-// Units Components
-import CheckBox from "components/units/CheckBox/CheckBox";
-import InputValidated from "components/units/InputValidated/InputValidated";
+import Input from "components/units/Input/Input";
 import AsyncButton from "components/units/Button/Button";
+import {Container, Form, StyleRedirect, StyledError} from "./Registration.styles";
+import PrivacyPolicy from "components/units/PrivacyPolicy/PrivacyPolicy";
+import Body from "components/layout/Body/Body";
+import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 
-// Styles
-import {Container, Form, RedirectStyled} from "../UserFlow.styles";
+const EMAIL_REGEX =
+	// eslint-disable-next-line no-useless-escape
+	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
 
-// Utilities
-import {msgs} from "utils/userFlow";
+const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase());
+const validatePassword = (password) => PASSWORD_REGEX.test(password);
 
 const Register = ({retrieveUser}) => {
 	const [error, setError] = useState(false);
-	const [animated, setAnimated] = useState(false);
+	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isEmailError, setIsEmailError] = useState(false);
+	const [isPassError, setIsPassError] = useState(false);
 	const [validacionConexion, setValidacionConexion] = useState(false);
 	const [email, setEmail] = useState("");
-	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
-	const [validPassword, setValidPassword] = useState(false);
-	const [privacy, setPrivacy] = useState(false);
 
 	const registerUser = async (user) => {
 		try {
@@ -41,19 +39,31 @@ const Register = ({retrieveUser}) => {
 		}
 	};
 
+	const handleEmailChange = (value) => {
+		setEmail(value);
+		const isEmail = validateEmail(value);
+		setIsEmailError(!isEmail);
+	};
+
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+		const isPass = validatePassword(value);
+		setIsPassError(!isPass);
+	};
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setAnimated(true);
+		setAnimatedState(true);
 		setIsDisabled(true);
 		setIsLoading(true);
 		registerUser({
 			email,
 			password,
-			privacy,
+			privacy: true,
 		});
 
 		setTimeout(() => {
-			setAnimated(false);
+			setAnimatedState(false);
 			setIsDisabled(false);
 			setIsLoading(false);
 		}, 2000);
@@ -62,7 +72,12 @@ const Register = ({retrieveUser}) => {
 	return (
 		<>
 			{error ? (
-				<Notification message={msgs.Ns.emailOrPasswordError} isSuccess={false} />
+				<Notification
+					message={
+						"Ha habido un error con tu usuario o contraseña. Introducelos de nuevo."
+					}
+					isSuccess={false}
+				/>
 			) : null}
 			{validacionConexion ? (
 				<Notification
@@ -72,61 +87,58 @@ const Register = ({retrieveUser}) => {
 				/>
 			) : null}
 
-			<Body title="Registro" justifyTitle="center">
+			<Body title="Registro" justifyTitle={"center"}>
 				<Container>
-					<Form onSubmit={handleSubmit} novalidate>
-						<InputValidated
-							type="email"
-							placeholder={msgs.placeholderEmail}
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							id="emailName"
-							name="emailName"
-							disabled={disabled}
-							className="w-full"
-							valid={setValidEmail}
-						/>
-						<InputValidated
-							type="password"
-							placeholder={msgs.placeholderPassword}
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							id="passName"
-							name="passName"
-							disabled={disabled}
-							minLength={6}
-							className="w-full mt-2"
-							valid={setValidPassword}
-						/>
-						<div className="w-full mt-2">
-							<CheckBox
-								label={
-									<RedirectStyled>
-										Acepto la <Link to="#">politica de privacidad</Link>.
-									</RedirectStyled>
-								}
-								value={privacy}
-								onChange={() => setPrivacy((prev) => !prev)}
-								id="privacyPolicy"
-								name="privacyPolicy"
-								error={!privacy}
-								errorText={msgs.required}
-								className="w-full mt-2"
+					<Form onSubmit={handleSubmit}>
+						<div className="classInput">
+							<label>Email</label>
+							<Input
+								type="email"
+								placeholder="Introduce tu email"
+								value={email}
+								onChange={(e) => handleEmailChange(e.target.value)}
+								id="emailName"
+								name="emailName"
+								error={isEmailError}
+								errorText="Enter a valid email address..."
+								disabled={disabled}
 							/>
 						</div>
+						<div className="classInput">
+							<label>Password</label>
+							<Input
+								type="password"
+								placeholder="Introduce tu contraseña"
+								value={password}
+								onChange={(e) => handlePasswordChange(e.target.value)}
+								id="passName"
+								name="passName"
+								error={isPassError}
+								errorText="The password to contain more than 6 characters and a uppercase letter"
+								disabled={disabled}
+								minLength={6}
+							/>
+						</div>
+						<PrivacyPolicy />
+						{error && (
+							<StyledError>
+								<p>{error}</p>
+							</StyledError>
+						)}
 						<AsyncButton
-							text="Registrarme"
-							loadingText="Registrando..."
+							text="Registrame"
+							loadingText="Registrando"
 							iconPosition="left"
 							type="submit"
-							className="w-full my-8 orange-gradient"
+							className="orangeGradient"
+							textStyles={{marginLeft: 10}}
 							isLoading={isLoading}
-							animated={animated}
-							disabled={!validEmail || !validPassword || !privacy}
+							animated={animatedState}
+							disabled={disabled}
 						/>
-						<RedirectStyled>
+						<StyleRedirect>
 							Tienes una cuenta? <Link to="/login">Inicia sesión</Link>
-						</RedirectStyled>
+						</StyleRedirect>
 					</Form>
 				</Container>
 			</Body>
