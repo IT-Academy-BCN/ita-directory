@@ -6,10 +6,10 @@ export const ProfileWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	padding: 3.5vh;
+	padding: 3rem;
 	background-color: ${Colors.extraLightGrey};
 	border-radius: 0.5em;
-	margin-bottom: 4vh;
+	margin-bottom: 2rem;
 `;
 
 export const ProfileForm = styled.form`
@@ -30,12 +30,12 @@ export const ProfileForm = styled.form`
 	}
 
 	&:not(:first-of-type) {
-		padding-top: 3vh;
+		padding-top: 2rem;
 	}
 
 	&:not(:last-of-type) {
 		border-bottom: 1px solid ${Colors.lightGray};
-		padding-bottom: 3vh;
+		padding-bottom: 2rem;
 	}
 
 	&.profile-photo {
@@ -67,7 +67,7 @@ export const ProfileForm = styled.form`
 	&.profile-data {
 		flex-direction: column;
 
-		& > div {
+		> div {
 			display: flex;
 			margin: 0;
 
@@ -79,15 +79,35 @@ export const ProfileForm = styled.form`
 				flex-direction: row;
 				column-gap: 2rem;
 			}
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				width: 50%;
+
+				p {
+					font-style: italic;
+					font-size: 0.7em;
+					margin-top: 0.5em;
+
+					a {
+						color: ${Colors.darkRed};
+
+						&:hover {
+							color: ${Colors.darkBlue};
+						}
+					}
+				}
+			}
 		}
 
-		& label,
-		& label p {
+		label,
+		label p {
 			width: 100%;
 			font-size: 0.8em;
 		}
 
-		& label p {
+		label p {
 			font-weight: 300;
 		}
 	}
@@ -113,25 +133,5 @@ export const ProfileUploadPhoto = styled.div`
 	p:first-of-type {
 		font-size: 1.3em;
 		margin-bottom: 0.4rem;
-	}
-`;
-
-export const ProfileLabel = styled.label`
-	display: flex;
-	flex-direction: column;
-	width: 50%;
-
-	p {
-		font-style: italic;
-		font-size: 0.7em;
-		margin-top: 0.5em;
-
-		a {
-			color: ${Colors.darkRed};
-
-			&:hover {
-				color: ${Colors.darkBlue};
-			}
-		}
 	}
 `;

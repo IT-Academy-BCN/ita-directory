@@ -10,21 +10,15 @@ import Input from "components/units/Input/Input";
 import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Style Components
-import {
-	ProfileWrapper,
-	ProfileForm,
-	ProfileImage,
-	ProfileUploadPhoto,
-	ProfileLabel,
-} from "./Profile.styles";
+import {ProfileWrapper, ProfileForm, ProfileImage, ProfileUploadPhoto} from "./Profile.styles";
 import {Container} from "theme/GlobalStyles";
 
 // Utilities
 import fakeProfilePhoto from "../../../assets/images/people1b.jpg";
 
 const Profile = () => {
-	const [password1, setPassword1] = useState("");
-	const [password2, setPassword2] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 	const [validPassword1, setValidPassword1] = useState(false);
 	const [validPassword2, setValidPassword2] = useState(false);
 	const [profilePhoto, setProfilePhoto] = useState(fakeProfilePhoto);
@@ -41,13 +35,13 @@ const Profile = () => {
 	};
 
 	useEffect(() => {
-		setPassword2("");
-	}, [password1]);
+		setRepeatedNewPassword("");
+	}, [newPassword]);
 
 	useEffect(() => {
-		setValidPassword2(password2 !== "" && password1 === password2);
+		setValidPassword2(repeatedNewPassword !== "" && newPassword === repeatedNewPassword);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [password2]);
+	}, [repeatedNewPassword]);
 
 	return (
 		<Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn="true">
@@ -74,21 +68,21 @@ const Profile = () => {
 					</ProfileForm>
 					<ProfileForm onSubmit={submitUserInfo} className="profile-data">
 						<div>
-							<ProfileLabel htmlFor="username">
-								Nombre de usuario
+							<div>
+								<label htmlFor="username">Nombre de usuario</label>
 								<Input
+									style={`marginTop: 0`}
 									type="text"
 									id="username"
 									name="username"
 									placeholder="Introducir nombre de usuario"
 									onChange={() => console.log("disabled")} // attr necesario, sinó da error
 									disabled={true}
-									minMarginTop
 								/>
 								<p>El nombre de usuario no se puede modificar</p>
-							</ProfileLabel>
-							<ProfileLabel htmlFor="email">
-								Email
+							</div>
+							<div>
+								<label htmlFor="email">Email</label>
 								<Input
 									type="email"
 									id="email"
@@ -102,38 +96,38 @@ const Profile = () => {
 									El email no se puede modificar. Ponte en{" "}
 									<Link to="#">contacto</Link> si necesitas actualizarlo.
 								</p>
-							</ProfileLabel>
+							</div>
 						</div>
 						<div>
-							<ProfileLabel htmlFor="passName">
-								Nueva Contraseña
+							<div>
+								<label htmlFor="passName">Nueva Contraseña</label>
 								<InputValidated
 									type="password"
-									value={password1}
+									value={newPassword}
 									placeholder="Introducir contraseña"
-									onChange={(e) => setPassword1(e.target.value)}
+									onChange={(e) => setNewPassword(e.target.value)}
 									id="passName"
 									name="passName"
 									valid={setValidPassword1}
 									minMarginTop
 								/>
-							</ProfileLabel>
-							<ProfileLabel htmlFor="confirmPassName">
-								Confirmar Contraseña
+							</div>
+							<div>
+								<label htmlFor="confirmPassName">Confirmar Contraseña</label>
 								<Input
 									type="password"
-									value={password2}
+									value={repeatedNewPassword}
 									placeholder="Confirma tu contraseña"
-									onChange={(e) => setPassword2(e.target.value)}
+									onChange={(e) => setRepeatedNewPassword(e.target.value)}
 									id="confirmPassName"
 									name="confirmPassName"
-									error={password2 !== "" && !validPassword2}
+									error={repeatedNewPassword !== "" && !validPassword2}
 									errorText="Las 2 contraseñas tienen que ser iguales"
-									success={password2 !== "" && validPassword2}
+									success={repeatedNewPassword !== "" && validPassword2}
 									disabled={!validPassword1}
 									minMarginTop
 								/>
-							</ProfileLabel>
+							</div>
 						</div>
 						<div>
 							<AsyncButton
