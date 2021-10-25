@@ -78,6 +78,7 @@ const Profile = () => {
 									placeholder="Introducir nombre de usuario"
 									onChange={() => console.log("disabled")} // attr necesario, sinó da error
 									disabled={true}
+									minMarginTop
 								/>
 								<p>El nombre de usuario no se puede modificar</p>
 							</div>
