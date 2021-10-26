@@ -7,8 +7,6 @@ async function createAd(req, res) {
 		const {...fields} = req.body;
 		await adsSchema.validateAsync(fields);
 
-		console.log(fields);
-
 		const ad = await prisma.ads.create({
 			data: {
 				user: {
