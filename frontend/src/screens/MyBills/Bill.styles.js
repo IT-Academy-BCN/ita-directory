@@ -21,7 +21,7 @@ export const BillComponentStyled = styled.div.attrs({
 		${tw`flex items-center uppercase tracking-normal opacity-100 mt-6`};
 	}
 
-	.blueGradient {
+	.blue-gradient {
 		width: 7.6rem;
 		margin-bottom: 1.5rem;
 	}
@@ -50,7 +50,7 @@ export const BillStyled = styled.div.attrs({
 
 export const HeaderStyled = styled.header.attrs({
 	className:
-		"bg-white flex flex-row justify-between items-end h-12 py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0",
+		"bg-white flex flex-row justify-between items-baseline h-12 py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0",
 })`
 	@media (min-width: 893px) {
 		padding: 0 2rem;
@@ -58,10 +58,18 @@ export const HeaderStyled = styled.header.attrs({
 	@media (min-width: 1230px) {
 		padding: 0 4rem;
 	}
+	h2 {
+		font-size: 18px;
+		font-weight: 600;
+		font-style: italic;
+	}
+	.invoice {
+		letter-spacing: 1.68px;
+	}
 `;
 
 export const AddressesWrapper = styled.div.attrs({
-	className: "justify-between bg-white md:flex md:flex-row md:mt-0",
+	className: "justify-between bg-white md:flex justify-between md:flex-row md:mt-16",
 })``;
 
 export const InvoiceRecipientStyled = styled.section.attrs({
@@ -70,6 +78,20 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 	div {
 		${tw`w-full p-0`}
 	}
+
+	.invoice-recipient > p {
+		font-size: 10px;
+	}
+
+	.invoice-recipient > h2 {
+		font-size: 16px;
+		margin-top: -8px;
+	}
+
+	.address-recipient > p {
+		font-size: 10px;
+	}
+
 	h2 {
 		font-weight: bold;
 	}
@@ -92,77 +114,80 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 `;
 
 export const TableWrapperStyled = styled.div.attrs({
-	className: "mt-12 w-full border-t-2 border-lightGrey",
+	className: "mt-12 w-full border-t border-lightGrey",
 })`
 	table {
-		${tw`w-full flex flex-col`}
-		block-size: fit-content;
-		th,
-		tr {
-			min-height: 47px;
-		}
+		font-size: 10px;
+		width: 100%;
+	}
 
-		th {
-			${tw` flex justify-center font-bold  uppercase pt-3 text-tiny`}
+	tr {
+		height: 47px;
+	}
 
-			&:last-child {
-				@media (max-width: 479px) {
-					display: flex;
-					justify-content: center !important;
-				}
+	th {
+		text-align: left;
+		padding-left: 1.5rem;
+		text-transform: uppercase;
+	}
 
-				@media (min-width: 480px) {
-					justify-content: flex-end;
-					padding-right: 2rem;
-				}
+	td {
+		min-width: 25px;
+		text-align: left;
+		padding-left: 1.5rem;
+	}
 
-				@media (min-width: 692px) {
-					padding-right: 0rem;
-				}
+	th:nth-child(4) {
+		text-align: center;
+		width: 200px;
+		padding-left: 0;
+	}
 
-				@media (min-width: 893px) {
-					padding-right: 2rem;
-				}
-				@media (min-width: 1230px) {
-					padding-right: 4rem;
-				}
-			}
-		}
+	td:nth-child(4) {
+		text-align: center;
+		width: 200px;
+		padding-left: 0;
 	}
 `;
 
 export const CalcTableStyled = styled.table`
-	border-collapse: collapse;
-	${tw`w-1/2 ml-auto pt-1 pb-0 pr-0 md:w-full md:ml-0`}
-
-	td,
-	th {
-		${tw`flex items-center justify-center  font-normal text-tiny`}
-		min-height: 47px;
-	}
+	font-size: 10px;
+	width: 100%;
+	text-align: left;
+	margin-left: 2rem;
 
 	tr {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		td {
-			${tw`flex justify-center items-center flex-grow text-tiny`}
-			min-width: 50px;
-			&:last-child {
-				@media (min-width: 893px) {
-					padding-right: 2rem;
-					display: flex;
-					justify-content: flex-end;
-				}
-				@media (min-width: 1230px) {
-					padding-right: 4rem;
-				}
-			}
-		}
+		height: 47px;
+	}
+
+	td {
+		max-width: 30px;
+		text-align: left;
+		padding-left: 2.7rem;
+	}
+
+	th {
+		max-width: 30px;
+		padding-left: 3rem;
+	}
+
+	.grand-total {
+		background-color: ${Colors.lightBeige};
 	}
 `;
+
 export const TermsAndCalcStyled = styled.div.attrs({
 	className: "flex items-start flex-col-reverse",
 })`
+	overflow: hidden;
+	padding-left: 2rem;
+
+	h3 {
+		font-size: 12px;
+		font-weight: 600;
+		text-align: left;
+	}
+
 	@media (min-width: 768px) {
 		display: grid;
 		grid-template-columns: 50% 50%;
@@ -170,8 +195,14 @@ export const TermsAndCalcStyled = styled.div.attrs({
 `;
 
 export const TermsStyled = styled.section.attrs({
-	className: "mt-10 py-0 px-8 max-w-sm h-24",
+	className: "mt-10 mr-8 pr-4 py-0 px-8 max-w-sm h-24",
 })`
+	p {
+		font-size: 8px;
+		line-height: normal;
+		margin-top: 2rem;
+	}
+
 	@media (min-width: 768px) {
 		margin-top: 4rem;
 		padding: 0rem;
@@ -204,12 +235,19 @@ export const PaySignStyled = styled.section.attrs({
 export const PaymentMethodStyled = styled.div.attrs({
 	className: "flex flex-col justify-end pl-8",
 })`
+	font-size: 12px;
+
 	h3 {
 		${tw`my-2 mx-0 pb-4`}
 		white-space: nowrap;
 	}
 
+	h5 {
+		font-size: 10px;
+	}
+
 	div {
+		font-size: 10px;
 		${tw`pt-4 pb-0`}
 	}
 	@media (min-width: 480px) {
@@ -233,6 +271,8 @@ export const SignatureStyled = styled.div.attrs({
 })`
 	margin-top: 1.8rem;
 	width: fit-content;
+	font-size: 12px;
+
 	@media (min-width: 893px) {
 		padding-right: 2rem;
 	}
@@ -247,6 +287,7 @@ export const SignatureStyled = styled.div.attrs({
 	h4 {
 		${tw`text-sm`}
 		font-weight: lighter !important;
+		font-size: 10px;
 	}
 
 	.signature-image {
@@ -255,14 +296,16 @@ export const SignatureStyled = styled.div.attrs({
 `;
 
 export const FooterStyled = styled.footer.attrs({
-	className: "flex flex-col justify-center text-center -mt-12 mb-5 px-8 pb-8",
+	className: "flex flex-col justify-center text-center mb-5",
 })`
 	h4 {
 		${tw`m-0 font-bold`}
+		font-size: 12px;
 	}
 
 	p {
 		${tw`text-sm`}
+		font-size: 10px;
 	}
 `;
 

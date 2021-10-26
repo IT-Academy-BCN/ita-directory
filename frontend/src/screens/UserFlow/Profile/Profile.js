@@ -1,160 +1,146 @@
-import React, {useState} from "react";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+
+// Layout Components
 import Body from "components/layout/Body/Body";
+
+// Units Components
 import AsyncButton from "components/units/Button/Button";
 import Input from "components/units/Input/Input";
-import {
-	StyledFormProfile,
-	StyledPhotoWrapper,
-	StyleUploadPhotoWrapper,
-	StyledInputsWrapper,
-	StyledSaveWrapper,
-	ImageWrapper,
-	StyledLabel,
-	BodyWrapper,
-	// StyledError,
-} from "./Profile.styles";
+import InputValidated from "components/units/InputValidated/InputValidated";
+
+// Style Components
+import {ProfileWrapper, ProfileForm, ProfileImage, ProfileUploadPhoto} from "./Profile.styles";
 import {Container} from "theme/GlobalStyles";
 
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
-
-const profilePicture =
-	"https://imagenes.20minutos.es/files/article_amp/uploads/2018/05/17/Aragorn01.jpg";
+// Utilities
+import fakeProfilePhoto from "../../../assets/images/people1b.jpg";
 
 const Profile = () => {
-	const [password, setPassword] = useState("");
-	const [password2, setPassword2] = useState("");
-	const [isPassError, setIsPassError] = useState(false);
-	const [isPassError2, setIsPassError2] = useState(false);
-	// const [disabled, setIsDisabled] = useState(true);
-	const [image, setImage] = useState(
-		"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg"
-	);
+	const [newPassword, setNewPassword] = useState("");
+	const [repeatedNewPassword, setRepeatedNewPassword] = useState("");
+	const [validPassword1, setValidPassword1] = useState(false);
+	const [validPassword2, setValidPassword2] = useState(false);
+	const [profilePhoto, setProfilePhoto] = useState(fakeProfilePhoto);
 
-	const handleSubmit = (event) => {
+	const submitPhoto = (event) => {
 		event.preventDefault();
 		console.log("profile photo clicked");
-		setImage(profilePicture);
+		setProfilePhoto(fakeProfilePhoto);
 	};
 
-	const handleSubmit2 = (event) => {
+	const submitUserInfo = (event) => {
 		event.preventDefault();
 		console.log("password saved");
 	};
 
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		const isPass = validatePassword(value);
-		setIsPassError(!isPass);
-	};
+	useEffect(() => {
+		setRepeatedNewPassword("");
+	}, [newPassword]);
 
-	const handlePasswordChange2 = (value) => {
-		setPassword2(value);
-		if (password === password2) {
-			setIsPassError2(false);
-		} else {
-			setIsPassError2(true);
-		}
-	};
+	useEffect(() => {
+		setValidPassword2(repeatedNewPassword !== "" && newPassword === repeatedNewPassword);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [repeatedNewPassword]);
 
 	return (
-		<Body
-			title="Editar perfil"
-			justifyTitle="flex-start"
-			paddingTitle="0px"
-			paddingTitle2="15vw"
-			isLoggedIn="true"
-		>
+		<Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn="true">
 			<Container>
-				<BodyWrapper>
-					<StyledFormProfile onSubmit={handleSubmit}>
-						<StyledPhotoWrapper>
-							<ImageWrapper>
-								<img src={image} alt={"Foto"} width="200" />
-							</ImageWrapper>
-							<StyleUploadPhotoWrapper>
+				<ProfileWrapper>
+					<ProfileForm onSubmit={submitPhoto} className="profile-photo">
+						<ProfileImage>
+							<img src={profilePhoto} alt={"Foto de perfil"} />
+						</ProfileImage>
+						<ProfileUploadPhoto>
+							<div>
 								<p>Fotografía de perfil</p>
-								<p>
-									Sube tu fotografía de perfil, tamaño recomendado 1000x1000.
-									Formato .JPG, .JPEG, .PNG, y .GIF.
-								</p>
-								<AsyncButton
-									text="Subir"
-									loadingText="Subiendo"
-									type="submit"
-									className="blueGradientProfile"
-									isLoading={false}
-								/>
-							</StyleUploadPhotoWrapper>
-						</StyledPhotoWrapper>
-					</StyledFormProfile>
-
-					<StyledFormProfile onSubmit={handleSubmit2}>
-						<StyledInputsWrapper>
-							<StyledLabel>
+								<p>Tamaño recomendado: 1000x1000</p>
+								<p>Formatos admitidos: JPG, JPEG, PNG, o GIF</p>
+							</div>
+							<AsyncButton
+								text="Subir"
+								loadingText="Subiendo"
+								type="submit"
+								className="blue-gradient w-28"
+								isLoading={false}
+							/>
+						</ProfileUploadPhoto>
+					</ProfileForm>
+					<ProfileForm onSubmit={submitUserInfo} className="profile-data">
+						<div>
+							<div>
 								<label htmlFor="username">Nombre de usuario</label>
 								<Input
+									style={`marginTop: 0`}
+									type="text"
 									id="username"
 									name="username"
 									placeholder="Introducir nombre de usuario"
+									onChange={() => console.log("disabled")} // attr necesario, sinó da error
 									disabled={true}
+									minMarginTop
 								/>
 								<p>El nombre de usuario no se puede modificar</p>
-							</StyledLabel>
-							<StyledLabel>
+							</div>
+							<div>
 								<label htmlFor="email">Email</label>
 								<Input
+									type="email"
 									id="email"
 									name="email"
 									placeholder="Introducir email"
+									onChange={() => console.log("disabled")} // attr necesario, sinó da error
 									disabled={true}
+									minMarginTop
 								/>
 								<p>
-									El email no se puede modificar. Ponte en contacto si necesitas
-									actualizarlo.
+									El email no se puede modificar. Ponte en{" "}
+									<Link to="#">contacto</Link> si necesitas actualizarlo.
 								</p>
-							</StyledLabel>
-						</StyledInputsWrapper>
-						<StyledInputsWrapper>
-							<StyledLabel>
-								<label htmlFor="passName">Nueva Constraseña</label>
-								<Input
+							</div>
+						</div>
+						<div>
+							<div>
+								<label htmlFor="passName">Nueva Contraseña</label>
+								<InputValidated
 									type="password"
+									value={newPassword}
 									placeholder="Introducir contraseña"
-									onChange={(e) => handlePasswordChange(e.target.value)}
-									className="errorProfile"
+									onChange={(e) => setNewPassword(e.target.value)}
 									id="passName"
 									name="passName"
-									error={isPassError}
-									errorText="The password to contain more than 6 characters and a uppercase letter"
-									minLength={6}
+									valid={setValidPassword1}
+									minMarginTop
 								/>
-							</StyledLabel>
-							<StyledLabel>
-								<label htmlFor="confirmPassName">Confirmar Constraseña</label>
+							</div>
+							<div>
+								<label htmlFor="confirmPassName">Confirmar Contraseña</label>
 								<Input
 									type="password"
+									value={repeatedNewPassword}
 									placeholder="Confirma tu contraseña"
-									onChange={(e) => handlePasswordChange2(e.target.value)}
-									className="errorProfile"
+									onChange={(e) => setRepeatedNewPassword(e.target.value)}
 									id="confirmPassName"
 									name="confirmPassName"
-									error={isPassError2}
-									errorText="Both passwords must be equal"
-									minLength={6}
+									error={repeatedNewPassword !== "" && !validPassword2}
+									errorText="Las 2 contraseñas tienen que ser iguales"
+									success={repeatedNewPassword !== "" && validPassword2}
+									disabled={!validPassword1}
+									minMarginTop
 								/>
-							</StyledLabel>
-						</StyledInputsWrapper>
-						<StyledSaveWrapper>
+							</div>
+						</div>
+						<div>
 							<AsyncButton
 								text="Guardar"
 								loadingText="Guardando"
 								type="submit"
-								className="greenGradient"
+								className="green-gradient"
+								disabled={!validPassword1 || !validPassword2}
 							/>
-						</StyledSaveWrapper>
-					</StyledFormProfile>
-				</BodyWrapper>
+						</div>
+					</ProfileForm>
+				</ProfileWrapper>
 			</Container>
 		</Body>
 	);
