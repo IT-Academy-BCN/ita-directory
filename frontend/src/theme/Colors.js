@@ -30,6 +30,7 @@ const Colors = {
 	darkerShadow: "rgba(0, 0, 0, 0.3)",
 	shadow: "rgba(0, 0, 0, 0.2)",
 	lighterShadow: "rgba(0, 0, 0, 0.19)",
+	lightBeige: "#EFEEEA",
 };
 
 export default Colors;

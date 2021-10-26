@@ -11,7 +11,7 @@ export const NotificationStyled = styled.div`
 		position: fixed;
 		top: 0;
 		right: 0;
-		margin: 3rem;
+		margin: 2rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
