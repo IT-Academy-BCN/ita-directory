@@ -6,7 +6,7 @@ sidebar_position: 1
 
 We use github issues and automation to manage our tasks. The workflow set for this project is based on branching model that involves the use of a main branch, develop and feature branches to develop new app features or resolve issues.
 
-![Gitworkflow]("/gitworkflow.png")
+![Gitworkflow](https://github.com/it-academyproject/ita-directory/blob/333-gitflow/documents/docs/Project/gitworkflow.png)
 
 # Develop and main branches
 
