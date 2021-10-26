@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useCallback} from "react";
+import React, {useState, useMemo, useCallback, useEffect} from "react";
 import {
 	faUserClock,
 	faUserCheck,
@@ -11,17 +11,18 @@ import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import ReactTable from "../../components/composed/Table/ReactTable";
 import usuarios from "assets/usuarios.json";
-import {people1b, people4b, people13b} from "assets/images";
+import {people4b, people1b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
+import axios from "axios";
 
 // Styles
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
 const ListaUsuariosAdmins = () => {
-	const [images] = useState([people1b, people4b, people13b]);
+	const [images] = useState([people4b, people13b, people1b]);
 
 	const [active, setActive] = useState(false);
 
@@ -39,6 +40,15 @@ const ListaUsuariosAdmins = () => {
 
 	//Edit Profile
 	const [currentEmail, setCurrentEmail] = useState("");
+
+	// get users from API
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const result = await axios("http://localhost:5000/users");
+			setDataUsers(result.data);
+		};
+		fetchUsers();
+	}, []);
 
 	const handleModalStatus = useCallback(
 		(name, state) => {
