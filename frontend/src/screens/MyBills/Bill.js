@@ -55,12 +55,12 @@ const Bill = (color_logo) => {
 				Cell: ({row}) => <div>{row.original.itemID}</div>,
 			},
 			{
-				Header: "ITEM",
+				Header: "Item",
 				accessor: "itemTitle",
 				Cell: ({row}) => <div>{row.original.itemTitle}</div>,
 			},
 			{
-				Header: "PRICE",
+				Header: "Price",
 				accessor: "itemPrice",
 				Cell: ({row}) => (
 					<div>
@@ -70,12 +70,12 @@ const Bill = (color_logo) => {
 				),
 			},
 			{
-				Header: "QUANTITY",
+				Header: "Quantity",
 				accessor: "itemQuant",
 				Cell: ({row}) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
 			},
 			{
-				Header: <div className="lastColumn">{"AMOUNT"}</div>,
+				Header: <div className="lastColumn">{"Amount"}</div>,
 				accessor: "amount",
 				Cell: ({row}) => (
 					<div className={`${customRowStyle} lastColumn1`}>

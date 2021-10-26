@@ -128,6 +128,7 @@ export const TableWrapperStyled = styled.div.attrs({
 	th {
 		text-align: left;
 		padding-left: 1.5rem;
+		text-transform: uppercase;
 	}
 
 	td {
