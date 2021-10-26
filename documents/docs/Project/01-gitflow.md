@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Git flow
 
 We use github issues and automation to manage our tasks. The workflow set for this project is based on branching model that involves the use of a main branch, develop and feature branches to develop new app features or resolve issues.
