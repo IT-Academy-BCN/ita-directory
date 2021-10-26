@@ -7,8 +7,25 @@ async function createAd(req, res) {
 		const {...fields} = req.body;
 		await adsSchema.validateAsync(fields);
 
+		console.log(fields);
+
 		const ad = await prisma.ads.create({
-			data: fields,
+			data: {
+				user: {
+					connect: {
+						id: parseInt(req.body.user_id),
+					},
+				},
+				title: req.body.title,
+				description: req.body.description,
+				city: req.body.city,
+				n_rooms: parseInt(req.body.n_rooms),
+				price: parseInt(req.body.price),
+				square_meters: parseInt(req.body.square_meters),
+				n_bathrooms: parseInt(req.body.n_bathrooms),
+				map_lat: parseFloat(req.body.map_lat),
+				map_lon: parseFloat(req.body.map_lon),
+			},
 		});
 
 		res.status(200).json(
