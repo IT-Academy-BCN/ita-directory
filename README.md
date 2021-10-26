@@ -128,7 +128,7 @@ Once you have started the server, then you can open your browser and enter this 
 http://localhost:5000/api-docs/
 ```
 
-1.  <!-- USAGE EXAMPLES -->
+<!-- USAGE EXAMPLES -->
 
 ## Usage
 
