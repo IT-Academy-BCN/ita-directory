@@ -35,7 +35,7 @@ const Input = ({
 	return (
 		<>
 			<InputContainerStyled
-				className="w-full InputContainer"
+				className="w-full input-container"
 				type={type}
 				minMarginTop={minMarginTop}
 			>

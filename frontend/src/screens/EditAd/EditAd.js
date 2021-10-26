@@ -74,7 +74,7 @@ const EditAd = (props) => {
 			label: "Habitaciones",
 			name: "numRooms",
 			icon: faBed,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
@@ -82,7 +82,7 @@ const EditAd = (props) => {
 			name: "monthlyRent",
 			required: true,
 			icon: faEuroSign,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
@@ -90,14 +90,14 @@ const EditAd = (props) => {
 			name: "squareMeters",
 			required: true,
 			icon: faHome,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
 			label: "Baños",
 			name: "numBaths",
 			icon: faBath,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 	];
 

@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
@@ -6,6 +6,7 @@ import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
@@ -59,15 +60,6 @@ const CreateNewAd = () => {
 			map_lon: Number(coordinates[1]),
 		});
 	};
-	//	,
-
-	useEffect(() => {
-		setForm({
-			...form,
-			map_lat: Number(coordinates[0]),
-			map_lon: Number(coordinates[1]),
-		});
-	}, [coordinates, form]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -89,14 +81,14 @@ const CreateNewAd = () => {
 			label: "Título",
 			name: "title",
 			required: true,
-			inputContainerClassName: "createNewAd",
+			inputContainerClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: TextArea,
 			type: "text",
 			label: "Descripción",
 			name: "description",
-			inputContainerClassName: "textAreaCreateNewAd",
+			inputContainerClassName: "style-input-create-new-ad", // textAreaCreateNewAd
 		},
 		{
 			Component: Input,
@@ -104,7 +96,7 @@ const CreateNewAd = () => {
 			label: "Ciudad",
 			name: "city",
 			required: true,
-			inputContainerClassName: "createNewAd",
+			inputContainerClassName: "style-input-create-new-ad",
 			icon: faMapMarkerAlt,
 		},
 		{
@@ -112,7 +104,7 @@ const CreateNewAd = () => {
 			label: "Habitaciones",
 			name: "n_rooms",
 			icon: faBed,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
@@ -120,7 +112,7 @@ const CreateNewAd = () => {
 			name: "price",
 			required: true,
 			icon: faEuroSign,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
@@ -128,14 +120,14 @@ const CreateNewAd = () => {
 			name: "square_meters",
 			required: true,
 			icon: faHome,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
 			label: "Baños",
 			name: "n_bathrooms",
 			icon: faBath,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 	];
 
@@ -167,18 +159,25 @@ const CreateNewAd = () => {
 							{inputComponentData.map((el, i) => {
 								const Component = el.Component;
 								return (
-									<Component
-										key={i}
-										type={el.type}
-										label={el.label}
-										name={el.name}
-										required={el.required}
-										value={form[el.name]}
-										onChange={handleChange}
-										className={el.inputClassName}
-										icon={el.icon}
-										inputContainerClassName={el.inputContainerClassName}
-									/>
+									<div key={i}>
+										<div className="form-label">
+											{el.Component === Input && (
+												<FontAwesomeIcon icon={el.icon} />
+											)}
+											<label>{el.label}</label>
+										</div>
+										<Component
+											key={i}
+											type={el.type}
+											name={el.name}
+											required={el.required}
+											value={form[el.name]}
+											onChange={handleChange}
+											className={el.inputClassName}
+											icon={el.Component === InputNumber && el.icon}
+											inputContainerClassName={el.inputContainerClassName}
+										/>
+									</div>
 								);
 							})}
 							<MapText>
