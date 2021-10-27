@@ -10,7 +10,6 @@ import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import ReactTable from "../../components/composed/Table/ReactTable";
-import {people4b, people1b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
@@ -19,6 +18,7 @@ import axios from "axios";
 
 // Styles
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
+//import {array} from "prop-types";
 
 const REQ_STATUS = {
 	INITIAL: "INITIAL",
@@ -28,8 +28,6 @@ const REQ_STATUS = {
 };
 
 const ListaUsuariosAdmins = () => {
-	const [images] = useState([people4b, people13b, people1b]);
-
 	const [active, setActive] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState([]);
@@ -49,28 +47,27 @@ const ListaUsuariosAdmins = () => {
 	//Edit Profile
 	const [currentEmail, setCurrentEmail] = useState("");
 
-	// get users from API
 	useEffect(() => {
 		setFetchStatus(REQ_STATUS.LOADING);
 		axios
 			.get("http://localhost:5000/users")
 			.then((response) => {
-				console.log(response.data);
 				setDataUsers(response.data);
 				setFetchStatus(REQ_STATUS.SUCCESS);
 			})
 			.catch((error) => {
 				console.error(error);
 				setFetchStatus(REQ_STATUS.FAILURE);
-				console.log("fetch status: ", fetchStatus);
 			});
-		console.log("fetch status: ", fetchStatus);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// add images
-	console.log(dataUsers);
+	//manage loading users
+	useEffect(() => {
+		console.log(fetchStatus);
+	}, [fetchStatus]);
+
+	//add avatar images users page
+	console.log("data users", dataUsers);
 
 	const handleModalStatus = useCallback(
 		(name, state) => {
@@ -155,7 +152,7 @@ const ListaUsuariosAdmins = () => {
 
 				Cell: ({row}) => (
 					<StyledCell>
-						{<StyledImage src={images[row.id]} alt="foto" width="50px" height="50px" />}
+						{<StyledImage src="#" alt="foto" width="50px" height="50px" />}
 					</StyledCell>
 				),
 				minWidth: "32px",
@@ -226,7 +223,7 @@ const ListaUsuariosAdmins = () => {
 				),
 			},
 		],
-		[handleModalDelete, handleModalEdit, handleModalStatus, images]
+		[handleModalDelete, handleModalEdit, handleModalStatus]
 	);
 
 	return (
