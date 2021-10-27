@@ -29,6 +29,11 @@ const Register = ({retrieveUser}) => {
 	const [validPassword, setValidPassword] = useState(false);
 	const [privacy, setPrivacy] = useState(false);
 
+	//manage modal success error
+	const closeNotification = () => {
+		return setError(false) || setValidacionConexion(false);
+	};
+
 	const registerUser = async (user) => {
 		try {
 			const resp = await axios.post("http://localhost:5000/users/v1/register", user);
@@ -62,13 +67,18 @@ const Register = ({retrieveUser}) => {
 	return (
 		<>
 			{error ? (
-				<Notification message={msgs.Ns.emailOrPasswordError} isSuccess={false} />
+				<Notification
+					message={msgs.Ns.emailOrPasswordError}
+					isSuccess={false}
+					closeNotification={closeNotification}
+				/>
 			) : null}
 			{validacionConexion ? (
 				<Notification
 					email={email}
 					message={`${email} has sido registrado. Te estamos redireccionando.`}
 					isSuccess={true}
+					closeNotification={closeNotification}
 				/>
 			) : null}
 
