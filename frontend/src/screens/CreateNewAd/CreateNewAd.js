@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
@@ -60,6 +60,15 @@ const CreateNewAd = () => {
 			map_lon: Number(coordinates[1]),
 		});
 	};
+	//	,
+
+	useEffect(() => {
+		setForm({
+			...form,
+			map_lat: Number(coordinates[0]),
+			map_lon: Number(coordinates[1]),
+		});
+	}, [coordinates, form]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

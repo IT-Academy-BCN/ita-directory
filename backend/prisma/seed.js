@@ -54,6 +54,46 @@ const users = [
 		password: "Test-test",
 		refresh_token: "20",
 	},
+	{
+		id: 2,
+		name: "test2",
+		lastnames: "test test",
+		email: "test2@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test2",
+		refresh_token: "20",
+	},
+	{
+		id: 3,
+		name: "test3",
+		lastnames: "test test",
+		email: "test3@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test3",
+		refresh_token: "20",
+	},
+	{
+		id: 4,
+		name: "test4",
+		lastnames: "test test",
+		email: "test4@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test4",
+		refresh_token: "20",
+	},
+	{
+		id: 5,
+		name: "test5",
+		lastnames: "test test",
+		email: "test5@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test5",
+		refresh_token: "20",
+	},
 ];
 
 const ads = [
@@ -199,6 +239,109 @@ const ads = [
 	},
 ];
 
+const medias = [
+	{
+		id: 1,
+		path: "../../public/2021/10",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 1,
+	},
+	{
+		id: 2,
+		path: "../../public/2021/10",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 2,
+	},
+	{
+		id: 3,
+		path: "../../public/2021/10",
+		mime_type: "png",
+		file_size: "200",
+		user_id: 3,
+	},
+	{
+		id: 4,
+		path: "../../public/2021/10",
+		mime_type: "png",
+		file_size: "200",
+		user_id: 4,
+	},
+];
+
+const medias_types = [
+	{
+		id: 1,
+		name: "thumnail",
+		thumnail: true,
+		medium: false,
+		large: false,
+		original: false,
+	},
+	{
+		id: 2,
+		name: "medium",
+		thumnail: false,
+		medium: true,
+		large: false,
+		original: false,
+	},
+	{
+		id: 3,
+		name: "large",
+		thumnail: false,
+		medium: false,
+		large: true,
+		original: false,
+	},
+	{
+		id: 4,
+		name: "original",
+		thumnail: false,
+		medium: false,
+		large: false,
+		original: true,
+	},
+];
+
+const medias_metas = [
+	{
+		id: 1,
+		path: "../../public/2021/10",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 1,
+		media_type_id: 1,
+	},
+	{
+		id: 2,
+		path: "../../public/2021/10",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 2,
+		media_type_id: 2,
+	},
+	{
+		id: 3,
+		path: "../../public/2021/10",
+		mime_type: "png",
+		file_size: "200",
+		media_id: 3,
+		media_type_id: 3,
+	},
+	{
+		id: 4,
+		path: "../../public/2021/10",
+		mime_type: "png",
+		file_size: "200",
+		media_id: 4,
+		media_type_id: 4,
+	},
+];
+
+
+
 async function main() {
 	for (let i = 0; i < user_roles.length; i++) {
 		const ur = user_roles[i];
@@ -241,6 +384,36 @@ async function main() {
 			update: {},
 			create: {
 				...ad,
+			},
+		});
+	}
+	for (let i = 0; i < medias.length; i++) {
+		const media = medias[i];
+		await prisma.media.upsert({
+			where: {id: media.id},
+			update: {},
+			create: {
+				...media,
+			},
+		});
+	}
+	for (let i = 0; i < medias_types.length; i++) {
+		const media_type = medias_types[i];
+		await prisma.media_type.upsert({
+			where: {id: media_type.id},
+			update: {},
+			create: {
+				...media_type,
+			},
+		});
+	}
+	for (let i = 0; i < medias_metas.length; i++) {
+		const media_meta = medias_metas[i];
+		await prisma.media_meta.upsert({
+			where: {id: media_meta.id},
+			update: {},
+			create: {
+				...media_meta,
 			},
 		});
 	}
