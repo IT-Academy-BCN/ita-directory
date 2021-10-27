@@ -268,6 +268,13 @@ const medias = [
 		file_size: "200",
 		user_id: 4,
 	},
+	{
+		id: 5,
+		path: "../../public/2021/10",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 5,
+	},
 ];
 
 const medias_types = [
@@ -336,6 +343,14 @@ const medias_metas = [
 		mime_type: "png",
 		file_size: "200",
 		media_id: 4,
+		media_type_id: 4,
+	},
+	{
+		id: 5,
+		path: "../../public/2021/10",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 5,
 		media_type_id: 4,
 	},
 ];
