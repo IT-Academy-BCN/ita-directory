@@ -1,4 +1,3 @@
-const uploadFile = require("./../middleware/uploadFile");
 const prisma = require("../../prisma/indexPrisma");
 const fs = require("fs");
 
