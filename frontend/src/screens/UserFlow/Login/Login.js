@@ -13,9 +13,6 @@ import InputValidated from "components/units/InputValidated/InputValidated";
 // Styles
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
-// Utilities
-import {msgs} from "utils/userFlow";
-
 const Login = ({onLogin}) => {
 	const [loginError, setLoginError] = useState(false);
 	const [loginSuccess, setLoginSuccess] = useState(false);
@@ -26,6 +23,7 @@ const Login = ({onLogin}) => {
 	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword] = useState(false);
+	const [message, setMessage] = useState("");
 
 	const closeNotification = () => {
 		return setLoginError(false) || setLoginSuccess(false);
@@ -35,9 +33,11 @@ const Login = ({onLogin}) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
 			console.log(response.status);
+			console.log(response.data.message);
+			setMessage(response.data.message);
+			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
 		} catch (error) {
-			// Handle Error Here
 			console.error(error);
 			setLoginError(true);
 		}
@@ -69,7 +69,7 @@ const Login = ({onLogin}) => {
 		<>
 			{loginError ? (
 				<Notification
-					message={msgs.Ns.emailOrPasswordError}
+					message={message}
 					isSuccess={false}
 					closeNotification={closeNotification}
 					autoClose={true}
@@ -77,13 +77,15 @@ const Login = ({onLogin}) => {
 			) : null}
 
 			{loginSuccess ? (
-				<Notification
-					email={email}
-					message={`${email}: ${msgs.Ns.loginSuccess}`}
-					isSuccess={true}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
+				<>
+					<Notification
+						email={email}
+						message={message}
+						isSuccess={true}
+						closeNotification={closeNotification}
+						autoClose={true}
+					/>
+				</>
 			) : null}
 
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
