@@ -176,34 +176,46 @@ exports.registerUser = async (req, res, next) => {
 exports.getAllUsers = async (req, res, next) => {
 	let userRet = [];
 	try {
-		const users = await prisma.user.findMany();
-		const medias = await prisma.media.findMany();
-		for (let i = 0; i < users.length; i++) {
-			const user = users[i];
-			for (let j = 0; j < medias.length; j++) {
-				const media = medias[j];
-				if (user.id == media.user_id) {
-					const newUser = {
-						id: user.id,
-						name: user.name,
-						lastnames: user.lastnames,
-						email: user.email,
-						created_at: user.created_at,
-						updated_at: user.updated_at,
-						user_status_id: user.user_status_id,
-						user_role_id: user.user_status_id,
-						refresh_token: user.refresh_token,
-						media_path: media.path
-					};
-					userRet.push(newUser);
-				}
-			}
-		}
-		userRet.sort(function (a, b) {
-			if (a.id !== b.id) {
-				return a.id - b.id;
+		/*const users = await prisma.user.findUnique({
+			select: {
+				id: true,
+				name: true,
+				lastnames: true,
+				email: true,
+				created_at: true,
+				updated_at: true,
+				user_status_id: true,
+				user_role_id: true,
+				refresh_token: true,
 			}
 		});
+		const med = await prisma.media.findMany({
+			where: {
+				user_id: users.id
+			},
+			select: {
+				path: true,
+			}
+		});*/
+		const users = await prisma.user.findMany({
+			select: {
+				id: true,
+				name: true,
+				lastnames: true,
+				email: true,
+				created_at: true,
+				updated_at: true,
+				user_status_id: true,
+				user_role_id: true,
+				refresh_token: true,
+				media: {
+					select: {
+						path: true
+					},
+				}
+			},
+		});
+		console.log(users);
 		return res.status(200).json(userRet);
 	} catch (err) {
 		return next(new Error(err));
