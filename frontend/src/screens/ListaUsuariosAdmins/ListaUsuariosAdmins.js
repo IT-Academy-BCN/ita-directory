@@ -54,6 +54,7 @@ const ListaUsuariosAdmins = () => {
 			.then((response) => {
 				setDataUsers(response.data);
 				setFetchStatus(REQ_STATUS.SUCCESS);
+				console.log(response.data);
 			})
 			.catch((error) => {
 				console.error(error);
