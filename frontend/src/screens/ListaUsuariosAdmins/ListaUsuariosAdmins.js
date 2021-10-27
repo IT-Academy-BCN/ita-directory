@@ -10,7 +10,6 @@ import Body from "components/layout/Body/Body";
 import {Container} from "theme/GlobalStyles.js";
 import Colors from "theme/Colors";
 import ReactTable from "../../components/composed/Table/ReactTable";
-import usuarios from "assets/usuarios.json";
 import {people4b, people1b, people13b} from "assets/images";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
@@ -21,13 +20,22 @@ import axios from "axios";
 // Styles
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
 
+const REQ_STATUS = {
+	INITIAL: "INITIAL",
+	LOADING: "LOADING",
+	SUCCESS: "SUCCESS",
+	FAILURE: "FAILURE",
+};
+
 const ListaUsuariosAdmins = () => {
 	const [images] = useState([people4b, people13b, people1b]);
 
 	const [active, setActive] = useState(false);
 
-	const [dataUsers, setDataUsers] = useState(usuarios);
+	const [dataUsers, setDataUsers] = useState([]);
 	const data = useMemo(() => [...dataUsers], [dataUsers]);
+
+	const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL);
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -43,12 +51,26 @@ const ListaUsuariosAdmins = () => {
 
 	// get users from API
 	useEffect(() => {
-		const fetchUsers = async () => {
-			const result = await axios("http://localhost:5000/users");
-			setDataUsers(result.data);
-		};
-		fetchUsers();
+		setFetchStatus(REQ_STATUS.LOADING);
+		axios
+			.get("http://localhost:5000/users")
+			.then((response) => {
+				console.log(response.data);
+				setDataUsers(response.data);
+				setFetchStatus(REQ_STATUS.SUCCESS);
+			})
+			.catch((error) => {
+				console.error(error);
+				setFetchStatus(REQ_STATUS.FAILURE);
+				console.log("fetch status: ", fetchStatus);
+			});
+		console.log("fetch status: ", fetchStatus);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	// add images
+	console.log(dataUsers);
 
 	const handleModalStatus = useCallback(
 		(name, state) => {
