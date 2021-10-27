@@ -22,7 +22,7 @@ const Colors = {
 	lightGrey: "#999999",
 	lightGray: "#B0B0B0",
 	strongBlue: "#006BB9",
-	extraLightGrey: "D8D8D8",
+	extraLightGrey: "#f7f7f7",
 	extraDarkBlue: "#074C84",
 	bahamaBlue: "#005593",
 	prussianBlue: "#00324c",
@@ -30,6 +30,7 @@ const Colors = {
 	darkerShadow: "rgba(0, 0, 0, 0.3)",
 	shadow: "rgba(0, 0, 0, 0.2)",
 	lighterShadow: "rgba(0, 0, 0, 0.19)",
+	lightBeige: "#EFEEEA",
 };
 
 export default Colors;

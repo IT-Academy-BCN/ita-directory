@@ -74,7 +74,7 @@ const EditAd = (props) => {
 			label: "Habitaciones",
 			name: "numRooms",
 			icon: faBed,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
@@ -82,7 +82,7 @@ const EditAd = (props) => {
 			name: "monthlyRent",
 			required: true,
 			icon: faEuroSign,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
@@ -90,14 +90,14 @@ const EditAd = (props) => {
 			name: "squareMeters",
 			required: true,
 			icon: faHome,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 		{
 			Component: InputNumber,
 			label: "Baños",
 			name: "numBaths",
 			icon: faBath,
-			inputClassName: "styleInputCreateNewAd",
+			inputClassName: "style-input-create-new-ad",
 		},
 	];
 
@@ -132,7 +132,7 @@ const EditAd = (props) => {
 								buttonStyles={{width: "7.25rem", height: "2.125rem"}}
 								text="Editar"
 								type="normal"
-								className="blueGradient"
+								className="blue-gradient"
 							/>
 							<Button
 								buttonStyles={{
@@ -143,7 +143,7 @@ const EditAd = (props) => {
 								text="Volver"
 								onClick={handleCancel}
 								type="normal"
-								className="orangeGradient"
+								className="orange-gradient"
 							/>
 						</form>
 						{submittedData && (

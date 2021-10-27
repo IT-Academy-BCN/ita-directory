@@ -172,7 +172,6 @@ const MyBills = () => {
 									{...row.getRowProps()}
 									style={{borderTop: `solid 1px ${Colors.grey}`}}
 								>
-
 									{row.cells.map((cell) => {
 										return (
 											<td {...cell.getCellProps()}>{cell.render("Cell")}</td>

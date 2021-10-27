@@ -31,7 +31,6 @@ const Bill = (color_logo) => {
 	const [chosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 	//const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
-
 	const data = useMemo(() => [...chosenBill], [chosenBill]);
 
 	// Selecting the right bill...
@@ -40,12 +39,11 @@ const Bill = (color_logo) => {
 		return res;
 	});
 
-	//Custom styles for rows needs implementation - at the moment not working
 	const customRowStyle = (row) => {
 		if (Number(row.original.itemID) % 2 === 0) {
-			return {backgroundColor: "white", alignItems: "center"};
+			return {backgroundColor: "white"};
 		}
-		return {backgroundColor: `${Colors.lightGrey}`, alignItems: "center"};
+		return {backgroundColor: `${Colors.lightBeige}`};
 	};
 
 	// Columns for datatables
@@ -81,7 +79,6 @@ const Bill = (color_logo) => {
 				accessor: "amount",
 				Cell: ({row}) => (
 					<div className={`${customRowStyle} lastColumn1`}>
-
 						<span>€ </span>
 						{row.original.itemPrice * row.original.itemQuant}
 					</div>
@@ -95,49 +92,54 @@ const Bill = (color_logo) => {
 		return (
 			<BillStyled key={bill.id} color={Colors.lightGray}>
 				<HeaderStyled>
-					<h2>{bill.header.logoCompany}</h2>
-					<h2>{bill.header.invoiceID}</h2>
+					<h2 className="logo-company">Logo Company {bill.header.logoCompany}</h2>
+					<h2 className="invoice">INVOICE {bill.header.invoiceID}</h2>
 				</HeaderStyled>
 				<AddressesWrapper>
 					<InvoiceRecipientStyled>
-						<div>
+						<div className="invoice-recipient">
 							<p>Invoice to:</p>
 							<h2>{bill.emisorReceiver.emisor.emName}</h2>
 							<p>{bill.emisorReceiver.emisor.emPosition}</p>
-							<br></br>
+						</div>
+						<br></br>
+						<div className="address-recipient">
 							<p>Address:</p>
 							<p>{bill.emisorReceiver.emisor.emStreet}</p>
 							<p>{bill.emisorReceiver.emisor.emContact}</p>
 						</div>
 					</InvoiceRecipientStyled>
 					<InvoiceSenderStyled>
-						<div>
+						<div className="invoice-recipient">
 							<p>Invoice from:</p>
 							<h2>{bill.emisorReceiver.receiver.reName}</h2>
 							<p>{bill.emisorReceiver.receiver.rePosition}</p>
-							<br></br>
+						</div>
+						<br></br>
+						<div className="address-recipient">
 							<p>Address:</p>
 							<p>{bill.emisorReceiver.emisor.emStreet}</p>
 							<p>{bill.emisorReceiver.emisor.emContact}</p>
 						</div>
 					</InvoiceSenderStyled>
 				</AddressesWrapper>
+
 				<TableWrapperStyled>
 					<ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
 				</TableWrapperStyled>
+
 				<TermsAndCalcStyled>
 					<TermsStyled>
 						<h3>Terms & Conditions</h3>
-						<small>
+						<p>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore
-						</small>
+						</p>
 					</TermsStyled>
 					<CalcTableStyled>
 						<tbody>
 							<tr>
 								<th>Sub Total</th>
-								<td></td>
 
 								<td>
 									€{" "}
@@ -154,7 +156,6 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Tax(5%)</th>
-								<td></td>
 
 								<td>
 									€{" "}
@@ -174,7 +175,6 @@ const Bill = (color_logo) => {
 							</tr>
 							<tr>
 								<th>Discount(10%)</th>
-								<td></td>
 
 								<td>
 									€{" "}
@@ -195,10 +195,8 @@ const Bill = (color_logo) => {
 								</td>
 							</tr>
 							<tr>
-								<th className="bg-lightGrey bold">GRAND TOTAL</th>
-								<td className="bg-lightGrey"></td>
-								<td className="bg-lightGrey items-center">
-
+								<th className="grand-total">GRAND TOTAL</th>
+								<td className="items-center grand-total">
 									<div className="font-bold">
 										€{" "}
 										{selectedBill.map((amount) => {

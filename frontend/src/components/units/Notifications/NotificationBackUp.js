@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
-import tw, {theme} from "twin.macro";
+// import tw, {theme} from "twin.macro";
 
 export const Container = styled.div`
 	background: #ffffff 0% 0% no-repeat padding-box;

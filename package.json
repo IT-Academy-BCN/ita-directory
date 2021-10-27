@@ -1,6 +1,7 @@
 {
   "name": "ita-directory",
   "private": true,
+  "proxy": "http://localhost:5001",
   "workspaces": [
     "frontend",
     "backend",
@@ -34,5 +35,6 @@
   "devDependencies": {
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2"
-  }
+  },
+  "dependencies": {}
 }
