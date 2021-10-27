@@ -261,12 +261,19 @@ const medias = [
 		file_size: "200",
 		user_id: 3,
 	},
+	{
+		id: 4,
+		path: "../../public/2021/10",
+		mime_type: "png",
+		file_size: "200",
+		user_id: 4,
+	},
 ];
 
 const medias_types = [
 	{
 		id: 1,
-		name: "media1",
+		name: "thumnail",
 		thumnail: true,
 		medium: false,
 		large: false,
@@ -274,7 +281,7 @@ const medias_types = [
 	},
 	{
 		id: 2,
-		name: "media2",
+		name: "medium",
 		thumnail: false,
 		medium: true,
 		large: false,
@@ -282,11 +289,19 @@ const medias_types = [
 	},
 	{
 		id: 3,
-		name: "media3",
+		name: "large",
 		thumnail: false,
 		medium: false,
 		large: true,
 		original: false,
+	},
+	{
+		id: 4,
+		name: "original",
+		thumnail: false,
+		medium: false,
+		large: false,
+		original: true,
 	},
 ];
 
@@ -314,6 +329,14 @@ const medias_metas = [
 		file_size: "200",
 		media_id: 3,
 		media_type_id: 3,
+	},
+	{
+		id: 4,
+		path: "../../public/2021/10",
+		mime_type: "png",
+		file_size: "200",
+		media_id: 4,
+		media_type_id: 4,
 	},
 ];
 
