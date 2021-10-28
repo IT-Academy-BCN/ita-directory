@@ -1,19 +1,11 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-
-// Layout Components
-import Body from "components/layout/Body/Body";
-
-// Units Components
-import AsyncButton from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
+import Body from "components/layout/Body/Body";
+import AsyncButton from "components/units/Button/Button";
 import InputValidated from "components/units/InputValidated/InputValidated";
-
-// Styles
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
-
-// Utilities
 import {msgs} from "utils/userFlow";
 
 const Login = ({onLogin}) => {
