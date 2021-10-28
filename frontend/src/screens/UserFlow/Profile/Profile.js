@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -23,10 +24,22 @@ const Profile = () => {
 	const [validPassword2, setValidPassword2] = useState(false);
 	const [profilePhoto, setProfilePhoto] = useState(fakeProfilePhoto);
 
+	const users = async () => {
+		try {
+			const response = await axios.get("http://localhost:5000/users");
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	console.log(users);
+	// cargar info usuario a mostrar
+	// enviar cambios
+
 	const submitPhoto = (event) => {
 		event.preventDefault();
 		console.log("profile photo clicked");
-		setProfilePhoto(fakeProfilePhoto);
+		setProfilePhoto("");
 	};
 
 	const submitUserInfo = (event) => {
