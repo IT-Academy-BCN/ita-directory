@@ -139,7 +139,7 @@ exports.registerUser = async (req, res, next) => {
 				code: "error",
 				header: "Invalid email",
 				message: "This email has already been registered.",
-				statusCode: 400,
+				statusCode: 200,
 			});
 		}
 
@@ -248,7 +248,7 @@ exports.login = async (req, res, next) => {
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
-				statusCode: 404,
+				statusCode: 200,
 			});
 		}
 
