@@ -62,13 +62,7 @@ const ListaUsuariosAdmins = () => {
 			});
 	}, []);
 
-	//manage loading users
-	useEffect(() => {
-		console.log(fetchStatus);
-	}, [fetchStatus]);
-
-	//add avatar images users page
-	console.log("data users", dataUsers);
+	console.log(fetchStatus);
 
 	const handleModalStatus = useCallback(
 		(name, state) => {
