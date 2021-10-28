@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
 const expressJSDocSwagger = require("express-jsdoc-swagger");
+const path = require("path");
 const options = require("./utils/swaggerOptions");
 const userRoutes = require("./routes/users");
 const mediaRoutes = require("./routes/media");
@@ -31,7 +32,7 @@ app.use(
 );
 
 //Settings for testing SocketIO
-app.use(express.static("public"));
+app.use('/static', express.static(path.join(__dirname, "public")));
 //app.set('view engine', 'ejs');
 
 // Middlewares
