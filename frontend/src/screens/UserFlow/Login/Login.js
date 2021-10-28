@@ -8,7 +8,6 @@ import InputValidated from "components/units/InputValidated/InputValidated";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 const Login = ({onLogin}) => {
-	const [loginError, setLoginError] = useState(false);
 	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
@@ -17,23 +16,20 @@ const Login = ({onLogin}) => {
 	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword] = useState(false);
-	const [message, setMessage] = useState("");
+	const [message, setMessage] = useState(null);
 
-	const closeNotification = () => {
-		return setLoginError(false) || setLoginSuccess(false);
-	};
+	const closeNotification = () => setMessage(null);
 
 	const loginUser = async (user) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
-			console.log(response.status);
-			console.log(response.data.message);
 			setMessage(response.data.message);
 			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
 		} catch (error) {
-			console.error(error);
-			setLoginError(true);
+			if (error.name === "Error")
+				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			setLoginSuccess(false);
 		}
 	};
 
@@ -50,7 +46,6 @@ const Login = ({onLogin}) => {
 				email,
 				password,
 				privacy: true,
-				// debe añadirse ChechBox de privacidad?
 			});
 			setTimeout(() => {
 				setIsDisabled(false);
@@ -61,25 +56,13 @@ const Login = ({onLogin}) => {
 
 	return (
 		<>
-			{loginError ? (
+			{message ? (
 				<Notification
 					message={message}
-					isSuccess={false}
+					isSuccess={loginSuccess}
 					closeNotification={closeNotification}
 					autoClose={true}
 				/>
-			) : null}
-
-			{loginSuccess ? (
-				<>
-					<Notification
-						email={email}
-						message={message}
-						isSuccess={true}
-						closeNotification={closeNotification}
-						autoClose={true}
-					/>
-				</>
 			) : null}
 
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
