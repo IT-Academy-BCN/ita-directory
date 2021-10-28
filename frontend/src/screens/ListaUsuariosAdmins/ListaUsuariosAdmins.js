@@ -14,7 +14,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
-import axios from "axios";
+//import axios from "axios";
 
 // Styles
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
@@ -49,17 +49,36 @@ const ListaUsuariosAdmins = () => {
 
 	useEffect(() => {
 		setFetchStatus(REQ_STATUS.LOADING);
-		axios
-			.get("http://localhost:5000/users")
-			.then((response) => {
-				setDataUsers(response.data);
-				setFetchStatus(REQ_STATUS.SUCCESS);
-				console.log(response.data);
+
+		const fetchData = () => {
+			fetch("mockUsers.json", {
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
 			})
-			.catch((error) => {
-				console.error(error);
-				setFetchStatus(REQ_STATUS.FAILURE);
-			});
+				.then(function (response) {
+					console.log(response);
+					return response.json();
+				})
+				.then(function (myJson) {
+					setDataUsers(myJson);
+					console.log(myJson);
+				});
+		};
+
+		/*axios
+            .get("http://localhost:5000/users")
+            .then((response) => {
+                setDataUsers(response.data);
+                setFetchStatus(REQ_STATUS.SUCCESS);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+                setFetchStatus(REQ_STATUS.FAILURE);
+            });*/
+		fetchData();
 	}, []);
 
 	console.log(fetchStatus);
@@ -143,11 +162,18 @@ const ListaUsuariosAdmins = () => {
 						Foto
 					</StyledCell>
 				),
-				accessor: "foto",
+				accessor: "media",
 
 				Cell: ({row}) => (
 					<StyledCell>
-						{<StyledImage src="#" alt="foto" width="50px" height="50px" />}
+						{
+							<StyledImage
+								src={row.values.media}
+								alt="foto"
+								width="50px"
+								height="50px"
+							/>
+						}
 					</StyledCell>
 				),
 				minWidth: "32px",
@@ -158,11 +184,11 @@ const ListaUsuariosAdmins = () => {
 						Nombre
 					</StyledCell>
 				),
-				accessor: "nombre",
+				accessor: "name",
 				Cell: ({row}) => (
-					<StyledCell color={Colors.bahamaBlue}>{row.values.nombre}</StyledCell>
+					<StyledCell color={Colors.bahamaBlue}>{row.values.name}</StyledCell>
 				),
-				minWidth: "60px",
+				minWidth: "50px",
 			},
 			{
 				Header: <StyledCell color={Colors.bahamaBlue}>Email</StyledCell>,
