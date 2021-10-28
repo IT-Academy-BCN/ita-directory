@@ -242,31 +242,38 @@ const ads = [
 const medias = [
 	{
 		id: 1,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image1",
 		mime_type: "jpeg",
 		file_size: "200",
 		user_id: 1,
 	},
 	{
 		id: 2,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image2",
 		mime_type: "jpeg",
 		file_size: "200",
 		user_id: 2,
 	},
 	{
 		id: 3,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image3",
 		mime_type: "png",
 		file_size: "200",
 		user_id: 3,
 	},
 	{
 		id: 4,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image4",
 		mime_type: "png",
 		file_size: "200",
 		user_id: 4,
+	},
+	{
+		id: 5,
+		path: "../../public/2021/10/image5",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 5,
 	},
 ];
 
@@ -308,7 +315,7 @@ const medias_types = [
 const medias_metas = [
 	{
 		id: 1,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image1",
 		mime_type: "jpeg",
 		file_size: "200",
 		media_id: 1,
@@ -316,7 +323,7 @@ const medias_metas = [
 	},
 	{
 		id: 2,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image2",
 		mime_type: "jpeg",
 		file_size: "200",
 		media_id: 2,
@@ -324,7 +331,7 @@ const medias_metas = [
 	},
 	{
 		id: 3,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image3",
 		mime_type: "png",
 		file_size: "200",
 		media_id: 3,
@@ -332,10 +339,18 @@ const medias_metas = [
 	},
 	{
 		id: 4,
-		path: "../../public/2021/10",
+		path: "../../public/2021/10/image4",
 		mime_type: "png",
 		file_size: "200",
 		media_id: 4,
+		media_type_id: 4,
+	},
+	{
+		id: 5,
+		path: "../../public/2021/10/image5",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 5,
 		media_type_id: 4,
 	},
 ];
