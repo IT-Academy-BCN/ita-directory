@@ -43,9 +43,9 @@
     <br />
     <a href="https://xd.adobe.com/view/6889eb5a-76b3-4b9d-adcb-0d76da6a8789-3dda/flow/">Visual design</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/it-academyproject/ita-directory/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/it-academyproject/ita-directory/issues">Request Feature</a>
   </p>
 </p>
 
@@ -88,8 +88,9 @@ Here's a blank template to get started:
 ### Built With
 
 - [React](https://reactjs.org/)
-- []()
-- []()
+- [Nodejs](https://nodejs.dev/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 
 <!-- GETTING STARTED -->
 
@@ -110,7 +111,7 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/it-academyproject/ita-directory.git
    ```
 2. Install NPM packages
    ```sh
