@@ -23,16 +23,24 @@ const Profile = () => {
 	const [validPassword1, setValidPassword1] = useState(false);
 	const [validPassword2, setValidPassword2] = useState(false);
 	const [profilePhoto, setProfilePhoto] = useState(fakeProfilePhoto);
+	const [users, setUsers] = useState(null);
 
-	const users = async () => {
-		try {
-			const response = await axios.get("http://localhost:5000/users");
-			return response.data;
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	console.log(users);
+	useEffect(() => {
+		const getUsers = async () => {
+			try {
+				const response = await axios.get("http://localhost:5000/users/");
+				console.log(response.data);
+				setUsers(response.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getUsers();
+		console.log(users);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	// cargar info usuario a mostrar
 	// enviar cambios
 
