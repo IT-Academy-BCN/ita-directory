@@ -1,0 +1,13 @@
+{
+    "id":1,
+    "name":"test",
+    "lastnames":"test test",
+    "email":"test@test.test",
+    "password":"Test123",
+    "created_at":"2021-10-18T07:51:02.952Z",
+    "updated_at":"2021-10-18T07:51:02.953Z",
+    "user_status_id":1,
+    "user_role_id":3,
+    "refresh_token":"20",
+    "photo": "people1b"
+}
