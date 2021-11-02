@@ -18,31 +18,29 @@ import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 import {msgs} from "utils/userFlow";
 
 const Register = ({retrieveUser}) => {
-	const [error, setError] = useState(false);
+	const [registerSuccess, setRegisterSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [validacionConexion, setValidacionConexion] = useState(false);
 	const [email, setEmail] = useState("");
 	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword] = useState(false);
 	const [privacy, setPrivacy] = useState(false);
+	const [message, setMessage] = useState(null);
 
-	//manage modal success error
-	const closeNotification = () => {
-		return setError(false) || setValidacionConexion(false);
-	};
+	const closeNotification = () => setMessage(null);
 
 	const registerUser = async (user) => {
 		try {
-			const resp = await axios.post("http://localhost:5000/users/v1/register", user);
-			console.log(resp.status);
-			setValidacionConexion(true);
+			const response = await axios.post("http://localhost:5000/users/v1/register", user);
+			setMessage(response.data.message);
+			if (response.data.code === "error") throw response.data.message;
+			setRegisterSuccess(true);
 		} catch (error) {
-			// Handle Error Here
-			console.error(error);
-			setError(true);
+			if (error.name === "Error")
+				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			setRegisterSuccess(false);
 		}
 	};
 
@@ -56,7 +54,6 @@ const Register = ({retrieveUser}) => {
 			password,
 			privacy,
 		});
-
 		setTimeout(() => {
 			setAnimated(false);
 			setIsDisabled(false);
@@ -66,19 +63,12 @@ const Register = ({retrieveUser}) => {
 
 	return (
 		<>
-			{error ? (
+			{message ? (
 				<Notification
-					message={msgs.Ns.emailOrPasswordError}
-					isSuccess={false}
+					message={message}
+					isSuccess={registerSuccess}
 					closeNotification={closeNotification}
-				/>
-			) : null}
-			{validacionConexion ? (
-				<Notification
-					email={email}
-					message={`${email} has sido registrado. Te estamos redireccionando.`}
-					isSuccess={true}
-					closeNotification={closeNotification}
+					autoClose={true}
 				/>
 			) : null}
 
