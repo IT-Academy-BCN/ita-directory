@@ -174,29 +174,7 @@ exports.registerUser = async (req, res, next) => {
 
 //get all users (FOR TESTING PURPOSE)
 exports.getAllUsers = async (req, res, next) => {
-	let userRet = [];
 	try {
-		/*const users = await prisma.user.findUnique({
-			select: {
-				id: true,
-				name: true,
-				lastnames: true,
-				email: true,
-				created_at: true,
-				updated_at: true,
-				user_status_id: true,
-				user_role_id: true,
-				refresh_token: true,
-			}
-		});
-		const med = await prisma.media.findMany({
-			where: {
-				user_id: users.id
-			},
-			select: {
-				path: true,
-			}
-		});*/
 		const users = await prisma.user.findMany({
 			select: {
 				id: true,
@@ -215,8 +193,8 @@ exports.getAllUsers = async (req, res, next) => {
 				}
 			},
 		});
-		console.log(users);
-		return res.status(200).json(userRet);
+
+		return res.status(200).json(users);
 	} catch (err) {
 		return next(new Error(err));
 	}
