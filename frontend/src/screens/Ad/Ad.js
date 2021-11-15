@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
 
@@ -18,16 +18,20 @@ import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
 
-const LIST_ICONS = [
-	{name: "Madrid", icon: faMapMarkerAlt},
-	{name: "3 habitaciones", icon: faBed},
-	{name: "1.390.000", icon: faEuroSign},
-	{name: "55m2", icon: faHome},
-	{name: "4 Baños", icon: faBath},
-];
-
-const Ad = ({icon}) => {
+const Ad = () => {
 	const [active, setActive] = useState(false);
+	const [adData, setAdData] = useState({});
+
+	useEffect(() => {
+		tryFetch();
+	}, []);
+	const tryFetch = () => {
+		fetch("http://localhost:10091/ads/v1/ads/1", {
+			method: "GET",
+		})
+			.then((response) => response.json())
+			.then((data) => setAdData(data.data));
+	};
 
 	const images = [
 		{
@@ -66,17 +70,35 @@ const Ad = ({icon}) => {
 
 						<BottomDiv>
 							<StyledUl>
-								{LIST_ICONS.map((el, index) => {
-									return (
-										<StyledItems>
-											<IconWithLabel
-												key={index}
-												icon={el.icon}
-												text={el.name}
-											/>
-										</StyledItems>
-									);
-								})}
+								<StyledItems>
+									<IconWithLabel icon={faMapMarkerAlt} text={adData.city} />
+								</StyledItems>
+								<StyledItems>
+									<IconWithLabel
+										icon={faBed}
+										text={`${adData.n_rooms} habitaciones`}
+									/>
+								</StyledItems>
+								<StyledItems>
+									<IconWithLabel
+										icon={faEuroSign}
+										text={`${new Intl.NumberFormat("es-ES").format(
+											adData.price * 1000
+										)}`}
+									/>
+								</StyledItems>
+								<StyledItems>
+									<IconWithLabel
+										icon={faHome}
+										text={`${adData.square_meters} m^2`}
+									/>
+								</StyledItems>
+								<StyledItems>
+									<IconWithLabel
+										icon={faBath}
+										text={`${adData.n_bathrooms} baños`}
+									/>
+								</StyledItems>
 							</StyledUl>
 
 							<StyledText>
