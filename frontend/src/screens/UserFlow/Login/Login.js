@@ -46,6 +46,7 @@ const Login = ({onLogin}) => {
 				email,
 				password,
 				privacy: true,
+				// debe añadirse ChechBox de privacidad?
 			});
 			setTimeout(() => {
 				setIsDisabled(false);

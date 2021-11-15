@@ -34,7 +34,7 @@ services:
       - ./backend:/home/node/app
       - /home/node/app/node_modules
     ports:
-      - $PORT:$PORT
+      - 10091:$PORT
     networks:
       - ita-net
     depends_on:
