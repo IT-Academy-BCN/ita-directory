@@ -139,7 +139,7 @@ exports.registerUser = async (req, res, next) => {
 				code: "error",
 				header: "Invalid email",
 				message: "This email has already been registered.",
-				statusCode: 400,
+				statusCode: 200,
 			});
 		}
 
@@ -175,7 +175,25 @@ exports.registerUser = async (req, res, next) => {
 //get all users (FOR TESTING PURPOSE)
 exports.getAllUsers = async (req, res, next) => {
 	try {
-		const users = await prisma.user.findMany();
+		const users = await prisma.user.findMany({
+			select: {
+				id: true,
+				name: true,
+				lastnames: true,
+				email: true,
+				created_at: true,
+				updated_at: true,
+				user_status_id: true,
+				user_role_id: true,
+				refresh_token: true,
+				media: {
+					select: {
+						path: true
+					},
+				}
+			},
+		});
+
 		return res.status(200).json(users);
 	} catch (err) {
 		return next(new Error(err));
@@ -208,7 +226,7 @@ exports.login = async (req, res, next) => {
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
-				statusCode: 404,
+				statusCode: 200,
 			});
 		}
 

@@ -86,10 +86,10 @@ model media_meta {
 model media_type {
   id         Int          @id @default(autoincrement())
   name       String
-  thumnail   Int
-  medium     Int
-  large      Int
-  original   Int
+  thumnail   Boolean
+  medium     Boolean
+  large      Boolean
+  original   Boolean
   media_meta media_meta[]
 }
 

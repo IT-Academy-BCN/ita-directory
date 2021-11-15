@@ -6,10 +6,8 @@ import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 import InputValidated from "components/units/InputValidated/InputValidated";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
-import {msgs} from "utils/userFlow";
 
 const Login = ({onLogin}) => {
-	const [loginError, setLoginError] = useState(false);
 	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
@@ -18,20 +16,20 @@ const Login = ({onLogin}) => {
 	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword] = useState(false);
+	const [message, setMessage] = useState(null);
 
-	const closeNotification = () => {
-		return setLoginError(false) || setLoginSuccess(false);
-	};
+	const closeNotification = () => setMessage(null);
 
 	const loginUser = async (user) => {
 		try {
 			const response = await axios.post("http://localhost:5000/users/v1/login", user);
-			console.log(response.status);
+			setMessage(response.data.message);
+			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
 		} catch (error) {
-			// Handle Error Here
-			console.error(error);
-			setLoginError(true);
+			if (error.name === "Error")
+				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			setLoginSuccess(false);
 		}
 	};
 
@@ -59,20 +57,10 @@ const Login = ({onLogin}) => {
 
 	return (
 		<>
-			{loginError ? (
+			{message ? (
 				<Notification
-					message={msgs.Ns.emailOrPasswordError}
-					isSuccess={false}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
-			) : null}
-
-			{loginSuccess ? (
-				<Notification
-					email={email}
-					message={`${email}: ${msgs.Ns.loginSuccess}`}
-					isSuccess={true}
+					message={message}
+					isSuccess={loginSuccess}
 					closeNotification={closeNotification}
 					autoClose={true}
 				/>
