@@ -1,0 +1,23 @@
+[
+	{
+		"id": 1,
+		"name": "Joe",
+		"lastnames": "Burrow",
+		"email": "joeburrow@bengals.com",
+		"user_status_id": 1,
+		"user_role_id": 1,
+		"refresh_token": "true",
+		"media": "https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/3915511.png"
+	},
+
+	{
+		"id": 2,
+		"name": "Zack",
+		"lastnames": "Wilson",
+		"email": "zackwilson@jets.com",
+		"user_status_id": 3,
+		"user_role_id": 2,
+		"refresh_token": "true",
+		"media": "https://static.clubs.nfl.com/image/private/t_editorial_landscape_mobile/f_png/jets/ca6vtuyo1wam1tlsfczi.png"
+	}
+]
