@@ -40,9 +40,10 @@ const AdList = () => {
 
 	useEffect(() => {
 		const fetchAds = async () => {
-			const result = await axios("http://localhost:5000/ads/v1/ads");
+			const result = await axios(`${process.env.REACT_APP_API_URL}ads/v1/ads`);
 			setAdList(result.data.data);
 			setLoading(false);
+			console.log(process.env.REACT_APP_API_URL);
 		};
 		fetchAds();
 	}, []);
