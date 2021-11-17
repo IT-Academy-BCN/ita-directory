@@ -42,7 +42,7 @@ const AdCard = ({
 			/>
 			<div className="content">
 				<div className="content-text">
-					<p className="address">Casa amueblada con piscina en {city}</p>
+					<p className="address">{`${title} en ${city}`}</p>
 					<div className="property-data">
 						<span className="price">{price} €</span>
 						<span>{n_rooms} habitaciones</span>
