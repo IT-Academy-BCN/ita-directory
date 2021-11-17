@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
-
+import {useParams} from "react-router";
 import {AdStyled, StyledUl, StyledText, BottomDiv, StyledStreet, StyledItems} from "./Ad.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
@@ -17,8 +17,6 @@ import {
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
 import "components/composed/Map/Map.css";
 import Map from "components/composed/Map/Map";
-// import {ads} from "../../api/data/db.json";
-import {useParams} from "react-router";
 import {getAd} from "api/ads";
 
 // const LIST_ICONS = [

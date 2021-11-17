@@ -43,6 +43,7 @@ const AdList = () => {
 			const result = await axios(`${process.env.REACT_APP_API_URL}/ads/v1/ads`);
 			setAdList(result.data.data);
 			setLoading(false);
+			console.log(process.env.REACT_APP_API_URL);
 		};
 		fetchAds();
 	}, []);

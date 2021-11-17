@@ -15,6 +15,9 @@ export const AdCardStyled = styled.div`
 		height: 175px;
 		object-fit: cover;
 		border-radius: 6px;
+		:hover {
+			cursor: pointer;
+		}
 	}
 
 	.content {
