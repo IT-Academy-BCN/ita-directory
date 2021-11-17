@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Body from "components/layout/Body/Body";
 import Button from "components/units/Button/Button";
-
+import {useParams} from "react-router";
 import {AdStyled, StyledUl, StyledText, BottomDiv, StyledStreet, StyledItems} from "./Ad.styles";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import Gallery from "components/composed/Gallery/Gallery";
@@ -22,11 +22,14 @@ const Ad = () => {
 	const [active, setActive] = useState(false);
 	const [adData, setAdData] = useState({});
 
+	let {id} = useParams();
+
 	useEffect(() => {
 		tryFetch();
+		// eslint-disable-next-line
 	}, []);
 	const tryFetch = () => {
-		fetch("http://localhost:10091/ads/v1/ads/1", {
+		fetch(`http://localhost:10091/ads/v1/ads/${id}`, {
 			method: "GET",
 		})
 			.then((response) => response.json())
