@@ -31,10 +31,18 @@ export async function getAds(filters) {
 
 export async function getAd(adId) {
 	try {
-		const data = await axios.get(`http://localhost:5000/ads/${adId}`);
-		const ads = await data.data;
-		return ads;
+		const response = await axios.get(`${process.env.REACT_APP_API_URL}/ads/v1/ads/${adId}`);
+		console.log("response", response);
+		const ad = response.data.data;
+		return ad;
 	} catch (e) {
 		console.log("Error: ", e);
 	}
 }
+// try {
+// 	const data = await axios.get(`http://localhost:5000/ads/${adId}`);
+// 	const ads = await data.data;
+// 	return ads;
+// } catch (e) {
+// 	console.log("Error: ", e);
+// }
