@@ -130,8 +130,8 @@ model ads {
 model level {
   id            Int        @id @default(autoincrement())
   name          String
-  parent_id     Int?
   parent        level?     @relation("parent", fields: [parent_id], references: [id])
+  parent_id     Int?
   child         level[]    @relation("parent")
   level_type    level_type @relation(fields: [level_type_id], references: [id])
   level_type_id Int
