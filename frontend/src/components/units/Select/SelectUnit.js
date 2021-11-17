@@ -1,15 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-const SelectUnit = () => {
-	const options = [
-		{
-			autoFocus: true,
-			value: "chocolate",
-			label: "Chocolate",
-		},
-	];
-
+const SelectUnit = ({options}) => {
 	return <Select options={options} />;
 };
 
