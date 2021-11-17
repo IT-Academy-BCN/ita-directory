@@ -356,6 +356,493 @@ const medias_metas = [
 ];
 
 
+const levels = [
+	{
+		id: 1,
+		name: "espana",
+		parent_id: null,
+		level_type: 1,
+	},
+	{
+		id: 2,
+		name: "andalucia",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 3,
+		name: "aragon",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 4,
+		name: "principado de asturias",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 5,
+		name: "islas baleares",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 6,
+		name: "canarias",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 7,
+		name: "cantabria",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 8,
+		name: "castilla-la mancha",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 9,
+		name: "castilla y leon",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 10,
+		name: "cataluna",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 11,
+		name: "comunidad valenciana",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 12,
+		name: "extremadura",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 13,
+		name: "galicia",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 14,
+		name: "la rioja",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 15,
+		name: "madrid",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 16,
+		name: "navarra",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 17,
+		name: "pais vasco",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 18,
+		name: "murcia",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 19,
+		name: "ceuta",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 20,
+		name: "melilla",
+		parent_id: 1,
+		level_type: 2,
+	},
+	{
+		id: 21,
+		name: "alava",
+		parent_id: 17,
+		level_type: 3,
+	},
+	{
+		id: 22,
+		name: "albacete",
+		parent_id: 8,
+		level_type: 3,
+	},
+	{
+		id: 23,
+		name: "alicante",
+		parent_id: 11,
+		level_type: 3,
+	},
+	{
+		id: 24,
+		name: "almeria",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 25,
+		name: "principado de asturias",
+		parent_id: 4,
+		level_type: 3,
+	},
+	{
+		id: 26,
+		name: "avila",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 27,
+		name: "badajoz",
+		parent_id: 12,
+		level_type: 3,
+	},
+	{
+		id: 28,
+		name: "barcelona",
+		parent_id: 10,
+		level_type: 3,
+	},
+	{
+		id: 29,
+		name: "burgos",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 30,
+		name: "caceres",
+		parent_id: 12,
+		level_type: 3,
+	},
+	{
+		id: 31,
+		name: "cadiz",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 32,
+		name: "cantabria",
+		parent_id: 7,
+		level_type: 3,
+	},
+	{
+		id: 33,
+		name: "castellon",
+		parent_id: 11,
+		level_type: 3,
+	},
+	{
+		id: 34,
+		name: "ciudad real",
+		parent_id: 8,
+		level_type: 3,
+	},
+	{
+		id: 35,
+		name: "cordoba",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 36,
+		name: "la coruna",
+		parent_id: 13,
+		level_type: 3,
+	},
+	{
+		id: 37,
+		name: "cuenca",
+		parent_id: 8,
+		level_type: 3,
+	},
+	{
+		id: 38,
+		name: "gerona",
+		parent_id: 10,
+		level_type: 3,
+	},
+	{
+		id: 39,
+		name: "granada",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 40,
+		name: "guadalajara",
+		parent_id: 8,
+		level_type: 3,
+	},
+	{
+		id: 41,
+		name: "guipuzcoa",
+		parent_id: 17,
+		level_type: 3,
+	},
+	{
+		id: 42,
+		name: "huelva",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 43,
+		name: "huesca",
+		parent_id: 3,
+		level_type: 3,
+	},
+	{
+		id: 44,
+		name: "islas baleares",
+		parent_id: 5,
+		level_type: 3,
+	},
+	{
+		id: 45,
+		name: "jaen",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 46,
+		name: "leon",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 47,
+		name: "lerida",
+		parent_id: 10,
+		level_type: 3,
+	},
+	{
+		id: 48,
+		name: "lugo",
+		parent_id: 13,
+		level_type: 3,
+	},
+	{
+		id: 49,
+		name: "comunidad de madrid",
+		parent_id: 15,
+		level_type: 3,
+	},
+	{
+		id: 50,
+		name: "malaga",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 51,
+		name: "region de murcia",
+		parent_id: 18,
+		level_type: 3,
+	},
+	{
+		id: 52,
+		name: "comunidad foral de navarra",
+		parent_id: 16,
+		level_type: 3,
+	},
+	{
+		id: 53,
+		name: "orense",
+		parent_id: 13,
+		level_type: 3,
+	},
+	{
+		id: 54,
+		name: "palencia",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 55,
+		name: "las palmas",
+		parent_id: 6,
+		level_type: 3,
+	},
+	{
+		id: 56,
+		name: "pontevedra",
+		parent_id: 13,
+		level_type: 3,
+	},
+	{
+		id: 57,
+		name: "la rioja",
+		parent_id: 14,
+		level_type: 3,
+	},
+	{
+		id: 58,
+		name: "salamanca",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 59,
+		name: "segovia",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 60,
+		name: "sevilla",
+		parent_id: 2,
+		level_type: 3,
+	},
+	{
+		id: 61,
+		name: "soria",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 62,
+		name: "tarragona",
+		parent_id: 10,
+		level_type: 3,
+	},
+	{
+		id: 63,
+		name: "santa cruz de tenerife",
+		parent_id: 6,
+		level_type: 3,
+	},
+	{
+		id: 64,
+		name: "teruel",
+		parent_id: 3,
+		level_type: 3,
+	},
+	{
+		id: 65,
+		name: "toledo",
+		parent_id: 8,
+		level_type: 3,
+	},
+	{
+		id: 66,
+		name: "valencia",
+		parent_id: 11,
+		level_type: 3,
+	},
+	{
+		id: 67,
+		name: "valladolid",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 68,
+		name: "vizcaya",
+		parent_id: 17,
+		level_type: 3,
+	},
+	{
+		id: 69,
+		name: "zamora",
+		parent_id: 9,
+		level_type: 3,
+	},
+	{
+		id: 70,
+		name: "zaragoza",
+		parent_id: 3,
+		level_type: 3,
+	},
+	{
+		id: 71,
+		name: "ceuta",
+		parent_id: 19,
+		level_type: 3,
+	},
+	{
+		id: 72,
+		name: "melilla",
+		parent_id: 20,
+		level_type: 3,
+	},
+];
+
+
+
+const level_types = [
+	{
+		id: 1,
+		name: "country",
+		country: 1,
+		state: 0,
+		city: 0,
+		town: 0,
+		district: 0
+	},
+	{
+		id: 2,
+		name: "state",
+		country: 0,
+		state: 1,
+		city: 0,
+		town: 0,
+		district: 0
+	},
+	{
+		id: 3,
+		name: "city",
+		country: 0,
+		state: 0,
+		city: 1,
+		town: 0,
+		district: 0
+	},
+	{
+		id: 4,
+		name: "town",
+		country: 0,
+		state: 0,
+		city: 0,
+		town: 1,
+		district: 0
+	},
+	{
+		id: 5,
+		name: "district",
+		country: 0,
+		state: 0,
+		city: 0,
+		town: 0,
+		district: 1
+	}
+]
+
+
+
 
 async function main() {
 	for (let i = 0; i < user_roles.length; i++) {
@@ -429,6 +916,26 @@ async function main() {
 			update: {},
 			create: {
 				...media_meta,
+			},
+		});
+	}
+	for (let i = 0; i < levels.length; i++) {
+		const level = levels[i];
+		await prisma.level.upsert({
+			where: {id: level.id},
+			update: {},
+			create: {
+				...level,
+			},
+		});
+	}
+	for (let i = 0; i < level_types.length; i++) {
+		const level_type = level_types[i];
+		await prisma.level_type.upsert({
+			where: {id: level_type.id},
+			update: {},
+			create: {
+				...level_type,
 			},
 		});
 	}

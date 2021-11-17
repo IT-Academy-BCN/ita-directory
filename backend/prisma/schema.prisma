@@ -126,3 +126,24 @@ model ads {
   map_lat       Decimal
   map_lon       Decimal
 }
+
+model level {
+  id            Int        @id @default(autoincrement())
+  name          String
+  parent_id     Int?
+  parent        level?     @relation("parent", fields: [parent_id], references: [id])
+  child         level[]    @relation("parent")
+  level_type    level_type @relation(fields: [level_type_id], references: [id])
+  level_type_id Int
+}
+
+model level_type {
+  id       Int     @id @default(autoincrement())
+  name     String
+  country  Int
+  state    Int
+  city     Int
+  town     Int
+  district Int
+  level    level[]
+}
