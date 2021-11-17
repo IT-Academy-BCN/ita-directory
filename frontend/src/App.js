@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import ProtectedRoute from "components/composed/ProtectedRoute";
+// import ProtectedRoute from "components/composed/ProtectedRoute";
 
 import Home from "screens/Home/Home";
 import Ad from "screens/Ad/Ad";
@@ -15,6 +15,7 @@ import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
 import Bill from "screens/MyBills/Bill";
 import UserAds from "screens/UserAds/UserAds";
+import ProtectedRoute from "components/composed/ProtectedRoute";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
@@ -28,7 +29,7 @@ const App = () => {
 		<>
 			<Switch>
 				<ProtectedRoute exact path="/" component={Home} />
-				<Route exact path="/ad" component={Ad} />
+				<Route exact path="/ad/:id" component={Ad} />
 				<Route exact path="/new-ad" component={CreateNewAd} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useHistory} from "react-router-dom";
 import {faComments} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import Colors from "theme/Colors";
@@ -19,17 +20,29 @@ const AdCard = ({
 	description,
 	n_rooms,
 	n_bathrooms,
+	id,
 }) => {
 	const [active, setActive] = useState(false);
 
 	const gastosIncluidos = true;
 
+	const history = useHistory();
+
+	const handleClick = () => {
+		history.push(`ad/${id}`);
+	};
 	return (
 		<AdCardStyled>
-			<img src={casaPiscinaAd} alt="" height={175} width={200} />
+			<img
+				src={casaPiscinaAd}
+				alt=""
+				height={175}
+				width={200}
+				onClick={() => handleClick()}
+			/>
 			<div className="content">
 				<div className="content-text">
-					<p className="address">Casa amueblada con piscina en {city}</p>
+					<p className="address">{`${title} en ${city}`}</p>
 					<div className="property-data">
 						<span className="price">{price} €</span>
 						<span>{n_rooms} habitaciones</span>
