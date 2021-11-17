@@ -736,7 +736,7 @@ const levels = [
 	},
 	{
 		id: 56,
-		name: "pontevedra",
+		name: "Pontevedra",
 		parent_id: 13,
 		level_type_id: 3,
 	},
