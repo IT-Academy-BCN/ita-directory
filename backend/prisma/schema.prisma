@@ -112,12 +112,20 @@ model media_type {
 //   user_id                  Int
 // }
 
+model ads_type{
+  id       Int     @id @default(autoincrement())
+  name     String
+  ads      ads[]
+}
+
 model ads {
   id            Int     @id @default(autoincrement())
   user          user    @relation(fields: [user_id], references: [id])
   user_id       Int
   title         String
   description   String
+  ads_type_id   Int         @default(1)
+  ads_type      ads_type    @relation(fields: [ads_type_id], references: [id])     
   city          String
   n_rooms       Int
   price         Int
@@ -147,3 +155,4 @@ model level_type {
   district Int
   level    level[]
 }
+

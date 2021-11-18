@@ -103,6 +103,7 @@ const ads = [
 		user_id: 1,
 		title: "ad1",
 		description: "ad house 1",
+		ads_type: 1,
 		city: "Barcelona",
 		n_rooms: 2,
 		price: 900,
@@ -117,6 +118,7 @@ const ads = [
 		user_id: 1,
 		title: "ad2",
 		description: "ad house 2",
+		ads_type: 2,
 		city: "Berlin",
 		n_rooms: 3,
 		price: 1200,
@@ -131,6 +133,7 @@ const ads = [
 		user_id: 1,
 		title: "ad3",
 		description: "ad house 3",
+		ads_type: 3,
 		city: "Glasgow",
 		n_rooms: 2,
 		price: 700,
@@ -145,6 +148,7 @@ const ads = [
 		user_id: 1,
 		title: "ad4",
 		description: "ad house 4",
+		ads_type: 4,
 		city: "Rotterdam",
 		n_rooms: 3,
 		price: 1000,
@@ -159,6 +163,7 @@ const ads = [
 		user_id: 1,
 		title: "ad5",
 		description: "ad house 5",
+		ads_type: 5,
 		city: "Mallorca",
 		n_rooms: 2,
 		price: 700,
@@ -173,6 +178,7 @@ const ads = [
 		user_id: 1,
 		title: "ad6",
 		description: "ad house 6",
+		ads_type: 6,
 		city: "Lyon",
 		n_rooms: 4,
 		price: 900,
@@ -187,6 +193,7 @@ const ads = [
 		user_id: 1,
 		title: "ad7",
 		description: "ad house 7",
+		ads_type: 7,
 		city: "Braga",
 		n_rooms: 2,
 		price: 800,
@@ -201,6 +208,7 @@ const ads = [
 		user_id: 1,
 		title: "ad8",
 		description: "ad house 8",
+		ads_type: 1,
 		city: "Napoli",
 		n_rooms: 3,
 		price: 900,
@@ -215,6 +223,7 @@ const ads = [
 		user_id: 1,
 		title: "ad9",
 		description: "ad house 9",
+		ads_type: 2,
 		city: "Paris",
 		n_rooms: 2,
 		price: 1200,
@@ -229,6 +238,7 @@ const ads = [
 		user_id: 1,
 		title: "ad10",
 		description: "ad house 10",
+		ads_type: 3,
 		city: "London",
 		n_rooms: 2,
 		price: 1000,
@@ -838,7 +848,36 @@ const levels = [
 	},
 ];
 
-
+const ads_types = [
+	{
+		id: 1,
+		name: "Vivienda"
+	},
+	{
+		id: 2,
+		name: "Habitación"
+	},
+	{
+		id: 3,
+		name: "Garage"
+	},
+	{
+		id: 4,
+		name: "Trastero"
+	},
+	{
+		id: 5,
+		name: "Oficina"
+	},
+	{
+		id: 6,
+		name: "Local o nave"
+	},
+	{
+		id: 7,
+		name: "Obra nueva"
+	}
+];
 
 
 
