@@ -65,6 +65,8 @@ const hashPassword = async (password) => {
 	});
 };
 
+const getRegionByLocationSchema = Joi.string().required()
+
 module.exports = {
 	// generateBlob,
 	apiResponse,
@@ -73,5 +75,6 @@ module.exports = {
 	AdByIdParamSchema,
 	signToken,
 	signRefreshToken,
-	hashPassword
+	hashPassword,
+	getRegionByLocationSchema
 };
