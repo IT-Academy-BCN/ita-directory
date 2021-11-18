@@ -2,6 +2,7 @@ const prisma = require("../../prisma/indexPrisma");
 const {apiResponse, getRegionByLocationSchema} = require("../utils/utils");
 const {formatLocation} = require("../utils/formatLocation")
 
+
 async function getRegion(req, res) {
     try {
         const {name} = req.body
