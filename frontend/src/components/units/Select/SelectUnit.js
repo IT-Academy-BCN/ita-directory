@@ -1,8 +1,17 @@
 import React from "react";
-import Select from "react-select";
+import AsyncSelect from "react-select/async";
 
-const SelectUnit = ({options}) => {
-	return <Select options={options} />;
+const SelectUnit = ({options, handleOnChange, customStyles, components, loadOptions}) => {
+	return (
+		<AsyncSelect
+			options={options}
+			onChange={handleOnChange}
+			styles={customStyles}
+			isMulti={false}
+			components={components}
+			loadOptions={loadOptions}
+		/>
+	);
 };
 
 export default SelectUnit;

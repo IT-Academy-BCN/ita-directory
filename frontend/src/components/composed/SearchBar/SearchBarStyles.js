@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	margin-top: 10%;
 `;
 export const SearchBarContainer = styled.div`
 	width: 70%;
@@ -22,3 +23,14 @@ export const SearchBarContainer = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 `;
+
+export const customStyles = {
+	control: (provided, state) => ({
+		// none of react-select's styles are passed to <Control />
+		...provided,
+		width: 350,
+		backgroundColor: "white",
+		height: "80%",
+		marginRight: "5px",
+	}),
+};
