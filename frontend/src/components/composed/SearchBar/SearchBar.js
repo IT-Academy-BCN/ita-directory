@@ -25,7 +25,7 @@ const SearchBar = () => {
 						? nameArray.push(ad.city)
 						: nameArray;
 				});
-				// nameArray.filter((value) => value.city.includes(adRegion))
+				nameArray.filter((value) => value.city.includes(adRegion));
 				console.log(adType, adRegion);
 			});
 	};
@@ -45,6 +45,7 @@ const SearchBar = () => {
 					handleOnChange={(value) => setAdRegion(value.value)}
 					customStyles={customStyles}
 					components={components}
+					loadOptions={loadOptions}
 				/>
 				<SearchButton />
 			</SearchBarContainer>
