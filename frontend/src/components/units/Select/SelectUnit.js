@@ -1,7 +1,14 @@
 import React from "react";
 import AsyncSelect from "react-select/async";
 
-const SelectUnit = ({options, handleOnChange, customStyles, components, loadOptions}) => {
+const SelectUnit = ({
+	options,
+	handleOnChange,
+	customStyles,
+	components,
+	loadOptions,
+	placeholder,
+}) => {
 	return (
 		<AsyncSelect
 			options={options}
@@ -10,6 +17,7 @@ const SelectUnit = ({options, handleOnChange, customStyles, components, loadOpti
 			isMulti={false}
 			components={components}
 			loadOptions={loadOptions}
+			placeholder={placeholder}
 		/>
 	);
 };

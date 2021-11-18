@@ -39,6 +39,7 @@ const SearchBar = () => {
 					customStyles={customStyles}
 					components={components}
 					loadOptions={loadOptions}
+					placeholder="Casa con piscina, chalet..."
 				/>
 				<SelectUnit
 					options={options}
@@ -46,6 +47,7 @@ const SearchBar = () => {
 					customStyles={customStyles}
 					components={components}
 					loadOptions={loadOptions}
+					placeholder="Barcelona, Berlín..."
 				/>
 				<SearchButton />
 			</SearchBarContainer>
