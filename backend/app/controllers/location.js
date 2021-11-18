@@ -32,7 +32,9 @@ async function getRegion(req, res) {
                 }
             })
             location[0] = parent
-            data.push(parent)
+            if (parent.level_type_id === 2) {
+                data.push(parent)
+            }
         }
 
 
