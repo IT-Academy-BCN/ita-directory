@@ -17,6 +17,8 @@ import Bill from "screens/MyBills/Bill";
 import UserAds from "screens/UserAds/UserAds";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 import SearchBar from "components/composed/SearchBar/SearchBar";
+import Search from "screens/Search/Search";
+
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
 // import SalesByType from "screens/Sales/SalesByType";
@@ -43,6 +45,7 @@ const App = () => {
 				<Route path="/my-bills/:id" children={<Bill />} />
 				<Route path="mi-ruta" children={noExiste} />
 				<Route path="/search" component={SearchBar} />
+				<Route path="/search-screen" component={Search} />
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}
