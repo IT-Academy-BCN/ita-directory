@@ -1,9 +1,9 @@
 import React from "react";
 import {Wrapper} from "./SearchButtonStyles";
 
-const SearchButton = () => {
+const SearchButton = ({handleOnClick}) => {
 	return (
-		<Wrapper>
+		<Wrapper onClick={handleOnClick}>
 			<span style={{color: "white"}}> &#x1F50E;&#xFE0E;</span>
 		</Wrapper>
 	);

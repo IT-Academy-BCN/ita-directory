@@ -26,7 +26,6 @@ export const SearchBarContainer = styled.div`
 
 export const customStyles = {
 	control: (provided, state) => ({
-		// none of react-select's styles are passed to <Control />
 		...provided,
 		width: 350,
 		backgroundColor: "white",

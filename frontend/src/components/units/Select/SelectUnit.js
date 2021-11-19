@@ -1,23 +1,24 @@
 import React from "react";
-import AsyncSelect from "react-select/async";
+import Select from "react-select";
 
-const SelectUnit = ({
-	options,
-	handleOnChange,
-	customStyles,
-	components,
-	loadOptions,
-	placeholder,
-}) => {
+const SelectUnit = ({options, handleOnChange, customStyles, components, placeholder, value}) => {
 	return (
-		<AsyncSelect
+		<Select
 			options={options}
 			onChange={handleOnChange}
 			styles={customStyles}
 			isMulti={false}
 			components={components}
-			loadOptions={loadOptions}
 			placeholder={placeholder}
+			value={value}
+			autoFocus={true}
+			isClearable={true}
+			isDisabled={false}
+			isLoading={false}
+			isRtl={false}
+			isSearchable={true}
+			isOptionSelected={true}
+			onSelectResetsInput={false}
 		/>
 	);
 };

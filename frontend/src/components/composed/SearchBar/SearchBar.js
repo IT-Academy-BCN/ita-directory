@@ -2,56 +2,51 @@ import React, {useState} from "react";
 import SelectUnit from "components/units/Select/SelectUnit";
 import {Wrapper, SearchBarContainer, customStyles} from "./SearchBarStyles";
 import SearchButton from "components/units/SearchButton/SearchButton";
+import {retrieveSearchBarAds} from "./logic/retrieveSearchBarAds/retrieveSearchBarAds";
+import {citiesOptions} from "./logic/data-json/citiesOptions";
+import {roomsOptions} from "./logic/data-json/roomsOptions";
+
 const SearchBar = () => {
 	const [adType, setAdType] = useState("");
 	const [adRegion, setAdRegion] = useState("");
-
-	const options = [
-		{value: "chocolate", label: "Chocolate"},
-		{value: "strawberry", label: "Strawberry"},
-		{value: "vanilla", label: "Vanilla"},
-	];
+	const [idMatches, setIdMatches] = useState(null);
 
 	const components = {DropdownIndicator: () => null, IndicatorSeparator: () => null};
-	let nameArray = [];
-	// const citiesArray = ["Barcelona", "Berlin", "Glasgow", "Rotterdam", "Mallorca", "Lyon", "Braga", "Napoli", "Paris", "London"]
 
-	const loadOptions = () => {
-		return fetch(`http://localhost:10091/ads/v1/ads`)
-			.then((res) => res.json())
-			.then((data) => {
-				data.data.map((ad) => {
-					return nameArray.includes(ad.city) === false
-						? nameArray.push(ad.city)
-						: nameArray;
-				});
-				nameArray.filter((value) => value.city.includes(adRegion));
-				console.log(adType, adRegion);
-			});
+	const handleChange = (e) => {
+		const {value} = e;
+		isNaN(value) ? setAdRegion(value) : setAdType(value);
 	};
 
+	const handleOnClick = async () => {
+		const idArray = await retrieveSearchBarAds(adType, adRegion);
+		setIdMatches(idArray);
+	};
 	return (
-		<Wrapper>
-			<SearchBarContainer>
-				<SelectUnit
-					options={options}
-					handleOnChange={(value) => setAdType(value.value)}
-					customStyles={customStyles}
-					components={components}
-					loadOptions={loadOptions}
-					placeholder="Casa con piscina, chalet..."
-				/>
-				<SelectUnit
-					options={options}
-					handleOnChange={(value) => setAdRegion(value.value)}
-					customStyles={customStyles}
-					components={components}
-					loadOptions={loadOptions}
-					placeholder="Barcelona, Berlín..."
-				/>
-				<SearchButton />
-			</SearchBarContainer>
-		</Wrapper>
+		<>
+			<Wrapper>
+				<SearchBarContainer>
+					<SelectUnit
+						options={roomsOptions}
+						handleOnChange={handleChange}
+						customStyles={customStyles}
+						components={components}
+						placeholder="Casa con piscina, chalet..."
+						value={adType}
+					/>
+					<SelectUnit
+						options={citiesOptions}
+						handleOnChange={handleChange}
+						customStyles={customStyles}
+						components={components}
+						placeholder="Barcelona, Berlín..."
+						value={adRegion}
+					/>
+					<SearchButton handleOnClick={handleOnClick} />
+				</SearchBarContainer>
+			</Wrapper>
+			<p>Els ads que coincideixen amb la búsqueda són els següents: {idMatches}</p>
+		</>
 	);
 };
 
