@@ -21,14 +21,14 @@ const SelectUnit = ({
 			value={value}
 			defaultValue={options[0]}
 			containerValue={containerValue}
-			// autoFocus={true}
-			// isClearable={true}
-			// isDisabled={false}
-			// isLoading={false}
-			// isRtl={false}
+			autoFocus={true}
+			isClearable={true}
+			isDisabled={false}
+			isLoading={false}
+			isRtl={false}
 			isSearchable={true}
-			// isOptionSelected={true}
-			// onSelectResetsInput={false}
+			isOptionSelected={true}
+			onSelectResetsInput={false}
 		/>
 	);
 };
