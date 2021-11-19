@@ -4,7 +4,7 @@ import casaPiscinaAd from "../../../assets/images/casaPiscinaAd2.jpg";
 import Button from "components/units/Button/Button";
 import {StyledViewCard} from "./ViewCard.styles";
 
-const ViewCardItem = ({ad}) => {
+const AdCardItem = ({ad}) => {
 	return (
 		<div style={{padding: "16px", width: "33.3%"}}>
 			<StyledViewCard>
@@ -23,4 +23,4 @@ const ViewCardItem = ({ad}) => {
 	);
 };
 
-export default ViewCardItem;
+export default AdCardItem;

@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 import {StyledViewList} from "./ViewList.styles";
 import Button from "components/units/Button/Button";
 import axios from "axios";
-import ViewCardItem from "./ViewCard";
+import AdCardItem from "./AdCardItem";
 
-const ViewList = () => {
+const AdCardList = () => {
 	const [ads, setAds] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,10 +33,10 @@ const ViewList = () => {
 	return (
 		<StyledViewList>
 			<div className="list-scroll">
-				{ads && adsToShow.map((ad) => <ViewCardItem key={ad.key} ad={ad}></ViewCardItem>)}
+				{ads && adsToShow.map((ad) => <AdCardItem key={ad.key} ad={ad}></AdCardItem>)}
 			</div>
 			<Button type="button" text="Load more" onClick={showMoreItems}></Button>
 		</StyledViewList>
 	);
 };
-export default ViewList;
+export default AdCardList;

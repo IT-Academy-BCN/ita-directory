@@ -1,11 +1,11 @@
 import React from "react";
-import ViewList from "./NewView/ViewList";
+import AdCardList from "./NewView/AdCardList";
 
 const FalseSearch = () => {
 	return (
 		<div style={{display: "flex"}}>
 			<div style={{flex: 1}}>
-				<ViewList />
+				<AdCardList />
 			</div>
 			<div style={{flex: "1"}}>Aqui estara el mapa</div>
 		</div>
