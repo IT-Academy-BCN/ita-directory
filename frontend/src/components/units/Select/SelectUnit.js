@@ -1,7 +1,15 @@
 import React from "react";
 import Select from "react-select";
 
-const SelectUnit = ({options, handleOnChange, customStyles, components, placeholder, value}) => {
+const SelectUnit = ({
+	options,
+	handleOnChange,
+	customStyles,
+	components,
+	placeholder,
+	value,
+	containerValue,
+}) => {
 	return (
 		<Select
 			options={options}
@@ -11,14 +19,16 @@ const SelectUnit = ({options, handleOnChange, customStyles, components, placehol
 			components={components}
 			placeholder={placeholder}
 			value={value}
-			autoFocus={true}
-			isClearable={true}
-			isDisabled={false}
-			isLoading={false}
-			isRtl={false}
+			defaultValue={options[0]}
+			containerValue={containerValue}
+			// autoFocus={true}
+			// isClearable={true}
+			// isDisabled={false}
+			// isLoading={false}
+			// isRtl={false}
 			isSearchable={true}
-			isOptionSelected={true}
-			onSelectResetsInput={false}
+			// isOptionSelected={true}
+			// onSelectResetsInput={false}
 		/>
 	);
 };

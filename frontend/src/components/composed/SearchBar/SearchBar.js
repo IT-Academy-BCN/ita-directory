@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import SelectUnit from "components/units/Select/SelectUnit";
-import {Wrapper, SearchBarContainer, customStyles} from "./SearchBarStyles";
+import {SearchBarContainer, customStyles} from "./SearchBarStyles";
+import {StyledSubHeader} from "components/layout/Header/Header.styles";
 import SearchButton from "components/units/SearchButton/SearchButton";
 import {retrieveSearchBarAds} from "./logic/retrieveSearchBarAds/retrieveSearchBarAds";
 import {citiesOptions} from "./logic/data-json/citiesOptions";
 import {roomsOptions} from "./logic/data-json/roomsOptions";
 
-const SearchBar = () => {
-	const [adType, setAdType] = useState("");
-	const [adRegion, setAdRegion] = useState("");
-	const [idMatches, setIdMatches] = useState(null);
+const SearchBar = ({setMatchesId, matchesId}) => {
+	const [adType, setAdType] = useState(null);
+	const [adRegion, setAdRegion] = useState(null);
 
 	const components = {DropdownIndicator: () => null, IndicatorSeparator: () => null};
 
@@ -20,11 +20,11 @@ const SearchBar = () => {
 
 	const handleOnClick = async () => {
 		const idArray = await retrieveSearchBarAds(adType, adRegion);
-		setIdMatches(idArray);
+		setMatchesId(idArray);
 	};
 	return (
 		<>
-			<Wrapper>
+			<StyledSubHeader>
 				<SearchBarContainer>
 					<SelectUnit
 						options={roomsOptions}
@@ -33,6 +33,7 @@ const SearchBar = () => {
 						components={components}
 						placeholder="Casa con piscina, chalet..."
 						value={adType}
+						valueContainer={adType}
 					/>
 					<SelectUnit
 						options={citiesOptions}
@@ -41,11 +42,11 @@ const SearchBar = () => {
 						components={components}
 						placeholder="Barcelona, Berlín..."
 						value={adRegion}
+						valueContainer={adRegion}
 					/>
 					<SearchButton handleOnClick={handleOnClick} />
 				</SearchBarContainer>
-			</Wrapper>
-			<p>Els ads que coincideixen amb la búsqueda són els següents: {idMatches}</p>
+			</StyledSubHeader>
 		</>
 	);
 };

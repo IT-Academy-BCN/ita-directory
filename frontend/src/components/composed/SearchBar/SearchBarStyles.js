@@ -17,7 +17,7 @@ export const SearchBarContainer = styled.div`
 	height: 80%;
 	display: flex;
 	flex-direction: row;
-	margin: auto;
+	margin-left: 5px;
 	margin-top: 0;
 	margin-bottom: 0;
 	justify-content: flex-start;
@@ -27,9 +27,21 @@ export const SearchBarContainer = styled.div`
 export const customStyles = {
 	control: (provided, state) => ({
 		...provided,
-		width: 350,
+		width: 415,
 		backgroundColor: "white",
 		height: "80%",
 		marginRight: "5px",
+	}),
+	option: (provided, state) => ({
+		...provided,
+		":hover": {
+			cursor: "pointer",
+		},
+	}),
+	valueContainer: (provided, state) => ({
+		...provided,
+		":hover": {
+			cursor: "text",
+		},
 	}),
 };
