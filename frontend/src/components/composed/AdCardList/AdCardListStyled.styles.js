@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledViewList = styled.div`
+export const AdCardListStyled = styled.div`
 	position: relative;
 	overflow: visible;
 

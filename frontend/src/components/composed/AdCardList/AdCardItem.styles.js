@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledViewCard = styled.div`
+export const AdCardItemStyled = styled.div`
 	border-radius: 6px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 	margin-bottom: 1.5rem;
