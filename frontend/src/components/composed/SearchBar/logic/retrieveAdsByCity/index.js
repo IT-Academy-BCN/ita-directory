@@ -14,8 +14,8 @@ export const retreiveAdsByCity = async (city) => {
 			const capitalizedCity = firstLetterUpperCase(city);
 			for (let i = 0; i < adData.length; i++) {
 				if (adData[i].city === capitalizedCity) {
-					if (filteredArrayByQuery.includes(adData[i].id) === false) {
-						filteredArrayByQuery.push(adData[i].id);
+					if (filteredArrayByQuery.includes(adData[i]) === false) {
+						filteredArrayByQuery.push(adData[i]);
 					}
 				}
 			}
