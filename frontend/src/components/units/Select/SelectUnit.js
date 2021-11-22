@@ -9,17 +9,17 @@ const SelectUnit = ({
 	placeholder,
 	value,
 	containerValue,
+	customStyles,
 }) => {
 	return (
 		<Select
 			options={options}
 			onChange={handleOnChange}
-			// styles={customStyles}
 			isMulti={false}
+			styles={customStyles}
 			components={components}
 			placeholder={placeholder}
 			value={value}
-			defaultValue={options[0]}
 			containerValue={containerValue}
 			autoFocus={true}
 			isClearable={true}
