@@ -16,7 +16,7 @@ import MyBills from "screens/MyBills/MyBills";
 import Bill from "screens/MyBills/Bill";
 import UserAds from "screens/UserAds/UserAds";
 import ProtectedRoute from "components/composed/ProtectedRoute";
-import FalseSearch from "screens/FalseSearch/FalseSearch";
+import FalseSearch from "screens/FalseSearch.js/FalseSearch";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
@@ -49,6 +49,7 @@ const App = () => {
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}
 			</Switch>
+			<FalseSearch></FalseSearch>
 		</>
 	);
 };
