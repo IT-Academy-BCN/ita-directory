@@ -4,7 +4,7 @@ import Select from "react-select";
 const SelectUnit = ({
 	options,
 	handleOnChange,
-	customStyles,
+	className,
 	components,
 	placeholder,
 	value,
@@ -14,7 +14,7 @@ const SelectUnit = ({
 		<Select
 			options={options}
 			onChange={handleOnChange}
-			styles={customStyles}
+			// styles={customStyles}
 			isMulti={false}
 			components={components}
 			placeholder={placeholder}
@@ -29,6 +29,7 @@ const SelectUnit = ({
 			isSearchable={true}
 			isOptionSelected={true}
 			onSelectResetsInput={false}
+			className={`header-select ${className}`}
 		/>
 	);
 };
