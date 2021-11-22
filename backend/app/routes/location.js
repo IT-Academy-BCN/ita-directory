@@ -4,12 +4,10 @@ const router = require("express").Router();
 
 
 /**
- * GET /location/v1/region
+ * GET /location/v1/region/:name
  * @summary Gets the region starting from a searched location.
  * @tags Location
  * @return {object} 200 - Success response - application/json
- * @example request - Correct location payload
- * {"name": "montcada"}
  * @example response - 200 - Example success response
  * {
     "message": "Location fetched",
@@ -30,16 +28,14 @@ const router = require("express").Router();
 }
  */
 
-router.get("/v1/region", locationController.getRegion);
+router.get("/v1/region/:name", locationController.getRegion);
 
 
 /**
- * GET /location/v1/relative
+ * GET /location/v1/relative/:name
  * @summary Gets a searched location's parent and children.
  * @tags Location
  * @return {object} 200 - Success response - application/json
- * @example request - Correct location payload
- * {"name": "montcada"}
  * @example response - 200 - Example success response
  * {
     "message": "Location fetched",
@@ -105,7 +101,7 @@ router.get("/v1/region", locationController.getRegion);
  */
 
 
-router.get("/v1/relative", locationController.getParentChild);
+router.get("/v1/relative/:name", locationController.getParentChild);
 
 
 module.exports = router;

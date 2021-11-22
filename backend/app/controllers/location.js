@@ -5,7 +5,7 @@ const {formatLocation} = require("../utils/formatLocation")
 
 async function getRegion(req, res) {
     try {
-        const {name} = req.body
+        const {name} = req.params
         await getRegionByLocationSchema.validateAsync(name)
         const formattedName = formatLocation(name)
         const data = []
@@ -75,7 +75,7 @@ async function getRegion(req, res) {
 
 async function getParentChild(req, res) {
     try {
-        const {name} = req.body
+        const {name} = req.params
         await getRegionByLocationSchema.validateAsync(name)
         const formattedName = formatLocation(name)
         const data = []
