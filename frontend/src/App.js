@@ -49,7 +49,6 @@ const App = () => {
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}
 			</Switch>
-			<FalseSearch></FalseSearch>
 		</>
 	);
 };

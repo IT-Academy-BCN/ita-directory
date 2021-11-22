@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {StyledViewList} from "./ViewList.styles";
+import {AdCardListStyled} from "./AdCardList.styles";
 import Button from "components/units/Button/Button";
 import axios from "axios";
 import AdCardItem from "./AdCardItem";
@@ -31,12 +31,12 @@ const AdCardList = () => {
 	};
 
 	return (
-		<StyledViewList>
+		<AdCardListStyled>
 			<div className="list-scroll">
 				{ads && adsToShow.map((ad) => <AdCardItem key={ad.key} ad={ad}></AdCardItem>)}
 			</div>
 			<Button type="button" text="Load more" onClick={showMoreItems}></Button>
-		</StyledViewList>
+		</AdCardListStyled>
 	);
 };
 export default AdCardList;
