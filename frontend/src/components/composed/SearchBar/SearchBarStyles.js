@@ -7,7 +7,7 @@ export const SearchBarContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding-right: 10px;
+	padding-right: 30px;
 	padding-left: 0.5rem;
 
 	@media only screen and (min-width: 768px) {
@@ -15,7 +15,6 @@ export const SearchBarContainer = styled.div`
 		flex-direction: row;
 		justify-content: ${(props) => (props.isLoading === 1 ? "center" : "flex-start")};
 		align-items: center;
-		padding-right: 30px;
 	}
 
 	.header-select {
@@ -41,8 +40,8 @@ export const SearchBarContainer = styled.div`
 	}
 
 	.spinner {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 2.5rem;
+		height: 2.5rem;
 		color: ${Colors.frenchBlue};
 
 		animation-name: fullRotation;
