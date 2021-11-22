@@ -1,15 +1,15 @@
 {
   "name": "ita-directory",
   "private": true,
-  "proxy": "http://localhost:5001",
-  "workspaces": [
-    "frontend",
-    "backend",
-    "documents"
-  ],
   "version": "1.0.0",
-  "description": "## Develop",
+  "description": "ITA Directory",
   "scripts": {
+    "docker-build": "",
+    "docker-start": "",
+    "docker-rebuild": "",
+    "prisma-migrate": "",
+    "prisma-..": "",
+    "install-all": "",
     "backend": "yarn workspace graphile dev",
     "frontend": "yarn workspace frontend start",
     "docs": "yarn workspace documents start",
@@ -26,7 +26,7 @@
     "prisma",
     "directory"
   ],
-  "author": "",
+  "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/it-academyproject/ita-directory-frontend/issues"

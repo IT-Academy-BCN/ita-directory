@@ -1,23 +1,17 @@
 # stage one
-FROM node:14 as builder
+FROM node:16 as builder
 
 # install dependencies for node-gyp
 # RUN apk add --no-cache python make g++
-
 WORKDIR /app
-
 COPY ./package.json prisma ./
 RUN npm install && npm uninstall argon2 && npm install argon2 --build-from-source
 
 # stage two
-FROM node:14
-
+FROM node:16
 ENV NODE_ENV=development
-
-# USER node
 RUN mkdir -p /home/node/app
 WORKDIR /home/node/app
-
 COPY . .
 COPY --from=builder /app/node_modules /home/node/app/node_modules
 
