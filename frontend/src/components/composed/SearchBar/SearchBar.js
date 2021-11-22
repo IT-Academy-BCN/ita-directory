@@ -7,7 +7,7 @@ import {retrieveSearchBarAds} from "./logic/retrieveSearchBarAds/retrieveSearchB
 import {citiesOptions} from "./logic/data-json/citiesOptions";
 import {roomsOptions} from "./logic/data-json/roomsOptions";
 
-const SearchBar = ({setMatchesId, matchesId}) => {
+const SearchBar = ({setMatchesId}) => {
 	const [adType, setAdType] = useState(null);
 	const [adRegion, setAdRegion] = useState(null);
 
@@ -21,6 +21,8 @@ const SearchBar = ({setMatchesId, matchesId}) => {
 	const handleOnClick = async () => {
 		const idArray = await retrieveSearchBarAds(adType, adRegion);
 		setMatchesId(idArray);
+		setAdRegion(null);
+		setAdType(null);
 	};
 	return (
 		<>
@@ -31,7 +33,7 @@ const SearchBar = ({setMatchesId, matchesId}) => {
 						handleOnChange={handleChange}
 						customStyles={customStyles}
 						components={components}
-						placeholder="Casa con piscina, chalet..."
+						placeholder="Número habitaciones"
 						value={adType}
 						valueContainer={adType}
 					/>

@@ -14,7 +14,6 @@ export const Wrapper = styled.div`
 `;
 export const SearchBarContainer = styled.div`
 	width: 70%;
-	height: 80%;
 	display: flex;
 	flex-direction: row;
 	margin-left: 5px;
@@ -22,23 +21,46 @@ export const SearchBarContainer = styled.div`
 	margin-bottom: 0;
 	justify-content: flex-start;
 	align-items: center;
+
+	@media only screen and (max-width: 768px) {
+		margin: 0;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	@media only screen and (min-width: 1024px) {
+	}
 `;
 
 export const customStyles = {
-	control: (provided, state) => ({
+	control: (provided) => ({
 		...provided,
-		width: 415,
 		backgroundColor: "white",
 		height: "80%",
 		marginRight: "5px",
 	}),
-	option: (provided, state) => ({
+	container: (provided) => ({
+		...provided,
+		flexBasis: "35%",
+		// "@media only screen and (max-width: 1200px)": {
+		// 	...provided["@media only screen and (max-width: 1200px)"],
+		// 	width: "50%",
+		// 	placeholder: "none"
+		// },
+		maxHeight: "80%",
+		minHeight: "80%",
+		"@media only screen and (max-width: 768px)": {
+			...provided,
+			width: "50%",
+		},
+	}),
+	option: (provided) => ({
 		...provided,
 		":hover": {
 			cursor: "pointer",
 		},
 	}),
-	valueContainer: (provided, state) => ({
+	valueContainer: (provided) => ({
 		...provided,
 		":hover": {
 			cursor: "text",

@@ -7,7 +7,7 @@ import styled from "styled-components";
 1025px — 1200px: Desktops, large screens.
 */
 /* @media only screen and (max-width: 1024px) {
-    flex-direction: column;
+	flex-direction: column;
 }
  */
 export const SearchStyled = styled.div`
