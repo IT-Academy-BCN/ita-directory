@@ -39,7 +39,7 @@ const AdCardListPagination = () => {
 				totalItems={ads.length}
 				currentPage={currentPage}
 				paginate={paginate}
-			></Pagination>
+			/>
 		</AdCardListStyled>
 	);
 };
