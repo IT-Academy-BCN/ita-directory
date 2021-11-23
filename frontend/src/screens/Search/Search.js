@@ -35,7 +35,7 @@ const Search = () => {
 						</div>
 					</div>
 					<div className="search-map">
-						<div className="map">xxxS</div>
+						<div className="map">map here</div>
 					</div>
 					<div className="search-more-button">
 						<button type="button">cargar mas</button>

@@ -30,6 +30,7 @@ const App = () => {
 		<>
 			<Switch>
 				<ProtectedRoute exact path="/" component={Home} />
+				<Route exact path="search" component={Search} />
 				<Route exact path="/ad/:id" component={Ad} />
 				<Route exact path="/new-ad" component={CreateNewAd} />
 				<Route exact path="/login" component={Login} />

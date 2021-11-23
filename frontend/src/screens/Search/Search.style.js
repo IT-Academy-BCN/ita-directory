@@ -6,10 +6,6 @@ import styled from "styled-components";
 769px — 1024px: Small screens, laptops.
 1025px — 1200px: Desktops, large screens.
 */
-/* @media only screen and (max-width: 1024px) {
-	flex-direction: column;
-}
- */
 export const SearchStyled = styled.div`
 	height: 100vh;
 	padding: 0 1rem;
@@ -31,17 +27,16 @@ export const SearchStyled = styled.div`
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 0.4rem;
-		/*     display: flex;
-    flex-wrap: wrap; */
 		background-color: blueviolet;
-		padding-right: 0.8rem;
 
 		@media only screen and (min-width: 480px) {
 			grid-template-columns: 1fr 1fr;
+			padding-right: 0;
 		}
 
 		@media only screen and (min-width: 1024px) {
 			grid-template-columns: repeat(3, 1fr);
+			padding-right: 0.8rem;
 		}
 	}
 	.search-more-button {
@@ -49,22 +44,26 @@ export const SearchStyled = styled.div`
 		justify-content: center;
 	}
 	.search-map {
-		background-color: orange;
+		background-color: orange; // Quitar
 		width: 100%;
-		padding: 0 0 0 0.8rem;
+		padding-top: 1rem;
 
-		@media only screen and (max-width: 768px) {
-			display: none;
+		@media only screen and (min-width: 768px) {
+			padding-left: 0.8rem;
+		}
+
+		@media only screen and (min-width: 1024px) {
+			padding: 0 0 0 0.8rem;
 		}
 	}
 	.box {
-		background-color: red;
+		background-color: red; // Quitar
 		width: 100%;
 		height: 10rem;
 		border-radius: 8px;
 	}
 	.map {
-		background-color: lightgreen;
+		background-color: lightgreen; // Quitar
 		height: 100%;
 		border-radius: 8px;
 	}
