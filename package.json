@@ -37,7 +37,6 @@
     "lint-staged": "^11.1.2"
   },
   "dependencies": {
-    "@craco/craco": "^6.4.0",
-    "react-select": "^5.2.1"
+    "@craco/craco": "^6.4.0"
   }
 }
