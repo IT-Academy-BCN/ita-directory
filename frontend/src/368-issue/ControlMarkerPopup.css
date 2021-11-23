@@ -1,0 +1,17 @@
+.Page {
+	text-align: center;
+}
+
+.Title h1 {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.ControlPopup {
+	font-weight: bold;
+	text-decoration: underline;
+}
+.ControlButtons button {
+	border: black solid 1px;
+    padding: 2px;
+}

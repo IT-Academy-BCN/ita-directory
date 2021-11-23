@@ -1,6 +1,6 @@
 .leaflet-popup-content {
     display: flex;
-    width: 441px !important;
+    width: 22em !important;
     /* height: 180px; */
 }
 

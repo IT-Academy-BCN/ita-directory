@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7" #Changed 3.8 wrong
 
 services:
   ita-db:
@@ -29,7 +29,7 @@ services:
       dockerfile: Dockerfile.dev
     image: ita-api:dev
     container_name: ita-api-dev
-    platform: linux/x86_64
+    # platform: linux/x86_64
     volumes:
       - ./backend:/home/node/app
       - /home/node/app/node_modules

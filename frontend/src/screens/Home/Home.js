@@ -20,6 +20,7 @@ const pages = [
 	{title: "Recover Password", route: "/recover-password/:hash"},
 	{title: "Register", route: "/register"},
 	{title: "User's Ads", route: "/user-ads"},
+	{title: "ControlMarkerPopup", route: "/ControlMarkerPopup"},  /* <<<<<<<<<<<<<<<<<<<<<< */
 ];
 
 const Home = () => {

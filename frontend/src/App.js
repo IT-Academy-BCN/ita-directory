@@ -17,6 +17,9 @@ import Bill from "screens/MyBills/Bill";
 import UserAds from "screens/UserAds/UserAds";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 
+
+import ControlMarkerPopup from "./368-issue/ControlMarkerPopup.js"  /* <<<<<<<<<<<<<<<<<<<<<< */
+
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
 // import SalesByType from "screens/Sales/SalesByType";
@@ -28,7 +31,7 @@ const App = () => {
 	return (
 		<>
 			<Switch>
-				<ProtectedRoute exact path="/" component={Home} />
+				<Route exact path="/" component={Home} />
 				<Route exact path="/ad/:id" component={Ad} />
 				<Route exact path="/new-ad" component={CreateNewAd} />
 				<Route exact path="/login" component={Login} />
@@ -42,6 +45,7 @@ const App = () => {
 				<Route exact path="/my-bills" component={MyBills} />
 				<Route path="/my-bills/:id" children={<Bill />} />
 				<Route path="mi-ruta" children={noExiste} />
+				<Route path="/ControlMarkerPopup" component={ControlMarkerPopup} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />

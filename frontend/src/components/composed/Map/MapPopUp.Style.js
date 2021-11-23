@@ -3,7 +3,7 @@ import Colors from "theme/Colors";
 
 export const PopupStyled = styled.div`
 	display: flex;
-	width: 124px;
+	width: 180px;
 	height: 180px;
 	border-radius: 6px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
@@ -35,7 +35,7 @@ export const PropertyData = styled.div`
 
 	.property-data-extra {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 	}
 `;
 
