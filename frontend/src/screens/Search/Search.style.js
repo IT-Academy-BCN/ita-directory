@@ -6,7 +6,6 @@ import styled from "styled-components";
 769px — 1024px: Small screens, laptops.
 1025px — 1200px: Desktops, large screens.
 */
-
 export const SearchStyled = styled.div`
 	height: 100vh;
 	padding: 0 1rem;
