@@ -33,7 +33,7 @@ const Register = ({retrieveUser}) => {
 
 	const registerUser = async (user) => {
 		try {
-			const response = await axios.post("http://localhost:5000/users/v1/register", user);
+			const response = await axios.post("http://localhost:10091/users/v1/register", user);
 			setMessage(response.data.message);
 			if (response.data.code === "error") throw response.data.message;
 			setRegisterSuccess(true);
