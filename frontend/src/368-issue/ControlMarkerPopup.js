@@ -3,14 +3,14 @@ import OnEventMarkerPopup from "./OnEventMarkerPopup.js";
 
 import "./ControlMarkerPopup.css"
 
-function ControlMarkerPopup() {
+function ControlMarkerPopup({showPop,setShowPop}) {
     const Barcelona = {lat: 41.38722, lng: 2.17012}
     const Cibernarium = {lat: 41.40319, lng: 2.19604}
 
     const [markerPosition, setMarkerPosition] = useState(Barcelona);
     const {lat, lng} = markerPosition;
 
-    const [showPop, setShowPop] = useState(false);
+    // const [showPop, setShowPop] = useState(false);
 
     const togglePop = () => {setShowPop(!showPop)}
     const onPop = () => {setShowPop(true)}
