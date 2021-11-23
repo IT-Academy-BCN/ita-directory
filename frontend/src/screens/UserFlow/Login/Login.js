@@ -22,7 +22,10 @@ const Login = ({onLogin}) => {
 
 	const loginUser = async (user) => {
 		try {
-			const response = await axios.post("http://localhost:10091/users/v1/login", user);
+			const response = await axios.post(
+				`${process.env.REACT_APP_API_URL}/users/v1/login`,
+				user
+			);
 			setMessage(response.data.message);
 			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
