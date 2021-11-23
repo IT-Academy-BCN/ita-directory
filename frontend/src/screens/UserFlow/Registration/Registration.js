@@ -34,7 +34,7 @@ const Register = ({retrieveUser}) => {
 	const registerUser = async (user) => {
 		try {
 			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/users/v1/login`,
+				`${process.env.REACT_APP_API_URL}/users/v1/register`,
 				user
 			);
 			setMessage(response.data.message);
