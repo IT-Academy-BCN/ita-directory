@@ -2,6 +2,26 @@ const authenticateToken = require("../middleware/verifyToken");
 const locationController = require("../controllers/location");
 const router = require("express").Router();
 
+/**
+ * Location data
+ * @typedef {object} levelData
+ * @property {integer} id.required - Location id
+ * @property {string} name.required - Location name
+ * @property {integer} parent_id.required - Location parent id
+ * @property {levelTypeData} level_type_id.required - Location type id
+ */
+
+/**
+ * LevelType data
+ * @typedef {object} levelTypeData
+ * @property {integer} id.required - Location id
+ * @property {string} name.required - Location name
+ * @property {integer} country - Location parent id
+ * @property {integer} state - Location type
+ * @property {integer} city - Location type
+ * @property {integer} town - Location type
+ * @property {integer} district - Location type
+ */
 
 /**
  * GET /location/v1/region/:name

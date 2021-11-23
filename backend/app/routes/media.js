@@ -18,8 +18,8 @@ const uploadFile = require("./../middleware/uploadFile");
  * { DATA NEEDED }
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
- * @example request - Payload example
- * 
+ * @example request - Payload example 
+ * {DATA NEEDED} 
  * @example response - 200 - Example success response
  * { "status":"200", "message": "File uploaded correctly"}
  * @example response - 400 - Example error response
@@ -37,7 +37,7 @@ router.post("/v1/upload", uploadFile, MediaControllers.uploadMedia);
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * 
+ * {DATA NEEDED} 
  * @example response - 200 - Example success response
  * { "status":"200", "message": "File deleted correctly"}
  * @example response - 400 - Example error response
