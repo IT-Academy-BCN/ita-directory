@@ -15,8 +15,26 @@ const router = require("express").Router();
  * @property {integer} n_bathrooms.required - Number of bathrooms
  * @property {number} map_lat.required - Latitude of the location on the map
  * @property {number} map_lon.required - Longitude of the location on the map
- * @property {number} ad_type_id.required - Ad type referred to the table ad_type
+ * @property {adTypeData} ad_type_id.required - Ad type referred to the table ad_type
  */
+
+/**
+ * adType data
+ * @typedef {object} adTypeData
+ * @property {integer} id.required - Ad_type id
+ * @property {string} name.required - Ad_type name
+ * @property {integer} house - Ad_type type
+ * @property {integer} room - Ad_type type 
+ * @property {integer} garage - Ad_type type
+ * @property {integer} storage - Ad_type type
+ * @property {integer} office - Ad_type type
+ * @property {integer} warehouse - Ad_type type
+ * @property {integer} building - Ad_type type
+ * @property {integer} new_building - Ad_type type
+ */
+
+
+
 
 /**
  * POST /ads/v1/post-ad
