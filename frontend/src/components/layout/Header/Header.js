@@ -8,7 +8,15 @@ import {Container} from "theme/GlobalStyles";
 const profilePicture =
 	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 
-const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTitle}) => {
+const Header = ({
+	isLoggedIn,
+	title,
+	logoColor,
+	headerColor,
+	fontColor,
+	justifyTitle,
+	isTitleVisible,
+}) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleClick = () => {
@@ -56,15 +64,17 @@ const Header = ({isLoggedIn, title, logoColor, headerColor, fontColor, justifyTi
 					) : null}
 				</div>
 			</Container>
-			<StyledSubHeader
-				headerColor={headerColor}
-				fontColor={fontColor}
-				justifyTitle={justifyTitleB}
-			>
-				<Container>
-					<h1>{title}</h1>
-				</Container>
-			</StyledSubHeader>
+			{isTitleVisible && (
+				<StyledSubHeader
+					headerColor={headerColor}
+					fontColor={fontColor}
+					justifyTitle={justifyTitleB}
+				>
+					<Container>
+						<h1>{title}</h1>
+					</Container>
+				</StyledSubHeader>
+			)}
 		</HeaderStyled>
 	);
 };

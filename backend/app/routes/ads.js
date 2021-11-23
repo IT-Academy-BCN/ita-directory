@@ -15,7 +15,26 @@ const router = require("express").Router();
  * @property {integer} n_bathrooms.required - Number of bathrooms
  * @property {number} map_lat.required - Latitude of the location on the map
  * @property {number} map_lon.required - Longitude of the location on the map
+ * @property {adTypeData} ad_type_id.required - Ad type referred to the table ad_type
  */
+
+/**
+ * adType data
+ * @typedef {object} adTypeData
+ * @property {integer} id.required - Ad_type id
+ * @property {string} name.required - Ad_type name
+ * @property {integer} house - Ad_type type
+ * @property {integer} room - Ad_type type 
+ * @property {integer} garage - Ad_type type
+ * @property {integer} storage - Ad_type type
+ * @property {integer} office - Ad_type type
+ * @property {integer} warehouse - Ad_type type
+ * @property {integer} building - Ad_type type
+ * @property {integer} new_building - Ad_type type
+ */
+
+
+
 
 /**
  * POST /ads/v1/post-ad
@@ -110,6 +129,60 @@ router.get("/v1/ads/:adId", adsController.getAdById);
     "errors": []
 }
 */
+
+
+/**
+ * GET /ads/v1/ads/type/:type
+ * @summary Gets all ads filtered according to their type name.
+ * @tags Ad
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+*  {
+    "message": "Ad fetched correctly.",
+    "data": [
+        {
+            "id": 11,
+            "user_id": 1,
+            "title": "ad11",
+            "description": "ad room 1",
+            "city": "Tampa",
+            "n_rooms": 1,
+            "price": 300,
+            "square_meters": 20,
+            "n_bathrooms": 1,
+            "map_lat": "27.950575",
+            "map_lon": "-82.457176",
+            "ad_type_id": 2
+        }
+    ]
+}
+ */
+
+router.get("/v1/ads/type/:type", adsController.getAdsByType)
+
+
+
+/**
+ * GET /ads/v1/ads/types/list
+ * @summary Gets all ad type names.
+ * @tags Ad
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+*  {
+    "message": "Types fetched correctly.",
+    "data": [
+        "house",
+        "room",
+        "garage",
+        "storage",
+        "office",
+        "warehouse",
+        "building",
+        "new_building"
+    ]
+}
+ */
+router.get("/v1/ads/types/list", adsController.getAdTypes)
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
 
