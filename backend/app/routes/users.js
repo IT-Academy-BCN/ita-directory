@@ -24,9 +24,7 @@ router.get("/v1/get_me", UsersController.getUser);
     "name": "name",
     "lastnames":"surname",
     "email": "email@email.com",
-    "password": "qwe1231-qwe!",
-    "user_status_id":"1",
-    "user_role_id":1
+    "password": "qwe1231-qwe!"
 }
  * @example response - 200 - Example success response
  * { "status":"200", "message": "User registered correctly"}
