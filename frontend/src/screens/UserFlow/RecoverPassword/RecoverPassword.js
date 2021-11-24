@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-
+import {useState} from "react";
+import axios from "axios";
 // Layout Components
 import Body from "components/layout/Body/Body";
 
@@ -13,26 +13,26 @@ import {Container, Form, LabelStyled} from "../UserFlow.styles";
 // Utilities
 import {msgs} from "utils/userFlow";
 
-const users = [
-	{
-		email: "juan@mail.com",
-		password: "Juan1992",
-	},
-];
+// const users = [
+// 	{
+// 		email: "juan@mail.com",
+// 		password: "Juan1992",
+// 	},
+// ];
 
-const updateUser = (email, password) => {
-	const newUsers = [];
-	for (let i = 0; i < users.length; i++) {
-		const user = users[i];
-		if (user.email === email) {
-			newUsers.push(email, password);
-			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
-			console.log("The user is correct. You will receive an email to change your password.");
-		} else {
-			console.error("the user is incorrect. Please try again.");
-		}
-	}
-};
+// const updateUser = (email, password) => {
+// 	const newUsers = [];
+// 	for (let i = 0; i < users.length; i++) {
+// 		const user = users[i];
+// 		if (user.email === email) {
+// 			newUsers.push(email, password);
+// 			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
+// 			console.log("The user is correct. You will receive an email to change your password.");
+// 		} else {
+// 			console.error("the user is incorrect. Please try again.");
+// 		}
+// 	}
+// };
 
 const RecoverPassword = ({retrieveUser}) => {
 	// const [error, setError] = useState("");
@@ -41,14 +41,16 @@ const RecoverPassword = ({retrieveUser}) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [validEmail, setValidEmail] = useState(false);
-	const [password, setPassword] = useState("");
+	// const [password, setPassword] = useState("");
 
-	// provisional
-	useEffect(() => {
-		setPassword("");
-	}, []);
+	// // provisional
+	// useEffect(() => {
+	// 	setPassword("");
+	// }, []);
 
-	const handleSubmit = (event) => {
+	const user = "ggg@gmail.com";
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setAnimatedState(true);
 		setIsDisabled(true);
@@ -59,17 +61,23 @@ const RecoverPassword = ({retrieveUser}) => {
 			setIsLoading(false);
 		}, 2000);
 
-		try {
-			updateUser(email, password, (error, token) => {
-				// if (error) return setError(error.message);
-				retrieveUser(token);
-			});
-		} catch ({message}) {
-			// setError(message);
-			console.error(message);
-		}
+		// try {
+		// 	updateUser(email, password, (error, token) => {
+		// 		// if (error) return setError(error.message);
+		// 		retrieveUser(token);
+		// 	});
+		// } catch ({message}) {
+		// 	// setError(message);
+		// 	console.error(message);
+		// }
 	};
-
+	const tryRecover = async () => {
+		const response = await axios.post(
+			`${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
+			user
+		);
+		console.log(response);
+	};
 	return (
 		<Body title="Cambiar contraseña" justifyTitle="center">
 			<Container>
@@ -100,6 +108,7 @@ const RecoverPassword = ({retrieveUser}) => {
 					/>
 				</Form>
 			</Container>
+			<button onClick={() => tryRecover}>Try</button>
 		</Body>
 	);
 };
