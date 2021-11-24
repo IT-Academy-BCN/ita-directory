@@ -13,8 +13,9 @@ export const msgs = {
 		loginSuccess: "Bienvenido de nuevo. Te estamos redireccionando.",
 	},
 	emailError: "Introduce un email válido.",
-	passwordError: "6 o más caracteres y una Mayúscula.",
+	passNameError: "6 o más caracteres y una Mayúscula.",
 	required: "Necesario",
 	placeholderEmail: "Email",
 	placeholderPassword: "Contraseña",
+	recoverPasswordError: "Las contraseñas no coinciden.",
 };
