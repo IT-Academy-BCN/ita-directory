@@ -20,7 +20,14 @@ router.get("/v1/get_me", UsersController.getUser);
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "email": "email@example.com", "password":"secret", "privacy":true}
+ * {
+    "name": "name",
+    "lastnames":"surname",
+    "email": "email@email.com",
+    "password": "qwe1231-qwe!",
+    "user_status_id":"1",
+    "user_role_id":1
+}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "User registered correctly"}
  * @example response - 400 - Example error response
