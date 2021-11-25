@@ -1,5 +1,5 @@
 const authenticateToken = require("../middleware/verifyToken");
-const adsController = require("../controllers/ads");
+const adsController = require("../controllers/ads.controller");
 const router = require("express").Router();
 
 /**
@@ -46,11 +46,12 @@ const router = require("express").Router();
  * @example request - Correct ad payload
  * { "user_id": "1", "title": "Apartment in Barcelona",
  * "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona",
- * "n_rooms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}
+ * "n_rooms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707,
+ * "ad_type_id": 1}
  * @example response - 200 - Example success response
  * { "message": "Ad created successfully.", "data": { "user_id": "1", "title": "Apartment in Barcelona",
   "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona", "n_rooms": 4,
-  "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}}
+  "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707, "ad_type_id": 1}}
   * @example request - Incorrect ad payload
   { "user_id": "1" }
   @example response - 400 - Example bad request response
@@ -73,9 +74,37 @@ router.post("/v1/post-ad", adsController.createAd);
  * "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona",
  * "n_rooms": 4, "price": 500000, "square_meters": 100, "n_bathrooms": 2, "map_lat": 41.418664, "map_lon": 2.133707}
  * @example response - 200 - Example success response
-* {"message": "Data fetched correctly.","data": [
-    {"id": 1,"user_id": 1,"title": "asdf","description": "asf","city": "fff","n_rooms": 1,"price": 2,"square_meters": 3,"n_bathrooms": 4,"map_lat": 3.4,"map_lon": 3.6},
-    {"id": 5,"user_id": 1,    "title": "asdf",    "description": "asf",    "city": "fff",    "n_rooms": 1,    "price": 2,    "square_meters": 3,    "n_bathrooms": 4,    "map_lat": 3.4,    "map_lon": 3.6}]}
+* {"message": "Data fetched correctly.",
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "title": "ad1",
+            "description": "ad house 1",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 1
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "title": "ad2",
+            "description": "ad house 2",
+            "city": "Berlin",
+            "n_rooms": 3,
+            "price": 1200,
+            "square_meters": 90,
+            "n_bathrooms": 2,
+            "map_lat": "52.520008",
+            "map_lon": "13.404954",
+            "ad_type_id": 1
+        }
+]}
  */
 router.get("/v1/ads", adsController.getAllAds);
 
@@ -88,7 +117,20 @@ router.get("/v1/ads", adsController.getAllAds);
  * @return {object} 400 - Bad request response - application/json
  * @return {object} 404 - Id not found - application/json
  * @example response - 200 - Example success response
-*{"message":"Ad fetched correctly.","data":{"id":1,"user_id":1,"title":"asdf","description":"asf","city":"fff","n_rooms":1,"price":2,"square_meters":3,"n_bathrooms":4,"map_lat":"3.4","map_lon":"3.6"}} 
+*{"message":"Ad fetched correctly.","data":{
+            "id": 1,
+            "user_id": 1,
+            "title": "ad1",
+            "description": "ad house 1",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 1
+        }} 
   @example response - 400 - Example bad request response
 {
     "message": "adId param must be an integer.",
@@ -183,6 +225,49 @@ router.get("/v1/ads/type/:type", adsController.getAdsByType)
 }
  */
 router.get("/v1/ads/types/list", adsController.getAdTypes)
+
+/**
+ * GET /ads/v1/ads/:location/:type 
+ * @summary Gets ads filtered by location and type
+ * @tags Ad
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+ * {
+    "message": "Ad fetched correctly.",
+    "data": [
+        {
+            "id": 21,
+            "user_id": 1,
+            "title": "ad1",
+            "description": "ad house 1",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 2
+        },
+        {
+            "id": 22,
+            "user_id": 1,
+            "title": "ad123",
+            "description": "ad room 123",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 2
+        }
+    ]
+}
+ */
+
+router.get("/v1/ads/:location/:type", adsController.getAdsByTypeAndLocation)
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
 

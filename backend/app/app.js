@@ -6,12 +6,12 @@ const helmet = require("helmet");
 const expressJSDocSwagger = require("express-jsdoc-swagger");
 const path = require("path");
 const options = require("./utils/swaggerOptions");
-const userRoutes = require("./routes/users");
-const mediaRoutes = require("./routes/media");
-const locationRoutes = require("./routes/location")
+const userRoutes = require("./routes/users.routes");
+const mediaRoutes = require("./routes/media.routes");
+const locationRoutes = require("./routes/location.routes")
 
-// const constantsRoute = require("./routes/constants");
-const adsRoutes = require("./routes/ads");
+// const constantsRoute = require("./routes/constants.routes");
+const adsRoutes = require("./routes/ads.routes");
 const authenticateToken = require("./middleware/verifyToken");
 
 // const UsersController = require("./controllers/users");
