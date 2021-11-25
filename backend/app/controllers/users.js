@@ -119,9 +119,8 @@ exports.getUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
 	const {name, lastnames, email, password} = req.body;
 	const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-
 	try {
-		if (regex.test(password)) {
+		if (!regex.test(password)) {
 			return next({
 				code: "error",
 				header: "Invalid password",
