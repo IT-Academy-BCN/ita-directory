@@ -34,6 +34,7 @@ const adsSchema = Joi.object({
 	n_bathrooms: Joi.number().required(),
 	map_lat: Joi.number().required(),
 	map_lon: Joi.number().required(),
+	// ad_type_id: Joi.number().required()
 });
 
 const signToken = (userid, maxAge = "15m") => {
