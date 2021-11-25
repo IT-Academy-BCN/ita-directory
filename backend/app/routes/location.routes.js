@@ -1,5 +1,5 @@
 const authenticateToken = require("../middleware/verifyToken");
-const locationController = require("../controllers/location");
+const locationController = require("../controllers/location.controller");
 const router = require("express").Router();
 
 /**

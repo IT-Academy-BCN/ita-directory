@@ -111,6 +111,19 @@ model media_type {
 //   user                     user         @relation(fields: [user_id], references: [id])
 //   user_id                  Int
 // }
+model ad_type {
+  id           Int    @id @default(autoincrement())
+  name         String
+  house        Int
+  room         Int
+  garage       Int
+  storage      Int
+  office       Int
+  warehouse    Int
+  building     Int
+  new_building Int
+  ads          ads[]
+}
 
 model ads {
   id            Int     @id @default(autoincrement())
@@ -125,23 +138,9 @@ model ads {
   n_bathrooms   Int
   map_lat       Decimal
   map_lon       Decimal
-  // ad_type       ad_type @relation(fields: [ad_type_id], references: [id])
-  // ad_type_id    Int
+  ad_type_id    Int
+  ad_type       ad_type @relation(fields: [ad_type_id], references: [id])
 }
-
-// model ad_type {
-//   id           Int    @id @default(autoincrement())
-//   name         String
-//   house        Int
-//   room         Int
-//   garage       Int
-//   storage      Int
-//   office       Int
-//   warehouse    Int
-//   building     Int
-//   new_building Int
-//   // ads          ads[]
-// }
 
 model level {
   id            Int        @id @default(autoincrement())
