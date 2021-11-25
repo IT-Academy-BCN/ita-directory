@@ -21,6 +21,7 @@ const RecoverPassword = () => {
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(null);
 	const [email, setEmail] = useState("");
 	const [validEmail, setValidEmail] = useState(false);
 	const [message, setMessage] = useState("");
@@ -43,12 +44,18 @@ const RecoverPassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
 				{email}
 			);
-			console.log(response.code);
 			setMessage(response.data.message);
-			if (response.data.code === "error") throw response.data.message;
+			setIsSuccess(true);
+
+			if (response.data.code === "error") {
+				setIsSuccess(false);
+				throw response.data.message;
+			}
 		} catch (error) {
-			if (error.name === "Error") console.log(error);
-			setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			if (error.name === "Error") {
+				setIsSuccess(false);
+				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			}
 		}
 	};
 	return (
@@ -58,6 +65,7 @@ const RecoverPassword = () => {
 					message={message}
 					closeNotification={closeNotification}
 					autoClose={true}
+					isSuccess={isSuccess}
 				/>
 			) : null}
 			<Body title="Cambiar contraseña" justifyTitle="center">
@@ -83,7 +91,7 @@ const RecoverPassword = () => {
 							loadingText="Enviando"
 							iconPosition="left"
 							type="submit"
-							className="w-full orange-gradient mt-6"
+							className="w-full blue-gradient mt-6"
 							isLoading={isLoading}
 							animated={animatedState}
 							disabled={!validEmail}

@@ -17,5 +17,4 @@ export const msgs = {
 	required: "Necesario",
 	placeholderEmail: "Email",
 	placeholderPassword: "Contraseña",
-	recoverPasswordError: "Las contraseñas no coinciden.",
 };

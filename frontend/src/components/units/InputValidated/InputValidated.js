@@ -40,7 +40,7 @@ const InputValidated = ({...props}) => {
 				type="email"
 				success={props.value !== "" && isValid}
 				error={props.value !== "" && !isValid}
-				errorText={props.errorText || msgs[`${props.name}Error`]}
+				errorText={props.errorText || msgs[`${props.type}Error`]}
 				{...props}
 			/>
 		</>

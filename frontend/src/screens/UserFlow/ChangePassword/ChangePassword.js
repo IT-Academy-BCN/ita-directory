@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 // eslint-disable-next-line
 import {useParams, useHistory} from "react-router-dom";
 import axios from "axios";
@@ -7,12 +7,13 @@ import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 import InputValidated from "components/units/InputValidated/InputValidated";
 // eslint-disable-next-line
-import {Container, Form, RedirectStyled} from "../UserFlow.styles";
+import {Container, Form} from "../UserFlow.styles";
 
 const ChangePassword = () => {
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(null);
 	const [message, setMessage] = useState("");
 
 	const [passwords, setPasswords] = useState({
@@ -20,35 +21,26 @@ const ChangePassword = () => {
 		password2: "",
 	});
 	const [validPassword, setValidPassword] = useState(false);
-	const [match, setMatch] = useState(false);
 	const history = useHistory();
 	const {token} = useParams();
 	const closeNotification = () => setMessage(null);
 
-	useEffect(() => {
-		if (passwords.password1 === passwords.password2) {
-			setMatch(true);
-		} else {
-			setMatch(false);
-		}
-		// eslint-disable-next-line
-	}, [passwords.password2]);
-
-	// eslint-disable-next-line
-
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		setIsDisabled(true);
 		setIsLoading(true);
 		setAnimated(true);
-		//comprovar si token segueix actiu
 		try {
-			const response = axios.post(
+			const response = await axios.post(
 				`${process.env.REACT_APP_API_URL}/users/v1/change-password/${token}`,
 				passwords
 			);
 			setMessage(response.data.message);
-			if (response.data.code === "error") throw response.data.message;
+			setIsSuccess(true);
+			if (response.data.code === "error") {
+				setIsSuccess(false);
+				throw response.data.message;
+			}
 			if (response.data.statusCode === 200) {
 				history.push("/login");
 			}
@@ -83,6 +75,7 @@ const ChangePassword = () => {
 					message={message}
 					closeNotification={closeNotification}
 					autoClose={true}
+					isSuccess={isSuccess}
 				/>
 			) : null}
 
@@ -113,10 +106,9 @@ const ChangePassword = () => {
 								setPasswords({...passwords, password2: e.target.value})
 							}
 							disabled={disabled}
-							isRegexWanted={false}
+							isRegexWanted={true}
 							className="w-full mt-2"
 							valid={setValidPassword}
-							match={match}
 						/>
 						<AsyncButton
 							text="Guardar cambios"
