@@ -10,6 +10,7 @@ const SelectUnit = ({
 	value,
 	containerValue,
 	customStyles,
+	loadOptions,
 }) => {
 	return (
 		<Select
