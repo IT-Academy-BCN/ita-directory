@@ -37,7 +37,7 @@ const App = () => {
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
 				<Route exact path="/profile" component={Profile} />
-				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
+				<Route exact path="/recover-password" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/dashboard" component={Dashboard} />

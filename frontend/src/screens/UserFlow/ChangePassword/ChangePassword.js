@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 // eslint-disable-next-line
-import {Link, useParams} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
@@ -10,46 +10,31 @@ import InputValidated from "components/units/InputValidated/InputValidated";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 const ChangePassword = () => {
-	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState("");
 
-	const [password, setPassword] = useState("");
-	const [repeatedPassword, setRepeatedPassword] = useState("");
+	const [passwords, setPasswords] = useState({
+		password1: "",
+		password2: "",
+	});
 	const [validPassword, setValidPassword] = useState(false);
 	const [match, setMatch] = useState(false);
-
+	const history = useHistory();
 	const {token} = useParams();
-	console.log(token);
 	const closeNotification = () => setMessage(null);
 
 	useEffect(() => {
-		if (password === repeatedPassword) {
+		if (passwords.password1 === passwords.password2) {
 			setMatch(true);
 		} else {
 			setMatch(false);
 		}
 		// eslint-disable-next-line
-	}, [repeatedPassword]);
+	}, [passwords.password2]);
 
 	// eslint-disable-next-line
-	const loginUser = async (user) => {
-		try {
-			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/users/v1/login`,
-				user
-			);
-			setMessage(response.data.message);
-			if (response.data.code === "error") throw response.data.message;
-			setLoginSuccess(true);
-		} catch (error) {
-			if (error.name === "Error")
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
-			setLoginSuccess(false);
-		}
-	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -57,14 +42,33 @@ const ChangePassword = () => {
 		setIsLoading(true);
 		setAnimated(true);
 		//comprovar si token segueix actiu
-		//en cas afirmatiu habilitar update password
-		//si l'update surt bé informar i, després de dos segons fer un history.push a login
-		//en cas negatiu informar i retornar a la pàgina principal
+		try {
+			const response = axios.post(
+				`${process.env.REACT_APP_API_URL}/users/v1/change-password/${token}`,
+				passwords
+			);
+			setMessage(response.data.message);
+			if (response.data.code === "error") throw response.data.message;
+			if (response.data.statusCode === 200) {
+				history.push("/login");
+			}
+		} catch (error) {
+			if (error.name === "Error")
+				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+		}
 		setTimeout(() => {
 			setIsDisabled(false);
 			setIsLoading(false);
 			setAnimated(false);
-			axios.patch(`${process.env.REACT_APP_API_URL}/users/v1/login`, password);
+			setTimeout(() => {
+				setIsDisabled(false);
+				setIsLoading(false);
+			}, 2000);
+		});
+		setTimeout(() => {
+			setIsDisabled(false);
+			setIsLoading(false);
+			setAnimated(false);
 			setTimeout(() => {
 				setIsDisabled(false);
 				setIsLoading(false);
@@ -77,7 +81,6 @@ const ChangePassword = () => {
 			{message ? (
 				<Notification
 					message={message}
-					isSuccess={loginSuccess}
 					closeNotification={closeNotification}
 					autoClose={true}
 				/>
@@ -89,8 +92,10 @@ const ChangePassword = () => {
 						<InputValidated
 							type="password"
 							placeholder="Introduce la nueva contraseña"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							value={passwords.password1}
+							onChange={(e) =>
+								setPasswords({...passwords, password1: e.target.value})
+							}
 							id="passName"
 							name="passName"
 							disabled={disabled}
@@ -103,8 +108,10 @@ const ChangePassword = () => {
 							type="password"
 							name="recoverPassword"
 							placeholder="Repite la contraseña"
-							value={repeatedPassword}
-							onChange={(e) => setRepeatedPassword(e.target.value)}
+							value={passwords.password2}
+							onChange={(e) =>
+								setPasswords({...passwords, password2: e.target.value})
+							}
 							disabled={disabled}
 							isRegexWanted={false}
 							className="w-full mt-2"

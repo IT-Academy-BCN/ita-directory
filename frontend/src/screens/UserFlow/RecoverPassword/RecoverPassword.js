@@ -1,5 +1,7 @@
 import {useState} from "react";
 import axios from "axios";
+import Notification from "components/units/Notifications/Notification";
+import {StyledParagraph} from "./RecoverPassword.styles";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -9,7 +11,7 @@ import AsyncButton from "components/units/Button/Button";
 import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Styles
-import {Container, Form, LabelStyled} from "../UserFlow.styles";
+import {Container, Form} from "../UserFlow.styles";
 
 // Utilities
 import {msgs} from "utils/userFlow";
@@ -21,6 +23,9 @@ const RecoverPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [validEmail, setValidEmail] = useState(false);
+	const [message, setMessage] = useState("");
+
+	const closeNotification = () => setMessage(null);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -34,44 +39,60 @@ const RecoverPassword = () => {
 		}, 2000);
 
 		try {
-			await axios.post(`${process.env.REACT_APP_API_URL}/users/v1/recover-password`, email);
-		} catch ({message}) {
-			// setError(message);
-			console.error(message);
+			const response = await axios.post(
+				`${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
+				{email}
+			);
+			console.log(response.code);
+			setMessage(response.data.message);
+			if (response.data.code === "error") throw response.data.message;
+		} catch (error) {
+			if (error.name === "Error") console.log(error);
+			setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
 		}
 	};
 
 	return (
-		<Body title="Cambiar contraseña" justifyTitle="center">
-			<Container>
-				<Form onSubmit={handleSubmit}>
-					<LabelStyled>
-						<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu
-						email y te enviaremos una nueva por correo.
-					</LabelStyled>
-					<InputValidated
-						type="email"
-						placeholder={msgs.placeholderEmail}
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						id="emailName"
-						name="emailName"
-						disabled={disabled}
-						valid={setValidEmail}
-					/>
-					<AsyncButton
-						text="Enviar"
-						loadingText="Enviando"
-						iconPosition="left"
-						type="submit"
-						className="w-full orange-gradient mt-6"
-						isLoading={isLoading}
-						animated={animatedState}
-						disabled={!validEmail}
-					/>
-				</Form>
-			</Container>
-		</Body>
+		<>
+			{message ? (
+				<Notification
+					message={message}
+					closeNotification={closeNotification}
+					autoClose={true}
+				/>
+			) : null}
+			<Body title="Cambiar contraseña" justifyTitle="center">
+				<Container>
+					<Form onSubmit={handleSubmit}>
+						<StyledParagraph>
+							Si has olvidado la contraseña introduce tu email y te enviaremos un
+							enlace para cambiarla.
+						</StyledParagraph>
+						<InputValidated
+							type="email"
+							name="email"
+							placeholder={msgs.placeholderEmail}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							id="emailName"
+							disabled={disabled}
+							valid={setValidEmail}
+							isRegexWanted={true}
+						/>
+						<AsyncButton
+							text="Enviar"
+							loadingText="Enviando"
+							iconPosition="left"
+							type="submit"
+							className="w-full orange-gradient mt-6"
+							isLoading={isLoading}
+							animated={animatedState}
+							disabled={!validEmail}
+						/>
+					</Form>
+				</Container>
+			</Body>
+		</>
 	);
 };
 
