@@ -8,6 +8,7 @@ const {
 	signRefreshToken,
 	registerSchema,
 	hashPassword,
+	decodeHash,
 } = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
@@ -451,7 +452,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 		});
 
 		if (passUser) {
-			const accessToken = signToken(passUser, "1h");
+			const accessToken = signToken(passUser.id, "1h");
 
 			return res.status(200).json(
 				apiResponse({
@@ -473,56 +474,51 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 	}
 };
 
-exports.recoverPassword = async (req, res, next) => {
+
+exports.changePassword = async (req, res, next) => {
 	try {
-		const token = req.params.token;
+		const {password1, password2} = req.body;
+		const token = req.params.token
+		const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
-		if (!token) {
 
+		if (password1 != password2) {
+			return res.status(200).json(
+				apiResponse({
+					message: "The password does not match"
+				})
+			)
+		}
+
+		if (!regex.test(password1)) {
 			return next({
 				code: "error",
-				message: "Your token is empty",
-				statusCode: 401,
+				header: "Invalid password",
+				message: "This password does not meet the requirements.",
+				statusCode: 400,
 			});
 		}
 
+
 		JWT.verify(token, process.env.JWT_SECRET, (err) => {
 			if (err) {
-
 				return next({
 					code: "error",
 					message: "Your token has expired!",
 					statusCode: 401,
 				});
 			}
+		})
 
-			res.status(200).json(
-				apiResponse({
-					message: "Authorization granted to change your password.",
-				})
-			);
-		});
-	} catch (err) {
+		const decodedToken = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString())
+		const encodedUserId = decodedToken.sub.user_id
+		let decodedId = decodeHash(encodedUserId)
 
-		return next(new Error(err));
-	}
-};
-
-exports.changePassword = async (req, res, next) => {
-	try {
-		const {password, email} = req.body;
-
-		// Create hook for update password?
-		const hashedPassword = await argon2.hash(password, {
-			type: argon2.argon2id,
-			memoryCost: 15360,
-			timeCost: 2,
-			parallelism: 1,
-		});
+		const hashedPassword = await hashPassword(password1);
 
 		await prisma.user.update({
 			where: {
-				email: email,
+				id: decodedId[0],
 			},
 			data: {
 				password: hashedPassword,
@@ -534,6 +530,7 @@ exports.changePassword = async (req, res, next) => {
 				message: "You password has been successfully changed.",
 			})
 		);
+
 	} catch (err) {
 
 		return next(new Error(err));

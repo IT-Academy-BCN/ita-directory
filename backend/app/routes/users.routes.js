@@ -124,7 +124,34 @@ router.patch("/v1/user", UsersController.updateUser);
 router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
 router.put("/test", UsersController.updateUserRole);
 
-router.get("/v1/change-password/:token", UsersController.recoverPassword);
-router.post("/v1/change-password", UsersController.changePassword);
+/**
+ * NewPassword data
+ * @typedef {object} newPasswordData
+ * @property {string} password1.required
+ * @property {string} password2.required
+ */
+
+/**
+ * POST /users/v1/change-password/:token
+ * @summary Checks the token in the params; if valid, changes the password for the associated user
+ * @tags User
+ * @param {newPasswordData} request.body.required - The payload looks like this:
+ * @return {object} 200 - success response - application/json
+ * @return {object} 400 - Bad request response
+ * @example request - Payload example
+ * { "password1": "qwertasd1!", "password2": "qwertasd1!"}
+ * @example response - 200 - Example success response
+ * {"message": "You password has been successfully changed."}
+ * @example response - 400 - Example error response
+ * {"code": "error", "message": "Your token has expired!"}
+ * @example response - 400 - Example error response
+ * {
+    "message": "The password does not match",
+    "data": {},
+    "errors": []
+}
+ */
+
+router.post("/v1/change-password/:token", UsersController.changePassword);
 
 module.exports = router;
