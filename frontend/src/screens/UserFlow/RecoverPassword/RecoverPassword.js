@@ -51,7 +51,6 @@ const RecoverPassword = () => {
 			setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
 		}
 	};
-
 	return (
 		<>
 			{message ? (

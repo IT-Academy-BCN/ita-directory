@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const UsersController = require("./../controllers/users");
-const uploadFile = require("./../middleware/uploadFile");
+const UsersController = require("../controllers/users.controller");
+const uploadFile = require("../middleware/uploadFile");
 
 router.get("/v1/get_me", UsersController.getUser);
 
@@ -20,7 +20,12 @@ router.get("/v1/get_me", UsersController.getUser);
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "email": "email@example.com", "password":"secret", "privacy":true}
+ * {
+    "name": "name",
+    "lastnames":"surname",
+    "email": "email@email.com",
+    "password": "8charactersOneNumberOnespecial!"
+}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "User registered correctly"}
  * @example response - 400 - Example error response
@@ -52,9 +57,15 @@ router.get("/v1/refresh-token", UsersController.getRefreshToken);
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "email": "email@example.com", "password":"secret", "privacy":true}
+ * { "email": "email@example.com", "password":"secret"}
  * @example response - 200 - Example success response
- * { "status":"200", "message": "successfully logged in"}
+ * {
+    "code": "success",
+    "header": "Welcome back",
+    "message": "We are redirecting you to your account.",
+    "token": "ACCESS TOKEN HERE",
+    "refreshToken": "REFRESH TOKEN HERE"
+}
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */

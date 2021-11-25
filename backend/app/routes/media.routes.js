@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const MediaControllers = require("../controllers/media.js");
-const uploadFile = require("./../middleware/uploadFile");
+const MediaControllers = require("../controllers/media.controller");
+const uploadFile = require("../middleware/uploadFile");
 
 
 /**
