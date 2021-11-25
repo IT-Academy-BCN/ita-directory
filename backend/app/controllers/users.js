@@ -117,11 +117,10 @@ exports.getUser = async (req, res, next) => {
 
 //User signup
 exports.registerUser = async (req, res, next) => {
-	const password = req.body.password;
-	const regex = /^(?=.*?[A-Z]).{6,}$/;
-
+	const {name, lastnames, email, password} = req.body;
+	const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 	try {
-		if (password.match(regex) === null) {
+		if (!regex.test(password)) {
 			return next({
 				code: "error",
 				header: "Invalid password",
@@ -131,7 +130,7 @@ exports.registerUser = async (req, res, next) => {
 		}
 
 		//Checking if valid email, password and privacy policy.
-		const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
+		const doesExist = await prisma.user.findUnique({where: {email}});
 
 
 		if (doesExist !== null) {
@@ -147,7 +146,9 @@ exports.registerUser = async (req, res, next) => {
 		const passwordHashed = await hashPassword(req.body.password);
 		await prisma.user.create({
 			data: {
-				email: req.body.email,
+				name,
+				lastnames,
+				email,
 				password: passwordHashed,
 				user_status_id: 1,
 				user_role_id: 3,
@@ -294,25 +295,6 @@ exports.updateUserRole = async (req, res, next) => {
 	}
 };
 
-//Update some user field with id_user & newfield (FOR TESTING PURPOSE)
-exports.updateUser = async (req, res, next) => {
-	const {user_id, user_role_id, user_status_id} = req.body;
-	if (!user_id) {
-		return next({
-			code: "error",
-			message: "user_id not identified",
-			statusCode: 400,
-		});
-	}
-
-	if (!user_role_id && !user_status_id) {
-		return next({
-			code: "error",
-			message: "undefined values",
-			statusCode: 400,
-		});
-	}
-};
 
 //Update some user field with id
 exports.updateUser = async (req, res, next) => {
@@ -376,7 +358,7 @@ exports.deleteUser = async (req, res, next) => {
 
 	}
 	try {
-		const userModel = await prisma.mec_user.findOne({
+		const userModel = await prisma.user.findOne({
 			raw: true,
 			nest: true,
 			attributes: {
@@ -416,7 +398,7 @@ exports.deleteUser = async (req, res, next) => {
 exports.forgetPassword = async (req, res, next) => {
 	const {email} = req.body;
 	try {
-		const user = await prisma.mec_user.findOne({where: {mec_un: email}});
+		const user = await prisma.user.findOne({where: {email}});
 		if (user) {
 			const token = JWT.sign(
 				{
