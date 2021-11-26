@@ -39,41 +39,6 @@ const SearchBar = ({setAdType, setAdRegion, getAds}) => {
 		setLoading(0);
 	}, []);
 
-	// const handleChangeAdType = (e) => {
-	// 	if (e) {
-	// 		setAdType(e);
-	// 	} else if (e === null) {
-	// 		setAdType(null);
-	// 	}
-	// };
-
-	// const handleChangeAdLocation = (e) => {
-	// 	if (e) {
-	// 		setAdRegion(e);
-	// 	} else if (e === null) {
-	// 		setAdRegion(null);
-	// 	}
-	// };
-	// const handleOnClick = async () => {
-	// 	if (adType && adRegion !== null) {
-	// 		setLoading(1);
-	// 		const idArray = await retrieveSearchBarAds(adType.value, adRegion.value);
-	// 		setMatchesId(idArray);
-	// 		setLoading(0);
-	// 	} else if (adType && adRegion === null) {
-	// 		setLoading(1);
-	// 		const idArray = await retrieveSearchBarAds(adType.value, adRegion);
-	// 		setMatchesId(idArray);
-	// 		setLoading(0);
-	// 	} else if (adType === null && adRegion) {
-	// 		setLoading(1);
-	// 		const idArray = await retrieveSearchBarAds(adType, adRegion.value);
-	// 		setMatchesId(idArray);
-	// 		setLoading(0);
-	// 	}
-	// 	setAdRegion(null);
-	// 	setAdType(null);
-	// };
 	return (
 		<StyledSubHeader>
 			<SearchBarContainer isLoading={loading}>
@@ -83,10 +48,8 @@ const SearchBar = ({setAdType, setAdRegion, getAds}) => {
 					<>
 						<Select
 							options={typesList}
-							// handleOnChange={handleChangeAdType}
 							components={components}
 							placeholder="House, room, garage..."
-							// value={adType}
 							className="header-select"
 							customStyles={customStyles}
 							onChange={(value) => setAdType(value)}
@@ -96,7 +59,6 @@ const SearchBar = ({setAdType, setAdRegion, getAds}) => {
 						<AsyncSelect
 							components={components}
 							placeholder="Barcelona, Berlín..."
-							// value={adRegion}
 							className="header-select"
 							customStyles={customStyles}
 							loadOptions={loadOptions}

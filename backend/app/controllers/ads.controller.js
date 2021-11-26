@@ -254,7 +254,7 @@ async function getAdsByTypeAndLocation(req, res) {
 		})
 
 		if (ads.length === 0) {
-			res.status(200).json({
+			return res.status(200).json({
 				message: "There are no ads for the city and type selected"
 			})
 		}

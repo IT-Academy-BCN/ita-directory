@@ -66,6 +66,11 @@ const hashPassword = async (password) => {
 	});
 };
 
+const decodeHash = (id) => {
+	return hashids.decode(id)
+}
+
+
 const getRegionByLocationSchema = Joi.string().required()
 
 const getAdsByTypeSchema = Joi.string().required()
@@ -79,6 +84,7 @@ module.exports = {
 	signToken,
 	signRefreshToken,
 	hashPassword,
+	decodeHash,
 	getRegionByLocationSchema,
 	getAdsByTypeSchema
 };
