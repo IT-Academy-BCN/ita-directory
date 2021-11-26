@@ -442,6 +442,7 @@ exports.forgetPassword = async (req, res, next) => {
 };
 
 exports.receiveEmailGetToken = async (req, res, next) => {
+	console.log(req.body)
 	try {
 		const user = req.body.email;
 
