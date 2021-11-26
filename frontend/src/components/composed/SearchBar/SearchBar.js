@@ -6,8 +6,8 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import AsyncSelect from "react-select/async";
 import Select from "react-select";
+import AsyncSelect from "react-select/async";
 
 const SearchBar = ({setAdType, setAdRegion, getAds}) => {
 	const [loading, setLoading] = useState(1);

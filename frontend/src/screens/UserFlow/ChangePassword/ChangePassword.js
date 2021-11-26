@@ -90,7 +90,6 @@ const ChangePassword = () => {
 								setPasswords({...passwords, password1: e.target.value})
 							}
 							id="passName"
-							name="passName"
 							disabled={disabled}
 							className="w-full"
 							valid={setValidPassword}
@@ -99,7 +98,6 @@ const ChangePassword = () => {
 						/>
 						<InputValidated
 							type="password"
-							name="recoverPassword"
 							placeholder="Repite la contraseña"
 							value={passwords.password2}
 							onChange={(e) =>
