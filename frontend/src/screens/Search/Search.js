@@ -22,21 +22,24 @@ const Search = () => {
 		try {
 			setLoading(1);
 			let response = null;
-			//if type has been selected by user, send an api request for ads filtered by type
-			if (adType) {
+			//if type and location have been selected by user, send an api request for filtered ads
+			if (adType && adRegion) {
 				response = await axios.get(
-					`${process.env.REACT_APP_API_URL}/ads/v1/ads/type/${adType.label}`
+					`${process.env.REACT_APP_API_URL}/ads/v1/ads/${adRegion.label}/${adType.label}`
 				);
-				//if type hasn´t been selected by user, send an api request for all ads
-			} else {
-				response = await axios.get(`${process.env.REACT_APP_API_URL}/ads/v1/ads/`);
-			}
-			let filteredAds = response.data.data;
+				//if only type was selected, API request for type filtered ads
+			} else if (adType && !adRegion) {
+				response = await axios.get(
+					`${process.env.REACT_APP_API_URL}/ads/v1/ads/types/${adType.label}`
+				);
 
-			//if region has been selected, filter ads by region
-			if (adRegion) {
-				filteredAds = filteredAds.filter((ad) => ad.city === adRegion.label);
+				// API request for all ads
+			} else {
+				response = await axios.get(`${process.env.REACT_APP_API_URL}/ads/v1/ads`);
 			}
+			let filteredAds = response.data.data || [];
+			console.log(filteredAds);
+
 			setAds(filteredAds);
 			setLoading(0);
 			setFirstSearch(true);
@@ -48,20 +51,14 @@ const Search = () => {
 	return (
 		<div>
 			<Header isTitleVisible={false} />
-			<SearchBar
-				// setMatchesId={setMatchesId}
-				// matchesId={matchesId}
-				setAdType={setAdType}
-				setAdRegion={setAdRegion}
-				getAds={getAds}
-			/>
+			<SearchBar setAdType={setAdType} setAdRegion={setAdRegion} getAds={getAds} />
 			<SearchStyled>
 				<div className="search-body">
 					<div className="search-results">
 						{loading ? (
 							<FontAwesomeIcon icon={faSpinner} className="spinner" />
 						) : ads.length === 0 && firstSearch ? (
-							`There are no ${adType?.label} in ${adRegion?.label}.`
+							`There are no results.`
 						) : (
 							<AdCardListLoadMore ads={ads} className="search-results-list" />
 						)}
