@@ -44,12 +44,13 @@ const RecoverPassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
 				{email}
 			);
-			setMessage(response.data.message);
-			setIsSuccess(true);
 
 			if (response.data.code === "error") {
 				setIsSuccess(false);
 				throw response.data.message;
+			} else {
+				setMessage(response.data.message);
+				setIsSuccess(true);
 			}
 		} catch (error) {
 			if (error.name === "Error") {

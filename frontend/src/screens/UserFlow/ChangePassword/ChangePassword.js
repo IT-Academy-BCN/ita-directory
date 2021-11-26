@@ -35,14 +35,15 @@ const ChangePassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/change-password/${token}`,
 				passwords
 			);
-			setMessage(response.data.message);
-			setIsSuccess(true);
 			if (response.data.code === "error") {
 				setIsSuccess(false);
 				throw response.data.message;
-			}
-			if (response.data.statusCode === 200) {
-				history.push("/login");
+			} else {
+				setMessage(response.data.message);
+				setIsSuccess(true);
+				setTimeout(() => {
+					history.push("/login");
+				}, 2000);
 			}
 		} catch (error) {
 			if (error.name === "Error")
