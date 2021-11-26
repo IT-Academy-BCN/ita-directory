@@ -119,7 +119,7 @@ exports.getUser = async (req, res, next) => {
 //User signup
 exports.registerUser = async (req, res, next) => {
 	const {name, lastnames, email, password} = req.body;
-	const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+	const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 	try {
 		if (!regex.test(password)) {
 			return next({
@@ -457,7 +457,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 			return res.status(200).json(
 				apiResponse({
 					message: "Access token granted.",
-					data: accessToken,
+					data: `${process.env.REACT_APP_API_URL}/change-password/${accessToken}`,
 				})
 			);
 		} else {
@@ -479,7 +479,7 @@ exports.changePassword = async (req, res, next) => {
 	try {
 		const {password1, password2} = req.body;
 		const token = req.params.token
-		const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+		const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 
 
 		if (password1 != password2) {
@@ -527,7 +527,7 @@ exports.changePassword = async (req, res, next) => {
 
 		res.status(200).json(
 			apiResponse({
-				message: "You password has been successfully changed.",
+				message: "Your password has been successfully changed.",
 			})
 		);
 
