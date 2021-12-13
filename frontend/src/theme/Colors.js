@@ -31,6 +31,7 @@ const Colors = {
 	shadow: "rgba(0, 0, 0, 0.2)",
 	lighterShadow: "rgba(0, 0, 0, 0.19)",
 	lightBeige: "#EFEEEA",
+	violet: "#8A82AF",
 };
 
 export default Colors;

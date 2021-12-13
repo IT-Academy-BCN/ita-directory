@@ -8,6 +8,7 @@ const {
     signRefreshToken,
     registerSchema,
     hashPassword,
+    decodeHash,
 } = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
@@ -116,11 +117,10 @@ exports.getUser = async (req, res, next) => {
 
 //User signup
 exports.registerUser = async (req, res, next) => {
-    const password = req.body.password;
-    const regex = /^(?=.*?[A-Z]).{6,}$/;
-
+    const {name, lastnames, email, password} = req.body;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     try {
-        if (password.match(regex) === null) {
+        if (!regex.test(password)) {
             return next({
                 code: "error",
                 header: "Invalid password",
@@ -130,7 +130,7 @@ exports.registerUser = async (req, res, next) => {
         }
 
         //Checking if valid email, password and privacy policy.
-        const doesExist = await prisma.user.findUnique({where: {email: req.body.email}});
+        const doesExist = await prisma.user.findUnique({where: {email}});
 
 
         if (doesExist !== null) {
@@ -146,7 +146,9 @@ exports.registerUser = async (req, res, next) => {
         const passwordHashed = await hashPassword(req.body.password);
         await prisma.user.create({
             data: {
-                email: req.body.email,
+                name,
+                lastnames,
+                email,
                 password: passwordHashed,
                 user_status_id: 1,
                 user_role_id: 3,
@@ -293,25 +295,6 @@ exports.updateUserRole = async (req, res, next) => {
     }
 };
 
-//Update some user field with id_user & newfield (FOR TESTING PURPOSE)
-exports.updateUser = async (req, res, next) => {
-    const {user_id, user_role_id, user_status_id} = req.body;
-    if (!user_id) {
-        return next({
-            code: "error",
-            message: "user_id not identified",
-            statusCode: 400,
-        });
-    }
-
-    if (!user_role_id && !user_status_id) {
-        return next({
-            code: "error",
-            message: "undefined values",
-            statusCode: 400,
-        });
-    }
-};
 
 //Update some user field with id
 exports.updateUser = async (req, res, next) => {
@@ -375,7 +358,7 @@ exports.deleteUser = async (req, res, next) => {
 
     }
     try {
-        const userModel = await prisma.mec_user.findOne({
+        const userModel = await prisma.user.findOne({
             raw: true,
             nest: true,
             attributes: {
@@ -415,7 +398,7 @@ exports.deleteUser = async (req, res, next) => {
 exports.forgetPassword = async (req, res, next) => {
     const {email} = req.body;
     try {
-        const user = await prisma.mec_user.findOne({where: {mec_un: email}});
+        const user = await prisma.user.findOne({where: {email}});
         if (user) {
             const token = JWT.sign(
                 {
@@ -458,6 +441,7 @@ exports.forgetPassword = async (req, res, next) => {
 };
 
 exports.receiveEmailGetToken = async (req, res, next) => {
+    console.log(req.body)
     try {
         const user = req.body.email;
 
@@ -468,89 +452,86 @@ exports.receiveEmailGetToken = async (req, res, next) => {
         });
 
         if (passUser) {
-            const accessToken = signToken(passUser, "1h");
+            const accessToken = signToken(passUser.id, "1h");
 
             return res.status(200).json(
                 apiResponse({
                     message: "Access token granted.",
-                    data: accessToken,
+                    data: `${process.env.REACT_APP_URL}/change-password/${accessToken}`,
                 })
             );
         } else {
-
-            return next({
-                code: "error",
-                message: "User not found.",
-                statusCode: 404,
-            });
-        }
-    } catch (err) {
-
-        return next(new Error(err));
-    }
-};
-
-exports.recoverPassword = async (req, res, next) => {
-    try {
-        const token = req.params.token;
-
-        if (!token) {
-
-            return next({
-                code: "error",
-                message: "Your token is empty",
-                statusCode: 401,
-            });
-        }
-
-        JWT.verify(token, process.env.JWT_SECRET, (err) => {
-            if (err) {
-
-                return next({
-                    code: "error",
-                    message: "Your token has expired!",
-                    statusCode: 401,
-                });
-            }
-
-            res.status(200).json(
+            return res.status(200).json(
                 apiResponse({
-                    message: "Authorization granted to change your password.",
+                    code: "error",
+                    message: "Email not found",
                 })
             );
-        });
+        }
     } catch (err) {
 
         return next(new Error(err));
     }
 };
+
 
 exports.changePassword = async (req, res, next) => {
     try {
-        const {password, email} = req.body;
+        const {password1, password2} = req.body;
+        const token = req.params.token
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 
-        // Create hook for update password?
-        const hashedPassword = await argon2.hash(password, {
-            type: argon2.argon2id,
-            memoryCost: 15360,
-            timeCost: 2,
-            parallelism: 1,
-        });
 
-        await prisma.user.update({
-            where: {
-                email: email,
-            },
-            data: {
-                password: hashedPassword,
-            },
-        });
+        if (password1 != password2) {
+            return res.status(200).json(
+                apiResponse({
+                    code: "error",
+                    message: "The password does not match"
+                })
+            )
+        }
 
-        res.status(200).json(
-            apiResponse({
-                message: "You password has been successfully changed.",
-            })
-        );
+        if (!regex.test(password1)) {
+            return next({
+                code: "error",
+                header: "Invalid password",
+                message: "This password does not meet the requirements.",
+                statusCode: 400,
+            });
+        }
+
+
+        JWT.verify(token, process.env.JWT_SECRET, async (err) => {
+            if (err) {
+                return res.status(200).json({
+                    code: "error",
+                    message: "Something is wrong with the token"
+                });
+            }
+            const decodedToken = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString())
+            const encodedUserId = decodedToken.sub.user_id
+            let decodedId = decodeHash(encodedUserId)
+
+            const hashedPassword = await hashPassword(password1);
+
+            await prisma.user.update({
+                where: {
+                    id: decodedId[0],
+                },
+                data: {
+                    password: hashedPassword,
+                },
+            });
+
+            return res.status(200).json(
+                apiResponse({
+                    message: "Your password has been successfully changed."
+                })
+            );
+
+        })
+
+
     } catch (err) {
 
         return next(new Error(err));

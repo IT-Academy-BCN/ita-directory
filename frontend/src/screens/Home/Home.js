@@ -17,9 +17,10 @@ const pages = [
 	{title: "My Bills", route: "/my-bills"},
 	{title: "New Ad", route: "/new-ad"},
 	{title: "Profile", route: "/profile"},
-	{title: "Recover Password", route: "/recover-password/:hash"},
+	{title: "Recover Password", route: "/recover-password"},
 	{title: "Register", route: "/register"},
 	{title: "User's Ads", route: "/user-ads"},
+	{title: "Change Password", route: "/change-password/:token"},
 ];
 
 const Home = () => {

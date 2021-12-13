@@ -47,6 +47,7 @@ const AdList = () => {
 		fetchAds();
 	}, []);
 
+	//console.log(AdList);
 	useEffect(() => {
 		let _filteredAds = [];
 		_filteredAds =

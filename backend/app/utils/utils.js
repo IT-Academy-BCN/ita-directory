@@ -34,6 +34,7 @@ const adsSchema = Joi.object({
 	n_bathrooms: Joi.number().required(),
 	map_lat: Joi.number().required(),
 	map_lon: Joi.number().required(),
+	ad_type_id: Joi.number().required()
 });
 
 const signToken = (userid, maxAge = "15m") => {
@@ -65,6 +66,15 @@ const hashPassword = async (password) => {
 	});
 };
 
+const decodeHash = (id) => {
+	return hashids.decode(id)
+}
+
+
+const getRegionByLocationSchema = Joi.string().required()
+
+const getAdsByTypeSchema = Joi.string().required()
+
 module.exports = {
 	// generateBlob,
 	apiResponse,
@@ -73,5 +83,8 @@ module.exports = {
 	AdByIdParamSchema,
 	signToken,
 	signRefreshToken,
-	hashPassword
+	hashPassword,
+	decodeHash,
+	getRegionByLocationSchema,
+	getAdsByTypeSchema
 };
