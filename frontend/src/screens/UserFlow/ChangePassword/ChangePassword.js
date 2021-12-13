@@ -35,15 +35,15 @@ const ChangePassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/change-password/${token}`,
 				passwords
 			);
+			setMessage(response.data.message);
+			setIsSuccess(true);
 			if (response.data.code === "error") {
 				setIsSuccess(false);
 				throw response.data.message;
-			} else {
-				setMessage(response.data.message);
-				setIsSuccess(true);
-				setTimeout(() => {
-					history.push("/login");
-				}, 2000);
+			}
+			if (response.data.statusCode === 200) {
+				history.push("/login");
+
 			}
 		} catch (error) {
 			if (error.name === "Error")
@@ -91,6 +91,7 @@ const ChangePassword = () => {
 								setPasswords({...passwords, password1: e.target.value})
 							}
 							id="passName"
+							name="passName"
 							disabled={disabled}
 							className="w-full"
 							valid={setValidPassword}
@@ -99,6 +100,8 @@ const ChangePassword = () => {
 						/>
 						<InputValidated
 							type="password"
+							name="recoverPassword"
+
 							placeholder="Repite la contraseña"
 							value={passwords.password2}
 							onChange={(e) =>
