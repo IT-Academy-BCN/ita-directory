@@ -1,6 +1,0 @@
-FROM node:14
-WORKDIR /usr/src/admin
-COPY package.json ./
-RUN yarn install --production=false
-COPY . .
-CMD ["yarn", "start"]
