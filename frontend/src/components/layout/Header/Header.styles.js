@@ -39,7 +39,7 @@ export const HeaderStyled = styled.header`
 				background-color: white;
 				box-shadow: 0 2px 4px ${Colors.darkerShadow};
 				border-radius: 4px;
-				padding: 0.5rem;
+				padding: 0.5rem 1.5rem;
 				position: relative;
 
 				img {
