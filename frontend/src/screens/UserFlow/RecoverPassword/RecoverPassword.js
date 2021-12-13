@@ -46,7 +46,6 @@ const RecoverPassword = () => {
 			);
 			setMessage(response.data.message);
 			setIsSuccess(true);
-
 			if (response.data.code === "error") {
 				setIsSuccess(false);
 				throw response.data.message;

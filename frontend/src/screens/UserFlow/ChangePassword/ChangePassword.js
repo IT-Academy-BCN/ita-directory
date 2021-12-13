@@ -43,6 +43,7 @@ const ChangePassword = () => {
 			}
 			if (response.data.statusCode === 200) {
 				history.push("/login");
+
 			}
 		} catch (error) {
 			if (error.name === "Error")
@@ -100,6 +101,7 @@ const ChangePassword = () => {
 						<InputValidated
 							type="password"
 							name="recoverPassword"
+
 							placeholder="Repite la contraseña"
 							value={passwords.password2}
 							onChange={(e) =>

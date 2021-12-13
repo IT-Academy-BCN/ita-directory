@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
 
 export const HomeContainer = styled(Container)`
-	height: 60vh;
+	height: 70vh;
 
 	ul {
 		text-align: center;
