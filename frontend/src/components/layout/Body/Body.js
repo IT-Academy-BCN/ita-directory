@@ -27,6 +27,7 @@ const Body = ({
 					fontColor={fontColor}
 					isLoggedIn={isLoggedIn}
 					justifyTitle={justifyTitle}
+					isTitleVisible={true}
 				/>
 			)}
 

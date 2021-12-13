@@ -6,7 +6,8 @@ import {HeaderStyled, StyledSubHeader} from "./Header.styles";
 import {Container} from "theme/GlobalStyles";
 
 const profilePicture =
-	"https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
+	// "https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
+	"https://randomuser.me/api/portraits/men/21.jpg";
 
 const Header = ({
 	isLoggedIn,
