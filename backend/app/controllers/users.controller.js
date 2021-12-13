@@ -119,7 +119,7 @@ exports.getUser = async (req, res, next) => {
 //User signup
 exports.registerUser = async (req, res, next) => {
 	const {name, lastnames, email, password} = req.body;
-	const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+	const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 	try {
 		if (!regex.test(password)) {
 			return next({
@@ -442,6 +442,7 @@ exports.forgetPassword = async (req, res, next) => {
 };
 
 exports.receiveEmailGetToken = async (req, res, next) => {
+	console.log(req.body)
 	try {
 		const user = req.body.email;
 
@@ -457,16 +458,16 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 			return res.status(200).json(
 				apiResponse({
 					message: "Access token granted.",
-					data: accessToken,
+					data: `${process.env.REACT_APP_URL}/change-password/${accessToken}`,
 				})
 			);
 		} else {
-
-			return next({
-				code: "error",
-				message: "User not found.",
-				statusCode: 404,
-			});
+			return res.status(200).json(
+				apiResponse({
+					code: "error",
+					message: "Email not found",
+				})
+			);
 		}
 	} catch (err) {
 
@@ -479,12 +480,13 @@ exports.changePassword = async (req, res, next) => {
 	try {
 		const {password1, password2} = req.body;
 		const token = req.params.token
-		const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+		const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 
 
 		if (password1 != password2) {
 			return res.status(200).json(
 				apiResponse({
+					code: "error",
 					message: "The password does not match"
 				})
 			)
@@ -500,36 +502,36 @@ exports.changePassword = async (req, res, next) => {
 		}
 
 
-		JWT.verify(token, process.env.JWT_SECRET, (err) => {
+		JWT.verify(token, process.env.JWT_SECRET, async (err) => {
 			if (err) {
-				return next({
+				return res.status(200).json({
 					code: "error",
-					message: "Your token has expired!",
-					statusCode: 401,
+					message: "Something is wrong with the token"
 				});
 			}
+			const decodedToken = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString())
+			const encodedUserId = decodedToken.sub.user_id
+			let decodedId = decodeHash(encodedUserId)
+
+			const hashedPassword = await hashPassword(password1);
+
+			await prisma.user.update({
+				where: {
+					id: decodedId[0],
+				},
+				data: {
+					password: hashedPassword,
+				},
+			});
+
+			return res.status(200).json(
+				apiResponse({
+					message: "Your password has been successfully changed."
+				})
+			);
+
 		})
 
-		const decodedToken = JSON.parse(Buffer.from(token.split(".")[1], 'base64').toString())
-		const encodedUserId = decodedToken.sub.user_id
-		let decodedId = decodeHash(encodedUserId)
-
-		const hashedPassword = await hashPassword(password1);
-
-		await prisma.user.update({
-			where: {
-				id: decodedId[0],
-			},
-			data: {
-				password: hashedPassword,
-			},
-		});
-
-		res.status(200).json(
-			apiResponse({
-				message: "You password has been successfully changed.",
-			})
-		);
 
 	} catch (err) {
 
