@@ -38,6 +38,9 @@ export const ProfileForm = styled.form`
 		padding-bottom: 2rem;
 	}
 
+	&.uploadphoto-modal {
+		align-items: center;
+	}
 	&.profile-photo {
 		flex-direction: column;
 		align-items: center;
@@ -61,6 +64,12 @@ export const ProfileForm = styled.form`
 				text-align: left;
 				font-size: 0.9em;
 			}
+		}
+
+		& .info-photo-uploaded {
+			padding-left: 1em;
+			color: ${Colors.darkRed};
+			font-style: italic;
 		}
 	}
 

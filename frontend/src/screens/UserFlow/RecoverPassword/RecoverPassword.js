@@ -1,4 +1,7 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import axios from "axios";
+import Notification from "components/units/Notifications/Notification";
+import {StyledParagraph} from "./RecoverPassword.styles";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -8,100 +11,95 @@ import AsyncButton from "components/units/Button/Button";
 import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Styles
-import {Container, Form, LabelStyled} from "../UserFlow.styles";
+import {Container, Form} from "../UserFlow.styles";
 
 // Utilities
 import {msgs} from "utils/userFlow";
 
-const users = [
-	{
-		email: "juan@mail.com",
-		password: "Juan1992",
-	},
-];
+const RecoverPassword = () => {
+    // const [error, setError] = useState("");
+    const [animatedState, setAnimatedState] = useState(false);
+    const [disabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(null);
+    const [email, setEmail] = useState("");
+    const [validEmail, setValidEmail] = useState(false);
+    const [message, setMessage] = useState("");
 
-const updateUser = (email, password) => {
-	const newUsers = [];
-	for (let i = 0; i < users.length; i++) {
-		const user = users[i];
-		if (user.email === email) {
-			newUsers.push(email, password);
-			localStorage.setItem("itacademy", "HE ENTRADO!!!!");
-			console.log("The user is correct. You will receive an email to change your password.");
-		} else {
-			console.error("the user is incorrect. Please try again.");
-		}
-	}
-};
+    const closeNotification = () => setMessage(null);
 
-const RecoverPassword = ({retrieveUser}) => {
-	// const [error, setError] = useState("");
-	const [animatedState, setAnimatedState] = useState(false);
-	const [disabled, setIsDisabled] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-	const [email, setEmail] = useState("");
-	const [validEmail, setValidEmail] = useState(false);
-	const [password, setPassword] = useState("");
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setAnimatedState(true);
+        setIsDisabled(true);
+        setIsLoading(true);
+        setTimeout(() => {
+            setAnimatedState(false);
+            setIsDisabled(false);
+            setIsLoading(false);
+        }, 2000);
 
-	// provisional
-	useEffect(() => {
-		setPassword("");
-	}, []);
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		setAnimatedState(true);
-		setIsDisabled(true);
-		setIsLoading(true);
-		setTimeout(() => {
-			setAnimatedState(false);
-			setIsDisabled(false);
-			setIsLoading(false);
-		}, 2000);
-
-		try {
-			updateUser(email, password, (error, token) => {
-				// if (error) return setError(error.message);
-				retrieveUser(token);
-			});
-		} catch ({message}) {
-			// setError(message);
-			console.error(message);
-		}
-	};
-
-	return (
-		<Body title="Cambiar contraseña" justifyTitle="center">
-			<Container>
-				<Form onSubmit={handleSubmit}>
-					<LabelStyled>
-						<strong>¿Has olvidado tu contraseña?</strong> Para recuperarla introduce tu
-						email y te enviaremos una nueva por correo.
-					</LabelStyled>
-					<InputValidated
-						type="email"
-						placeholder={msgs.placeholderEmail}
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						id="emailName"
-						name="emailName"
-						disabled={disabled}
-						valid={setValidEmail}
-					/>
-					<AsyncButton
-						text="Enviar"
-						loadingText="Enviando"
-						iconPosition="left"
-						type="submit"
-						className="w-full orange-gradient mt-6"
-						isLoading={isLoading}
-						animated={animatedState}
-						disabled={!validEmail}
-					/>
-				</Form>
-			</Container>
-		</Body>
-	);
+        try {
+            const response = await axios.post(
+                `${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
+                {email}
+            );
+            setMessage(response.data.message);
+            setIsSuccess(true);
+            if (response.data.code === "error") {
+                setIsSuccess(false);
+                throw response.data.message;
+            }
+        } catch (error) {
+            if (error.name === "Error") {
+                setIsSuccess(false);
+                setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+            }
+        }
+    };
+    return (
+        <>
+            {message ? (
+                <Notification
+                    message={message}
+                    closeNotification={closeNotification}
+                    autoClose={true}
+                    isSuccess={isSuccess}
+                />
+            ) : null}
+            <Body title="Cambiar contraseña" justifyTitle="center">
+                <Container>
+                    <Form onSubmit={handleSubmit}>
+                        <StyledParagraph>
+                            Si has olvidado la contraseña introduce tu email y te enviaremos un
+                            enlace para cambiarla.
+                        </StyledParagraph>
+                        <InputValidated
+                            type="email"
+                            name="email"
+                            placeholder={msgs.placeholderEmail}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            id="emailName"
+                            disabled={disabled}
+                            valid={setValidEmail}
+                            isRegexWanted={true}
+                        />
+                        <AsyncButton
+                            text="Enviar"
+                            loadingText="Enviando"
+                            iconPosition="left"
+                            type="submit"
+                            className="w-full blue-gradient mt-6"
+                            isLoading={isLoading}
+                            animated={animatedState}
+                            disabled={!validEmail}
+                        />
+                    </Form>
+                </Container>
+            </Body>
+        </>
+    );
 };
 
 export default RecoverPassword;

@@ -19,7 +19,7 @@
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^2.25.0",
+    "@prisma/client": "3.6.0",
     "argon2": "^0.28.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -30,17 +30,11 @@
     "jest": "^27.3.1",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mariadb": "^2.5.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "mysql2": "^2.2.5",
     "pg": "^8.6.0",
     "redis": "^3.1.2",
-    "sequelize": "^6.3.5",
-    "sequelize-auto": "^0.8.3",
-    "slugify": "^1.6.1",
-    "socket.io": "^4.1.2",
-    "supertest": "^6.1.6"
+    "socket.io": "^4.1.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
@@ -49,7 +43,6 @@
     "eslint-config-prettier": "^8.3.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
-    "prisma": "^2.25.0",
-    "sequelize-auto": "^0.8.3"
+    "prisma": "3.6.0"
   }
 }

@@ -17,10 +17,16 @@ Clone this repository:
 $ git clone https://github.com/it-academyproject/ita-directory.git
 ```
 
+Checkout to the develop branch:
+
+```
+$ git checkout develop
+```
+
 Install packages.
 
 ```
-make install
+yarn install
 ```
 
 Run the front-end app in the development mode. Open http://localhost:3000/ to view it in the browser.

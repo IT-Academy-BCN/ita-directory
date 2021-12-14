@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Switch} from "react-router-dom";
-import ProtectedRoute from "components/composed/ProtectedRoute";
+// import ProtectedRoute from "components/composed/ProtectedRoute";
 
 import Home from "screens/Home/Home";
 import Ad from "screens/Ad/Ad";
@@ -15,6 +15,9 @@ import Dashboard from "screens/Dashboard/Dashboard";
 import MyBills from "screens/MyBills/MyBills";
 import Bill from "screens/MyBills/Bill";
 import UserAds from "screens/UserAds/UserAds";
+import ProtectedRoute from "components/composed/ProtectedRoute";
+import Search from "screens/Search/Search";
+import ChangePassword from "screens/UserFlow/ChangePassword/ChangePassword";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
@@ -28,12 +31,12 @@ const App = () => {
 		<>
 			<Switch>
 				<ProtectedRoute exact path="/" component={Home} />
-				<Route exact path="/ad" component={Ad} />
+				<Route exact path="/ad/:id" component={Ad} />
 				<Route exact path="/new-ad" component={CreateNewAd} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
 				<Route exact path="/profile" component={Profile} />
-				<Route exact path="/recover-password/:hash" component={RecoverPassword} />
+				<Route exact path="/recover-password" component={RecoverPassword} />
 				<Route exact path="/ads" component={AdList} />
 				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
 				<Route exact path="/dashboard" component={Dashboard} />
@@ -41,6 +44,8 @@ const App = () => {
 				<Route exact path="/my-bills" component={MyBills} />
 				<Route path="/my-bills/:id" children={<Bill />} />
 				<Route path="mi-ruta" children={noExiste} />
+				<Route path="/search" component={Search} />
+				<Route path="/change-password/:token" component={ChangePassword} />
 
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />

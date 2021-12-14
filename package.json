@@ -1,19 +1,19 @@
 {
   "name": "ita-directory",
   "private": true,
-  "proxy": "http://localhost:5001",
-  "workspaces": [
-    "frontend",
-    "backend",
-    "documents"
-  ],
   "version": "1.0.0",
-  "description": "## Develop",
+  "description": "ITA Directory",
   "scripts": {
-    "backend": "yarn workspace graphile dev",
-    "frontend": "yarn workspace frontend start",
-    "docs": "yarn workspace documents start",
-    "lint-frontend": "yarn workspace frontend run lint-staged",
+    "frontend": "cd ./frontend && npm start",
+    "backend": "cd ./backend && npm run dev",
+    "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
+    "start-redis": "cd ./scripts && source ./docker-utils.sh; launchRedis",
+    "start-server": "cd ./scripts && bash up.sh",
+    "prisma-migrate": "cd ./backend && npx prisma migrate dev",
+    "prisma-seed": "node ./backend/prisma/seed.js",
+    "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
+    "up": "npm run start-server && npm run start-prismac",
+    "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install"
   },
   "repository": {
@@ -24,9 +24,10 @@
     "react",
     "node.js",
     "prisma",
-    "directory"
+    "directory",
+    "docosaurus"
   ],
-  "author": "",
+  "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/it-academyproject/ita-directory-frontend/issues"

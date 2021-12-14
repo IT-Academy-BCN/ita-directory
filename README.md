@@ -64,6 +64,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#swagger-docs">Swagger Docs</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -98,6 +99,32 @@ Here's a blank template to get started:
 
 To get a local copy up and running follow these simple steps.
 
+1. Clone the repository
+
+`git clone https://github.com/it-academyproject/ita-directory.git`
+
+2. Checkout to the develop **branch**, we don't work from **main**.
+
+`git checkout develop`
+
+3. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
+
+4. Make sure that you have docker installed and running, and from the main folder launch up
+
+`npm run up`
+
+The up command will:
+
+- Start PostgreSQL
+- Start Redis
+- Generate PRISMA migrations
+- Seed the Postgres database
+
+5. Once all of it is up and running launch the backend, to enable the API and the frontend if necessary
+
+`npm run backend`
+`npm run frontend`
+
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
@@ -117,6 +144,16 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
+
+### Swagger Docs
+
+Once you have started the server, then you can open your browser and enter this endpoint `/api-docs/` to the server URL to open the swagger documentation.
+
+-example
+
+```sh
+http://localhost:5000/api-docs/
+```
 
 <!-- USAGE EXAMPLES -->
 

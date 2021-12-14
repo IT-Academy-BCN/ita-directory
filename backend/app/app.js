@@ -4,12 +4,14 @@ const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
 const expressJSDocSwagger = require("express-jsdoc-swagger");
+const path = require("path");
 const options = require("./utils/swaggerOptions");
-const userRoutes = require("./routes/users");
-const mediaRoutes = require("./routes/media");
+const userRoutes = require("./routes/users.routes");
+const mediaRoutes = require("./routes/media.routes");
+const locationRoutes = require("./routes/location.routes")
 
-// const constantsRoute = require("./routes/constants");
-const adsRoutes = require("./routes/ads");
+// const constantsRoute = require("./routes/constants.routes");
+const adsRoutes = require("./routes/ads.routes");
 const authenticateToken = require("./middleware/verifyToken");
 
 // const UsersController = require("./controllers/users");
@@ -31,7 +33,7 @@ app.use(
 );
 
 //Settings for testing SocketIO
-app.use(express.static("public"));
+app.use('/static', express.static(path.join(__dirname, "public")));
 //app.set('view engine', 'ejs');
 
 // Middlewares
@@ -56,6 +58,7 @@ app.get("/", (req, res) => {
 app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 app.use("/media", mediaRoutes);
+app.use("/location", locationRoutes)
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {

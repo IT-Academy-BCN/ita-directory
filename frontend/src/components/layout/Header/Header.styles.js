@@ -39,7 +39,7 @@ export const HeaderStyled = styled.header`
 				background-color: white;
 				box-shadow: 0 2px 4px ${Colors.darkerShadow};
 				border-radius: 4px;
-				padding: 0.5rem;
+				padding: 0.5rem 1.5rem;
 				position: relative;
 
 				img {
@@ -112,14 +112,14 @@ export const HeaderStyled = styled.header`
 `;
 
 export const StyledSubHeader = styled.div`
-	width: 100%;
+	width: 100vw;
 	background-color: ${(props) =>
 		props.headerColor ? props.headerColor : `${Colors.transparentBlue}`};
 	border: ${(props) => (props.headerColor ? `` : `1px solid ${Colors.palerBlue}`)};
 	border-left: none;
 	border-right: none;
 	margin-bottom: 2rem;
-	padding: 20px 0 20px 0;
+	padding: 10px;
 
 	h1 {
 		width: 100%;

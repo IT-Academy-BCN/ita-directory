@@ -1,6 +1,10 @@
 const argon2 = require("argon2");
 const {PrismaClient} = require("@prisma/client");
 const prisma = new PrismaClient();
+const ads = require('./seedFiles/ads')
+const ad_types = require('./seedFiles/ad_types')
+const levels = require('./seedFiles/levels')
+const level_types = require('./seedFiles/level_types')
 
 const user_roles = [
 	{
@@ -54,150 +58,167 @@ const users = [
 		password: "Test-test",
 		refresh_token: "20",
 	},
-];
-
-const ads = [
-	{
-		id: 1,
-
-		user_id: 1,
-		title: "ad1",
-		description: "ad house 1",
-		city: "Barcelona",
-		n_rooms: 2,
-		price: 900,
-		square_meters: 80,
-		n_bathrooms: 1,
-		map_lat: 41.385063,
-		map_lon: 2.173404,
-	},
 	{
 		id: 2,
-
-		user_id: 1,
-		title: "ad2",
-		description: "ad house 2",
-		city: "Berlin",
-		n_rooms: 3,
-		price: 1200,
-		square_meters: 90,
-		n_bathrooms: 2,
-		map_lat: 52.520008,
-		map_lon: 13.404954,
+		name: "test2",
+		lastnames: "test test",
+		email: "test2@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test2",
+		refresh_token: "20",
 	},
 	{
 		id: 3,
-
-		user_id: 1,
-		title: "ad3",
-		description: "ad house 3",
-		city: "Glasgow",
-		n_rooms: 2,
-		price: 700,
-		square_meters: 75,
-		n_bathrooms: 1,
-		map_lat: 55.864239,
-		map_lon: -4.251806,
+		name: "test3",
+		lastnames: "test test",
+		email: "test3@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test3",
+		refresh_token: "20",
 	},
 	{
 		id: 4,
-
-		user_id: 1,
-		title: "ad4",
-		description: "ad house 4",
-		city: "Rotterdam",
-		n_rooms: 3,
-		price: 1000,
-		square_meters: 90,
-		n_bathrooms: 2,
-		map_lat: 51.924419,
-		map_lon: 4.477733,
+		name: "test4",
+		lastnames: "test test",
+		email: "test4@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test4",
+		refresh_token: "20",
 	},
 	{
 		id: 5,
-
-		user_id: 1,
-		title: "ad5",
-		description: "ad house 5",
-		city: "Mallorca",
-		n_rooms: 2,
-		price: 700,
-		square_meters: 70,
-		n_bathrooms: 1,
-		map_lat: 39.695263,
-		map_lon: 3.017571,
-	},
-	{
-		id: 6,
-
-		user_id: 1,
-		title: "ad6",
-		description: "ad house 6",
-		city: "Lyon",
-		n_rooms: 4,
-		price: 900,
-		square_meters: 85,
-		n_bathrooms: 2,
-		map_lat: 45.75667,
-		map_lon: 4.831811,
-	},
-	{
-		id: 7,
-
-		user_id: 1,
-		title: "ad7",
-		description: "ad house 7",
-		city: "Braga",
-		n_rooms: 2,
-		price: 800,
-		square_meters: 70,
-		n_bathrooms: 1,
-		map_lat: 41.55013,
-		map_lon: -8.427734,
-	},
-	{
-		id: 8,
-
-		user_id: 1,
-		title: "ad8",
-		description: "ad house 8",
-		city: "Napoli",
-		n_rooms: 3,
-		price: 900,
-		square_meters: 65,
-		n_bathrooms: 1,
-		map_lat: 40.83607,
-		map_lon: 14.249339,
-	},
-	{
-		id: 9,
-
-		user_id: 1,
-		title: "ad9",
-		description: "ad house 9",
-		city: "Paris",
-		n_rooms: 2,
-		price: 1200,
-		square_meters: 80,
-		n_bathrooms: 2,
-		map_lat: 48.834668,
-		map_lon: 2.350532,
-	},
-	{
-		id: 10,
-
-		user_id: 1,
-		title: "ad10",
-		description: "ad house 10",
-		city: "London",
-		n_rooms: 2,
-		price: 1000,
-		square_meters: 75,
-		n_bathrooms: 1,
-		map_lat: 51.499927,
-		map_lon: -0.118429,
+		name: "test5",
+		lastnames: "test test",
+		email: "test5@test.test",
+		user_status_id: 1,
+		user_role_id: 3,
+		password: "test5",
+		refresh_token: "20",
 	},
 ];
+
+
+const medias = [
+	{
+		id: 1,
+		path: "/public/2021/10/image1.jpg",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 1,
+	},
+	{
+		id: 2,
+		path: "/public/2021/10/image2.jpg",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 2,
+	},
+	{
+		id: 3,
+		path: "/public/2021/10/image3.png",
+		mime_type: "png",
+		file_size: "200",
+		user_id: 3,
+	},
+	{
+		id: 4,
+		path: "/public/2021/10/image4.png",
+		mime_type: "png",
+		file_size: "200",
+		user_id: 4,
+	},
+	{
+		id: 5,
+		path: "/public/2021/10/image5.jpg",
+		mime_type: "jpeg",
+		file_size: "200",
+		user_id: 5,
+	},
+];
+
+const medias_types = [
+	{
+		id: 1,
+		name: "thumnail",
+		thumnail: true,
+		medium: false,
+		large: false,
+		original: false,
+	},
+	{
+		id: 2,
+		name: "medium",
+		thumnail: false,
+		medium: true,
+		large: false,
+		original: false,
+	},
+	{
+		id: 3,
+		name: "large",
+		thumnail: false,
+		medium: false,
+		large: true,
+		original: false,
+	},
+	{
+		id: 4,
+		name: "original",
+		thumnail: false,
+		medium: false,
+		large: false,
+		original: true,
+	},
+];
+
+const medias_metas = [
+	{
+		id: 1,
+		path: "/public/2021/10/image1.jpg",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 1,
+		media_type_id: 1,
+	},
+	{
+		id: 2,
+		path: "/public/2021/10/image2.jpg",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 2,
+		media_type_id: 2,
+	},
+	{
+		id: 3,
+		path: "/public/2021/10/image3.png",
+		mime_type: "png",
+		file_size: "200",
+		media_id: 3,
+		media_type_id: 3,
+	},
+	{
+		id: 4,
+		path: "/public/2021/10/image4.png",
+		mime_type: "png",
+		file_size: "200",
+		media_id: 4,
+		media_type_id: 4,
+	},
+	{
+		id: 5,
+		path: "/public/2021/10/image5.jpg",
+		mime_type: "jpeg",
+		file_size: "200",
+		media_id: 5,
+		media_type_id: 4,
+	},
+];
+
+
+
 
 async function main() {
 	for (let i = 0; i < user_roles.length; i++) {
@@ -234,6 +255,16 @@ async function main() {
 			},
 		});
 	}
+	for (let i = 0; i < ad_types.length; i++) {
+		const ad_type = ad_types[i];
+		await prisma.ad_type.upsert({
+			where: {id: ad_type.id},
+			update: {},
+			create: {
+				...ad_type,
+			},
+		});
+	}
 	for (let i = 0; i < ads.length; i++) {
 		const ad = ads[i];
 		await prisma.ads.upsert({
@@ -241,6 +272,56 @@ async function main() {
 			update: {},
 			create: {
 				...ad,
+			},
+		});
+	}
+	for (let i = 0; i < medias.length; i++) {
+		const media = medias[i];
+		await prisma.media.upsert({
+			where: {id: media.id},
+			update: {},
+			create: {
+				...media,
+			},
+		});
+	}
+	for (let i = 0; i < medias_types.length; i++) {
+		const media_type = medias_types[i];
+		await prisma.media_type.upsert({
+			where: {id: media_type.id},
+			update: {},
+			create: {
+				...media_type,
+			},
+		});
+	}
+	for (let i = 0; i < medias_metas.length; i++) {
+		const media_meta = medias_metas[i];
+		await prisma.media_meta.upsert({
+			where: {id: media_meta.id},
+			update: {},
+			create: {
+				...media_meta,
+			},
+		});
+	}
+	for (let i = 0; i < level_types.length; i++) {
+		const level_type = level_types[i];
+		await prisma.level_type.upsert({
+			where: {id: level_type.id},
+			update: {},
+			create: {
+				...level_type,
+			},
+		});
+	}
+	for (let i = 0; i < levels.length; i++) {
+		const level = levels[i];
+		await prisma.level.upsert({
+			where: {id: level.id},
+			update: {},
+			create: {
+				...level,
 			},
 		});
 	}
