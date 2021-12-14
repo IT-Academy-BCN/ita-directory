@@ -1,5 +1,6 @@
 const path = require("path");
-require("dotenv").config({path: path.join(__dirname, "/./../.env")});
+let envFile = process.env.NODE === 'development' ? '.env.development' : '.env'
+require("dotenv").config({path: path.join(__dirname, `/./../${envFile}`)});
 const app = require("./app/app.js");
 const socketio = require("socket.io");
 const http = require("http");

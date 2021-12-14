@@ -8,12 +8,12 @@
     "backend": "cd ./backend && npm run dev",
     "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
     "start-redis": "cd ./scripts && source ./docker-utils.sh; launchRedis",
-    "start-server": "npm run start-db && npm run start-redis",
+    "start-server": "cd ./scripts && bash up.sh",
     "prisma-migrate": "cd ./backend && npx prisma migrate dev",
     "prisma-seed": "node ./backend/prisma/seed.js",
     "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
-    "up": "npm run start-server && npm run start-prisma",
-    "down": "cd ./scripts && source ./docker-utils.sh; stopContainers",
+    "up": "npm run start-server && npm run start-prismac",
+    "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install"
   },
   "repository": {
