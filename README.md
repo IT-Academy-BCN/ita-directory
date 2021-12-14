@@ -109,7 +109,13 @@ To get a local copy up and running follow these simple steps.
 
 3. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
 
-4. Make sure that you have docker installed and running, and from the main folder launch up
+4. Install dependencies with:
+
+`npm run install-deps`
+
+_It installs the dependencies of the front, the back and the main directory_
+
+5. Make sure that you have docker installed and running, and from the main folder launch up
 
 `npm run up`
 
@@ -120,7 +126,7 @@ The up command will:
 - Generate PRISMA migrations
 - Seed the Postgres database
 
-5. Once all of it is up and running launch the backend, to enable the API and the frontend if necessary
+6. Once all of it is up and running launch the backend, to enable the API and the frontend if necessary
 
 `npm run backend`
 `npm run frontend`
