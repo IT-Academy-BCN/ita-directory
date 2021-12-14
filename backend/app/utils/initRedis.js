@@ -2,8 +2,8 @@ const redis = require("redis");
 const util = require("util");
 
 const client = redis.createClient({
-    host: process.env.REDIS_HOST,
-    password: process.env.REDIS_PASSWORD,
+	host: process.env.REDIS_PORT,
+	password: process.env.REDIS_PASSWORD,
 });
 
 const set = util.promisify(client.set).bind(client);
