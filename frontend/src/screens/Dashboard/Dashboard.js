@@ -10,6 +10,8 @@ import PieChart from "components/composed/Charts/PieChart/PieChart";
 // STYLES
 import {StyledDashboard, DashboardContainer} from "./Dashboard.style";
 import Body from "components/layout/Body/Body";
+import D3LineChart from "components/composed/Charts/D3LineChart/D3LineChart";
+import D3BarChart from "components/composed/Charts/D3BarChart/D3BarChart";
 
 const initialDate = "2012-01-01";
 const days = daysBetween(initialDate, "2016-12-31");
@@ -48,6 +50,18 @@ function Dashboard() {
 							onMonthChange={(month) => setGlobalMonth(month)}
 						/>
 					</div>
+
+					<div className="marginTop">
+						<D3LineChart
+							data={data}
+							active={active}
+							hideModal={hideModal}
+							size={graphSize}
+							month={globalMonth}
+							year={globalYear}
+						/>
+					</div>
+
 					<div className="marginTop">
 						<BarChart
 							data={data}
