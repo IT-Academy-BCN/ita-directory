@@ -18,6 +18,8 @@ import UserAds from "screens/UserAds/UserAds";
 import ProtectedRoute from "components/composed/ProtectedRoute";
 import Search from "screens/Search/Search";
 import ChangePassword from "screens/UserFlow/ChangePassword/ChangePassword";
+import NotFound from "screens/NotFound/NotFound";
+
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
@@ -46,7 +48,8 @@ const App = () => {
 				<Route path="mi-ruta" children={noExiste} />
 				<Route path="/search" component={Search} />
 				<Route path="/change-password/:token" component={ChangePassword} />
-
+				<Route component={NotFound} />
+				
 				{/* <Route exact path="/sales-line-chart" component={SalesLineChart} dashboard={false}/>
 				<Route exact path="/sales-by-month" component={SalesByMonth} />
 				<Route exact path="/sales-by-type" component={SalesByType} dashboard={false} /> */}

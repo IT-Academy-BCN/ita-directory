@@ -21,6 +21,7 @@ const pages = [
 	{title: "Register", route: "/register"},
 	{title: "User's Ads", route: "/user-ads"},
 	{title: "Change Password", route: "/change-password/:token"},
+	{title: "NotFound", route: "/"},
 ];
 
 const Home = () => {
