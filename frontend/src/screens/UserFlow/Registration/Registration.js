@@ -23,6 +23,10 @@ const Register = ({retrieveUser}) => {
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
+	const [name, setName] = useState("");
+	const [validName, setValidName] = useState(false);
+	const [lastName, setLastName] = useState("");
+	const [validLastname, setValidLastname] = useState("");
 	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
 	const [validPassword, setValidPassword] = useState(false);
@@ -32,6 +36,7 @@ const Register = ({retrieveUser}) => {
 	const closeNotification = () => setMessage(null);
 
 	const registerUser = async (user) => {
+		console.log(`user`, user);
 		try {
 			const response = await axios.post(
 				`${process.env.REACT_APP_API_URL}/users/v1/register`,
@@ -53,6 +58,8 @@ const Register = ({retrieveUser}) => {
 		setIsDisabled(true);
 		setIsLoading(true);
 		registerUser({
+			name,
+			lastnames: lastName,
 			email,
 			password,
 			privacy,
@@ -61,6 +68,10 @@ const Register = ({retrieveUser}) => {
 			setAnimated(false);
 			setIsDisabled(false);
 			setIsLoading(false);
+			setName("");
+			setLastName("");
+			setEmail("");
+			setPassword("");
 		}, 2000);
 	};
 
@@ -79,12 +90,34 @@ const Register = ({retrieveUser}) => {
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>
 						<InputValidated
+							type="text"
+							placeholder={"Nombre"}
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							id="name"
+							name="name"
+							disabled={disabled}
+							className="w-full"
+							valid={setValidName}
+						/>
+						<InputValidated
+							type="text"
+							placeholder={"Apellido"}
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+							id="lastname"
+							name="lastname"
+							disabled={disabled}
+							className="w-full"
+							valid={setValidLastname}
+						/>
+						<InputValidated
 							type="email"
 							placeholder={msgs.placeholderEmail}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							id="emailName"
-							name="emailName"
+							id={"emailName"}
+							name="email"
 							disabled={disabled}
 							className="w-full"
 							valid={setValidEmail}
@@ -94,10 +127,10 @@ const Register = ({retrieveUser}) => {
 							placeholder={msgs.placeholderPassword}
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							id="passName"
-							name="passName"
+							id="password"
+							name="password"
 							disabled={disabled}
-							minLength={6}
+							// minLength={6}
 							className="w-full mt-2"
 							valid={setValidPassword}
 						/>
@@ -125,7 +158,14 @@ const Register = ({retrieveUser}) => {
 							className="w-full my-8 orange-gradient"
 							isLoading={isLoading}
 							animated={animated}
-							disabled={!validEmail || !validPassword || !privacy}
+							disabled={
+								!validName ||
+								!validLastname ||
+								!validPassword ||
+								!validEmail ||
+								!validPassword ||
+								!privacy
+							}
 						/>
 						<RedirectStyled>
 							Tienes una cuenta? <Link to="/login">Inicia sesión</Link>

@@ -8,7 +8,7 @@ const path = require("path");
 const options = require("./utils/swaggerOptions");
 const userRoutes = require("./routes/users.routes");
 const mediaRoutes = require("./routes/media.routes");
-const locationRoutes = require("./routes/location.routes")
+const locationRoutes = require("./routes/location.routes");
 
 // const constantsRoute = require("./routes/constants.routes");
 const adsRoutes = require("./routes/ads.routes");
@@ -33,16 +33,13 @@ app.use(
 );
 
 //Settings for testing SocketIO
-app.use('/static', express.static(path.join(__dirname, "public")));
+app.use("/static", express.static(path.join(__dirname, "public")));
 //app.set('view engine', 'ejs');
 
 // Middlewares
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({limit: "50mb", type: "application/json"}));
-
-
-
 
 // API
 expressJSDocSwagger(app)(options);
@@ -58,7 +55,7 @@ app.get("/", (req, res) => {
 app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 app.use("/media", mediaRoutes);
-app.use("/location", locationRoutes)
+app.use("/location", locationRoutes);
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {

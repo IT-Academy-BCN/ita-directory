@@ -14,26 +14,18 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserModal from "components/composed/UserModal/UserModal.js";
 import DeleteModal from "components/composed/DeleteModal/DeleteModal.js";
 import EditProfile from "components/composed/EditProfileModal/EditProfile.js";
-//import axios from "axios";
+import patchUser from "../../api/utils/patchUser";
 
 // Styles
 import {StyledTableWrapper, StyledImage, StyledCell} from "./ListaUsuariosAdmins.style";
-//import {array} from "prop-types";
-
-const REQ_STATUS = {
-	INITIAL: "INITIAL",
-	LOADING: "LOADING",
-	SUCCESS: "SUCCESS",
-	FAILURE: "FAILURE",
-};
+// import {array} from "prop-types";
 
 const ListaUsuariosAdmins = () => {
-	const [active, setActive] = useState(false);
+	//if active show Modal Status
+	const [showModalStatus, setShowModalStatus] = useState(false);
 
 	const [dataUsers, setDataUsers] = useState([]);
 	const data = useMemo(() => [...dataUsers], [dataUsers]);
-
-	const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL);
 
 	//Delete user
 	const [eliminar, setEliminar] = useState(false);
@@ -42,78 +34,54 @@ const ListaUsuariosAdmins = () => {
 	// Current user
 	const [currentName, setCurrentName] = useState("");
 	const [editar, setEditar] = useState(false);
-	const [currentUserState, setCurrentUserState] = useState("pending");
+	const [currentUserStatus, setCurrentUserStatus] = useState("");
 
 	//Edit Profile
 	const [currentEmail, setCurrentEmail] = useState("");
 
 	useEffect(() => {
-		setFetchStatus(REQ_STATUS.LOADING);
-
-		const fetchData = () => {
-			fetch("mockUsers.json", {
+		const fetchData = async () => {
+			await fetch("http://localhost:10910/users", {
 				headers: {
 					"Content-Type": "application/json",
 					Accept: "application/json",
 				},
 			})
-				.then(function (response) {
-					console.log(response);
+				.then((response) => {
 					return response.json();
 				})
-				.then(function (myJson) {
-					setDataUsers(myJson);
-					console.log(myJson);
+				.then((dataUsers) => {
+					const newDataUsers = dataUsers.filter((user) => user.user_status_id !== 4);
+					setDataUsers(newDataUsers);
+					console.log(dataUsers);
 				});
 		};
 
-		/*axios
-            .get("http://localhost:5000/users")
-            .then((response) => {
-                setDataUsers(response.data);
-                setFetchStatus(REQ_STATUS.SUCCESS);
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-                setFetchStatus(REQ_STATUS.FAILURE);
-            });*/
 		fetchData();
 	}, []);
 
-	console.log(fetchStatus);
+	const handleModalDelete = useCallback((userRow) => {
+		setCurrentColum(userRow);
+		setEliminar((prev) => !prev);
+	}, []);
 
-	const handleModalStatus = useCallback(
-		(name, state) => {
-			setCurrentName((prev) => name);
-			setCurrentUserState((prev) => state);
-			setActive((prev) => true);
-		},
-		[]
-		//[currentName, currentUserState, active]
-	);
-
-	const handleModalDelete = useCallback(
-		(row) => {
-			setCurrentColum((prev) => row);
-			setEliminar((prev) => true);
-		},
-		[]
-		//[currentColum, eliminar]
-	);
-
-	const handleModalEdit = useCallback(
-		(name, email) => {
-			setCurrentName((prev) => name);
-			setCurrentEmail((prev) => email);
-			setEditar((prev) => true);
-		},
-		[]
-		// [currentName, currentEmail, editar]
-	);
+	const handleModalEdit = useCallback((name, email) => {
+		setCurrentName(name);
+		setCurrentEmail(email);
+		setEditar((prev) => !prev);
+	}, []);
 
 	const updateDelete = useCallback(
-		(user) => {
+		(userName) => {
+			dataUsers.forEach((user) => {
+				if (user.name === userName.name) {
+					patchUser({
+						...user,
+						user_status_id: 4,
+					});
+				}
+			});
+
 			const newUsers = dataUsers.filter((user) => {
 				if (user.email.localeCompare(currentColum.email) !== 0) {
 					return true;
@@ -121,36 +89,62 @@ const ListaUsuariosAdmins = () => {
 					return false;
 				}
 			});
-			setDataUsers((prev) => newUsers);
+			setDataUsers(newUsers);
 		},
 		[dataUsers, currentColum]
-		//[dataUsers, currentColum, eliminar]
 	);
 
 	const updateUserData = useCallback(
 		(newName, newEmail) => {
 			setDataUsers(
-				dataUsers.map((item) =>
-					item.nombre === currentName || item.email === currentEmail
-						? {...item, nombre: newName, email: newEmail}
-						: item
-				)
+				dataUsers.map((item) => {
+					if (item.name === currentName || item.email === currentEmail) {
+						console.log(`item`, item);
+						setCurrentUserStatus(item.user_status_id);
+						setCurrentName(item.name);
+						patchUser({
+							...item,
+							email: newEmail,
+							name: newName,
+						});
+					}
+					return item.name === currentName || item.email === currentEmail
+						? {...item, name: newName, email: newEmail}
+						: item;
+				})
 			);
 		},
 		[dataUsers, currentName, currentEmail]
-		//[dataUsers, currentName, currentEmail, eliminar, currentColum]
 	);
 
 	const updateUserStatus = useCallback(
-		(val, nombreUsuario) => {
+		(name, userStatus) => {
+			function evaluateStatus(status) {
+				if (status === "rejected") return 3;
+				if (status === "pending") return 2;
+				if (status === "aprobado") return 1;
+			}
 			setDataUsers(
-				dataUsers.map((t) => (t.nombre === nombreUsuario ? {...t, acciones: val} : t))
+				dataUsers.map((user) => {
+					if (user.name === name) {
+						patchUser({...user, user_status_id: evaluateStatus(userStatus)});
+						return {...user, user_status_id: evaluateStatus(userStatus)};
+					} else {
+						return user;
+					}
+				})
 			);
 		},
 		[dataUsers]
 	);
 
-	const customRowStyle = (row) => {
+	const handleModalStatus = useCallback((name, userStatus) => {
+		setShowModalStatus((prev) => !prev);
+		setCurrentUserStatus(userStatus);
+		setCurrentName(name);
+	}, []);
+
+	const customRowStyle = () => {
 		return {borderTop: `0.9px solid ${Colors.bahamaBlue}`};
 	};
 
@@ -163,12 +157,17 @@ const ListaUsuariosAdmins = () => {
 					</StyledCell>
 				),
 				accessor: "media",
-
 				Cell: ({row}) => (
 					<StyledCell>
 						{
 							<StyledImage
-								src={row.values.media}
+								src={
+									row.values.media[0] !== undefined
+										? row.values.media[0].path
+										: `https://randomuser.me/api/portraits/women/${Math.floor(
+												Math.random() * 100
+										  )}.jpg`
+								}
 								alt="foto"
 								width="50px"
 								height="50px"
@@ -200,39 +199,39 @@ const ListaUsuariosAdmins = () => {
 			},
 			{
 				Header: (
-					<StyledCell color={Colors.bahamaBlue} justify={"flex-end"}>
+					<StyledCell color={Colors.bahamaBlue} justify={"center"}>
 						Acciones
 					</StyledCell>
 				),
-				accessor: "acciones",
+				accessor: "user_status_id",
 				minWidth: "60px",
 				Cell: ({row}) => (
 					<div className="actions-column">
 						<button
 							onClick={() =>
-								handleModalStatus(row.values.nombre, row.values.acciones)
+								handleModalStatus(row.values.name, row.values.user_status_id)
 							}
 						>
 							<FontAwesomeIcon
 								icon={
-									row.values.acciones === "rejected"
+									row.values.user_status_id === 3
 										? faUserAltSlash
-										: row.values.acciones === "aprobado"
+										: row.values.user_status_id === 1
 										? faUserCheck
 										: faUserClock
 								}
 								color={
-									row.values.acciones === "rejected"
+									row.values.user_status_id === 3
 										? Colors.redColor
-										: row.values.acciones === "aprobado"
+										: row.values.user_status_id === 1
 										? Colors.darkGreen
 										: Colors.grey
 								}
-							></FontAwesomeIcon>
+							/>
 						</button>
 						<button
 							onClick={() =>
-								handleModalEdit(row.values.nombre, row.values.email, row.values.id)
+								handleModalEdit(row.values.name, row.values.email, row.values.id)
 							}
 						>
 							<FontAwesomeIcon icon={faEye} color={Colors.prussianBlue} />
@@ -265,16 +264,16 @@ const ListaUsuariosAdmins = () => {
 			</Container>
 			<UserModal
 				nombreUsuario={currentName}
-				currentUserState={currentUserState}
-				active={active}
-				hideModal={() => setActive(false)}
+				currentUserState={currentUserStatus}
+				active={showModalStatus}
+				hideModal={() => setShowModalStatus((prev) => !prev)}
 				updateUserStatus={updateUserStatus}
 			/>
 			<DeleteModal
 				columnSelect={currentColum}
-				currentUser={eliminar}
+				currentUserName={currentName}
 				active={eliminar}
-				hideModal={() => setEliminar((prev) => false)}
+				hideModal={() => setEliminar(false)}
 				updateDelete={updateDelete}
 			/>
 			<EditProfile
@@ -284,7 +283,6 @@ const ListaUsuariosAdmins = () => {
 				hideModal={() => setEditar(false)}
 				updateUserData={updateUserData}
 				setCurrentNombre={setCurrentName}
-				// updateCerrar={updateCerrar}
 			/>
 		</Body>
 	);
