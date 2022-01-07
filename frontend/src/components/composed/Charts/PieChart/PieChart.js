@@ -11,7 +11,7 @@ export const PieChart = ({data, size, year, month}) => {
 
 	return (
 		<div>
-			<PieGraphicWithD3 />
+			<PieGraphicWithD3 data={data} />
 			{/* <PieGraphic
 				data={data}
 				size={size}

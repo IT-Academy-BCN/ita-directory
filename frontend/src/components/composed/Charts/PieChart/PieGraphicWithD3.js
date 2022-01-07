@@ -27,7 +27,28 @@ const useD3 = (renderChartFn, dependencies) => {
 	return ref;
 };
 
-function PieChart() {
+function PieChart({data}) {
+	const totalPisos = data.reduce((prev, curr) => prev + curr.pisos, 0);
+	const totalChalets = data.reduce((prev, curr) => prev + curr.chalets, 0);
+	const totalGarages = data.reduce((prev, curr) => prev + curr.garages, 0);
+	const totalLocales = data.reduce((prev, curr) => prev + curr.locales, 0);
+
+	const chartData = [
+		{type: "Pisos", total: totalPisos},
+		{type: "Garages", total: totalGarages},
+		{type: "Locales", total: totalLocales},
+		{type: "Chalets", total: totalChalets},
+	];
+
+	console.log("totalPisos: ");
+	console.log(totalPisos);
+	console.log("totalChalets: ");
+	console.log(totalChalets);
+	console.log("totalGarages: ");
+	console.log(totalGarages);
+	console.log("totalLocales: ");
+	console.log(totalLocales);
+
 	const ref = useD3(
 		(graph) => {
 			let svgWidth = 500,
@@ -43,17 +64,17 @@ function PieChart() {
 			let color = d3.scaleOrdinal(d3.schemeAccent);
 
 			const pie = d3.pie().value(function (d) {
-				return d.percentage;
+				return d.total;
 			});
 
 			const path = d3.arc().outerRadius(radius).innerRadius(0);
 
-			const arc = g.selectAll("arc").data(pie(testData)).enter().append("g");
+			const arc = g.selectAll("arc").data(pie(chartData)).enter().append("g");
 
 			arc.append("path")
 				.attr("d", path)
 				.attr("fill", function (d) {
-					return color(d.data.percentage);
+					return color(d.data.total);
 				});
 
 			const label = d3.arc().outerRadius(radius).innerRadius(0);
@@ -64,10 +85,10 @@ function PieChart() {
 				})
 				.attr("text-anchor", "middle")
 				.text(function (d) {
-					return d.data.type + ":" + d.data.percentage + "%";
+					return d.data.type + ":" + d.data.total + "%";
 				});
 		},
-		[testData.length]
+		[chartData.length]
 	);
 
 	return <svg ref={ref} width="500" height="500" className="pie-chart-d3"></svg>;
