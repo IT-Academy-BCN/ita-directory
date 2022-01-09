@@ -30,8 +30,11 @@ export default function D3LineGraphic({data, active, size, month, year}) {
 
     const reloadChart = () => {
         clearChart()
-        setDataToPrint(handleData(month, year))
-        printChart()
+        setTimeout(() => {
+            setDataToPrint(handleData(month, year))
+            printChart()
+        }, 500);
+
     }
 
     function handleData(month, year) {
