@@ -11,14 +11,28 @@ export default function D3LineGraphic({data, active, size, month, year}) {
     const [altura, setAltura] = useState()
 
     useEffect(() => {
+        let z = svgRef.current.parentNode.clientWidth;
+        let s = 100;
+        let m = 350
         setDataToPrint(handleData(month, year))
-        setAnchura(svgRef.current.parentNode.clientWidth - 150)
-        setAltura(200)
+        setAnchura(z - 150)
+        setAltura(z > 400 ? z - m : z)
+        window.addEventListener("resize", () => reloadChart());
+        return () => {
+            window.removeEventListener("resize", () => reloadChart());
+        };
+
     }, [])
 
     const clearChart = () => {
         d3.selectAll("#container > *").remove();
     };
+
+    const reloadChart = () => {
+        clearChart()
+        setDataToPrint(handleData(month, year))
+        printChart()
+    }
 
     function handleData(month, year) {
         if (data) {
@@ -63,7 +77,7 @@ export default function D3LineGraphic({data, active, size, month, year}) {
         clearChart()
         setDataToPrint(handleData(month, year))
         printChart()
-    }, [month, year]);
+    }, [month, year, size]);
 
     useEffect(() => {
         clearChart()
@@ -84,9 +98,10 @@ export default function D3LineGraphic({data, active, size, month, year}) {
                 .attr('height', '100%')
                 .style('background', 'white')
                 .attr("viewBox", [0, 0, anchura, altura])
-                .attr("style", `max-width: 100%; ${anchura}: auto; ${altura}: intrinsic;`)
+                .attr("style", `max-width: 100%; ${anchura}: auto; ${altura}: auto; max-height: 500px`)
                 .style('overflow', 'visible')
-                .style('padding', '5% 10%')
+                .style('padding', '10% ')
+                .classed("svg-content-responsive", true)
 
             // setting up scaleing**********************************************************
             const xScale = d3.scaleLinear()
@@ -137,7 +152,8 @@ export default function D3LineGraphic({data, active, size, month, year}) {
                 .attr("viewBox", [0, 0, anchura, altura])
                 .attr("style", `max-width: 100%; ${anchura}: auto; ${altura}: intrinsic;`)
                 .style('overflow', 'visible')
-                .style('padding', '5% 10% ')
+                .style('padding', '10% ')
+                .classed("svg-content-responsive", true)
 
             // setting up scaleing**********************************************************
             const xScale = d3.scaleLinear()
@@ -153,7 +169,7 @@ export default function D3LineGraphic({data, active, size, month, year}) {
             // setting up axis         **************************************************
             const xAxis = d3.axisBottom(xScale)
                 .ticks(xaTicks + 1)  /// 12 anual 31/30/28 mensual
-                .tickFormat((i) => {if (i != 0) {return i} })
+                .tickFormat((i) => {if (i != 0 && i % 2 !== 0) {return i} })
 
             const yAxis = d3.axisLeft(yScale)
                 .ticks(yaTicks);
