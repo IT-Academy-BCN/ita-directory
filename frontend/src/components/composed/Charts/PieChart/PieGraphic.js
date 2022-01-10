@@ -112,6 +112,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 					</button>
 				</div>
 			</div>
+
 			<div className="cardBody">
 				{active ? (
 					<div className="chart" ref={chartRef}></div>

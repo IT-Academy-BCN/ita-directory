@@ -81,6 +81,8 @@ export const PieGraphicStyled = styled.div`
 			width: 100%;
 			height: 100%;
 			margin: 12px;
+			margin-top: 3rem;
+			font-size: 0.85rem;
 		}
 	}
 `;

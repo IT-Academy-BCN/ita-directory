@@ -1,30 +1,15 @@
 import React, {useState, useRef, useEffect} from "react";
-// import * as echarts from "echarts";
 import * as d3 from "d3";
-import {groupByTypePie, daysBetween} from "utils/generateData";
 import {PieGraphicStyled} from "./PieChart.styles";
-import {options} from "./defaultOptions";
 import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
-import {type} from "os";
-// import PieChartD3 from "./PieChartD3";
-// following this guide: https://www.pluralsight.com/guides/using-d3.js-inside-a-react-app
-
-const useD3 = (renderChartFn, dependencies) => {
-	const ref = useRef();
-
-	useEffect(() => {
-		renderChartFn(d3.select(ref.current));
-		return () => {};
-	}, dependencies);
-	return ref;
-};
 
 function PieChart({data, hideModal, active, size, year, month}) {
 	const [selectedYear, setSelectedYear] = useState(year);
 	const [selectedMonth, setSelectedMonth] = useState(month);
+
+	const d3Container = useRef(null);
 
 	useEffect(() => {
 		setSelectedYear(year);
@@ -45,14 +30,98 @@ function PieChart({data, hideModal, active, size, year, month}) {
 		);
 	}
 
-	const fullYear = data.filter((item) => item.day.getFullYear() === parseInt(selectedYear));
-	console.log(`fullYear: `);
-	console.log(fullYear);
+	let filterDataByDate;
 
-	const totalPisos = data.reduce((prev, curr) => prev + curr.pisos, 0);
-	const totalChalets = data.reduce((prev, curr) => prev + curr.chalets, 0);
-	const totalGarages = data.reduce((prev, curr) => prev + curr.garages, 0);
-	const totalLocales = data.reduce((prev, curr) => prev + curr.locales, 0);
+	switch (selectedMonth) {
+		case "all":
+			filterDataByDate = data.filter(
+				(item) => item.day.getFullYear() === parseInt(selectedYear)
+			);
+			break;
+		case "0":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 0
+			);
+			break;
+		case "1":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 1
+			);
+			break;
+		case "2":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 2
+			);
+			break;
+		case "3":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 3
+			);
+			break;
+		case "4":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 4
+			);
+			break;
+		case "5":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 5
+			);
+			break;
+		case "6":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 6
+			);
+			break;
+		case "7":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 7
+			);
+			break;
+		case "8":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 8
+			);
+			break;
+		case "9":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 9
+			);
+			break;
+		case "10":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 10
+			);
+			break;
+		case "11":
+			filterDataByDate = data.filter(
+				(item) =>
+					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 11
+			);
+			break;
+
+		default:
+			filterDataByDate = data.filter(
+				(item) => item.day.getFullYear() === parseInt(selectedYear)
+			);
+			break;
+	}
+
+	const totalPisos = filterDataByDate.reduce((prev, curr) => prev + curr.pisos, 0);
+	const totalChalets = filterDataByDate.reduce((prev, curr) => prev + curr.chalets, 0);
+	const totalGarages = filterDataByDate.reduce((prev, curr) => prev + curr.garages, 0);
+	const totalLocales = filterDataByDate.reduce((prev, curr) => prev + curr.locales, 0);
 
 	const chartData = [
 		{type: "Pisos", total: totalPisos},
@@ -61,47 +130,38 @@ function PieChart({data, hideModal, active, size, year, month}) {
 		{type: "Chalets", total: totalChalets},
 	];
 
-	const ref = useD3(
-		(graph) => {
+	useEffect(() => {
+		if (data && d3Container.current) {
 			let svgWidth = 500,
 				svgHeight = 300,
 				radius = Math.min(svgWidth, svgHeight) / 2;
-			const svg = d3.select("svg").attr("width", svgWidth).attr("height", svgHeight);
-
-			//Create group element to hold pie chart
-			const g = graph
-				.append("g")
-				.attr("transform", "translate(" + radius * 2 + "," + radius + ")");
+			const svg = d3
+				.select(d3Container.current)
+				.attr("width", svgWidth)
+				.attr("height", svgHeight);
+			const update = svg.append("g").attr("transform", `translate(${radius * 2}, ${radius})`);
 
 			let color = d3.scaleOrdinal(d3.schemeAccent);
 
-			const pie = d3.pie().value(function (d) {
-				return d.total;
-			});
+			const pie = d3.pie().value((d) => d.total);
 
+			const arc = update.selectAll("arc").data(pie(chartData)).enter().append("g"); // Do we really need this??
 			const path = d3.arc().outerRadius(radius).innerRadius(0);
-
-			const arc = g.selectAll("arc").data(pie(chartData)).enter().append("g");
 
 			arc.append("path")
 				.attr("d", path)
-				.attr("fill", function (d) {
-					return color(d.data.total);
-				});
+				.attr("fill", (d) => color(d.data.total));
 
 			const label = d3.arc().outerRadius(radius).innerRadius(0);
 
 			arc.append("text")
-				.attr("transform", function (d) {
-					return "translate(" + label.centroid(d) + ")";
-				})
+				.attr("transform", (d) => `translate( ${label.centroid(d)})`)
 				.attr("text-anchor", "middle")
-				.text(function (d) {
-					return d.data.type + ":" + d.data.total + "%";
-				});
-		},
-		[chartData.length]
-	);
+				.text(
+					(d) => `${d.data.type}: ${new Intl.NumberFormat("es-ES").format(d.data.total)}`
+				);
+		}
+	}, [chartData, d3Container.current]);
 
 	// handlers
 	const handleYearChange = (e) => {
@@ -131,7 +191,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 
 			<div className="cardBody">
 				<div className="chart">
-					<svg ref={ref} width="500" height="500" className="pie-chart-d3"></svg>
+					<svg ref={d3Container} width="500" height="500" className="pie-chart-d3"></svg>
 				</div>
 			</div>
 		</PieGraphicStyled>
