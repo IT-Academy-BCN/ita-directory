@@ -6,7 +6,7 @@ export const LineChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
-	console.log("active", active);
+	// console.log("active", active);
 
 	return (
 		<div>

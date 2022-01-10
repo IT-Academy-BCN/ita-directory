@@ -1,0 +1,68 @@
+import ModalGraphic from 'components/composed/ModalGraphic/ModalGraphic'
+import {useState, useEffect} from 'react'
+import React from 'react'
+import D3LineGraphic from './D3LineGraphic'
+import {LineGraphicStyled} from './LineChart.styles'
+import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
+
+export default function Selector({data, active, hideModal, size, month, year}) {
+    const [selectedYear, setSelectedYear] = useState(year);
+    const [selectedMonth, setSelectedMonth] = useState(month);
+    const [detail, setDetail] = useState(month);
+
+    const startYear = 2012;
+    const endYear = 2016;
+    const yearDifference = endYear - startYear;
+    const optionsSelectYear = [];
+    for (let i = 0; i < yearDifference + 1; i++) {
+        const curYear = startYear + i;
+        optionsSelectYear.push(
+            <option value={curYear} key={curYear}>
+                {curYear}
+            </option>
+        );
+    }
+
+    useEffect(() => {
+        setSelectedYear(year);
+        setDetail(month);
+        setSelectedMonth(month);
+    }, [year, month]);
+
+    return (
+        <div>
+            <LineGraphicStyled>
+                <div className="cardHeader">
+                    <h2>Ventas anuales continuas</h2>
+                    <div className="selectorWrapper">
+                        <select value={detail} onChange={(e) => setDetail(e.target.value)}>
+                            <option value="all">All</option>
+                            {useOptionSelectMonth()}
+                        </select>
+                        <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+                            {optionsSelectYear}
+                        </select>
+                        <button onClick={hideModal}>
+                            <FontAwesomeIcon
+                                icon={active ? faTimes : faExternalLinkAlt}
+                                style={{color: "#e22e2e"}}
+                            />
+                        </button>
+                    </div>
+
+                </div>
+                <D3LineGraphic
+                    data={data}
+                    active={active}
+                    hideModal={hideModal}
+                    size={size}
+                    month={detail}
+                    year={selectedYear}
+                />
+            </LineGraphicStyled>
+
+        </div>
+    )
+}

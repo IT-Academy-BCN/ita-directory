@@ -17,7 +17,7 @@ export const StyledDashboard = styled.div`
 	flex-direction: column;
 	width: 100%;
 	justify-content: center;
-
+	
 	.marginTop {
 		margin-bottom: 2rem;
 		flex-grow: 1;
