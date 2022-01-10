@@ -11,7 +11,14 @@ export const PieChart = ({data, size, year, month}) => {
 
 	return (
 		<div>
-			<PieGraphicWithD3 data={data} />
+			<PieGraphicWithD3
+				data={data}
+				size={size}
+				active={active}
+				hideModal={() => hideModal()}
+				year={year}
+				month={month}
+			/>
 			{/* <PieGraphic
 				data={data}
 				size={size}
