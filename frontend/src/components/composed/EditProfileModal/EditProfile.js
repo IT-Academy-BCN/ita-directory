@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
@@ -24,16 +24,6 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 	const [newName, setNewName] = useState(currentNombre);
 	const [newEmail, setNewEmail] = useState(currentEmail);
 
-	// Aquí actualizamos el estado cuando cambian las props.
-	useEffect(() => {
-		setNewName(currentNombre);
-		setNewEmail(currentEmail);
-	}, [currentNombre, currentEmail]);
-
-	useEffect(() => {
-		setNewName(newName);
-	}, [newName]);
-
 	const handleNameChange = (newName) => {
 		setNewName(newName);
 	};
@@ -57,7 +47,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 		}
 	};
 
-	const actualizar = (value) => {
+	const actualizar = () => {
 		if (newName === "") {
 			alert("Debes rellenar el nombre de usuario");
 		} else {
@@ -109,16 +99,15 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 						iconPosition="right"
 						type="submit"
 						className="darkBlue"
-						onClick={() => actualizar(currentNombre)}
+						onClick={actualizar}
 						buttonStyles={{marginRight: 0}}
-						// onClick={() => handleClick(newName)}
 					/>
 				</ButtonWrapper>
 			}
 		>
 			<EditModalStyled>
 				<PhotoWrapper>
-					<div className="containerImage"></div>
+					<div className="containerImage" />
 					<div className="profileContain">
 						<div className="StyledSubtitle">Fotografía de perfil</div>
 						<div className="StyledTextProfile">
@@ -140,15 +129,15 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 						<Input
 							id="userName"
 							name="userName"
-							label="Nuevo usuario"
+							label="Nombre"
 							type="text"
-							value={currentNombre}
-							placeholder={currentNombre}
+							value={newName}
+							placeholder="Introduce un nuevo nombre"
 							onChange={(e) => handleNameChange(e.target.value)}
 							className="errorProfile"
 							// error={isPassError}
 							// errorText="The password to contain more than 6 characters and a uppercase letter"
-							// minLength={6}
+							minLength={6}
 						/>
 					</label>
 
@@ -158,8 +147,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							id="email"
 							name="email"
 							label="Email"
-							ype="text"
-							placeholder="Introduce un email"
+							type="text"
+							placeholder="Introduce un nuevo email"
 							value={newEmail}
 							onChange={(e) => handleEmailChange(e.target.value)}
 						/>
@@ -197,7 +186,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 					</label>
 				</div>
 				<Button
-					onClick={() => actualizar(currentNombre)}
+					onClick={actualizar}
 					text="Guardar"
 					type="submit"
 					className="green-gradient"

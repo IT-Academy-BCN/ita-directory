@@ -7,7 +7,7 @@ const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) =>
 		<Fragment>
 			{active && (
 				<ModalBlock>
-					<button className="modalOverlay" onClick={() => hideModal()}></button>
+					<button className="modalOverlay" onClick={() => hideModal((prev) => !prev)} />
 					<div className="modalContainer">
 						<div className="modalHeader">
 							<span colorModalTitle={colorModalTitle}>{title}</span>

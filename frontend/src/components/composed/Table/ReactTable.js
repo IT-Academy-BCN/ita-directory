@@ -29,6 +29,7 @@ const ReactTable = ({columns, data, customRowStyle}) => {
 					return (
 						<tr style={customRowStyle(row)} {...row.getRowProps()}>
 							{row.cells.map((cell) => {
+								// debugger;
 								return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
 							})}
 						</tr>
