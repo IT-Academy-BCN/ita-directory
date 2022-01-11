@@ -56,14 +56,14 @@ function PieChart({data, hideModal, active, size, year, month}) {
 
 	useEffect(() => {
 		if (data && d3Container.current) {
-			let svgWidth = 500,
-				svgHeight = 300,
+			let svgWidth = 80,
+				svgHeight = 80,
 				radius = Math.min(svgWidth, svgHeight) / 2;
-			const svg = d3
-				.select(d3Container.current)
-				.attr("width", svgWidth)
-				.attr("height", svgHeight);
-			const update = svg.append("g").attr("transform", `translate(${radius * 2}, ${radius})`);
+			console.log(radius);
+			const svg = d3.select(d3Container.current);
+			// .attr("width", svgWidth)
+			// .attr("height", svgHeight);
+			const update = svg.append("g").attr("transform", `translate(50, 57)`);
 
 			let color = d3.scaleOrdinal(d3.schemeAccent);
 
@@ -81,6 +81,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 			arc.append("text")
 				.attr("transform", (d) => `translate( ${label.centroid(d)})`)
 				.attr("text-anchor", "middle")
+				.attr("font-size", "2.8")
 				.text(
 					(d) => `${d.data.type}: ${new Intl.NumberFormat("es-ES").format(d.data.total)}`
 				);
@@ -115,7 +116,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 
 			<div className="cardBody">
 				<div className="chart">
-					<svg ref={d3Container} width="500" height="500" className="pie-chart-d3"></svg>
+					<svg ref={d3Container} viewBox={`0 0 100 100`} className="pie-chart-d3"></svg>
 				</div>
 			</div>
 		</PieGraphicStyled>
