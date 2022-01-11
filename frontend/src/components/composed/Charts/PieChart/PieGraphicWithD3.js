@@ -32,90 +32,14 @@ function PieChart({data, hideModal, active, size, year, month}) {
 
 	let filterDataByDate;
 
-	switch (selectedMonth) {
-		case "all":
-			filterDataByDate = data.filter(
-				(item) => item.day.getFullYear() === parseInt(selectedYear)
-			);
-			break;
-		case "0":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 0
-			);
-			break;
-		case "1":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 1
-			);
-			break;
-		case "2":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 2
-			);
-			break;
-		case "3":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 3
-			);
-			break;
-		case "4":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 4
-			);
-			break;
-		case "5":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 5
-			);
-			break;
-		case "6":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 6
-			);
-			break;
-		case "7":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 7
-			);
-			break;
-		case "8":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 8
-			);
-			break;
-		case "9":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 9
-			);
-			break;
-		case "10":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 10
-			);
-			break;
-		case "11":
-			filterDataByDate = data.filter(
-				(item) =>
-					item.day.getFullYear() === parseInt(selectedYear) && item.day.getMonth() === 11
-			);
-			break;
-
-		default:
-			filterDataByDate = data.filter(
-				(item) => item.day.getFullYear() === parseInt(selectedYear)
-			);
-			break;
+	if (selectedMonth === "all") {
+		filterDataByDate = data.filter((item) => item.day.getFullYear() === parseInt(selectedYear));
+	} else {
+		filterDataByDate = data.filter(
+			(item) =>
+				item.day.getFullYear() === parseInt(selectedYear) &&
+				item.day.getMonth() === parseInt(selectedMonth)
+		);
 	}
 
 	const totalPisos = filterDataByDate.reduce((prev, curr) => prev + curr.pisos, 0);
