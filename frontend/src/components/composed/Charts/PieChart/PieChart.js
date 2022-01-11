@@ -19,19 +19,11 @@ export const PieChart = ({data, size, year, month}) => {
 				year={year}
 				month={month}
 			/>
-			{/* <PieGraphic
-				data={data}
-				size={size}
-				active={active}
-				hideModal={() => hideModal()}
-				year={year}
-				month={month}
-			/> */}
-			{/* <ModalGraphic
+			<ModalGraphic
 				active={active}
 				hideModal={hideModal}
 				children={
-					<PieGraphic
+					<PieGraphicWithD3
 						data={data}
 						size={size}
 						active={active}
@@ -40,7 +32,7 @@ export const PieChart = ({data, size, year, month}) => {
 						month={month}
 					/>
 				}
-			/> */}
+			/>
 		</div>
 	);
 };
