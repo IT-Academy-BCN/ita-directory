@@ -1,13 +1,14 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
-import InputValidated from "components/units/InputValidated/InputValidated";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
+import {msgs, validateEmail, validatePassword} from "utils/userFlow";
+import Input from "components/units/Input/Input";
 
-const UpdatePassword = ({onLogin}) => {
+const UpdatePassword = () => {
 	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
@@ -19,6 +20,11 @@ const UpdatePassword = ({onLogin}) => {
 	const [message, setMessage] = useState(null);
 
 	const closeNotification = () => setMessage(null);
+
+	useEffect(() => {
+		setValidEmail(validateEmail(email));
+		setValidPassword(validatePassword(password));
+	}, [email, password]);
 
 	const loginUser = async (user) => {
 		try {
@@ -48,8 +54,6 @@ const UpdatePassword = ({onLogin}) => {
 			loginUser({
 				email,
 				password,
-				privacy: true,
-				// debe añadirse ChechBox de privacidad?
 			});
 			setTimeout(() => {
 				setIsDisabled(false);
@@ -72,28 +76,31 @@ const UpdatePassword = ({onLogin}) => {
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>
-						<InputValidated
+						<Input
 							type="email"
 							placeholder="Introduce tu email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
-							name="emailName"
+							name="email"
 							disabled={disabled}
 							className="w-full"
-							valid={setValidEmail}
+							success={email !== "" && validEmail}
+							error={email !== "" && !validEmail}
+							errorText={msgs[`emailError`]}
 						/>
-						<InputValidated
+						<Input
 							type="password"
 							placeholder="Introduce tu contraseña"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							id="passName"
-							name="passName"
+							name="password"
 							disabled={disabled}
-							minLength={6}
 							className="w-full mt-2"
-							valid={setValidPassword}
+							success={password !== "" && validPassword}
+							error={password !== "" && !validPassword}
+							errorText={msgs[`passwordError`]}
 						/>
 						<AsyncButton
 							text="Acceder"

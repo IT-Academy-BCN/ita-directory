@@ -7,7 +7,6 @@ import Body from "components/layout/Body/Body";
 // Units Components
 import AsyncButton from "components/units/Button/Button";
 import Input from "components/units/Input/Input";
-import InputValidated from "components/units/InputValidated/InputValidated";
 import Notification from "components/units/Notifications/Notification";
 
 // Composed Components
@@ -23,6 +22,7 @@ import people4b from "../../../assets/images/people4b.jpg";
 import people13b from "../../../assets/images/people13b.jpg";
 
 import initLoggedinUserInfo from "../fakeUser.json";
+import {msgs, validatePassword} from "utils/userFlow";
 
 const usersPhoto = {
 	people1b: people1b,
@@ -73,6 +73,10 @@ const Profile = () => {
 	}, [loggedinUserInfo]);
 
 	useEffect(() => {
+		setValidNewPassword(validatePassword(newPassword));
+	}, [newPassword, setValidNewPassword]);
+
+	useEffect(() => {
 		setNewPasswordRepeated("");
 	}, [newPassword]);
 
@@ -80,8 +84,7 @@ const Profile = () => {
 		setValidNewPasswordRepeated(
 			newPasswordRepeated !== "" && newPassword === newPasswordRepeated
 		);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [newPasswordRepeated]);
+	}, [newPasswordRepeated, newPassword]);
 
 	const changePhoto = () => {
 		const photos = Object.keys(usersPhoto);
@@ -164,50 +167,49 @@ const Profile = () => {
 							<div>
 								<label htmlFor="username">Nombre de usuario</label>
 								<Input
-									style={`marginTop: 0`}
 									type="text"
 									id="username"
 									name="username"
 									placeholder={loggedinUserInfo.name}
-									onChange={() => console.log("disabled")} // attr necesario, sinó da error
-									disabled={true}
+									disabled
 									minMarginTop
 								/>
 								<p>El nombre de usuario no se puede modificar</p>
 							</div>
 							<div>
-								<label htmlFor="email">Email</label>
+								<label>Email</label>
 								<Input
 									type="email"
 									id="email"
 									name="email"
 									placeholder={loggedinUserInfo.email}
-									onChange={() => console.log("disabled")} // attr necesario, sinó da error
-									disabled={true}
+									disabled
 									minMarginTop
 								/>
 								<p>
-									El email no se puede modificar. Ponte en{" "}
+									El email no se puede modificar. Ponte en
 									<Link to="#">contacto</Link> si necesitas actualizarlo.
 								</p>
 							</div>
 						</div>
 						<div>
 							<div>
-								<label htmlFor="passName">Nueva Contraseña</label>
-								<InputValidated
+								<label>Nueva Contraseña</label>
+								<Input
 									type="password"
 									value={newPassword}
 									placeholder="Introducir contraseña"
 									onChange={(e) => setNewPassword(e.target.value)}
 									id="passName"
-									name="passName"
-									valid={setValidNewPassword}
+									name="password"
 									minMarginTop
+									success={newPassword !== "" && validNewPassword}
+									error={newPassword !== "" && !validNewPassword}
+									errorText={msgs[`passwordError`]}
 								/>
 							</div>
 							<div>
-								<label htmlFor="confirmPassName">Confirmar Contraseña</label>
+								<label>Confirmar Contraseña</label>
 								<Input
 									type="password"
 									value={newPasswordRepeated}

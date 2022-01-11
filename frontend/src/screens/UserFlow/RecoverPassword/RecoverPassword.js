@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 import {StyledParagraph} from "./RecoverPassword.styles";
@@ -8,16 +8,15 @@ import Body from "components/layout/Body/Body";
 
 // Units Components
 import AsyncButton from "components/units/Button/Button";
-import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Styles
 import {Container, Form} from "../UserFlow.styles";
 
 // Utilities
-import {msgs} from "utils/userFlow";
+import {msgs, validateEmail} from "utils/userFlow";
+import Input from "components/units/Input/Input";
 
 const RecoverPassword = () => {
-	// const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +26,10 @@ const RecoverPassword = () => {
 	const [message, setMessage] = useState("");
 
 	const closeNotification = () => setMessage(null);
+
+	useEffect(() => {
+		setValidEmail(validateEmail(email));
+	}, [email]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -74,7 +77,7 @@ const RecoverPassword = () => {
 							Si has olvidado la contraseña introduce tu email y te enviaremos un
 							enlace para cambiarla.
 						</StyledParagraph>
-						<InputValidated
+						<Input
 							type="email"
 							name="email"
 							placeholder={msgs.placeholderEmail}
@@ -82,8 +85,10 @@ const RecoverPassword = () => {
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							disabled={disabled}
-							valid={setValidEmail}
-							isRegexWanted={true}
+							success={email !== "" && validEmail}
+							error={email !== "" && !validEmail}
+							errorText={msgs[`emailError`]}
+							v
 						/>
 						<AsyncButton
 							text="Enviar"

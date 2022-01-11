@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
@@ -10,42 +10,24 @@ import {
 } from "components/composed/EditProfileModal/EditProfile.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
-
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
-
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+import {msgs, validateEmail, validateName, validatePassword} from "utils/userFlow";
 
 const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUserData}) => {
 	const [password, setPassword] = useState("");
-	const [isPassError, setIsPassError] = useState(false);
-	const [isPassError2, setIsPassError2] = useState(false);
+	const [validPassword, setValidPassword] = useState(false);
+	const [password2, setPassword2] = useState("");
 
 	// MODIFY USERNAME / EMAIL
 	const [newName, setNewName] = useState(currentNombre);
+	const [validNewName, setValidNewName] = useState(false);
 	const [newEmail, setNewEmail] = useState(currentEmail);
+	const [validNewEmail, setNewValidEmail] = useState(false);
 
-	const handleNameChange = (newName) => {
-		setNewName(newName);
-	};
-
-	const handleEmailChange = (newEmail) => {
-		setNewEmail(newEmail);
-	};
-
-	// PASSWORD
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		const isPass = validatePassword(value);
-		setIsPassError(!isPass);
-	};
-
-	const handlePasswordChange2 = (value) => {
-		if (password === value) {
-			setIsPassError2(false);
-		} else {
-			setIsPassError2(true);
-		}
-	};
+	useEffect(() => {
+		setValidPassword(validatePassword(password));
+		setNewValidEmail(validateEmail(newEmail));
+		setValidNewName(validateName(newName));
+	}, [newEmail, password, newName]);
 
 	const actualizar = () => {
 		if (newName === "") {
@@ -57,10 +39,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 	};
 
 	const resetForm = () => {
-		setPassword();
-		// setPassword2();
-		setIsPassError(false);
-		setIsPassError2(false);
+		setPassword("");
 		hideModal();
 	};
 
@@ -133,16 +112,15 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							type="text"
 							value={newName}
 							placeholder="Introduce un nuevo nombre"
-							onChange={(e) => handleNameChange(e.target.value)}
+							onChange={(e) => setNewName(e.target.value)}
 							className="errorProfile"
-							// error={isPassError}
-							// errorText="The password to contain more than 6 characters and a uppercase letter"
-							minLength={6}
+							success={newName !== "" && validNewName}
+							error={newName !== "" && !validNewName}
+							errorText={msgs[`nameError`]}
 						/>
 					</label>
 
 					<label>
-						{/* <label htmlFor="email">Email</label> */}
 						<Input
 							id="email"
 							name="email"
@@ -150,7 +128,10 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							type="text"
 							placeholder="Introduce un nuevo email"
 							value={newEmail}
-							onChange={(e) => handleEmailChange(e.target.value)}
+							onChange={(e) => setNewEmail(e.target.value)}
+							success={newEmail !== "" && validNewEmail}
+							error={newEmail !== "" && !validNewEmail}
+							errorText={msgs[`emailError`]}
 						/>
 					</label>
 				</div>
@@ -161,27 +142,28 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							label="Nueva contraseña"
 							type="password"
 							placeholder="Introducir contraseña"
-							onChange={(e) => handlePasswordChange(e.target.value)}
+							onChange={(e) => setPassword(e.target.value)}
 							className="errorProfile"
 							id="passName"
 							name="passName"
-							error={isPassError}
-							errorText="The password to contain more than 6 characters and a uppercase letter"
-							minLength={6}
+							success={password !== "" && validPassword}
+							error={password !== "" && !validPassword}
+							errorText={msgs[`passwordError`]}
 						/>
 					</label>
 					<label>
 						<Input
+							validPassword2
 							label="Confirmar contraseña"
 							type="password"
 							placeholder="Confirma tu contraseña"
-							onChange={(e) => handlePasswordChange2(e.target.value)}
+							onChange={(e) => setPassword2(e.target.value)}
 							className="errorProfile"
 							id="confirmPassName"
 							name="confirmPassName"
-							error={isPassError2}
 							errorText="Both passwords must be equal"
-							minLength={6}
+							success={password2 === password}
+							error={password2 !== password}
 						/>
 					</label>
 				</div>

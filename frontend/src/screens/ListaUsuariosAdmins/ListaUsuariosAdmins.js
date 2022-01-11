@@ -53,7 +53,6 @@ const ListaUsuariosAdmins = () => {
 				.then((dataUsers) => {
 					const newDataUsers = dataUsers.filter((user) => user.user_status_id !== 4);
 					setDataUsers(newDataUsers);
-					console.log(dataUsers);
 				});
 		};
 
@@ -99,7 +98,6 @@ const ListaUsuariosAdmins = () => {
 			setDataUsers(
 				dataUsers.map((item) => {
 					if (item.name === currentName || item.email === currentEmail) {
-						console.log(`item`, item);
 						setCurrentUserStatus(item.user_status_id);
 						setCurrentName(item.name);
 						patchUser({
