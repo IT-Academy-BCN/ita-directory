@@ -1,5 +1,5 @@
 import {useState} from "react";
-import PieGraphic from "./PieGraphic";
+import PieGraphicWithD3 from "./PieGraphicWithD3";
 import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
 
 export const PieChart = ({data, size, year, month}) => {
@@ -10,7 +10,7 @@ export const PieChart = ({data, size, year, month}) => {
 
 	return (
 		<div>
-			<PieGraphic
+			<PieGraphicWithD3
 				data={data}
 				size={size}
 				active={active}
@@ -22,7 +22,7 @@ export const PieChart = ({data, size, year, month}) => {
 				active={active}
 				hideModal={hideModal}
 				children={
-					<PieGraphic
+					<PieGraphicWithD3
 						data={data}
 						size={size}
 						active={active}
