@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 import {StyledParagraph} from "./RecoverPassword.styles";
@@ -22,14 +22,9 @@ const RecoverPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(null);
 	const [email, setEmail] = useState("");
-	const [validEmail, setValidEmail] = useState(false);
 	const [message, setMessage] = useState("");
 
 	const closeNotification = () => setMessage(null);
-
-	useEffect(() => {
-		setValidEmail(validateEmail(email));
-	}, [email]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -85,10 +80,9 @@ const RecoverPassword = () => {
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							disabled={disabled}
-							success={email !== "" && validEmail}
-							error={email !== "" && !validEmail}
+							success={email !== "" && validateEmail(email)}
+							error={email !== "" && !validateEmail(email)}
 							errorText={msgs[`emailError`]}
-							v
 						/>
 						<AsyncButton
 							text="Enviar"
@@ -98,7 +92,7 @@ const RecoverPassword = () => {
 							className="w-full blue-gradient mt-6"
 							isLoading={isLoading}
 							animated={animatedState}
-							disabled={!validEmail}
+							disabled={!validateEmail(email)}
 						/>
 					</Form>
 				</Container>

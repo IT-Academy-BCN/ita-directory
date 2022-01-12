@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
@@ -14,20 +14,11 @@ import {msgs, validateEmail, validateName, validatePassword} from "utils/userFlo
 
 const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUserData}) => {
 	const [password, setPassword] = useState("");
-	const [validPassword, setValidPassword] = useState(false);
 	const [password2, setPassword2] = useState("");
 
 	// MODIFY USERNAME / EMAIL
 	const [newName, setNewName] = useState(currentNombre);
-	const [validNewName, setValidNewName] = useState(false);
 	const [newEmail, setNewEmail] = useState(currentEmail);
-	const [validNewEmail, setNewValidEmail] = useState(false);
-
-	useEffect(() => {
-		setValidPassword(validatePassword(password));
-		setNewValidEmail(validateEmail(newEmail));
-		setValidNewName(validateName(newName));
-	}, [newEmail, password, newName]);
 
 	const actualizar = () => {
 		if (newName === "") {
@@ -114,8 +105,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							placeholder="Introduce un nuevo nombre"
 							onChange={(e) => setNewName(e.target.value)}
 							className="errorProfile"
-							success={newName !== "" && validNewName}
-							error={newName !== "" && !validNewName}
+							success={newName !== "" && validateName(newName)}
+							error={newName !== "" && !validateName(newName)}
 							errorText={msgs[`nameError`]}
 						/>
 					</label>
@@ -129,8 +120,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							placeholder="Introduce un nuevo email"
 							value={newEmail}
 							onChange={(e) => setNewEmail(e.target.value)}
-							success={newEmail !== "" && validNewEmail}
-							error={newEmail !== "" && !validNewEmail}
+							success={newEmail !== "" && validateEmail(newEmail)}
+							error={newEmail !== "" && !validateEmail(newEmail)}
 							errorText={msgs[`emailError`]}
 						/>
 					</label>
@@ -146,14 +137,13 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							className="errorProfile"
 							id="passName"
 							name="passName"
-							success={password !== "" && validPassword}
-							error={password !== "" && !validPassword}
+							success={password !== "" && validatePassword(password)}
+							error={password !== "" && !validatePassword(password)}
 							errorText={msgs[`passwordError`]}
 						/>
 					</label>
 					<label>
 						<Input
-							validPassword2
 							label="Confirmar contraseña"
 							type="password"
 							placeholder="Confirma tu contraseña"
@@ -162,8 +152,8 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							id="confirmPassName"
 							name="confirmPassName"
 							errorText="Both passwords must be equal"
-							success={password2 === password}
-							error={password2 !== password}
+							success={password2 !== "" && password2 === password}
+							error={password2 !== "" && password2 !== password}
 						/>
 					</label>
 				</div>
@@ -172,10 +162,16 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 					text="Guardar"
 					type="submit"
 					className="green-gradient"
+					disabled={
+						!(
+							validatePassword(password) &&
+							validateEmail(newEmail) &&
+							validateName(newName) &&
+							password2 === password
+						)
+					}
 				/>
 			</EditModalStyled>
-
-			{/* <StyledSmall>{check}</StyledSmall> */}
 		</Modal>
 	);
 };

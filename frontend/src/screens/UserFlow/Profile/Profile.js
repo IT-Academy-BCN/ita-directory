@@ -35,8 +35,6 @@ const Profile = () => {
 	const [newPassword, setNewPassword] = useState("");
 	const [newPasswordRepeated, setNewPasswordRepeated] = useState("");
 	const [newPhoto, setNewPhoto] = useState(null);
-	const [validNewPassword, setValidNewPassword] = useState(false);
-	const [validNewPasswordRepeated, setValidNewPasswordRepeated] = useState(false);
 	const [loggedinUserInfo, setLoggedinUserInfo] = useState({});
 	const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false);
 	const [submitSuccess, setSubmitSuccess] = useState(null);
@@ -73,18 +71,8 @@ const Profile = () => {
 	}, [loggedinUserInfo]);
 
 	useEffect(() => {
-		setValidNewPassword(validatePassword(newPassword));
-	}, [newPassword, setValidNewPassword]);
-
-	useEffect(() => {
 		setNewPasswordRepeated("");
 	}, [newPassword]);
-
-	useEffect(() => {
-		setValidNewPasswordRepeated(
-			newPasswordRepeated !== "" && newPassword === newPasswordRepeated
-		);
-	}, [newPasswordRepeated, newPassword]);
 
 	const changePhoto = () => {
 		const photos = Object.keys(usersPhoto);
@@ -165,7 +153,7 @@ const Profile = () => {
 					<ProfileForm className="profile-data">
 						<div>
 							<div>
-								<label htmlFor="username">Nombre de usuario</label>
+								<label>Nombre de usuario</label>
 								<Input
 									type="text"
 									id="username"
@@ -203,8 +191,8 @@ const Profile = () => {
 									id="passName"
 									name="password"
 									minMarginTop
-									success={newPassword !== "" && validNewPassword}
-									error={newPassword !== "" && !validNewPassword}
+									success={newPassword !== "" && validatePassword(newPassword)}
+									error={newPassword !== "" && !validatePassword(newPassword)}
 									errorText={msgs[`passwordError`]}
 								/>
 							</div>
@@ -217,10 +205,16 @@ const Profile = () => {
 									onChange={(e) => setNewPasswordRepeated(e.target.value)}
 									id="confirmPassName"
 									name="confirmPassName"
-									error={newPasswordRepeated !== "" && !validNewPasswordRepeated}
+									error={
+										newPasswordRepeated !== "" &&
+										newPassword !== newPasswordRepeated
+									}
 									errorText="Las 2 contraseñas tienen que ser iguales"
-									success={newPasswordRepeated !== "" && validNewPasswordRepeated}
-									disabled={!validNewPassword}
+									success={
+										newPasswordRepeated !== "" &&
+										newPassword === newPasswordRepeated
+									}
+									disabled={!validatePassword(newPassword)}
 									minMarginTop
 								/>
 							</div>
@@ -236,7 +230,9 @@ const Profile = () => {
 								}}
 								className="green-gradient"
 								disabled={
-									!newPhoto && (!validNewPassword || !validNewPasswordRepeated)
+									!newPhoto &&
+									(!validatePassword(newPassword) ||
+										!(newPassword === newPasswordRepeated))
 								}
 							/>
 						</div>

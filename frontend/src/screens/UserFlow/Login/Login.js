@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
@@ -14,17 +14,9 @@ const Login = () => {
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
-	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
-	const [validPassword, setValidPassword] = useState(false);
 	const [message, setMessage] = useState(null);
-
 	const closeNotification = () => setMessage(null);
-
-	useEffect(() => {
-		setValidEmail(validateEmail(email));
-		setValidPassword(validatePassword(password));
-	}, [email, password]);
 
 	const loginUser = async (user) => {
 		try {
@@ -85,8 +77,8 @@ const Login = () => {
 							name="email"
 							disabled={disabled}
 							className="w-full"
-							success={email !== "" && validEmail}
-							error={email !== "" && !validEmail}
+							success={email !== "" && validateEmail(email)}
+							error={email !== "" && !validateEmail(email)}
 							errorText={msgs[`emailError`]}
 						/>
 						<Input
@@ -98,8 +90,8 @@ const Login = () => {
 							name="passName"
 							disabled={disabled}
 							className="w-full mt-2"
-							success={password !== "" && validPassword}
-							error={password !== "" && !validPassword}
+							success={password !== "" && validatePassword(password)}
+							error={password !== "" && !validatePassword(password)}
 							errorText={msgs[`passwordError`]}
 						/>
 						<AsyncButton
@@ -110,7 +102,7 @@ const Login = () => {
 							className="blue-gradient w-full my-8"
 							isLoading={isLoading}
 							animated={animated}
-							disabled={!validEmail || !validPassword}
+							disabled={!validateEmail(email) || !validatePassword(password)}
 						/>
 						<div className="w-full">
 							<RedirectStyled>

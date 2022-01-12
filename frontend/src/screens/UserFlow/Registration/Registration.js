@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -24,21 +24,10 @@ const Register = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [name, setName] = useState("");
-	const [validName, setValidName] = useState(false);
 	const [lastName, setLastName] = useState("");
-	const [validLastname, setValidLastname] = useState("");
-	const [validEmail, setValidEmail] = useState(false);
 	const [password, setPassword] = useState("");
-	const [validPassword, setValidPassword] = useState(false);
 	const [privacy, setPrivacy] = useState(false);
 	const [message, setMessage] = useState(null);
-
-	useEffect(() => {
-		setValidName(validateName(name));
-		setValidLastname(validateName(lastName));
-		setValidEmail(validateEmail(email));
-		setValidPassword(validatePassword(password));
-	}, [name, lastName, email, password]);
 
 	const closeNotification = () => setMessage(null);
 
@@ -105,22 +94,22 @@ const Register = () => {
 							name="name"
 							disabled={disabled}
 							className="w-full"
-							success={name !== "" && validName}
-							error={name !== "" && !validName}
+							success={name !== "" && validateName(name)}
+							error={name !== "" && !validateName(name)}
 							errorText={msgs[`nameError`]}
 						/>
 
 						<Input
 							type="text"
-							placeholder={"Apellido"}
+							placeholder="Apellido"
 							value={lastName}
 							onChange={(e) => setLastName(e.target.value)}
 							id="lastname"
 							name="lastname"
 							disabled={disabled}
 							className="w-full"
-							success={lastName !== "" && validLastname}
-							error={lastName !== "" && !validLastname}
+							success={lastName !== "" && validateName(lastName)}
+							error={lastName !== "" && !validateName(lastName)}
 							errorText={msgs[`lastnameError`]}
 						/>
 
@@ -129,12 +118,12 @@ const Register = () => {
 							placeholder={msgs.placeholderEmail}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							id={"emailName"}
+							id="emailName"
 							name="email"
 							disabled={disabled}
 							className="w-full"
-							success={email !== "" && validEmail}
-							error={email !== "" && !validEmail}
+							success={email !== "" && validateEmail(email)}
+							error={email !== "" && !validateEmail(email)}
 							errorText={msgs[`emailError`]}
 						/>
 
@@ -147,8 +136,8 @@ const Register = () => {
 							name="password"
 							disabled={disabled}
 							className="w-full mt-2"
-							success={password !== "" && validPassword}
-							error={password !== "" && !validPassword}
+							success={password !== "" && validatePassword(password)}
+							error={password !== "" && !validatePassword(password)}
 							errorText={msgs[`passwordError`]}
 						/>
 						<div className="w-full mt-2">
@@ -158,7 +147,7 @@ const Register = () => {
 										Acepto la <Link to="#">politica de privacidad</Link>.
 									</RedirectStyled>
 								}
-								value={privacy}
+								// value={privacy}
 								onChange={() => setPrivacy((prev) => !prev)}
 								id="privacyPolicy"
 								name="privacyPolicy"
@@ -176,11 +165,10 @@ const Register = () => {
 							isLoading={isLoading}
 							animated={animated}
 							disabled={
-								!validName ||
-								!validLastname ||
-								!validPassword ||
-								!validEmail ||
-								!validPassword ||
+								!validateName(name) ||
+								!validateName(lastName) ||
+								!validatePassword(password) ||
+								!validateEmail(email) ||
 								!privacy
 							}
 						/>

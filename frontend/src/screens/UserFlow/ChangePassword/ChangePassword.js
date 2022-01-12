@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import {useParams, useHistory} from "react-router-dom";
 import axios from "axios";
@@ -12,24 +12,16 @@ import Input from "components/units/Input/Input";
 
 const ChangePassword = () => {
 	const [animated, setAnimated] = useState(false);
-	const [disabled, setIsDisabled] = useState(false);
+	const [disabled, setIsDisabled] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(null);
 	const [message, setMessage] = useState("");
-
 	const [password1, setPassword1] = useState("");
-	const [validPassword1, setValidPassword1] = useState("");
 	const [password2, setPassword2] = useState("");
-	const [validPassword2, setValidPassword2] = useState("");
 
 	const history = useHistory();
 	const {token} = useParams();
 	const closeNotification = () => setMessage(null);
-
-	useEffect(() => {
-		setValidPassword1(validatePassword(password1));
-		setValidPassword2(validatePassword(password2));
-	}, [password1, password2]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -58,20 +50,9 @@ const ChangePassword = () => {
 			setIsDisabled(false);
 			setIsLoading(false);
 			setAnimated(false);
-			setTimeout(() => {
-				setIsDisabled(false);
-				setIsLoading(false);
-			}, 2000);
-		});
-		setTimeout(() => {
-			setIsDisabled(false);
-			setIsLoading(false);
-			setAnimated(false);
-			setTimeout(() => {
-				setIsDisabled(false);
-				setIsLoading(false);
-			}, 2000);
-		});
+			setPassword1("");
+			setPassword2("");
+		}, 2000);
 	};
 
 	return (
@@ -97,8 +78,8 @@ const ChangePassword = () => {
 							name="password"
 							disabled={disabled}
 							className="w-full"
-							success={password1 !== "" && validPassword1}
-							error={password1 !== "" && !validPassword1}
+							success={password1 !== "" && validatePassword(password1)}
+							error={password1 !== "" && !validatePassword(password1)}
 							errorText={msgs[`passwordError`]}
 						/>
 						<Input
@@ -109,9 +90,9 @@ const ChangePassword = () => {
 							onChange={(e) => setPassword2(e.target.value)}
 							disabled={disabled}
 							className="w-full mt-2"
-							success={password2 !== "" && validPassword2}
-							error={password2 !== "" && !validPassword2}
-							errorText={msgs[`passwordError`]}
+							errorText="Both passwords must be equal"
+							success={password2 !== "" && password2 === password1}
+							error={password2 !== "" && password2 !== password1}
 						/>
 						<AsyncButton
 							text="Guardar cambios"
@@ -121,7 +102,13 @@ const ChangePassword = () => {
 							className="blue-gradient w-full my-8"
 							isLoading={isLoading}
 							animated={animated}
-							disabled={!(validPassword1 && validPassword2)}
+							disabled={
+								!(
+									validatePassword(password1) &&
+									password2 !== "" &&
+									password2 === password1
+								) || disabled
+							}
 						/>
 					</Form>
 				</Container>
