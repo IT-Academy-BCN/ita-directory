@@ -10,9 +10,7 @@ const Input = ({
 	onChange,
 	onFocus,
 	onBlur,
-	textStyles, //not working
 	inputStyles,
-	labelStyles,
 	className,
 	id,
 	name,
@@ -25,7 +23,6 @@ const Input = ({
 	error,
 	disabled,
 	label,
-	inputContainerClassName,
 	required,
 	icon,
 	minMarginTop,
@@ -74,7 +71,7 @@ Input.propTypes = {
 	type: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	onChange: PropTypes.func.isRequired,
+	/*onChange: PropTypes.func.isRequired,*/
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
 	textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
