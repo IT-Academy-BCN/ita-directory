@@ -59,7 +59,6 @@ function PieChart({data, hideModal, active, size, year, month}) {
 			let svgWidth = 80,
 				svgHeight = 80,
 				radius = Math.min(svgWidth, svgHeight) / 2;
-			console.log(radius);
 			const svg = d3.select(d3Container.current);
 			// .attr("width", svgWidth)
 			// .attr("height", svgHeight);
