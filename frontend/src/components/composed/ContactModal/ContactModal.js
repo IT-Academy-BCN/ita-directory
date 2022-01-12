@@ -9,7 +9,8 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
 const ContactModal = ({id, active, hideModal}) => {
-	const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const EMAIL_REGEX =
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 	const validateEmail = (email) => {
 		if (!email) return "Email is required";
@@ -124,6 +125,7 @@ const ContactModal = ({id, active, hideModal}) => {
 					label="Nombre"
 					{...bindName}
 					inputContainerClassName="input-container"
+					onChange
 				/>
 			</Wrapper>
 

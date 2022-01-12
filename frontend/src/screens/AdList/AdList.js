@@ -122,6 +122,7 @@ const AdList = () => {
 								<div className="rowWrapper">
 									{mapView ? (
 										<Button
+											type="button"
 											text="Vista de detalles"
 											icon={faBars}
 											iconPosition="left"
@@ -134,6 +135,7 @@ const AdList = () => {
 										/>
 									) : (
 										<Button
+											type="button"
 											text="Vista de mapa"
 											icon={faMapMarkerAlt}
 											iconPosition="left"
