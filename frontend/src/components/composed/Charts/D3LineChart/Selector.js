@@ -1,4 +1,4 @@
-import ModalGraphic from 'components/composed/ModalGraphic/ModalGraphic'
+
 import {useState, useEffect} from 'react'
 import React from 'react'
 import D3LineGraphic from './D3LineGraphic'
@@ -9,7 +9,6 @@ import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 
 export default function Selector({data, active, hideModal, size, month, year}) {
     const [selectedYear, setSelectedYear] = useState(year);
-    const [selectedMonth, setSelectedMonth] = useState(month);
     const [detail, setDetail] = useState(month);
 
     const startYear = 2012;
@@ -28,7 +27,6 @@ export default function Selector({data, active, hideModal, size, month, year}) {
     useEffect(() => {
         setSelectedYear(year);
         setDetail(month);
-        setSelectedMonth(month);
     }, [year, month]);
 
     return (
@@ -56,7 +54,7 @@ export default function Selector({data, active, hideModal, size, month, year}) {
                 <D3LineGraphic
                     data={data}
                     active={active}
-                    hideModal={hideModal}
+                    hideModal={() => hideModal()}
                     size={size}
                     month={detail}
                     year={selectedYear}
