@@ -1,0 +1,15 @@
+DATABASE_URL="postgresql://postgres:123456@localhost:10911/ita_directory_postgres?schema=app_public"
+DB_NAME=ita_directory_postgres
+DB_PASS=123456
+DB_PORT=10911
+DB_USER=postgres
+DB_SCHEMA=app_public
+
+REDIS_NAME=ita_directory_redis
+REDIS_PORT=10912
+REDIS_PASS=fzG*aSD3@dsa5ssd
+
+PORT=10910
+JWT_SECRET=ita-secret-token
+JWT_REFRESH_TOKEN_SECRET=ita-secret-refresh_token
+REACT_APP_URL=http://localhost:5000
