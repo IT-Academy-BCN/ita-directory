@@ -6,14 +6,17 @@ Describe library, requirements, next steps to expand the functionality, and so o
 
 Use images/videos if necessary from our own dashboard.
 
+`src/screens/Dashboard`
+
 ## Bar Chart
 
-...
+`src/components/composed/Charts/D3BarChart`
 
 ## Line Chart
 
-...
+`src/components/composed/Charts/D3LineChart`
 
 ## Pie Chart
 
-...
+`src/components/composed/Charts/PieChart`
+`PieGraphicWithD3.js`
