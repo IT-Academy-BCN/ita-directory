@@ -13,7 +13,7 @@ export const Container = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	.http__Message {
+	.notfound-error {
 		font-size: 150px;
 		color: #76adf5;
 		text-shadow: 1px 1px 1px #192791, 2px 2px 1px #192791, 3px 3px 1px #192791,
@@ -24,7 +24,7 @@ export const Container = styled.div`
 			font-weight: 530;
 		}
 	}
-	.error__Mess {
+	.error-message {
 		margin: 2rem 0;
 		font-size: 20px;
 		font-weight: 600;
@@ -35,7 +35,7 @@ export const Container = styled.div`
 			display: flex;
 		}
 	}
-	.backHome__Link {
+	.home-button {
 		display: inline-block;
 		color: #222;
 		text-transform: uppercase;
@@ -54,7 +54,7 @@ export const Container = styled.div`
 		}
 	}
 
-	.contact__Link {
+	.contact {
 		display: inline-block;
 		color: #222;
 		text-transform: uppercase;
@@ -73,5 +73,3 @@ export const Container = styled.div`
 		}
 	}
 `;
-
-
