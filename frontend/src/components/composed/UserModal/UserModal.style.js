@@ -26,16 +26,16 @@ export const UserModalStyled = styled.div`
 		width: 100%;
 
 		color: ${(props) =>
-			props.currentUserState === "rejected"
+			props.currentUserState === ("rejected" || 3)
 				? Colors.redColor
-				: props.currentUserState === "aprobado"
+				: props.currentUserState === ("aprobado" || 1)
 				? Colors.darkGreen
 				: Colors.grey};
 
 		border-color: ${(props) =>
-			props.currentUserState === "rejected"
+			props.currentUserState === ("rejected" || 3)
 				? Colors.redColor
-				: props.currentUserState === "aprobado"
+				: props.currentUserState === ("aprobado" || 1)
 				? Colors.darkGreen
 				: Colors.grey};
 

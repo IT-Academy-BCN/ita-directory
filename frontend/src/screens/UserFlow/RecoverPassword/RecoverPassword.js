@@ -8,22 +8,20 @@ import Body from "components/layout/Body/Body";
 
 // Units Components
 import AsyncButton from "components/units/Button/Button";
-import InputValidated from "components/units/InputValidated/InputValidated";
 
 // Styles
 import {Container, Form} from "../UserFlow.styles";
 
 // Utilities
-import {msgs} from "utils/userFlow";
+import {msgs, validateEmail} from "utils/userFlow";
+import Input from "components/units/Input/Input";
 
 const RecoverPassword = () => {
-	// const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(null);
 	const [email, setEmail] = useState("");
-	const [validEmail, setValidEmail] = useState(false);
 	const [message, setMessage] = useState("");
 
 	const closeNotification = () => setMessage(null);
@@ -74,7 +72,7 @@ const RecoverPassword = () => {
 							Si has olvidado la contraseña introduce tu email y te enviaremos un
 							enlace para cambiarla.
 						</StyledParagraph>
-						<InputValidated
+						<Input
 							type="email"
 							name="email"
 							placeholder={msgs.placeholderEmail}
@@ -82,8 +80,9 @@ const RecoverPassword = () => {
 							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							disabled={disabled}
-							valid={setValidEmail}
-							isRegexWanted={true}
+							success={email !== "" && validateEmail(email)}
+							error={email !== "" && !validateEmail(email)}
+							errorText={msgs[`emailError`]}
 						/>
 						<AsyncButton
 							text="Enviar"
@@ -93,7 +92,7 @@ const RecoverPassword = () => {
 							className="w-full blue-gradient mt-6"
 							isLoading={isLoading}
 							animated={animatedState}
-							disabled={!validEmail}
+							disabled={!validateEmail(email)}
 						/>
 					</Form>
 				</Container>
