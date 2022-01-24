@@ -29,6 +29,7 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 									fontFamily: "Arial",
 									width: "auto",
 									paddingLeft: 0,
+									paddingRight: 0,
 								}}
 								iconStyles={{
 									paddingRight: "5px",

@@ -110,7 +110,17 @@ const ContactModal = ({id, active, hideModal}) => {
 						animated={animatedState}
 						disabled={disabled}
 						onClick={handleSubmit}
-						buttonStyles={{marginRight: 0}}
+						buttonStyles={{
+							width: "auto",
+							minWidth: "110px",
+							marginRight: 0,
+							paddingRight: "15px",
+							paddingLeft: "15px",
+						}}
+						iconStyles={{
+							width: "1.8rem",
+							height: "1.8rem",
+						}}
 					/>
 				</ButtonWrapper>
 			}

@@ -36,6 +36,7 @@ export const TextAreaInput = styled.textarea.attrs({
 				text-xs
 				text-1x2
 				p-3
+				mb-9
 				overflow-y-auto
 				resize-none
 				text-darkGray
