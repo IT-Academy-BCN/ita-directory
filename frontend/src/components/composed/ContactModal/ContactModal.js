@@ -125,7 +125,6 @@ const ContactModal = ({id, active, hideModal}) => {
 					label="Nombre"
 					{...bindName}
 					inputContainerClassName="input-container"
-					onChange
 				/>
 			</Wrapper>
 

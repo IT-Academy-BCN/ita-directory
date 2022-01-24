@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import {ModalBlock} from "./Modal.styles";
 import PropTypes from "prop-types";
 
-const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) => {
+const Modal = ({title, footer, children, active, hideModal}) => {
 	return (
 		<Fragment>
 			{active && (
@@ -10,7 +10,7 @@ const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) =>
 					<button className="modalOverlay" onClick={() => hideModal((prev) => !prev)} />
 					<div className="modalContainer">
 						<div className="modalHeader">
-							<span colorModalTitle={colorModalTitle}>{title}</span>
+							<span>{title}</span>
 						</div>
 						<div className="modalBody">{children}</div>
 						<div className="modalFooter">{footer}</div>
