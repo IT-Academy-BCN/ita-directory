@@ -45,8 +45,8 @@ export const ModalBlock = styled.div`
 
 		.modalHeader {
 			display: flex;
-			flex-direction: row;
 			justify-content: space-between;
+			align-items: center;
 			color: #303742;
 			padding: 20px 0px 10px 0px;
 			border-bottom: 1px solid ${Colors.lightGray};

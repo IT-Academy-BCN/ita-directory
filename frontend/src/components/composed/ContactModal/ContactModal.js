@@ -116,9 +116,6 @@ const ContactModal = ({id, active, hideModal}) => {
 			}
 		>
 			<Wrapper>
-				<p>Estoy intentando contactar por el anuncio con id: {id}</p>
-			</Wrapper>
-			<Wrapper>
 				<Input
 					type="text"
 					name="name"

@@ -2,6 +2,11 @@ import React, {Fragment} from "react";
 import {ModalBlock} from "./Modal.styles";
 import PropTypes from "prop-types";
 
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import Colors from "theme/Colors";
+
+import Button from "components/units/Button/Button";
+
 const Modal = ({title, footer, children, active, hideModal}) => {
 	return (
 		<Fragment>
@@ -11,6 +16,27 @@ const Modal = ({title, footer, children, active, hideModal}) => {
 					<div className="modalContainer">
 						<div className="modalHeader">
 							<span>{title}</span>
+							<Button
+								iconPosition="left"
+								type="submit"
+								onClick={() => hideModal()}
+								icon={faTimes}
+								buttonStyles={{
+									color: Colors.lightGrey,
+									background: "transparent",
+									boxShadow: "none",
+									fontSize: "0.95rem",
+									fontFamily: "Arial",
+									width: "auto",
+									paddingLeft: 0,
+								}}
+								iconStyles={{
+									paddingRight: "5px",
+									paddingLeft: "0px",
+									width: "1rem",
+									height: "1rem",
+								}}
+							/>
 						</div>
 						<div className="modalBody">{children}</div>
 						<div className="modalFooter">{footer}</div>
