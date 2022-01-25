@@ -4,6 +4,9 @@ import tw, {theme} from "twin.macro";
 const StyledButton = styled.button.attrs({
 	className: "font-bold text-white py-2 px-6 rounded my-2 shadow bg-lightBlue",
 })`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	box-shadow: ${theme`boxShadow.button-shadow`};
 
 	&.blue-gradient {
