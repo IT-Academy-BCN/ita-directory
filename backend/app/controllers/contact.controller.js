@@ -1,19 +1,35 @@
+const nodemailer = require("nodemailer");
+
 const contactController = async (req, res) => {
-	const data = req.body;
+	const {name, email, text} = req.body;
 
-	for (var key in data) {
-		if (data.hasOwnProperty(key)) {
-			if (!data[key]) {
-				res.status(400).json({
-					msg: "Error, no data",
-				});
-				return;
-			}
+	let transporter = await nodemailer.createTransport({
+		host: process.env.NODEMAILER_HOST,
+		port: 587,
+		secure: false,
+		auth: {
+			user: process.env.NODEMAILER_USER,
+			pass: process.env.NODEMAILER_PASS,
+		},
+	});
+
+	let mailOptions = {
+		from: process.env.NODEMAILER_FROM,
+		to: email,
+		subject: process.env.NODEMAILER_SUBJECT,
+		text: `Hola ${name}, hemos recibido tu mensaje y pronto nos pondremos en contacto con ud.`,
+	};
+
+	await transporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+			res.status(500).json(error.message);
+		} else {
+			//console.log("email enviado.");
+			res.status(200).json({
+				id: info.messageId,
+				msg: "Email sent",
+			});
 		}
-	}
-
-	res.status(200).json({
-		msg: "Message received",
 	});
 };
 

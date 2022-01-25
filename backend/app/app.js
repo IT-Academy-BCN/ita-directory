@@ -57,12 +57,7 @@ app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 app.use("/media", mediaRoutes);
 app.use("/location", locationRoutes);
-
-/****************************************** */
-//Route for contact
 app.use("/contact", contactRoutes);
-
-/****************************************** */
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
