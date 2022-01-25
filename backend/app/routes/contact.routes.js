@@ -27,9 +27,9 @@ router.post("/v1/contact", validation(schema), contactController);
     "text": "message"
 }
  * @example response - 200 - Example success response
- * { "status":"200", "message": "Message received"}
+ * { "status":"200", "id": "info.messageId", "message": "Email sent"}
  * @example response - 400 - Example error response
- * { "errCode":"errCode", "message":"Error"}
+ * { "message":"error"}
  */
 
 module.exports = router;
