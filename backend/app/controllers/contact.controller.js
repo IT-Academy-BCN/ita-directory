@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const mensaje = require("../utils/messagEmail");
 
 const contactController = async (req, res) => {
 	const {name, email, text} = req.body;
@@ -17,7 +18,7 @@ const contactController = async (req, res) => {
 		from: process.env.NODEMAILER_FROM,
 		to: email,
 		subject: process.env.NODEMAILER_SUBJECT,
-		text: `Hola ${name}, hemos recibido tu mensaje y pronto nos pondremos en contacto con ud.`,
+		text: mensaje,
 	};
 
 	await transporter.sendMail(mailOptions, (error, info) => {
