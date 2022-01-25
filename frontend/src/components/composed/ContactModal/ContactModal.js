@@ -12,6 +12,11 @@ const ContactModal = ({id, active, hideModal}) => {
 	const EMAIL_REGEX =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+	const validateName = (name) => {
+		if (!name) return "Name is required";
+		return "";
+	};
+
 	const validateEmail = (email) => {
 		if (!email) return "Email is required";
 		if (!EMAIL_REGEX.test(email.toLowerCase())) return "Email invalid";
@@ -23,7 +28,7 @@ const ContactModal = ({id, active, hideModal}) => {
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [name, bindName, resetName] = useInput("");
+	const [name, bindName, resetName] = useInput("", validateName);
 	const [email, bindEmail, resetEmail] = useInput("", validateEmail);
 	const [message, bindMessage, resetMessage] = useInput("");
 
@@ -58,6 +63,8 @@ const ContactModal = ({id, active, hideModal}) => {
 		if (isAnyFieldEmpty()) {
 			setError("Missing required fields");
 			return;
+		} else {
+			setError("");
 		}
 
 		sendContact(name, email, message, (error) => {
@@ -110,14 +117,21 @@ const ContactModal = ({id, active, hideModal}) => {
 						animated={animatedState}
 						disabled={disabled}
 						onClick={handleSubmit}
-						buttonStyles={{marginRight: 0}}
+						buttonStyles={{
+							width: "auto",
+							minWidth: "110px",
+							marginRight: 0,
+							paddingRight: "15px",
+							paddingLeft: "15px",
+						}}
+						iconStyles={{
+							width: "1.8rem",
+							height: "1.8rem",
+						}}
 					/>
 				</ButtonWrapper>
 			}
 		>
-			<Wrapper>
-				<p>Estoy intentando contactar por el anuncio con id: {id}</p>
-			</Wrapper>
 			<Wrapper>
 				<Input
 					type="text"
@@ -125,7 +139,6 @@ const ContactModal = ({id, active, hideModal}) => {
 					label="Nombre"
 					{...bindName}
 					inputContainerClassName="input-container"
-					onChange
 				/>
 			</Wrapper>
 

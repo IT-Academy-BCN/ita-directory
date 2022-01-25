@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const TextAreaStyled = styled.div.attrs({
-	className: "flex text-grey",
+	className: "text-grey",
 })`
 	& {
 		&.textAreaCreateNewAd {
@@ -36,6 +36,7 @@ export const TextAreaInput = styled.textarea.attrs({
 				text-xs
 				text-1x2
 				p-3
+				mb-9
 				overflow-y-auto
 				resize-none
 				text-darkGray

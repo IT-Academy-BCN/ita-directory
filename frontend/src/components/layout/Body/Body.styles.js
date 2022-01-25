@@ -14,6 +14,7 @@ export const Childrens = styled.div`
 	justify-content: center;
 	padding-top: 3.5rem;
 	padding-top: 1rem;
+	min-height: 70vh;
 
 	&.accessRegister {
 		padding-top: 3.5rem;
