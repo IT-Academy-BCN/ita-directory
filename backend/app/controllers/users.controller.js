@@ -1,7 +1,11 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
-const {getRedisClient} = require("../utils/initRedis");
 const Hashids = require("hashids");
+const nodemailer = require("nodemailer");
+
+const mensaje = require("../utils/messagEmail");
+const {getRedisClient} = require("../utils/initRedis");
+
 const {
 	apiResponse,
 	signToken,
@@ -419,32 +423,48 @@ exports.forgetPassword = async (req, res, next) => {
 };
 
 exports.receiveEmailGetToken = async (req, res, next) => {
-	console.log(req.body);
 	try {
-		const user = req.body.email;
+		const {email} = req.body;
+		const passUser = await prisma.user.findUnique({where: {email}});
 
-		const passUser = await prisma.user.findUnique({
-			where: {
-				email: user,
-			},
-		});
-
-		if (passUser) {
-			const accessToken = signToken(passUser.id, "1h");
-
-			return res.status(200).json(
-				apiResponse({
-					message: "Access token granted.",
-					data: `${process.env.REACT_APP_URL}/change-password/${accessToken}`,
-				})
-			);
-		} else {
-			return res.status(200).json(
+		//console.log("user", passUser);
+		if (!passUser) {
+			return res.status(404).json(
 				apiResponse({
 					code: "error",
 					message: "Email not found",
 				})
 			);
+		} else {
+			const accessToken = signToken(passUser.id, "1h");
+
+			const transporter = await nodemailer.createTransport({
+				host: process.env.NODEMAILER_HOST,
+				port: 587,
+				secure: false,
+				auth: {
+					user: process.env.NODEMAILER_USER,
+					pass: process.env.NODEMAILER_PASS,
+				},
+			});
+
+			const mailOptions = {
+				from: process.env.NODEMAILER_FROM,
+				to: email,
+				subject: process.env.NODEMAILER_SUBJECT,
+				html: `${process.env.REACT_APP_URL}/change-password/${accessToken}`,
+			};
+
+			await transporter.sendMail(mailOptions, (error, info) => {
+				if (error) {
+					res.status(500).json(error.message);
+				} else {
+					res.status(200).json({
+						//id: info.messageId,
+						msg: "Email sent",
+					});
+				}
+			});
 		}
 	} catch (err) {
 		return next(new Error(err));
