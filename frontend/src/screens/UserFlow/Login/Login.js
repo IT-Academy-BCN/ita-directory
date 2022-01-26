@@ -107,7 +107,7 @@ const Login = () => {
 						<div className="w-full">
 							<RedirectStyled>
 								Has olvidado tu contraseña?
-								<Link to="/recover-password/:hash">Recupérala</Link>
+								<Link to="/recover-password">Recupérala</Link>
 							</RedirectStyled>
 							<RedirectStyled>
 								No tienes cuenta?
