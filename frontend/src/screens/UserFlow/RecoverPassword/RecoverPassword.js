@@ -20,7 +20,7 @@ const RecoverPassword = () => {
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isSuccess, setIsSuccess] = useState(null);
+	const [isSuccess, setIsSuccess] = useState(false);
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
 
@@ -42,12 +42,10 @@ const RecoverPassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
 				{email}
 			);
+			response.data.message === "Access token granted."
+				? setIsSuccess(true)
+				: setIsSuccess(false);
 			setMessage(response.data.message);
-			setIsSuccess(true);
-			if (response.data.code === "error") {
-				setIsSuccess(false);
-				throw response.data.message;
-			}
 		} catch (error) {
 			if (error.name === "Error") {
 				setIsSuccess(false);
