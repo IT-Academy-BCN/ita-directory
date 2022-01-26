@@ -4,7 +4,7 @@ const mensaje = require("../utils/messagEmail");
 const contactController = async (req, res) => {
 	const {name, email, text} = req.body;
 
-	let transporter = await nodemailer.createTransport({
+	const transporter = await nodemailer.createTransport({
 		host: process.env.NODEMAILER_HOST,
 		port: 587,
 		secure: false,
@@ -14,7 +14,7 @@ const contactController = async (req, res) => {
 		},
 	});
 
-	let mailOptions = {
+	const mailOptions = {
 		from: process.env.NODEMAILER_FROM,
 		to: email,
 		subject: process.env.NODEMAILER_SUBJECT,
