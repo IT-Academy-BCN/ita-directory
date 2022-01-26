@@ -3,7 +3,6 @@ const argon2 = require("argon2");
 const Hashids = require("hashids");
 const nodemailer = require("nodemailer");
 
-const mensaje = require("../utils/messagEmail");
 const {getRedisClient} = require("../utils/initRedis");
 
 const {
