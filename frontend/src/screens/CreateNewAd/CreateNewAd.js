@@ -10,7 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
-import CustomMap from "components/composed/Map/CustomMap";
+import CustomMap from "components/composed/Map/CustomMap/CustomMap";
 
 const CreateNewAd = () => {
 	const emptyForm = {
