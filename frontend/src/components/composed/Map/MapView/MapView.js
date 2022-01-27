@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {MapContainer, TileLayer, useMap} from "react-leaflet";
-import MapMarkers from "./MapMarkers";
+import MapMarkers from "./MapMarkers/MapMarkers";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
