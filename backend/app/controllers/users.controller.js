@@ -39,10 +39,10 @@ exports.getRefreshToken = (req, res, next) => {
 				const dehashedId = hashids.decode(hashedId);
 				const userId = dehashedId[0];
 				//!
-				const result = await client().get(userId);
+				const result = await client.get(userId);
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
-					await client().incr(counterKey);
+					await client.incr(counterKey);
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);

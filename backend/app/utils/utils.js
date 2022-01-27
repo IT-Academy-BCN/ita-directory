@@ -6,6 +6,9 @@ const argon2 = require("argon2");
 
 const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
 
+//!
+console.log("CLIENT !!!!!!!");
+console.log(client);
 /*
 / message - A user friendly message of what happened, string, defaults to ''
 / data - The main data, defaults to an object, it can be any type
@@ -61,7 +64,7 @@ const signRefreshToken = (userid, maxAge = 86400) => {
 	console.log(token);
 	console.log("getReadisClient y token");
 	//getRedisClient().set(userid, token, "EX", maxAge);
-	client.set(userid, token); //falta opcions )
+	client.SETEX(userid, token, {EX: 86400}); //falta opcions )
 	return token;
 };
 

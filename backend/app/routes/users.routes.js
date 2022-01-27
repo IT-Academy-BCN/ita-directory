@@ -43,7 +43,7 @@ router.get("/v1/get_me", UsersController.getUser);
  */
 
 //Register
-router.post("/v1/register", authenticateToken, UsersController.registerUser);
+router.post("/v1/register", UsersController.registerUser);
 
 //Read All Users (for testing purpose)
 router.get("/", UsersController.getAllUsers);
@@ -163,5 +163,8 @@ router.put("/test", authenticateToken, UsersController.updateUserRole);
  */
 
 router.post("/v1/change-password/:token", authenticateToken, UsersController.changePassword);
+
+//! DELETE
+// router.delete("/v1/delete/:user", authenticateToken, UsersController.deleteUser);
 
 module.exports = router;
