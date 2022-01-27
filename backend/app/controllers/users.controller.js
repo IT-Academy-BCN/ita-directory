@@ -1,6 +1,9 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
-const {getRedisClient} = require("../utils/initRedis");
+//const {getRedisClient} = require("../utils/initRedis");
+//const { getRedisClient } = require("../utils/utils");
+const {client} = require("../utils/initRedis");
+
 const Hashids = require("hashids");
 const {
 	apiResponse,
@@ -35,11 +38,11 @@ exports.getRefreshToken = (req, res, next) => {
 				const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
 				const dehashedId = hashids.decode(hashedId);
 				const userId = dehashedId[0];
-
-				const result = await getRedisClient().get(userId);
+				//!
+				const result = await client().get(userId);
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
-					await getRedisClient().incr(counterKey);
+					await client().incr(counterKey);
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);

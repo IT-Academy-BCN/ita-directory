@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const JWT = require("jsonwebtoken");
 const Hashids = require("hashids");
-const {getRedisClient} = require("../utils/initRedis");
+const {client} = require("../utils/initRedis");
 const argon2 = require("argon2");
 
 const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
@@ -34,7 +34,7 @@ const adsSchema = Joi.object({
 	n_bathrooms: Joi.number().required(),
 	map_lat: Joi.number().required(),
 	map_lon: Joi.number().required(),
-	ad_type_id: Joi.number().required()
+	ad_type_id: Joi.number().required(),
 });
 
 const signToken = (userid, maxAge = "15m") => {
@@ -42,18 +42,26 @@ const signToken = (userid, maxAge = "15m") => {
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
 	const secret = process.env.JWT_SECRET;
 	const options = {expiresIn: maxAge};
+	//!
+	console.log("El token es:");
+	console.log(JWT.sign(payload, secret, options));
 	return JWT.sign(payload, secret, options);
 };
 
 // maxAge = "1d" => 86400 must be a number for Redis expiration time
 const signRefreshToken = (userid, maxAge = 86400) => {
-	console.log("### REFRESH TOKEN")
+	console.log("### REFRESH TOKEN");
 	const hashedId = hashids.encode(userid);
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
 	const secret = process.env.JWT_REFRESH_TOKEN_SECRET;
 	const options = {expiresIn: maxAge};
 	const token = JWT.sign(payload, secret, options);
-	getRedisClient().set(userid, token, "EX", maxAge);
+	//!
+	console.log("TOKEN$$$$$");
+	console.log(token);
+	console.log("getReadisClient y token");
+	//getRedisClient().set(userid, token, "EX", maxAge);
+	client.set(userid, token); //falta opcions )
 	return token;
 };
 
@@ -67,13 +75,12 @@ const hashPassword = async (password) => {
 };
 
 const decodeHash = (id) => {
-	return hashids.decode(id)
-}
+	return hashids.decode(id);
+};
 
+const getRegionByLocationSchema = Joi.string().required();
 
-const getRegionByLocationSchema = Joi.string().required()
-
-const getAdsByTypeSchema = Joi.string().required()
+const getAdsByTypeSchema = Joi.string().required();
 
 module.exports = {
 	// generateBlob,
@@ -86,5 +93,5 @@ module.exports = {
 	hashPassword,
 	decodeHash,
 	getRegionByLocationSchema,
-	getAdsByTypeSchema
+	getAdsByTypeSchema,
 };
