@@ -4,7 +4,7 @@
   "description": "Backend ITAcademy Directory project (react + node tracks)",
   "main": "server.js",
   "scripts": {
-    "dev": "set NODE_ENV=development && nodemon --legacy-watch server.js",
+    "dev": "export NODE_ENV=development && nodemon --legacy-watch server.js",
     "test": "jest"
   },
   "keywords": [
