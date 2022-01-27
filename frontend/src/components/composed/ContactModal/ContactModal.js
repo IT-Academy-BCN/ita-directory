@@ -2,35 +2,18 @@ import React, {useState} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
-import useInput from "hooks/useInput";
 import {Wrapper, StyledSmall, ButtonWrapper} from "./ContactModal.style.js";
 import TextArea from "components/units/TextArea/TextArea.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const ContactModal = ({id, active, hideModal}) => {
-	const EMAIL_REGEX =
-		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+import contactSchema from "validation/contactModalSchema.js";
 
-	const validateName = (name) => {
-		if (!name) return "Name is required";
-		return "";
-	};
-
-	const validateEmail = (email) => {
-		if (!email) return "Email is required";
-		if (!EMAIL_REGEX.test(email.toLowerCase())) return "Email invalid";
-		return "";
-	};
-
+const ContactModal = ({active, hideModal}) => {
 	const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const [name, bindName, resetName] = useInput("", validateName);
-	const [email, bindEmail, resetEmail] = useInput("", validateEmail);
-	const [message, bindMessage, resetMessage] = useInput("");
 
 	const sendContact = (name, email, message, callback) => {
 		setTimeout(() => {
@@ -39,17 +22,20 @@ const ContactModal = ({id, active, hideModal}) => {
 		}, 2000);
 	};
 
-	const resetForm = () => {
-		resetEmail();
-		resetName();
-		resetMessage();
+	const handleValidateForm = async (values) => {
+		try {
+			await contactSchema.validate(values, {abortEarly: false});
+			setError("");
+			sendContact(values.name, values.email, values.message, (res) => {
+				console.log(res);
+			});
+		} catch (err) {
+			console.log(err.errors);
+			setError(err.errors[0]);
+		}
 	};
 
-	const isAnyFieldEmpty = () => {
-		return name.length === 0 || email.length === 0 || message.length === 0;
-	};
-
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setAnimatedState(true);
 		setIsDisabled(true);
@@ -60,30 +46,35 @@ const ContactModal = ({id, active, hideModal}) => {
 			setIsLoading(false);
 		}, 2000);
 
-		if (isAnyFieldEmpty()) {
-			setError("Missing required fields");
-			return;
-		} else {
-			setError("");
-		}
+		const formData = new FormData(e.target);
+		const values = {
+			name: formData.get("name"),
+			email: formData.get("email"),
+			message: formData.get("message"),
+		};
 
-		sendContact(name, email, message, (error) => {
-			if (error) {
-				setError(error);
-			} else {
-				setError("");
-				console.log("The message has been sent!");
-				resetForm();
-			}
-		});
+		handleValidateForm(values);
 	};
 
 	return (
-		<Modal
-			active={active}
-			hideModal={hideModal}
-			title="Contactar"
-			footer={
+		<Modal active={active} hideModal={hideModal} title="Contactar">
+			<form onSubmit={handleSubmit}>
+				<Input
+					type="text"
+					name="name"
+					label="Nombre"
+					inputContainerClassName="input-container"
+				/>
+
+				<Input
+					type="text"
+					name="email"
+					label="Email"
+					inputContainerClassName="input-container"
+				/>
+
+				<TextArea name="message" label="Mensaje" textAreaStyles={{width: "100%"}} />
+				<StyledSmall>{error}</StyledSmall>
 				<ButtonWrapper>
 					<Button
 						text="Cancelar"
@@ -116,7 +107,6 @@ const ContactModal = ({id, active, hideModal}) => {
 						isLoading={isLoading}
 						animated={animatedState}
 						disabled={disabled}
-						onClick={handleSubmit}
 						buttonStyles={{
 							width: "auto",
 							minWidth: "110px",
@@ -130,39 +120,7 @@ const ContactModal = ({id, active, hideModal}) => {
 						}}
 					/>
 				</ButtonWrapper>
-			}
-		>
-			<Wrapper>
-				<Input
-					type="text"
-					name="name"
-					label="Nombre"
-					{...bindName}
-					inputContainerClassName="input-container"
-				/>
-			</Wrapper>
-
-			<Wrapper>
-				<Input
-					type="text"
-					name="email"
-					label="Email"
-					{...bindEmail}
-					inputContainerClassName="input-container"
-				/>
-			</Wrapper>
-
-			<Wrapper>
-				<TextArea
-					name="message"
-					label="Mensaje"
-					required={true}
-					{...bindMessage}
-					textAreaStyles={{width: "100%"}}
-				/>
-			</Wrapper>
-
-			<StyledSmall>{error}</StyledSmall>
+			</form>
 		</Modal>
 	);
 };
