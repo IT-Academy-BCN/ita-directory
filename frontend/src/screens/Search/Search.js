@@ -3,13 +3,14 @@ import axios from "axios";
 
 //styles
 import {SearchStyled} from "./Search.style.js";
+import {Container} from "theme/GlobalStyles.js";
 
 //fontawesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 
 //components
-import Header from "components/layout/Header/Header";
+import Body from "components/layout/Body/Body.js";
 import SearchBar from "components/composed/SearchBar/SearchBar.js";
 import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMoreBtn";
 import MapView from "components/composed/Map/MapView/MapView";
@@ -51,32 +52,35 @@ const Search = () => {
 	};
 
 	return (
-		<div>
-			<Header isTitleVisible={false} />
-			<SearchBar setAdType={setAdType} setAdRegion={setAdRegion} getAds={getAds} />
-			<SearchStyled>
-				<div className="search-body">
-					<div className="search-results">
-						{loading ? (
-							<FontAwesomeIcon icon={faSpinner} className="spinner" />
-						) : ads.length === 0 && firstSearch ? (
-							`There are no results.`
-						) : (
-							<AdCardListLoadMore
-								ads={ads}
-								className="search-results-list"
-								setLocalizedAdId={setLocalizedAdId}
-							/>
-						)}
+		<Body
+			title={<SearchBar setAdType={setAdType} setAdRegion={setAdRegion} getAds={getAds} />}
+			isLoggedIn="true"
+		>
+			<Container>
+				<SearchStyled>
+					<div className="search-body">
+						<div className="search-results">
+							{loading ? (
+								<FontAwesomeIcon icon={faSpinner} className="spinner" />
+							) : ads.length === 0 && firstSearch ? (
+								`There are no results.`
+							) : (
+								<AdCardListLoadMore
+									ads={ads}
+									className="search-results-list"
+									setLocalizedAdId={setLocalizedAdId}
+								/>
+							)}
+						</div>
+						<div className="search-map">
+							{ads.length > 0 && (
+								<MapView filteredAds={ads} localizedAdId={localizedAdId} />
+							)}
+						</div>
 					</div>
-					<div className="search-map">
-						{ads.length > 0 && (
-							<MapView filteredAds={ads} localizedAdId={localizedAdId} />
-						)}
-					</div>
-				</div>
-			</SearchStyled>
-		</div>
+				</SearchStyled>
+			</Container>
+		</Body>
 	);
 };
 

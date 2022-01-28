@@ -7,8 +7,7 @@ export const SearchBarContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding-right: 30px;
-	padding-left: 0.5rem;
+
 
 	@media only screen and (min-width: 768px) {
 		margin: 0;

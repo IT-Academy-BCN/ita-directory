@@ -3,11 +3,11 @@ import Colors from "theme/Colors";
 
 export const SearchStyled = styled.div`
 	height: 100vh;
-	padding: 0 1rem;
 
 	.search-body {
 		display: grid;
 		grid-template-columns: 1fr;
+		grid-gap: 1rem;
 
 		@media only screen and (min-width: 768px) {
 			grid-template-columns: 0.6fr 0.4fr;
@@ -63,7 +63,7 @@ export const SearchStyled = styled.div`
 	}
 	.search-map {
 		width: 100%;
-		height: 80vh;
+		height: 75vh;
 		border-radius: 0.5rem;
 	}
 `;
