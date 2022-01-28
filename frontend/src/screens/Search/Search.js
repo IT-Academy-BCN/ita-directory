@@ -1,14 +1,17 @@
 import React, {useState} from "react";
-import Header from "components/layout/Header/Header";
-import SearchBar from "components/composed/SearchBar/SearchBar.js";
-/* import Body from "components/layout/Body/Body.js"; */
-import {SearchStyled} from "./Search.style.js";
-/* import Map from "components/composed/Map/Map"; 
-import CardSearch from 'components/composed/CardSearch/CardSearch.js'; */
-import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMoreBtn.js";
 import axios from "axios";
+
+//styles
+import {SearchStyled} from "./Search.style.js";
+
+//fontawesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
+
+//components
+import Header from "components/layout/Header/Header";
+import SearchBar from "components/composed/SearchBar/SearchBar.js";
+import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMoreBtn";
 
 const Search = () => {
 	// const [matchesId, setMatchesId] = useState(null);
@@ -30,7 +33,7 @@ const Search = () => {
 				//if only type was selected, API request for type filtered ads
 			} else if (adType && !adRegion) {
 				response = await axios.get(
-					`${process.env.REACT_APP_API_URL}/ads/v1/ads/types/${adType.label}`
+					`${process.env.REACT_APP_API_URL}/ads/v1/ads/type/${adType.label}`
 				);
 
 				// API request for all ads
