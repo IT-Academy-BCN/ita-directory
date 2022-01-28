@@ -12,6 +12,7 @@ import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import Header from "components/layout/Header/Header";
 import SearchBar from "components/composed/SearchBar/SearchBar.js";
 import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMoreBtn";
+import MapView from "components/composed/Map/MapView/MapView";
 
 const Search = () => {
 	// const [matchesId, setMatchesId] = useState(null);
@@ -67,7 +68,7 @@ const Search = () => {
 						)}
 					</div>
 					<div className="search-map">
-						<div className="map">map here</div>
+						{ads.length > 0 && <MapView filteredAds={ads} />}
 					</div>
 				</div>
 			</SearchStyled>
