@@ -1,9 +1,9 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const Hashids = require("hashids");
-const nodemailer = require("nodemailer");
 
 const {getRedisClient} = require("../utils/initRedis");
+const {transporter, mailOptions} = require("../utils/transporterEmail");
 
 const {
 	apiResponse,
@@ -424,10 +424,10 @@ exports.forgetPassword = async (req, res, next) => {
 exports.receiveEmailGetToken = async (req, res, next) => {
 	try {
 		const {email} = req.body;
-		const passUser = await prisma.user.findUnique({where: {email}});
+		const user = await prisma.user.findUnique({where: {email}});
 
 		//console.log("user", passUser);
-		if (!passUser) {
+		if (!user) {
 			return res.status(404).json(
 				apiResponse({
 					code: "error",
@@ -435,24 +435,10 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 				})
 			);
 		} else {
-			const accessToken = signToken(passUser.id, "1h");
+			const accessToken = signToken(user.id, "1h");
 
-			const transporter = await nodemailer.createTransport({
-				host: process.env.NODEMAILER_HOST,
-				port: 587,
-				secure: false,
-				auth: {
-					user: process.env.NODEMAILER_USER,
-					pass: process.env.NODEMAILER_PASS,
-				},
-			});
-
-			const mailOptions = {
-				from: process.env.NODEMAILER_FROM,
-				to: email,
-				subject: process.env.NODEMAILER_SUBJECT,
-				html: `${process.env.REACT_APP_URL}/change-password/${accessToken}`,
-			};
+			mailOptions.to = email;
+			mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`;
 
 			await transporter.sendMail(mailOptions, (error, info) => {
 				if (error) {
