@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
 
-/* 
-320px — 480px: Mobile devices.
-481px — 768px: iPads, Tablets.
-769px — 1024px: Small screens, laptops.
-1025px — 1200px: Desktops, large screens.
-*/
 export const SearchStyled = styled.div`
 	height: 100vh;
 	padding: 0 1rem;
@@ -68,27 +62,8 @@ export const SearchStyled = styled.div`
 		}
 	}
 	.search-map {
-		background-color: orange; // Quitar
 		width: 100%;
-		padding-top: 1rem;
-
-		@media only screen and (min-width: 768px) {
-			padding-left: 0.8rem;
-		}
-
-		@media only screen and (min-width: 1024px) {
-			padding: 0 0 0 0.8rem;
-		}
-	}
-	.box {
-		background-color: red; // Quitar
-		width: 100%;
-		height: 10rem;
-		border-radius: 8px;
-	}
-	.map {
-		background-color: lightgreen; // Quitar
-		height: 100%;
-		border-radius: 8px;
+		height: 80vh;
+		border-radius: 0.5rem;
 	}
 `;

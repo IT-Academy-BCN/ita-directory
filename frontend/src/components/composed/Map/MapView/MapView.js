@@ -77,7 +77,6 @@ const MapView = ({filteredAds}) => {
 			className="Container-View"
 			bounds={[fitBoundsCoordinates.topLeft, fitBoundsCoordinates.bottomRight]}
 			boundsOptions={{padding: [0, 0]}}
-			style={{height: 400, width: "100%"}}
 		>
 			<TileLayer
 				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
