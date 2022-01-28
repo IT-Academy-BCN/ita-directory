@@ -5,7 +5,7 @@ import Button from "components/units/Button/Button";
 import {AdCardItemStyled} from "./AdCardItem.styles";
 import {AdCardContainer} from "./AdCardContainer";
 
-const AdCardItem = ({ad}) => {
+const AdCardItem = ({ad, openSelectedAdPopup}) => {
 	return (
 		<AdCardContainer>
 			<AdCardItemStyled>
@@ -17,6 +17,7 @@ const AdCardItem = ({ad}) => {
 						buttonStyles={{backgroundColor: Colors.violet}}
 						type="button"
 						text="Localizar"
+						onClick={openSelectedAdPopup}
 					></Button>
 				</div>
 			</AdCardItemStyled>

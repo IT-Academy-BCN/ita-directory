@@ -15,12 +15,12 @@ import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMor
 import MapView from "components/composed/Map/MapView/MapView";
 
 const Search = () => {
-	// const [matchesId, setMatchesId] = useState(null);
 	const [loading, setLoading] = useState(0);
 	const [ads, setAds] = useState([]);
 	const [adType, setAdType] = useState(null);
 	const [adRegion, setAdRegion] = useState(null);
 	const [firstSearch, setFirstSearch] = useState(false);
+	const [localizedAdId, setLocalizedAdId] = useState(null);
 
 	const getAds = async () => {
 		try {
@@ -42,8 +42,6 @@ const Search = () => {
 				response = await axios.get(`${process.env.REACT_APP_API_URL}/ads/v1/ads`);
 			}
 			let filteredAds = response.data.data || [];
-			console.log(filteredAds);
-
 			setAds(filteredAds);
 			setLoading(0);
 			setFirstSearch(true);
@@ -64,11 +62,17 @@ const Search = () => {
 						) : ads.length === 0 && firstSearch ? (
 							`There are no results.`
 						) : (
-							<AdCardListLoadMore ads={ads} className="search-results-list" />
+							<AdCardListLoadMore
+								ads={ads}
+								className="search-results-list"
+								setLocalizedAdId={setLocalizedAdId}
+							/>
 						)}
 					</div>
 					<div className="search-map">
-						{ads.length > 0 && <MapView filteredAds={ads} />}
+						{ads.length > 0 && (
+							<MapView filteredAds={ads} localizedAdId={localizedAdId} />
+						)}
 					</div>
 				</div>
 			</SearchStyled>

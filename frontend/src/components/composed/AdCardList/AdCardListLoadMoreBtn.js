@@ -3,7 +3,7 @@ import {AdCardListStyled} from "./AdCardList.styles";
 import Button from "components/units/Button/Button";
 import AdCardItem from "./AdCardItem";
 
-const AdCardListLoadMore = ({ads}) => {
+const AdCardListLoadMore = ({ads, setLocalizedAdId}) => {
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const itemsPerPage = 9;
@@ -17,7 +17,14 @@ const AdCardListLoadMore = ({ads}) => {
 	return (
 		<AdCardListStyled>
 			<div className="list-scroll">
-				{ads && adsToShow.map((ad) => <AdCardItem key={ad.id} ad={ad}></AdCardItem>)}
+				{ads &&
+					adsToShow.map((ad, index) => (
+						<AdCardItem
+							key={index}
+							ad={ad}
+							openSelectedAdPopup={() => setLocalizedAdId(index)}
+						></AdCardItem>
+					))}
 			</div>
 			<Button type="button" text="Load more" onClick={showMoreItems}></Button>
 		</AdCardListStyled>
