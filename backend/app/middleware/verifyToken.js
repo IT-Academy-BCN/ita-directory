@@ -12,13 +12,16 @@ const authenticateToken = async (req, res, next) => {
 		//console.log("tokern recibido", token);
 		if (!token) return res.status(401).json({msg: "No Token"});
 		jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
-			if (err) return res.status(401).json(apiResponse({message: "Token has expired!"}));
-
-			const hashedId = payload.sub.user_id;
-			const dehashedId = hashids.decode(hashedId);
-			const userId = dehashedId[0];
-			req.userId = userId;
-			next();
+			if (err) {
+				return res.status(401).json(apiResponse({message: "Token has expired!"}));
+			} else {
+				const hashedId = payload.sub.user_id;
+				const dehashedId = hashids.decode(hashedId);
+				const userId = dehashedId[0];
+				//console.log("userId", userId);
+				req.userId = userId;
+				next();
+			}
 		});
 	} catch (err) {
 		res.status(500).json({err});
