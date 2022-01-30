@@ -1,6 +1,8 @@
 const router = require("express").Router();
+const {verify} = require("jsonwebtoken");
 const UsersController = require("../controllers/users.controller");
 const uploadFile = require("../middleware/uploadFile");
+const authenticateToken = require("../middleware/verifyToken");
 
 router.get("/v1/get_me", UsersController.getUser);
 
@@ -97,7 +99,7 @@ router.post("/v1/login", UsersController.login);
  * { "errCode":"errCode", "message":"User not found"}
  */
 //Update some field to User
-router.patch("/v1/user", UsersController.updateUser);
+router.patch("/v1/user", authenticateToken, UsersController.updateUser);
 
 /**
  * RecoverPassword data
@@ -122,7 +124,7 @@ router.patch("/v1/user", UsersController.updateUser);
  */
 
 router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
-router.put("/test", UsersController.updateUserRole);
+router.put("/test", authenticateToken, UsersController.test);
 
 /**
  * NewPassword data

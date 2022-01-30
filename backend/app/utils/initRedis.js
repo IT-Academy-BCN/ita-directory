@@ -6,4 +6,4 @@ const client = redis.createClient({
 	)}`,
 });
 
-module.exports = {client};
+module.exports = client;

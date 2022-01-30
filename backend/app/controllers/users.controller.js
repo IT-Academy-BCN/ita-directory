@@ -2,7 +2,7 @@ const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const Hashids = require("hashids");
 
-const {getRedisClient} = require("../utils/initRedis");
+const client = require("../utils/initRedis");
 const {transporter, mailOptions} = require("../utils/transporterEmail");
 
 const {
@@ -39,10 +39,10 @@ exports.getRefreshToken = (req, res, next) => {
 				const dehashedId = hashids.decode(hashedId);
 				const userId = dehashedId[0];
 
-				const result = await getRedisClient().get(userId);
+				const result = await client.get(userId);
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
-					await getRedisClient().incr(counterKey);
+					await client.incr(counterKey);
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);
@@ -190,6 +190,8 @@ exports.getAllUsers = async (req, res, next) => {
 			},
 		});
 
+		//console.log("tokens redis", client.get());
+
 		return res.status(200).json(users);
 	} catch (err) {
 		return next(new Error(err));
@@ -199,6 +201,8 @@ exports.getAllUsers = async (req, res, next) => {
 // Login
 exports.login = async (req, res, next) => {
 	const {body = {}} = req;
+
+	console.log("reque", body);
 	// Check that the request isn't empty
 
 	if (!body.email || !body.password) {
@@ -211,11 +215,11 @@ exports.login = async (req, res, next) => {
 	}
 
 	try {
-		const USER = await prisma.user.findUnique({
+		const user = await prisma.user.findUnique({
 			where: {email: body.email},
 		});
 
-		if (!USER) {
+		if (!user) {
 			return next({
 				code: "error",
 				header: "User doesn't exist",
@@ -224,7 +228,7 @@ exports.login = async (req, res, next) => {
 			});
 		}
 
-		const value = await argon2.verify(USER.password, body.password);
+		const value = await argon2.verify(user.password, body.password);
 		if (value === false) {
 			return next({
 				code: "error",
@@ -234,8 +238,8 @@ exports.login = async (req, res, next) => {
 				statusCode: 200,
 			});
 		} else {
-			const token = signToken(USER.id);
-			const refreshToken = signRefreshToken(USER.id);
+			const token = await signToken(user.id);
+			const refreshToken = await signRefreshToken(user.id);
 
 			return res.status(200).json({
 				code: "success",
@@ -507,6 +511,21 @@ exports.changePassword = async (req, res, next) => {
 					message: "Your password has been successfully changed.",
 				})
 			);
+		});
+	} catch (err) {
+		return next(new Error(err));
+	}
+};
+
+//test
+exports.test = async (req, res, next) => {
+	const userId = req.userId;
+	try {
+		console.log("test controller ok");
+
+		res.json({
+			userId,
+			msg: "Ok desde test controller",
 		});
 	} catch (err) {
 		return next(new Error(err));
