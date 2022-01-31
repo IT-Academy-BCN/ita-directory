@@ -18,7 +18,6 @@ const Input = ({
 	maxlength,
 	size,
 	success,
-	errorText,
 	errorStyles,
 	error,
 	disabled,
@@ -26,9 +25,9 @@ const Input = ({
 	required,
 	icon,
 	minMarginTop,
+	register,
 }) => {
 	const hasIcon = icon ? true : false;
-
 	return (
 		<>
 			<InputContainerStyled
@@ -56,13 +55,10 @@ const Input = ({
 					error={error}
 					required={required}
 					style={inputStyles}
+					{...(register && {register: register(`${name}`)})}
 				/>
-				{label && type === "checkbox" && <label>{label}</label>}
 			</InputContainerStyled>
-			<ErrorStyled
-				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-				styles={errorStyles}
-			/>
+			<ErrorStyled styles={errorStyles}>{error}</ErrorStyled>
 		</>
 	);
 };
@@ -71,7 +67,6 @@ Input.propTypes = {
 	type: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	/*onChange: PropTypes.func.isRequired,*/
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
 	textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -86,7 +81,7 @@ Input.propTypes = {
 	disabled: PropTypes.bool,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	error: PropTypes.bool,
+	error: PropTypes.string,
 	success: PropTypes.bool,
 	inputContainerClassName: PropTypes.string,
 	required: PropTypes.bool,

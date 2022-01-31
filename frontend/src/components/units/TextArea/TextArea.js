@@ -5,7 +5,6 @@ import {TextAreaStyled, TextAreaError, TextAreaInput, StyledError} from "./TextA
 const TextArea = ({
 	placeholder,
 	value,
-	onChange,
 	onFocus,
 	onBlur,
 	textAreaStyles,
@@ -19,11 +18,11 @@ const TextArea = ({
 	required = false,
 	rows,
 	cols,
-	errorText,
 	errorStyles,
 	error,
 	label,
 	inputContainerClassName,
+	register,
 }) => {
 	return (
 		<TextAreaStyled className={inputContainerClassName}>
@@ -34,7 +33,6 @@ const TextArea = ({
 				<TextAreaInput
 					style={textAreaStyles}
 					placeholder={placeholder}
-					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					className={`${className} ${error ? "error" : ""}`}
@@ -47,12 +45,11 @@ const TextArea = ({
 					cols={cols}
 					required={required}
 					value={value}
+					{...register(`${name}`)}
 				/>
-				<StyledError
-					dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-					className={className}
-					style={errorStyles}
-				/>
+				<StyledError className={className} style={errorStyles}>
+					{error}
+				</StyledError>
 			</TextAreaError>
 		</TextAreaStyled>
 	);
@@ -61,7 +58,6 @@ const TextArea = ({
 TextArea.propTypes = {
 	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
 

@@ -1,19 +1,36 @@
 import React, {useState} from "react";
+
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
-import {StyledSmall, ButtonWrapper} from "./ContactModal.style.js";
 import TextArea from "components/units/TextArea/TextArea.js";
+
+import {StyledSmall, ButtonWrapper} from "./ContactModal.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 import contactSchema from "validation/contactModalSchema.js";
 
 const ContactModal = ({active, hideModal}) => {
-	const [error, setError] = useState("");
 	const [animatedState, setAnimatedState] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm({
+		resolver: yupResolver(contactSchema),
+	});
+
+	const submitForm = (data) => {
+		const {name, email, message} = data;
+		sendContact(name, email, message, (err) => {
+			console.log(err);
+		});
+	};
 
 	const sendContact = (name, email, message, callback) => {
 		setAnimatedState(true);
@@ -28,39 +45,16 @@ const ContactModal = ({active, hideModal}) => {
 		}, 2000);
 	};
 
-	const handleValidateForm = async (values) => {
-		try {
-			await contactSchema.validate(values, {abortEarly: false});
-			setError("");
-			sendContact(values.name, values.email, values.message, (res) => {
-				console.log(res);
-			});
-		} catch (err) {
-			setError(err.errors[0]);
-		}
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		const formData = new FormData(e.target);
-		const values = {
-			name: formData.get("name"),
-			email: formData.get("email"),
-			message: formData.get("message"),
-		};
-
-		handleValidateForm(values);
-	};
-
 	return (
 		<Modal active={active} hideModal={hideModal} title="Contactar">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit(submitForm)}>
 				<Input
 					type="text"
 					name="name"
 					label="Nombre"
 					inputContainerClassName="input-container"
+					register={register ? register : {}}
+					error={errors.name?.message}
 				/>
 
 				<Input
@@ -68,11 +62,17 @@ const ContactModal = ({active, hideModal}) => {
 					name="email"
 					label="Email"
 					inputContainerClassName="input-container"
+					register={register}
+					error={errors.email?.message}
 				/>
 
-				<TextArea name="message" label="Mensaje" textAreaStyles={{width: "100%"}} />
-
-				<StyledSmall>{error}</StyledSmall>
+				<TextArea
+					name="message"
+					label="Mensaje"
+					textAreaStyles={{width: "100%"}}
+					register={register}
+					error={errors.message?.message}
+				/>
 
 				<Button
 					text="Enviar"
