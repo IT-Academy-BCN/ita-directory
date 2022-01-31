@@ -7,21 +7,19 @@ import {AdCardContainer} from "./AdCardContainer";
 
 const AdCardItem = ({ad, openSelectedAdPopup}) => {
 	return (
-		<AdCardContainer>
-			<AdCardItemStyled>
-				<img src={casaPiscinaAd} alt="" />
-				<p className="description">{ad.description}</p>
-				<div className="itemsInLine">
-					<span className="price">{`${ad.price}€`}</span>{" "}
-					<Button
-						buttonStyles={{backgroundColor: Colors.violet}}
-						type="button"
-						text="Localizar"
-						onClick={openSelectedAdPopup}
-					></Button>
-				</div>
-			</AdCardItemStyled>
-		</AdCardContainer>
+		<AdCardItemStyled>
+			<img src={casaPiscinaAd} alt="" />
+			<p className="description">{ad.description}</p>
+			<div className="itemsInLine">
+				<span className="price">{`${ad.price}€`}</span>{" "}
+				<Button
+					buttonStyles={{backgroundColor: Colors.violet}}
+					type="button"
+					text="Localizar"
+					onClick={openSelectedAdPopup}
+				></Button>
+			</div>
+		</AdCardItemStyled>
 	);
 };
 

@@ -2,41 +2,14 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const SearchStyled = styled.div`
-	height: 100vh;
-
 	.search-body {
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-gap: 1rem;
-
+		grid-gap: 1.5rem;
+		position: relative;
 		@media only screen and (min-width: 768px) {
 			grid-template-columns: 0.6fr 0.4fr;
 		}
-	}
-	.search-results {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-	.search-results-list {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-gap: 0.4rem;
-		background-color: blueviolet;
-
-		@media only screen and (min-width: 480px) {
-			grid-template-columns: 1fr 1fr;
-			padding-right: 0;
-		}
-
-		@media only screen and (min-width: 1024px) {
-			grid-template-columns: repeat(3, 1fr);
-			padding-right: 0.8rem;
-		}
-	}
-	.search-more-button {
-		display: flex;
-		justify-content: center;
 	}
 	.spinner {
 		width: 2.5rem;

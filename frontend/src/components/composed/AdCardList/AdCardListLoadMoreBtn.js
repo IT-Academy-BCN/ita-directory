@@ -26,7 +26,12 @@ const AdCardListLoadMore = ({ads, setLocalizedAdId}) => {
 						></AdCardItem>
 					))}
 			</div>
-			<Button type="button" text="Load more" onClick={showMoreItems}></Button>
+			<Button
+				type="button"
+				text="Load more"
+				onClick={showMoreItems}
+				className="mt-5"
+			></Button>
 		</AdCardListStyled>
 	);
 };

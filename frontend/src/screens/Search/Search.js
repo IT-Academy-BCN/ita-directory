@@ -59,17 +59,18 @@ const Search = () => {
 			<Container>
 				<SearchStyled>
 					<div className="search-body">
-						<div className="search-results">
+						<div>
 							{loading ? (
 								<FontAwesomeIcon icon={faSpinner} className="spinner" />
 							) : ads.length === 0 && firstSearch ? (
 								`There are no results.`
 							) : (
-								<AdCardListLoadMore
-									ads={ads}
-									className="search-results-list"
-									setLocalizedAdId={setLocalizedAdId}
-								/>
+								ads.length > 0 && (
+									<AdCardListLoadMore
+										ads={ads}
+										setLocalizedAdId={setLocalizedAdId}
+									/>
+								)
 							)}
 						</div>
 						<div className="search-map">
