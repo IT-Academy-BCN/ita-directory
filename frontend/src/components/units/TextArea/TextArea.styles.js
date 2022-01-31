@@ -2,7 +2,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const TextAreaStyled = styled.div.attrs({
-	className: "text-grey",
+	className: "text-grey mt-4",
 })`
 	& {
 		&.textAreaCreateNewAd {
