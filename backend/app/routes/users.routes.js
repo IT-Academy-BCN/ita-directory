@@ -38,7 +38,7 @@ router.get("/v1/get_me", UsersController.getUser);
 router.post("/v1/register", UsersController.registerUser);
 
 //Read All Users (for testing purpose)
-router.get("/", UsersController.getAllUsers);
+router.get("/", authenticateToken, UsersController.getAllUsers);
 
 //Refresh-token
 router.get("/v1/refresh-token", UsersController.getRefreshToken);
@@ -100,6 +100,7 @@ router.post("/v1/login", UsersController.login);
  */
 //Update some field to User
 router.patch("/v1/user", authenticateToken, UsersController.updateUser);
+//router.put("/v1/update-user-role", authenticateToken, UsersController.updateUserRole);
 
 /**
  * RecoverPassword data
@@ -124,7 +125,6 @@ router.patch("/v1/user", authenticateToken, UsersController.updateUser);
  */
 
 router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
-router.put("/test", authenticateToken, UsersController.test);
 
 /**
  * NewPassword data

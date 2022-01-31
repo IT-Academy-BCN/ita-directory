@@ -170,6 +170,10 @@ exports.registerUser = async (req, res, next) => {
 
 //get all users (FOR TESTING PURPOSE)
 exports.getAllUsers = async (req, res, next) => {
+	const id = req.userId;
+	if (!id) {
+		return res.status(400).json({msg: "Not authorized"});
+	}
 	try {
 		const users = await prisma.user.findMany({
 			select: {
@@ -289,50 +293,32 @@ exports.updateUserRole = async (req, res, next) => {
 	}
 };
 
-//Update some user field with id	**********************************
+//Update user name and lastname field with id
 exports.updateUser = async (req, res, next) => {
-	const {userId} = req;
-	console.log("updateuser", userId);
-	console.log("updateuser", req.body);
-	const {name, lastname} = req.body;
-	if (!userId) {
-		res.status(400).json(
-			apiResponse({
-				message: "User id not defined",
-			})
-		);
+	const {name, lastnames, user_role_id} = req.body;
+	const id = req.userId;
+
+	if (!req.body) {
+		return res.status(400).json({msg: "Undefined user status or user role"});
 	}
 
-	// if (!name || !lastname) {
-	// 	res.status(400).json(
-	// 		apiResponse({
-	// 			message: "Undefined user status or user role",
-	// 		})
-	// 	);
-	// }
-
-	// // Updating user using id
 	try {
-		// 	const user = await prisma.user.update({
-		// 		where: {id: parseInt(req.body.id)},
-		// 		data: {
-		// 			...req.body,
-		// 		},
-		// 	});
-		// 	if (user === null) {
-		// 		return next({
-		// 			code: "error",
-		// 			message: "User not found.",
-		// 			statusCode: 204, // @todo: 404 error no 204 si no existe
-		// 		});
-		// 	} else {
-		// 		// return data
-		// 		return res.status(200).json(
-		// 			apiResponse({
-		// 				message: "User updated successfully",
-		// 			})
-		// 		);
-		// 	}
+		const user = await prisma.user.update({
+			where: {id},
+			data: {
+				name,
+				lastnames,
+				user_role_id,
+			},
+		});
+		if (!user) {
+			return res.status(404).json({msg: "User no found!"});
+		} else {
+			res.status(200).json({
+				message: "User updated successfully",
+				user,
+			});
+		}
 	} catch (err) {
 		return next(new Error(err));
 	}
@@ -514,21 +500,6 @@ exports.changePassword = async (req, res, next) => {
 					message: "Your password has been successfully changed.",
 				})
 			);
-		});
-	} catch (err) {
-		return next(new Error(err));
-	}
-};
-
-//test
-exports.test = async (req, res, next) => {
-	const userId = req.userId;
-	try {
-		console.log("test controller ok");
-
-		res.json({
-			userId,
-			msg: "Ok desde test controller",
 		});
 	} catch (err) {
 		return next(new Error(err));
