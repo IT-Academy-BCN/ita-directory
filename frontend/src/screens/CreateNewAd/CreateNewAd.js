@@ -1,15 +1,21 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
+
+//styles
+import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
+import {Container} from "theme/GlobalStyles";
+
+//fontawesome
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
+
+//components
 import Body from "components/layout/Body/Body";
 import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
-import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
 
 const CreateNewAd = () => {
@@ -170,7 +176,7 @@ const CreateNewAd = () => {
 								return (
 									<div key={i}>
 										<div className="form-label">
-											{el.Component === Input && (
+											{el.Component === Input && el.icon && (
 												<FontAwesomeIcon icon={el.icon} />
 											)}
 											<label>{el.label}</label>
