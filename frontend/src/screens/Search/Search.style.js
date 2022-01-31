@@ -8,6 +8,7 @@ export const SearchStyled = styled.div`
 	width: 100%;
 	@media only screen and (min-width: 1536px) {
 		grid-template-columns: 0.6fr 0.4fr;
+		position: relative;
 	}
 	.search-body {
 		width: 100%;
@@ -39,5 +40,8 @@ export const SearchStyled = styled.div`
 		width: 100%;
 		height: 75vh;
 		border-radius: 0.5rem;
+		position: -webkit-sticky;
+		position: sticky;
+		top: 1.5rem;
 	}
 `;
