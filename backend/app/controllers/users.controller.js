@@ -193,9 +193,6 @@ exports.getAllUsers = async (req, res, next) => {
 				},
 			},
 		});
-
-		//console.log("tokens redis", client.get());
-
 		return res.status(200).json(users);
 	} catch (err) {
 		return next(new Error(err));
