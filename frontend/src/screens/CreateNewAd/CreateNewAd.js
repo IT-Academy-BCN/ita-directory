@@ -66,15 +66,14 @@ const CreateNewAd = () => {
 			map_lon: Number(coordinates[1]),
 		});
 	};
-	//	,
 
 	useEffect(() => {
-		setForm({
-			...form,
+		setForm((prev) => ({
+			...prev,
 			map_lat: Number(coordinates[0]),
 			map_lon: Number(coordinates[1]),
-		});
-	}, [coordinates, form]);
+		}));
+	}, [coordinates]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
