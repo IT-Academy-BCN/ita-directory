@@ -1,10 +1,10 @@
 const argon2 = require("argon2");
 const {PrismaClient} = require("@prisma/client");
 const prisma = new PrismaClient();
-const ads = require('./seedFiles/ads')
-const ad_types = require('./seedFiles/ad_types')
-const levels = require('./seedFiles/levels')
-const level_types = require('./seedFiles/level_types')
+const ads = require("./seedFiles/ads");
+const ad_types = require("./seedFiles/ad_types");
+const levels = require("./seedFiles/levels");
+const level_types = require("./seedFiles/level_types");
 
 const user_roles = [
 	{
@@ -99,7 +99,6 @@ const users = [
 		refresh_token: "20",
 	},
 ];
-
 
 const medias = [
 	{
@@ -217,9 +216,6 @@ const medias_metas = [
 	},
 ];
 
-
-
-
 async function main() {
 	for (let i = 0; i < user_roles.length; i++) {
 		const ur = user_roles[i];
@@ -325,7 +321,6 @@ async function main() {
 			},
 		});
 	}
-
 }
 
 main()
