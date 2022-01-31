@@ -17,7 +17,6 @@ const Input = ({
 	minlength,
 	maxlength,
 	size,
-	success,
 	errorStyles,
 	error,
 	disabled,
@@ -44,18 +43,17 @@ const Input = ({
 					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
-					className={`${className} ${error ? "error" : ""}`}
+					className={`${className}`}
 					id={id}
 					name={name}
 					disabled={disabled}
 					minLength={minlength}
 					maxLength={maxlength}
 					size={size}
-					success={success}
 					error={error}
 					required={required}
 					style={inputStyles}
-					{...(register && {register: register(`${name}`)})}
+					{...(register && register)}
 				/>
 			</InputContainerStyled>
 			<ErrorStyled styles={errorStyles}>{error}</ErrorStyled>

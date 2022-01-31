@@ -35,7 +35,7 @@ const TextArea = ({
 					placeholder={placeholder}
 					onFocus={onFocus}
 					onBlur={onBlur}
-					className={`${className} ${error ? "error" : ""}`}
+					className={`${className}`}
 					id={id}
 					name={name}
 					disabled={disabled}
@@ -45,6 +45,7 @@ const TextArea = ({
 					cols={cols}
 					required={required}
 					value={value}
+					error={error}
 					{...register(`${name}`)}
 				/>
 				<StyledError className={className} style={errorStyles}>
@@ -77,7 +78,7 @@ TextArea.propTypes = {
 	cols: PropTypes.number,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	error: PropTypes.bool,
+	error: PropTypes.string,
 };
 
 export default TextArea;

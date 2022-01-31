@@ -5,7 +5,7 @@ import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
 import TextArea from "components/units/TextArea/TextArea.js";
 
-import {StyledSmall, ButtonWrapper} from "./ContactModal.style.js";
+import {ButtonWrapper} from "./ContactModal.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
@@ -53,7 +53,7 @@ const ContactModal = ({active, hideModal}) => {
 					name="name"
 					label="Nombre"
 					inputContainerClassName="input-container"
-					register={register ? register : {}}
+					register={register("name")}
 					error={errors.name?.message}
 				/>
 
@@ -62,7 +62,7 @@ const ContactModal = ({active, hideModal}) => {
 					name="email"
 					label="Email"
 					inputContainerClassName="input-container"
-					register={register}
+					register={register("email")}
 					error={errors.email?.message}
 				/>
 
