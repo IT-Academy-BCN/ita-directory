@@ -2,14 +2,15 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const SearchStyled = styled.div`
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 1.5rem;
+	width: 100%;
+	@media only screen and (min-width: 1536px) {
+		grid-template-columns: 0.6fr 0.4fr;
+	}
 	.search-body {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-gap: 1.5rem;
-		position: relative;
-		@media only screen and (min-width: 768px) {
-			grid-template-columns: 0.6fr 0.4fr;
-		}
+		width: 100%;
 	}
 	.spinner {
 		width: 2.5rem;

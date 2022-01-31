@@ -59,25 +59,20 @@ const Search = () => {
 			<Container>
 				<SearchStyled>
 					<div className="search-body">
-						<div>
-							{loading ? (
-								<FontAwesomeIcon icon={faSpinner} className="spinner" />
-							) : ads.length === 0 && firstSearch ? (
-								`There are no results.`
-							) : (
-								ads.length > 0 && (
-									<AdCardListLoadMore
-										ads={ads}
-										setLocalizedAdId={setLocalizedAdId}
-									/>
-								)
-							)}
-						</div>
-						<div className="search-map">
-							{ads.length > 0 && (
-								<MapView filteredAds={ads} localizedAdId={localizedAdId} />
-							)}
-						</div>
+						{loading ? (
+							<FontAwesomeIcon icon={faSpinner} className="spinner" />
+						) : ads.length === 0 && firstSearch ? (
+							`There are no results.`
+						) : (
+							ads.length > 0 && (
+								<AdCardListLoadMore ads={ads} setLocalizedAdId={setLocalizedAdId} />
+							)
+						)}
+					</div>
+					<div className="search-map">
+						{ads.length > 0 && (
+							<MapView filteredAds={ads} localizedAdId={localizedAdId} />
+						)}
 					</div>
 				</SearchStyled>
 			</Container>
