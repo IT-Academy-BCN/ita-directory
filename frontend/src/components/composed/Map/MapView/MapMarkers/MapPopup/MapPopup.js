@@ -7,7 +7,6 @@ import ContactModal from "components/composed/ContactModal/ContactModal.js";
 import {PopupStyled, Content, Adress, PropertyData, Span, Price} from "./MapPopUp.Style";
 import Colors from "theme/Colors";
 import Button from "components/units/Button/Button";
-import "./MapPopup.css";
 
 const MapPopup = (props) => {
 	// aqui borré ContactPerson y contactPhone porque no hay datos iguales en el json

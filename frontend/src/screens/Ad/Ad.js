@@ -15,8 +15,7 @@ import {
 	adThumbnail3,
 } from "assets/images";
 import IconWithLabel from "components/units/IconWithLabel/IconWithLabel";
-import "components/composed/Map/Map.css";
-import Map from "components/composed/Map/Map";
+import Map from "components/composed/Map/Map/Map";
 import {getAd} from "api/ads";
 
 // const LIST_ICONS = [

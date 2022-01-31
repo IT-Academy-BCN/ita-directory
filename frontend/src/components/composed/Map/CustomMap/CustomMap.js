@@ -3,7 +3,7 @@ import {MapContainer, TileLayer, useMapEvents} from "react-leaflet";
 import L from "leaflet";
 import "./CustomMap.css";
 import IconSelector from "./IconSelector/IconSelector";
-import {customIcons} from "./CustomMapIcons";
+import {customIcons} from "./CustomMapIcons/CustomMapIcons";
 
 let layer;
 
