@@ -4,7 +4,6 @@ import {TextAreaStyled, TextAreaError, TextAreaInput, StyledError} from "./TextA
 
 const TextArea = ({
 	placeholder,
-	value,
 	onFocus,
 	onBlur,
 	textAreaStyles,
@@ -44,9 +43,8 @@ const TextArea = ({
 					rows={rows}
 					cols={cols}
 					required={required}
-					value={value}
 					error={error}
-					{...register(`${name}`)}
+					{...(register && register)}
 				/>
 				<StyledError className={className} style={errorStyles}>
 					{error}

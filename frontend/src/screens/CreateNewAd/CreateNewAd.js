@@ -68,7 +68,7 @@ const CreateNewAd = () => {
 			map_lat: Number(coordinates[0]),
 			map_lon: Number(coordinates[1]),
 		});
-	}, [coordinates, form]);
+	}, [coordinates]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -100,7 +100,7 @@ const CreateNewAd = () => {
 			inputContainerClassName: "style-input-create-new-ad", // textAreaCreateNewAd
 		},
 		{
-			Component: Input,
+			Component: InputNumber,
 			type: "text",
 			label: "Ciudad",
 			name: "city",
@@ -170,9 +170,6 @@ const CreateNewAd = () => {
 								return (
 									<div key={i}>
 										<div className="form-label">
-											{el.Component === Input && (
-												<FontAwesomeIcon icon={el.icon} />
-											)}
 											<label>{el.label}</label>
 										</div>
 										<Component
@@ -181,9 +178,8 @@ const CreateNewAd = () => {
 											name={el.name}
 											required={el.required}
 											value={form[el.name]}
-											onChange={handleChange}
 											className={el.inputClassName}
-											icon={el.Component === InputNumber && el.icon}
+											icon={el.icon && el.icon}
 											inputContainerClassName={el.inputContainerClassName}
 										/>
 									</div>
