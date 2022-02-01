@@ -5,6 +5,7 @@ export const ButtonWrapper = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	border-top: 1px solid ${Colors.lightGray};
 `;
 
 export const Wrapper = styled.div`

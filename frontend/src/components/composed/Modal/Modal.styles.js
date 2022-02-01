@@ -80,7 +80,6 @@ export const ModalBlock = styled.div`
 		.modalFooter {
 			padding: 10px 0px 0px;
 			text-align: right;
-			border-top: 1px solid ${Colors.lightGray};
 		}
 	}
 `;

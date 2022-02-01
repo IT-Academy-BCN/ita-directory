@@ -1,7 +1,10 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
-const {getRedisClient} = require("../utils/initRedis");
 const Hashids = require("hashids");
+
+const {getRedisClient} = require("../utils/initRedis");
+const {transporter, mailOptions} = require("../utils/transporterEmail");
+
 const {
 	apiResponse,
 	signToken,
@@ -419,32 +422,34 @@ exports.forgetPassword = async (req, res, next) => {
 };
 
 exports.receiveEmailGetToken = async (req, res, next) => {
-	console.log(req.body);
 	try {
-		const user = req.body.email;
+		const {email} = req.body;
+		const user = await prisma.user.findUnique({where: {email}});
 
-		const passUser = await prisma.user.findUnique({
-			where: {
-				email: user,
-			},
-		});
-
-		if (passUser) {
-			const accessToken = signToken(passUser.id, "1h");
-
-			return res.status(200).json(
-				apiResponse({
-					message: "Access token granted.",
-					data: `${process.env.REACT_APP_URL}/change-password/${accessToken}`,
-				})
-			);
-		} else {
-			return res.status(200).json(
+		//console.log("user", passUser);
+		if (!user) {
+			return res.status(404).json(
 				apiResponse({
 					code: "error",
 					message: "Email not found",
 				})
 			);
+		} else {
+			const accessToken = signToken(user.id, "1h");
+
+			mailOptions.to = email;
+			mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`;
+
+			await transporter.sendMail(mailOptions, (error, info) => {
+				if (error) {
+					res.status(500).json(error.message);
+				} else {
+					res.status(200).json({
+						//id: info.messageId,
+						msg: "Email sent",
+					});
+				}
+			});
 		}
 	} catch (err) {
 		return next(new Error(err));

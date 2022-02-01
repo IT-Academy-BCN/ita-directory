@@ -86,6 +86,7 @@ const MapView = ({filteredAds, localizedAdId}) => {
 			{filteredAds.map((ad, i) => (
 				<MapMarker key={i} ad={ad} activePopup={localizedAdId === i} />
 			))}
+
 		</MapContainer>
 	);
 };

@@ -9,6 +9,7 @@ const options = require("./utils/swaggerOptions");
 const userRoutes = require("./routes/users.routes");
 const mediaRoutes = require("./routes/media.routes");
 const locationRoutes = require("./routes/location.routes");
+const contactRoutes = require("./routes/contact.routes");
 
 // const constantsRoute = require("./routes/constants.routes");
 const adsRoutes = require("./routes/ads.routes");
@@ -56,6 +57,7 @@ app.use("/ads", adsRoutes);
 app.use("/users", userRoutes);
 app.use("/media", mediaRoutes);
 app.use("/location", locationRoutes);
+app.use("/contact", contactRoutes);
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {

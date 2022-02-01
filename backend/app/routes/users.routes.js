@@ -114,7 +114,7 @@ router.patch("/v1/user", UsersController.updateUser);
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "email": "email@example.com", "privacy":true}
+ * { "email": "email@example.com"}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "email sent successfully"}
  * @example response - 400 - Example error response
