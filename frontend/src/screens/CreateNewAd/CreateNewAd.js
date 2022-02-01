@@ -6,7 +6,6 @@ import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
@@ -110,6 +109,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "Habitaciones",
 			name: "n_rooms",
 			icon: faBed,
@@ -117,6 +117,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "Precio",
 			name: "price",
 			required: true,
@@ -125,6 +126,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "M\u00B2",
 			name: "square_meters",
 			required: true,
@@ -133,6 +135,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "Baños",
 			name: "n_bathrooms",
 			icon: faBath,
@@ -176,8 +179,6 @@ const CreateNewAd = () => {
 											key={i}
 											type={el.type}
 											name={el.name}
-											required={el.required}
-											value={form[el.name]}
 											className={el.inputClassName}
 											icon={el.icon && el.icon}
 											inputContainerClassName={el.inputContainerClassName}

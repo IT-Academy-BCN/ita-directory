@@ -5,8 +5,6 @@ import {InputNumberStyled, StyledError, StyledInput, StyledContainer} from "./In
 
 const InputNumber = ({
 	placeholder,
-	value,
-	onChange,
 	onFocus,
 	onBlur,
 	textStyles,
@@ -25,6 +23,7 @@ const InputNumber = ({
 	icon,
 	label,
 	required,
+	type,
 }) => {
 	const [isInvalid, setIsInvalid] = useState(false);
 
@@ -33,13 +32,6 @@ const InputNumber = ({
 	by the browser (e.g. when "+", "-" are typed) and onChange event is not fired. 
 	Consider this when managing validation on parent components!
 	*/
-
-	const handleOnChange = (e) => {
-		const val = e.target.value;
-		const regex = /^\d+$/;
-		setIsInvalid(val === "" || !regex.test(val) ? true : false);
-		onChange(e);
-	};
 
 	return (
 		<InputNumberStyled>
@@ -50,10 +42,8 @@ const InputNumber = ({
 						<FontAwesomeIcon icon={icon} />
 					</div>
 					<StyledInput
-						type="number"
+						type={type}
 						placeholder={placeholder}
-						value={value}
-						onChange={handleOnChange}
 						onFocus={onFocus}
 						onBlur={onBlur}
 						className={`${className} ${isInvalid ? "error" : ""}`}
@@ -68,7 +58,6 @@ const InputNumber = ({
 						labelStyles={labelStyles}
 						size={size}
 						errorStyles={errorStyles}
-						required={required}
 					/>
 				</StyledContainer>
 				<StyledError
