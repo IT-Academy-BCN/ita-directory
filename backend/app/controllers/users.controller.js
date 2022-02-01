@@ -285,6 +285,7 @@ exports.updateUser = async (req, res, next) => {
 
 // Delete user
 exports.deleteUser = async (req, res, next) => {
+<<<<<<< HEAD
 	const email = req.body.email;
 
 	if (email === null || undefined) return res.status(404).json({message: "Enter correct email!"});
@@ -292,6 +293,34 @@ exports.deleteUser = async (req, res, next) => {
 	try {
 		const deleteUser = await prisma.user.delete({
 			where: {email},
+=======
+	// Check that the request isn't empty
+	if (!req.body) {
+		return next({
+			code: "error",
+			message: "User not found",
+			statusCode: 404,
+		});
+	}
+	try {
+		const userModel = await prisma.user.findOne({
+			raw: true,
+			nest: true,
+			attributes: {
+				exclude: ["mec_pwd", "password_change"],
+			},
+			include: [
+				{
+					model: prisma.profile,
+					attributes: ["id"],
+				},
+				{
+					model: prisma.mecuser_people,
+				},
+				{model: prisma.people},
+			],
+			where: {id: req.body.uid},
+>>>>>>> develop
 		});
 		res.status(200).json({user: deleteUser, msg: `User successfully deleted`});
 		next();
