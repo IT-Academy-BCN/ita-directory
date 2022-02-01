@@ -26,10 +26,10 @@ async function createAd(req, res) {
 				map_lon: parseFloat(req.body.map_lon),
 				ad_type: {
 					connect: {
-						id: parseInt(req.body.ad_type_id)
-					}
-				}
-			}
+						id: parseInt(req.body.ad_type_id),
+					},
+				},
+			},
 		});
 
 		res.status(200).json(
@@ -128,25 +128,40 @@ async function getAdById(req, res) {
 	}
 }
 
-
 async function getAdsByType(req, res) {
 	try {
 		const {type} = req.params;
-		let type_id
+		let type_id;
 		await getAdsByTypeSchema.validateAsync(type);
 
 		switch (type) {
-			case "house": type_id = 1; break;
-			case "room": type_id = 2; break;
-			case "garage": type_id = 3; break;
-			case "storage": type_id = 4; break;
-			case "office": type_id = 5; break;
-			case "warehouse": type_id = 6; break;
-			case "building": type_id = 7; break;
-			case "new_building": type_id = 8; break;
-			default: type_id = 0;
-		};
-
+			case "house":
+				type_id = 1;
+				break;
+			case "room":
+				type_id = 2;
+				break;
+			case "garage":
+				type_id = 3;
+				break;
+			case "storage":
+				type_id = 4;
+				break;
+			case "office":
+				type_id = 5;
+				break;
+			case "warehouse":
+				type_id = 6;
+				break;
+			case "building":
+				type_id = 7;
+				break;
+			case "new_building":
+				type_id = 8;
+				break;
+			default:
+				type_id = 0;
+		}
 
 		if (type_id == 0) {
 			return res.status(404).json(
@@ -157,16 +172,15 @@ async function getAdsByType(req, res) {
 		}
 		const {id} = await prisma.ad_type.findUnique({
 			where: {
-				id: type_id
+				id: type_id,
 			},
 		});
 
 		const ads = await prisma.ads.findMany({
 			where: {
-				ad_type_id: id
+				ad_type_id: id,
 			},
-		})
-
+		});
 
 		return res.status(200).json({
 			message: "Ad fetched correctly.",
@@ -191,12 +205,13 @@ async function getAdsByType(req, res) {
 	}
 }
 
-
 async function getAdTypes(req, res) {
 	try {
-		const typeNames = await prisma.ad_type.findMany()
-		let data = []
-		typeNames.forEach(type => {data.push(type.name)})
+		const typeNames = await prisma.ad_type.findMany();
+		let data = [];
+		typeNames.forEach((type) => {
+			data.push(type.name);
+		});
 		return res.status(200).json({
 			message: "Types fetched correctly.",
 			data,
@@ -209,29 +224,43 @@ async function getAdTypes(req, res) {
 			})
 		);
 	}
-
 }
-
 
 async function getAdsByTypeAndLocation(req, res) {
 	try {
 		const {location, type} = req.params;
-		let formattedLocation = formatLocation(location)
-		let type_id
+		let formattedLocation = formatLocation(location);
+		let type_id;
 		await getAdsByTypeSchema.validateAsync(type);
 
 		switch (type) {
-			case "house": type_id = 1; break;
-			case "room": type_id = 2; break;
-			case "garage": type_id = 3; break;
-			case "storage": type_id = 4; break;
-			case "office": type_id = 5; break;
-			case "warehouse": type_id = 6; break;
-			case "building": type_id = 7; break;
-			case "new_building": type_id = 8; break;
-			default: type_id = 0;
-		};
-
+			case "house":
+				type_id = 1;
+				break;
+			case "room":
+				type_id = 2;
+				break;
+			case "garage":
+				type_id = 3;
+				break;
+			case "storage":
+				type_id = 4;
+				break;
+			case "office":
+				type_id = 5;
+				break;
+			case "warehouse":
+				type_id = 6;
+				break;
+			case "building":
+				type_id = 7;
+				break;
+			case "new_building":
+				type_id = 8;
+				break;
+			default:
+				type_id = 0;
+		}
 
 		if (type_id == 0) {
 			return res.status(404).json(
@@ -242,21 +271,21 @@ async function getAdsByTypeAndLocation(req, res) {
 		}
 		const {id} = await prisma.ad_type.findUnique({
 			where: {
-				id: type_id
+				id: type_id,
 			},
 		});
 
 		const ads = await prisma.ads.findMany({
 			where: {
 				city: formattedLocation,
-				ad_type_id: id
+				ad_type_id: id,
 			},
-		})
+		});
 
 		if (ads.length === 0) {
 			return res.status(200).json({
-				message: "There are no ads for the city and type selected"
-			})
+				message: "There are no ads for the city and type selected",
+			});
 		}
 
 		return res.status(200).json({
@@ -273,7 +302,22 @@ async function getAdsByTypeAndLocation(req, res) {
 	}
 }
 
-
+async function getAdsByLocation(req, res) {
+	try {
+		const {location} = req.params;
+		const formattedLocation = formatLocation(location);
+		const data = await prisma.ads.findMany({where: {city: formattedLocation}});
+		console.log("ads", data);
+		res.status(200).json({data});
+	} catch (err) {
+		return res.status(500).json(
+			apiResponse({
+				message: "Something wrong occurred with your query.",
+				err: err.message,
+			})
+		);
+	}
+}
 
 async function deleteById(req, res) {
 	try {
@@ -313,14 +357,13 @@ async function deleteById(req, res) {
 	}
 }
 
-
-
 module.exports = {
 	createAd,
 	getAllAds,
 	getAdById,
 	getAdsByType,
 	getAdTypes,
+	getAdsByLocation,
 	getAdsByTypeAndLocation,
-	deleteById
+	deleteById,
 };
