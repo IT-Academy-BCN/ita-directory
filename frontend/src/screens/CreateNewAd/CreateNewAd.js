@@ -17,6 +17,7 @@ import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
+import UploadAdsFromFile from "components/composed/UploadAdsFromFile/UploadAdsFromFile";
 
 const CreateNewAd = () => {
 	const emptyForm = {
@@ -217,6 +218,9 @@ const CreateNewAd = () => {
 								<pre>{submittedData}</pre>
 							</div>
 						)}
+					</Wrapper>
+					<Wrapper>
+						<UploadAdsFromFile />
 					</Wrapper>
 				</Container>
 			</Body>
