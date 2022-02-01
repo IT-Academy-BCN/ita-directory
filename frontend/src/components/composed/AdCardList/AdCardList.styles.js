@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const AdCardListStyled = styled.div`
-	position: relative;
-	overflow: visible;
-
 	.list-scroll {
-		display: flex;
-		flex-wrap: wrap;
-		overflow: auto;
-		position: relative;
-		height: 100vh;
+		display: grid;
+		grid-gap: 1.5rem;
+
+		@media (min-width: 640px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@media (min-width: 1024px) {
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 `;

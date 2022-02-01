@@ -37,7 +37,7 @@ router.get("/v1/get_me", UsersController.getUser);
 router.post("/v1/register", UsersController.registerUser);
 
 //Read All Users (for testing purpose)
-router.get("/", UsersController.getAllUsers);
+router.get("/", authenticateToken, UsersController.getAllUsers);
 
 //Refresh-token
 router.get("/v1/refresh-token", UsersController.getRefreshToken);
