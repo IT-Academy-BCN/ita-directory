@@ -334,7 +334,7 @@ exports.updateUser = async (req, res, next) => {
 // Delete user
 exports.deleteUser = async (req, res, next) => {
 	// Check that the request isn't empty
-	if (!req.user) {
+	if (!req.body) {
 		return next({
 			code: "error",
 			message: "User not found",
@@ -358,7 +358,7 @@ exports.deleteUser = async (req, res, next) => {
 				},
 				{model: prisma.people},
 			],
-			where: {id: req.user.uid},
+			where: {id: req.body.uid},
 		});
 
 		if (userModel) {
