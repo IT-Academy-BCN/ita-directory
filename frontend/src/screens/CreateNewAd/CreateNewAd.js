@@ -220,7 +220,10 @@ const CreateNewAd = () => {
 						)}
 					</Wrapper>
 					<Wrapper>
-						<UploadAdsFromFile />
+						<UploadAdsFromFile
+							setError={setError}
+							setSuccessfulPost={setSuccessfulPost}
+						/>
 					</Wrapper>
 				</Container>
 			</Body>

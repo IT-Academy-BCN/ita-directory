@@ -7,9 +7,8 @@ import {Form} from "./UploadAdsFromFile.styles";
 //components
 import Input from "components/units/Input/Input";
 import Button from "components/units/Button/Button";
-import Notification from "components/units/Notifications/Notification";
 
-const UploadAdsFromFile = () => {
+const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 	const [csvFile, setCsvFile] = useState();
 
 	const validateCsvFile = (file) => {
@@ -27,10 +26,10 @@ const UploadAdsFromFile = () => {
 			axios
 				.post(`${process.env.REACT_APP_API_URL}/media/v1/upload`, {text})
 				.then((res) => {
-					console.log("enviat amb èxit");
+					setSuccessfulPost(true);
 					console.log(res);
 				})
-				.catch(() => console.log("error en enviar"));
+				.catch(() => setError(true));
 		};
 
 		reader.readAsText(file);
