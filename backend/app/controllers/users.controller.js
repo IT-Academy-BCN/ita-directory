@@ -333,6 +333,7 @@ exports.updateUser = async (req, res, next) => {
 
 // Delete user
 exports.deleteUser = async (req, res, next) => {
+<<<<<<< HEAD
 	// Check that the request isn't empty
 	if (!req.body) {
 		return next({
@@ -359,24 +360,67 @@ exports.deleteUser = async (req, res, next) => {
 				{model: prisma.people},
 			],
 			where: {id: req.body.uid},
-		});
+=======
+	const email = req.body.email;
 
-		if (userModel) {
-			if (userModel.person.picture) {
-				userModel.person.picture = Buffer.from(userModel.person.picture).toString("base64");
-			}
-			return res.status(200).json(userModel);
-		} else {
-			return next({
-				code: "error",
-				message: "User not found",
-				statusCode: 404,
-			});
-		}
-	} catch (err) {
-		return next(new Error(err));
+	if (email === null || undefined) return res.status(404).json({message: "Enter correct email!"});
+
+	try {
+		const deleteUser = await prisma.user.delete({
+			where: {email},
+>>>>>>> develop
+		});
+		res.status(200).json({user: deleteUser, msg: `User successfully deleted`});
+		next();
+	} catch (error) {
+		return new Error(error);
 	}
 };
+
+// // Check that the request isn't empty
+// if (!req.body) {
+// 	return next({
+// 		code: "error",
+// 		message: "User not found",
+// 		statusCode: 404,
+// 	});
+// }
+// try {
+// 	const userModel = await prisma.user.findOne({
+// 		raw: true,
+// 		nest: true,
+// 		attributes: {
+// 			exclude: ["mec_pwd", "password_change"],
+// 		},
+// 		include: [
+// 			{
+// 				model: prisma.profile,
+// 				attributes: ["id"],
+// 			},
+// 			{
+// 				model: prisma.mecuser_people,
+// 			},
+// 			{model: prisma.people},
+// 		],
+// 		where: {id: req.body.uid},
+// 	});
+
+// 	if (userModel) {
+// 		if (userModel.person.picture) {
+// 			userModel.person.picture = Buffer.from(userModel.person.picture).toString("base64");
+// 		}
+// 		return res.status(200).json(userModel);
+// 	} else {
+// 		return next({
+// 			code: "error",
+// 			message: "User not found",
+// 			statusCode: 404,
+// 		});
+// 	}
+// } catch (err) {
+// 	return next(new Error(err));
+// }
+// };
 
 exports.forgetPassword = async (req, res, next) => {
 	const {email} = req.body;

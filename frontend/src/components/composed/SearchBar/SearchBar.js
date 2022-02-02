@@ -40,42 +40,40 @@ const SearchBar = ({setAdType, setAdRegion, getAds}) => {
 	}, []);
 
 	return (
-		<StyledSubHeader>
-			<SearchBarContainer isLoading={loading}>
-				{loading ? (
-					<FontAwesomeIcon icon={faSpinner} className="spinner" />
-				) : (
-					<>
-						<Select
-							options={typesList}
-							components={components}
-							placeholder="House, room, garage..."
-							className="header-select"
-							customStyles={customStyles}
-							onChange={(value) => setAdType(value)}
-							isClearable={true}
-						/>
+		<SearchBarContainer isLoading={loading}>
+			{loading ? (
+				<FontAwesomeIcon icon={faSpinner} className="spinner" />
+			) : (
+				<>
+					<Select
+						options={typesList}
+						components={components}
+						placeholder="House, room, garage..."
+						className="header-select"
+						customStyles={customStyles}
+						onChange={(value) => setAdType(value)}
+						isClearable={true}
+					/>
 
-						<AsyncSelect
-							components={components}
-							placeholder="Barcelona, Berlín..."
-							className="header-select"
-							customStyles={customStyles}
-							loadOptions={loadOptions}
-							onChange={(value) => setAdRegion(value)}
-							isClearable={true}
-						/>
-						<Button
-							onClick={getAds}
-							icon={faSearch}
-							iconPosition="left"
-							className="header-button"
-							type="button"
-						/>
-					</>
-				)}
-			</SearchBarContainer>
-		</StyledSubHeader>
+					<AsyncSelect
+						components={components}
+						placeholder="Barcelona, Berlín..."
+						className="header-select"
+						customStyles={customStyles}
+						loadOptions={loadOptions}
+						onChange={(value) => setAdRegion(value)}
+						isClearable={true}
+					/>
+					<Button
+						onClick={getAds}
+						icon={faSearch}
+						iconPosition="left"
+						className="header-button"
+						type="button"
+					/>
+				</>
+			)}
+		</SearchBarContainer>
 	);
 };
 

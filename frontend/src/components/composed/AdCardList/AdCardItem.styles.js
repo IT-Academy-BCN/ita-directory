@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const AdCardItemStyled = styled.div`
 	border-radius: 6px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-	margin-bottom: 1.5rem;
-
+	width: 100%;
 	img {
+		width: 100%;
 		height: 175px;
 		object-fit: cover;
-		border-radius: 6px;
+		border-radius: inherit;
 		:hover {
 			cursor: pointer;
 		}
