@@ -59,7 +59,7 @@ const UploadAdsFromFile = () => {
 			const text = e.target.result;
 			console.log(text);
 			axios
-				.post(`${process.env.REACT_APP_API_URL}/media/v1/uploadMedia`, {text})
+				.post(`${process.env.REACT_APP_API_URL}/media/v1/upload`, {text})
 				.then((res) => {
 					console.log("enviat amb èxit");
 					console.log(res);
@@ -72,6 +72,7 @@ const UploadAdsFromFile = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
+			<label>Publicar anuncios desde archivo</label>
 			<Input
 				type="file"
 				name="csvFile"
