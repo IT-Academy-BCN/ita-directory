@@ -8,32 +8,44 @@ import Body from "components/layout/Body/Body";
 
 // Units Components
 import AsyncButton from "components/units/Button/Button";
+import Input from "components/units/Input/Input";
 
 // Styles
 import {Container, Form} from "../UserFlow.styles";
 
-// Utilities
-import {msgs, validateEmail} from "utils/userFlow";
-import Input from "components/units/Input/Input";
+//Form validation
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import recoverPasswordSchema from "validation/recoverPasswordSchema";
 
 const RecoverPassword = () => {
 	const [animatedState, setAnimatedState] = useState(false);
-	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
-	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
 
 	const closeNotification = () => setMessage(null);
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm({
+		resolver: yupResolver(recoverPasswordSchema),
+	});
+
+	const submitForm = (data) => {
+		const {email} = data;
+		sendEmail(email, message, (err) => {
+			console.log(err);
+		});
+	};
+
+	const sendEmail = async (email) => {
 		setAnimatedState(true);
-		setIsDisabled(true);
 		setIsLoading(true);
 		setTimeout(() => {
 			setAnimatedState(false);
-			setIsDisabled(false);
 			setIsLoading(false);
 		}, 2000);
 
@@ -65,7 +77,7 @@ const RecoverPassword = () => {
 			) : null}
 			<Body title="Cambiar contraseña" justifyTitle="center">
 				<Container>
-					<Form onSubmit={handleSubmit}>
+					<Form onSubmit={handleSubmit(submitForm)}>
 						<StyledParagraph>
 							Si has olvidado la contraseña introduce tu email y te enviaremos un
 							enlace para cambiarla.
@@ -73,14 +85,9 @@ const RecoverPassword = () => {
 						<Input
 							type="email"
 							name="email"
-							placeholder={msgs.placeholderEmail}
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							id="emailName"
-							disabled={disabled}
-							success={email !== "" && validateEmail(email)}
-							error={email !== "" && !validateEmail(email)}
-							errorText={msgs[`emailError`]}
+							placeholder="enter your email"
+							register={register("email")}
+							error={errors.email?.message}
 						/>
 						<AsyncButton
 							text="Enviar"
@@ -90,7 +97,6 @@ const RecoverPassword = () => {
 							className="w-full blue-gradient mt-6"
 							isLoading={isLoading}
 							animated={animatedState}
-							disabled={!validateEmail(email)}
 						/>
 					</Form>
 				</Container>
