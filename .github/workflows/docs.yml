@@ -2,29 +2,31 @@ name: Update docs
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
-      run: npm install
-      run: npm run build
-      env:
-        CI: true
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install Packages
+        run: npm install
+      - name: Build Docs
+        run: npm run build
+        env:
+          CI: true
 
-    - name: Deploy via rsync
-      uses: burnett01/rsync-deployments@5.2
-      with:
-        switches: -avzr --delete
-        path: build/
-        remote_path: ${{ secrets.DOCS_PATH }}
-        remote_host: ${{ secrets.DEPLOY_HOST }}
-        remote_port: ${{ secrets.DEPLOY_PORT }}
-        remote_user: ${{ secrets.DEPLOY_USER }}
-        remote_key: ${{ secrets.DEPLOY_KEY }}
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@5.2
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: ${{ secrets.DOCS_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
