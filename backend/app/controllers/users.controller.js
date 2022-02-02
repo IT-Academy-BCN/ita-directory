@@ -2,7 +2,7 @@ const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
 const Hashids = require("hashids");
 
-const {getRedisClient} = require("../utils/initRedis");
+const client = require("../utils/initRedis");
 const {transporter, mailOptions} = require("../utils/transporterEmail");
 
 const {
@@ -39,7 +39,7 @@ exports.getRefreshToken = (req, res, next) => {
 				const dehashedId = hashids.decode(hashedId);
 				const userId = dehashedId[0];
 
-				const result = await getRedisClient().get(userId);
+				const result = await client.get(userId);
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
 					await getRedisClient().incr(counterKey);
