@@ -98,11 +98,7 @@ router.post("/v1/login", UsersController.login);
  * { "errCode":"errCode", "message":"User not found"}
  */
 //Update some field to User
-<<<<<<< HEAD
 router.patch("/v1/update-user", UsersController.updateUser);
-=======
-router.patch("/v1/user", authenticateToken, UsersController.updateUser);
->>>>>>> develop
 
 /**
  * RecoverPassword data
@@ -127,10 +123,6 @@ router.patch("/v1/user", authenticateToken, UsersController.updateUser);
  */
 
 router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
-<<<<<<< HEAD
-=======
-//router.put("/test", UsersController.updateUserRole);
->>>>>>> develop
 
 /**
  * NewPassword data
