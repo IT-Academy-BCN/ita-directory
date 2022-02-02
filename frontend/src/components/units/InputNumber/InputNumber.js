@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {InputNumberStyled, StyledError, StyledInput, StyledContainer} from "./InputNumber.styles";
@@ -25,8 +25,6 @@ const InputNumber = ({
 	register,
 	type,
 }) => {
-	const [isInvalid, setIsInvalid] = useState(false);
-
 	/*warning on behavior of input type number:
 	target value is passed as empty string if the number is not interpreted as valid 
 	by the browser (e.g. when "+", "-" are typed) and onChange event is not fired. 

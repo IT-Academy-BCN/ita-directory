@@ -12,6 +12,7 @@ const registerSchema = yup.object().shape({
 			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
 			"Debe contener un carácter especial (@ $ ! % * # ? &) y al menos un número"
 		),
+	privacy: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
 });
 
 export default registerSchema;

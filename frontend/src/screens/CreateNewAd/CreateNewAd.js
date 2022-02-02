@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
-import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
