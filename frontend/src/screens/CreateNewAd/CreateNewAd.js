@@ -86,7 +86,7 @@ const CreateNewAd = () => {
 
 	const inputComponentData = [
 		{
-			Component: Input,
+			Component: InputNumber,
 			type: "text",
 			label: "Título",
 			name: "title",

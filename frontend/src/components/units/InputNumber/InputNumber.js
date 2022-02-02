@@ -37,16 +37,18 @@ const InputNumber = ({
 		<InputNumberStyled>
 			<label htmlFor={id}>{label}</label>
 			<div className="inputsContainer">
-				<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
-					<div className="styledIcon">
-						<FontAwesomeIcon icon={icon} />
-					</div>
+				<StyledContainer className={`${className} ${error ? "error" : ""}`}>
+					{icon && (
+						<div className="styledIcon">
+							<FontAwesomeIcon icon={icon} />
+						</div>
+					)}
 					<StyledInput
 						type={type}
 						placeholder={placeholder}
 						onFocus={onFocus}
 						onBlur={onBlur}
-						className={`${className} ${isInvalid ? "error" : ""}`}
+						className={`${className} ${error ? "error" : ""}`}
 						id={id}
 						name={name}
 						min={min}

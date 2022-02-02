@@ -36,7 +36,11 @@ export const StyledContainer = styled.div`
 	}
 	&:focus-within {
 		outline: 0 none;
-		border: 3px solid #000 !important;
+		border: 2px solid #000 !important;
+	}
+
+	&.error:focus-within {
+		border-color: red !important;
 	}
 
 	.styledIcon {
