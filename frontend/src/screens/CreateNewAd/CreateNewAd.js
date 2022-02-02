@@ -72,8 +72,6 @@ const CreateNewAd = () => {
 			map_lat: Number(coordinates[0]),
 			map_lon: Number(coordinates[1]),
 		};
-
-		console.log(JSON.stringify(formInfo));
 		postAd(formInfo);
 		setSubmittedData(JSON.stringify(formInfo, 0, 2));
 		//variables reset

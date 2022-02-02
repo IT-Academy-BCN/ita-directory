@@ -8,7 +8,9 @@ const newAdSchema = yup.object().shape({
 		.number()
 		.typeError("")
 		.integer("not decimals allowed")
-		.positive("must be positive number"),
+		.positive("must be positive number")
+		.nullable(true)
+		.transform((val) => (isNaN(val) ? undefined : val)),
 	price: yup
 		.number()
 		.typeError("this field is required")
@@ -24,7 +26,9 @@ const newAdSchema = yup.object().shape({
 		.number()
 		.typeError("")
 		.integer("not decimals allowed")
-		.positive("must be positive number"),
+		.positive("must be positive number")
+		.nullable(true)
+		.transform((val) => (isNaN(val) ? undefined : val)),
 });
 
 export default newAdSchema;
