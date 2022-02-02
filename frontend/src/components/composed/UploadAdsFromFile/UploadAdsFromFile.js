@@ -1,54 +1,20 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
+
+//styles
+import {Form} from "./UploadAdsFromFile.styles";
 
 //components
 import Input from "components/units/Input/Input";
 import Button from "components/units/Button/Button";
+import Notification from "components/units/Notifications/Notification";
 
 const UploadAdsFromFile = () => {
-	const requiredHeaders = [
-		"user_id",
-		"title",
-		"description",
-		"city",
-		"n_rooms",
-		"price",
-		"square_meters",
-		"n_bathrooms",
-		"map_lat",
-		"map_lon",
-		"ad_type_id",
-	];
 	const [csvFile, setCsvFile] = useState();
-	/* const [adsArray, setAdsArray] = useState(null); */
 
 	const validateCsvFile = (file) => {
 		return file && file.type === "text/csv";
 	};
-
-	/* const validateHeaders = (str, delimiter = ",") => {
-		const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-		for (let i = 0; i < requiredHeaders.length; i++) {
-			if (headers[i] !== requiredHeaders[i]) return false;
-		}
-		return true;
-	};
-
-	function csvToArray(str, delimiter = ",") {
-		const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-		const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-
-		const arr = rows.map((row) => {
-			const values = row.split(delimiter);
-			const el = headers.reduce((object, header, index) => {
-				object[header] = values[index];
-				return object;
-			}, {});
-			return el;
-		});
-
-		return arr;
-	} */
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -71,12 +37,11 @@ const UploadAdsFromFile = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit}>
 			<label>Publicar anuncios desde archivo</label>
 			<Input
 				type="file"
 				name="csvFile"
-				placeholder="upload csv file"
 				onChange={(event) => {
 					setCsvFile(event.target.files[0]);
 				}}
@@ -85,8 +50,18 @@ const UploadAdsFromFile = () => {
 				error={csvFile && !validateCsvFile(csvFile)}
 				errorText="Sube un archivo .csv"
 			/>
-			<Button type="submit" text="enviar" />
-		</form>
+			<Button
+				type="submit"
+				text="enviar"
+				className="blue-gradient"
+				buttonStyles={{
+					width: "7.25rem",
+					height: "2.125rem",
+					marginBottom: "2rem",
+				}}
+				disabled={!(csvFile && validateCsvFile(csvFile))}
+			/>
+		</Form>
 	);
 };
 
