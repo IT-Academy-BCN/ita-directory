@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const UsersController = require("../controllers/users.controller");
 const uploadFile = require("../middleware/uploadFile");
+const authenticateToken = require("../middleware/verifyToken");
 
 router.get("/v1/get_me", UsersController.getUser);
 
@@ -36,7 +37,7 @@ router.get("/v1/get_me", UsersController.getUser);
 router.post("/v1/register", UsersController.registerUser);
 
 //Read All Users (for testing purpose)
-router.get("/", UsersController.getAllUsers);
+router.get("/", authenticateToken, UsersController.getAllUsers);
 
 //Refresh-token
 router.get("/v1/refresh-token", UsersController.getRefreshToken);
@@ -97,7 +98,7 @@ router.post("/v1/login", UsersController.login);
  * { "errCode":"errCode", "message":"User not found"}
  */
 //Update some field to User
-router.patch("/v1/user", UsersController.updateUser);
+router.patch("/v1/update-user", UsersController.updateUser);
 
 /**
  * RecoverPassword data
@@ -122,7 +123,6 @@ router.patch("/v1/user", UsersController.updateUser);
  */
 
 router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
-router.put("/test", UsersController.updateUserRole);
 
 /**
  * NewPassword data
@@ -153,5 +153,8 @@ router.put("/test", UsersController.updateUserRole);
  */
 
 router.post("/v1/change-password/:token", UsersController.changePassword);
+
+//Route delete create
+router.delete("/v1/delete-user", UsersController.deleteUser);
 
 module.exports = router;
