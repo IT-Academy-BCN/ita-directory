@@ -16,13 +16,13 @@ const InputNumber = ({
 	min,
 	max,
 	size,
-	errorText = "Tiene que ser un número válido o no puede estar vacío",
+	error,
 	errorStyles,
 	disabled,
 	step,
 	icon,
 	label,
-	required,
+	register,
 	type,
 }) => {
 	const [isInvalid, setIsInvalid] = useState(false);
@@ -58,12 +58,11 @@ const InputNumber = ({
 						labelStyles={labelStyles}
 						size={size}
 						errorStyles={errorStyles}
+						error={error}
+						{...(register && register)}
 					/>
 				</StyledContainer>
-				<StyledError
-					dangerouslySetInnerHTML={{__html: isInvalid ? errorText : null}}
-					className={className}
-				/>
+				<StyledError className={className}>{error}</StyledError>
 			</div>
 		</InputNumberStyled>
 	);
