@@ -2,7 +2,14 @@ name: Update docs
 
 on:
   push:
-    branches: [develop]
+    branches:
+      - develop
+    paths:
+      - "documents/**/**"
+
+defaults:
+  run:
+    working-directory: documents
 
 jobs:
   build-and-deploy:
