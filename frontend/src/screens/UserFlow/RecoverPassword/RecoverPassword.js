@@ -36,9 +36,7 @@ const RecoverPassword = () => {
 
 	const submitForm = (data) => {
 		const {email} = data;
-		sendEmail(email, message, (err) => {
-			console.log(err);
-		});
+		sendEmail(email);
 	};
 
 	const sendEmail = async (email) => {
@@ -52,12 +50,12 @@ const RecoverPassword = () => {
 		try {
 			const response = await axios.post(
 				`${process.env.REACT_APP_API_URL}/users/v1/recover-password`,
-				{email}
+				email
 			);
 			response.data.message === "Access token granted."
 				? setIsSuccess(true)
 				: setIsSuccess(false);
-			setMessage(response.data.message);
+			setMessage("The instructions to recover your password has been sent to your email");
 		} catch (error) {
 			if (error.name === "Error") {
 				setIsSuccess(false);
@@ -77,7 +75,7 @@ const RecoverPassword = () => {
 			) : null}
 			<Body title="Cambiar contraseña" justifyTitle="center">
 				<Container>
-					<Form onSubmit={handleSubmit(submitForm)}>
+					<Form onSubmit={handleSubmit(submitForm)} noValidation>
 						<StyledParagraph>
 							Si has olvidado la contraseña introduce tu email y te enviaremos un
 							enlace para cambiarla.
