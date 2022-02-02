@@ -249,85 +249,37 @@ exports.login = async (req, res, next) => {
 		return next(new Error(err));
 	}
 };
-//Update role to user with id_user & id_role (FOR TESTING PURPOSE)
-exports.updateUserRole = async (req, res, next) => {
-	if (!req.body) {
-		return next({
-			code: "error",
-			message: "Request is empty",
-			statusCode: 400,
-		});
-	}
-	try {
-		const user = await prisma.user.update(
-			{user_role_id: req.body.user_role_id},
-			{where: {id: req.body.user_id}}
-		);
-		if (user === null) {
-			return next({
-				code: "error",
-				success: "false",
-				message: "user not found",
-				statusCode: 204,
-			});
-		} else {
-			//make update & return data
 
-			return res.status(200).json({
-				success: "true",
-				name: user.name,
-				lastnames: user.lastnames,
-				user_role_id: user.user_role_id,
-			});
-		}
-	} catch (err) {
-		return next(new Error(err));
-	}
-};
-
-//Update some user field with id
+//Update user
 exports.updateUser = async (req, res, next) => {
-	const {id, user_role_id, user_status_id} = req.body;
-	if (!id) {
-		res.status(400).json(
-			apiResponse({
-				message: "User id not defined",
-			})
-		);
+	const {email, name, lastnames, password, user_role_id, user_status_id} = req.body;
+
+	if (!req.body) {
+		return res.status(400).json({message: `Enter correct roles!, please`});
 	}
 
-	if (!user_status_id && !user_role_id) {
-		res.status(400).json(
-			apiResponse({
-				message: "Undefined user status or user role",
-			})
-		);
-	}
-
-	// Updating user using id
 	try {
-		const user = await prisma.user.update({
-			where: {id: parseInt(req.body.id)},
+		const updateUser = await prisma.user.update({
+			where: {email},
 			data: {
-				...req.body,
+				name,
+				lastnames,
+				email,
+				password,
+				user_role_id,
+				user_status_id,
 			},
 		});
-		if (user === null) {
-			return next({
-				code: "error",
-				message: "User not found.",
-				statusCode: 204, // @todo: 404 error no 204 si no existe
-			});
+		if (updateUser === null || undefined) {
+			return res.status(204).json({massage: `User not found. Entry data, please`});
 		} else {
-			// return data
-			return res.status(200).json(
-				apiResponse({
-					message: "User updated successfully",
-				})
-			);
+			res.status(200).json({
+				updateUser,
+				message: `Data user updated successfully`,
+			});
 		}
-	} catch (err) {
-		return next(new Error(err));
+	} catch (error) {
+		return new Error(error);
 	}
 };
 
