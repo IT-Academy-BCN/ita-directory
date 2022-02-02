@@ -1,4 +1,5 @@
 const prisma = require("../../prisma/indexPrisma");
+const {type_sw} = require("../utils/CONSTANTS");
 const {formatLocation} = require("../utils/formatLocation");
 const {apiResponse, adsSchema, AdByIdParamSchema, getAdsByTypeSchema} = require("../utils/utils");
 
@@ -131,37 +132,10 @@ async function getAdById(req, res) {
 async function getAdsByType(req, res) {
 	try {
 		const {type} = req.params;
+		console.log("type", type);
 		let type_id;
 		await getAdsByTypeSchema.validateAsync(type);
-
-		switch (type) {
-			case "house":
-				type_id = 1;
-				break;
-			case "room":
-				type_id = 2;
-				break;
-			case "garage":
-				type_id = 3;
-				break;
-			case "storage":
-				type_id = 4;
-				break;
-			case "office":
-				type_id = 5;
-				break;
-			case "warehouse":
-				type_id = 6;
-				break;
-			case "building":
-				type_id = 7;
-				break;
-			case "new_building":
-				type_id = 8;
-				break;
-			default:
-				type_id = 0;
-		}
+		type_id = type_sw(type);
 
 		if (type_id == 0) {
 			return res.status(404).json(
@@ -232,35 +206,7 @@ async function getAdsByTypeAndLocation(req, res) {
 		let formattedLocation = formatLocation(location);
 		let type_id;
 		await getAdsByTypeSchema.validateAsync(type);
-
-		switch (type) {
-			case "house":
-				type_id = 1;
-				break;
-			case "room":
-				type_id = 2;
-				break;
-			case "garage":
-				type_id = 3;
-				break;
-			case "storage":
-				type_id = 4;
-				break;
-			case "office":
-				type_id = 5;
-				break;
-			case "warehouse":
-				type_id = 6;
-				break;
-			case "building":
-				type_id = 7;
-				break;
-			case "new_building":
-				type_id = 8;
-				break;
-			default:
-				type_id = 0;
-		}
+		type_id = type_sw(type);
 
 		if (type_id == 0) {
 			return res.status(404).json(
