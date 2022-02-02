@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 //components
 import Input from "components/units/Input/Input";
@@ -19,13 +20,13 @@ const UploadAdsFromFile = () => {
 		"ad_type_id",
 	];
 	const [csvFile, setCsvFile] = useState();
-	const [adsArray, setAdsArray] = useState(null);
+	/* const [adsArray, setAdsArray] = useState(null); */
 
 	const validateCsvFile = (file) => {
 		return file && file.type === "text/csv";
 	};
 
-	const validateHeaders = (str, delimiter = ",") => {
+	/* const validateHeaders = (str, delimiter = ",") => {
 		const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
 		for (let i = 0; i < requiredHeaders.length; i++) {
 			if (headers[i] !== requiredHeaders[i]) return false;
@@ -47,7 +48,7 @@ const UploadAdsFromFile = () => {
 		});
 
 		return arr;
-	}
+	} */
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -56,19 +57,18 @@ const UploadAdsFromFile = () => {
 
 		reader.onload = function (e) {
 			const text = e.target.result;
-			if (validateHeaders(text)) {
-				setAdsArray(csvToArray(text));
-			} else {
-				console.log("error en los headers");
-			}
+			console.log(text);
+			axios
+				.post(`${process.env.REACT_APP_API_URL}/media/v1/uploadMedia`, {text})
+				.then((res) => {
+					console.log("enviat amb èxit");
+					console.log(res);
+				})
+				.catch(() => console.log("error en enviar"));
 		};
 
 		reader.readAsText(file);
 	};
-
-	useEffect(() => {
-		if (adsArray) console.log(adsArray);
-	}, [adsArray]);
 
 	return (
 		<form onSubmit={handleSubmit}>
