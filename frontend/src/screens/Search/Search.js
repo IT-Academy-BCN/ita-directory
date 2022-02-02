@@ -37,6 +37,11 @@ const Search = () => {
 				response = await axios.get(
 					`${process.env.REACT_APP_API_URL}/ads/v1/ads/type/${adType.label}`
 				);
+				//if only location was selected, API request for type filtered ads
+			} else if (!adType && adRegion) {
+				response = await axios.get(
+					`${process.env.REACT_APP_API_URL}/v1/ads/search/location/${adRegion.label}`
+				);
 
 				// API request for all ads
 			} else {
