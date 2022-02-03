@@ -14,20 +14,25 @@ import Notification from "components/units/Notifications/Notification";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 // Utilities
-import {msgs, validateEmail, validateName, validatePassword} from "utils/userFlow";
 import Input from "components/units/Input/Input";
+
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import registerSchema from "validation/registerUserSchema.js";
 
 const Register = () => {
 	const [registerSuccess, setRegisterSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [email, setEmail] = useState("");
-	const [name, setName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [password, setPassword] = useState("");
-	const [privacy, setPrivacy] = useState(false);
 	const [message, setMessage] = useState(null);
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm({
+		resolver: yupResolver(registerSchema),
+	});
 
 	const closeNotification = () => setMessage(null);
 
@@ -47,15 +52,15 @@ const Register = () => {
 		}
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const submitForm = (data) => {
+		const {name, lastname, email, password, privacy} = data;
 		setAnimated(true);
 		setIsDisabled(true);
 		setIsLoading(true);
 
 		registerUser({
 			name,
-			lastnames: lastName,
+			lastnames: lastname,
 			email,
 			password,
 			privacy,
@@ -64,10 +69,6 @@ const Register = () => {
 			setAnimated(false);
 			setIsDisabled(false);
 			setIsLoading(false);
-			setName("");
-			setLastName("");
-			setEmail("");
-			setPassword("");
 		}, 2000);
 	};
 
@@ -84,61 +85,49 @@ const Register = () => {
 
 			<Body title="Registro" justifyTitle="center">
 				<Container>
-					<Form onSubmit={handleSubmit} novalidate>
+					<Form onSubmit={handleSubmit(submitForm)} noValidate>
 						<Input
 							type="text"
 							placeholder="Nombre"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
 							id="name"
 							name="name"
 							disabled={disabled}
 							className="w-full"
-							success={name !== "" && validateName(name)}
-							error={name !== "" && !validateName(name)}
-							errorText={msgs[`nameError`]}
+							error={errors.name?.message}
+							register={register("name")}
 						/>
 
 						<Input
 							type="text"
 							placeholder="Apellido"
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
 							id="lastname"
 							name="lastname"
 							disabled={disabled}
 							className="w-full"
-							success={lastName !== "" && validateName(lastName)}
-							error={lastName !== "" && !validateName(lastName)}
-							errorText={msgs[`lastnameError`]}
+							error={errors.lastname?.message}
+							register={register("lastname")}
 						/>
 
 						<Input
 							type="email"
-							placeholder={msgs.placeholderEmail}
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
+							placeholder={"Email"}
 							id="emailName"
 							name="email"
 							disabled={disabled}
 							className="w-full"
-							success={email !== "" && validateEmail(email)}
-							error={email !== "" && !validateEmail(email)}
-							errorText={msgs[`emailError`]}
+							error={errors.email?.message}
+							register={register("email")}
 						/>
 
 						<Input
 							type="password"
-							placeholder={msgs.placeholderPassword}
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							placeholder={"Contraseña"}
 							id="password"
 							name="password"
 							disabled={disabled}
 							className="w-full mt-2"
-							success={password !== "" && validatePassword(password)}
-							error={password !== "" && !validatePassword(password)}
-							errorText={msgs[`passwordError`]}
+							error={errors.password?.message}
+							register={register("password")}
 						/>
 						<div className="w-full mt-2">
 							<CheckBox
@@ -147,13 +136,11 @@ const Register = () => {
 										Acepto la <Link to="#">politica de privacidad</Link>.
 									</RedirectStyled>
 								}
-								// value={privacy}
-								onChange={() => setPrivacy((prev) => !prev)}
 								id="privacyPolicy"
 								name="privacyPolicy"
-								error={!privacy}
-								errorText={msgs.required}
 								className="w-full mt-2"
+								error={errors.privacy?.message}
+								register={register("privacy")}
 							/>
 						</div>
 						<AsyncButton
@@ -164,13 +151,6 @@ const Register = () => {
 							className="w-full my-8 orange-gradient"
 							isLoading={isLoading}
 							animated={animated}
-							disabled={
-								!validateName(name) ||
-								!validateName(lastName) ||
-								!validatePassword(password) ||
-								!validateEmail(email) ||
-								!privacy
-							}
 						/>
 						<RedirectStyled>
 							Tienes una cuenta? <Link to="/login">Inicia sesión</Link>
