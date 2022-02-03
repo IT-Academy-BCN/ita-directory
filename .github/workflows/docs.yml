@@ -7,9 +7,9 @@ on:
     paths:
       - "documents/**/**"
 
-defaults:
-  run:
-    working-directory: documents
+# defaults:
+#   run:
+#     working-directory: documents
 
 jobs:
   build-and-deploy:
