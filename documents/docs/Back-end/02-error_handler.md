@@ -9,7 +9,7 @@ A file called handler-errors.s has been created in the middleware folder for err
 
 ## routeFoundHandler
 
-This function returns error 404 when we pass an invalid or non-existent endpoint
+This function returns error 404 when we pass an invalid or non-existent endpoint.
 
 ## errorHandler
 
