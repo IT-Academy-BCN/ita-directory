@@ -18,22 +18,25 @@ const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const file = csvFile;
-		const reader = new FileReader();
-
-		reader.onload = function (e) {
-			const text = e.target.result;
-			console.log(text);
-			axios
-				.post(`${process.env.REACT_APP_API_URL}/media/v1/upload`, {text})
+		const formData = new FormData();
+		formData.append("file", file);
+		/* axios.post(`${process.env.REACT_APP_API_URL}/media/v1/upload`, formData, {​​​ headers: {​​​ 'Content-Type': 'multipart/form-data' }​​​ }​​​)
 				.then((res) => {
 					setSuccessfulPost(true);
 					console.log(res);
 				})
-				.catch(() => setError(true));
-		};
-
-		reader.readAsText(file);
+				.catch(() => setError(true)); */
 	};
+
+	/* [9:13] kevinmamaqi
+    const formData =newFormData()
+	formData.append('file', file)
+	​[9:14] kevinmamaqi
+    consthandleChange= (e) => {​​​
+	if (e.currentTarget.files) setFile(e.currentTarget.files[0])
+	}​​​
+	​[9:16] kevinmamaqi
+    {​​​ headers: {​​​ 'Content-Type': 'multipart/form-data' }​​​ }​​​ */
 
 	return (
 		<Form onSubmit={handleSubmit}>
@@ -62,6 +65,6 @@ const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 			/>
 		</Form>
 	);
-};
+};;
 
 export default UploadAdsFromFile;
