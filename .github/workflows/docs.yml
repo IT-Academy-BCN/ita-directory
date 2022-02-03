@@ -26,6 +26,7 @@ jobs:
         run: npm run build
         env:
           CI: true
+      - run: pwd && ls -la
       - run: mkdir ~/.ssh
       - run: 'echo "${{ secrets.DEPLOY_KEY }}" >> ~/.ssh/github_rsa'
       - run: chmod 400 ~/.ssh/github_rsa
