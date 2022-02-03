@@ -26,23 +26,8 @@ jobs:
         run: npm run build
         env:
           CI: true
-
-      - name: See contents
-        run: |
-          pwd
-          ls -la
-
-      - name: Deploy via rsync
-        uses: burnett01/rsync-deployments@5.2
-        with:
-          switches: -avzr --delete
-          path: build/
-          remote_path: ${{ secrets.DOCS_PATH }}
-          remote_host: ${{ secrets.DEPLOY_HOST }}
-          remote_port: ${{ secrets.DEPLOY_PORT }}
-          remote_user: ${{ secrets.DEPLOY_USER }}
-          remote_key: ${{ secrets.DEPLOY_KEY }}
-      - name: See internal contents
-        run: |
-          pwd
-          ls -la
+      - run: mkdir ~/.ssh
+      - run: 'echo "${{ secrets.DEPLOY_KEY }}" >> ~/.ssh/github_rsa'
+      - run: chmod 400 ~/.ssh/github-action
+      - run: echo -e "Host ita-github-actions\n\tUser ${{ secrets.DEPLOY_USER }}\n\tHostname ${{ secrets.DEPLOY_HOST }}\n\tIdentityFile ~/.ssh/github_rsa\n\tStrictHostKeyChecking No" >> ~/.ssh/config
+      - run: rsync -avzr --delete -e ssh public github-actions-tutorial:${{ secrets.DOCS_PATH }}
