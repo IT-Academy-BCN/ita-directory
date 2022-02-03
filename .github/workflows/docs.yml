@@ -28,6 +28,6 @@ jobs:
           CI: true
       - run: mkdir ~/.ssh
       - run: 'echo "${{ secrets.DEPLOY_KEY }}" >> ~/.ssh/github_rsa'
-      - run: chmod 400 ~/.ssh/github-action
+      - run: chmod 400 ~/.ssh/github_rsa
       - run: echo -e "Host ita-github-actions\n\tUser ${{ secrets.DEPLOY_USER }}\n\tHostname ${{ secrets.DEPLOY_HOST }}\n\tIdentityFile ~/.ssh/github_rsa\n\tStrictHostKeyChecking No" >> ~/.ssh/config
-      - run: rsync -avzr --delete -e ssh public github-actions-tutorial:${{ secrets.DOCS_PATH }}
+      - run: rsync -avzr --delete -e ssh public ita-github-actions:${{ secrets.DOCS_PATH }}
