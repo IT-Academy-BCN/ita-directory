@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 //styles
@@ -8,17 +8,26 @@ import {Form} from "./UploadAdsFromFile.styles";
 import Input from "components/units/Input/Input";
 import Button from "components/units/Button/Button";
 
-const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
-	const [csvFile, setCsvFile] = useState();
+//form validation
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import uploadCsvSchema from "validation/uploadCsvSchema";
 
-	const handleChange = (event) => {
-		event.preventDefault();
-		const file = event.target.files[0];
-		if (file && file.type === "text/csv") setCsvFile(file);
+const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm({
+		resolver: yupResolver(uploadCsvSchema),
+	});
+
+	const submitForm = (data) => {
+		const csvFile = data.csvFile[0];
+		sendCsv(csvFile);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const sendCsv = (csvFile) => {
 		const formData = new FormData();
 		formData.append("csv", csvFile);
 		axios
@@ -34,9 +43,15 @@ const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit(submitForm)}>
 			<label>Publicar anuncios desde archivo</label>
-			<input type="file" name="csvFile" onChange={handleChange} id="csvFile" />
+			<Input
+				type="file"
+				name="csvFile"
+				id="csvFile"
+				register={register("csvFile")}
+				error={errors.csvFile?.message}
+			/>
 			<Button
 				type="submit"
 				text="enviar"
@@ -44,11 +59,11 @@ const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 				buttonStyles={{
 					width: "7.25rem",
 					height: "2.125rem",
-					marginBottom: "2rem",
+					marginTop: "1rem",
 				}}
 			/>
 		</Form>
 	);
-};;
+};
 
 export default UploadAdsFromFile;
