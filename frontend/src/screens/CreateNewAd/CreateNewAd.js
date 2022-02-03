@@ -51,6 +51,7 @@ const CreateNewAd = () => {
 
 	const postAd = (formInfo) => {
 		console.log(formInfo);
+
 		axios
 			.post(`${process.env.REACT_APP_API_URL}/ads/v1/post-ad`, formInfo)
 			.then(() => setError(false))
@@ -77,8 +78,6 @@ const CreateNewAd = () => {
 		setSubmittedData(JSON.stringify(formInfo, 0, 2));
 		//variables reset
 		setForm(emptyForm);
-		setError(false);
-		setNotification(false);
 		setTimeout(() => setSubmittedData(""), 5000);
 	};
 
