@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import tw from "twin.macro";
+import Colors from "theme/Colors";
 
 export const TextAreaStyled = styled.div.attrs({
-	className: "flex text-grey",
+	className: "text-grey mt-4",
 })`
 	& {
 		&.textAreaCreateNewAd {
@@ -26,7 +27,7 @@ export const TextAreaError = styled.div.attrs({
 	}
 `;
 
-export const TextAreaInput = styled.textarea.attrs({
+export const TextAreaInput = styled.textarea.attrs((props) => ({
 	rows: 8,
 	className: `textarea
 				border
@@ -40,15 +41,20 @@ export const TextAreaInput = styled.textarea.attrs({
 				resize-none
 				text-darkGray
 				`,
-})`
+}))`
 	&.error {
-		${tw`border rounded text-grey border-redColor`}
+		border: 1px solid #fecaca !important;
+	}
+	&:focus {
+		outline: 0 none;
+		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
 	}
 `;
 
 export const StyledError = styled.small.attrs({
-	className: `absolute left-0 visible text-redColor`,
+	className: ` visible text-redColor mb-9`,
 })`
+	display: inline-block;
 	&.errorProfile {
 		${tw`static`};
 	}

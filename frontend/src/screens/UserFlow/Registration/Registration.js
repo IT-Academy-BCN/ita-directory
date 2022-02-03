@@ -7,7 +7,6 @@ import Body from "components/layout/Body/Body";
 
 // Units Components
 import CheckBox from "components/units/CheckBox/CheckBox";
-import InputValidated from "components/units/InputValidated/InputValidated";
 import AsyncButton from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
 
@@ -15,19 +14,25 @@ import Notification from "components/units/Notifications/Notification";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 
 // Utilities
-import {msgs} from "utils/userFlow";
+import Input from "components/units/Input/Input";
 
-const Register = ({retrieveUser}) => {
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import registerSchema from "validation/registerUserSchema.js";
+
+const Register = () => {
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [animated, setAnimated] = useState(false);
     const [disabled, setIsDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState("");
-    const [validEmail, setValidEmail] = useState(false);
-    const [password, setPassword] = useState("");
-    const [validPassword, setValidPassword] = useState(false);
-    const [privacy, setPrivacy] = useState(false);
     const [message, setMessage] = useState(null);
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({
+        resolver: yupResolver(registerSchema),
+    });
 
     const closeNotification = () => setMessage(null);
 
@@ -47,12 +52,15 @@ const Register = ({retrieveUser}) => {
         }
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const submitForm = (data) => {
+        const {name, lastname, email, password, privacy} = data;
         setAnimated(true);
         setIsDisabled(true);
         setIsLoading(true);
+
         registerUser({
+            name,
+            lastnames: lastname,
             email,
             password,
             privacy,
@@ -77,29 +85,49 @@ const Register = ({retrieveUser}) => {
 
             <Body title="Registro" justifyTitle="center">
                 <Container>
-                    <Form onSubmit={handleSubmit} novalidate>
-                        <InputValidated
-                            type="email"
-                            placeholder={msgs.placeholderEmail}
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            id="emailName"
-                            name="emailName"
+                    <Form onSubmit={handleSubmit(submitForm)} noValidate>
+                        <Input
+                            type="text"
+                            placeholder="Nombre"
+                            id="name"
+                            name="name"
                             disabled={disabled}
                             className="w-full"
-                            valid={setValidEmail}
+                            error={errors.name?.message}
+                            register={register("name")}
                         />
-                        <InputValidated
-                            type="password"
-                            placeholder={msgs.placeholderPassword}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            id="passName"
-                            name="passName"
+
+                        <Input
+                            type="text"
+                            placeholder="Apellido"
+                            id="lastname"
+                            name="lastname"
                             disabled={disabled}
-                            minLength={6}
+                            className="w-full"
+                            error={errors.lastname?.message}
+                            register={register("lastname")}
+                        />
+
+                        <Input
+                            type="email"
+                            placeholder={"Email"}
+                            id="emailName"
+                            name="email"
+                            disabled={disabled}
+                            className="w-full"
+                            error={errors.email?.message}
+                            register={register("email")}
+                        />
+
+                        <Input
+                            type="password"
+                            placeholder={"Contraseña"}
+                            id="password"
+                            name="password"
+                            disabled={disabled}
                             className="w-full mt-2"
-                            valid={setValidPassword}
+                            error={errors.password?.message}
+                            register={register("password")}
                         />
                         <div className="w-full mt-2">
                             <CheckBox
@@ -108,13 +136,11 @@ const Register = ({retrieveUser}) => {
                                         Acepto la <Link to="#">politica de privacidad</Link>.
                                     </RedirectStyled>
                                 }
-                                value={privacy}
-                                onChange={() => setPrivacy((prev) => !prev)}
                                 id="privacyPolicy"
                                 name="privacyPolicy"
-                                error={!privacy}
-                                errorText={msgs.required}
                                 className="w-full mt-2"
+                                error={errors.privacy?.message}
+                                register={register("privacy")}
                             />
                         </div>
                         <AsyncButton
@@ -125,7 +151,6 @@ const Register = ({retrieveUser}) => {
                             className="w-full my-8 orange-gradient"
                             isLoading={isLoading}
                             animated={animated}
-                            disabled={!validEmail || !validPassword || !privacy}
                         />
                         <RedirectStyled>
                             Tienes una cuenta? <Link to="/login">Inicia sesión</Link>

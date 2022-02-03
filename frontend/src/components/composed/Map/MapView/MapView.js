@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {MapContainer, TileLayer, useMap} from "react-leaflet";
-import MapMarkers from "./MapMarkers";
+import MapMarker from "./MapMarker/MapMarker";
 import "leaflet/dist/leaflet.css";
 import "./MapView.css";
 
@@ -64,7 +64,7 @@ function SetBounds({bounds}) {
 	return null;
 }
 
-const MapView = ({filteredAds}) => {
+const MapView = ({filteredAds, localizedAdId}) => {
 	const maxMinBounds = getMaxMin(filteredAds);
 	const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(maxMinBounds);
 
@@ -77,14 +77,16 @@ const MapView = ({filteredAds}) => {
 			className="Container-View"
 			bounds={[fitBoundsCoordinates.topLeft, fitBoundsCoordinates.bottomRight]}
 			boundsOptions={{padding: [0, 0]}}
-			style={{height: 400, width: "100%"}}
 		>
 			<TileLayer
 				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			<SetBounds bounds={fitBoundsCoordinates} />
-			<MapMarkers apartments={filteredAds} />
+			{filteredAds.map((ad, i) => (
+				<MapMarker key={i} ad={ad} activePopup={localizedAdId === i} />
+			))}
+
 		</MapContainer>
 	);
 };

@@ -32,10 +32,9 @@ export const ModalBlock = styled.div`
 	.modalContainer {
 		display: flex;
 		flex-direction: column;
-		max-height: 95vh;
 		max-width: 850px;
-		min-width: 25%;
-		padding: 0 1.5rem;
+		min-width: 34.5%;
+		padding: 1.374rem 1.875rem;
 		animation: ${keyframes`${fadeIn}`} 0.5s;
 		z-index: 1;
 		background: ${Colors.white} 0% 0% no-repeat padding-box;
@@ -45,10 +44,11 @@ export const ModalBlock = styled.div`
 
 		.modalHeader {
 			display: flex;
-			flex-direction: row;
 			justify-content: space-between;
+			align-items: center;
+			height: 38px;
+			padding-bottom: 10px;
 			color: #303742;
-			padding: 20px 0px 10px 0px;
 			border-bottom: 1px solid ${Colors.lightGray};
 
 			span {
@@ -71,7 +71,6 @@ export const ModalBlock = styled.div`
 		}
 
 		.modalBody {
-			padding: 22px 0px;
 			overflow-y: auto;
 			position: relative;
 			font-family: Arial;
@@ -79,9 +78,8 @@ export const ModalBlock = styled.div`
 		}
 
 		.modalFooter {
-			padding: 10px 0px;
+			padding: 10px 0px 0px;
 			text-align: right;
-			border-top: 1px solid ${Colors.lightGray};
 		}
 	}
 `;

@@ -1,0 +1,34 @@
+name: Update docs
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "documents/**/**"
+
+defaults:
+  run:
+    working-directory: documents
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install Packages
+        run: npm install
+      - name: Build Docs
+        run: npm run build
+        env:
+          CI: true
+      - run: pwd && ls -la
+      - run: mkdir ~/.ssh
+      - run: 'echo "${{ secrets.DEPLOY_KEY }}" >> ~/.ssh/github_rsa'
+      - run: chmod 400 ~/.ssh/github_rsa
+      - run: echo -e "Host ita-github-actions\n\tUser ${{ secrets.DEPLOY_USER }}\n\tHostname ${{ secrets.DEPLOY_HOST }}\n\tIdentityFile ~/.ssh/github_rsa\n\tStrictHostKeyChecking No" >> ~/.ssh/config
+      - run: rsync -avzr --delete -e ssh build/ ita-github-actions:${{ secrets.DOCS_PATH }}

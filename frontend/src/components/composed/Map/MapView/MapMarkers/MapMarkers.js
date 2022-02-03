@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Marker} from "react-leaflet";
-import {icon} from "./MapIcon";
-import MapPopup from "./MapPopup";
+import {icon} from "./MapIcon/MapIcon";
+import MapPopup from "./MapPopup/MapPopup";
 
 const MapMarkers = ({apartments}) => {
 	const markers = apartments.map((apartment, i) => (

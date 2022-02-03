@@ -5,7 +5,7 @@ import Input from "components/units/Input/Input.js";
 import {Wrapper, ButtonWrapper} from "./EditAdModal.style";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
-import Map from "components/composed/Map/Map";
+import Map from "components/composed/Map/Map/Map";
 
 const EditAdModal = ({ad, active, hideModal}) => {
 	const {name, m2, desc, habitaciones, gastosIncluidos, price, lat, long} = ad;

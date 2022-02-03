@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Button from "components/units/Button/Button";
 import Modal from "components/composed/Modal/Modal.js";
 import Input from "components/units/Input/Input.js";
@@ -10,54 +10,17 @@ import {
 } from "components/composed/EditProfileModal/EditProfile.style.js";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
-
-const PASSWORD_REGEX = /^(?=.*?[A-Z]).{6,}$/;
-
-const validatePassword = (password) => PASSWORD_REGEX.test(password);
+import {msgs, validateEmail, validateName, validatePassword} from "utils/userFlow";
 
 const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUserData}) => {
 	const [password, setPassword] = useState("");
-	const [isPassError, setIsPassError] = useState(false);
-	const [isPassError2, setIsPassError2] = useState(false);
+	const [password2, setPassword2] = useState("");
 
 	// MODIFY USERNAME / EMAIL
 	const [newName, setNewName] = useState(currentNombre);
 	const [newEmail, setNewEmail] = useState(currentEmail);
 
-	// Aquí actualizamos el estado cuando cambian las props.
-	useEffect(() => {
-		setNewName(currentNombre);
-		setNewEmail(currentEmail);
-	}, [currentNombre, currentEmail]);
-
-	useEffect(() => {
-		setNewName(newName);
-	}, [newName]);
-
-	const handleNameChange = (newName) => {
-		setNewName(newName);
-	};
-
-	const handleEmailChange = (newEmail) => {
-		setNewEmail(newEmail);
-	};
-
-	// PASSWORD
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-		const isPass = validatePassword(value);
-		setIsPassError(!isPass);
-	};
-
-	const handlePasswordChange2 = (value) => {
-		if (password === value) {
-			setIsPassError2(false);
-		} else {
-			setIsPassError2(true);
-		}
-	};
-
-	const actualizar = (value) => {
+	const actualizar = () => {
 		if (newName === "") {
 			alert("Debes rellenar el nombre de usuario");
 		} else {
@@ -67,10 +30,7 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 	};
 
 	const resetForm = () => {
-		setPassword();
-		// setPassword2();
-		setIsPassError(false);
-		setIsPassError2(false);
+		setPassword("");
 		hideModal();
 	};
 
@@ -109,16 +69,15 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 						iconPosition="right"
 						type="submit"
 						className="darkBlue"
-						onClick={() => actualizar(currentNombre)}
+						onClick={actualizar}
 						buttonStyles={{marginRight: 0}}
-						// onClick={() => handleClick(newName)}
 					/>
 				</ButtonWrapper>
 			}
 		>
 			<EditModalStyled>
 				<PhotoWrapper>
-					<div className="containerImage"></div>
+					<div className="containerImage" />
 					<div className="profileContain">
 						<div className="StyledSubtitle">Fotografía de perfil</div>
 						<div className="StyledTextProfile">
@@ -140,28 +99,30 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 						<Input
 							id="userName"
 							name="userName"
-							label="Nuevo usuario"
+							label="Nombre"
 							type="text"
-							value={currentNombre}
-							placeholder={currentNombre}
-							onChange={(e) => handleNameChange(e.target.value)}
+							value={newName}
+							placeholder="Introduce un nuevo nombre"
+							onChange={(e) => setNewName(e.target.value)}
 							className="errorProfile"
-							// error={isPassError}
-							// errorText="The password to contain more than 6 characters and a uppercase letter"
-							// minLength={6}
+							success={newName !== "" && validateName(newName)}
+							error={newName !== "" && !validateName(newName)}
+							errorText={msgs[`nameError`]}
 						/>
 					</label>
 
 					<label>
-						{/* <label htmlFor="email">Email</label> */}
 						<Input
 							id="email"
 							name="email"
 							label="Email"
-							ype="text"
-							placeholder="Introduce un email"
+							type="text"
+							placeholder="Introduce un nuevo email"
 							value={newEmail}
-							onChange={(e) => handleEmailChange(e.target.value)}
+							onChange={(e) => setNewEmail(e.target.value)}
+							success={newEmail !== "" && validateEmail(newEmail)}
+							error={newEmail !== "" && !validateEmail(newEmail)}
+							errorText={msgs[`emailError`]}
 						/>
 					</label>
 				</div>
@@ -172,13 +133,13 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							label="Nueva contraseña"
 							type="password"
 							placeholder="Introducir contraseña"
-							onChange={(e) => handlePasswordChange(e.target.value)}
+							onChange={(e) => setPassword(e.target.value)}
 							className="errorProfile"
 							id="passName"
 							name="passName"
-							error={isPassError}
-							errorText="The password to contain more than 6 characters and a uppercase letter"
-							minLength={6}
+							success={password !== "" && validatePassword(password)}
+							error={password !== "" && !validatePassword(password)}
+							errorText={msgs[`passwordError`]}
 						/>
 					</label>
 					<label>
@@ -186,25 +147,31 @@ const EditProfile = ({currentNombre, currentEmail, active, hideModal, updateUser
 							label="Confirmar contraseña"
 							type="password"
 							placeholder="Confirma tu contraseña"
-							onChange={(e) => handlePasswordChange2(e.target.value)}
+							onChange={(e) => setPassword2(e.target.value)}
 							className="errorProfile"
 							id="confirmPassName"
 							name="confirmPassName"
-							error={isPassError2}
 							errorText="Both passwords must be equal"
-							minLength={6}
+							success={password2 !== "" && password2 === password}
+							error={password2 !== "" && password2 !== password}
 						/>
 					</label>
 				</div>
 				<Button
-					onClick={() => actualizar(currentNombre)}
+					onClick={actualizar}
 					text="Guardar"
 					type="submit"
 					className="green-gradient"
+					disabled={
+						!(
+							validatePassword(password) &&
+							validateEmail(newEmail) &&
+							validateName(newName) &&
+							password2 === password
+						)
+					}
 				/>
 			</EditModalStyled>
-
-			{/* <StyledSmall>{check}</StyledSmall> */}
 		</Modal>
 	);
 };

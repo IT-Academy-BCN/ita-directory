@@ -6,32 +6,25 @@ import {InputContainerStyled, InputStyled, ErrorStyled} from "./Input.styles";
 const Input = ({
 	type,
 	placeholder,
-	value,
-	onChange,
 	onFocus,
 	onBlur,
-	textStyles, //not working
 	inputStyles,
-	labelStyles,
 	className,
 	id,
 	name,
 	minlength,
 	maxlength,
 	size,
-	success,
-	errorText,
 	errorStyles,
 	error,
 	disabled,
 	label,
-	inputContainerClassName,
 	required,
 	icon,
 	minMarginTop,
+	register,
 }) => {
 	const hasIcon = icon ? true : false;
-
 	return (
 		<>
 			<InputContainerStyled
@@ -44,8 +37,6 @@ const Input = ({
 				<InputStyled
 					type={type}
 					placeholder={placeholder}
-					value={value}
-					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					className={`${className} ${error ? "error" : ""}`}
@@ -55,17 +46,13 @@ const Input = ({
 					minLength={minlength}
 					maxLength={maxlength}
 					size={size}
-					success={success}
 					error={error}
 					required={required}
 					style={inputStyles}
+					{...(register && register)}
 				/>
-				{label && type === "checkbox" && <label>{label}</label>}
 			</InputContainerStyled>
-			<ErrorStyled
-				dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-				styles={errorStyles}
-			/>
+			<ErrorStyled styles={errorStyles}>{error}</ErrorStyled>
 		</>
 	);
 };
@@ -74,7 +61,6 @@ Input.propTypes = {
 	type: PropTypes.string.isRequired,
 	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
 	textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -89,7 +75,7 @@ Input.propTypes = {
 	disabled: PropTypes.bool,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	error: PropTypes.bool,
+	error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 	success: PropTypes.bool,
 	inputContainerClassName: PropTypes.string,
 	required: PropTypes.bool,

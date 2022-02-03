@@ -4,8 +4,6 @@ import {TextAreaStyled, TextAreaError, TextAreaInput, StyledError} from "./TextA
 
 const TextArea = ({
 	placeholder,
-	value,
-	onChange,
 	onFocus,
 	onBlur,
 	textAreaStyles,
@@ -19,11 +17,11 @@ const TextArea = ({
 	required = false,
 	rows,
 	cols,
-	errorText,
 	errorStyles,
 	error,
 	label,
 	inputContainerClassName,
+	register,
 }) => {
 	return (
 		<TextAreaStyled className={inputContainerClassName}>
@@ -34,7 +32,6 @@ const TextArea = ({
 				<TextAreaInput
 					style={textAreaStyles}
 					placeholder={placeholder}
-					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					className={`${className} ${error ? "error" : ""}`}
@@ -46,13 +43,12 @@ const TextArea = ({
 					rows={rows}
 					cols={cols}
 					required={required}
-					value={value}
+					error={error}
+					{...(register && register)}
 				/>
-				<StyledError
-					dangerouslySetInnerHTML={{__html: error ? errorText : null}}
-					className={className}
-					style={errorStyles}
-				/>
+				<StyledError className={className} style={errorStyles}>
+					{error}
+				</StyledError>
 			</TextAreaError>
 		</TextAreaStyled>
 	);
@@ -61,7 +57,6 @@ const TextArea = ({
 TextArea.propTypes = {
 	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
 
@@ -81,7 +76,7 @@ TextArea.propTypes = {
 	cols: PropTypes.number,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	error: PropTypes.bool,
+	error: PropTypes.string,
 };
 
 export default TextArea;

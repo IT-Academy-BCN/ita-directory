@@ -2,15 +2,42 @@ import React, {Fragment} from "react";
 import {ModalBlock} from "./Modal.styles";
 import PropTypes from "prop-types";
 
-const Modal = ({colorModalTitle, title, footer, children, active, hideModal}) => {
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import Colors from "theme/Colors";
+
+import Button from "components/units/Button/Button";
+
+const Modal = ({title, footer, children, active, hideModal}) => {
 	return (
 		<Fragment>
 			{active && (
 				<ModalBlock>
-					<button className="modalOverlay" onClick={() => hideModal()}></button>
+					<button className="modalOverlay" onClick={() => hideModal((prev) => !prev)} />
 					<div className="modalContainer">
 						<div className="modalHeader">
-							<span colorModalTitle={colorModalTitle}>{title}</span>
+							<span>{title}</span>
+							<Button
+								iconPosition="left"
+								type="submit"
+								onClick={() => hideModal()}
+								icon={faTimes}
+								buttonStyles={{
+									color: Colors.lightGrey,
+									background: "transparent",
+									boxShadow: "none",
+									fontSize: "0.95rem",
+									fontFamily: "Arial",
+									width: "auto",
+									paddingLeft: 0,
+									paddingRight: 0,
+								}}
+								iconStyles={{
+									paddingRight: "5px",
+									paddingLeft: "0px",
+									width: "1rem",
+									height: "1rem",
+								}}
+							/>
 						</div>
 						<div className="modalBody">{children}</div>
 						<div className="modalFooter">{footer}</div>

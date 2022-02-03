@@ -4,21 +4,27 @@ import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
-import InputValidated from "components/units/InputValidated/InputValidated";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
+import Input from "components/units/Input/Input";
 
-const Login = ({onLogin}) => {
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import loginSchema from "validation/loginSchema.js";
+
+const Login = () => {
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [animated, setAnimated] = useState(false);
     const [disabled, setIsDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState("");
-    const [validEmail, setValidEmail] = useState(false);
-    const [password, setPassword] = useState("");
-    const [validPassword, setValidPassword] = useState(false);
     const [message, setMessage] = useState(null);
-
     const closeNotification = () => setMessage(null);
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm({
+        resolver: yupResolver(loginSchema),
+    });
 
     const loginUser = async (user) => {
         try {
@@ -36,8 +42,8 @@ const Login = ({onLogin}) => {
         }
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const submitForm = (data) => {
+        const {email, password} = data;
         setIsDisabled(true);
         setIsLoading(true);
         setAnimated(true);
@@ -48,8 +54,6 @@ const Login = ({onLogin}) => {
             loginUser({
                 email,
                 password,
-                privacy: true,
-                // debe añadirse ChechBox de privacidad?
             });
             setTimeout(() => {
                 setIsDisabled(false);
@@ -71,29 +75,26 @@ const Login = ({onLogin}) => {
 
             <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
                 <Container>
-                    <Form onSubmit={handleSubmit} novalidate>
-                        <InputValidated
+                    <Form onSubmit={handleSubmit(submitForm)} noValidate>
+                        <Input
                             type="email"
                             placeholder="Introduce tu email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                             id="emailName"
-                            name="emailName"
+                            name="email"
                             disabled={disabled}
                             className="w-full"
-                            valid={setValidEmail}
+                            error={errors.email?.message}
+                            register={register("email")}
                         />
-                        <InputValidated
+                        <Input
                             type="password"
                             placeholder="Introduce tu contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
                             id="passName"
-                            name="passName"
+                            name="password"
                             disabled={disabled}
-                            minLength={6}
                             className="w-full mt-2"
-                            valid={setValidPassword}
+                            error={errors.password?.message}
+                            register={register("password")}
                         />
                         <AsyncButton
                             text="Acceder"
@@ -103,12 +104,11 @@ const Login = ({onLogin}) => {
                             className="blue-gradient w-full my-8"
                             isLoading={isLoading}
                             animated={animated}
-                            disabled={!validEmail || !validPassword}
                         />
                         <div className="w-full">
                             <RedirectStyled>
                                 Has olvidado tu contraseña?
-                                <Link to="/recover-password/:hash">Recupérala</Link>
+                                <Link to="/recover-password">Recupérala</Link>
                             </RedirectStyled>
                             <RedirectStyled>
                                 No tienes cuenta?

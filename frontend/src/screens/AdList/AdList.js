@@ -4,7 +4,7 @@ import Body from "components/layout/Body/Body";
 import {faMapMarkerAlt, faBars} from "@fortawesome/free-solid-svg-icons";
 import Button from "components/units/Button/Button";
 import Colors from "theme/Colors";
-import MapView from "components/composed/Map/MapView.js";
+import MapView from "components/composed/Map/MapView/MapView.js";
 import axios from "axios";
 import _ from "lodash";
 import AdListFilter from "screens/AdList/AdListFilter/AdListFilter";
@@ -122,6 +122,7 @@ const AdList = () => {
                                 <div className="rowWrapper">
                                     {mapView ? (
                                         <Button
+                                            type="button"
                                             text="Vista de detalles"
                                             icon={faBars}
                                             iconPosition="left"
@@ -134,6 +135,7 @@ const AdList = () => {
                                         />
                                     ) : (
                                         <Button
+                                            type="button"
                                             text="Vista de mapa"
                                             icon={faMapMarkerAlt}
                                             iconPosition="left"

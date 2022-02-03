@@ -1,22 +1,27 @@
 import React, {useState} from "react";
-import Header from "components/layout/Header/Header";
-import SearchBar from "components/composed/SearchBar/SearchBar.js";
-/* import Body from "components/layout/Body/Body.js"; */
-import {SearchStyled} from "./Search.style.js";
-/* import Map from "components/composed/Map/Map"; 
-import CardSearch from 'components/composed/CardSearch/CardSearch.js'; */
-import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMoreBtn.js";
 import axios from "axios";
+
+//styles
+import {SearchStyled} from "./Search.style.js";
+import {Container} from "theme/GlobalStyles.js";
+
+//fontawesome
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 
+//components
+import Body from "components/layout/Body/Body.js";
+import SearchBar from "components/composed/SearchBar/SearchBar.js";
+import AdCardListLoadMore from "components/composed/AdCardList/AdCardListLoadMoreBtn";
+import MapView from "components/composed/Map/MapView/MapView";
+
 const Search = () => {
-	// const [matchesId, setMatchesId] = useState(null);
 	const [loading, setLoading] = useState(0);
 	const [ads, setAds] = useState([]);
 	const [adType, setAdType] = useState(null);
 	const [adRegion, setAdRegion] = useState(null);
 	const [firstSearch, setFirstSearch] = useState(false);
+	const [localizedAdId, setLocalizedAdId] = useState(null);
 
 	const getAds = async () => {
 		try {
@@ -30,7 +35,12 @@ const Search = () => {
 				//if only type was selected, API request for type filtered ads
 			} else if (adType && !adRegion) {
 				response = await axios.get(
-					`${process.env.REACT_APP_API_URL}/ads/v1/ads/types/${adType.label}`
+					`${process.env.REACT_APP_API_URL}/ads/v1/ads/type/${adType.label}`
+				);
+				//if only location was selected, API request for type filtered ads
+			} else if (!adType && adRegion) {
+				response = await axios.get(
+					`${process.env.REACT_APP_API_URL}/ads/v1/ads/search/location/${adRegion.label}`
 				);
 
 				// API request for all ads
@@ -38,8 +48,6 @@ const Search = () => {
 				response = await axios.get(`${process.env.REACT_APP_API_URL}/ads/v1/ads`);
 			}
 			let filteredAds = response.data.data || [];
-			console.log(filteredAds);
-
 			setAds(filteredAds);
 			setLoading(0);
 			setFirstSearch(true);
@@ -49,26 +57,31 @@ const Search = () => {
 	};
 
 	return (
-		<div>
-			<Header isTitleVisible={false} />
-			<SearchBar setAdType={setAdType} setAdRegion={setAdRegion} getAds={getAds} />
-			<SearchStyled>
-				<div className="search-body">
-					<div className="search-results">
+		<Body
+			title={<SearchBar setAdType={setAdType} setAdRegion={setAdRegion} getAds={getAds} />}
+			isLoggedIn="true"
+		>
+			<Container>
+				<SearchStyled>
+					<div className="search-body">
 						{loading ? (
 							<FontAwesomeIcon icon={faSpinner} className="spinner" />
 						) : ads.length === 0 && firstSearch ? (
 							`There are no results.`
 						) : (
-							<AdCardListLoadMore ads={ads} className="search-results-list" />
+							ads.length > 0 && (
+								<AdCardListLoadMore ads={ads} setLocalizedAdId={setLocalizedAdId} />
+							)
 						)}
 					</div>
 					<div className="search-map">
-						<div className="map">map here</div>
+						{ads.length > 0 && (
+							<MapView filteredAds={ads} localizedAdId={localizedAdId} />
+						)}
 					</div>
-				</div>
-			</SearchStyled>
-		</div>
+				</SearchStyled>
+			</Container>
+		</Body>
 	);
 };
 

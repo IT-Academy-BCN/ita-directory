@@ -7,7 +7,6 @@ import Body from "components/layout/Body/Body";
 // Units Components
 import AsyncButton from "components/units/Button/Button";
 import Input from "components/units/Input/Input";
-import InputValidated from "components/units/InputValidated/InputValidated";
 import Notification from "components/units/Notifications/Notification";
 
 // Composed Components
@@ -23,6 +22,7 @@ import people4b from "../../../assets/images/people4b.jpg";
 import people13b from "../../../assets/images/people13b.jpg";
 
 import initLoggedinUserInfo from "../fakeUser.json";
+import {msgs, validatePassword} from "utils/userFlow";
 
 const usersPhoto = {
     people1b: people1b,
@@ -35,8 +35,6 @@ const Profile = () => {
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeated, setNewPasswordRepeated] = useState("");
     const [newPhoto, setNewPhoto] = useState(null);
-    const [validNewPassword, setValidNewPassword] = useState(false);
-    const [validNewPasswordRepeated, setValidNewPasswordRepeated] = useState(false);
     const [loggedinUserInfo, setLoggedinUserInfo] = useState({});
     const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(null);
@@ -75,13 +73,6 @@ const Profile = () => {
     useEffect(() => {
         setNewPasswordRepeated("");
     }, [newPassword]);
-
-    useEffect(() => {
-        setValidNewPasswordRepeated(
-            newPasswordRepeated !== "" && newPassword === newPasswordRepeated
-        );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [newPasswordRepeated]);
 
     const changePhoto = () => {
         const photos = Object.keys(usersPhoto);
@@ -162,52 +153,51 @@ const Profile = () => {
                     <ProfileForm className="profile-data">
                         <div>
                             <div>
-                                <label htmlFor="username">Nombre de usuario</label>
+                                <label>Nombre de usuario</label>
                                 <Input
-                                    style={`marginTop: 0`}
                                     type="text"
                                     id="username"
                                     name="username"
                                     placeholder={loggedinUserInfo.name}
-                                    onChange={() => console.log("disabled")} // attr necesario, sinó da error
-                                    disabled={true}
+                                    disabled
                                     minMarginTop
                                 />
                                 <p>El nombre de usuario no se puede modificar</p>
                             </div>
                             <div>
-                                <label htmlFor="email">Email</label>
+                                <label>Email</label>
                                 <Input
                                     type="email"
                                     id="email"
                                     name="email"
                                     placeholder={loggedinUserInfo.email}
-                                    onChange={() => console.log("disabled")} // attr necesario, sinó da error
-                                    disabled={true}
+                                    disabled
                                     minMarginTop
                                 />
                                 <p>
-                                    El email no se puede modificar. Ponte en{" "}
+                                    El email no se puede modificar. Ponte en
                                     <Link to="#">contacto</Link> si necesitas actualizarlo.
                                 </p>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <label htmlFor="passName">Nueva Contraseña</label>
-                                <InputValidated
+                                <label>Nueva Contraseña</label>
+                                <Input
                                     type="password"
                                     value={newPassword}
                                     placeholder="Introducir contraseña"
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     id="passName"
-                                    name="passName"
-                                    valid={setValidNewPassword}
+                                    name="password"
                                     minMarginTop
+                                    success={newPassword !== "" && validatePassword(newPassword)}
+                                    error={newPassword !== "" && !validatePassword(newPassword)}
+                                    errorText={msgs[`passwordError`]}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="confirmPassName">Confirmar Contraseña</label>
+                                <label>Confirmar Contraseña</label>
                                 <Input
                                     type="password"
                                     value={newPasswordRepeated}
@@ -215,10 +205,16 @@ const Profile = () => {
                                     onChange={(e) => setNewPasswordRepeated(e.target.value)}
                                     id="confirmPassName"
                                     name="confirmPassName"
-                                    error={newPasswordRepeated !== "" && !validNewPasswordRepeated}
+                                    error={
+                                        newPasswordRepeated !== "" &&
+                                        newPassword !== newPasswordRepeated
+                                    }
                                     errorText="Las 2 contraseñas tienen que ser iguales"
-                                    success={newPasswordRepeated !== "" && validNewPasswordRepeated}
-                                    disabled={!validNewPassword}
+                                    success={
+                                        newPasswordRepeated !== "" &&
+                                        newPassword === newPasswordRepeated
+                                    }
+                                    disabled={!validatePassword(newPassword)}
                                     minMarginTop
                                 />
                             </div>
@@ -234,7 +230,9 @@ const Profile = () => {
                                 }}
                                 className="green-gradient"
                                 disabled={
-                                    !newPhoto && (!validNewPassword || !validNewPasswordRepeated)
+                                    !newPhoto &&
+                                    (!validatePassword(newPassword) ||
+                                        !(newPassword === newPasswordRepeated))
                                 }
                             />
                         </div>

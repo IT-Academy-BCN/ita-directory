@@ -11,7 +11,7 @@ import {
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 
-const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
+const DeleteModal = ({currentUserName, columnSelect, updateDelete, active, hideModal}) => {
 	const [error, setError] = useState("");
 
 	const [name, bindName, resetName] = useInput("");
@@ -27,16 +27,15 @@ const DeleteModal = ({columnSelect, updateDelete, active, hideModal}) => {
 			setError("Escribe la palabra ELIMINAR");
 			return;
 		}
-
+		updateDelete(columnSelect, currentUserName);
 		hideModal();
 		resetForm();
-		updateDelete(columnSelect);
 	};
 
 	const resetForm = () => {
 		resetName();
 		setError();
-		hideModal();
+		hideModal((prev) => !prev);
 	};
 
 	return (

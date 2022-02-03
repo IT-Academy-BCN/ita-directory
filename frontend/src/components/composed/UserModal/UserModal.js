@@ -19,12 +19,12 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 	};
 
 	const handleClick = (val, nombreUsuario) => {
-		updateUserStatus(val, nombreUsuario);
+		setSelectValue(val);
+		updateUserStatus(nombreUsuario, val);
 		closeModal();
 	};
 
 	const closeModal = () => {
-		setSelectValue(currentUserState);
 		hideModal();
 	};
 
@@ -65,12 +65,12 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 						type="submit"
 						className="darkBlue"
 						buttonStyles={{marginRight: 0}}
-						onClick={() => handleClick(selectValue, nombreUsuario)}
+						onClick={(e) => handleClick(selectValue, nombreUsuario)}
 					/>
 				</ButtonWrapper>
 			}
 		>
-			<UserModalStyled currentUserState={selectValue}>
+			<UserModalStyled currentUserState={currentUserState}>
 				<p>Cambiar el estado del usuario {nombreUsuario}</p>
 
 				<label htmlFor="estado-usuario">Estado usuario</label>
@@ -78,16 +78,19 @@ const UserModal = ({nombreUsuario, currentUserState, active, hideModal, updateUs
 					name="estado-usuario"
 					id="estado-usuario"
 					defaultValue={currentUserState}
-					onChange={(e) => handleSelect(e.target.value)}
+					onChange={(e) => {
+						handleSelect(e.target.value);
+					}}
 				>
+					<option value="">Selecciona status</option>
 					<option value="aprobado" className="aprobado">
-						Aprobado
+						Activo
 					</option>
 					<option value="pending" className="pending">
 						Pendiente
 					</option>
 					<option value="rejected" className="rejected">
-						Rechazado
+						Suspendido
 					</option>
 				</select>
 			</UserModalStyled>
