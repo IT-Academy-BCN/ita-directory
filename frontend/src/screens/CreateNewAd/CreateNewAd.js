@@ -34,12 +34,13 @@ const CreateNewAd = () => {
 		n_bathrooms: "",
 		map_lat: 0,
 		map_lon: 0,
+		ad_type_id: 1,
 	};
 	const [form, setForm] = useState(emptyForm);
 	const [submittedData, setSubmittedData] = useState(""); //@todo -> remove -probably unecessary
 	const [error, setError] = useState(false);
-	const [successfulPost, setSuccessfulPost] = useState(false);
 	const [coordinates, setCoordinates] = useState([]);
+	const [notification, setNotification] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -48,21 +49,13 @@ const CreateNewAd = () => {
 		resolver: yupResolver(newAdSchema),
 	});
 
-	const postAd = async (formInfo) => {
-		try {
-			const res = await axios({
-				method: "post",
-				url: "http://localhost:5000/ads/v1/post-ad",
-				data: formInfo,
-			});
-			await console.log(res);
-			await setSuccessfulPost((prev) => true);
-			await setTimeout(() => setSuccessfulPost((prev) => false), 3000);
-		} catch (err) {
-			console.log(err);
-			setError((prev) => true);
-			setTimeout(() => setError((prev) => false), 3000);
-		}
+	const postAd = (formInfo) => {
+		console.log(formInfo);
+		axios
+			.post(`${process.env.REACT_APP_API_URL}/ads/v1/post-ad`, formInfo)
+			.then(() => setError(false))
+			.catch(() => setError(true));
+		setNotification(true);
 	};
 
 	useEffect(() => {
@@ -84,8 +77,8 @@ const CreateNewAd = () => {
 		setSubmittedData(JSON.stringify(formInfo, 0, 2));
 		//variables reset
 		setForm(emptyForm);
-		setError((prev) => false);
-		setSuccessfulPost((prev) => false);
+		setError(false);
+		setNotification(false);
 		setTimeout(() => setSubmittedData(""), 5000);
 	};
 
@@ -152,17 +145,16 @@ const CreateNewAd = () => {
 
 	return (
 		<>
-			{" "}
-			{error && (
+			{notification && (
 				<Notification
-					message={"Ha habido un error. Vuelve ha intentar ahora o mas tarde"}
-					isSuccess={false}
-				/>
-			)}
-			{successfulPost && (
-				<Notification
-					message={`Tu anuncio ha sido publicado con exito.`}
-					isSuccess={true}
+					message={
+						error
+							? "Ha habido un error. Vuelve ha intentar ahora o mas tarde"
+							: "Tu anuncio ha sido publicado con exito"
+					}
+					isSuccess={error ? false : true}
+					closeNotification={() => setNotification(false)}
+					autoClose
 				/>
 			)}
 			<Body
@@ -228,10 +220,7 @@ const CreateNewAd = () => {
 						)}
 					</Wrapper>
 					<Wrapper>
-						<UploadAdsFromFile
-							setError={setError}
-							setSuccessfulPost={setSuccessfulPost}
-						/>
+						<UploadAdsFromFile setError={setError} setNotification={setNotification} />
 					</Wrapper>
 				</Container>
 			</Body>

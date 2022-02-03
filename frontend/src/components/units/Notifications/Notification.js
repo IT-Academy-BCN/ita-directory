@@ -23,7 +23,7 @@ const Notification = ({message, isSuccess, autoClose, closeNotification}) => {
 				/>
 				<p>{message}</p>
 
-				<button onClick={() => closeNotification(false)}>X</button>
+				<button onClick={() => closeNotification()}>X</button>
 			</div>
 		</NotificationStyled>
 	);

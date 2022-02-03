@@ -5,9 +5,9 @@ export const NotificationStyled = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	z-index: 999;
 
 	div {
+		z-index: 1;
 		position: fixed;
 		top: 0;
 		right: 0;

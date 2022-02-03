@@ -12,7 +12,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import uploadCsvSchema from "validation/uploadCsvSchema";
 
-const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
+const UploadAdsFromFile = ({setError, setNotification}) => {
 	const {
 		register,
 		handleSubmit,
@@ -33,12 +33,9 @@ const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 			.post(`${process.env.REACT_APP_API_URL}/media/v1/upload-csv`, formData, {
 				headers: {"Content-Type": "multipart/form-data"},
 			})
-			.then(() => {
-				setSuccessfulPost(true);
-			})
-			.catch(() => {
-				setError(true);
-			});
+			.then(() => setError(false))
+			.catch(() => setError(true));
+		setNotification(true);
 	};
 
 	return (
