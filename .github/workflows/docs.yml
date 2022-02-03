@@ -34,9 +34,6 @@ jobs:
 
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@5.2
-        run: |
-          pwd
-          ls -la
         with:
           switches: -avzr --delete
           path: build/
@@ -45,3 +42,7 @@ jobs:
           remote_port: ${{ secrets.DEPLOY_PORT }}
           remote_user: ${{ secrets.DEPLOY_USER }}
           remote_key: ${{ secrets.DEPLOY_KEY }}
+      - name: See internal contents
+        run: |
+          pwd
+          ls -la
