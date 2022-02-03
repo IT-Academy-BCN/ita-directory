@@ -29,6 +29,7 @@ jobs:
 
       - name: See contents
         run: |
+          pwd
           ls -la
 
       - name: Deploy via rsync
