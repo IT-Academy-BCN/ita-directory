@@ -1,15 +1,23 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
+
+//styles
+import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
+import {Container} from "theme/GlobalStyles";
+
+//fontawesome
+import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
+
+//components
 import Body from "components/layout/Body/Body";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
-import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
-import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
+import UploadAdsFromFile from "components/composed/UploadAdsFromFile/UploadAdsFromFile";
 
+//form validation
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import newAdSchema from "validation/createNewAdSchema.js";
@@ -218,6 +226,12 @@ const CreateNewAd = () => {
 								<pre>{submittedData}</pre>
 							</div>
 						)}
+					</Wrapper>
+					<Wrapper>
+						<UploadAdsFromFile
+							setError={setError}
+							setSuccessfulPost={setSuccessfulPost}
+						/>
 					</Wrapper>
 				</Container>
 			</Body>
