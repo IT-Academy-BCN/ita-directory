@@ -11,47 +11,32 @@ import Button from "components/units/Button/Button";
 const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 	const [csvFile, setCsvFile] = useState();
 
-	const validateCsvFile = (file) => {
-		return file && file.type === "text/csv";
+	const handleChange = (event) => {
+		event.preventDefault();
+		const file = event.target.files[0];
+		if (file && file.type === "text/csv") setCsvFile(file);
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const file = csvFile;
 		const formData = new FormData();
-		formData.append("file", file);
-		/* axios.post(`${process.env.REACT_APP_API_URL}/media/v1/upload`, formData, {​​​ headers: {​​​ 'Content-Type': 'multipart/form-data' }​​​ }​​​)
-				.then((res) => {
-					setSuccessfulPost(true);
-					console.log(res);
-				})
-				.catch(() => setError(true)); */
+		formData.append("csv", csvFile);
+		axios
+			.post(`${process.env.REACT_APP_API_URL}/media/v1/upload-csv`, formData, {
+				headers: {"Content-Type": "multipart/form-data"},
+			})
+			.then(() => {
+				setSuccessfulPost(true);
+			})
+			.catch(() => {
+				setError(true);
+			});
 	};
-
-	/* [9:13] kevinmamaqi
-    const formData =newFormData()
-	formData.append('file', file)
-	​[9:14] kevinmamaqi
-    consthandleChange= (e) => {​​​
-	if (e.currentTarget.files) setFile(e.currentTarget.files[0])
-	}​​​
-	​[9:16] kevinmamaqi
-    {​​​ headers: {​​​ 'Content-Type': 'multipart/form-data' }​​​ }​​​ */
 
 	return (
 		<Form onSubmit={handleSubmit}>
 			<label>Publicar anuncios desde archivo</label>
-			<Input
-				type="file"
-				name="csvFile"
-				onChange={(event) => {
-					setCsvFile(event.target.files[0]);
-				}}
-				id="csvFile"
-				success={csvFile && validateCsvFile(csvFile)}
-				error={csvFile && !validateCsvFile(csvFile)}
-				errorText="Sube un archivo .csv"
-			/>
+			<input type="file" name="csvFile" onChange={handleChange} id="csvFile" />
 			<Button
 				type="submit"
 				text="enviar"
@@ -61,7 +46,6 @@ const UploadAdsFromFile = ({setError, setSuccessfulPost}) => {
 					height: "2.125rem",
 					marginBottom: "2rem",
 				}}
-				disabled={!(csvFile && validateCsvFile(csvFile))}
 			/>
 		</Form>
 	);
