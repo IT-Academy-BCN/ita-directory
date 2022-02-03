@@ -33,9 +33,15 @@ const UploadAdsFromFile = ({setError, setNotification}) => {
 			.post(`${process.env.REACT_APP_API_URL}/media/v1/upload-csv`, formData, {
 				headers: {"Content-Type": "multipart/form-data"},
 			})
-			.then(() => setError(false))
-			.catch(() => setError(true));
-		setNotification(true);
+			.then(() => {
+				setError(false);
+				setNotification(true);
+			})
+			.catch(() => {
+				setError(true);
+				setNotification(true);
+			});
+		
 	};
 
 	return (

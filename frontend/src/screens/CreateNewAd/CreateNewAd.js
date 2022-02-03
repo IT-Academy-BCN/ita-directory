@@ -24,7 +24,7 @@ import newAdSchema from "validation/createNewAdSchema.js";
 
 const CreateNewAd = () => {
 	const emptyForm = {
-		user_id: 1,
+		user_id: "1",
 		title: "",
 		description: "",
 		city: "",
@@ -54,9 +54,15 @@ const CreateNewAd = () => {
 
 		axios
 			.post(`${process.env.REACT_APP_API_URL}/ads/v1/post-ad`, formInfo)
-			.then(() => setError(false))
-			.catch(() => setError(true));
-		setNotification(true);
+			.then(() => {
+				setError(false);
+				setNotification(true);
+			})
+			.catch(() => {
+				setError(true);
+				setNotification(true);
+			});
+		
 	};
 
 	useEffect(() => {
