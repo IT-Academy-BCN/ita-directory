@@ -6,8 +6,6 @@ import {InputContainerStyled, InputStyled, ErrorStyled} from "./Input.styles";
 const Input = ({
 	type,
 	placeholder,
-	value,
-	onChange,
 	onFocus,
 	onBlur,
 	inputStyles,
@@ -39,11 +37,9 @@ const Input = ({
 				<InputStyled
 					type={type}
 					placeholder={placeholder}
-					value={value}
-					onChange={onChange}
 					onFocus={onFocus}
 					onBlur={onBlur}
-					className={`${className}`}
+					className={`${className} ${error ? "error" : ""}`}
 					id={id}
 					name={name}
 					disabled={disabled}
@@ -79,7 +75,7 @@ Input.propTypes = {
 	disabled: PropTypes.bool,
 	errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 	errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-	error: PropTypes.string,
+	error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 	success: PropTypes.bool,
 	inputContainerClassName: PropTypes.string,
 	required: PropTypes.bool,

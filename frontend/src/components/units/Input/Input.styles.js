@@ -18,13 +18,15 @@ export const InputStyled = styled.input.attrs((props) => ({
 	px-2
 	border 
 	rounded-md 
-	hover:opacity-90 
-	${props.error ? "border-red-200" : "border-gray-200"}`,
+	hover:opacity-90 `,
 }))`
 	height: 49px;
+	&.error {
+		border: 1px solid #fecaca !important;
+	}
 	&:focus {
 		outline: 0 none;
-		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)};
+		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
 	}
 `;
 

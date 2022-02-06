@@ -70,7 +70,7 @@ const ContactModal = ({active, hideModal}) => {
 					name="message"
 					label="Mensaje"
 					textAreaStyles={{width: "100%"}}
-					register={register}
+					register={register("message")}
 					error={errors.message?.message}
 				/>
 
