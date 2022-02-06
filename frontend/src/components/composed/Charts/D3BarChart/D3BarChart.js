@@ -178,7 +178,6 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 					.attr("y", (data) => y(data.value))
 					.attr("x", (data) => x(data))
 					.attr("fill", (data) => data.color)
-					.attr("rx", "")
 					.classed("bar", true);
 
 				//Draw bar labels
