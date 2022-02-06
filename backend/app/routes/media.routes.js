@@ -2,6 +2,7 @@ const router = require("express").Router();
 const MediaControllers = require("../controllers/media.controller");
 const uploadFile = require("../middleware/uploadFile");
 
+
 /**
  * Registration data
  * @typedef {object} mediaUploadData
@@ -10,18 +11,19 @@ const uploadFile = require("../middleware/uploadFile");
  */
 
 /**
- * POST /media/v1/upload
+ * POST /media/v1/uploadMedia
  * @summary Allows upload media file
  * @tags Media
  * @param {mediaUploadData} request.body.required - The payload looks like this:
+ * { DATA NEEDED }
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
- * @example request - Payload example
- * {"image": "file", "userId": "1"}
+ * @example request - Payload example 
+ * {DATA NEEDED} 
  * @example response - 200 - Example success response
  * { "status":"200", "message": "File uploaded correctly"}
  * @example response - 400 - Example error response
- * { "errCode":"errCode", "msg": "File/userId error"}
+ * { "errCode":"errCode", "message":"Failed uploading media"}
  */
 
 router.post("/v1/upload", uploadFile, MediaControllers.uploadMedia);
@@ -35,12 +37,15 @@ router.post("/v1/upload", uploadFile, MediaControllers.uploadMedia);
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * {DATA NEEDED}
+ * {DATA NEEDED} 
  * @example response - 200 - Example success response
  * { "status":"200", "message": "File deleted correctly"}
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"Failed deleting file"}
  */
 router.delete("/v1/delete", MediaControllers.deleteMedia);
+
+
+
 
 module.exports = router;

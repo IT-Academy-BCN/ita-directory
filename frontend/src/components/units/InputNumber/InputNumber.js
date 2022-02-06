@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {InputNumberStyled, StyledError, StyledInput, StyledContainer} from "./InputNumber.styles";
 
 const InputNumber = ({
 	placeholder,
+	value,
+	onChange,
 	onFocus,
 	onBlur,
 	textStyles,
@@ -16,37 +18,45 @@ const InputNumber = ({
 	min,
 	max,
 	size,
-	error,
+	errorText = "Tiene que ser un número válido o no puede estar vacío",
 	errorStyles,
 	disabled,
 	step,
 	icon,
 	label,
-	register,
-	type,
+	required,
 }) => {
+	const [isInvalid, setIsInvalid] = useState(false);
+
 	/*warning on behavior of input type number:
 	target value is passed as empty string if the number is not interpreted as valid 
 	by the browser (e.g. when "+", "-" are typed) and onChange event is not fired. 
 	Consider this when managing validation on parent components!
 	*/
 
+	const handleOnChange = (e) => {
+		const val = e.target.value;
+		const regex = /^\d+$/;
+		setIsInvalid(val === "" || !regex.test(val) ? true : false);
+		onChange(e);
+	};
+
 	return (
 		<InputNumberStyled>
 			<label htmlFor={id}>{label}</label>
 			<div className="inputsContainer">
-				<StyledContainer className={`${className} ${error ? "error" : ""}`}>
-					{icon && (
-						<div className="styledIcon">
-							<FontAwesomeIcon icon={icon} />
-						</div>
-					)}
+				<StyledContainer className={`${className} ${isInvalid ? "error" : ""}`}>
+					<div className="styledIcon">
+						<FontAwesomeIcon icon={icon} />
+					</div>
 					<StyledInput
-						type={type}
+						type="number"
 						placeholder={placeholder}
+						value={value}
+						onChange={handleOnChange}
 						onFocus={onFocus}
 						onBlur={onBlur}
-						className={`${className} ${error ? "error" : ""}`}
+						className={`${className} ${isInvalid ? "error" : ""}`}
 						id={id}
 						name={name}
 						min={min}
@@ -58,11 +68,13 @@ const InputNumber = ({
 						labelStyles={labelStyles}
 						size={size}
 						errorStyles={errorStyles}
-						error={error}
-						{...(register && register)}
+						required={required}
 					/>
 				</StyledContainer>
-				<StyledError className={className}>{error}</StyledError>
+				<StyledError
+					dangerouslySetInnerHTML={{__html: isInvalid ? errorText : null}}
+					className={className}
+				/>
 			</div>
 		</InputNumberStyled>
 	);
@@ -71,7 +83,7 @@ const InputNumber = ({
 InputNumber.propTypes = {
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
-	onChange: PropTypes.func,
+	onChange: PropTypes.func.isRequired,
 	onFocus: PropTypes.func,
 	onBlur: PropTypes.func,
 	textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),

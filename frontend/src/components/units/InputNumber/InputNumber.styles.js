@@ -26,21 +26,20 @@ export const StyledContainer = styled.div`
 	align-items: center;
 	flex-wrap: nowrap;
 	border-radius: 5px;
+	border: 1px solid #dddddd;
 	width: 18.6rem;
 	height: 2.6rem;
 	padding: 5px;
-	border: 1px solid #707070;
 	&.error {
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
 	}
 	&:focus-within {
 		outline: 0 none;
-		border: 2px solid #000 !important;
+		border: 3px solid #000 !important;
 	}
-
-	&.error:focus-within {
-		border-color: red !important;
+	&.style-input-create-new-ad {
+		border: 1px solid #707070;
 	}
 
 	.styledIcon {

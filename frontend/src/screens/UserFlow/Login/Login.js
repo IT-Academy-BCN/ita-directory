@@ -5,26 +5,18 @@ import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
+import {msgs, validateEmail, validatePassword} from "utils/userFlow";
 import Input from "components/units/Input/Input";
-
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import loginSchema from "validation/loginSchema.js";
 
 const Login = () => {
 	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState(null);
 	const closeNotification = () => setMessage(null);
-	const {
-		register,
-		handleSubmit,
-		formState: {errors},
-	} = useForm({
-		resolver: yupResolver(loginSchema),
-	});
 
 	const loginUser = async (user) => {
 		try {
@@ -42,8 +34,8 @@ const Login = () => {
 		}
 	};
 
-	const submitForm = (data) => {
-		const {email, password} = data;
+	const handleSubmit = (event) => {
+		event.preventDefault();
 		setIsDisabled(true);
 		setIsLoading(true);
 		setAnimated(true);
@@ -75,26 +67,32 @@ const Login = () => {
 
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
-					<Form onSubmit={handleSubmit(submitForm)} noValidate>
+					<Form onSubmit={handleSubmit} novalidate>
 						<Input
 							type="email"
 							placeholder="Introduce tu email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							id="emailName"
 							name="email"
 							disabled={disabled}
 							className="w-full"
-							error={errors.email?.message}
-							register={register("email")}
+							success={email !== "" && validateEmail(email)}
+							error={email !== "" && !validateEmail(email)}
+							errorText={msgs[`emailError`]}
 						/>
 						<Input
 							type="password"
 							placeholder="Introduce tu contraseña"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 							id="passName"
-							name="password"
+							name="passName"
 							disabled={disabled}
 							className="w-full mt-2"
-							error={errors.password?.message}
-							register={register("password")}
+							success={password !== "" && validatePassword(password)}
+							error={password !== "" && !validatePassword(password)}
+							errorText={msgs[`passwordError`]}
 						/>
 						<AsyncButton
 							text="Acceder"
@@ -104,6 +102,7 @@ const Login = () => {
 							className="blue-gradient w-full my-8"
 							isLoading={isLoading}
 							animated={animated}
+							disabled={!validateEmail(email) || !validatePassword(password)}
 						/>
 						<div className="w-full">
 							<RedirectStyled>

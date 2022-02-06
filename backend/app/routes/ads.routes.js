@@ -24,7 +24,7 @@ const router = require("express").Router();
  * @property {integer} id.required - Ad_type id
  * @property {string} name.required - Ad_type name
  * @property {integer} house - Ad_type type
- * @property {integer} room - Ad_type type
+ * @property {integer} room - Ad_type type 
  * @property {integer} garage - Ad_type type
  * @property {integer} storage - Ad_type type
  * @property {integer} office - Ad_type type
@@ -32,6 +32,9 @@ const router = require("express").Router();
  * @property {integer} building - Ad_type type
  * @property {integer} new_building - Ad_type type
  */
+
+
+
 
 /**
  * POST /ads/v1/post-ad
@@ -169,6 +172,7 @@ router.get("/v1/ads/:adId", adsController.getAdById);
 }
 */
 
+
 /**
  * GET /ads/v1/ads/type/:type
  * @summary Gets all ads filtered according to their type name.
@@ -196,7 +200,9 @@ router.get("/v1/ads/:adId", adsController.getAdById);
 }
  */
 
-router.get("/v1/ads/type/:type", adsController.getAdsByType);
+router.get("/v1/ads/type/:type", adsController.getAdsByType)
+
+
 
 /**
  * GET /ads/v1/ads/types/list
@@ -218,7 +224,7 @@ router.get("/v1/ads/type/:type", adsController.getAdsByType);
     ]
 }
  */
-router.get("/v1/ads/types/list", adsController.getAdTypes);
+router.get("/v1/ads/types/list", adsController.getAdTypes)
 
 /**
  * GET /ads/v1/ads/:location/:type 
@@ -261,9 +267,7 @@ router.get("/v1/ads/types/list", adsController.getAdTypes);
 }
  */
 
-router.get("/v1/ads/:location/:type", adsController.getAdsByTypeAndLocation);
-
-router.get("/v1/ads/search/location/:location", adsController.getAdsByLocation);
+router.get("/v1/ads/:location/:type", adsController.getAdsByTypeAndLocation)
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
 

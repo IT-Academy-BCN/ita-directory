@@ -37,24 +37,23 @@ export const TextAreaInput = styled.textarea.attrs((props) => ({
 				text-xs
 				text-1x2
 				p-3
+				mb-9
 				overflow-y-auto
 				resize-none
 				text-darkGray
+				${props.error ? "border-red-200" : "border-gray-200"}
 				`,
 }))`
-	&.error {
-		border: 1px solid #fecaca !important;
-	}
 	&:focus {
 		outline: 0 none;
-		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
+		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)};
 	}
 `;
 
 export const StyledError = styled.small.attrs({
-	className: ` visible text-redColor mb-9`,
+	className: `absolute visible text-redColor`,
 })`
-	display: inline-block;
+	bottom: 70px;
 	&.errorProfile {
 		${tw`static`};
 	}

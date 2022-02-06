@@ -123,6 +123,7 @@ router.patch("/v1/update-user", authenticateToken, UsersController.updateUser);
  */
 
 router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
+//router.put("/test", UsersController.updateUserRole);
 
 /**
  * NewPassword data

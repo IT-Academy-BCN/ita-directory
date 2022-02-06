@@ -2,14 +2,7 @@ name: Update docs
 
 on:
   push:
-    branches:
-      - develop
-    paths:
-      - "documents/**/**"
-
-defaults:
-  run:
-    working-directory: documents
+    branches: [develop]
 
 jobs:
   build-and-deploy:
@@ -26,9 +19,14 @@ jobs:
         run: npm run build
         env:
           CI: true
-      - run: pwd && ls -la
-      - run: mkdir ~/.ssh
-      - run: 'echo "${{ secrets.DEPLOY_KEY }}" >> ~/.ssh/github_rsa'
-      - run: chmod 400 ~/.ssh/github_rsa
-      - run: echo -e "Host ita-github-actions\n\tUser ${{ secrets.DEPLOY_USER }}\n\tHostname ${{ secrets.DEPLOY_HOST }}\n\tIdentityFile ~/.ssh/github_rsa\n\tStrictHostKeyChecking No" >> ~/.ssh/config
-      - run: rsync -avzr --delete -e ssh build/ ita-github-actions:${{ secrets.DOCS_PATH }}
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@5.2
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: ${{ secrets.DOCS_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
