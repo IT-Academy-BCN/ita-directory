@@ -37,7 +37,7 @@ router.get("/v1/get_me", UsersController.getUser);
 router.post("/v1/register", UsersController.registerUser);
 
 //Read All Users (for testing purpose)
-router.get("/", authenticateToken, UsersController.getAllUsers);
+router.get("/", UsersController.getAllUsers);
 
 //Refresh-token
 router.get("/v1/refresh-token", UsersController.getRefreshToken);
@@ -98,7 +98,7 @@ router.post("/v1/login", UsersController.login);
  * { "errCode":"errCode", "message":"User not found"}
  */
 //Update some field to User
-router.patch("/v1/user", authenticateToken, UsersController.updateUser);
+router.patch("/v1/update-user", authenticateToken, UsersController.updateUser);
 
 /**
  * RecoverPassword data
@@ -156,6 +156,6 @@ router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
 router.post("/v1/change-password/:token", UsersController.changePassword);
 
 //Route delete create
-router.delete("/v1/delete-user", UsersController.deleteUser);
+router.delete("/v1/delete-user", authenticateToken, UsersController.deleteUser);
 
 module.exports = router;
