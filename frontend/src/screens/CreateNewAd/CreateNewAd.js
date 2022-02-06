@@ -1,16 +1,18 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
-import Input from "components/units/Input/Input";
 import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Notification from "components/units/Notifications/Notification";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
 import {Wrapper, MapText, MapBox} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
+
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import newAdSchema from "validation/createNewAdSchema.js";
 
 const CreateNewAd = () => {
 	const emptyForm = {
@@ -30,6 +32,13 @@ const CreateNewAd = () => {
 	const [error, setError] = useState(false);
 	const [successfulPost, setSuccessfulPost] = useState(false);
 	const [coordinates, setCoordinates] = useState([]);
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm({
+		resolver: yupResolver(newAdSchema),
+	});
 
 	const postAd = async (formInfo) => {
 		try {
@@ -48,34 +57,23 @@ const CreateNewAd = () => {
 		}
 	};
 
-	const handleChange = (e) => {
-		let {name, value} = e.target;
-		if (Number(value)) {
-			value = Number(value);
-		}
-		setForm({
-			...form,
-			[name]: value,
-			map_lat: Number(coordinates[0]),
-			map_lon: Number(coordinates[1]),
-		});
-	};
-	//	,
-
 	useEffect(() => {
 		setForm({
 			...form,
 			map_lat: Number(coordinates[0]),
 			map_lon: Number(coordinates[1]),
 		});
-	}, [coordinates, form]);
+	}, [coordinates]);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		console.log(JSON.stringify(form));
-		postAd(form);
-		setSubmittedData(JSON.stringify(form, 0, 2));
+	const submitForm = (data) => {
+		const formInfo = {
+			...form,
+			...data,
+			map_lat: Number(coordinates[0]),
+			map_lon: Number(coordinates[1]),
+		};
+		postAd(formInfo);
+		setSubmittedData(JSON.stringify(formInfo, 0, 2));
 		//variables reset
 		setForm(emptyForm);
 		setError((prev) => false);
@@ -85,7 +83,7 @@ const CreateNewAd = () => {
 
 	const inputComponentData = [
 		{
-			Component: Input,
+			Component: InputNumber,
 			type: "text",
 			label: "Título",
 			name: "title",
@@ -100,7 +98,7 @@ const CreateNewAd = () => {
 			inputContainerClassName: "style-input-create-new-ad", // textAreaCreateNewAd
 		},
 		{
-			Component: Input,
+			Component: InputNumber,
 			type: "text",
 			label: "Ciudad",
 			name: "city",
@@ -110,6 +108,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "Habitaciones",
 			name: "n_rooms",
 			icon: faBed,
@@ -117,6 +116,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "Precio",
 			name: "price",
 			required: true,
@@ -125,6 +125,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "M\u00B2",
 			name: "square_meters",
 			required: true,
@@ -133,6 +134,7 @@ const CreateNewAd = () => {
 		},
 		{
 			Component: InputNumber,
+			type: "number",
 			label: "Baños",
 			name: "n_bathrooms",
 			icon: faBath,
@@ -164,27 +166,31 @@ const CreateNewAd = () => {
 			>
 				<Container>
 					<Wrapper>
-						<form onSubmit={handleSubmit}>
+						<form onSubmit={handleSubmit(submitForm)} noValidate>
 							{inputComponentData.map((el, i) => {
-								const Component = el.Component;
+								const {
+									Component,
+									label,
+									type,
+									name,
+									inputClassName,
+									icon,
+									inputContainerClassName,
+								} = el;
 								return (
 									<div key={i}>
 										<div className="form-label">
-											{el.Component === Input && (
-												<FontAwesomeIcon icon={el.icon} />
-											)}
-											<label>{el.label}</label>
+											<label>{label}</label>
 										</div>
 										<Component
 											key={i}
-											type={el.type}
-											name={el.name}
-											required={el.required}
-											value={form[el.name]}
-											onChange={handleChange}
-											className={el.inputClassName}
-											icon={el.Component === InputNumber && el.icon}
-											inputContainerClassName={el.inputContainerClassName}
+											type={type}
+											name={name}
+											className={inputClassName}
+											icon={icon && icon}
+											inputContainerClassName={inputContainerClassName}
+											register={register(`${name}`)}
+											error={errors[name]?.message}
 										/>
 									</div>
 								);
