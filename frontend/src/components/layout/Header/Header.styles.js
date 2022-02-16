@@ -24,7 +24,7 @@ export const HeaderStyled = styled.header`
 			color: ${(props) => (props.logoColor ? props.logoColor : Colors.darkRed)};
 			font-family: Roboto Mono Medium for Powerline;
 			font-size: 15px;
-			
+
 			opacity: 1;
 			text-decoration: none;
 
@@ -38,8 +38,7 @@ export const HeaderStyled = styled.header`
 				width: 77px;
 				height: 18px;
 				letter-spacing: -1.5px;
-				color: #DB2C7F;
-				
+				color: #db2c7f;
 			}
 		}
 

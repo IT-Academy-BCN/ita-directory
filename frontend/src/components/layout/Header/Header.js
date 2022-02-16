@@ -4,20 +4,20 @@ import {Link} from "react-router-dom";
 // Styles
 import {HeaderStyled, StyledSubHeader} from "./Header.styles";
 import {Container} from "theme/GlobalStyles";
-import logo from "../../../assets/logos/logo.png"
+import logo from "../../../assets/logos/logo.png";
 
 const profilePicture =
 	// "https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
 	"https://randomuser.me/api/portraits/men/21.jpg";
 
 const Header = ({
-	isLoggedIn=true,
+	isLoggedIn = true,
 	title,
 	logoColor,
 	headerColor,
 	fontColor,
 	justifyTitle,
-	isTitleVisible=true,
+	isTitleVisible = true,
 }) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -33,8 +33,8 @@ const Header = ({
 			<Container>
 				<div className="top-header">
 					<Link className="logo-group" to="/ads">
-					<img src={logo} alt="ITAcademy Logo" className="logo" />
-					<span>_directory</span>
+						<img src={logo} alt="ITAcademy Logo" className="logo" />
+						<span>_directory</span>
 					</Link>
 					{isLoggedIn ? (
 						<div className="profile">
