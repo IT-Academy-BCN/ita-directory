@@ -5,6 +5,7 @@ const Colors = {
 	bloodRed: "#DC2626",
 	paleRed: "#FECACA",
 	redColor: "rgba(193, 12, 12, 1)",
+	redPink: "#DB2C7F",
 	transparentBlue: "#e6f2f2",
 	palerBlue: "#b5dddd",
 	lightBlue: "#46C1F7",
@@ -31,7 +32,8 @@ const Colors = {
 	shadow: "rgba(0, 0, 0, 0.2)",
 	lighterShadow: "rgba(0, 0, 0, 0.19)",
 	lightBeige: "#EFEEEA",
-	violet: "#8A82AF",
-};
-
-export default Colors;
+	violet: "#8A82AF"
+  };
+  
+  export default Colors;
+  

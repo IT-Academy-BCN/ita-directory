@@ -16,18 +16,31 @@ export const HeaderStyled = styled.header`
 		margin-top: 1rem;
 		margin-bottom: 1rem;
 
-		.logo {
+		.logo-group {
 			display: flex;
 			align-items: center;
 			justify-content: ${(props) => (props.justifyTitle ? "center" : "left")};
-
-			width: 100%;
+			width: 229px;
 			color: ${(props) => (props.logoColor ? props.logoColor : Colors.darkRed)};
-			font: normal normal normal 15px/15px Korb-Bold;
-			letter-spacing: 0px;
-			text-transform: uppercase;
+			font-family: Roboto Mono Medium for Powerline;
+			font-size: 15px;
+			
 			opacity: 1;
 			text-decoration: none;
+
+			& img {
+				width: 144px;
+				height: 36px;
+			}
+
+			& span {
+				margin-left: 5px;
+				width: 77px;
+				height: 18px;
+				letter-spacing: -1.5px;
+				color: #DB2C7F;
+				
+			}
 		}
 
 		.profile {
