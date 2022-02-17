@@ -17,7 +17,7 @@ const Header = ({
 	headerColor,
 	fontColor,
 	justifyTitle,
-	isTitleVisible = true,
+	isTitleVisible = false,
 }) => {
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 

@@ -7,6 +7,7 @@ export const StyledBody = styled.div`
 	background-size: 100%;
 	min-height: 100vh;
 	width: 100vw;
+	position: relative;
 `;
 
 export const Childrens = styled.div`

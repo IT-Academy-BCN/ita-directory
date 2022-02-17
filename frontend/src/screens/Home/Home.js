@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import Banner from "../../components/units/Banner/Banner";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -29,13 +30,14 @@ const Home = () => {
 		<>
 			<Body title="Home" justifyTitle="center">
 				<HomeContainer>
-					<ul>
+					<Banner />
+					{/* <ul>
 						{pages.map((page) => (
 							<li>
 								<Link to={page.route}>{page.title}</Link>
 							</li>
 						))}
-					</ul>
+					</ul> */}
 				</HomeContainer>
 			</Body>
 		</>
