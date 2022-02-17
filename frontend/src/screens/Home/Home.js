@@ -31,6 +31,7 @@ const Home = () => {
 			<Body title="Home" justifyTitle="center">
 				<HomeContainer>
 					<Banner />
+
 					{/* <ul>
 						{pages.map((page) => (
 							<li>
