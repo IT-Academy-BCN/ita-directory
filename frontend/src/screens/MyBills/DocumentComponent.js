@@ -5,21 +5,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import Colors from "theme/Colors";
 import {PDFDownloadLink} from "@react-pdf/renderer";
-import interRegular from "../../assets/fonts/Inter/Inter-Regular.ttf";
-import interSemiBold from "../../assets/fonts/Inter/Inter-SemiBold.ttf";
+import robotoRegular from "../../assets/fonts/roboto/Roboto-Regular.ttf";
 
 // Create styles
 
 Font.register({
-	family: "Inter",
-	fonts: [{src: interRegular}, {src: interSemiBold}],
+	family: "Roboto",
+	fonts: [{src: robotoRegular}],
 });
 
 const styles = StyleSheet.create({
 	body: {
 		padding: "28px 42px 4px 42px",
 		backgroundColor: "#ffffff",
-		fontFamily: "Inter",
+		fontFamily: "Roboto",
 		fontSize: "10pt",
 	},
 	header: {

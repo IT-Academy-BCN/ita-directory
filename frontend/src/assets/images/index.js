@@ -8,3 +8,4 @@ export {default as adCardImage} from "./casaPiscinaAd.jpg";
 export {default as people1b} from "./people1b.jpg";
 export {default as people4b} from "./people4b.jpg";
 export {default as people13b} from "./people13b.jpg";
+

@@ -1,16 +1,28 @@
 import React from "react";
 
 // Styles
-import {Anchor, Copyright, Rights, Information, Legal, Logo, StyledFooter} from "./Footer.styles";
+import {Logo, Credits, Anchor, Rights, Information, Legal, StyledFooter} from "./Footer.styles";
 import {Container} from "theme/GlobalStyles";
+import logo from "../../../assets/logos/logo.png";
 
 const Footer = () => {
 	return (
 		<Container column>
 			<StyledFooter>
-				<Logo>LOGO EMPRESA</Logo>
+				<Logo>
+					<img src={logo} alt="corporate logo" />
+					<p className="directory">_directory</p>
+					<Credits>
+						<p>
+							Diseñado por <span>Kevin Mamaqui</span>
+						</p>
+						<p>
+							para <span>ITAcademy de Barcelona Activa</span>
+						</p>
+					</Credits>
+				</Logo>
+
 				<Information>
-					<Copyright>©miempresa.com</Copyright>
 					<Rights>Todos los derechos reservados.</Rights>
 					<Legal>
 						<Anchor href="#">Aviso Legal</Anchor>-<Anchor href="#">Privacidad</Anchor>-
