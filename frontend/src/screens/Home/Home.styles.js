@@ -2,11 +2,8 @@ import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
 
 export const HomeContainer = styled(Container)`
-	height: 70vh;
-	position: absolute;
-	left: 0;
-	min-width: 100vw;
-	ul {
+	flex-direction: column;
+	min-height: 70vh ul {
 		text-align: center;
 
 		li {

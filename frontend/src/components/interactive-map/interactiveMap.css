@@ -1,0 +1,11 @@
+path {
+    cursor: pointer;
+    fill:#f0e68c;
+    stroke: #db2c7f;
+    stroke-width: 2px;
+}
+
+#vallcarca-28:hover, #elcoll-29:hover {
+    fill: #db2c7f
+}
+

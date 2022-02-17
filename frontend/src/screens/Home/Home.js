@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import Banner from "../../components/units/Banner/Banner";
+import InteractiveMap from "../../components/interactive-map/InteractiveMap";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -31,6 +32,7 @@ const Home = () => {
 			<Body title="Home" justifyTitle="center">
 				<HomeContainer>
 					<Banner />
+					<InteractiveMap />
 
 					{/* <ul>
 						{pages.map((page) => (
