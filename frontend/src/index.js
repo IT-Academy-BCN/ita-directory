@@ -10,7 +10,9 @@ axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<div className="font-roboto">
+				<App />
+			</div>
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById("root")

@@ -44,7 +44,7 @@ module.exports = {
 
 		extend: {
 			fontFamily: {
-				roboto: ["Roboto Mono"],
+				roboto: ["'Roboto Mono'"],
 			},
 			colors: {
 				white: "#FFFFFF",
