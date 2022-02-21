@@ -3,6 +3,7 @@ import {Container} from "theme/GlobalStyles";
 
 export const HomeContainer = styled(Container)`
 	flex-direction: column;
+
 	min-height: 70vh ul {
 		text-align: center;
 

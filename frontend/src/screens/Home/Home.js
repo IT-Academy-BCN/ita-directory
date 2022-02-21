@@ -7,6 +7,7 @@ import Body from "components/layout/Body/Body";
 
 // Styles
 import {HomeContainer} from "./Home.styles";
+import MapOfDistricts from "components/interactive-map/MapOfDistricts";
 
 const pages = [
 	{title: "Ad", route: "/ad"},
@@ -32,7 +33,7 @@ const Home = () => {
 			<Body title="Home" justifyTitle="center">
 				<HomeContainer>
 					<Banner />
-					<InteractiveMap />
+					<MapOfDistricts />
 
 					{/* <ul>
 						{pages.map((page) => (
