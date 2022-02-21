@@ -5,6 +5,10 @@ path {
 	stroke-width: 2px;
 }
 
+.columns {
+	height: 116vh;
+}
+
 li {
 	font-size: 8px;
 }

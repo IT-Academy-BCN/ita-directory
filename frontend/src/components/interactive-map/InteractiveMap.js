@@ -8,7 +8,7 @@ const InteractiveMap = () => {
 
 	const handleMouseOver = (id) => {
 		const action = {
-			type: "swap-district",
+			type: "swap-area",
 			payload: id,
 		};
 		dispatch(action);

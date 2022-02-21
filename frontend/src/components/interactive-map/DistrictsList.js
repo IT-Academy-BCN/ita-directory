@@ -7,16 +7,16 @@ import "./interactiveMap.css";
 const DistrictsList = () => {
 	const {state, dispatch} = useContext(MapContext);
 
-	const handleMouseOver = (mapId) => {
+	const handleAreaMouseOver = (mapId) => {
 		const action = {
-			type: "swap-district",
+			type: "swap-area",
 			payload: mapId,
 		};
 		dispatch(action);
 	};
 
 	return (
-		<div>
+		<div className="flex flex-col flex-wrap columns">
 			{allDistricts.map(({district, areas}) => (
 				<>
 					<p key={district} className="text-xs">
@@ -27,7 +27,7 @@ const DistrictsList = () => {
 							<li
 								key={id}
 								className={id === state ? "is-lit" : null}
-								onMouseOver={() => handleMouseOver(id)}
+								onMouseOver={() => handleAreaMouseOver(id)}
 							>
 								{`${nr}. ${name}`}
 							</li>
