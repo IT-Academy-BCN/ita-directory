@@ -30,7 +30,7 @@ const DistrictsList = () => {
 			setLeftColumnDistricts(left);
 			setRightColumnDistricts(right);
 		}
-	}, [allDistricts]);
+	}, []);
 
 	const handleDistrictMouseOver = (areas) => {
 		const action = {
