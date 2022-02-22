@@ -4,14 +4,14 @@ import InteractiveMap from "./InteractiveMap";
 import {MapContext} from "./MapContext";
 import {mapReducer} from "./mapReducer";
 
-const initialState = "";
+const initialState = {};
 
 const MapOfDistricts = () => {
 	const [state, dispatch] = useReducer(mapReducer, initialState);
 	return (
 		<>
 			<MapContext.Provider value={{state, dispatch}}>
-				<div className="flex">
+				<div className="flex border-2 ">
 					<InteractiveMap />
 					<DistrictsList />
 				</div>

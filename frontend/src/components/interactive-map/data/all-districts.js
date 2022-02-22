@@ -1,4 +1,4 @@
-const allDistricts = [
+export const allDistricts = [
 	{
 		district: "Ciutat Vella",
 		areas: [
@@ -177,5 +177,3 @@ const allDistricts = [
 		],
 	},
 ];
-
-export default allDistricts;

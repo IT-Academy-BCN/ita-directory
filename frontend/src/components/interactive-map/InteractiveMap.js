@@ -8,7 +8,7 @@ const InteractiveMap = () => {
 
 	const handleMouseOver = (id) => {
 		const action = {
-			type: "swap-area",
+			type: "lit-area",
 			payload: id,
 		};
 		dispatch(action);
@@ -163,7 +163,7 @@ const InteractiveMap = () => {
 							id={item.id}
 							d={item.d}
 							transform={item.transform}
-							className={item.id === state ? "is-lit" : null}
+							className={item.id === state[item.id] ? "is-lit" : null}
 							onMouseOver={() => handleMouseOver(item.id)}
 							onMouseLeave={() => handleMouseOver("")}
 							fill="none"
