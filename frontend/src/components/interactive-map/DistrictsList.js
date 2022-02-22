@@ -72,7 +72,7 @@ const DistrictsList = () => {
 	);
 
 	return (
-		<div className="flex flex-row">
+		<div className="flex flex-row ml-2">
 			<div className="flex flex-col">
 				{leftColumnDistricts.map(({district, areas}) => renderList(district, areas))}
 			</div>
