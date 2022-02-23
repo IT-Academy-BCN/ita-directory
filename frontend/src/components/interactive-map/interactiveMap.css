@@ -1,8 +1,23 @@
 path {
 	cursor: pointer;
+	fill: transparent;
 }
 
-li {
+#path4301,
+#path4287,
+#path4293,
+#path4295,
+#path4299,
+#Sarrià-SantGervasi,
+#path709,
+#path695,
+#path697,
+#path707,
+#path25 {
+	fill: #fcf5e3;
+}
+
+#path li {
 	font-size: 8px;
 }
 
@@ -11,4 +26,8 @@ li {
 	color: #fff;
 	cursor: pointer;
 	fill: #db2c7f;
+}
+
+.is-district-lit {
+	fill: #db2c7f !important;
 }

@@ -8,6 +8,18 @@ const DistrictsList = () => {
 	const {state, dispatch} = useContext(MapContext);
 	const [leftColumnDistricts, setLeftColumnDistricts] = useState([]);
 	const [rightColumnDistricts, setRightColumnDistricts] = useState([]);
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+	const handleWindowSizeChange = () => {
+		setScreenWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener("resize", handleWindowSizeChange);
+		return () => {
+			window.removeEventListener("resize", handleWindowSizeChange);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (allDistricts) {
@@ -20,6 +32,7 @@ const DistrictsList = () => {
 					el.district === "Sarrià-Sant Gervasi" ||
 					el.district === "Gràcia"
 			);
+
 			const right = allDistricts.filter(
 				(el) =>
 					el.district === "Horta-Guinardó" ||
@@ -31,6 +44,14 @@ const DistrictsList = () => {
 			setRightColumnDistricts(right);
 		}
 	}, []);
+
+	const handleMobileDistrictMouseOver = (district) => {
+		const action = {
+			type: "lit-map-district",
+			payload: district,
+		};
+		dispatch(action);
+	};
 
 	const handleDistrictMouseOver = (areas) => {
 		const action = {
@@ -49,28 +70,52 @@ const DistrictsList = () => {
 	};
 
 	const renderList = (district, areas) => (
-		<ul>
+		<ul key={district}>
 			<li
-				key={district}
 				className="text-xs cursor-pointer"
 				onMouseOver={() => handleDistrictMouseOver(areas)}
 			>
 				{district}
 			</li>
 			<ul className="flex flex-col">
-				{areas.map(({nr, id, name}) => (
-					<li
-						key={id}
-						className={id === state[id] && state.title !== "district" ? "is-lit" : null}
-						onMouseOver={() => handleAreaMouseOver(id)}
-					>
-						{`${nr}. ${name}`}
-					</li>
-				))}
+				{areas
+					.filter((areas) => Number.isFinite(areas.nr))
+					.map(({nr, id, name}) => (
+						<li
+							key={id}
+							className={
+								id === state[id] && state.title !== "district" ? "is-lit" : null
+							}
+							onMouseOver={() => handleAreaMouseOver(id)}
+						>
+							{`${nr}. ${name}`}
+						</li>
+					))}
 			</ul>
 		</ul>
 	);
 
+	const renderMobileList = (district, areas) => (
+		<li
+			key={district}
+			className="text-xs cursor-pointer"
+			onMouseOver={() => handleMobileDistrictMouseOver(district)}
+		>
+			{district}
+		</li>
+	);
+
+	const isMobileOrTablet = screenWidth <= 820;
+
+	if (isMobileOrTablet) {
+		return (
+			<div className="flex">
+				<ul>
+					{allDistricts.map(({district, areas}) => renderMobileList(district, areas))}
+				</ul>
+			</div>
+		);
+	}
 	return (
 		<div className="flex flex-row ml-2">
 			<div className="flex flex-col">

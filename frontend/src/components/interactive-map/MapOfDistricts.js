@@ -11,7 +11,7 @@ const MapOfDistricts = () => {
 	return (
 		<>
 			<MapContext.Provider value={{state, dispatch}}>
-				<div className="flex p-2">
+				<div className="flex p-2 ">
 					<InteractiveMap />
 					<DistrictsList />
 				</div>

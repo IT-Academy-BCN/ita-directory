@@ -1,10 +1,23 @@
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import "./interactiveMap.css";
 import {MapContext} from "./MapContext";
 import path_data from "./data/path-data";
 
 const InteractiveMap = () => {
 	const {state, dispatch} = useContext(MapContext);
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+	const [litDistrict, setLitDistrict] = useState("");
+
+	const handleWindowSizeChange = () => {
+		setScreenWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener("resize", handleWindowSizeChange);
+		return () => {
+			window.removeEventListener("resize", handleWindowSizeChange);
+		};
+	}, []);
 
 	const handleMouseOver = (id) => {
 		const action = {
@@ -14,8 +27,10 @@ const InteractiveMap = () => {
 		dispatch(action);
 	};
 
+	const isMobileOrTablet = screenWidth <= 820;
+
 	return (
-		<>
+		<div>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -31,15 +46,18 @@ const InteractiveMap = () => {
 				<g id="Group_309" data-name="Group 309" transform="translate(-20014.055 -3139.501)">
 					<g id="layer1" transform="translate(20014.555 3140.001)">
 						<path
-							id="path4284"
+							id="Sarrià-SantGervasi"
 							d="M275.091,155.246c.084-.667.861-.884,1.281-1.332.881-.857,1.308.114,1.913.8a1.973,1.973,0,0,0,3.377-.725,18.5,18.5,0,0,1,.717-3.725,5.3,5.3,0,0,0,.91-1.372c.324-.428.162-.963.109-1.446.489-.458,1.374-.517,1.46-1.306-.2-.417-.781-.736-1.129-1.114-1.188-.672.781-1.782.347-2.859-.155-1.514,1.639-2.211,2.554-3.127.53-.237,1.054-.619.806-1.279a15.91,15.91,0,0,1-.544-3.877,6.909,6.909,0,0,1,.519-2.218,1.668,1.668,0,0,1,1.211.554,7.826,7.826,0,0,0,2.787,3.518c.542.166.688.944,1.305.881a12.415,12.415,0,0,0,3.072,1.553c1.162,1.024,1.887-.386,2.8-.9a4.021,4.021,0,0,0,1.073-.934c.352.117.9.777,1.177.311-.556-.9-1.531-1.572-2.029-2.552-.885-1.546-1.27-3.453-2.562-4.729a8.8,8.8,0,0,0-2.192-1.752c-.419-.516-.687-1.215-1.425-1.334-1.353-.342-1.856-1.842-2.549-2.9-.811-.819-.7-1.431.248-1.919.638-.432,1.088-1.248,1.926-1.257a10.216,10.216,0,0,1,1.2-.933,19.653,19.653,0,0,0,1.812-1.178c1.6.446,3.253.7,4.806,1.279,1.163.5,2.309,1.042,3.465,1.559a17.938,17.938,0,0,1,.112-3.18c.039-1.249-.785-2.371-.724-3.633a5.174,5.174,0,0,0-.572-2.366c-.437-1.968,1.222-3.547,1.329-5.454.4-1.453.559-3.016,1.463-4.272a26.97,26.97,0,0,1,1.735-2.757,5.413,5.413,0,0,1,2.139-1.466c1.076-.408,2.135-.92,3.221-1.265a16.507,16.507,0,0,1,3.815.5c.852.06-.4.464-.647.7l-3.947,2.357c-.161.549-.214,1.052.429,1.258a16.277,16.277,0,0,0,3.2,1.58c.256.755-.388,1.341-.652,2-.33.492-.469,1.17-.918,1.546-.849.553-1.932.838-2.548,1.682-.232.746-.449,1.716.294,2.252.592.576,1.334,1.045,1.538,1.9.22.76-.015,1.585.137,2.37a3.794,3.794,0,0,0,1.186,2.458,23.015,23.015,0,0,1,1.841,2.46c.2.993-.8,1.689-1.57,2.095-.555.587.005,1.446.347,1.988.377.443.965.51,1.137-.144.292-.517.8-1.106,1.458-.84a1.883,1.883,0,0,1,2.688.533c.24.584-.019,1.432-.732,1.475-.747.108-1.106.879-1.372,1.493.343,1.107,2.876,1.027,2.22,2.607-.559.3-1.485-.058-1.833.626-.192.9.292,1.782.412,2.67a14.187,14.187,0,0,1,.487,2.57.7.7,0,0,0,.219,1.169,4.684,4.684,0,0,1,1.593,2.018c.282.38.607.821.321,1.294-.092.651-.318,1.392.151,1.957a6.348,6.348,0,0,0,2.127-.125,16.708,16.708,0,0,0,1.611-.463c.757.894.056,3.056,1.227,3.277.821.225,1.341-.5,2.026-.128.237.461.872-.134,1.311.223.451.121.911.686,1.364.519.618-.289,1.186-.984,1.929-.742a10.763,10.763,0,0,0,1.435-.439,14.411,14.411,0,0,0,2.175-.111,32.841,32.841,0,0,0,3.557-1.215c.777-.08,1.511-.361,2.163.19.444.368.945.182,1.334.612a6.255,6.255,0,0,1,1.275,1.412,3.242,3.242,0,0,0,.035,2.2c.258.578.077,1.255.484,1.776a13.667,13.667,0,0,1,.706,2.437c.064.565-.491.736-.887.991-.5.35-1.184.532-1.313,1.206-.291.543-.458,1.175-.774,1.683.926.43,1.327,1.729,1.744,2.716.21.549.724,1.1.624,1.7-.381.915-.209,1.934-.532,2.872-.164.482-.4.9-.114,1.394-.071.5.426.724.511,1.195.114.462-.248,1.187.22,1.452a6.244,6.244,0,0,0,1.9.487c1.007.5,2.092.9,3.052,1.453.4.361.456.775.793,1.189a12.262,12.262,0,0,0,3.421,3.474,17.913,17.913,0,0,1,2,2.43c.664,1.085,1.268,2.221,1.969,3.274.519.354.913.951,1.526,1.121.507-.243,1.276-.049,1.288.6.123.457-.013,1.159.625,1.22,1.26.516.867,2.432,1.619,3.439.878.789.456,1.89-.031,2.755a3.105,3.105,0,0,0-.322,2.8c.119.532.346,1.016.419,1.544a2.686,2.686,0,0,0,1.107,1.548,12.338,12.338,0,0,1,1.371,3.14c.283.813.455,1.755,1.272,2.214a7.338,7.338,0,0,0,1.682,1.2c.567.033.341.8-.027,1.03-1.3.656-2.745,1.037-4.1,1.581-1.32.413-1.816,1.848-2.8,2.666-.891.261-.872,1.358-1.329,2.021-.639.951-.276,2.15-.744,3.162-.16.52-.66,1.1-1.245.765-.748-.428-.229.475-.2.87.258.27.307,1.01.485,1.462.66,2.274,1.217,4.587,1.942,6.837.755,2.04,1.137,4.2,1.719,6.294l.976,3.853c.366.538.376-.439.417-.828.241-.841-.332-1.717,0-2.529.352-.38,1.055.035,1.363-.487a2.284,2.284,0,0,0-.12-1.965c-.007-.538.8-.685,1.2-.409.428.187,1.081-.012,1.2.609.33.425,1.2-.134,1.334.5-.149.488-.447,1.02-.106,1.517-.066,1.075,1.123.523,1.553.971-.2.643-1.119.789-1.375,1.429a4.913,4.913,0,0,0-.8,2.158,12.3,12.3,0,0,0,1.086,1.478,18.305,18.305,0,0,1,2.146.7,25.274,25.274,0,0,1,1.025,3.042,6.275,6.275,0,0,1,.544,2.766c-.055,2.157-.322,4.293-.509,6.441a11.565,11.565,0,0,0-1.7,1.089c-.1,1.288-.308,2.591-.341,3.871a3.248,3.248,0,0,1,.417,1.892c-.025,2.723-.05,5.447-.125,8.166.053.8-.137,1.718.552,2.309,1.576,2.28,3.448,4.34,5.08,6.573.693.874.152,2.018-.073,2.965a9.719,9.719,0,0,0-1.093,2.753c-.848,3.1-1.824,6.266-1.6,9.524-.7-.192-.862.205-1.193.415-.04.083-.027.883.221,1,.048.884.135.172.417-.009.732-.146.417.653.434,1.084-.12.977.181,2.2-.716,2.882-1.161.444-1.45,1.778-2.069,2.729a1.987,1.987,0,0,1-1.554,1.4,5.715,5.715,0,0,0-2.115,1.092c-.6,1.448-.881,3.006-1.35,4.5a3.393,3.393,0,0,1-1.038,2.15c-.5.623-1.525.955-1.426,1.92-.826,4.636-1.17,9.343-2.029,13.97a13.99,13.99,0,0,1-1.252,3.348c-7.77-3.91-15.574-7.752-23.36-11.628a1.014,1.014,0,0,1-1.211.727c-.473-.3-.9-.622-.793-1.241.086-.623-.736-.626-1.115-.932q-5.573-2.886-11.139-5.787c-1.356-2.519-3.057-4.829-4.587-7.243-1.959-2.884-3.818-5.839-5.843-8.676a3.349,3.349,0,0,0-2-1.5c-4.366-2.069-8.661-4.285-13.009-6.391-1.575-1.159-3.635-1.281-5.4-2.042.773-1.535,1.53-3.256.915-4.991-.384-1.77-1.954-3.163-1.849-5.045,3.3.081,6.827-2.5,6.761-6-.1-2.036-1.88-3.536-1.981-5.577-.38-2.166-.69-4.343-.974-6.523a5.43,5.43,0,0,0-2.394-.073,9.123,9.123,0,0,1-3.806-.351c-.64-.4-1.691-.783-1.518-1.719a2.233,2.233,0,0,1,.353-1.593,4.539,4.539,0,0,0,.685-1.939c.494-.3.421-.862.381-1.35.137-.676.712-.858.847-1.657.108-.61.687-.7.745-1.25-.069-.533-.331-1.091.069-1.557.012-.722.377-1.5-.069-2.146a1.3,1.3,0,0,1,.242-1.211,3.592,3.592,0,0,0,.035-1.384,2.627,2.627,0,0,0-.554-1.661,1.667,1.667,0,0,0-.346-1.28c.009-.426.168-.9-.3-1.241-.992-1.184-1.049-2.922-2.111-4.048-1.128-.573.054-.719.566-1.091.92-.55,1.628-1.493,2.745-1.679a5.54,5.54,0,0,0,3.747-2.807,3.922,3.922,0,0,0,.61-1.671,14.266,14.266,0,0,0-.985-2.528,1.09,1.09,0,0,1-.183-1.38c.5-1.008,1.524-1.62,2.124-2.57.465-.523.191-1.367.809-1.8a2.614,2.614,0,0,0,.958-1.616,11.62,11.62,0,0,1,.946-2.862c-1.583-1.966-1.307-5.032-3.438-6.6-1.025-.516-1.956.493-2.988.485a5.145,5.145,0,0,1-1.719-.193c-.693-.421-1.527-.681-1.9-1.471-1.63-2.262-2.653-5.153-5.215-6.578-1.665-2.8-4.075-5.319-4.71-8.613.059-1.345.142-2.91-1.093-3.806a2.562,2.562,0,0,0-1.6-.846,27.2,27.2,0,0,0-3.69,0,21.515,21.515,0,0,0-5.28.5c-.059.7-.8.274-1.257.282-1.119-.189-2.211-.524-3.311-.767-.608.432-1.329-.153-1.938.1a8.774,8.774,0,0,1-2.15,2.139c-1.216.779-2.728.47-4.094.673a4.423,4.423,0,0,1-2.824-.216,1.4,1.4,0,0,1-1.7-.554c-.959-1.886-2.05-4.238-4.387-4.614-.916.107-.165-.97-.355-1.51a11.274,11.274,0,0,0-.173-2.216,10.258,10.258,0,0,1-1.579-.914l-.5-1.924a29.557,29.557,0,0,0,1.107-9.379l.934-1.523a1.566,1.566,0,0,1,1.419.524c.941.521,1.691,1.34,2.576,1.916a2.583,2.583,0,0,0,1.923-.294c.76-1.689,1.41-3.675,3.289-4.428,1.148-.633,2.325-1.06,2.936.4.951,1.576,2.824.93,4.31,1.194,1.567.256,3.521.815,3.842,2.627.127.71-.248,1.612.652.866.689-1.035,3.01.691,2.826-.622l-.308-2.187Zm-1.246-9.258a29.27,29.27,0,0,1-4.168.262L261.7,148.1l-3.772-1.488c.619-.353,1.392-.518,1.738-1.2a15.889,15.889,0,0,0,1.861-2.846c.683-.7,1.726-.636,2.605-.919a2.343,2.343,0,0,1,1.712-.032c1.324.312,2.644.719,3.97.972a14.945,14.945,0,0,0,3.941-.921c.649-.4.176.727.273,1.078ZM272.773,131.8c-2.037-1.018-4.024-2.151-6.094-3.093-.61-.249-1.336-.206-1.773-.775-1.065-1.029-2.029-2.2-3.116-3.185l-1.787-.6-1.557,3.841a46.465,46.465,0,0,1-4.9,3.214l-1.747,1.043c-4.04-1.719-8.041-3.527-12.044-5.33.266,1.477.718,3.123-.138,4.5.2.805-.435.586-.974.486l-5.706-.832,3.115-14.155a13.509,13.509,0,0,0,4.746-.634c1.392-.339,2.811-.562,4.183-.992,1.591-1.28,3.21-2.549,4.858-3.74.391-.615.4-1.412.937-1.959a6.144,6.144,0,0,1,1.166-2.1,5.138,5.138,0,0,0,1.148-1.859c.341-.838,1.421-.894,1.805-1.69a4.964,4.964,0,0,0,.279-3.755c-.281-.7-1.114-1.67-.423-2.4.444-.436-.975-.534-.777-1a6.558,6.558,0,0,0,.6-3.244,1.233,1.233,0,0,1-.357-1.264c-.034-.663.271-.92.918-.765a4.232,4.232,0,0,1,3.021.755,42.743,42.743,0,0,0,6.453,2.637c1.128.173,2.312.652,3.426.378.943-.441,1.41-1.477,2.279-2.042,1.156-1.116,2.837-1.457,4.014-2.526,2.1-2.159,3.848-4.627,5.776-6.935,1.86-2.273,3.651-4.608,5.554-6.842l3.2-3.04c1.413,1.285,2.737,2.677,4.222,3.876.007.525-.771.523-1.017.942a18.365,18.365,0,0,0-2.877,2.644c-.23.606-.772,1.1-.847,1.744.265.655,1.078.877,1.637,1.245l3.347,1.42c-1.152,1.7-2.235,3.475-3.43,5.133-.793.232.2.674.417,1.025A25.879,25.879,0,0,1,293.2,94.81q2.31,2.888,4.625,5.773c-2.341,1.442-4.655,2.942-7.025,4.326a1.873,1.873,0,0,1-1.321,1.009,13.419,13.419,0,0,1-3.029,1.153c-1.885.171-2.267,2.13-3.179,3.417-.381.513.4,1.09.555,1.633l2.163,3.966-3.461,8.548Z"
 							transform="translate(-141.228 -73.9)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
+							className={
+								state.districtId === "Sarrià-SantGervasi" && "is-district-lit"
+							}
 						/>
 						<path
 							id="path709"
@@ -47,23 +65,23 @@ const InteractiveMap = () => {
 							transform="translate(-151.337 -247.676)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<g id="g687" transform="translate(268.454 282.505) rotate(90)">
-							<g id="g689" clip-path="url(#clip-path)">
+							<g id="g689" clipPath="url(#clip-path)">
 								<path
 									id="path695"
 									d="M7.545,34.054l4.015-3.841-.035-4.949.9-2.769,1.107-3.322-.069-1.246V14.155l3.392.035h7.233l.035-3.668.069-3.6c7.317.151,14.66.236,21.976.208.023-2.365.114-4.73.138-7.095l.969.554L48.347.035,50.978,0h8.029l-.346,1.7-2.319.069-.588,3.08L56.273,8.1,59.11,16.4l2.076,5.918-.692.277.8,2.076,1.523,3.6.554,1.7,1.107,2.63,2.18,4.153,2.423,4.776,4.6,7.095.8.865,3.149-1.142.311.761-3.461,2.18,2.146,4.5,1.419,1.8,2.353,4.984-.173,4.049-1.142,2.8-.623,2.665,9.171,26.856.311.415,3.219,9.552.554,1,.519.8.173.658.554,1.281.519,1.28.761.969,14.293,20.142,2.769,3.876,2.492,3.392,4.637,6.506,2.734,3.911.484.692-.8.484-4.845-6.749-3.184,2.215-.381.208-.312-.069-.035-.277-2.076-3.149.381-.311,1,1.488.934-.692.381.519.484-.346-.381-.519,1.73-1.28-1.211-1.523-4.326-5.78-1.211-.069-.1.069-.311-.035-2.63-3.7-1.8-2.838,1.073-.623L95.726,119.4l-1.315.415-1.869-2.457-.623-1.211-.035-.069-.1-.45-.138-.519.208-1.281-.588-.8-1.384-4.084-1.246-.1-1.211.415-.519-.277-.45-.658-.1-.173h.035l.554-.208-8.687-25.16L74.511,71.846l3.5-6.126L76.83,60.287l-2.526-3.5-.658.485.208.242-.138.1-.311-.415.069-.069.1-.069L73.542,57l.035-.035-.1-.069.588-.45-3.253-4.291L69.147,53.4l2.319,3.115-.346.242L72.088,58l.069.035.831-.485.277.381-.519.346.554.727-.554.484-3.7-4.914-.727.554,3.738,4.88-.311.242-.692-.934-1.107.8-3.461-4.637-.8.588-.9-1.177,4.672-3.53-.8-1.073-1.627,1.281-.45-.588-1.142.969-1.834-2.353,2.7-2.111L62.5,42.5l-.277-.692-.554.311.969,2.215-.173.069-.831-1.973-1.869.761-.554,1.765,3.7,4.741-1.177.969H61.5l-1.765.415-.069-.242,1.592-.381-.623-.865-1.488.519-.1-.311,1.384-.415L59.8,48.52l-1.488.554-.1-.208,1.384-.588-.657-.8-1.384.692-.138-.208,1.315-.727-.623-.831-1.315.8-.173-.242,1.315-.8-.727-.865-.969.865-.208-.208,1-.934,1.246-3.772L58,41.114l-.381-.519-.761.069.554-.519L55.58,37.411l-1.315,2.457-.173-.1,1.35-2.561-.519-.8-1.246-.623-1.834,3.5-.242-.1,1.834-3.565-1.557-.831-1.938,3.7-.242-.1,1.938-3.7-1.315-.761-2.007,3.772-.277-.1,2.007-3.807-.9-.519-2.111,3.876-.208-.069L48.9,33.154l-.277-.173-.346.1-.415-.242L46.029,36.2l-.208-.1,1.8-3.322-1.142.311-1.557,2.8-.277-.138,1.419-2.526-1.142.242-.9,1.7-.311-.1L44.54,33.5l-.865.277-1.142,1.8-.173.381L52.846,41.7l2.111,8.341-.277.381-3.288.761-1.246-.8-1.938-7.545L44.817,41.01l-.623-.381-1.281-.692-.484.1,3.149,12.182.485,2.076.45,1.973.554,2.492.727-.208.173.554,11.351-2.8-.138-.588.692-.242,1.038.623.035.208.934,3.911-.588,1-.692.173-.173-.658L50.389,63.16l-1.938.519h-.208l-.208-.208-3.08.727-.173.035-.8-3.322-2.6,1.28-3.565,2.942-.865.692-4.568,3.807-.242.208-.623.658-1.592,1.834L28.725,73.4l-.8-.069-.727-.1H24.26L22.737,73.2c-3.344-.165-6.514-.078-9.863-.208C8.562,67.7,4.3,62.368,0,57.069l.208-2.423,9.413-7.475C9.265,43.233,7.49,38.119,7.545,34.054Z"
 									transform="translate(0.485 0.519)"
 									fill="none"
 									stroke="#000"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-miterlimit="10"
-									stroke-width="1"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									strokeWidth="1"
 								/>
 							</g>
 						</g>
@@ -73,10 +91,10 @@ const InteractiveMap = () => {
 							transform="translate(-227.105 -348.97)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<path
 							id="path25"
@@ -84,11 +102,11 @@ const InteractiveMap = () => {
 							transform="translate(-167.346 -404.186)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
-							fill-rule="evenodd"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
+							fillRule="evenodd"
 						/>
 						<path
 							id="path4299"
@@ -96,10 +114,10 @@ const InteractiveMap = () => {
 							transform="translate(-288.068 -191.602)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<path
 							id="path4301"
@@ -107,10 +125,10 @@ const InteractiveMap = () => {
 							transform="translate(-290.176 -249.752)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<path
 							id="path4295"
@@ -118,10 +136,10 @@ const InteractiveMap = () => {
 							transform="translate(-387.28 -219.311)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<path
 							id="path4293"
@@ -129,10 +147,10 @@ const InteractiveMap = () => {
 							transform="translate(-388.346 -255.191)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<path
 							id="path4287"
@@ -140,10 +158,10 @@ const InteractiveMap = () => {
 							transform="translate(-330.343 -357.4)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 						<path
 							id="path707"
@@ -151,784 +169,807 @@ const InteractiveMap = () => {
 							transform="translate(-34.189 -348.243)"
 							fill="#fcf5e3"
 							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="1"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeMiterlimit="10"
+							strokeWidth="1"
 						/>
 					</g>
-					{path_data.map((item) => (
-						<path
-							key={item.id}
-							id={item.id}
-							d={item.d}
-							transform={item.transform}
-							className={item.id === state[item.id] ? "is-lit" : null}
-							onMouseOver={() => handleMouseOver(item.id)}
-							onMouseLeave={() => handleMouseOver("")}
-							fill="none"
-							stroke="#000"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-miterlimit="10"
-							stroke-width="0.1"
-							fill-rule="evenodd"
-						/>
-					))}
 
-					<text
-						id="2-gotic-nr"
-						transform="translate(20235.615 3451.573)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							2
-						</tspan>
-					</text>
-					<text
-						id="3-barceloneta-nr"
-						transform="translate(20254.227 3477.998)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							3
-						</tspan>
-					</text>
-					<text
-						id="4-santpere-nr"
-						transform="translate(20256.525 3453.412)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							4
-						</tspan>
-					</text>
-					<text
-						id="5-fortpienc-nr"
-						transform="translate(20276.746 3427.676)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							5
-						</tspan>
-					</text>
-					<text
-						id="6-sagradafamilia-nr"
-						transform="translate(20285.018 3401.941)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							6
-						</tspan>
-					</text>
-					<text
-						id="7-eixampledreta"
-						transform="translate(20247.104 3414.809)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							7
-						</tspan>
-					</text>
-					<text
-						id="8-antigaesquerradeleixample-nr"
-						transform="translate(20217.691 3405.158)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							8
-						</tspan>
-					</text>
-					<text
-						id="9-novaesquerradeleixample-nr"
-						transform="translate(20193.105 3407.226)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							9
-						</tspan>
-					</text>
-					<text
-						id="10-santantoni-nr"
-						transform="translate(20195.174 3432.042)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							10
-						</tspan>
-					</text>
-					<text
-						id="11-poblesec-nr"
-						transform="translate(20189.889 3452.033)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							11
-						</tspan>
-					</text>
-					<text
-						id="pm-parcmontjuic-nr"
-						transform="translate(20157.49 3466.739)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							PM
-						</tspan>
-					</text>
-					<text
-						id="fp-zonafranca-nr"
-						transform="translate(20057.996 3479.526)"
-						font-size="8"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							FP
-						</tspan>
-					</text>
-					<text
-						id="12-lamarinadelpratvermell-nr"
-						transform="translate(20109.695 3460.764)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							12
-						</tspan>
-					</text>
-					<text
-						id="13-lamarinadelport"
-						transform="translate(20123.482 3440.314)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							13
-						</tspan>
-					</text>
-					<text
-						id="14-lafontdelaguatlla-nr"
-						transform="translate(20154.043 3427.676)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							14
-						</tspan>
-					</text>
-					<text
-						id="15-hostafrancs-nr"
-						transform="translate(20165.533 3415.268)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							15
-						</tspan>
-					</text>
-					<text
-						id="16-labordeta-nr"
-						transform="translate(20138.877 3415.958)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							16
-						</tspan>
-					</text>
-					<text
-						id="17-santsbadal-nr"
-						transform="translate(20136.58 3389.992)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							17
-						</tspan>
-					</text>
-					<text
-						id="18-sants-nr"
-						transform="translate(20154.963 3397.575)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							18
-						</tspan>
-					</text>
-					<text
-						id="19-lescorts-nr"
-						transform="translate(20174.033 3373.678)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							19
-						</tspan>
-					</text>
-					<text
-						id="20-lamaternitat-nr"
-						transform="translate(20133.594 3358.742)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							20
-						</tspan>
-					</text>
-					<text
-						id="21-pedralbes"
-						transform="translate(20141.865 3324.275)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							21
-						</tspan>
-					</text>
-					<text
-						id="22-vallvidrera-nr"
-						transform="translate(20180.008 3236.04)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							22
-						</tspan>
-					</text>
-					<text
-						id="23-sarria-nr"
-						transform="translate(20179.549 3308.88)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							23
-						</tspan>
-					</text>
-					<text
-						id="24-trestorres"
-						transform="translate(20194.715 3340.59)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							24
-						</tspan>
-					</text>
-					<text
-						id="25-santgervasibonanova-nr"
-						transform="translate(20216.314 3317.152)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							25
-						</tspan>
-					</text>
-					<text
-						id="26-santgervasigalvany-nr"
-						transform="translate(20210.34 3363.568)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							26
-						</tspan>
-					</text>
-					<text
-						id="27-elputget-nr"
-						transform="translate(20233.547 3345.645)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							27
-						</tspan>
-					</text>
-					<text
-						id="28-vallcarca-nr"
-						transform="translate(20249.172 3318.99)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							28
-						</tspan>
-					</text>
-					<text
-						id="29-elcoll-nr"
-						transform="translate(20265.027 3328.182)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							29
-						</tspan>
-					</text>
-					<text
-						id="30-lasalut-nr"
-						transform="translate(20261.58 3350.7)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							30
-						</tspan>
-					</text>
-					<text
-						id="31-gracia"
-						transform="translate(20246.645 3375.057)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							31
-						</tspan>
-					</text>
-					<text
-						id="32-elcampdengrassot-nr"
-						transform="translate(20265.717 3387.924)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							32
-						</tspan>
-					</text>
-					<text
-						id="33-baixguinardo-nr"
-						transform="translate(20283.18 3375.287)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							33
-						</tspan>
-					</text>
-					<text
-						id="34-canbaro-nr"
-						transform="translate(20284.328 3356.215)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							34
-						</tspan>
-					</text>
-					<text
-						id="35-elguinardo-nr"
-						transform="translate(20308.455 3370.461)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							35
-						</tspan>
-					</text>
-					<text
-						id="36-lafontdenfargues"
-						transform="translate(20307.076 3344.036)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							36
-						</tspan>
-					</text>
-					<text
-						id="37-elcarmel"
-						transform="translate(20281.342 3335.764)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							37
-						</tspan>
-					</text>
-					<text
-						id="38-lateixonera"
-						transform="translate(20268.703 3313.476)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							38
-						</tspan>
-					</text>
-					<text
-						id="39-santgenisdelsagudells-nr"
-						transform="translate(20251.471 3281.996)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							39
-						</tspan>
-					</text>
-					<text
-						id="40-montbau-nr"
-						transform="translate(20289.154 3271.656)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							40
-						</tspan>
-					</text>
-					<text
-						id="41-valldhebron-nr"
-						transform="translate(20291.451 3303.136)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							41
-						</tspan>
-					</text>
-					<text
-						id="42-laclota-nr"
-						transform="translate(20296.506 3313.476)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							42
-						</tspan>
-					</text>
-					<text
-						id="43-horta-nr"
-						transform="translate(20322.012 3284.294)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							43
-						</tspan>
-					</text>
-					<text
-						id="44-vilapicina-nr"
-						transform="translate(20328.676 3348.862)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							44
-						</tspan>
-					</text>
-					<text
-						id="45-porta-nr"
-						transform="translate(20349.586 3341.739)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							45
-						</tspan>
-					</text>
-					<text
-						id="46-turodelapeira-nr"
-						transform="translate(20331.434 3334.845)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							46
-						</tspan>
-					</text>
-					<text
-						id="47-canpeguera-nr"
-						transform="translate(20330.514 3322.897)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							47
-						</tspan>
-					</text>
-					<text
-						id="48-laguineueta-nr"
-						transform="translate(20345.449 3317.612)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							48
-						</tspan>
-					</text>
-					<text
-						id="49-canyelles-nr"
-						transform="translate(20348.438 3295.323)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							49
-						</tspan>
-					</text>
-					<text
-						id="50-lesroquetes-nr"
-						transform="translate(20370.725 3307.961)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							50
-						</tspan>
-					</text>
-					<text
-						id="51-verdun-nr"
-						transform="translate(20362.453 3319.91)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							51
-						</tspan>
-					</text>
-					<text
-						id="52-prosperitat-nr"
-						transform="translate(20373.482 3330.479)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							52
-						</tspan>
-					</text>
-					<text
-						id="53-trinitatnova-nr"
-						transform="translate(20392.785 3318.99)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							53
-						</tspan>
-					</text>
-					<text
-						id="54-torrebaro-nr"
-						transform="translate(20387.039 3293.945)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							54
-						</tspan>
-					</text>
-					<text
-						id="55-ciutatmeridiana-nr"
-						transform="translate(20402.436 3280.158)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							55
-						</tspan>
-					</text>
-					<text
-						id="56-vallbona-nr"
-						transform="translate(20421.736 3287.97)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							56
-						</tspan>
-					</text>
-					<text
-						id="57-trinitatvella-nr"
-						transform="translate(20409.098 3331.398)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							57
-						</tspan>
-					</text>
-					<text
-						id="58-barodeviver-nr"
-						transform="translate(20409.787 3350.47)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							58
-						</tspan>
-					</text>
-					<text
-						id="59-bonpastor-nr"
-						transform="translate(20393.703 3375.057)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							59
-						</tspan>
-					</text>
-					<text
-						id="60-santandreu-nr"
-						transform="translate(20372.334 3354.606)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							60
-						</tspan>
-					</text>
-					<text
-						id="61-sagrera-nr"
-						transform="translate(20345.221 3385.397)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							61
-						</tspan>
-					</text>
-					<text
-						id="62-elcongresielsindians-nr"
-						transform="translate(20332.123 3367.704)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							62
-						</tspan>
-					</text>
-					<text
-						id="63-navas-nr"
-						transform="translate(20327.527 3390.222)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							63
-						</tspan>
-					</text>
-					<text
-						id="64-campdelarpadelclot-nr"
-						transform="translate(20307.535 3398.035)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							64
-						</tspan>
-					</text>
-					<text
-						id="65-elclot-nr"
-						transform="translate(20316.957 3415.268)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							65
-						</tspan>
-					</text>
-					<text
-						id="66-elparcilallacunadelpoblenou-nr"
-						transform="translate(20291.451 3440.084)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							66
-						</tspan>
-					</text>
-					<text
-						id="67-vilaolimpica-nr"
-						transform="translate(20283.869 3464.671)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							67
-						</tspan>
-					</text>
-					<text
-						id="68-poblenou-nr"
-						transform="translate(20312.592 3455.709)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							68
-						</tspan>
-					</text>
-					<text
-						id="69-diagonalmar-nr"
-						transform="translate(20345.449 3462.833)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							69
-						</tspan>
-					</text>
-					<text
-						id="70-besosimaresme-nr"
-						transform="translate(20365.441 3442.612)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							70
-						</tspan>
-					</text>
-					<text
-						id="71-provençalsdelpoblenou-nr"
-						transform="translate(20339.475 3433.421)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							71
-						</tspan>
-					</text>
-					<text
-						id="72-santmartideprovençals-nr"
-						transform="translate(20342.463 3413.2)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							72
-						</tspan>
-					</text>
-					<text
-						id="73-lavernedailapau-nr"
-						transform="translate(20365.441 3406.307)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							73
-						</tspan>
-					</text>
-					<text
-						id="1-elraval-nr"
-						transform="translate(20218.842 3444.91)"
-						font-size="9"
-						font-family="ArialMT, Arial"
-					>
-						<tspan x="0" y="0">
-							1
-						</tspan>
-					</text>
+					{isMobileOrTablet &&
+						path_data.map((item) => (
+							<path
+								key={item.id}
+								id={item.id}
+								d={item.d}
+								transform={item.transform}
+								fill="none"
+								stroke="#fcf5e3"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="0"
+								strokeWidth="0"
+								fillRule="evenodd"
+							/>
+						))}
+
+					{!isMobileOrTablet &&
+						path_data.map((item) => (
+							<path
+								key={item.id}
+								id={item.id}
+								d={item.d}
+								transform={item.transform}
+								className={item.id === state[item.id] ? "is-lit" : null}
+								onMouseOver={() => handleMouseOver(item.id)}
+								onMouseLeave={() => handleMouseOver("")}
+								fill="none"
+								stroke="#000"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeMiterlimit="10"
+								strokeWidth="0.1"
+								fillRule="evenodd"
+							/>
+						))}
+
+					{!isMobileOrTablet ? (
+						<>
+							<text
+								id="2-gotic-nr"
+								transform="translate(20235.615 3451.573)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									2
+								</tspan>
+							</text>
+							<text
+								id="3-barceloneta-nr"
+								transform="translate(20254.227 3477.998)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									3
+								</tspan>
+							</text>
+							<text
+								id="4-santpere-nr"
+								transform="translate(20256.525 3453.412)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									4
+								</tspan>
+							</text>
+							<text
+								id="5-fortpienc-nr"
+								transform="translate(20276.746 3427.676)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									5
+								</tspan>
+							</text>
+							<text
+								id="6-sagradafamilia-nr"
+								transform="translate(20285.018 3401.941)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									6
+								</tspan>
+							</text>
+							<text
+								id="7-eixampledreta"
+								transform="translate(20247.104 3414.809)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									7
+								</tspan>
+							</text>
+							<text
+								id="8-antigaesquerradeleixample-nr"
+								transform="translate(20217.691 3405.158)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									8
+								</tspan>
+							</text>
+							<text
+								id="9-novaesquerradeleixample-nr"
+								transform="translate(20193.105 3407.226)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									9
+								</tspan>
+							</text>
+							<text
+								id="10-santantoni-nr"
+								transform="translate(20195.174 3432.042)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									10
+								</tspan>
+							</text>
+							<text
+								id="11-poblesec-nr"
+								transform="translate(20189.889 3452.033)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									11
+								</tspan>
+							</text>
+							<text
+								id="pm-parcmontjuic-nr"
+								transform="translate(20157.49 3466.739)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									PM
+								</tspan>
+							</text>
+							<text
+								id="fp-zonafranca-nr"
+								transform="translate(20057.996 3479.526)"
+								fontSize="8"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									FP
+								</tspan>
+							</text>
+							<text
+								id="12-lamarinadelpratvermell-nr"
+								transform="translate(20109.695 3460.764)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									12
+								</tspan>
+							</text>
+							<text
+								id="13-lamarinadelport"
+								transform="translate(20123.482 3440.314)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									13
+								</tspan>
+							</text>
+							<text
+								id="14-lafontdelaguatlla-nr"
+								transform="translate(20154.043 3427.676)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									14
+								</tspan>
+							</text>
+							<text
+								id="15-hostafrancs-nr"
+								transform="translate(20165.533 3415.268)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									15
+								</tspan>
+							</text>
+							<text
+								id="16-labordeta-nr"
+								transform="translate(20138.877 3415.958)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									16
+								</tspan>
+							</text>
+							<text
+								id="17-santsbadal-nr"
+								transform="translate(20136.58 3389.992)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									17
+								</tspan>
+							</text>
+							<text
+								id="18-sants-nr"
+								transform="translate(20154.963 3397.575)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									18
+								</tspan>
+							</text>
+							<text
+								id="19-lescorts-nr"
+								transform="translate(20174.033 3373.678)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									19
+								</tspan>
+							</text>
+							<text
+								id="20-lamaternitat-nr"
+								transform="translate(20133.594 3358.742)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									20
+								</tspan>
+							</text>
+							<text
+								id="21-pedralbes"
+								transform="translate(20141.865 3324.275)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									21
+								</tspan>
+							</text>
+							<text
+								id="22-vallvidrera-nr"
+								transform="translate(20180.008 3236.04)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									22
+								</tspan>
+							</text>
+							<text
+								id="23-sarria-nr"
+								transform="translate(20179.549 3308.88)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									23
+								</tspan>
+							</text>
+							<text
+								id="24-trestorres"
+								transform="translate(20194.715 3340.59)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									24
+								</tspan>
+							</text>
+							<text
+								id="25-santgervasibonanova-nr"
+								transform="translate(20216.314 3317.152)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									25
+								</tspan>
+							</text>
+							<text
+								id="26-santgervasigalvany-nr"
+								transform="translate(20210.34 3363.568)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									26
+								</tspan>
+							</text>
+							<text
+								id="27-elputget-nr"
+								transform="translate(20233.547 3345.645)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									27
+								</tspan>
+							</text>
+							<text
+								id="28-vallcarca-nr"
+								transform="translate(20249.172 3318.99)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									28
+								</tspan>
+							</text>
+							<text
+								id="29-elcoll-nr"
+								transform="translate(20265.027 3328.182)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									29
+								</tspan>
+							</text>
+							<text
+								id="30-lasalut-nr"
+								transform="translate(20261.58 3350.7)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									30
+								</tspan>
+							</text>
+							<text
+								id="31-gracia"
+								transform="translate(20246.645 3375.057)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									31
+								</tspan>
+							</text>
+							<text
+								id="32-elcampdengrassot-nr"
+								transform="translate(20265.717 3387.924)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									32
+								</tspan>
+							</text>
+							<text
+								id="33-baixguinardo-nr"
+								transform="translate(20283.18 3375.287)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									33
+								</tspan>
+							</text>
+							<text
+								id="34-canbaro-nr"
+								transform="translate(20284.328 3356.215)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									34
+								</tspan>
+							</text>
+							<text
+								id="35-elguinardo-nr"
+								transform="translate(20308.455 3370.461)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									35
+								</tspan>
+							</text>
+							<text
+								id="36-lafontdenfargues"
+								transform="translate(20307.076 3344.036)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									36
+								</tspan>
+							</text>
+							<text
+								id="37-elcarmel"
+								transform="translate(20281.342 3335.764)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									37
+								</tspan>
+							</text>
+							<text
+								id="38-lateixonera"
+								transform="translate(20268.703 3313.476)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									38
+								</tspan>
+							</text>
+							<text
+								id="39-santgenisdelsagudells-nr"
+								transform="translate(20251.471 3281.996)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									39
+								</tspan>
+							</text>
+							<text
+								id="40-montbau-nr"
+								transform="translate(20289.154 3271.656)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									40
+								</tspan>
+							</text>
+							<text
+								id="41-valldhebron-nr"
+								transform="translate(20291.451 3303.136)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									41
+								</tspan>
+							</text>
+							<text
+								id="42-laclota-nr"
+								transform="translate(20296.506 3313.476)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									42
+								</tspan>
+							</text>
+							<text
+								id="43-horta-nr"
+								transform="translate(20322.012 3284.294)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									43
+								</tspan>
+							</text>
+							<text
+								id="44-vilapicina-nr"
+								transform="translate(20328.676 3348.862)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									44
+								</tspan>
+							</text>
+							<text
+								id="45-porta-nr"
+								transform="translate(20349.586 3341.739)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									45
+								</tspan>
+							</text>
+							<text
+								id="46-turodelapeira-nr"
+								transform="translate(20331.434 3334.845)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									46
+								</tspan>
+							</text>
+							<text
+								id="47-canpeguera-nr"
+								transform="translate(20330.514 3322.897)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									47
+								</tspan>
+							</text>
+							<text
+								id="48-laguineueta-nr"
+								transform="translate(20345.449 3317.612)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									48
+								</tspan>
+							</text>
+							<text
+								id="49-canyelles-nr"
+								transform="translate(20348.438 3295.323)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									49
+								</tspan>
+							</text>
+							<text
+								id="50-lesroquetes-nr"
+								transform="translate(20370.725 3307.961)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									50
+								</tspan>
+							</text>
+							<text
+								id="51-verdun-nr"
+								transform="translate(20362.453 3319.91)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									51
+								</tspan>
+							</text>
+							<text
+								id="52-prosperitat-nr"
+								transform="translate(20373.482 3330.479)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									52
+								</tspan>
+							</text>
+							<text
+								id="53-trinitatnova-nr"
+								transform="translate(20392.785 3318.99)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									53
+								</tspan>
+							</text>
+							<text
+								id="54-torrebaro-nr"
+								transform="translate(20387.039 3293.945)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									54
+								</tspan>
+							</text>
+							<text
+								id="55-ciutatmeridiana-nr"
+								transform="translate(20402.436 3280.158)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									55
+								</tspan>
+							</text>
+							<text
+								id="56-vallbona-nr"
+								transform="translate(20421.736 3287.97)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									56
+								</tspan>
+							</text>
+							<text
+								id="57-trinitatvella-nr"
+								transform="translate(20409.098 3331.398)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									57
+								</tspan>
+							</text>
+							<text
+								id="58-barodeviver-nr"
+								transform="translate(20409.787 3350.47)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									58
+								</tspan>
+							</text>
+							<text
+								id="59-bonpastor-nr"
+								transform="translate(20393.703 3375.057)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									59
+								</tspan>
+							</text>
+							<text
+								id="60-santandreu-nr"
+								transform="translate(20372.334 3354.606)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									60
+								</tspan>
+							</text>
+							<text
+								id="61-sagrera-nr"
+								transform="translate(20345.221 3385.397)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									61
+								</tspan>
+							</text>
+							<text
+								id="62-elcongresielsindians-nr"
+								transform="translate(20332.123 3367.704)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									62
+								</tspan>
+							</text>
+							<text
+								id="63-navas-nr"
+								transform="translate(20327.527 3390.222)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									63
+								</tspan>
+							</text>
+							<text
+								id="64-campdelarpadelclot-nr"
+								transform="translate(20307.535 3398.035)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									64
+								</tspan>
+							</text>
+							<text
+								id="65-elclot-nr"
+								transform="translate(20316.957 3415.268)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									65
+								</tspan>
+							</text>
+							<text
+								id="66-elparcilallacunadelpoblenou-nr"
+								transform="translate(20291.451 3440.084)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									66
+								</tspan>
+							</text>
+							<text
+								id="67-vilaolimpica-nr"
+								transform="translate(20283.869 3464.671)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									67
+								</tspan>
+							</text>
+							<text
+								id="68-poblenou-nr"
+								transform="translate(20312.592 3455.709)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									68
+								</tspan>
+							</text>
+							<text
+								id="69-diagonalmar-nr"
+								transform="translate(20345.449 3462.833)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									69
+								</tspan>
+							</text>
+							<text
+								id="70-besosimaresme-nr"
+								transform="translate(20365.441 3442.612)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									70
+								</tspan>
+							</text>
+							<text
+								id="71-provençalsdelpoblenou-nr"
+								transform="translate(20339.475 3433.421)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									71
+								</tspan>
+							</text>
+							<text
+								id="72-santmartideprovençals-nr"
+								transform="translate(20342.463 3413.2)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									72
+								</tspan>
+							</text>
+							<text
+								id="73-lavernedailapau-nr"
+								transform="translate(20365.441 3406.307)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									73
+								</tspan>
+							</text>
+							<text
+								id="1-elraval-nr"
+								transform="translate(20218.842 3444.91)"
+								fontSize="9"
+								fontFamily="ArialMT, Arial"
+							>
+								<tspan x="0" y="0">
+									1
+								</tspan>
+							</text>
+						</>
+					) : null}
 				</g>
 			</svg>
-		</>
+		</div>
 	);
 };
 
