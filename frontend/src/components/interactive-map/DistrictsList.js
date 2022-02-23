@@ -25,20 +25,20 @@ const DistrictsList = () => {
 		if (allDistricts) {
 			const left = allDistricts.filter(
 				(el) =>
-					el.district === "Ciutat Vella" ||
-					el.district === "L'Eixample" ||
-					el.district === "Sants-Montjuic" ||
-					el.district === "Les Corts" ||
-					el.district === "Sarrià-Sant Gervasi" ||
+					el.district === "Ciutat_Vella" ||
+					el.district === "L_Eixample" ||
+					el.district === "Sants_Montjuic" ||
+					el.district === "Les_Corts" ||
+					el.district === "Sarria_Sant_Gervasi" ||
 					el.district === "Gràcia"
 			);
 
 			const right = allDistricts.filter(
 				(el) =>
-					el.district === "Horta-Guinardó" ||
-					el.district === "Nou Barris" ||
-					el.district === "Sant Andreu" ||
-					el.district === "Sant Martí"
+					el.district === "Horta_Guinardó" ||
+					el.district === "Nou_Barris" ||
+					el.district === "Sant_Andreu" ||
+					el.district === "Sant_Martí"
 			);
 			setLeftColumnDistricts(left);
 			setRightColumnDistricts(right);
@@ -72,7 +72,7 @@ const DistrictsList = () => {
 	const renderList = (district, areas) => (
 		<ul key={district}>
 			<li
-				className="text-xs cursor-pointer"
+				className="text-sm cursor-pointer"
 				onMouseOver={() => handleDistrictMouseOver(areas)}
 			>
 				{district}
@@ -84,7 +84,9 @@ const DistrictsList = () => {
 						<li
 							key={id}
 							className={
-								id === state[id] && state.title !== "district" ? "is-lit" : null
+								id === state[id] && state.title !== "district"
+									? "is-lit text-xs"
+									: "text-xs"
 							}
 							onMouseOver={() => handleAreaMouseOver(id)}
 						>
@@ -95,11 +97,16 @@ const DistrictsList = () => {
 		</ul>
 	);
 
-	const renderMobileList = (district, areas) => (
+	const renderMobileList = (district) => (
 		<li
 			key={district}
-			className="text-xs cursor-pointer"
+			className={
+				state.districtId === district
+					? "is-lit text-xs cursor-pointer"
+					: "text-xs cursor-pointer"
+			}
 			onMouseOver={() => handleMobileDistrictMouseOver(district)}
+			onMouseLeave={() => handleMobileDistrictMouseOver("")}
 		>
 			{district}
 		</li>
@@ -109,9 +116,9 @@ const DistrictsList = () => {
 
 	if (isMobileOrTablet) {
 		return (
-			<div className="flex">
-				<ul>
-					{allDistricts.map(({district, areas}) => renderMobileList(district, areas))}
+			<div className="flex flex-col">
+				<ul className="ml-4">
+					{allDistricts.map(({district}) => renderMobileList(district))}
 				</ul>
 			</div>
 		);

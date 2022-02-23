@@ -1,6 +1,6 @@
 export const allDistricts = [
 	{
-		district: "Ciutat Vella",
+		district: "Ciutat_Vella",
 		areas: [
 			{
 				nr: 1,
@@ -34,7 +34,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "L'Eixample",
+		district: "L_Eixample",
 		areas: [
 			{
 				nr: 5,
@@ -81,7 +81,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Sants-Montjuic",
+		district: "Sants_Montjuic",
 		areas: [
 			{
 				nr: 11,
@@ -156,7 +156,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Les Corts",
+		district: "Les_Corts",
 		areas: [
 			{
 				nr: 19,
@@ -182,7 +182,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Sarrià-SantGervasi",
+		district: "Sarria_Sant_Gervasi",
 		areas: [
 			{
 				nr: 22,
@@ -281,7 +281,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Horta-Guinardó",
+		district: "Horta_Guinardó",
 		areas: [
 			{
 				nr: 33,
@@ -363,7 +363,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Nou Barris",
+		district: "Nou_Barris",
 		areas: [
 			{
 				nr: 44,
@@ -459,7 +459,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Sant Andreu",
+		district: "Sant_Andreu",
 		areas: [
 			{
 				nr: 57,
@@ -513,7 +513,7 @@ export const allDistricts = [
 		],
 	},
 	{
-		district: "Sant Martí",
+		district: "Sant_Martí",
 		areas: [
 			{
 				nr: 64,

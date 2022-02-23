@@ -1,18 +1,19 @@
 path {
 	cursor: pointer;
 	fill: transparent;
+	pointer-events: auto;
 }
 
-#path4301,
-#path4287,
-#path4293,
-#path4295,
-#path4299,
-#Sarrià-SantGervasi,
-#path709,
-#path695,
-#path697,
-#path707,
+#Ciutat_Vella,
+#Les_Corts,
+#L_Eixample,
+#Horta_Guinardó,
+#Nou_Barris,
+#Sants_Montjuic,
+#Sant_Andreu,
+#Sant_Martí,
+#Gràcia,
+#Sarria_Sant_Gervasi,
 #path25 {
 	fill: #fcf5e3;
 }
@@ -25,9 +26,5 @@ path {
 	background-color: #db2c7f;
 	color: #fff;
 	cursor: pointer;
-	fill: #db2c7f;
-}
-
-.is-district-lit {
 	fill: #db2c7f !important;
 }
