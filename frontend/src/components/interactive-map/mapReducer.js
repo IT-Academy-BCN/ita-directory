@@ -5,7 +5,9 @@ export const mapReducer = (state, action) => {
 				[action.payload]: action.payload,
 			};
 		case "lit-district":
-			const districtIds = {};
+			const districtIds = {
+				title: "district",
+			};
 			for (let i = 0; i < action.payload.length; i++) {
 				districtIds[action.payload[i].id] = action.payload[i].id;
 			}

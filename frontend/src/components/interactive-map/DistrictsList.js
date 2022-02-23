@@ -52,7 +52,7 @@ const DistrictsList = () => {
 		<ul>
 			<li
 				key={district}
-				className="text-xs"
+				className="text-xs cursor-pointer"
 				onMouseOver={() => handleDistrictMouseOver(areas)}
 			>
 				{district}
@@ -61,7 +61,7 @@ const DistrictsList = () => {
 				{areas.map(({nr, id, name}) => (
 					<li
 						key={id}
-						className={id === state[id] ? "is-lit" : null}
+						className={id === state[id] && state.title !== "district" ? "is-lit" : null}
 						onMouseOver={() => handleAreaMouseOver(id)}
 					>
 						{`${nr}. ${name}`}
