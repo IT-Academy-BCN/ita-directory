@@ -1,5 +1,4 @@
 export const mapReducer = (state, action) => {
-	console.log(action);
 	switch (action.type) {
 		case "lit-area":
 			return {
@@ -15,7 +14,9 @@ export const mapReducer = (state, action) => {
 
 			return districtIds;
 		case "lit-map-district":
+			console.log("lit-map", action);
 			return {
+				...state,
 				districtId: action.payload,
 			};
 		default:
