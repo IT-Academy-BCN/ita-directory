@@ -1,8 +1,43 @@
 import {useContext, useEffect, useState} from "react";
 import "./interactiveMap.css";
-import {MapContext} from "./MapContext";
+import {MapContext} from "./store/context";
 import path_data from "./data/path-data";
 import {mapDistricts} from "./data/map-districts";
+import {MAP_ACTIONS} from "./store/reducer";
+import styled from "styled-components";
+
+const SvgStyled = styled.svg`
+	path {
+		cursor: pointer;
+		fill: transparent;
+		pointer-events: auto;
+	}
+
+	#Ciutat_Vella,
+	#Les_Corts,
+	#L_Eixample,
+	#Horta_Guinardó,
+	#Nou_Barris,
+	#Sants_Montjuic,
+	#Sant_Andreu,
+	#Sant_Martí,
+	#Gràcia,
+	#Sarria_Sant_Gervasi,
+	#path25 {
+		fill: #fcf5e3;
+	}
+
+	#path li {
+		font-size: 8px;
+	}
+
+	.is-lit {
+		background-color: #db2c7f;
+		color: #fff;
+		cursor: pointer;
+		fill: #db2c7f !important;
+	}
+`;
 
 const InteractiveMap = () => {
 	const {state, dispatch} = useContext(MapContext);
@@ -20,11 +55,10 @@ const InteractiveMap = () => {
 	}, []);
 
 	const handleMobileMouseOver = (id) => {
-		const action = {
-			type: "lit-map-district",
+		dispatch({
+			type: MAP_ACTIONS.LIT_NEIGHBOURHOOD,
 			payload: id,
-		};
-		dispatch(action);
+		});
 	};
 
 	const handleMouseOver = (id) => {
@@ -35,11 +69,9 @@ const InteractiveMap = () => {
 		dispatch(action);
 	};
 
-	const isMobileOrTablet = screenWidth <= 820;
-
 	return (
 		<div>
-			<svg
+			<SvgStyled
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
 				width="427.543"
@@ -53,39 +85,44 @@ const InteractiveMap = () => {
 				</defs>
 				<g id="Group_309" data-name="Group 309" transform="translate(-20014.055 -3139.501)">
 					<g id="layer1" transform="translate(20014.555 3140.001)">
-						{isMobileOrTablet &&
-							mapDistricts.map((el) => (
-								<path
-									key={el.id}
-									id={el.id}
-									d={el.d}
-									transform={el.transform}
-									fill="#fcf5e3"
-									stroke="#000"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeMiterlimit="10"
-									strokeWidth="1"
-									className={state.districtId === el.id ? "is-lit" : null}
-									onMouseOver={() => handleMobileMouseOver(el.id)}
-									onMouseLeave={() => handleMobileMouseOver("")}
-								/>
-							))}
-						{!isMobileOrTablet &&
-							mapDistricts.map((el) => (
-								<path
-									key={el.id}
-									id={el.id}
-									d={el.d}
-									transform={el.transform}
-									fill="#fcf5e3"
-									stroke="#000"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeMiterlimit="10"
-									strokeWidth="1"
-								/>
-							))}
+						{screenWidth <= 820
+							? mapDistricts.map((el) => (
+									<path
+										key={el.id}
+										id={el.id}
+										d={el.d}
+										transform={el.transform}
+										fill="#fcf5e3"
+										stroke="#000"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeMiterlimit="10"
+										strokeWidth="1"
+										className={state.districtId === el.id ? "is-lit" : null}
+										onMouseOver={() => {
+											console.log("get-in", el.id);
+											handleMobileMouseOver(el.id);
+										}}
+										onMouseLeave={() => {
+											console.log("get-out", el.id);
+											handleMobileMouseOver("");
+										}}
+									/>
+							  ))
+							: mapDistricts.map((el) => (
+									<path
+										key={el.id}
+										id={el.id}
+										d={el.d}
+										transform={el.transform}
+										fill="#fcf5e3"
+										stroke="#000"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeMiterlimit="10"
+										strokeWidth="1"
+									/>
+							  ))}
 
 						<g id="g687" transform="translate(268.454 282.505) rotate(90)">
 							<g id="g689" clipPath="url(#clip-path)">
@@ -104,44 +141,43 @@ const InteractiveMap = () => {
 						</g>
 					</g>
 
-					{isMobileOrTablet &&
-						path_data.map((item) => (
-							<path
-								key={item.id}
-								id={item.id}
-								d={item.d}
-								transform={item.transform}
-								fill="none"
-								stroke="#fcf5e3"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeMiterlimit="0"
-								strokeWidth="0"
-								fillRule="evenodd"
-							/>
-						))}
+					{screenWidth <= 820
+						? null
+						: // path_data.map((item) => (
+						  // 		<path
+						  // 			key={item.id}
+						  // 			id={item.id}
+						  // 			d={item.d}
+						  // 			transform={item.transform}
+						  // 			fill="none"
+						  // 			stroke="#fcf5e3"
+						  // 			strokeLinecap="round"
+						  // 			strokeLinejoin="round"
+						  // 			strokeMiterlimit="0"
+						  // 			strokeWidth="0"
+						  // 			fillRule="evenodd"
+						  // 		/>
+						  //   ))
+						  path_data.map((item) => (
+								<path
+									key={item.id}
+									id={item.id}
+									d={item.d}
+									transform={item.transform}
+									className={item.id === state[item.id] ? "is-lit" : null}
+									onMouseOver={() => handleMouseOver(item.id)}
+									onMouseLeave={() => handleMouseOver("")}
+									fill="none"
+									stroke="#000"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeMiterlimit="10"
+									strokeWidth="0.1"
+									fillRule="evenodd"
+								/>
+						  ))}
 
-					{!isMobileOrTablet &&
-						path_data.map((item) => (
-							<path
-								key={item.id}
-								id={item.id}
-								d={item.d}
-								transform={item.transform}
-								className={item.id === state[item.id] ? "is-lit" : null}
-								onMouseOver={() => handleMouseOver(item.id)}
-								onMouseLeave={() => handleMouseOver("")}
-								fill="none"
-								stroke="#000"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeMiterlimit="10"
-								strokeWidth="0.1"
-								fillRule="evenodd"
-							/>
-						))}
-
-					{!isMobileOrTablet ? (
+					{screenWidth > 820 ? (
 						<>
 							<text
 								id="2-gotic-nr"
@@ -896,7 +932,7 @@ const InteractiveMap = () => {
 						</>
 					) : null}
 				</g>
-			</svg>
+			</SvgStyled>
 		</div>
 	);
 };

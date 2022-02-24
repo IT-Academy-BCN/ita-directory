@@ -1,6 +1,12 @@
-export const mapReducer = (state, action) => {
+export const MAP_ACTIONS = {
+	LIT_NEIGHBOURHOOD: "LIT_NEIGHBOURHOOD",
+	LIT_DISTRICT: "LIT_DISTRICT",
+	LIST_MAP_DISTRICT: "LIST_MAP_DISTRICT",
+};
+
+export const reducer = (state, action) => {
 	switch (action.type) {
-		case "lit-area":
+		case MAP_ACTIONS.LIT_NEIGHBOURHOOD:
 			return {
 				[action.payload]: action.payload,
 			};
@@ -14,7 +20,6 @@ export const mapReducer = (state, action) => {
 
 			return districtIds;
 		case "lit-map-district":
-			console.log("lit-map", action);
 			return {
 				...state,
 				districtId: action.payload,

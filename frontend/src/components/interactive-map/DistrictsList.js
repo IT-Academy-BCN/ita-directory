@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useContext} from "react";
-import {MapContext} from "./MapContext";
+import {MapContext} from "./store/context";
 import {allDistricts} from "./data/all-districts";
 import "./interactiveMap.css";
 
