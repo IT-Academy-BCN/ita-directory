@@ -30,7 +30,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="ita-logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">IT Academy Directory</h3>
@@ -38,7 +38,7 @@
   <p align="center">
     IT Academy Directory is a project built with React.js and Node.js for students at the IT Academy from Barcelona Activa. The goal is to allow them to familiarize themselves with a generic development setup that could be found in other places. One of the purposes of this project is to allow students to deal with new features, legacy code, fixes and teamwork challenges. As a consequence the priority is not only excellent technical execution, but to provide a full learning experience to our students. 
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://docs.itadirectory.eurecatacademy.org/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://xd.adobe.com/view/6889eb5a-76b3-4b9d-adcb-0d76da6a8789-3dda/flow/">Visual design</a>
