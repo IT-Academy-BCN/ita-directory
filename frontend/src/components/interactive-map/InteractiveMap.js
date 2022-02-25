@@ -60,12 +60,6 @@ const InteractiveMap = () => {
 		};
 	}, []);
 
-	const handleMouseOver = (e) => {
-		if (screenWidth <= 768) {
-			dispatch({type: MAP_ACTIONS.LIT_DISTRICT, payload: e.target.id});
-		} else dispatch({type: MAP_ACTIONS.LIT_NEIGHBORHOOD, payload: e.target.id});
-	};
-
 	return (
 		<div>
 			<SvgStyled
@@ -74,7 +68,11 @@ const InteractiveMap = () => {
 				width="427.543"
 				height="405.636"
 				viewBox="0 0 427.543 405.636"
-				onMouseOver={(e) => handleMouseOver(e)}
+				onMouseOver={(e) => {
+					if (screenWidth <= 768) {
+						dispatch({type: MAP_ACTIONS.LIT_DISTRICT, payload: e.target.id});
+					} else dispatch({type: MAP_ACTIONS.LIT_NEIGHBORHOOD, payload: e.target.id});
+				}}
 			>
 				<defs>
 					<clipPath id="clip-path">

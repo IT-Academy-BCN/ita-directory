@@ -65,7 +65,9 @@ const DistrictsList = () => {
 						})
 					}
 				>
-					{district.replace("-", " ")}
+					{district === "L-Eixample"
+						? district.replace("-", "´")
+						: district.replace("-", " ")}
 				</li>
 				<ul className="flex flex-col">
 					{neighborhoods
