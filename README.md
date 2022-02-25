@@ -30,7 +30,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="ita-logo.png" alt="Logo" width="80" height="80">
+    <img src="ita-logo.png" alt="Logo" width="229" height="36">
   </a>
 
   <h3 align="center">IT Academy Directory</h3>
