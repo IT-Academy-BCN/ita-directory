@@ -1,5 +1,12 @@
 import BarcelonaBanner from "../../../assets/logos/barcelona-banner.jpg";
-import {BannerImage} from "./Banner.styles";
+import styled from "styled-components";
+
+const BannerImage = styled.img`
+	height: 366px;
+	position: absolute;
+	left: 0;
+	right: 0;
+`;
 
 const Banner = () => {
 	return (
