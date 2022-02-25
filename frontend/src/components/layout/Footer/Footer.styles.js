@@ -57,7 +57,9 @@ export const Logo = styled.div`
 	}
 
 	& .directory {
+
 		${tw`text-[15px] text-pinkRed ml-2`}
+
 	}
 
 	@media only screen and (max-width: 1019px) {
