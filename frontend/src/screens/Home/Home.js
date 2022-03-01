@@ -1,10 +1,13 @@
 import {Link} from "react-router-dom";
+import Banner from "../../components/units/Banner/Banner";
+import InteractiveMap from "../../components/interactive-map/InteractiveMap";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
 
 // Styles
 import {HomeContainer} from "./Home.styles";
+import MapOfDistricts from "components/interactive-map/MapOfDistricts";
 
 const pages = [
 	{title: "Ad", route: "/ad"},
@@ -29,13 +32,16 @@ const Home = () => {
 		<>
 			<Body title="Home" justifyTitle="center">
 				<HomeContainer>
-					<ul>
+					<Banner />
+					<MapOfDistricts />
+
+					{/* <ul>
 						{pages.map((page) => (
 							<li>
 								<Link to={page.route}>{page.title}</Link>
 							</li>
 						))}
-					</ul>
+					</ul> */}
 				</HomeContainer>
 			</Body>
 		</>
