@@ -267,6 +267,6 @@ router.get("/v1/ads/search/location/:location", adsController.getAdsByLocation);
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
 
-router.patch("/v1/ads/:adId", adsController.updateAd ) //TODO verificar que sea la forma 
+router.patch("/v1/ads/:adId", adsController.updateAd ) //TODO verificar que sea la forma, va a necesitar middleware de autenticacion de token?
 
 module.exports = router;
