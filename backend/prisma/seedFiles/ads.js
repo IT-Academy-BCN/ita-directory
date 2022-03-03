@@ -1,7 +1,6 @@
 module.exports = [
     {
         id: 1,
-
         user_id: 1,
         title: "ad1",
         description: "ad house 1",
@@ -16,7 +15,6 @@ module.exports = [
     },
     {
         id: 2,
-
         user_id: 1,
         title: "ad2",
         description: "ad house 2",
@@ -31,7 +29,6 @@ module.exports = [
     },
     {
         id: 3,
-
         user_id: 1,
         title: "ad3",
         description: "ad house 3",
@@ -46,7 +43,6 @@ module.exports = [
     },
     {
         id: 4,
-
         user_id: 1,
         title: "ad4",
         description: "ad house 4",
@@ -61,7 +57,6 @@ module.exports = [
     },
     {
         id: 5,
-
         user_id: 1,
         title: "ad5",
         description: "ad house 5",
@@ -76,7 +71,6 @@ module.exports = [
     },
     {
         id: 6,
-
         user_id: 1,
         title: "ad6",
         description: "ad house 6",
@@ -91,7 +85,6 @@ module.exports = [
     },
     {
         id: 7,
-
         user_id: 1,
         title: "ad7",
         description: "ad house 7",
@@ -106,7 +99,6 @@ module.exports = [
     },
     {
         id: 8,
-
         user_id: 1,
         title: "ad8",
         description: "ad house 8",
@@ -121,7 +113,6 @@ module.exports = [
     },
     {
         id: 9,
-
         user_id: 1,
         title: "ad9",
         description: "ad house 9",
@@ -135,7 +126,6 @@ module.exports = [
         ad_type_id: 1
     },
     {
-        id: 10,
 
         user_id: 1,
         title: "ad10",
@@ -150,7 +140,6 @@ module.exports = [
         ad_type_id: 1
     },
     {
-        id: 11,
 
         user_id: 1,
         title: "ad11",
@@ -165,7 +154,6 @@ module.exports = [
         ad_type_id: 2
     },
     {
-        id: 12,
 
         user_id: 1,
         title: "ad12",
@@ -180,7 +168,6 @@ module.exports = [
         ad_type_id: 3
     },
     {
-        id: 13,
 
         user_id: 1,
         title: "ad13",
@@ -195,7 +182,6 @@ module.exports = [
         ad_type_id: 4
     },
     {
-        id: 14,
 
         user_id: 1,
         title: "ad14",
@@ -210,7 +196,6 @@ module.exports = [
         ad_type_id: 5
     },
     {
-        id: 15,
 
         user_id: 1,
         title: "ad15",
@@ -225,7 +210,6 @@ module.exports = [
         ad_type_id: 6
     },
     {
-        id: 16,
 
         user_id: 1,
         title: "ad16",
@@ -240,7 +224,6 @@ module.exports = [
         ad_type_id: 7
     },
     {
-        id: 17,
 
         user_id: 1,
         title: "ad17",
