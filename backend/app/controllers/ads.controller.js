@@ -303,6 +303,87 @@ async function deleteById(req, res) {
 	}
 }
 
+async function updateAd(req,res){
+	try {
+		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
+		const {...fields} = req.body;
+		
+		console.log( '[1;35m req.body.user_id' ,req.body.user_id )
+
+		const validationResult =await adsSchema.validateAsync(fields, {warnings: true});
+		console.log( '[1;34m res:::' ,validationResult )
+		
+		console.log( '[1;31m after validate'  )
+		
+	//! Esta bien levantar el usuario con parametro en la url????	
+	//! Deberia definir cuales son los campos modificables por el usuario.
+	//! en ningun lugar se esta validando el tipo de datos! (string, int, etc)
+	//! validateAsync necesita que lleguen todos los argumentos del schema. O no lo uso, o recibo todos.
+	//!Si vamos a recibir solo la informacion modificada, usar (email: req.email || undefined,), el validador no va a servir!
+	//! Por que adtype no es necesario para la validacion, pero usuario si?
+
+
+	
+	
+		const updatedAd = await prisma.ads.update({
+
+			where: {
+				id: parseInt(req.params.adId),
+			},
+			data: {
+				user: {
+					connect: {
+						id: parseInt(req.body.user_id),
+					},
+				},
+				title: req.body.title,
+				description: req.body.description,
+				city: req.body.city,
+				n_rooms: parseInt(req.body.n_rooms),
+				price: parseInt(req.body.price),
+				square_meters: parseInt(req.body.square_meters),
+				n_bathrooms: parseInt(req.body.n_bathrooms),
+				map_lat: parseFloat(req.body.map_lat),
+				map_lon: parseFloat(req.body.map_lon),
+				ad_type: {
+					connect: {
+						id: parseInt(req.body.ad_type_id),
+					},
+				},
+			},
+		})
+
+		if (updatedAd === null || undefined) {
+			return res.status(204).json({massage: `Ad not found`});
+		} else {
+	
+		res.status(200).json( 
+			apiResponse({
+				message: "Ad updated successfully.",
+				 data: updatedAd,
+			})
+		);
+		}
+	} catch (err) {
+		if (err.isJoi && err.name === "ValidationError") {
+			res.status(400).json(
+				apiResponse({
+					message: "At least one of the required values is not defined.",
+					errors: err.message,
+				})
+			);
+		}
+
+		res.status(500).json(
+			apiResponse({
+				message: "An error occurred while posting your ad.",
+				errors: err.message,
+			})
+		);
+	}
+
+}
+
 module.exports = {
 	createAd,
 	getAllAds,
@@ -312,4 +393,5 @@ module.exports = {
 	getAdsByLocation,
 	getAdsByTypeAndLocation,
 	deleteById,
+	updateAd
 };
