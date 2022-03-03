@@ -304,28 +304,22 @@ async function deleteById(req, res) {
 }
 
 async function updateAd(req,res){
-	try {
-		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
-		const {...fields} = req.body;
-		
-		console.log( '[1;35m req.body.user_id' ,req.body.user_id )
 
-		const validationResult =await adsSchema.validateAsync(fields, {warnings: true});
-		console.log( '[1;34m res:::' ,validationResult )
-		
-		console.log( '[1;31m after validate'  )
-		
-	//! Esta bien levantar el usuario con parametro en la url????	
+	//! El id del ad es obtenido con parametro en la url.
 	//! Deberia definir cuales son los campos modificables por el usuario.
 	//! en ningun lugar se esta validando el tipo de datos! (string, int, etc)
 	//! validateAsync necesita que lleguen todos los argumentos del schema. O no lo uso, o recibo todos.
 	//!Si vamos a recibir solo la informacion modificada, usar (email: req.email || undefined,), el validador no va a servir!
-	//! Por que adtype no es necesario para la validacion, pero usuario si?
+	//! Manejar mejor el error de que el ad no existe
 
 
-	
-	
-		const updatedAd = await prisma.ads.update({
+	try {
+		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
+		const {...fields} = req.body;
+		
+		const validationResult =await adsSchema.validateAsync(fields, {warnings: true});
+
+			const updatedAd = await prisma.ads.update({
 
 			where: {
 				id: parseInt(req.params.adId),
@@ -352,7 +346,7 @@ async function updateAd(req,res){
 				},
 			},
 		})
-
+		
 		if (updatedAd === null || undefined) {
 			return res.status(204).json({massage: `Ad not found`});
 		} else {
