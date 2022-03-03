@@ -1,6 +1,5 @@
 module.exports = [
     {
-        id: 1,
         name: "country",
         country: 1,
         state: 0,
@@ -9,7 +8,6 @@ module.exports = [
         district: 0
     },
     {
-        id: 2,
         name: "state",
         country: 0,
         state: 1,
@@ -18,7 +16,6 @@ module.exports = [
         district: 0
     },
     {
-        id: 3,
         name: "city",
         country: 0,
         state: 0,
@@ -27,7 +24,6 @@ module.exports = [
         district: 0
     },
     {
-        id: 4,
         name: "town",
         country: 0,
         state: 0,
@@ -36,7 +32,6 @@ module.exports = [
         district: 0
     },
     {
-        id: 5,
         name: "district",
         country: 0,
         state: 0,
