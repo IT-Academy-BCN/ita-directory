@@ -37,6 +37,21 @@ const adsSchema = Joi.object({
 	ad_type_id: Joi.number().required(),
 });
 
+const patchAdSchema = Joi.object({
+	adId:Joi.number().integer().required(),
+	user_id: Joi.number(),
+	title: Joi.string(),
+	description: Joi.string(),
+	city: Joi.string(),
+	n_rooms: Joi.number(),
+	price: Joi.number(),
+	square_meters: Joi.number(),
+	n_bathrooms: Joi.number(),
+	map_lat: Joi.number(),
+	map_lon: Joi.number(),
+	ad_type_id: Joi.number(),
+});
+
 const signToken = (userid, maxAge = "15m") => {
 	const hashedId = hashids.encode(userid);
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
@@ -88,4 +103,5 @@ module.exports = {
 	decodeHash,
 	getRegionByLocationSchema,
 	getAdsByTypeSchema,
+	patchAdSchema
 };
