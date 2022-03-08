@@ -8,6 +8,7 @@ const {
 	getAdsByTypeSchema,
 	patchAdSchema,
 } = require("../utils/utils");
+const csv = require("csvtojson");
 
 async function createAd(req, res) {
 	try {
@@ -72,12 +73,12 @@ async function createAd(req, res) {
 }
 
 async function createAdsFromCSVBuffer(req, res) {
-	console.log("[1;34m 2-PASA POR createAdsFromCSVBuffer ");
 	try {
-		const file = req.file;
-		console.log("[1;33m el file que deberia contener un buffer:", file);
+		const adsArray = await csv().fromString(req.file.buffer.toString());
+		console.log("adsArray", adsArray);
+		//TODO append del user ID
 
-		console.log("el buffer en si mismo:", file.buffer);
+		res.send("paso todo ");
 	} catch (err) {
 		console.log(err);
 	}
