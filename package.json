@@ -39,6 +39,7 @@
     "lint-staged": "^11.1.2"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.0",
     "@types/d3": "^7.1.0",
     "@types/recharts": "^1.8.23",
     "d3": "^7.2.1",
