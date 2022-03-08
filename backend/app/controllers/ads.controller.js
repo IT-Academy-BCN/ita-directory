@@ -310,9 +310,6 @@ async function deleteById(req, res) {
 }
 
 async function updateAd(req, res) {
-	//! Deberia definir cuales son los campos modificables por el usuario. Por ejemplo, user_id no deberia poder modificarse.
-	//! Hablar sobre la validacion
-
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
 
@@ -326,11 +323,6 @@ async function updateAd(req, res) {
 				id: validatedFields.adId,
 			},
 			data: {
-				user: {
-					connect: {
-						id: parseInt(req.body.user_id),
-					},
-				},
 				title: req.body.title || undefined,
 				description: req.body.description || undefined,
 				city: req.body.city || undefined,

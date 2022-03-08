@@ -39,7 +39,6 @@ const adsSchema = Joi.object({
 
 const patchAdSchema = Joi.object({
 	adId: Joi.number().integer().required(),
-	user_id: Joi.number(),
 	title: Joi.string(),
 	description: Joi.string(),
 	city: Joi.string(),
