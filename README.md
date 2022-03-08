@@ -95,7 +95,25 @@ Here's a blank template to get started:
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+### Requirements
+
+1. Docker
+2. Bash terminal
+3. Git pull-request and issue flows.
+
+### How to work with GIT
+
+1. When new features or fixes are required we create a new issue.
+2. Issues are assigned to one person.
+3. The number of the issue is created as a new branch name following git branch naming conventions: https://deepsource.io/blog/git-branch-naming-conventions/
+4. Once the issue is resolved, a new pull-request from your branch to development is required.
+
+### Project files:
+
+1. This repository
+2. Visual: <a href="https://xd.adobe.com/view/6889eb5a-76b3-4b9d-adcb-0d76da6a8789-3dda/flow/">Visual design</a>
+
+### Getting Started
 
 To get a local copy up and running follow these simple steps.
 
