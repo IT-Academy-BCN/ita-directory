@@ -3,7 +3,6 @@ const multer = require("multer");
 //req.file will be undefined in case of .single()
 
 const csvFilter = function (req, file, cb) {
-	console.log("[1;34m 0-PASA POR csvFilter ");
 	if (file.mimetype === "text/csv") {
 		console.log("[1;34m 0.1-csvFilter OK ");
 
@@ -17,15 +16,27 @@ const csvFilter = function (req, file, cb) {
 
 const storage = multer.memoryStorage(); //poner a donde va
 
-const uploadAdCSV = multer({storage, fileFilter: csvFilter}).single("some_csv");
+const upload = multer({storage, fileFilter: csvFilter}).single("some_csv");
 
-//When using memory storage, the file info will contain a field called buffer that contains the entire file.
+const uploadAdCSV = (req, res, next) => {
+	upload(req, res, function (err) {
+		if (err) {
+			// This is a good practice when you want to handle your errors differently
 
-module.exports = uploadAdCSV;
+			return;
+		}
 
+		// Everything went fine
+		next();
+	});
+};
+
+module.exports = {uploadAdCSV};
 //---------------------------------------
-
+// Tenes problemas cuando subis un .csv , pero que por dentro no lo es! te da un empty buffer, controlar eso! Probablemente controlar los headers es lo que hay que hacer!!!!
 //TODO ver limits en la docu
 // ver que es esto de fileValidationError!!!!!!!!!!!
 //! uso single o multiple files?
 //TODO Resolver como vas a modelar lo del id que te llegue, con query param???
+
+// a considerar https://stackoverflow.com/questions/45805890/node-multer-memory-storage-how-to-release-memory
