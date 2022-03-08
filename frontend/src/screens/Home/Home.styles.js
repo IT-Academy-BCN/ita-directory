@@ -2,9 +2,9 @@ import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
 
 export const HomeContainer = styled(Container)`
-	height: 70vh;
+	flex-direction: column;
 
-	ul {
+	min-height: 70vh ul {
 		text-align: center;
 
 		li {

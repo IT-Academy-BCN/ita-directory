@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const StyledBody = styled.div`
-	margin: 0;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 100%;
 	min-height: 100vh;
 	width: 100vw;
+	display: flex;
+	flex-direction: column;
 `;
 
 export const Childrens = styled.div`

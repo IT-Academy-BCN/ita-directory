@@ -16,6 +16,7 @@
 		"d3": "^7.0.4",
 		"echarts": "^5.1.2",
 		"leaflet": "^1.7.1",
+		"normalize.css": "^8.0.1",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.1",
 		"react-animations": "^1.0.0",

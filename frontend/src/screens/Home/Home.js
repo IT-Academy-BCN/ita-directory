@@ -1,10 +1,13 @@
 import {Link} from "react-router-dom";
+import Banner from "../../components/units/Banner/Banner";
+import InteractiveMap from "../../components/interactive-map/InteractiveMap";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
 
 // Styles
 import {HomeContainer} from "./Home.styles";
+import MapOfDistricts from "components/interactive-map/MapOfDistricts";
 
 const pages = [
     {title: "Ad", route: "/ad"},
@@ -25,21 +28,24 @@ const pages = [
 ];
 
 const Home = () => {
-    return (
-        <>
-            <Body title="Home" justifyTitle="center">
-                <HomeContainer>
-                    <ul>
-                        {pages.map((page) => (
-                            <li>
-                                <Link to={page.route}>{page.title}</Link>
-                            </li>
-                        ))}
-                    </ul>
-                </HomeContainer>
-            </Body>
-        </>
-    );
+	return (
+		<>
+			<Body title="Home" justifyTitle="center">
+				<HomeContainer>
+					<Banner />
+					<MapOfDistricts />
+
+					{/* <ul>
+						{pages.map((page) => (
+							<li>
+								<Link to={page.route}>{page.title}</Link>
+							</li>
+						))}
+					</ul> */}
+				</HomeContainer>
+			</Body>
+		</>
+	);
 };
 
 export default Home;

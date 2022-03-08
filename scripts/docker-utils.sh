@@ -1,7 +1,7 @@
 #!/bin/bash
 source utils.sh
 ENV_FILE=$(git_root)/.env
-loadEnv $ENV_FILE
+loadEnv "$ENV_FILE"
 
 launchPostgres() {
     echo "Starting PostgreSQL ..."

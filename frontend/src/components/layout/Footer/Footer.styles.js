@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import tw from "twin.macro";
+import Colors from "../../../theme/Colors";
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -22,7 +23,7 @@ export const StyledFooter = styled.footer`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	border-top: 1px solid ${Colors.grey};
+	border-top: 1px solid ${Colors.lightGrey};
 	width: 100%;
 	margin: 1rem 0rem;
 	padding-top: 1rem;
@@ -39,15 +40,27 @@ export const StyledFooter = styled.footer`
 `;
 
 export const Logo = styled.div`
+	display: flex;
+	align-items: center;
 	text-align: left;
-	font: normal normal normal 15px/15px Korb-Bold;
 	letter-spacing: 0px;
 	color: ${Colors.black};
 	opacity: 1;
 	font-weight: bold;
-	text-transform: uppercase;
-	padding-top: 3px;
 	padding-bottom: 1rem;
+	height: 80px;
+	position: relative;
+
+	& img {
+		width: 144px;
+		height: 36px;
+	}
+
+	& .directory {
+
+		${tw`text-[15px] text-pinkRed ml-2`}
+
+	}
 
 	@media only screen and (max-width: 1019px) {
 		min-width: 10rem;
@@ -80,16 +93,26 @@ export const Information = styled.div`
 		flex: 3;
 	}
 	@media only screen and (max-width: 468px) {
-		text-align: center;
+		text-align: left;
 		margin-top: 0.5rem;
 		flex: 4;
 	}
 `;
-export const Copyright = styled.div`
-	margin: 3px;
+
+export const Credits = styled(Information)`
+	${tw`absolute bottom-0 left-0`}
+	& p {
+		color: ${Colors.black};
+		text-align: left;
+	}
+	& span {
+		color: ${Colors.redPink};
+	}
 `;
+
 export const Rights = styled.div`
 	margin: 3px;
+	color: #000;
 `;
 
 export const Legal = styled.div`
@@ -98,7 +121,7 @@ export const Legal = styled.div`
 `;
 
 export const Anchor = styled.a`
-	color: ${Colors.grey};
+	color: ${Colors.redPink};
 	text-decoration: none;
 	list-style-type: none;
 	padding: 2px;
