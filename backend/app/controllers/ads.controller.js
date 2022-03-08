@@ -72,9 +72,8 @@ async function createAd(req, res) {
 }
 
 async function createAdsFromCSVBuffer(req, res) {
+	console.log("[1;34m 2-PASA POR createAdsFromCSVBuffer ");
 	try {
-		console.log("[1;35m llama a la funcion createAdsFromCSVBuffer ");
-
 		const file = req.file;
 		console.log("[1;33m el file que deberia contener un buffer:", file);
 
