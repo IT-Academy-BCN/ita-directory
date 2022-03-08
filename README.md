@@ -30,7 +30,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo" width="458" height="72">
   </a>
 
   <h3 align="center">IT Academy Directory</h3>
@@ -38,7 +38,7 @@
   <p align="center">
     IT Academy Directory is a project built with React.js and Node.js for students at the IT Academy from Barcelona Activa. The goal is to allow them to familiarize themselves with a generic development setup that could be found in other places. One of the purposes of this project is to allow students to deal with new features, legacy code, fixes and teamwork challenges. As a consequence the priority is not only excellent technical execution, but to provide a full learning experience to our students. 
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://docs.itadirectory.eurecatacademy.org/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://xd.adobe.com/view/6889eb5a-76b3-4b9d-adcb-0d76da6a8789-3dda/flow/">Visual design</a>
@@ -95,32 +95,35 @@ Here's a blank template to get started:
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+### Requirements
+
+1. Docker
+2. Bash terminal
+3. Git pull-request and issue flows.
+
+### How to work with GIT
+
+1. When new features or fixes are required we create a new issue.
+2. Issues are assigned to one person.
+3. The number of the issue is created as a new branch name following git branch naming conventions: https://deepsource.io/blog/git-branch-naming-conventions/
+4. Once the issue is resolved, a new pull-request from your branch to development is required.
+
+### Project files:
+
+1. This repository
+2. Visual: <a href="https://xd.adobe.com/view/6889eb5a-76b3-4b9d-adcb-0d76da6a8789-3dda/flow/">Visual design</a>
+
+### Getting Started
 
 To get a local copy up and running follow these simple steps.
 
-1. Clone the repository
-
-`git clone https://github.com/it-academyproject/ita-directory.git`
-
-2. Checkout to the develop **branch**, we don't work from **main**.
-
-`git checkout develop`
-
+1. Clone the repository: `git clone https://github.com/it-academyproject/ita-directory.git`
+2. Checkout to the develop **branch**, we don't work from **main**: `git checkout develop`
 3. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
-
-4. Install dependencies with:
-
-`npm run install-deps`
-
-_It installs the dependencies of the front, the back and the main directory_
-
-5. Make sure that you have docker installed and running, and from the main folder launch up
-
-`npm run up`
+4. Install dependencies with: `npm run install-deps` _It installs the dependencies of the front, the back and the main directory_
+5. Make sure that you have docker installed and running, and from the main folder launch up: `npm run up`
 
 The up command will:
-
 - Start PostgreSQL
 - Start Redis
 - Generate PRISMA migrations
