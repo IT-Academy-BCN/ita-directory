@@ -1,7 +1,7 @@
 const authenticateToken = require("../middleware/verifyToken");
 const adsController = require("../controllers/ads.controller");
 const router = require("express").Router();
-const uploadAdCSV = require("../middleware/uploadAdsCSV");
+const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
 
 /**
  * Ad data
