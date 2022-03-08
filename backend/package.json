@@ -4,7 +4,11 @@
   "description": "Backend ITAcademy Directory project (react + node tracks)",
   "main": "server.js",
   "scripts": {
-    "dev": "set NODE_ENV=development && nodemon --legacy-watch server.js",
+    "dev": "export NODE_ENV=development && nodemon --legacy-watch server.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate-dev": "prisma migrate dev",
+    "prisma:seed": "npx prisma db seed --preview-feature",
+    "start:dev": "npm run prisma:generate && npm run prisma:migrate-dev && npm run prisma:seed && npm run dev",
     "test": "jest"
   },
   "keywords": [
