@@ -71,6 +71,19 @@ async function createAd(req, res) {
 	}
 }
 
+async function createAdsFromCSVBuffer(req, res) {
+	try {
+		console.log("[1;35m llama a la funcion createAdsFromCSVBuffer ");
+
+		const file = req.file;
+		console.log("[1;33m el file que deberia contener un buffer:", file);
+
+		console.log("el buffer en si mismo:", file.buffer);
+	} catch (err) {
+		console.log(err);
+	}
+}
+
 async function getAllAds(req, res) {
 	try {
 		const ads = await prisma.ads.findMany();
@@ -383,4 +396,5 @@ module.exports = {
 	getAdsByTypeAndLocation,
 	deleteById,
 	updateAd,
+	createAdsFromCSVBuffer,
 };
