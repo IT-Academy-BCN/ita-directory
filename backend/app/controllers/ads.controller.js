@@ -1,7 +1,13 @@
 const prisma = require("../../prisma/indexPrisma");
 const {type_sw} = require("../utils/CONSTANTS");
 const {formatLocation} = require("../utils/formatLocation");
-const {apiResponse, adsSchema, AdByIdParamSchema, getAdsByTypeSchema} = require("../utils/utils");
+const {
+	apiResponse,
+	adsSchema,
+	AdByIdParamSchema,
+	getAdsByTypeSchema,
+	patchAdSchema,
+} = require("../utils/utils");
 
 async function createAd(req, res) {
 	try {
@@ -303,6 +309,70 @@ async function deleteById(req, res) {
 	}
 }
 
+async function updateAd(req, res) {
+	try {
+		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
+
+		const adId = req.params.adId;
+		const {...fields} = req.body;
+
+		const validatedFields = await patchAdSchema.validateAsync({adId, ...fields});
+
+		const updatedAd = await prisma.ads.update({
+			where: {
+				id: validatedFields.adId,
+			},
+			data: {
+				title: req.body.title || undefined,
+				description: req.body.description || undefined,
+				city: req.body.city || undefined,
+				n_rooms: parseInt(req.body.n_rooms) || undefined,
+				price: parseInt(req.body.price) || undefined,
+				square_meters: parseInt(req.body.square_meters) || undefined,
+				n_bathrooms: parseInt(req.body.n_bathrooms) || undefined,
+				map_lat: parseFloat(req.body.map_lat) || undefined,
+				map_lon: parseFloat(req.body.map_lon) || undefined,
+				ad_type: {
+					connect: {
+						id: parseInt(req.body.ad_type_id || undefined),
+					},
+				},
+			},
+		});
+
+		res.status(200).json(
+			apiResponse({
+				message: "Ad updated successfully.",
+				data: updatedAd,
+			})
+		);
+	} catch (err) {
+		if (err.isJoi && err.name === "ValidationError") {
+			res.status(400).json(
+				apiResponse({
+					message: "At least one of the required values is not defined.",
+					errors: err.message,
+				})
+			);
+		} else if (err.code === "P2025") {
+			res.status(404).json(
+				apiResponse({
+					message: err.meta.cause,
+					errors: err.message,
+				})
+			);
+		} else {
+			//! Este else probablemente no sea necesario, solamente para el error del nombre al middleware handle error que esta para eso, llamar a next!
+			res.status(500).json(
+				apiResponse({
+					message: "An error occurred while posting your ad.",
+					errors: err.message,
+				})
+			);
+		}
+	}
+}
+
 module.exports = {
 	createAd,
 	getAllAds,
@@ -312,4 +382,5 @@ module.exports = {
 	getAdsByLocation,
 	getAdsByTypeAndLocation,
 	deleteById,
+	updateAd,
 };
