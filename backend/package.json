@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "set NODE_ENV=development && nodemon --legacy-watch server.js",
-    "test": "jest"
+    "test": "jest",
+    "fmt": "npx prettier --write ./app"
   },
   "keywords": [
     "node",

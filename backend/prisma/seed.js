@@ -203,7 +203,7 @@ async function main() {
 	for (let i = 0; i < user_roles.length; i++) {
 		const ur = user_roles[i];
 		await prisma.user_role.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...ur,
@@ -214,7 +214,7 @@ async function main() {
 	for (let i = 0; i < user_status.length; i++) {
 		const us = user_status[i];
 		await prisma.user_status.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...us,
@@ -224,9 +224,9 @@ async function main() {
 
 	// @todo: fix by students
 	for (let i = 0; i < users.length; i++) {
-		const user = users[i];	
+		const user = users[i];
 		await prisma.user.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...user,
@@ -237,7 +237,7 @@ async function main() {
 	for (let i = 0; i < ad_types.length; i++) {
 		const ad_type = ad_types[i];
 		await prisma.ad_type.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...ad_type,
@@ -248,7 +248,7 @@ async function main() {
 	for (let i = 0; i < ads.length; i++) {
 		const ad = ads[i];
 		await prisma.ads.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...ad,
@@ -259,7 +259,7 @@ async function main() {
 	for (let i = 0; i < medias.length; i++) {
 		const media = medias[i];
 		await prisma.media.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...media,
@@ -270,7 +270,7 @@ async function main() {
 	for (let i = 0; i < medias_types.length; i++) {
 		const media_type = medias_types[i];
 		await prisma.media_type.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...media_type,
@@ -280,7 +280,7 @@ async function main() {
 	for (let i = 0; i < medias_metas.length; i++) {
 		const media_meta = medias_metas[i];
 		await prisma.media_meta.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...media_meta,
@@ -290,7 +290,7 @@ async function main() {
 	for (let i = 0; i < level_types.length; i++) {
 		const level_type = level_types[i];
 		await prisma.level_type.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...level_type,
@@ -300,7 +300,7 @@ async function main() {
 	for (let i = 0; i < levels.length; i++) {
 		const level = levels[i];
 		await prisma.level.upsert({
-			where: {id: i+1},
+			where: {id: i + 1},
 			update: {},
 			create: {
 				...level,
@@ -318,5 +318,3 @@ main()
 		console.log("disconnect Prisma");
 		await prisma.$disconnect();
 	});
-
-
