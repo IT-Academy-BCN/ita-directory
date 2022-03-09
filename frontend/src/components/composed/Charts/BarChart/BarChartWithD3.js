@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import * as d3 from "d3";
 import {barColors, returnChartSize, returnLegendData} from "./barGraphicConst";
 import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
 
-const D3BarChart = ({data, active, size, selectedMonth}) => {
+const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 	const [chartWidth, setChartWidth] = useState();
 	const [chartHeight, setChartHeight] = useState();
-
+	console.log(data);
 	const [displayLabels, setLabels] = useState(false);
 
 	const chartMargin = {top: 20, bottom: 20, left: 40, right: 40};
@@ -208,13 +208,15 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 	};
 
 	return (
-		<D3SvgChartContainer>
-			<StyledSvg className="bar-chart" />
-			<ChartLegend className="chart-legend">
-				<ul />
-			</ChartLegend>
-		</D3SvgChartContainer>
+		<Fragment>
+			<D3SvgChartContainer>
+				<StyledSvg className="bar-chart" />
+				<ChartLegend className="chart-legend">
+					<ul />
+				</ChartLegend>
+			</D3SvgChartContainer>
+		</Fragment>
 	);
 };
 
-export default D3BarChart;
+export default BarChartWithD3;

@@ -4,7 +4,6 @@ import Colors from "theme/Colors";
 
 export const LineGraphicStyled = styled.div`
 	width: 100%;
-	min-height: calc(90vh - 10rem - 120px);
 	box-shadow: 0 3px 6px #00000029;
 	border: 1px solid #ddd;
 	border-radius: 6px;
