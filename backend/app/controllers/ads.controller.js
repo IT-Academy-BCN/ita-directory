@@ -8,8 +8,7 @@ const {
 	getAdsByTypeSchema,
 	patchAdSchema,
 } = require("../utils/utils");
-const csv = require("csvtojson");
-
+const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
 async function createAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
@@ -72,30 +71,41 @@ async function createAd(req, res) {
 	}
 }
 
-async function createAdsFromCSVBuffer(req, res) {
+async function createAdsFromCSVBuffer(req, res, next) {
 	try {
-		// posible validacion de headers https://github.com/Keyang/node-csvtojson/issues/355
-		csv().on("header", (header) => {
-			console.log("[1;33m EL EVENTO HEADER FUNCIONA!", header);
+		const adsArray = await parseAdsFromCsvBuffer(req);
 
-			//header=> [header1, header2, header3]
-		});
-
-		const adsArray = await csv().fromString(req.file.buffer.toString());
-		console.log("adsArray", adsArray);
-		//TODO append del user ID
-
-		//DB related
+		console.log("%cads.controller.js line:78 adsArray", "color: #007acc;", adsArray);
+		//DB related-----------------------------------------------------------------------------------------------------------------------------
 		const mockUserId = 1;
 
 		//TODO fundamental! decidir como viene el user ID, si en el body o en la url!!
 		const adsArrayWithUserId = adsArray.map((ad) => ({...ad, user_id: mockUserId.toString()}));
 
-		console.log("adsArrayWithUserId: ", adsArrayWithUserId);
+		// const createMany = await prisma.ads.createMany({
+		// 	data: [
+		// 		{name: "Bob", email: "bob@prisma.io"},
+		// 		{name: "Bobo", email: "bob@prisma.io"}, // Duplicate unique key!
+		// 		{name: "Yewande", email: "yewande@prisma.io"},
+		// 		{name: "Angelique", email: "angelique@prisma.io"},
+		// 	],
+		// 	skipDuplicates: true, // Skip 'Bobo'
+		// });
 
+		//console.log("adsArrayWithUserId: ", adsArrayWithUserId);
 		res.send("paso todo ");
 	} catch (err) {
-		console.log(err);
+		if (err.message === "Invalid CSV Headers") {
+			return res.status(400).json(
+				apiResponse({
+					message: err.message,
+					errors: err.message,
+				})
+			);
+		} else {
+			console.log(err);
+			next(err);
+		}
 	}
 }
 
