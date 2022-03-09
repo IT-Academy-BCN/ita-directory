@@ -75,25 +75,29 @@ async function createAdsFromCSVBuffer(req, res, next) {
 	try {
 		const adsArray = await parseAdsFromCsvBuffer(req);
 
-		console.log("%cads.controller.js line:78 adsArray", "color: #007acc;", adsArray);
 		//DB related-----------------------------------------------------------------------------------------------------------------------------
+
+		//!mockUserId: To be replaced with user extracted from Token
 		const mockUserId = 1;
 
-		//TODO fundamental! decidir como viene el user ID, si en el body o en la url!!
+		//Append user_id to each ad entry
 		const adsArrayWithUserId = adsArray.map((ad) => ({...ad, user_id: mockUserId.toString()}));
 
-		// const createMany = await prisma.ads.createMany({
-		// 	data: [
-		// 		{name: "Bob", email: "bob@prisma.io"},
-		// 		{name: "Bobo", email: "bob@prisma.io"}, // Duplicate unique key!
-		// 		{name: "Yewande", email: "yewande@prisma.io"},
-		// 		{name: "Angelique", email: "angelique@prisma.io"},
-		// 	],
-		// 	skipDuplicates: true, // Skip 'Bobo'
-		// });
+		const promiseArray = adsArrayWithUserId.map((ad) => adsSchema.validateAsync(ad));
+		const validatedAdsArray = await Promise.all(promiseArray);
 
-		//console.log("adsArrayWithUserId: ", adsArrayWithUserId);
-		res.send("paso todo ");
+		const createMany = await prisma.ads.createMany({
+			data: validatedAdsArray,
+			skipDuplicates: true,
+		});
+
+		res.status(200).json(
+			apiResponse({
+				message: `${createMany.count} records have been created successfully`,
+				//createMany does not return created records. As a workaround, validatedAdsArray is returned. https://github.com/prisma/prisma/issues/8131
+				data: validatedAdsArray,
+			})
+		);
 	} catch (err) {
 		if (err.message === "Invalid CSV Headers") {
 			return res.status(400).json(
@@ -102,9 +106,20 @@ async function createAdsFromCSVBuffer(req, res, next) {
 					errors: err.message,
 				})
 			);
+		} else if (err.isJoi && err.name === "ValidationError") {
+			res.status(400).json(
+				apiResponse({
+					message: "At least one of the required values is not defined.",
+					errors: err.message,
+				})
+			);
 		} else {
-			console.log(err);
-			next(err);
+			res.status(500).json(
+				apiResponse({
+					message: "An error occurred while posting the ads.",
+					errors: err.message,
+				})
+			);
 		}
 	}
 }
@@ -392,6 +407,7 @@ async function updateAd(req, res) {
 					errors: err.message,
 				})
 			);
+			// P2025 Prisma error record not found
 		} else if (err.code === "P2025") {
 			res.status(404).json(
 				apiResponse({
