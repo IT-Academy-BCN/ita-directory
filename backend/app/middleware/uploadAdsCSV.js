@@ -1,8 +1,6 @@
 const multer = require("multer");
 const {apiResponse} = require("../utils/utils");
 
-//req.file will be undefined in case of .single()
-
 const csvFilter = function (req, file, cb) {
 	if (file.mimetype === "text/csv") {
 		cb(null, true);
@@ -45,7 +43,3 @@ const uploadAdCSV = (req, res, next) => {
 	});
 };
 module.exports = {uploadAdCSV};
-//---------------------------------------
-
-//TODO Resolver como vas a modelar lo del id que te llegue, con query param???
-// a considerar https://stackoverflow.com/questions/45805890/node-multer-memory-storage-how-to-release-memory

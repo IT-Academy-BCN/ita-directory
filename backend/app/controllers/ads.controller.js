@@ -71,11 +71,9 @@ async function createAd(req, res) {
 	}
 }
 
-async function createAdsFromCSVBuffer(req, res, next) {
+async function createAdsFromCSVBuffer(req, res) {
 	try {
 		const adsArray = await parseAdsFromCsvBuffer(req);
-
-		//DB related-----------------------------------------------------------------------------------------------------------------------------
 
 		//!mockUserId: To be replaced with user extracted from Token
 		const mockUserId = 1;
