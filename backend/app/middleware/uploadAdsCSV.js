@@ -5,12 +5,8 @@ const {apiResponse} = require("../utils/utils");
 
 const csvFilter = function (req, file, cb) {
 	if (file.mimetype === "text/csv") {
-		console.log("[1;34m 0.1-csvFilter OK ");
-
 		cb(null, true);
 	} else {
-		console.log("[1;34m 0.1-csvFilter ERROR ");
-
 		cb(new Error("File extension must be CSV"), false);
 	}
 };
@@ -44,15 +40,12 @@ const uploadAdCSV = (req, res, next) => {
 			);
 		}
 		// Everything went fine
+
 		next();
 	});
 };
-
 module.exports = {uploadAdCSV};
 //---------------------------------------
-// Tenes problemas cuando subis un .csv , pero que por dentro no lo es! te da un empty buffer, controlar eso! Probablemente controlar los headers es lo que hay que hacer!!!!
-//TODO ver limits en la documentacion
-// ver que es esto de fileValidationError!!!!!!!!!!!
-//TODO Resolver como vas a modelar lo del id que te llegue, con query param???
 
+//TODO Resolver como vas a modelar lo del id que te llegue, con query param???
 // a considerar https://stackoverflow.com/questions/45805890/node-multer-memory-storage-how-to-release-memory
