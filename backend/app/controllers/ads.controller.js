@@ -74,9 +74,24 @@ async function createAd(req, res) {
 
 async function createAdsFromCSVBuffer(req, res) {
 	try {
+		// posible validacion de headers https://github.com/Keyang/node-csvtojson/issues/355
+		csv().on("header", (header) => {
+			console.log("[1;33m EL EVENTO HEADER FUNCIONA!", header);
+
+			//header=> [header1, header2, header3]
+		});
+
 		const adsArray = await csv().fromString(req.file.buffer.toString());
 		console.log("adsArray", adsArray);
 		//TODO append del user ID
+
+		//DB related
+		const mockUserId = 1;
+
+		//TODO fundamental! decidir como viene el user ID, si en el body o en la url!!
+		const adsArrayWithUserId = adsArray.map((ad) => ({...ad, user_id: mockUserId.toString()}));
+
+		console.log("adsArrayWithUserId: ", adsArrayWithUserId);
 
 		res.send("paso todo ");
 	} catch (err) {
