@@ -4,7 +4,7 @@ module.exports = [
 		country: 1,
 		state: 0,
 		city: 0,
-		town: 0,
+		neighbordhood: 0,
 		district: 0,
 	},
 	{
@@ -12,7 +12,7 @@ module.exports = [
 		country: 0,
 		state: 1,
 		city: 0,
-		town: 0,
+		neighbordhood: 0,
 		district: 0,
 	},
 	{
@@ -20,15 +20,15 @@ module.exports = [
 		country: 0,
 		state: 0,
 		city: 1,
-		town: 0,
+		neighbordhood: 0,
 		district: 0,
 	},
 	{
-		name: "town",
+		name: "neighborhood",
 		country: 0,
 		state: 0,
 		city: 0,
-		town: 1,
+		neighborhood: 1,
 		district: 0,
 	},
 	{
@@ -36,7 +36,7 @@ module.exports = [
 		country: 0,
 		state: 0,
 		city: 0,
-		town: 0,
+		neighbordhood: 0,
 		district: 1,
 	},
 ];
