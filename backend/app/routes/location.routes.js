@@ -50,7 +50,6 @@ const router = require("express").Router();
 
 router.get("/v1/region/:name", locationController.getRegion);
 
-
 /**
  * GET /location/v1/relative/:name
  * @summary Gets a searched location's parent and children.
@@ -120,8 +119,6 @@ router.get("/v1/region/:name", locationController.getRegion);
 }
  */
 
-
 router.get("/v1/relative/:name", locationController.getParentChild);
-
 
 module.exports = router;

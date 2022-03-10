@@ -1,6 +1,7 @@
 const authenticateToken = require("../middleware/verifyToken");
 const adsController = require("../controllers/ads.controller");
 const router = require("express").Router();
+const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
 
 /**
  * Ad data
@@ -266,5 +267,9 @@ router.get("/v1/ads/:location/:type", adsController.getAdsByTypeAndLocation);
 router.get("/v1/ads/search/location/:location", adsController.getAdsByLocation);
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
+
+router.patch("/v1/ads/:adId", adsController.updateAd); //TODO verificar que sea la forma, va a necesitar middleware de autenticacion de token?
+
+router.post("/v1/post-ads-csv", uploadAdCSV, adsController.createAdsFromCSVBuffer);
 
 module.exports = router;

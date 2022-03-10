@@ -13,7 +13,10 @@
         "@prisma/client": "3.8.1",
         "argon2": "0.28.2",
         "cors": "2.8.5",
+<<<<<<< HEAD
+=======
         "csvtojson": "^2.0.10",
+>>>>>>> develop
         "dotenv": "10.0.0",
         "express": "4.17.1",
         "express-jsdoc-swagger": "1.6.2",
@@ -8971,8 +8974,12 @@
         "ws": {
           "version": "7.4.6",
           "resolved": "https://registry.npmjs.org/ws/-/ws-7.4.6.tgz",
+<<<<<<< HEAD
+          "integrity": "sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A=="
+=======
           "integrity": "sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==",
           "requires": {}
+>>>>>>> develop
         }
       }
     },

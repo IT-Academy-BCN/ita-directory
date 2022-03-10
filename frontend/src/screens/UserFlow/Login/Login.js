@@ -11,36 +11,33 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import loginSchema from "validation/loginSchema.js";
 
-const Login = () => {
-    const [loginSuccess, setLoginSuccess] = useState(false);
-    const [animated, setAnimated] = useState(false);
-    const [disabled, setIsDisabled] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [message, setMessage] = useState(null);
-    const closeNotification = () => setMessage(null);
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-    } = useForm({
-        resolver: yupResolver(loginSchema),
-    });
+import {login, selectUser} from "store/userSlice";
+import {useSelector, useDispatch} from "react-redux";
 
-    const loginUser = async (user) => {
-        try {
-            const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/users/v1/login`,
-                user
-            );
-            setMessage(response.data.message);
-            if (response.data.code === "error") throw response.data.message;
-            setLoginSuccess(true);
-        } catch (error) {
-            if (error.name === "Error")
-                setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
-            setLoginSuccess(false);
-        }
-    };
+const Login = () => {
+	const loggedUser = useSelector(selectUser);
+
+	const dispatch = useDispatch();
+
+
+
+	const loginUser = async (user) => {
+		try {
+			const response = await axios.post(
+				`${process.env.REACT_APP_API_URL}/users/v1/login`,
+				user
+			);
+			setMessage(response.data.message);
+			console.log(response.data);
+			if (response.data.code === "error") throw response.data.message;
+			setLoginSuccess(true);
+			dispatch(login("test")); //aqui el objeto con los datos del user
+		} catch (error) {
+			if (error.name === "Error")
+				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			setLoginSuccess(false);
+		}
+	};
 
     const submitForm = (data) => {
         const {email, password} = data;
