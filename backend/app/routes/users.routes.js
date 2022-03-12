@@ -3,7 +3,7 @@ const UsersController = require("../controllers/users.controller");
 const uploadFile = require("../middleware/uploadFile");
 const authenticateToken = require("../middleware/verifyToken");
 
-router.get("/v1/get_me", UsersController.getUser);
+router.get("/v1/get_me", authenticateToken, UsersController.getUser);
 
 /**
  * Registration data

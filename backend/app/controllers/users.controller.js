@@ -61,7 +61,7 @@ exports.getRefreshToken = (req, res, next) => {
 	);
 };
 
-// Get token
+// Get token //! This could be deleted. Not in used.
 exports.getToken = async (req, res, next) => {
 	const idUser = "100001";
 	const accessToken = signToken(idUser);
@@ -81,7 +81,7 @@ exports.getToken = async (req, res, next) => {
 // Get User (/v1/get_me endPoint)
 exports.getUser = async (req, res, next) => {
 	// Check that the request isn't empty
-	if (!req.body) {
+	if (!req.userId) {
 		return next({
 			code: "error",
 			message: "Request is empty.",
@@ -89,7 +89,7 @@ exports.getUser = async (req, res, next) => {
 		});
 	}
 	try {
-		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
+		const USER = await prisma.user.findUnique({where: {id: parseInt(req.userId)}});
 		console.log("user", USER);
 		if (USER === null) {
 			return next({
