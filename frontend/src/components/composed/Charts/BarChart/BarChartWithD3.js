@@ -6,7 +6,6 @@ import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
 const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 	const [chartWidth, setChartWidth] = useState();
 	const [chartHeight, setChartHeight] = useState();
-	console.log(data);
 	const [displayLabels, setLabels] = useState(false);
 
 	const chartMargin = {top: 20, bottom: 20, left: 40, right: 40};
