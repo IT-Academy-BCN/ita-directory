@@ -115,7 +115,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 
 			<div className="cardBody">
 				<div className="chart">
-					<svg ref={d3Container} viewBox={`0 0 100 100`} className="pie-chart-d3"></svg>
+					<svg ref={d3Container} viewBox={`0 5 100 100`} className="pie-chart-d3"></svg>
 				</div>
 			</div>
 		</PieGraphicStyled>
