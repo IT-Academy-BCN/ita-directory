@@ -158,7 +158,7 @@ model level_type {
   country  Int
   state    Int
   city     Int
-  town     Int
+  neighbordhood  Int
   district Int
   level    level[]
 }
