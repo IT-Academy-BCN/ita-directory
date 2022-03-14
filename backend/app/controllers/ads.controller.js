@@ -75,11 +75,10 @@ async function createAdsFromCSVBuffer(req, res) {
 	try {
 		const adsArray = await parseAdsFromCsvBuffer(req);
 
-		//!mockUserId: To be replaced with user extracted from Token
-		const mockUserId = 1;
+		const userId = req.userId;
 
 		//Append user_id to each ad entry
-		const adsArrayWithUserId = adsArray.map((ad) => ({...ad, user_id: mockUserId.toString()}));
+		const adsArrayWithUserId = adsArray.map((ad) => ({...ad, user_id: userId.toString()}));
 
 		const promiseArray = adsArrayWithUserId.map((ad) => adsSchema.validateAsync(ad));
 		const validatedAdsArray = await Promise.all(promiseArray);

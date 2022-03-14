@@ -270,6 +270,11 @@ router.delete("/v1/ads/:adId", adsController.deleteById);
 
 router.patch("/v1/ads/:adId", adsController.updateAd); //TODO verificar que sea la forma, va a necesitar middleware de autenticacion de token?
 
-router.post("/v1/post-ads-csv", uploadAdCSV, adsController.createAdsFromCSVBuffer);
+router.post(
+	"/v1/post-ads-csv",
+	authenticateToken,
+	uploadAdCSV,
+	adsController.createAdsFromCSVBuffer
+);
 
 module.exports = router;
