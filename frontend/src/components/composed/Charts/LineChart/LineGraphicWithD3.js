@@ -119,7 +119,7 @@ export default function LineGraphic({data, active, size, month, year}) {
 				.select(svgRef.current)
 				.style("background", "white")
 				.attr("viewBox", `0, 0, ${anchura}, ${altura}`)
-				.attr("style", `max-width: ${anchura}; height: 100%; height: intrinsic;`)
+				.attr("style", `max-width: 100%; height: 100%; height: intrinsic;`)
 				.style("overflow", "visible")
 				.style("padding", "5% 10%")
 				.classed("svg-content-responsive", true);

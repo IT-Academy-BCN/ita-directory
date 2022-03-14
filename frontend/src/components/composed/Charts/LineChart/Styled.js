@@ -2,8 +2,6 @@ import styled from "styled-components";
 import Colors from "theme/Colors";
 
 export const MySvg = styled.svg`
-	max-width: 35rem !important;
-	margin: auto;
 	.toolLine {
 		stroke: #a5a5a5;
 		stroke-width: 1px;
@@ -24,11 +22,11 @@ export const MySvg = styled.svg`
 	}
 
 	text {
-		font-size: 0.8rem;
+		font-size: large;
 		color: ${Colors.lightGrey};
 
 		@media (max-width: 615px) {
-			font-size: 0.6rem;
+			font-size: x-large;
 		}
 	}
 
