@@ -9,7 +9,7 @@ export const NotificationStyled = styled.div`
 
 	div {
 		position: fixed;
-		top: 0;
+		bottom: 0;
 		right: 0;
 		margin: 2rem;
 		display: flex;
@@ -20,7 +20,7 @@ export const NotificationStyled = styled.div`
 		width: min(22rem);
 		height: min(4rem);
 		border-radius: 6px;
-		background-color: ${(props) => (props.isSuccess ? "#317126" : "#bc3434")};
+		background-color: ${(props) => (props.isSuccess === "success" ? "#317126" : "#bc3434")};
 
 		p {
 			font-size: 0.9rem;

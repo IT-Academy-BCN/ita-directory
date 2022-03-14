@@ -12,12 +12,31 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import loginSchema from "validation/loginSchema.js";
 
 import {login, selectUser} from "store/userSlice";
+
+import {actions as alertActions} from "store/alertSlice";
+
 import {useSelector, useDispatch} from "react-redux";
 
 const Login = () => {
 	const loggedUser = useSelector(selectUser);
-
 	const dispatch = useDispatch();
+
+	const onSuccess = () => {
+		dispatch(
+			alertActions.createAlert({
+				message: "Te has logeado correctamente",
+				type: "success",
+			})
+		);
+	};
+	const onError = () => {
+		dispatch(
+			alertActions.createAlert({
+				message: "Revisa tus credenciales",
+				type: "error",
+			})
+		);
+	};
 
 	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
@@ -26,6 +45,7 @@ const Login = () => {
 	const [message, setMessage] = useState(null);
 
 	const closeNotification = () => setMessage(null);
+
 	const {
 		register,
 		handleSubmit,
@@ -44,11 +64,13 @@ const Login = () => {
 			console.log(response.data);
 			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
+
+			onSuccess();
 			dispatch(login("test")); //aqui el objeto con los datos del user
 		} catch (error) {
 			if (error.name === "Error")
 				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
-			setLoginSuccess(false);
+			onError();
 		}
 	};
 
@@ -74,15 +96,6 @@ const Login = () => {
 
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					isSuccess={loginSuccess}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
-			) : null}
-
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit(submitForm)} noValidate>

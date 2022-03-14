@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "components/layout/Header/Header";
 import Footer from "components/layout/Footer/Footer";
+import NotificationRedux from "../../../components/units/Notifications/NotificationRedux";
 import {Childrens, StyledBody} from "./Body.styles";
 
 const Body = ({
@@ -30,7 +31,7 @@ const Body = ({
 					isTitleVisible={false}
 				/>
 			)}
-
+			<NotificationRedux />
 			<Childrens>{children}</Childrens>
 			{hideFooter ? "" : <Footer />}
 		</StyledBody>
