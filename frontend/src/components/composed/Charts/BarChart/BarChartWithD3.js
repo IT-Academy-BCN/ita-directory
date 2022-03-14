@@ -177,7 +177,7 @@ const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 					.attr("y", (data) => y(data.value))
 					.attr("x", (data) => x(data))
 					.attr("fill", (data) => data.color)
-					.attr("rx", "")
+					.attr("rx", "0.25rem")
 					.classed("bar", true);
 
 				//Draw bar labels
