@@ -151,7 +151,7 @@ const CreateNewAd = () => {
 	const[validCsvFile, setValidCsvFile] = useState(null);
 	const[notification, setNotification] = useState(null);
 	
-	const closeNotification = (e) => setNotification(e);
+	const closeNotification = (e) => setNotification(false);
 
 	
 
@@ -172,8 +172,6 @@ const CreateNewAd = () => {
 		else{
 			const f = new FormData();
 			f.append("files", csvFile);
-
-			console.log(f);
 
 			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'Content-Type':'multipart/form-data'}})
 			.then(response=>{
@@ -259,11 +257,15 @@ const CreateNewAd = () => {
 									<Notification
 										message={`Tus anuncios no se han podido publicar.`}
 										isSuccess={false}
-										closeNotification = {false}
+										autoClose={true}
+										closeNotification = {closeNotification}
+									
 									/> : 
 									<Notification
 										message={`Tus anuncios han sido publicados con exito`}
 										isSuccess={true}
+										autoClose={true}
+										closeNotification = {closeNotification}
 									/>
 						}
 
