@@ -15,9 +15,9 @@ CREATE TABLE "level_type" (
     "country" INTEGER NOT NULL,
     "state" INTEGER NOT NULL,
     "city" INTEGER NOT NULL,
-    "neighbordhood" INTEGER NOT NULL,
+    "town" INTEGER NOT NULL,
     "district" INTEGER NOT NULL,
-
+    "neighbourhood" INTEGER NOT NULL,
     PRIMARY KEY ("id")
 );
 
