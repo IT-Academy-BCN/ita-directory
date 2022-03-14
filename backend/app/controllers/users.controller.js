@@ -61,7 +61,7 @@ exports.getRefreshToken = (req, res, next) => {
 	);
 };
 
-// Get token //! This could be deleted. Not in used.
+// Get token //! This could be deleted. Not in use.
 exports.getToken = async (req, res, next) => {
 	const idUser = "100001";
 	const accessToken = signToken(idUser);
