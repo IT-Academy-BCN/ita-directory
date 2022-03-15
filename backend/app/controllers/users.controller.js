@@ -1,9 +1,7 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
-
 const client = require("../utils/initRedis");
 const {transporter, mailOptions} = require("../utils/transporterEmail");
-
 const {
 	apiResponse,
 	signToken,
@@ -15,7 +13,6 @@ const {
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
-
 exports.getRefreshToken = (req, res, next) => {
 	let refreshToken = req.headers.refresh;
 
@@ -36,7 +33,7 @@ exports.getRefreshToken = (req, res, next) => {
 				const hashedId = payload.sub.user_id;
 				const dehashedId = decodeHash(hashedId);
 				const userId = dehashedId[0];
-	
+
 				const result = await client.get(userId.toString());
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
@@ -445,6 +442,7 @@ exports.changePassword = async (req, res, next) => {
 			});
 		}
 
+		//TODO This verification should be implemented using middleware
 		JWT.verify(token, process.env.JWT_SECRET, async (err) => {
 			if (err) {
 				return res.status(200).json({
