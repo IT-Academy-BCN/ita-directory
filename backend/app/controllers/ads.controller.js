@@ -10,16 +10,18 @@ const {
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
 async function createAd(req, res) {
+	const userId = req.userId;
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
 		const {...fields} = req.body;
+		//TODO user_id might be removed from adsSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
 		await adsSchema.validateAsync(fields);
 
 		const ad = await prisma.ads.create({
 			data: {
 				user: {
 					connect: {
-						id: parseInt(req.body.user_id),
+						id: userId,
 					},
 				},
 				title: req.body.title,
@@ -363,10 +365,24 @@ async function updateAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
 
+		const userID = req.userId;
+
 		const adId = req.params.adId;
 		const {...fields} = req.body;
 
 		const validatedFields = await patchAdSchema.validateAsync({adId, ...fields});
+
+		//This extra query is the only way I found to check that the ad intended to be updated belongs to the user that is attempting to update it. Might me improved.
+		const result = await prisma.ads.findMany({
+			where: {
+				user_id: userID,
+				id: validatedFields.adId,
+			},
+		});
+
+		if (result.length === 0) {
+			return res.sendStatus(403);
+		}
 
 		const updatedAd = await prisma.ads.update({
 			where: {
