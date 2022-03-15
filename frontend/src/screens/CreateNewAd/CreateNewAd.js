@@ -174,7 +174,7 @@ const CreateNewAd = () => {
 			const f = new FormData();
 			f.append("files", csvFile);
 
-			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'authorization':'multipart/form-data'}})
+			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'authorization':''}})
 			.then(response=>{
 				console.log(response.data);
 				setValidCsvFile(true);
