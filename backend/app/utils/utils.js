@@ -69,7 +69,7 @@ const signRefreshToken = (userid, maxAge = 86400) => {
 	const options = {expiresIn: maxAge};
 	const token = JWT.sign(payload, secret, options);
 
-	client.set(hashedId, token, {EX: maxAge});
+	client.set(userid, token, {EX: maxAge});
 	return token;
 };
 
