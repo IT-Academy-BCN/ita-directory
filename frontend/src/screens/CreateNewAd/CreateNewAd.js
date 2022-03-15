@@ -274,7 +274,7 @@ const CreateNewAd = () => {
 										message={`Tus anuncios han sido publicados con exito`}
 										isSuccess={true}
 										autoClose={true}
-										// closeNotification = {closeNotification}
+										closeNotification = {() => setNotification(false)}
 									/>
 						}
 
