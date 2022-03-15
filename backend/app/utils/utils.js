@@ -4,7 +4,7 @@ const Hashids = require("hashids");
 const client = require("../utils/initRedis");
 const argon2 = require("argon2");
 
-const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
+const hashIds = new Hashids(process.env.HASH_ID_SECRET, 10);
 
 /*
 / message - A user friendly message of what happened, string, defaults to ''
@@ -52,7 +52,7 @@ const patchAdSchema = Joi.object({
 });
 
 const signToken = (userid, maxAge = "15m") => {
-	const hashedId = hashids.encode(userid);
+	const hashedId = hashIds.encode(userid);
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
 	const secret = process.env.JWT_SECRET;
 	const options = {expiresIn: maxAge};
@@ -60,16 +60,15 @@ const signToken = (userid, maxAge = "15m") => {
 };
 
 // maxAge = "1d" => 86400 must be a number for Redis expiration time
-const signRefreshToken = (userid, maxAge = 86400) => {
-	console.log("### REFRESH TOKEN");
+const signRefreshToken = (userId, maxAge = 86400) => {
 
-	const hashedId = hashids.encode(userid);
+	const hashedId = hashIds.encode(userId);
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
 	const secret = process.env.JWT_REFRESH_TOKEN_SECRET;
 	const options = {expiresIn: maxAge};
 	const token = JWT.sign(payload, secret, options);
 
-	client.set(userid, token, {EX: maxAge});
+	client.set(userId.toString(), token, {EX: maxAge});
 	return token;
 };
 
@@ -83,7 +82,7 @@ const hashPassword = async (password) => {
 };
 
 const decodeHash = (id) => {
-	return hashids.decode(id);
+	return hashIds.decode(id);
 };
 
 const getRegionByLocationSchema = Joi.string().required();

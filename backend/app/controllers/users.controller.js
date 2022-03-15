@@ -38,11 +38,11 @@ exports.getRefreshToken = (req, res, next) => {
 				const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
 				const dehashedId = hashids.decode(hashedId);
 				const userId = dehashedId[0];
-
-				const result = await client.get(userId);
+	
+				const result = await client.get(userId.toString());
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
-					await getRedisClient().incr(counterKey);
+					await client.incr(counterKey);
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);
