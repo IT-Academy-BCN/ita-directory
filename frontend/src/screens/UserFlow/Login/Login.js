@@ -11,12 +11,20 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import loginSchema from "validation/loginSchema.js";
 
+import {login, selectUser} from "store/userSlice";
+import {useSelector, useDispatch} from "react-redux";
+
 const Login = () => {
+	const loggedUser = useSelector(selectUser);
+
+	const dispatch = useDispatch();
+
 	const [loginSuccess, setLoginSuccess] = useState(false);
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState(null);
+
 	const closeNotification = () => setMessage(null);
 	const {
 		register,
@@ -33,8 +41,10 @@ const Login = () => {
 				user
 			);
 			setMessage(response.data.message);
+			console.log(response.data);
 			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
+			dispatch(login("test")); //aqui el objeto con los datos del user
 		} catch (error) {
 			if (error.name === "Error")
 				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);

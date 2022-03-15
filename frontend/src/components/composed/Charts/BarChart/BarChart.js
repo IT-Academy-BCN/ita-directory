@@ -6,8 +6,6 @@ export const BarChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
-	// console.log("active", active);
-
 	return (
 		<div>
 			<BarGraphic
@@ -24,8 +22,8 @@ export const BarChart = ({data, size, year, month}) => {
 				children={
 					<BarGraphic
 						data={data}
-						size={size}
 						active={active}
+						size={size}
 						hideModal={() => hideModal()}
 						year={year}
 						month={month}
