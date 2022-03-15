@@ -1,8 +1,8 @@
 import React, {useReducer} from "react";
 import DistrictsList from "./DistrictsList";
-import InteractiveMap from "./InteractiveMap";
 import {MapContext} from "./store/context";
 import {reducer} from "./store/reducer";
+import {ContainerExterior} from "./mapOfDistrictsStyles"
 
 const initialState = {};
 
@@ -11,10 +11,9 @@ const MapOfDistricts = () => {
 	return (
 		<>
 			<MapContext.Provider value={{state, dispatch}}>
-				<div className="flex p-2 ">
-					<InteractiveMap />
+				<ContainerExterior>
 					<DistrictsList />
-				</div>
+				</ContainerExterior>
 			</MapContext.Provider>
 		</>
 	);

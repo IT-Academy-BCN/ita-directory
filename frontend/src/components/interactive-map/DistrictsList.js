@@ -4,16 +4,21 @@ import {MapContext} from "./store/context";
 import {allDistricts} from "./data/all-districts";
 import styled from "styled-components";
 import {MAP_ACTIONS} from "./store/reducer";
+import InteractiveMap from "./InteractiveMap";
+import {Container, GridItem, GridItemA, GridItemB, GridItemC} from "./mapOfDistrictsStyles";
+
 
 const StyledList = styled.div`
 	cursor: pointer;
 	.district {
-		font-size: 15px;
+		font-size: 12px;
+		font-weight: bold;
+		margin-bottom: 6px;
 	}
 
 	.neighborhood {
-		font-size: 12px;
-		text-indent: 1rem;
+		font-size: 10px;
+		text-indent: 0rem;
 	}
 
 	.lit-neighborhood,
@@ -28,7 +33,9 @@ const DistrictsList = () => {
 	const {state, dispatch} = useContext(MapContext);
 	const [leftColumnDistricts, setLeftColumnDistricts] = useState([]);
 	const [rightColumnDistricts, setRightColumnDistricts] = useState([]);
-
+	const [centerLColumnDistricts, setCenterLColumnDistricts] = useState([]);
+	const [centerRColumnDistricts, setCenterRColumnDistricts] = useState([]);
+	
 	useEffect(() => {
 		if (allDistricts) {
 			const left = allDistricts.filter(
@@ -37,18 +44,25 @@ const DistrictsList = () => {
 					el.district === "L-Eixample" ||
 					el.district === "Sants-Montjuic" ||
 					el.district === "Les-Corts" ||
-					el.district === "Sarria-Sant-Gervasi" ||
-					el.district === "Gracia"
+					el.district === "Sarria-Sant-Gervasi"
 			);
-
+			const centerL = allDistricts.filter(
+				(el) => 
+					el.district === "Gracia" 
+			);	
+			const centerR = allDistricts.filter(
+				(el) => 
+					el.district === "Horta-Guinardo" 
+			);	
 			const right = allDistricts.filter(
 				(el) =>
-					el.district === "Horta-Guinardo" ||
 					el.district === "Nou-Barris" ||
 					el.district === "Sant-Andreu" ||
 					el.district === "Sant-Marti"
 			);
 			setLeftColumnDistricts(left);
+			setCenterLColumnDistricts(centerL);
+			setCenterRColumnDistricts(centerR);
 			setRightColumnDistricts(right);
 		}
 	}, []);
@@ -69,7 +83,7 @@ const DistrictsList = () => {
 						? district.replace("-", "´")
 						: district.replace("-", " ")}
 				</li>
-				<ul className="flex flex-col">
+				<ul className="flex flex-col mb-3">
 					{neighborhoods
 						.filter((neighborhoods) => Number.isFinite(neighborhoods.nr))
 						.map(({nr, id, name}) => (
@@ -93,23 +107,37 @@ const DistrictsList = () => {
 	);
 
 	return (
-		<div className="flex flex-row ml-2 ">
-			<div className="flex flex-col w-80 md:hidden">
-				{allDistricts.map(({district, neighborhoods}) =>
-					renderList(district, neighborhoods)
-				)}
-			</div>
-			<div className="hidden md:flex flex-col w-80">
+		<Container>
+			
+			<GridItemA >
 				{leftColumnDistricts.map(({district, neighborhoods}) =>
 					renderList(district, neighborhoods)
 				)}
-			</div>
-			<div className="hidden md:flex flex-col w-80">
+			</GridItemA>
+
+		 	<GridItem >
+				{centerLColumnDistricts.map(({district, neighborhoods}) =>
+					renderList(district, neighborhoods)
+				)}
+			</GridItem> 
+
+		 	<GridItem >
+				{centerRColumnDistricts.map(({district, neighborhoods}) =>
+					renderList(district, neighborhoods)
+				)}
+			</GridItem> 
+			
+			<GridItemC>
+				<InteractiveMap /> 
+			</GridItemC>
+			
+			<GridItemB>
 				{rightColumnDistricts.map(({district, neighborhoods}) =>
 					renderList(district, neighborhoods)
 				)}
-			</div>
-		</div>
+			</GridItemB>
+
+		</Container>
 	);
 };
 
