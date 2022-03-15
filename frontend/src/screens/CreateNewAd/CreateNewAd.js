@@ -12,6 +12,8 @@ import {Wrapper, MapText, MapBox, CsvNotificationError, CsvNotificationSuccess} 
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
 
+import { HeaderContent } from "./CreateNewAd.styles";
+
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import newAdSchema from "validation/createNewAdSchema.js";
@@ -151,7 +153,6 @@ const CreateNewAd = () => {
 	const[validCsvFile, setValidCsvFile] = useState(null);
 	const[notification, setNotification] = useState(null);
 	
-	const closeNotification = (e) => setNotification(false);
 
 	
 
@@ -173,7 +174,7 @@ const CreateNewAd = () => {
 			const f = new FormData();
 			f.append("files", csvFile);
 
-			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'Content-Type':'multipart/form-data'}})
+			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'authorization':'multipart/form-data'}})
 			.then(response=>{
 				console.log(response.data);
 				setValidCsvFile(true);
@@ -204,13 +205,21 @@ const CreateNewAd = () => {
 					isSuccess={true}
 				/>
 			)}
+
+				{/* <HeaderContent>
+					<h2>Publicar Anuncio</h2>
+				</HeaderContent> */}
+					
 			<Body
 				title="Publicar anuncio"
 				justifyTitle="flex-start"
-				paddingTitle="0px"
+				paddingTitle="500px"
 				paddingTitle2="15vw"
 				isLoggedIn="true"
+				isTitleVisible = "true"
 			>
+				
+			
 				<Container>
 					<Wrapper>
 						<Button
@@ -224,8 +233,8 @@ const CreateNewAd = () => {
 							className="green-gradient"
 							onClick={() => setOpenModal(true)}
 						/>
-						<Modal active={openModal} hideModal={setOpenModal}> 
-							<Input type="file" onChange={(e) => updateCsvFiles(e.target.files)}/>
+						<Modal active={openModal} hideModal={() => setOpenModal(false)}> 
+							<Input type="file" accept=".csv" onChange={(e) => updateCsvFiles(e.target.files)} />
 
 							{ validCsv == null ? <></> : (
 								validCsv == false ?
@@ -258,14 +267,14 @@ const CreateNewAd = () => {
 										message={`Tus anuncios no se han podido publicar.`}
 										isSuccess={false}
 										autoClose={true}
-										closeNotification = {closeNotification}
+										closeNotification = {() => setNotification(false)}
 									
 									/> : 
 									<Notification
 										message={`Tus anuncios han sido publicados con exito`}
 										isSuccess={true}
 										autoClose={true}
-										closeNotification = {closeNotification}
+										// closeNotification = {closeNotification}
 									/>
 						}
 
