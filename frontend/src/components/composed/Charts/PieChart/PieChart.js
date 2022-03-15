@@ -6,8 +6,6 @@ export const PieChart = ({data, size, year, month}) => {
 	const [active, setActive] = useState(false);
 	const hideModal = () => setActive(!active);
 
-	console.log("active", active);
-
 	return (
 		<div>
 			<PieGraphicWithD3

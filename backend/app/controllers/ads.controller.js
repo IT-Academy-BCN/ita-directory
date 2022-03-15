@@ -8,7 +8,7 @@ const {
 	getAdsByTypeSchema,
 	patchAdSchema,
 } = require("../utils/utils");
-
+const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
 async function createAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
@@ -68,6 +68,57 @@ async function createAd(req, res) {
 				errors: err.message,
 			})
 		);
+	}
+}
+
+async function createAdsFromCSVBuffer(req, res) {
+	try {
+		const adsArray = await parseAdsFromCsvBuffer(req);
+
+		//!mockUserId: To be replaced with user extracted from Token
+		const mockUserId = 1;
+
+		//Append user_id to each ad entry
+		const adsArrayWithUserId = adsArray.map((ad) => ({...ad, user_id: mockUserId.toString()}));
+
+		const promiseArray = adsArrayWithUserId.map((ad) => adsSchema.validateAsync(ad));
+		const validatedAdsArray = await Promise.all(promiseArray);
+
+		const createMany = await prisma.ads.createMany({
+			data: validatedAdsArray,
+			skipDuplicates: true,
+		});
+
+		res.status(200).json(
+			apiResponse({
+				message: `${createMany.count} records have been created successfully`,
+				//createMany does not return created records. As a workaround, validatedAdsArray is returned. https://github.com/prisma/prisma/issues/8131
+				data: validatedAdsArray,
+			})
+		);
+	} catch (err) {
+		if (err.message === "Invalid CSV Headers") {
+			return res.status(400).json(
+				apiResponse({
+					message: err.message,
+					errors: err.message,
+				})
+			);
+		} else if (err.isJoi && err.name === "ValidationError") {
+			res.status(400).json(
+				apiResponse({
+					message: "At least one of the required values is not defined.",
+					errors: err.message,
+				})
+			);
+		} else {
+			res.status(500).json(
+				apiResponse({
+					message: "An error occurred while posting the ads.",
+					errors: err.message,
+				})
+			);
+		}
 	}
 }
 
@@ -354,6 +405,7 @@ async function updateAd(req, res) {
 					errors: err.message,
 				})
 			);
+			// P2025 Prisma error record not found
 		} else if (err.code === "P2025") {
 			res.status(404).json(
 				apiResponse({
@@ -383,4 +435,5 @@ module.exports = {
 	getAdsByTypeAndLocation,
 	deleteById,
 	updateAd,
+	createAdsFromCSVBuffer,
 };

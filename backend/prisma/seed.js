@@ -299,6 +299,7 @@ async function main() {
 	}
 	for (let i = 0; i < levels.length; i++) {
 		const level = levels[i];
+		console.log("level to upsert", level);
 		await prisma.level.upsert({
 			where: {id: i + 1},
 			update: {},

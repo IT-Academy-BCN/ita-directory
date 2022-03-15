@@ -55,6 +55,7 @@ const Input = ({
 					onChange={onChange}
 					ref={ref}
 					accept={accept}
+
 					{...(register && register)}
 				/>
 			</InputContainerStyled>

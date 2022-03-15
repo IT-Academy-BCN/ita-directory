@@ -154,6 +154,9 @@ const CreateNewAd = () => {
 	const[notification, setNotification] = useState(null);
 	
 
+	const closeNotification = (e) => setNotification(false);
+
+
 	
 
 	const updateCsvFiles = (e) => {
@@ -175,6 +178,7 @@ const CreateNewAd = () => {
 			f.append("files", csvFile);
 
 			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'authorization':'multipart/form-data'}})
+
 			.then(response=>{
 				console.log(response.data);
 				setValidCsvFile(true);
@@ -233,8 +237,11 @@ const CreateNewAd = () => {
 							className="green-gradient"
 							onClick={() => setOpenModal(true)}
 						/>
+
 						<Modal active={openModal} hideModal={() => setOpenModal(false)}> 
 							<Input type="file" accept=".csv" onChange={(e) => updateCsvFiles(e.target.files)} />
+
+
 
 							{ validCsv == null ? <></> : (
 								validCsv == false ?
@@ -267,14 +274,18 @@ const CreateNewAd = () => {
 										message={`Tus anuncios no se han podido publicar.`}
 										isSuccess={false}
 										autoClose={true}
+
 										closeNotification = {() => setNotification(false)}
+
 									
 									/> : 
 									<Notification
 										message={`Tus anuncios han sido publicados con exito`}
 										isSuccess={true}
 										autoClose={true}
+
 										closeNotification = {() => setNotification(false)}
+
 									/>
 						}
 

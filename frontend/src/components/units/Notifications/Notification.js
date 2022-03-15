@@ -20,6 +20,7 @@ const Notification = ({message, isSuccess, autoClose}) => {
 		setNotificationState(false);
 	}
 
+
 	return (
 			notificationState == true  ? 
 			<NotificationStyled isSuccess={isSuccess}>
@@ -34,6 +35,11 @@ const Notification = ({message, isSuccess, autoClose}) => {
 			</NotificationStyled> 
 		 
 		 : <></>
+
+				<button onClick={() => closeNotification((prev) => !prev)}>X</button>
+				
+			</div>
+		</NotificationStyled>
 	);
 };
 
