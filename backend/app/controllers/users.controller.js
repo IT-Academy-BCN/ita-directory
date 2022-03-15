@@ -1,6 +1,5 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
-const Hashids = require("hashids");
 
 const client = require("../utils/initRedis");
 const {transporter, mailOptions} = require("../utils/transporterEmail");
