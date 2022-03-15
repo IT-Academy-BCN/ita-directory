@@ -5,10 +5,17 @@ import InputNumber from "components/units/InputNumber/InputNumber";
 import TextArea from "components/units/TextArea/TextArea";
 import Button from "components/units/Button/Button";
 import Input from "components/units/Input/Input";
-import Notification from "components/units/Notifications/Notification";
+import {useSelector, useDispatch} from "react-redux";
+import {actions as alertActions} from "store/alertSlice";
 import Modal from "components/composed/Modal/Modal";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-import {Wrapper, MapText, MapBox, CsvNotificationError, CsvNotificationSuccess} from "./CreateNewAd.styles";
+import {
+	Wrapper,
+	MapText,
+	MapBox,
+	CsvNotificationError,
+	CsvNotificationSuccess,
+} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
 
@@ -42,6 +49,17 @@ const CreateNewAd = () => {
 		resolver: yupResolver(newAdSchema),
 	});
 
+	const dispatch = useDispatch();
+
+	const doAlert = (message, type) => {
+		dispatch(
+			alertActions.createAlert({
+				message,
+				type,
+			})
+		);
+	};
+
 	const postAd = async (formInfo) => {
 		try {
 			const res = await axios({
@@ -51,10 +69,12 @@ const CreateNewAd = () => {
 			});
 			await console.log(res);
 			await setSuccessfulPost((prev) => true);
+			doAlert("Tu anuncio ha sido publicado con exito.", "success");
 			await setTimeout(() => setSuccessfulPost((prev) => false), 3000);
 		} catch (err) {
 			console.log(err);
 			setError((prev) => true);
+			doAlert("Ha habido un error. Vuelve ha intentar ahora o mas tarde", "error");
 			setTimeout(() => setError((prev) => false), 3000);
 		}
 	};
@@ -144,66 +164,48 @@ const CreateNewAd = () => {
 		},
 	];
 
-
-	const[openModal, setOpenModal] = useState(false);
-	const[csvFile, setCsvFile] = useState(null);
-	const[validCsv, setValidCsv] = useState(null);
-	const[validCsvFile, setValidCsvFile] = useState(null);
-	const[notification, setNotification] = useState(null);
-	
-	const closeNotification = (e) => setNotification(false);
-
-	
+	const [openModal, setOpenModal] = useState(false);
+	const [csvFile, setCsvFile] = useState(null);
+	const [validCsv, setValidCsv] = useState(null);
+	const [validCsvFile, setValidCsvFile] = useState(null);
 
 	const updateCsvFiles = (e) => {
-		if (e[0].name.endsWith('.csv')){
+		if (e[0].name.endsWith(".csv")) {
 			setCsvFile(e);
 			setValidCsv(true);
-
-		}else{
+		} else {
 			setValidCsv(false);
 		}
-	}
+	};
 
-	const submitCsv = async() => {
+	const submitCsv = async () => {
 		if (csvFile == null) {
 			setValidCsvFile(false);
-		}
-		else{
+		} else {
 			const f = new FormData();
 			f.append("files", csvFile);
 
-			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'Content-Type':'multipart/form-data'}})
-			.then(response=>{
-				console.log(response.data);
-				setValidCsvFile(true);
-			}).catch(error=> {
-				console.log(error);
-				setValidCsvFile(false);
-			})
+			await axios
+				.post("http://localhost:10910/ads/v1/post-ads-csv", f, {
+					headers: {"Content-Type": "multipart/form-data"},
+				})
+				.then((response) => {
+					console.log(response.data);
+					setValidCsvFile(true);
+					doAlert("Archivo Csv subido", "success");
+				})
+				.catch((error) => {
+					console.log(error);
+					setValidCsvFile(false);
+					doAlert("Ha habido un error. Vuelve ha intentar ahora o mas tarde", "error");
+				});
 		}
 		setValidCsv(null);
 		setOpenModal(false);
-		
-	}
-
-
+	};
 
 	return (
 		<>
-			{" "}
-			{error && (
-				<Notification
-					message={"Ha habido un error. Vuelve ha intentar ahora o mas tarde"}
-					isSuccess={false}
-				/>
-			)}
-			{successfulPost && (
-				<Notification
-					message={`Tu anuncio ha sido publicado con exito.`}
-					isSuccess={true}
-				/>
-			)}
 			<Body
 				title="Publicar anuncio"
 				justifyTitle="flex-start"
@@ -224,20 +226,20 @@ const CreateNewAd = () => {
 							className="green-gradient"
 							onClick={() => setOpenModal(true)}
 						/>
-						<Modal active={openModal} hideModal={setOpenModal}> 
-							<Input type="file" onChange={(e) => updateCsvFiles(e.target.files)}/>
+						<Modal active={openModal} hideModal={setOpenModal}>
+							<Input type="file" onChange={(e) => updateCsvFiles(e.target.files)} />
 
-							{ validCsv == null ? <></> : (
-								validCsv == false ?
-									<CsvNotificationError>
-										<p>Archivo No Válido</p>
-									</CsvNotificationError>
-									: 
-									<CsvNotificationSuccess>
-										<p>Archivo Válido</p>
-									</CsvNotificationSuccess>
-								)
-							}
+							{validCsv == null ? (
+								<></>
+							) : validCsv == false ? (
+								<CsvNotificationError>
+									<p>Archivo No Válido</p>
+								</CsvNotificationError>
+							) : (
+								<CsvNotificationSuccess>
+									<p>Archivo Válido</p>
+								</CsvNotificationSuccess>
+							)}
 							<Button
 								buttonStyles={{
 									width: "17rem",
@@ -250,31 +252,8 @@ const CreateNewAd = () => {
 								onClick={() => submitCsv()}
 							/>
 						</Modal>
-						
-						{ 
-							validCsvFile == null ? <></> : 
-								validCsvFile == false ?
-									<Notification
-										message={`Tus anuncios no se han podido publicar.`}
-										isSuccess={false}
-										autoClose={true}
-										closeNotification = {closeNotification}
-									
-									/> : 
-									<Notification
-										message={`Tus anuncios han sido publicados con exito`}
-										isSuccess={true}
-										autoClose={true}
-										closeNotification = {closeNotification}
-									/>
-						}
-
-						
-
 
 						<form onSubmit={handleSubmit(submitForm)} noValidate>
-						
-
 							{inputComponentData.map((el, i) => {
 								const {
 									Component,
@@ -319,7 +298,6 @@ const CreateNewAd = () => {
 								type="normal"
 								className="blue-gradient"
 							/>
-						
 						</form>
 						{submittedData && (
 							<div>

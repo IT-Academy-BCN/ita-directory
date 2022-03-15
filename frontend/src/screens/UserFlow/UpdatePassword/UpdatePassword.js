@@ -1,12 +1,13 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 import {msgs, validateEmail, validatePassword} from "utils/userFlow";
 import Input from "components/units/Input/Input";
+import {useDispatch} from "react-redux";
+import {actions as alertActions} from "store/alertSlice";
 
 const UpdatePassword = () => {
 	const [loginSuccess, setLoginSuccess] = useState(false);
@@ -15,9 +16,17 @@ const UpdatePassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [message, setMessage] = useState(null);
 
-	const closeNotification = () => setMessage(null);
+	const dispatch = useDispatch();
+
+	const doAlert = (message, type) => {
+		dispatch(
+			alertActions.createAlert({
+				message,
+				type,
+			})
+		);
+	};
 
 	const loginUser = async (user) => {
 		try {
@@ -25,12 +34,16 @@ const UpdatePassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/login`,
 				user
 			);
-			setMessage(response.data.message);
+
+			doAlert(response.data.message, "success");
 			if (response.data.code === "error") throw response.data.message;
 			setLoginSuccess(true);
 		} catch (error) {
 			if (error.name === "Error")
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+				doAlert(
+					`Sorry, connection failed: "${error.message}". Please, try later.`,
+					"error"
+				);
 			setLoginSuccess(false);
 		}
 	};
@@ -57,15 +70,6 @@ const UpdatePassword = () => {
 
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					isSuccess={loginSuccess}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
-			) : null}
-
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>
