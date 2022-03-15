@@ -245,17 +245,21 @@ exports.login = async (req, res, next) => {
 	}
 };
 
-//Update user
+//Update user //TODO Improve error handling
 exports.updateUser = async (req, res, next) => {
 	const {email, name, lastnames, password, user_role_id, user_status_id} = req.body;
 
+	const userId = req.userId;
+
+	//TODO req.body fields should be validated using joi
 	if (!req.body) {
 		return res.status(400).json({message: `Enter correct roles!, please`});
 	}
+	console.log("[1;31m llega al post de update");
 
 	try {
 		const updateUser = await prisma.user.update({
-			where: {email},
+			where: {id: userId},
 			data: {
 				name,
 				lastnames,
@@ -265,6 +269,7 @@ exports.updateUser = async (req, res, next) => {
 				user_status_id,
 			},
 		});
+		//! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
 		if (updateUser === null || undefined) {
 			return res.status(204).json({massage: `User not found. Entry data, please`});
 		} else {
