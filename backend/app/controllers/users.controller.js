@@ -35,8 +35,7 @@ exports.getRefreshToken = (req, res, next) => {
 			try {
 				if (err) return res.sendStatus(401);
 				const hashedId = payload.sub.user_id;
-				const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
-				const dehashedId = hashids.decode(hashedId);
+				const dehashedId = decodeHash(hashedId);
 				const userId = dehashedId[0];
 	
 				const result = await client.get(userId.toString());
