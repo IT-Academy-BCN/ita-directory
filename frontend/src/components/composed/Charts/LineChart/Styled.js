@@ -25,7 +25,7 @@ export const MySvg = styled.svg`
 		font-size: large;
 		color: ${Colors.lightGrey};
 
-		@media (max-width: 615px) {
+		@media screen and (min-width: 600px) {
 			font-size: x-large;
 		}
 	}
