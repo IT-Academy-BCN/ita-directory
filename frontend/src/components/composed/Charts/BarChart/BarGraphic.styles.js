@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
+import Colors from "theme/Colors";
 
 export const BarGraphicStyled = styled.div`
 	min-width: 100%;
@@ -77,6 +78,7 @@ export const D3SvgChartContainer = styled.div`
 `;
 
 export const StyledSvg = styled.svg`
+	overflow: visible;
 	.bar {
 		animation: fadeIn ease-in 1s;
 	}
@@ -115,6 +117,14 @@ export const StyledSvg = styled.svg`
 		100% {
 			opacity: 1;
 			transform: translateY(0%);
+		}
+	}
+	text {
+		font-size: small;
+		color: ${Colors.lightGrey};
+
+		@media screen and (min-width: 600px) {
+			font-size: large;
 		}
 	}
 `;

@@ -62,7 +62,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 			const svg = d3.select(d3Container.current);
 			// .attr("width", svgWidth)
 			// .attr("height", svgHeight);
-			const update = svg.append("g").attr("transform", `translate(50, 57)`);
+			const update = svg.append("g").attr("transform", `translate(50, 50)`);
 
 			let color = d3.scaleOrdinal(d3.schemeAccent);
 
@@ -115,7 +115,7 @@ function PieChart({data, hideModal, active, size, year, month}) {
 
 			<div className="cardBody">
 				<div className="chart">
-					<svg ref={d3Container} viewBox={`0 5 100 100`} className="pie-chart-d3"></svg>
+					<svg ref={d3Container} viewBox={`0 0 100 100`} className="pie-chart-d3"></svg>
 				</div>
 			</div>
 		</PieGraphicStyled>

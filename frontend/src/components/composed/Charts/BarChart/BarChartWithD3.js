@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from "react";
+import React, {useState, useEffect} from "react";
 import * as d3 from "d3";
 import {barColors, returnChartSize, returnLegendData} from "./barGraphicConst";
 import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
@@ -177,7 +177,7 @@ const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 					.attr("y", (data) => y(data.value))
 					.attr("x", (data) => x(data))
 					.attr("fill", (data) => data.color)
-					.attr("rx", "")
+					.attr("rx", "0.25rem")
 					.classed("bar", true);
 
 				//Draw bar labels
@@ -207,14 +207,12 @@ const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 	};
 
 	return (
-		<Fragment>
-			<D3SvgChartContainer>
-				<StyledSvg className="bar-chart" />
-				<ChartLegend className="chart-legend">
-					<ul />
-				</ChartLegend>
-			</D3SvgChartContainer>
-		</Fragment>
+		<D3SvgChartContainer>
+			<StyledSvg className="bar-chart" />
+			<ChartLegend className="hart-legend">
+				<ul />
+			</ChartLegend>
+		</D3SvgChartContainer>
 	);
 };
 
