@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import {barColors, returnChartSize, returnLegendData} from "./barGraphicConst";
 import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
 
-const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
+const BarChartWithD3 = ({data, active, selectedMonth}) => {
 	const [chartWidth, setChartWidth] = useState();
 	const [chartHeight, setChartHeight] = useState();
 	const [displayLabels, setLabels] = useState(false);

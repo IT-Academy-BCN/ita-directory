@@ -27,7 +27,6 @@ export default function LineGraphic({data, active, size, month, year}) {
 
 	useEffect(() => {
 		let z = svgRef.current.parentNode.clientWidth;
-		let s = 100;
 		let m = 350;
 		setDataToPrint(handleData(month, year));
 		setAnchura(active ? window.innerWidth - 200 : z - 150);
@@ -38,17 +37,10 @@ export default function LineGraphic({data, active, size, month, year}) {
 		d3.selectAll("#container > *").remove();
 	};
 
-	const reloadChart = () => {
-		clearChart();
-		setDataToPrint(handleData(month, year));
-		printChart();
-	};
-
 	function handleData(month, year) {
 		if (data) {
 			const dataAño = data.filter(dateYearFilter);
 			function dateYearFilter(date) {
-				const d = date.day.getFullYear();
 				return date.day.getFullYear() === parseInt(year);
 			}
 
@@ -63,7 +55,6 @@ export default function LineGraphic({data, active, size, month, year}) {
 			/// data por dias segun mes y año seleccionado
 			let dataMes = dataAño.filter(daysInMonth);
 			function daysInMonth(date) {
-				const d = date.day.getMonth();
 				return date.day.getMonth() === parseInt(month);
 			}
 			dataMes = dataMes.map((day) => {
@@ -188,7 +179,7 @@ export default function LineGraphic({data, active, size, month, year}) {
 						.style("visibility", "visible")
 						.text(`${meses[date + 1]} ${year} : ` + d);
 				})
-				.on("mousemove", (e, d) => {
+				.on("mousemove", (e) => {
 					tooldiv.style("top", e.pageY - 50 + "px").style("left", e.pageX - 50 + "px");
 				})
 				.on("mouseout", () => {
@@ -266,7 +257,7 @@ export default function LineGraphic({data, active, size, month, year}) {
 						.text(`${[day + 1]} / ${parseInt(month) + 1} / ${year} : ` + d)
 						.attr("z-index", "100");
 				})
-				.on("mousemove", (e, d) => {
+				.on("mousemove", (e) => {
 					tooldiv.style("top", e.pageY - 50 + "px").style("left", e.pageX - 50 + "px");
 				})
 				.on("mouseout", () => {
