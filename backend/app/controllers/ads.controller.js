@@ -9,6 +9,7 @@ const {
 	patchAdSchema,
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
+
 async function createAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
@@ -425,6 +426,18 @@ async function updateAd(req, res) {
 	}
 }
 
+async function listAdsByLocationAndsDate(req, res) {
+	try {
+		const id = req.params.id;
+		const date = req.params.date;
+		const ads = await prisma.level.findMany( { where: {id: id} } )
+		res.status(200).send(ads)
+		"It's working"
+	} catch (err) {
+		console.log(err.message)
+	}
+}
+
 module.exports = {
 	createAd,
 	getAllAds,
@@ -436,4 +449,5 @@ module.exports = {
 	deleteById,
 	updateAd,
 	createAdsFromCSVBuffer,
+	listAdsByLocationAndsDate
 };

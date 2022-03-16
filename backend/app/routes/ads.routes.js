@@ -272,4 +272,6 @@ router.patch("/v1/ads/:adId", adsController.updateAd); //TODO verificar que sea 
 
 router.post("/v1/post-ads-csv", uploadAdCSV, adsController.createAdsFromCSVBuffer);
 
+router.get("/v1/ads/chart/:id/:date", adsController.listAdsByLocationAndsDate);
+
 module.exports = router;
