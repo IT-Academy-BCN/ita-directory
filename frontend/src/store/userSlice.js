@@ -1,7 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+import {renewToken} from "./userThunk";
+
 const initialState = {
-	value: null,
+	value: {
+		user: {},
+		token: localStorage.getItem("token"),
+	},
 };
 
 export const userSlice = createSlice({
@@ -9,11 +14,24 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		login: (state, action) => {
-			state.value = action.payload;
+			state.value.user = action.payload;
 		},
 		logout: (state) => {
 			state.value = null;
 		},
+	},
+	extraReducers: (builder) => {
+		// Add reducers for additional action types here, and handle loading state as needed
+		builder.addCase(renewToken.fulfilled, (state, action) => {
+			state.value.token = action.payload;
+		});
+
+		builder.addCase(renewToken.rejected, (state, action) => {
+			localStorage.removeItem("token");
+			localStorage.removeItem("refreshToken");
+			state.value.user = {};
+			state.value.token = "";
+		});
 	},
 });
 

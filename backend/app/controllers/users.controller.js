@@ -210,6 +210,8 @@ exports.login = async (req, res, next) => {
 			where: {email: body.email},
 		});
 
+		console.log(USER);
+
 		if (!USER) {
 			return next({
 				code: "error",
