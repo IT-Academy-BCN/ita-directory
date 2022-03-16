@@ -365,7 +365,7 @@ async function updateAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
 
-		const userID = req.userId;
+		const userId = req.userId;
 
 		const adId = req.params.adId;
 		const {...fields} = req.body;
@@ -375,7 +375,7 @@ async function updateAd(req, res) {
 		//This extra query is the only way I found to check that the ad intended to be updated belongs to the user that is attempting to update it. Might me improved.
 		const result = await prisma.ads.findMany({
 			where: {
-				user_id: userID,
+				user_id: userId,
 				id: validatedFields.adId,
 			},
 		});
