@@ -207,7 +207,7 @@ const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 	};
 
 	return (
-		<D3SvgChartContainer className="AQUI">
+		<D3SvgChartContainer>
 			<StyledSvg className="bar-chart" />
 			<ChartLegend className="hart-legend">
 				<ul />
