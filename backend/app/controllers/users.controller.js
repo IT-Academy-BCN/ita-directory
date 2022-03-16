@@ -1,10 +1,7 @@
 const JWT = require("jsonwebtoken");
 const argon2 = require("argon2");
-const Hashids = require("hashids");
-
 const client = require("../utils/initRedis");
 const {transporter, mailOptions} = require("../utils/transporterEmail");
-
 const {
 	apiResponse,
 	signToken,
@@ -16,7 +13,6 @@ const {
 const prisma = require("../../prisma/indexPrisma");
 
 // Refresh token
-
 exports.getRefreshToken = (req, res, next) => {
 	let refreshToken = req.headers.refresh;
 
@@ -35,14 +31,13 @@ exports.getRefreshToken = (req, res, next) => {
 			try {
 				if (err) return res.sendStatus(401);
 				const hashedId = payload.sub.user_id;
-				const hashids = new Hashids(process.env.HASH_ID_SECRET, 10);
-				const dehashedId = hashids.decode(hashedId);
+				const dehashedId = decodeHash(hashedId);
 				const userId = dehashedId[0];
 
-				const result = await client.get(userId);
+				const result = await client.get(userId.toString());
 				if (refreshToken !== result) {
 					const counterKey = `C${userId}`;
-					await getRedisClient().incr(counterKey);
+					await client.incr(counterKey);
 					return res.sendStatus(401);
 				}
 				const accessToken = signToken(userId);
@@ -61,7 +56,7 @@ exports.getRefreshToken = (req, res, next) => {
 	);
 };
 
-// Get token
+// Get token //! This could be deleted. Not in use.
 exports.getToken = async (req, res, next) => {
 	const idUser = "100001";
 	const accessToken = signToken(idUser);
@@ -81,7 +76,7 @@ exports.getToken = async (req, res, next) => {
 // Get User (/v1/get_me endPoint)
 exports.getUser = async (req, res, next) => {
 	// Check that the request isn't empty
-	if (!req.body) {
+	if (!req.userId) {
 		return next({
 			code: "error",
 			message: "Request is empty.",
@@ -89,7 +84,7 @@ exports.getUser = async (req, res, next) => {
 		});
 	}
 	try {
-		const USER = await prisma.user.findUnique({where: {id: parseInt(req.body.id)}});
+		const USER = await prisma.user.findUnique({where: {id: parseInt(req.userId)}});
 		console.log("user", USER);
 		if (USER === null) {
 			return next({
@@ -250,13 +245,17 @@ exports.login = async (req, res, next) => {
 	}
 };
 
-//Update user
+//Update user //TODO Improve error handling
 exports.updateUser = async (req, res, next) => {
 	const {email, name, lastnames, password, user_role_id, user_status_id} = req.body;
 
+	const userId = req.userId;
+
+	//TODO req.body fields should be validated using joi
 	if (!req.body) {
 		return res.status(400).json({message: `Enter correct roles!, please`});
 	}
+	console.log("[1;31m llega al post de update");
 
 	try {
 		const updateUser = await prisma.user.update({
@@ -270,6 +269,7 @@ exports.updateUser = async (req, res, next) => {
 				user_status_id,
 			},
 		});
+		//! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
 		if (updateUser === null || undefined) {
 			return res.status(204).json({massage: `User not found. Entry data, please`});
 		} else {
@@ -447,6 +447,7 @@ exports.changePassword = async (req, res, next) => {
 			});
 		}
 
+		//TODO This verification should be implemented using middleware
 		JWT.verify(token, process.env.JWT_SECRET, async (err) => {
 			if (err) {
 				return res.status(200).json({
