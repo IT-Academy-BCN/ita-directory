@@ -2,7 +2,7 @@ const multer = require("multer");
 const {apiResponse} = require("../utils/utils");
 
 const csvFilter = function (req, file, cb) {
-	if (file.mimetype === "text/csv") {
+	if (file.mimetype === "text/csv" || file.mimetype == "application/vnd.ms-excel") {
 		cb(null, true);
 	} else {
 		cb(new Error("File extension must be CSV"), false);
