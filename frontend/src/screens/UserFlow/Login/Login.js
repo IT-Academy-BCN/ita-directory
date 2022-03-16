@@ -7,15 +7,14 @@ import AsyncButton from "components/units/Button/Button";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 import Input from "components/units/Input/Input";
 
-import {renewToken} from "store/userThunk";
-
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import loginSchema from "validation/loginSchema.js";
 
 import {login, selectUser} from "store/userSlice";
 import {useSelector, useDispatch} from "react-redux";
-import {createAsyncThunk} from "@reduxjs/toolkit";
+
+import axiosInstance from "utils/axiosInstance";
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -25,6 +24,14 @@ const Login = () => {
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState(null);
+
+	const test = async () => {
+		const userData = await axiosInstance
+			.get(`/users/v1/get_me`)
+			.then((response) => response.data);
+
+		console.log(userData);
+	};
 
 	const closeNotification = () => setMessage(null);
 	const {
@@ -44,23 +51,19 @@ const Login = () => {
 			setMessage(response.data.message);
 			console.log(response.data);
 
-			localStorage.setItem("token", response.data.token);
-			localStorage.setItem("refreshToken", response.data.refreshToken);
+			if (response) {
+				localStorage.setItem("token", response.data.token);
+				localStorage.setItem("refreshToken", response.data.refreshToken);
 
-			//ahora siempre que haya un fetch y el token sea denegado
-			//VVVVVVVVVVVVVV y con el useSelector agarrar el token nuevo
-			dispatch(renewToken(localStorage.getItem("refreshToken")));
+				const userData = await axiosInstance
+					.get(`/users/v1/get_me`)
+					.then((response) => response.data);
 
-			const userData = await axios
-				.get(`${process.env.REACT_APP_API_URL}/users/v1/get_me`, {
-					headers: {Authorization: "Bearer " + response.data.token},
-				})
-				.then((response) => response.data);
+				if (userData) dispatch(login(userData));
+				setLoginSuccess(true);
+			}
 
 			if (response.data.code === "error") throw response.data.message;
-			setLoginSuccess(true);
-			if (userData) dispatch(login(userData));
-			//aqui el objeto con los datos del user
 		} catch (error) {
 			if (error.name === "Error")
 				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
@@ -140,6 +143,8 @@ const Login = () => {
 								No tienes cuenta?
 								<Link to="/register">Regístrate</Link>
 							</RedirectStyled>
+
+							<div onClick={test}>prueba interceptors </div>
 						</div>
 					</Form>
 				</Container>
