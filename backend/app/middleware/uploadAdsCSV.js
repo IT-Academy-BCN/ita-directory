@@ -2,7 +2,16 @@ const multer = require("multer");
 const {apiResponse} = require("../utils/utils");
 
 const csvFilter = function (req, file, cb) {
-	if (file.mimetype === "text/csv" || file.mimetype == "application/vnd.ms-excel") {
+	const filetypes = /csv/;
+	const mimetypeREGEX =
+		/text\/plain|text\/x-csv|application\/vnd.ms-excel|application\/csv|application\/x-csv|text\/csv|text\/comma-separated-values|text\/x-comma-separated-values|text\/tab-separated-values/;
+
+	const fileExtension = filetypes.test(
+		file.originalname.split(".")[file.originalname.split(".").length - 1]
+	);
+	const mimeType = mimetypeREGEX.test(file.mimetype);
+
+	if (mimeType && fileExtension) {
 		cb(null, true);
 	} else {
 		cb(new Error("File extension must be CSV"), false);
