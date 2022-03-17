@@ -24,10 +24,6 @@ export const MySvg = styled.svg`
 	text {
 		font-size: large;
 		color: ${Colors.lightGrey};
-
-		@media screen and (min-width: 600px) {
-			font-size: x-large;
-		}
 	}
 
 	@keyframes lines {
