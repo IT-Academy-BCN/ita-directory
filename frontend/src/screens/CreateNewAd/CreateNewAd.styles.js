@@ -71,3 +71,19 @@ export const MapBox = styled.div`
 	width: 295%;
 	justify-content: flex-start;
 `;
+
+export const CsvNotificationError = styled.div`
+	background-color: #d47982;
+	text-align: center;
+	font-style: italic;
+	color: white;
+`;
+
+export const CsvNotificationSuccess = styled.div`
+	background-color: #91d479;
+	text-align: center;
+	font-style: italic;
+	color: white;
+`;
+
+

@@ -37,11 +37,5 @@
   "devDependencies": {
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2"
-  },
-  "dependencies": {
-    "@types/d3": "^7.1.0",
-    "@types/recharts": "^1.8.23",
-    "d3": "^7.2.1",
-    "recharts": "^2.1.8"
   }
 }

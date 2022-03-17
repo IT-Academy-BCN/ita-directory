@@ -39,7 +39,6 @@ model user {
   user_status_id   Int
   user_role        user_role          @relation(fields: [user_role_id], references: [id])
   user_role_id     Int
-  refresh_token    String
   acces_log        acces_log[]
   recover_password recover_password[]
   media            media[]
@@ -153,12 +152,13 @@ model level {
 }
 
 model level_type {
-  id       Int     @id @default(autoincrement())
-  name     String
-  country  Int
-  state    Int
-  city     Int
-  town     Int
-  district Int
-  level    level[]
+  id                Int     @id @default(autoincrement())
+  name              String
+  country           Int // País
+  state             Int // Autonomía
+  city              Int // Provincia
+  town              Int // Ciudad-Población
+  district          Int // Distrito
+  neighbourhood     Int // Barrio
+  level             level[]
 }
