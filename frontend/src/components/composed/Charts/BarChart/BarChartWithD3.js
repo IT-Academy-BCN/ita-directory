@@ -13,17 +13,9 @@ const BarChartWithD3 = ({data, active, selectedMonth}) => {
 	useEffect(() => {
 		setLabels(window.innerWidth < 992 ? false : true);
 		reloadChart();
-		// eslint-disable-next-line
-	}, [data, active, chartWidth, chartHeight]);
-
-	//Resize chart
-	useEffect(() => {
+		//Resize chart
 		window.addEventListener("resize", () => reloadChart());
-		return () => {
-			window.removeEventListener("resize", () => reloadChart());
-		};
-		// eslint-disable-next-line
-	}, []);
+	}, [data, active, chartWidth, chartHeight]);
 
 	const reloadChart = () => {
 		const [width, height] = !active
@@ -36,7 +28,11 @@ const BarChartWithD3 = ({data, active, selectedMonth}) => {
 	};
 
 	const clearChart = () => {
-		d3.selectAll(".bar-chart").selectAll("*").remove();
+		d3.selectAll(".bar-chart")
+			.selectAll("*")
+			.attr("viewBox", "0 0 100 100")
+			.attr("preserveAspectRatio", "xMinYMin")
+			.remove();
 	};
 
 	const drawLegend = (d) => {
