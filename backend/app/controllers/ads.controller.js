@@ -426,13 +426,14 @@ async function updateAd(req, res) {
 	}
 }
 
-async function listAdsByLocationAndsDate(req, res) {
+async function listAdsByLocationAndDate(req, res) {
 	try {
-		const id = req.params.id;
+		const location = req.params.location;
 		const date = req.params.date;
-		const ads = await prisma.level.findMany( { where: {id: id} } )
-		res.status(200).send(ads)
-		"It's working"
+		console.log(location, date)
+		console.log(typeof location)
+		console.log(typeof date)
+		res.status(200).send("It works!")
 	} catch (err) {
 		console.log(err.message)
 	}
@@ -449,5 +450,5 @@ module.exports = {
 	deleteById,
 	updateAd,
 	createAdsFromCSVBuffer,
-	listAdsByLocationAndsDate
+	listAdsByLocationAndDate
 };
