@@ -60,7 +60,7 @@ const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
 }
  */
 
-router.post("/v1/post-ad", adsController.createAd);
+router.post("/v1/post-ad", authenticateToken, adsController.createAd);
 
 /**
  * GET /ads/v1/ads
@@ -268,8 +268,13 @@ router.get("/v1/ads/search/location/:location", adsController.getAdsByLocation);
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
 
-router.patch("/v1/ads/:adId", adsController.updateAd); //TODO verificar que sea la forma, va a necesitar middleware de autenticacion de token?
+router.patch("/v1/ads/:adId", authenticateToken, adsController.updateAd);
 
-router.post("/v1/post-ads-csv", uploadAdCSV, adsController.createAdsFromCSVBuffer);
+router.post(
+	"/v1/post-ads-csv",
+	authenticateToken,
+	uploadAdCSV,
+	adsController.createAdsFromCSVBuffer
+);
 
 module.exports = router;
