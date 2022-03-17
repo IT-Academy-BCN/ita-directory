@@ -4,8 +4,7 @@ import {MapContext} from "./store/context";
 import {allDistricts} from "./data/all-districts";
 import styled from "styled-components";
 import {MAP_ACTIONS} from "./store/reducer";
-import InteractiveMap from "./InteractiveMap";
-import {Container, GridItem, GridItemA, GridItemB, GridItemC} from "./mapOfDistrictsStyles";
+import {Container, GridItem} from "./mapOfDistrictsStyles";
 
 
 const StyledList = styled.div`
@@ -17,7 +16,7 @@ const StyledList = styled.div`
 	}
 
 	.neighborhood {
-		font-size: 10px;
+		font-size: 9px;
 		text-indent: 0rem;
 	}
 
@@ -108,35 +107,26 @@ const DistrictsList = () => {
 
 	return (
 		<Container>
-			
-			<GridItemA >
+			<GridItem >
 				{leftColumnDistricts.map(({district, neighborhoods}) =>
 					renderList(district, neighborhoods)
 				)}
-			</GridItemA>
-
+			</GridItem>
 		 	<GridItem >
-				{centerLColumnDistricts.map(({district, neighborhoods}) =>
-					renderList(district, neighborhoods)
-				)}
+					{centerLColumnDistricts.map(({district, neighborhoods}) =>
+						renderList(district, neighborhoods)
+					)}
+			</GridItem>
+		 	<GridItem > 
+					{centerRColumnDistricts.map(({district, neighborhoods}) =>
+						renderList(district, neighborhoods)
+					)}
 			</GridItem> 
-
-		 	<GridItem >
-				{centerRColumnDistricts.map(({district, neighborhoods}) =>
-					renderList(district, neighborhoods)
-				)}
-			</GridItem> 
-			
-			<GridItemC>
-				<InteractiveMap /> 
-			</GridItemC>
-			
-			<GridItemB>
+			<GridItem>
 				{rightColumnDistricts.map(({district, neighborhoods}) =>
 					renderList(district, neighborhoods)
 				)}
-			</GridItemB>
-
+			</GridItem>
 		</Container>
 	);
 };

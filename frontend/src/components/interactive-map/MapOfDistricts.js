@@ -2,7 +2,8 @@ import React, {useReducer} from "react";
 import DistrictsList from "./DistrictsList";
 import {MapContext} from "./store/context";
 import {reducer} from "./store/reducer";
-import {ContainerExterior} from "./mapOfDistrictsStyles"
+import {ContainerExterior, Mapa} from "./mapOfDistrictsStyles"
+import InteractiveMap from "./InteractiveMap";
 
 const initialState = {};
 
@@ -13,6 +14,9 @@ const MapOfDistricts = () => {
 			<MapContext.Provider value={{state, dispatch}}>
 				<ContainerExterior>
 					<DistrictsList />
+					<Mapa>
+						<InteractiveMap />
+					</Mapa>
 				</ContainerExterior>
 			</MapContext.Provider>
 		</>

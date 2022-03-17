@@ -4,8 +4,8 @@ import {MAP_ACTIONS} from "./store/reducer";
 import styled from "styled-components";
 
 const SvgStyled = styled.svg`
-	width:32rem ;
-	height:32rem;
+	width:30rem ;
+	height:30rem;
 
 	path {
 		cursor: pointer;
@@ -41,42 +41,50 @@ const SvgStyled = styled.svg`
 		fill: #db2c7f !important;
 	}
 
+	@media screen and (max-width: 1534px){
+		width:48rem;
+		height:48rem;
+	}
 	@media screen and (max-width: 1440px){
+		width:44rem;
+		height:44rem;
+	}
+	@media screen and (max-width: 1280px){
+		width:38rem;
+		height:38rem;
+	}
+	@media screen and (max-width: 1151px){
+		width:32rem;
+		height:32rem;
+	}
+	@media screen and (max-width: 1050px){
 		width:30rem;
 		height:30rem;
 	}
-	@media screen and (max-width: 1280px){
-		width:28rem;
-		height:28rem;
-	}
-	@media screen and (max-width: 1024px){
-		width:20rem;
-		height:20rem;
-	}
-	@media screen and (max-width: 768px){
-		width:32rem;
-		height:32rem;
-		
-	}
-	@media screen and (max-width: 578px){
-		width:23.5rem;
-		height:23.5rem;
-		text {
-			display: none;
-		}
-	}
-	@media screen and (max-width: 425px){
-		width:18rem;
+	@media screen and (max-width: 980px){
+		width:26rem;
+		height:26rem;
+	} 
+	@media screen and (max-width: 880px){
+		width:24rem;
+		height:24rem;
+	} 
+	@media screen and (max-width: 810px){
+		width:22rem;
+		height:22rem;
+	} 
+	@media screen and (max-width: 450px){
+		width: 18rem;
 		height:18rem;
-	}
-	@media screen and (max-width:375px){
+    }
+	@media screen and (max-width: 375px){
 		width: 16rem;
 		height:16rem;
-	}
-	@media screen and (max-width:320px){
-		width:14rem;
+    }
+	@media screen and (max-width: 325px){
+		width: 14rem;
 		height:14rem;
-	}
+    }
 `;
 
 const InteractiveMap = () => {

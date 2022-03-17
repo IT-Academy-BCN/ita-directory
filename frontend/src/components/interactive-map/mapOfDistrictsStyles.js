@@ -2,83 +2,64 @@ import styled from "styled-components";
 
 export const ContainerExterior = styled.div` 
     display: flex ;
+    flex-direction:column;
     justify-content:center;
+    align-items:center ;
 `;
 
 export const Container = styled.div` 
-    max-width: 1070px;
-    height: auto ;
-    display: grid;
-    gap: 1.2rem;
+    max-width: 1090px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: flex-start;
+    align-content: flex-start;
     margin-top: 3rem;
-    
-    @media screen and (max-width: 425px){
-        gap: .8rem;
+
+    @media screen and (max-width: 1151px){
+        justify-content: space-between ;
     }
 `;
 
 export const GridItem = styled.div`
+    width: 15.8rem;
 
-    @media screen and (max-width: 1024px){
-        width:8rem ;
-    }    
-    @media screen and (max-width: 768px){
-        width:12rem ;
-    }   
-    @media screen and (max-width: 578px){
-        width: 8rem ;
-        margin-top: -1.2rem ;
-    } 
-    @media screen and (max-width: 425px){
-        width: 8rem;
-        margin-top: -.8rem ;
-    } 
     @media screen and (max-width: 375px){
-        width: 7rem;
+        width:12rem;
     }
-    @media screen and (max-width:320px){
-        margin-top:-2.2rem;
-    }
+
 `;
 
-export const GridItemA = styled.div`
-    grid-column: 1 ;
-    grid-row: 1 / span 2;
-
-    @media screen and (max-width: 768px){
-        grid-column: 1 ;
-        grid-row: 1 / span 1;
-    }
-    @media screen and (max-width: 578px){
-        grid-column: 1 ;
-        grid-row: 1 / span 3;
-    }
-`;
-
-export const GridItemB = styled.div`
-    grid-column: 4;
-    grid-row: 1 / span 2;
+export const Mapa = styled.div`
+    position:relative;
+    top: -27rem;
+    left: -2rem;
     
-    @media screen and (max-width: 768px){
-        grid-column: 2;
-        grid-row: 1 / span 1;
+    @media screen and (max-width: 1534px){
+        top: -56rem;
+        left: 2rem;
     }
-    @media screen and (max-width: 578px){
-        grid-column: 2;
-        grid-row: 3 / span 0;
+    @media screen and (max-width: 1440px){
+        top: -54rem;
+        left: 4rem;
     }
-`;
-
-export const GridItemC = styled.div`
-    grid-column: 2 / span 2;
-    grid-row: 2;
-    
-    @media screen and (max-width: 768px){
-        grid-column: 1 / span 2;
-        grid-row: 3;
+    @media screen and (max-width: 1151px){
+        top: -63rem;
+        left: 6rem;
     }
-    @media screen and (max-width: 578px){
-        grid-column: 1 / span 2;
-        grid-row: 4;
+    @media screen and (max-width: 1050px){
+        top: -62rem;
+        left: 6rem;
     }
+    @media screen and (max-width: 980px){
+        top: -57rem;
+        left: 7rem;
+    }
+    @media screen and (max-width: 770px){
+        top: -56rem;
+    }
+   @media screen and (max-width: 767px){
+        top: 0rem;
+        left: 0rem;
+    } 
 `;
