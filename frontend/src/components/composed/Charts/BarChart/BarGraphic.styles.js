@@ -79,6 +79,7 @@ export const D3SvgChartContainer = styled.div`
 
 export const StyledSvg = styled.svg`
 	overflow: visible;
+	margin: 0 auto;
 	.bar {
 		animation: fadeIn ease-in 1s;
 	}

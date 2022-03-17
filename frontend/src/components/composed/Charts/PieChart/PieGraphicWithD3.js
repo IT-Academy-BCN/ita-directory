@@ -5,7 +5,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
 
-function PieChart({data, hideModal, active, size, year, month}) {
+function PieChart({data, hideModal, active, year, month}) {
 	const [selectedYear, setSelectedYear] = useState(year);
 	const [selectedMonth, setSelectedMonth] = useState(month);
 
