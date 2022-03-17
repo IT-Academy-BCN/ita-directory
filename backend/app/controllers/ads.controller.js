@@ -72,6 +72,7 @@ async function createAd(req, res) {
 }
 
 async function createAdsFromCSVBuffer(req, res) {
+	console.log("entra a crear Ad");
 	try {
 		const adsArray = await parseAdsFromCsvBuffer(req);
 
