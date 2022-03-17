@@ -407,7 +407,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 			mailOptions.to = email;
 			mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`;
 
-			await transporter.sendMail(mailOptions, (error, info) => {
+			transporter.sendMail(mailOptions, (error, info) => {
 				if (error) {
 					res.status(500).json(error.message);
 				} else {
