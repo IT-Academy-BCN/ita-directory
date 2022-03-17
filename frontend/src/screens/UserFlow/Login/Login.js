@@ -25,14 +25,6 @@ const Login = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState(null);
 
-	const test = async () => {
-		const userData = await axiosInstance
-			.get(`/users/v1/get_me`)
-			.then((response) => response.data);
-
-		console.log(userData);
-	};
-
 	const closeNotification = () => setMessage(null);
 	const {
 		register,
@@ -143,8 +135,6 @@ const Login = () => {
 								No tienes cuenta?
 								<Link to="/register">Regístrate</Link>
 							</RedirectStyled>
-
-							<div onClick={test}>prueba interceptors </div>
 						</div>
 					</Form>
 				</Container>

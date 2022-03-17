@@ -26,7 +26,6 @@ axiosInstance.interceptors.response.use(
 		const originalRequest = error.config;
 
 		if (error.response.status === 401) {
-			console.log("et");
 			originalRequest._retry = true;
 			return axios
 				.get(`${process.env.REACT_APP_API_URL}/users/v1/refresh-token`, {
@@ -40,6 +39,9 @@ axiosInstance.interceptors.response.use(
 							"Bearer " + response.data.data.accessToken;
 
 						return axios(originalRequest);
+					} else {
+						localStorage.removeItem("token");
+						localStorage.removeItem("refreshToken");
 					}
 				});
 		}
