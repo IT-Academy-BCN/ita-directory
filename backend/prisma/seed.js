@@ -6,6 +6,7 @@ const ad_types = require("./seedFiles/ad_types");
 const levels = require("./seedFiles/levels");
 const level_types = require("./seedFiles/level_types");
 
+//TODO hashPassword should be imported from utils ?
 const hashPassword = async (password) => {
 	return await argon2.hash(password, {
 		type: argon2.argon2id,
