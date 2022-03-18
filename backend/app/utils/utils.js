@@ -3,6 +3,7 @@ const JWT = require("jsonwebtoken");
 const Hashids = require("hashids");
 const client = require("../utils/initRedis");
 const argon2 = require("argon2");
+const prisma = require("../../prisma/indexPrisma");
 
 const hashIds = new Hashids(process.env.HASH_ID_SECRET, 10);
 
@@ -88,6 +89,19 @@ const getRegionByLocationSchema = Joi.string().required();
 
 const getAdsByTypeSchema = Joi.string().required();
 
+//Will test if provided password has already been used, if so, returns true.
+const isRepeatedPassword = async (userId, password) => {
+	const pwLog = await prisma.recover_password_log.findMany({where: {user_id: userId}});
+
+	const promiseArray = pwLog.map((log) => {
+		return argon2.verify(log.password, password);
+	});
+
+	const repeatedPass = await Promise.all(promiseArray);
+
+	return repeatedPass.includes(true);
+};
+
 module.exports = {
 	// generateBlob,
 	apiResponse,
@@ -101,4 +115,5 @@ module.exports = {
 	getRegionByLocationSchema,
 	getAdsByTypeSchema,
 	patchAdSchema,
+	isRepeatedPassword,
 };
