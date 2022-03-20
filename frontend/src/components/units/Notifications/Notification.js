@@ -21,10 +21,10 @@ const Notification = ({message, isSuccess, autoClose, closeNotification}) => {
 					icon={isSuccess ? faCheckCircle : faExclamationCircle}
 					style={{color: "white", width: "30px", height: "30px"}}
 				/>
+
 				<p>{message}</p>
 
 				<button onClick={() => closeNotification((prev) => !prev)}>X</button>
-				
 			</div>
 		</NotificationStyled>
 	);
