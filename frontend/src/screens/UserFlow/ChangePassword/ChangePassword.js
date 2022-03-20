@@ -17,8 +17,6 @@ const ChangePassword = () => {
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isSuccess, setIsSuccess] = useState(null);
-	const [message, setMessage] = useState("");
 	const [password1, setPassword1] = useState("");
 	const [password2, setPassword2] = useState("");
 
@@ -50,7 +48,6 @@ const ChangePassword = () => {
 			doAlert(response.data.message, "success");
 
 			if (response.data.code === "error") {
-				setIsSuccess(false);
 				throw response.data.message;
 			}
 			if (response.data.statusCode === 200) {
