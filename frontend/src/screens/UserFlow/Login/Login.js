@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";

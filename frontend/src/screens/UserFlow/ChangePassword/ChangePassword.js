@@ -1,8 +1,11 @@
 import {useState} from "react";
 
+import {actions as alertActions} from "store/alertSlice";
+
+import {useDispatch} from "react-redux";
+
 import {useParams, useHistory} from "react-router-dom";
 import axios from "axios";
-import Notification from "components/units/Notifications/Notification";
 import Body from "components/layout/Body/Body";
 import AsyncButton from "components/units/Button/Button";
 
@@ -21,7 +24,17 @@ const ChangePassword = () => {
 
 	const history = useHistory();
 	const {token} = useParams();
-	const closeNotification = () => setMessage(null);
+
+	const dispatch = useDispatch();
+
+	const doAlert = (message, type) => {
+		dispatch(
+			alertActions.createAlert({
+				message,
+				type,
+			})
+		);
+	};
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -33,8 +46,9 @@ const ChangePassword = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/change-password/${token}`,
 				{password1, password2}
 			);
-			setMessage(response.data.message);
-			setIsSuccess(true);
+
+			doAlert(response.data.message, "success");
+
 			if (response.data.code === "error") {
 				setIsSuccess(false);
 				throw response.data.message;
@@ -44,7 +58,10 @@ const ChangePassword = () => {
 			}
 		} catch (error) {
 			if (error.name === "Error")
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+				doAlert(
+					`Sorry, connection failed: "${error.message}". Please, try later.`,
+					"error"
+				);
 		}
 		setTimeout(() => {
 			setIsDisabled(false);
@@ -57,15 +74,6 @@ const ChangePassword = () => {
 
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					closeNotification={closeNotification}
-					autoClose={true}
-					isSuccess={isSuccess}
-				/>
-			) : null}
-
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>

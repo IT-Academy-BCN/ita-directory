@@ -16,7 +16,7 @@ export const NotificationStyled = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	z-index: 999;
+	z-index: 9999;
 
 	div {
 		animation: ${showUp} 0.5s cubic-bezier(0.19, 0.94, 0.83, 0.67) 1;
@@ -34,7 +34,7 @@ export const NotificationStyled = styled.div`
 		height: min(4rem);
 		border-radius: 6px;
 		//background-color: ${(props) => (props.isSuccess === "success" ? "#317126" : "#bc3434")};
-
+		background-color: white;
 		p {
 			font-size: 0.9rem;
 			font-weight: 300;

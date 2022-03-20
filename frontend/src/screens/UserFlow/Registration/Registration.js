@@ -2,13 +2,16 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
+import {actions as alertActions} from "store/alertSlice";
+
+import {useDispatch} from "react-redux";
+
 // Layout Components
 import Body from "components/layout/Body/Body";
 
 // Units Components
 import CheckBox from "components/units/CheckBox/CheckBox";
 import AsyncButton from "components/units/Button/Button";
-import Notification from "components/units/Notifications/Notification";
 
 // Styles
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
@@ -25,7 +28,7 @@ const Register = () => {
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [message, setMessage] = useState(null);
+
 	const {
 		register,
 		handleSubmit,
@@ -34,7 +37,16 @@ const Register = () => {
 		resolver: yupResolver(registerSchema),
 	});
 
-	const closeNotification = () => setMessage(null);
+	const dispatch = useDispatch();
+
+	const doAlert = (message, type) => {
+		dispatch(
+			alertActions.createAlert({
+				message,
+				type,
+			})
+		);
+	};
 
 	const registerUser = async (user) => {
 		try {
@@ -42,12 +54,12 @@ const Register = () => {
 				`${process.env.REACT_APP_API_URL}/users/v1/register`,
 				user
 			);
-			setMessage(response.data.message);
+
+			doAlert(response.data.message, "success");
 			if (response.data.code === "error") throw response.data.message;
 			setRegisterSuccess(true);
 		} catch (error) {
-			if (error.name === "Error")
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			doAlert(`Sorry, connection failed: "${error.message}". Please, try later.`, "error");
 			setRegisterSuccess(false);
 		}
 	};
@@ -74,15 +86,6 @@ const Register = () => {
 
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					isSuccess={registerSuccess}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
-			) : null}
-
 			<Body title="Registro" justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit(submitForm)} noValidate>

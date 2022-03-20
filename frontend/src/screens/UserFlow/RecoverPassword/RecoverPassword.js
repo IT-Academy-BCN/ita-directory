@@ -1,7 +1,11 @@
 import {useState} from "react";
 import axios from "axios";
-import Notification from "components/units/Notifications/Notification";
+
 import {StyledParagraph} from "./RecoverPassword.styles";
+
+import {actions as alertActions} from "store/alertSlice";
+
+import {useDispatch} from "react-redux";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -22,9 +26,17 @@ const RecoverPassword = () => {
 	const [animatedState, setAnimatedState] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
-	const [message, setMessage] = useState("");
 
-	const closeNotification = () => setMessage(null);
+	const dispatch = useDispatch();
+
+	const doAlert = (message, type) => {
+		dispatch(
+			alertActions.createAlert({
+				message,
+				type,
+			})
+		);
+	};
 
 	const {
 		register,
@@ -55,24 +67,24 @@ const RecoverPassword = () => {
 			response.data.message === "Access token granted."
 				? setIsSuccess(true)
 				: setIsSuccess(false);
-			setMessage("The instructions to recover your password has been sent to your email");
+
+			doAlert(
+				"The instructions to recover your password has been sent to your email",
+				"success"
+			);
 		} catch (error) {
 			if (error.name === "Error") {
 				setIsSuccess(false);
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+
+				doAlert(
+					`Sorry, connection failed: "${error.message}". Please, try later.`,
+					"error"
+				);
 			}
 		}
 	};
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					closeNotification={closeNotification}
-					autoClose={true}
-					isSuccess={isSuccess}
-				/>
-			) : null}
 			<Body title="Cambiar contraseña" justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit(submitForm)} noValidation>
