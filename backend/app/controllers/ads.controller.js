@@ -426,14 +426,29 @@ async function updateAd(req, res) {
 	}
 }
 
-async function listAdsByLocationAndDate(req, res) {
+async function activeAdsByLocationAndDate(req, res) {
 	try {
-		const location = req.params.location;
-		const date = req.params.date;
-		console.log(location, date)
-		console.log(typeof location)
-		console.log(typeof date)
-		res.status(200).send("It works!")
+		const location_id = JSON.parse(req.body.location_id);
+		console.log(location_id)
+		const initialDate = JSON.stringify(req.body.initialDate);
+		console.log(initialDate)
+		const finalDate = JSON.stringify(req.body.finalDate);
+		console.log(finalDate)
+		const ads = await prisma.ads.findMany({
+			where: {
+				id: location_id,
+				createdAt: {
+					gte: initialDate,
+					lte: finalDate
+				},
+				AND: [
+					{
+						publish: true,
+					}
+				]
+			}
+		});
+		res.status(200).send(ads)
 	} catch (err) {
 		console.log(err.message)
 	}
@@ -450,5 +465,5 @@ module.exports = {
 	deleteById,
 	updateAd,
 	createAdsFromCSVBuffer,
-	listAdsByLocationAndDate
+	activeAdsByLocationAndDate
 };

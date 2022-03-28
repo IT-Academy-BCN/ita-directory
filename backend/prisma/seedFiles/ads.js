@@ -11,6 +11,9 @@ module.exports = [
 		map_lat: 41.408096,
 		map_lon: 2.206178,
 		ad_type_id: 1,
+		publish: true,
+  	createdAt: '2022/01/20',
+  	updateAt: '2022/01/20'
 	},
 	{
 		user_id: 1,
@@ -24,6 +27,9 @@ module.exports = [
 		map_lat: 41.397528,
 		map_lon: 2.115692,
 		ad_type_id: 1,
+		publish: true,
+  	createdAt: '2021/05/12',
+  	updateAt: '2021/06/12'
 	},
 	{
 		user_id: 1,
@@ -37,6 +43,9 @@ module.exports = [
 		map_lat: 41.373817,
 		map_lon: 2.143247,
 		ad_type_id: 1,
+		publish: false,
+  	createdAt: '2022/06/20',
+  	updateAt: '2022/06/20',
 	},
 	{
 		user_id: 1,
@@ -50,6 +59,9 @@ module.exports = [
 		map_lat: 41.440082,
 		map_lon: 2.190728,
 		ad_type_id: 1,
+		publish: true,
+  	createdAt: '2019/06/14',
+  	updateAt: '2019/06/14',
 	},
 	{
 		user_id: 1,
@@ -63,6 +75,25 @@ module.exports = [
 		map_lat: 41.377679,
 		map_lon: 2.190640,
 		ad_type_id: 1,
-	}
+		publish: true,
+  	createdAt: '2021/05/12',
+  	updateAt: '2021/05/12'
+	},
+	{
+		user_id: 1,
+		title: "ad6",
+		description: "ad house 6",
+		city: "Barcelona",
+		n_rooms: 3,
+		price: 1200,
+		square_meters: 90,
+		n_bathrooms: 2,
+		map_lat: 41.397528,
+		map_lon: 2.115692,
+		ad_type_id: 1,
+		publish: true,
+  	createdAt: '2021/03/07',
+  	updateAt: '2021/03/07'
+	},
 ];
 	
