@@ -277,4 +277,7 @@ router.post(
 	adsController.createAdsFromCSVBuffer
 );
 
+router.get("/v1/chart-data", adsController.activeAdsByLocationAndDate);
+
+
 module.exports = router;

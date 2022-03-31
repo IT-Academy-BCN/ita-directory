@@ -9,6 +9,9 @@ const {
 	patchAdSchema,
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
+
+
+
 async function createAd(req, res) {
 	const userId = req.userId;
 	try {
@@ -440,6 +443,31 @@ async function updateAd(req, res) {
 	}
 }
 
+async function activeAdsByLocationAndDate(req, res) {
+	try {
+		const location_id = JSON.parse(req.body.location_id);
+		const initialDate = new Date(req.body.initialDate);
+		const finalDate = new Date(req.body.finalDate);
+		const ads = await prisma.ads.findMany({
+			where: {
+				id: location_id,
+				createdAt: {
+					gte: initialDate,
+					lte: finalDate
+				},
+				AND: [
+					{
+						publish: true,
+					}
+				]
+			}
+		});
+		res.status(200).send(ads)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
+
 module.exports = {
 	createAd,
 	getAllAds,
@@ -451,4 +479,5 @@ module.exports = {
 	deleteById,
 	updateAd,
 	createAdsFromCSVBuffer,
+	activeAdsByLocationAndDate
 };

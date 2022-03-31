@@ -57,7 +57,7 @@ const users = [
 		user_status_id: 1,
 		user_role_id: 3,
 		password: "Test-test",
-		refresh_token: "20",
+
 	},
 	{
 		name: "test2",
@@ -66,7 +66,7 @@ const users = [
 		user_status_id: 1,
 		user_role_id: 3,
 		password: "test2",
-		refresh_token: "20",
+
 	},
 	{
 		name: "test3",
@@ -75,7 +75,7 @@ const users = [
 		user_status_id: 1,
 		user_role_id: 3,
 		password: "test3",
-		refresh_token: "20",
+
 	},
 	{
 		name: "test4",
@@ -84,7 +84,7 @@ const users = [
 		user_status_id: 1,
 		user_role_id: 3,
 		password: "test4",
-		refresh_token: "20",
+
 	},
 	{
 		name: "Mariano5",
@@ -93,7 +93,7 @@ const users = [
 		user_status_id: 1,
 		user_role_id: 3,
 		password: "test5",
-		refresh_token: "20",
+
 	},
 ];
 
