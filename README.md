@@ -143,17 +143,6 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/it-academyproject/ita-directory.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
 ### Swagger Docs
 
 Once you have started the server, then you can open your browser and enter this endpoint `/api-docs/` to the server URL to open the swagger documentation.
