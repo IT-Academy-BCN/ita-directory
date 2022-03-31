@@ -10,6 +10,8 @@ const {
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
 
+
+
 async function createAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
@@ -429,11 +431,8 @@ async function updateAd(req, res) {
 async function activeAdsByLocationAndDate(req, res) {
 	try {
 		const location_id = JSON.parse(req.body.location_id);
-		console.log(location_id)
-		const initialDate = JSON.stringify(req.body.initialDate);
-		console.log(initialDate)
-		const finalDate = JSON.stringify(req.body.finalDate);
-		console.log(finalDate)
+		const initialDate = new Date(req.body.initialDate);
+		const finalDate = new Date(req.body.finalDate);
 		const ads = await prisma.ads.findMany({
 			where: {
 				id: location_id,

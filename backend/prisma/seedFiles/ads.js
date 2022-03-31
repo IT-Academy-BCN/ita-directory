@@ -1,3 +1,5 @@
+
+
 module.exports = [
 	{
 		user_id: 1,
@@ -12,8 +14,8 @@ module.exports = [
 		map_lon: 2.206178,
 		ad_type_id: 1,
 		publish: true,
-  	createdAt: '2022/01/20',
-  	updateAt: '2022/01/20'
+  	createdAt: '2019-12-31T00:00:00.000Z',
+  	updateAt: '2021-12-31T00:00:00.000Z'
 	},
 	{
 		user_id: 1,
@@ -28,8 +30,8 @@ module.exports = [
 		map_lon: 2.115692,
 		ad_type_id: 1,
 		publish: true,
-  	createdAt: '2021/05/12',
-  	updateAt: '2021/06/12'
+  	createdAt: '2021-03-31T00:00:00.000Z',
+  	updateAt: '2021-06-31T00:00:00.000Z'
 	},
 	{
 		user_id: 1,
@@ -44,8 +46,8 @@ module.exports = [
 		map_lon: 2.143247,
 		ad_type_id: 1,
 		publish: false,
-  	createdAt: '2022/06/20',
-  	updateAt: '2022/06/20',
+  	createdAt: '2019-01-31T00:00:00.000Z',
+  	updateAt: '2020-02-31T00:00:00.000Z',
 	},
 	{
 		user_id: 1,
@@ -60,8 +62,8 @@ module.exports = [
 		map_lon: 2.190728,
 		ad_type_id: 1,
 		publish: true,
-  	createdAt: '2019/06/14',
-  	updateAt: '2019/06/14',
+  	createdAt: '2020-10-31T00:00:00.000Z',
+  	updateAt: '2021-11-31T00:00:00.000Z',
 	},
 	{
 		user_id: 1,
@@ -76,8 +78,8 @@ module.exports = [
 		map_lon: 2.190640,
 		ad_type_id: 1,
 		publish: true,
-  	createdAt: '2021/05/12',
-  	updateAt: '2021/05/12'
+  	createdAt: '2019-07-31T00:00:00.000Z',
+  	updateAt: '2021-08-31T00:00:00.000Z'
 	},
 	{
 		user_id: 1,
@@ -92,8 +94,8 @@ module.exports = [
 		map_lon: 2.115692,
 		ad_type_id: 1,
 		publish: true,
-  	createdAt: '2021/03/07',
-  	updateAt: '2021/03/07'
+  	createdAt: '2021-09-31T00:00:00.000Z',
+  	updateAt: '2021-10-31T00:00:00.000Z'
 	},
 ];
 	
