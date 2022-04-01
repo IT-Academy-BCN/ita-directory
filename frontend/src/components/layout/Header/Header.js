@@ -67,7 +67,7 @@ const Header = ({
 					) : null}
 				</div>
 			</Container>
-			{isTitleVisible && (
+			{/* {isTitleVisible && ( */}
 				<StyledSubHeader
 					headerColor={headerColor}
 					fontColor={fontColor}
@@ -77,7 +77,7 @@ const Header = ({
 						<h1>{title}</h1>
 					</Container>
 				</StyledSubHeader>
-			)}
+			{/* )} */}
 		</HeaderStyled>
 	);
 };

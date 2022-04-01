@@ -193,7 +193,6 @@ async function getAdById(req, res) {
 async function getAdsByType(req, res) {
 	try {
 		const {type} = req.params;
-		console.log("type", type);
 		let type_id;
 		await getAdsByTypeSchema.validateAsync(type);
 		type_id = type_sw(type);
@@ -314,7 +313,6 @@ async function getAdsByLocation(req, res) {
 		const {location} = req.params;
 		const formattedLocation = formatLocation(location);
 		const data = await prisma.ads.findMany({where: {city: formattedLocation}});
-		console.log("ads", data);
 		res.status(200).json({data});
 	} catch (err) {
 		return res.status(500).json(
