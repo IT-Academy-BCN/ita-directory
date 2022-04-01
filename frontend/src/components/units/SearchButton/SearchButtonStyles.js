@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 		cursor: pointer;
 	}
 	transform: rotate(270deg);
-	@media only ${Device.maxMobileXLarge} {
+	@media only ${Device.maxMobileXl} {
 		width: 50%;
 		transform: none;
 		margin-right: 1.5%;

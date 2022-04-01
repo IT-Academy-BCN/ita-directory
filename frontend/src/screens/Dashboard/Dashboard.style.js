@@ -40,7 +40,7 @@ export const StyledDashboard = styled.div`
 		display: flex;
 		justify-content: space-between;
 
-		@media ${Device.maxMobileXLarge} {
+		@media ${Device.maxMobileXl} {
 			display: flex;
 			width: 100%;
 			flex-direction: column;

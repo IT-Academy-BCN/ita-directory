@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
-import {Device, Values} from "../../theme/mediaQueries";
+import {Device} from "../../theme/mediaQueries";
 
 export const MyTableStyle = styled.table`
 	display: flex;
@@ -13,11 +13,11 @@ export const MyTableStyle = styled.table`
 	border: 0px 1px 1px 1px solid ${Colors.grey};
 
 	@media ${Device.max650} {
-		${Values.width100}
+		width: 100%;
 		font: normal normal normal 6px/18px Arial;
 	}
 	@media ${Device.max450} {
-		${Values.width100}
+		width: 100%;
 	}
 
 	button {
@@ -44,10 +44,10 @@ export const StyledDiv = styled.div`
 	padding-left: ${(props) => props.paddingL};
 
 	@media ${Device.max650} {
-		${Values.fontSize14}
+		font-size: 14px;
 	}
 	@media ${Device.max450} {
-		${Values.fontSize14}
+		font-size: 14px;
 	}
 `;
 
@@ -61,10 +61,10 @@ export const RowTableStyle = styled.div`
 	padding-left: ${(props) => props.paddingL};
 
 	@media ${Device.max650} {
-		${Values.fontSize14}
+		font-size: 14px;
 	}
 	@media ${Device.max450} {
-		${Values.fontSize14}
+		font-size: 14px;
 	}
 `;
 
@@ -77,9 +77,9 @@ export const HeaderTableStyle = styled.div`
 	padding-left: ${(props) => props.paddingL};
 
 	@media ${Device.max650} {
-		${Values.fontSize14}
+		font-size: 14px;
 	}
 	@media ${Device.max450} {
-		${Values.fontSize14}
+		font-size: 14px;
 	}
 `;

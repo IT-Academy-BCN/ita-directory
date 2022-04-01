@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 import Colors from "theme/Colors";
-import {Device, Values} from "../../theme/mediaQueries";
+import {Device} from "../../theme/mediaQueries";
 
 export const Error = styled.div`
 	border: 1px solid;
@@ -107,12 +107,12 @@ export const TableWrapperStyled = styled.div.attrs({
 			${tw` flex justify-center font-bold  uppercase pt-3 text-tiny`}
 
 			&:last-child {
-				@media ${Device.maxMobileXLarge} {
+				@media ${Device.maxMobileXl} {
 					display: flex;
 					justify-content: center !important;
 				}
 
-				@media ${Device.minMobileXLarge} {
+				@media ${Device.minMobileXl} {
 					justify-content: flex-end;
 					padding-right: 2rem;
 				}
@@ -213,7 +213,7 @@ export const PaymentMethodStyled = styled.div.attrs({
 	div {
 		${tw`pt-4 pb-0`}
 	}
-	@media ${Device.minMobileXLarge} {
+	@media ${Device.minMobileXl} {
 		padding-left: 2rem;
 	}
 
