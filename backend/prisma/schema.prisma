@@ -139,6 +139,9 @@ model ads {
   map_lon       Decimal
   ad_type_id    Int
   ad_type       ad_type @relation(fields: [ad_type_id], references: [id])
+  publish       Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updateAt      DateTime  @updateAt
 }
 
 model level {
@@ -159,6 +162,6 @@ model level_type {
   city              Int // Provincia
   town              Int // Ciudad-Población
   district          Int // Distrito
-  neighbourhood     Int // Barrio
+  neighborhood      Int // Barrio
   level             level[]
 }

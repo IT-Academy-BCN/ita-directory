@@ -9,6 +9,9 @@ const {
 	patchAdSchema,
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
+
+
+
 async function createAd(req, res) {
 	const userId = req.userId;
 	try {
@@ -190,7 +193,6 @@ async function getAdById(req, res) {
 async function getAdsByType(req, res) {
 	try {
 		const {type} = req.params;
-		console.log("type", type);
 		let type_id;
 		await getAdsByTypeSchema.validateAsync(type);
 		type_id = type_sw(type);
@@ -311,7 +313,6 @@ async function getAdsByLocation(req, res) {
 		const {location} = req.params;
 		const formattedLocation = formatLocation(location);
 		const data = await prisma.ads.findMany({where: {city: formattedLocation}});
-		console.log("ads", data);
 		res.status(200).json({data});
 	} catch (err) {
 		return res.status(500).json(
@@ -365,7 +366,9 @@ async function updateAd(req, res) {
 	try {
 		// fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
 
-		const userId = req.userId;
+
+		const userID = req.userId;
+
 
 		const adId = req.params.adId;
 		const {...fields} = req.body;
@@ -375,7 +378,9 @@ async function updateAd(req, res) {
 		//This extra query is the only way I found to check that the ad intended to be updated belongs to the user that is attempting to update it. Might me improved.
 		const result = await prisma.ads.findMany({
 			where: {
-				user_id: userId,
+
+				user_id: userID,
+
 				id: validatedFields.adId,
 			},
 		});
@@ -440,6 +445,31 @@ async function updateAd(req, res) {
 	}
 }
 
+async function activeAdsByLocationAndDate(req, res) {
+	try {
+		const location_id = JSON.parse(req.body.location_id);
+		const initialDate = new Date(req.body.initialDate);
+		const finalDate = new Date(req.body.finalDate);
+		const ads = await prisma.ads.findMany({
+			where: {
+				id: location_id,
+				createdAt: {
+					gte: initialDate,
+					lte: finalDate
+				},
+				AND: [
+					{
+						publish: true,
+					}
+				]
+			}
+		});
+		res.status(200).send(ads)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
+
 module.exports = {
 	createAd,
 	getAllAds,
@@ -451,4 +481,5 @@ module.exports = {
 	deleteById,
 	updateAd,
 	createAdsFromCSVBuffer,
+	activeAdsByLocationAndDate
 };
