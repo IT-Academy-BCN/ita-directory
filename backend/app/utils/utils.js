@@ -51,7 +51,9 @@ const patchAdSchema = Joi.object({
 	ad_type_id: Joi.number(),
 });
 
-const signToken = (userid, maxAge = 900) => {
+
+const signToken = (userid, maxAge = "15m") => {
+
 	const hashedId = hashIds.encode(userid);
 	const payload = {iss: "itacademy", sub: {user_id: hashedId}};
 	const secret = process.env.JWT_SECRET;
