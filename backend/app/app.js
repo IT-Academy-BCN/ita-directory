@@ -59,6 +59,7 @@ app.use("/media", mediaRoutes);
 app.use("/location", locationRoutes);
 app.use("/contact", contactRoutes);
 
+
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
 // 	res.json({message: "Correct Token !", data: {user_id: req.userId}});

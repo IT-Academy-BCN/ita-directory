@@ -14,9 +14,9 @@ import loginSchema from "validation/loginSchema.js";
 import {login, selectUser} from "store/userSlice";
 import {useSelector, useDispatch} from "react-redux";
 
-const Login = () => {
-	const loggedUser = useSelector(selectUser);
+import axiosInstance from "utils/axiosInstance";
 
+const Login = () => {
 	const dispatch = useDispatch();
 
 	const [loginSuccess, setLoginSuccess] = useState(false);
@@ -42,9 +42,20 @@ const Login = () => {
 			);
 			setMessage(response.data.message);
 			console.log(response.data);
+
+			if (response) {
+				localStorage.setItem("token", response.data.token);
+				localStorage.setItem("refreshToken", response.data.refreshToken);
+
+				const userData = await axiosInstance
+					.get(`/users/v1/get_me`)
+					.then((response) => response.data);
+
+				if (userData) dispatch(login(userData));
+				setLoginSuccess(true);
+			}
+
 			if (response.data.code === "error") throw response.data.message;
-			setLoginSuccess(true);
-			dispatch(login("test")); //aqui el objeto con los datos del user
 		} catch (error) {
 			if (error.name === "Error")
 				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);

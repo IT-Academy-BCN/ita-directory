@@ -86,3 +86,12 @@ export const CsvNotificationSuccess = styled.div`
 	font-style: italic;
 	color: white;
 `;
+
+export const HeaderContent = styled.div`
+	background-color: green;
+	color: blue;
+	font-size: 1.4em;
+	display: block;
+	width: 100%;
+
+`;
