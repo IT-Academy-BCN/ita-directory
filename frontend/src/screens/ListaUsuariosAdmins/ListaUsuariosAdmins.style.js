@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../theme/mediaQueries";
 
 export const StyledTableWrapper = styled.div`
 	display: flex;
@@ -14,11 +15,11 @@ export const StyledTableWrapper = styled.div`
 	flex-wrap: nowrap;
 	padding: 0.5rem 1.8rem;
 
-	@media only screen and (max-width: 650px) {
+	@media only ${Device.max650} {
 		width: 100%;
 		font: normal normal normal 6px/18px Arial;
 	}
-	@media only screen and (max-width: 450px) {
+	@media only ${Device.max450} {
 		width: 100%;
 	}
 
@@ -56,7 +57,7 @@ export const StyledCell = styled.div`
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
 
-	@media only screen and (max-width: 450px) {
+	@media only ${Device.max450} {
 		font-size: 14px;
 	}
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Device} from "./../../theme/mediaQueries";
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -8,7 +9,7 @@ export const Wrapper = styled.div`
 		flex-basis: 150px;
 		color: #707070;
 	}
-	@media screen and (max-width: 600px) {
+	@media ${Device.max600} {
 		padding-left: 5vw;
 		padding-right: 5vw;
 		label {

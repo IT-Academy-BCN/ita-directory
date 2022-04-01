@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "../../../theme/Colors";
+import {Device} from "../../theme/mediaQueries";
 
 const blueColor = Colors.frenchBlue;
 const lightBlueColor = Colors.lightBlue;
@@ -18,7 +19,7 @@ export const Wrapper = styled.div`
 		cursor: pointer;
 	}
 	transform: rotate(270deg);
-	@media only screen and (max-width: 480px) {
+	@media only ${Device.maxMobileXLarge} {
 		width: 50%;
 		transform: none;
 		margin-right: 1.5%;

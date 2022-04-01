@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../theme/mediaQueries";
 
 export const AdListDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 
-	@media only screen and (max-width: 1024px) {
+	@media only ${Device.maxLaptop} {
 		flex-direction: column;
 	}
 `;

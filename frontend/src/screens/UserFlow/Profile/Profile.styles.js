@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const ProfileWrapper = styled.div`
 	display: flex;
@@ -24,7 +25,7 @@ export const ProfileForm = styled.form`
 		align-items: center;
 		row-gap: 1.5rem;
 
-		@media only screen and (min-width: 768px) {
+		@media only ${Device.minTablet} {
 			align-items: flex-start;
 		}
 	}
@@ -45,7 +46,7 @@ export const ProfileForm = styled.form`
 		flex-direction: column;
 		align-items: center;
 
-		@media only screen and (min-width: 768px) {
+		@media only ${Device.minTablet} {
 			flex-direction: row;
 			justify-content: flex-start;
 			column-gap: 3rem;
@@ -60,7 +61,7 @@ export const ProfileForm = styled.form`
 			font-weight: 300;
 			text-align: center;
 
-			@media only screen and (min-width: 768px) {
+			@media only ${Device.minTablet} {
 				text-align: left;
 				font-size: 0.9em;
 			}
@@ -84,7 +85,7 @@ export const ProfileForm = styled.form`
 			justify-content: stretch;
 			row-gap: 1rem;
 
-			@media only screen and (min-width: 768px) {
+			@media only ${Device.minTablet} {
 				flex-direction: row;
 				column-gap: 2rem;
 			}

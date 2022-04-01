@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Device} from "../../theme/mediaQueries";
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -50,7 +51,7 @@ export const Wrapper = styled.div`
 		}
 	}
 
-	@media screen and (max-width: 600px) {
+	@media ${Device.max600} {
 		padding-left: 5vw;
 		padding-right: 5vw;
 		label {
@@ -85,5 +86,3 @@ export const CsvNotificationSuccess = styled.div`
 	font-style: italic;
 	color: white;
 `;
-
-

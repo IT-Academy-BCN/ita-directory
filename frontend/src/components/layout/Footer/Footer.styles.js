@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 import Colors from "../../../theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -28,13 +29,13 @@ export const StyledFooter = styled.footer`
 	margin: 1rem 0rem;
 	padding-top: 1rem;
 
-	@media only screen and (max-width: 468px) {
+	@media only ${Device.max468} {
 		flex-wrap: wrap;
 		justify-content: center;
 		margin: 1rem 0.5rem;
 	}
 
-	@media only screen and (max-width: 600px) {
+	@media only ${Device.max600} {
 		margin: 0.5rem;
 	}
 `;
@@ -57,17 +58,15 @@ export const Logo = styled.div`
 	}
 
 	& .directory {
-
 		${tw`text-[15px] text-pinkRed ml-2`}
-
 	}
 
-	@media only screen and (max-width: 1019px) {
+	@media only ${Device.max1019} {
 		min-width: 10rem;
 		flex: 2;
 	}
 
-	@media only screen and (max-width: 468px) {
+	@media only ${Device.max468} {
 		text-align: center;
 		flex: 4;
 	}
@@ -83,16 +82,16 @@ export const Information = styled.div`
 	padding-left: 0;
 	color: ${Colors.grey};
 
-	@media only screen and (min-width: 1020px) {
+	@media only ${Device.min1020} {
 		min-width: 10rem;
 		flex: 3;
 	}
-	@media only screen and (min-width: 1019px) {
+	@media only ${Device.min1019} {
 		margin: 0px;
 		min-width: 10rem;
 		flex: 3;
 	}
-	@media only screen and (max-width: 468px) {
+	@media only ${Device.max468} {
 		text-align: left;
 		margin-top: 0.5rem;
 		flex: 4;

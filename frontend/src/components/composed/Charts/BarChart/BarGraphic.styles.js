@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
 import Colors from "theme/Colors";
+import {Device} from "../../../../theme/mediaQueries";
 
 export const BarGraphicStyled = styled.div`
 	min-width: 100%;
@@ -21,7 +22,7 @@ export const BarGraphicStyled = styled.div`
 		justify-content: space-between;
 		padding-bottom: 1rem;
 
-		@media (min-width: 768px) {
+		@media ${Device.minTablet} {
 			flex-direction: row;
 			padding: 0.5rem 2rem;
 		}
@@ -52,7 +53,7 @@ export const BarGraphicStyled = styled.div`
 				background-repeat: no-repeat;
 				background-size: 15px 12px;
 				background-color: #fff;
-				@media (max-width: 768px) {
+				@media ${Device.maxTablet} {
 					width: 90px;
 				}
 			}
@@ -124,7 +125,7 @@ export const StyledSvg = styled.svg`
 		font-size: small;
 		color: ${Colors.lightGrey};
 
-		@media screen and (min-width: 600px) {
+		@media ${Device.min600} {
 			font-size: large;
 		}
 	}

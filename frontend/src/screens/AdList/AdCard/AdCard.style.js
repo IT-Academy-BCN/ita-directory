@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const AdCardStyled = styled.div`
 	display: flex;
@@ -52,7 +53,7 @@ export const AdCardStyled = styled.div`
 			}
 		}
 	}
-	@media (min-width: 768px) {
+	@media ${Device.minTablet} {
 		display: grid;
 		grid-template-columns: 30% 70%;
 

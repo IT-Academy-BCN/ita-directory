@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const CardStyled = styled.div`
 	display: flex;
@@ -10,7 +11,7 @@ export const CardStyled = styled.div`
 	opacity: 1;
 	align-items: center;
 
-	@media only screen and (max-width: 768px) {
+	@media only ${Device.maxTablet} {
 		flex-direction: column;
 		align-items: center;
 	}
@@ -22,11 +23,11 @@ export const CardStyled = styled.div`
 		object-fit: cover;
 		border-radius: 6px;
 		margin-left: 0.5rem;
-		@media only screen and (max-width: 768px) {
+		@media only ${Device.maxTablet} {
 			margin-left: 0;
 			margin-top: 0.5rem;
 		}
-		@media only screen and (min-width: 768px) and (max-width: 1024px) {
+		@media only ${Device.between768and1024} {
 			width: auto;
 			height: 100%;
 		}
@@ -35,7 +36,7 @@ export const CardStyled = styled.div`
 	.info {
 		margin-left: 3rem;
 		padding: 1rem;
-		@media only screen and (max-width: 768px) {
+		@media only ${Device.maxTablet} {
 			margin-left: 0.5rem;
 		}
 	}
@@ -57,7 +58,7 @@ export const CardStyled = styled.div`
 		margin-right: 0.2rem;
 		max-width: 60%;
 
-		@media only screen and (max-width: 1280px) {
+		@media only ${Device.maxDesktop} {
 			flex-direction: column;
 			align-items: flex-start;
 		}

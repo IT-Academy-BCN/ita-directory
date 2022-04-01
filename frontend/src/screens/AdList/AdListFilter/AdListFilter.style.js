@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Device} from "../../../theme/mediaQueries";
 
 export const Card = styled.div`
 	width: 35%;
@@ -13,13 +14,13 @@ export const Card = styled.div`
 	padding: 0.7rem 0.7rem;
 	margin-right: 0.9rem;
 
-	@media (max-width: 768px) {
+	@media ${Device.maxTablet} {
 		display: flex;
 		width: 100%;
 		flex-direction: column;
 	}
 
-	@media (max-width: 1240px) {
+	@media ${Device.max1040} {
 		display: flex;
 		width: 100%;
 		flex-direction: column;
@@ -31,7 +32,7 @@ export const CardBody = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: left;
-	@media only screen and (max-width: 1024px) {
+	@media only ${Device.maxLaptop} {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
@@ -40,7 +41,7 @@ export const CardBody = styled.div`
 
 export const CardHeader = styled.div`
 	background-color: #f4f4f4;
-	@media only screen and (max-width: 1024px) {
+	@media only ${Device.maxLaptop} {
 		justify-content: center;
 	}
 `;

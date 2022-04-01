@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../theme/mediaQueries";
 
 export const SearchStyled = styled.div`
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-gap: 1.5rem;
 	width: 100%;
-	@media only screen and (min-width: 1536px) {
+	@media only ${Device.min1536} {
 		grid-template-columns: 0.6fr 0.4fr;
 		position: relative;
 	}
@@ -31,7 +32,7 @@ export const SearchStyled = styled.div`
 				transform: rotate(360deg);
 			}
 		}
-		@media only screen and (min-width: 768px) {
+		@media only ${Device.minTablet} {
 			width: 2.5rem;
 			height: 2.5rem;
 		}

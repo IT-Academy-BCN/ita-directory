@@ -3,13 +3,13 @@ import {Container} from "theme/GlobalStyles";
 
 export const HomeContainer = styled(Container)`
 	flex-direction: column;
+	min-height: 70vh;
 
-	min-height: 70vh ul {
+	ul {
 		text-align: center;
-
-		li {
-			margin: 0.5rem;
-		}
+	}
+	li {
+		margin: 0.5rem;
 	}
 
 	a {

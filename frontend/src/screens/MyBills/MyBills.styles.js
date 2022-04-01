@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device, Values} from "../../theme/mediaQueries";
 
 export const MyTableStyle = styled.table`
 	display: flex;
@@ -11,19 +12,13 @@ export const MyTableStyle = styled.table`
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid ${Colors.grey};
 
-	@media only screen and (max-width: 650px) {
-		width: 100%;
+	@media ${Device.max650} {
+		${Values.width100}
 		font: normal normal normal 6px/18px Arial;
 	}
-	@media only screen and (max-width: 450px) {
-		width: 100%;
+	@media ${Device.max450} {
+		${Values.width100}
 	}
-
-	// .actions-column {
-	// 	display: flex;
-	// 	align-items: center;
-	// 	justify-content: end;
-	// 	width: 40px;
 
 	button {
 		width: 42px;
@@ -46,13 +41,13 @@ export const StyledDiv = styled.div`
 	text-align: center;
 	font-weight: bold;
 	padding: 10px 0px;
-
 	padding-left: ${(props) => props.paddingL};
-	@media only screen and (max-width: 650px) {
-		font-size: 14px;
+
+	@media ${Device.max650} {
+		${Values.fontSize14}
 	}
-	@media only screen and (max-width: 450px) {
-		font-size: 14px;
+	@media ${Device.max450} {
+		${Values.fontSize14}
 	}
 `;
 
@@ -64,11 +59,12 @@ export const RowTableStyle = styled.div`
 	padding: 10px 0px;
 
 	padding-left: ${(props) => props.paddingL};
-	@media only screen and (max-width: 650px) {
-		font-size: 14px;
+
+	@media ${Device.max650} {
+		${Values.fontSize14}
 	}
-	@media only screen and (max-width: 450px) {
-		font-size: 14px;
+	@media ${Device.max450} {
+		${Values.fontSize14}
 	}
 `;
 
@@ -78,12 +74,12 @@ export const HeaderTableStyle = styled.div`
 	text-align: center;
 	font-weight: bold;
 	padding: 10px 0px;
-
 	padding-left: ${(props) => props.paddingL};
-	@media only screen and (max-width: 650px) {
-		font-size: 14px;
+
+	@media ${Device.max650} {
+		${Values.fontSize14}
 	}
-	@media only screen and (max-width: 450px) {
-		font-size: 14px;
+	@media ${Device.max450} {
+		${Values.fontSize14}
 	}
 `;

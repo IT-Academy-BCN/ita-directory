@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 import Colors from "theme/Colors";
+import {Device, Values} from "../../theme/mediaQueries";
 
 export const Error = styled.div`
 	border: 1px solid;
@@ -32,7 +33,7 @@ export const BillStyled = styled.div.attrs({
 })`
 	transform: scale(0.8);
 	font-family: "Inter", sans-serif;
-	@media (min-width: 768px) {
+	@media ${Device.minTablet} {
 		transform: scale(1);
 	}
 
@@ -52,10 +53,10 @@ export const HeaderStyled = styled.header.attrs({
 	className:
 		"bg-white flex flex-row justify-between items-end h-12 py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0",
 })`
-	@media (min-width: 893px) {
+	@media ${Device.min893} {
 		padding: 0 2rem;
 	}
-	@media (min-width: 1230px) {
+	@media ${Device.minDesktop} {
 		padding: 0 4rem;
 	}
 `;
@@ -79,13 +80,13 @@ export const InvoiceRecipientStyled = styled.section.attrs({
 `;
 
 export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
-	@media (min-width: 768px) {
+	@media ${Device.minTablet} {
 		h2 {
 			margin: 0;
 		}
 		justify-content: flex-end;
 
-		@media (min-width: 1230px) {
+		@media ${Device.minDesktop} {
 			${tw`pr-16 pl-24`}
 		}
 	}
@@ -106,24 +107,24 @@ export const TableWrapperStyled = styled.div.attrs({
 			${tw` flex justify-center font-bold  uppercase pt-3 text-tiny`}
 
 			&:last-child {
-				@media (max-width: 479px) {
+				@media ${Device.maxMobileXLarge} {
 					display: flex;
 					justify-content: center !important;
 				}
 
-				@media (min-width: 480px) {
+				@media ${Device.minMobileXLarge} {
 					justify-content: flex-end;
 					padding-right: 2rem;
 				}
 
-				@media (min-width: 692px) {
+				@media ${Device.min692} {
 					padding-right: 0rem;
 				}
 
-				@media (min-width: 893px) {
+				@media ${Device.min893} {
 					padding-right: 2rem;
 				}
-				@media (min-width: 1230px) {
+				@media ${Device.minDesktop} {
 					padding-right: 4rem;
 				}
 			}
@@ -148,12 +149,12 @@ export const CalcTableStyled = styled.table`
 			${tw`flex justify-center items-center flex-grow text-tiny`}
 			min-width: 50px;
 			&:last-child {
-				@media (min-width: 893px) {
+				@media ${Device.min893} {
 					padding-right: 2rem;
 					display: flex;
 					justify-content: flex-end;
 				}
-				@media (min-width: 1230px) {
+				@media ${Device.minDesktop} {
 					padding-right: 4rem;
 				}
 			}
@@ -163,7 +164,7 @@ export const CalcTableStyled = styled.table`
 export const TermsAndCalcStyled = styled.div.attrs({
 	className: "flex items-start flex-col-reverse",
 })`
-	@media (min-width: 768px) {
+	@media ${Device.minTablet} {
 		display: grid;
 		grid-template-columns: 50% 50%;
 	}
@@ -172,15 +173,15 @@ export const TermsAndCalcStyled = styled.div.attrs({
 export const TermsStyled = styled.section.attrs({
 	className: "mt-10 py-0 px-8 max-w-sm h-24",
 })`
-	@media (min-width: 768px) {
+	@media ${Device.minTablet} {
 		margin-top: 4rem;
 		padding: 0rem;
 		max-width: 350px;
 	}
-	@media (min-width: 893px) {
+	@media ${Device.min893} {
 		padding: 0 2rem;
 	}
-	@media (min-width: 1229px) {
+	@media ${Device.minDesktop} {
 		padding-left: 4rem;
 	}
 `;
@@ -212,18 +213,18 @@ export const PaymentMethodStyled = styled.div.attrs({
 	div {
 		${tw`pt-4 pb-0`}
 	}
-	@media (min-width: 480px) {
+	@media ${Device.minMobileXLarge} {
 		padding-left: 2rem;
 	}
 
-	@media (min-width: 730px) {
+	@media ${Device.minTablet} {
 		padding-left: 0;
 	}
 
-	@media (min-width: 893px) {
+	@media ${Device.min893} {
 		padding-left: 2rem;
 	}
-	@media (min-width: 1230px) {
+	@media ${Device.minDesktop} {
 		padding-left: 4rem;
 	}
 `;
@@ -233,10 +234,10 @@ export const SignatureStyled = styled.div.attrs({
 })`
 	margin-top: 1.8rem;
 	width: fit-content;
-	@media (min-width: 893px) {
+	@media ${Device.min893} {
 		padding-right: 2rem;
 	}
-	@media (min-width: 1230px) {
+	@media ${Device.minDesktop} {
 		padding-right: 4rem;
 	}
 	p {

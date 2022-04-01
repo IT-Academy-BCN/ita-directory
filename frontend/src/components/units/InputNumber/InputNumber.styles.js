@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const InputNumberStyled = styled.div`
 	display: flex;
-	@media screen and (max-width: 600px) {
+	@media ${Device.max600} {
 		flex-direction: column;
 	}
 
