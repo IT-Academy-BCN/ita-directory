@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import {barColors, returnChartSize, returnLegendData} from "./barGraphicConst";
 import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
 
-const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
+const BarChartWithD3 = ({data, active, selectedMonth}) => {
 	const [chartWidth, setChartWidth] = useState();
 	const [chartHeight, setChartHeight] = useState();
 	const [displayLabels, setLabels] = useState(false);
@@ -13,17 +13,9 @@ const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 	useEffect(() => {
 		setLabels(window.innerWidth < 992 ? false : true);
 		reloadChart();
-		// eslint-disable-next-line
-	}, [data, active, chartWidth, chartHeight]);
-
-	//Resize chart
-	useEffect(() => {
+		//Resize chart
 		window.addEventListener("resize", () => reloadChart());
-		return () => {
-			window.removeEventListener("resize", () => reloadChart());
-		};
-		// eslint-disable-next-line
-	}, []);
+	}, [data, active, chartWidth, chartHeight]);
 
 	const reloadChart = () => {
 		const [width, height] = !active
@@ -36,7 +28,11 @@ const BarChartWithD3 = ({data, active, size, selectedMonth}) => {
 	};
 
 	const clearChart = () => {
-		d3.selectAll(".bar-chart").selectAll("*").remove();
+		d3.selectAll(".bar-chart")
+			.selectAll("*")
+			.attr("viewBox", "0 0 100 100")
+			.attr("preserveAspectRatio", "xMinYMin")
+			.remove();
 	};
 
 	const drawLegend = (d) => {

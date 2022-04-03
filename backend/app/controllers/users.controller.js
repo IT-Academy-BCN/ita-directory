@@ -210,6 +210,8 @@ exports.login = async (req, res, next) => {
 			where: {email: body.email},
 		});
 
+		console.log(USER);
+
 		if (!USER) {
 			return next({
 				code: "error",
@@ -258,7 +260,7 @@ exports.updateUser = async (req, res, next) => {
 
 	try {
 		const updateUser = await prisma.user.update({
-			where: {email},
+			where: {id: userId},
 			data: {
 				name,
 				lastnames,
