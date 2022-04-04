@@ -3,6 +3,7 @@ const {PrismaClient} = require("@prisma/client");
 const prisma = new PrismaClient();
 const ads = require("./seedFiles/ads");
 const ad_types = require("./seedFiles/ad_types");
+const ad_status = require("./seedFiles/ad_status");
 const levels = require("./seedFiles/levels");
 const level_types = require("./seedFiles/level_types");
 
@@ -234,6 +235,7 @@ async function main() {
 			},
 		});
 	}
+
 	for (let i = 0; i < ad_types.length; i++) {
 		const ad_type = ad_types[i];
 		await prisma.ad_type.upsert({
@@ -241,17 +243,6 @@ async function main() {
 			update: {},
 			create: {
 				...ad_type,
-			},
-		});
-	}
-
-	for (let i = 0; i < ads.length; i++) {
-		const ad = ads[i];
-		await prisma.ads.upsert({
-			where: {id: i + 1},
-			update: {},
-			create: {
-				...ad,
 			},
 		});
 	}
@@ -308,8 +299,31 @@ async function main() {
 			},
 		});
 	}
-}
 
+	for (let i = 0; i < ad_status.length; i++) {
+		const adStatus = ad_status[i];
+		await prisma.ad_status.upsert({
+			where: {id: i + 1},
+			update: {},
+			create: {
+				...adStatus,
+			},
+		});
+	}
+	
+	for (let i = 0; i < ads.length; i++) {
+		const ad = ads[i];
+		await prisma.ads.upsert({
+			where: {id: i + 1},
+			update: {},
+			create: {
+				...ad,
+			},
+		});
+	}
+
+	
+}
 main()
 	.catch((e) => {
 		console.error(e);

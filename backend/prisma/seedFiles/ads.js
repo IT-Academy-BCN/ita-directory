@@ -1,11 +1,10 @@
 
-
 module.exports = [
 	{
 		user_id: 1,
 		title: "ad1",
 		description: "ad house 1",
-		city: "Barcelona",
+		location: 4,
 		n_rooms: 2,
 		price: 900,
 		square_meters: 80,
@@ -13,15 +12,15 @@ module.exports = [
 		map_lat: 41.408096,
 		map_lon: 2.206178,
 		ad_type_id: 1,
-		publish: true,
-  	createdAt: '2019-12-31T00:00:00.000Z',
-  	updateAt: '2021-12-31T00:00:00.000Z'
+		ad_status_id: 1,
+  	created_at: new Date("2019-03-19T14:21:00+0200"),
+  	updated_at: new Date("2020-03-19T14:21:00+0200")
 	},
 	{
 		user_id: 1,
 		title: "ad2",
 		description: "ad house 2",
-		city: "Barcelona",
+		location: 5,
 		n_rooms: 3,
 		price: 1200,
 		square_meters: 90,
@@ -29,15 +28,15 @@ module.exports = [
 		map_lat: 41.397528,
 		map_lon: 2.115692,
 		ad_type_id: 1,
-		publish: true,
-  	createdAt: '2021-03-31T00:00:00.000Z',
-  	updateAt: '2021-06-31T00:00:00.000Z'
+		ad_status_id: 0,
+  	created_at: new Date("2021-03-19T14:21:00+0200"),
+  	updated_at: new Date("2022-03-19T14:21:00+0200")
 	},
 	{
 		user_id: 1,
 		title: "ad3",
 		description: "ad house 3",
-		city: "Barcelona",
+		location: 6,
 		n_rooms: 2,
 		price: 700,
 		square_meters: 75,
@@ -45,15 +44,15 @@ module.exports = [
 		map_lat: 41.373817,
 		map_lon: 2.143247,
 		ad_type_id: 1,
-		publish: false,
-  	createdAt: '2019-01-31T00:00:00.000Z',
-  	updateAt: '2020-02-31T00:00:00.000Z',
+		ad_status_id: 0,
+  	created_at: new Date("2018-02-19T14:21:00+0200"),
+  	updated_at: new Date("2022-02-19T14:21:00+0200")
 	},
 	{
 		user_id: 1,
 		title: "ad4",
 		description: "ad house 4",
-		city: "Barcelona",
+		location: 7,
 		n_rooms: 3,
 		price: 1000,
 		square_meters: 90,
@@ -61,15 +60,15 @@ module.exports = [
 		map_lat: 41.440082,
 		map_lon: 2.190728,
 		ad_type_id: 1,
-		publish: true,
-  	createdAt: '2020-10-31T00:00:00.000Z',
-  	updateAt: '2021-11-31T00:00:00.000Z',
+		ad_status_id: 1,
+  	created_at: new Date("2020-04-19T14:21:00+0200"),
+  	updated_at: new Date("2020-05-19T14:21:00+0200")
 	},
 	{
 		user_id: 1,
 		title: "ad5",
 		description: "ad house 5",
-		city: "Barcelona",
+		location: 8,
 		n_rooms: 2,
 		price: 700,
 		square_meters: 70,
@@ -77,15 +76,15 @@ module.exports = [
 		map_lat: 41.377679,
 		map_lon: 2.190640,
 		ad_type_id: 1,
-		publish: true,
-  	createdAt: '2019-07-31T00:00:00.000Z',
-  	updateAt: '2021-08-31T00:00:00.000Z'
+		ad_status_id: 1,
+  	created_at: new Date("2020-03-22T14:21:00+0200"),
+  	updated_at: new Date("2020-01-19T14:21:00+0200")
 	},
 	{
 		user_id: 1,
 		title: "ad6",
 		description: "ad house 6",
-		city: "Barcelona",
+		location: 9,
 		n_rooms: 3,
 		price: 1200,
 		square_meters: 90,
@@ -93,9 +92,8 @@ module.exports = [
 		map_lat: 41.397528,
 		map_lon: 2.115692,
 		ad_type_id: 1,
-		publish: true,
-  	createdAt: '2021-09-31T00:00:00.000Z',
-  	updateAt: '2021-10-31T00:00:00.000Z'
+		ad_status_id: 1,
+  	created_at: new Date("2019-06-23T14:21:00+0200"),
+  	updated_at: new Date("2020-07-19T14:21:00+0200")
 	},
-];
-	
+]

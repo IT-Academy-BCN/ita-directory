@@ -110,6 +110,7 @@ model media_type {
 //   user                     user         @relation(fields: [user_id], references: [id])
 //   user_id                  Int
 // }
+
 model ad_type {
   id           Int    @id @default(autoincrement())
   name         String
@@ -124,24 +125,16 @@ model ad_type {
   ads          ads[]
 }
 
-model ads {
-  id            Int     @id @default(autoincrement())
-  user          user    @relation(fields: [user_id], references: [id])
-  user_id       Int
-  title         String
-  description   String
-  city          String
-  n_rooms       Int
-  price         Int
-  square_meters Int
-  n_bathrooms   Int
-  map_lat       Decimal
-  map_lon       Decimal
-  ad_type_id    Int
-  ad_type       ad_type @relation(fields: [ad_type_id], references: [id])
-  publish       Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updateAt      DateTime  @updateAt
+model level_type {
+  id           Int     @id @default(autoincrement())
+  name         String
+  country      Int // País
+  state        Int // Autonomía
+  city         Int // Provincia
+  town         Int // Ciudad-Población
+  district     Int // Distrito
+  neighborhood Int // Barrio
+  level        level[]
 }
 
 model level {
@@ -154,14 +147,31 @@ model level {
   level_type_id Int
 }
 
-model level_type {
-  id                Int     @id @default(autoincrement())
-  name              String
-  country           Int // País
-  state             Int // Autonomía
-  city              Int // Provincia
-  town              Int // Ciudad-Población
-  district          Int // Distrito
-  neighborhood      Int // Barrio
-  level             level[]
+model ad_status {
+  id         Int    @id @default(autoincrement())
+  name       String
+  publish    Int
+  un_publish Int
+  ads        ads[]
+}
+
+model ads {
+  id            Int       @id @default(autoincrement())
+  user          user      @relation(fields: [user_id], references: [id])
+  user_id       Int
+  title         String
+  description   String
+  location      Int
+  n_rooms       Int
+  price         Int
+  square_meters Int
+  n_bathrooms   Int
+  map_lat       Decimal
+  map_lon       Decimal
+  ad_type_id    Int
+  ad_type       ad_type   @relation(fields: [ad_type_id], references: [id])
+  ad_status_id  Int
+  ad_status     ad_status @relation(fields: [ad_status_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 }
