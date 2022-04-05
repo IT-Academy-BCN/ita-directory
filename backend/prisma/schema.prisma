@@ -12,6 +12,7 @@ model user_role {
   id         Int     @id @default(autoincrement())
   name       String
   admin      Boolean @default(false)
+  developer  Boolean @default(false) //Developer role added
   manager    Boolean @default(false)
   registered Boolean @default(false)
   user       user[]
@@ -43,7 +44,24 @@ model user {
   recover_password recover_password[]
   media            media[]
   ads              ads[]
+  developer_data   Json? //Added developer data (not a jsonb?)
+
 }
+
+// model developer_data {
+//   id          Int      @id @default(autoincrement())
+//   user        user     @relation(fields: [user_id], references: [id])
+//   user_id     Int      @unique
+//   github      String?
+//   linkedin    String?
+//   website     String?
+//   tags        String[]
+//   description String
+//   media_id    media    @relation(fields: [mediaId], references: [id]) //¿cómo relacionar con tabla "media"?
+//   version     Int //como aumenta?
+//   layout_type String //?
+//   mediaId     Int
+// }
 
 model acces_log {
   id      Int      @id @default(autoincrement())
@@ -125,8 +143,8 @@ model ad_type {
 }
 
 model ads {
-  id            Int     @id @default(autoincrement())
-  user          user    @relation(fields: [user_id], references: [id])
+  id            Int      @id @default(autoincrement())
+  user          user     @relation(fields: [user_id], references: [id])
   user_id       Int
   title         String
   description   String
@@ -138,10 +156,10 @@ model ads {
   map_lat       Decimal
   map_lon       Decimal
   ad_type_id    Int
-  ad_type       ad_type @relation(fields: [ad_type_id], references: [id])
-  publish       Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updateAt      DateTime  @updateAt
+  ad_type       ad_type  @relation(fields: [ad_type_id], references: [id])
+  publish       Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updateAt      DateTime @updatedAt
 }
 
 model level {
@@ -155,13 +173,13 @@ model level {
 }
 
 model level_type {
-  id                Int     @id @default(autoincrement())
-  name              String
-  country           Int // País
-  state             Int // Autonomía
-  city              Int // Provincia
-  town              Int // Ciudad-Población
-  district          Int // Distrito
-  neighborhood      Int // Barrio
-  level             level[]
+  id           Int     @id @default(autoincrement())
+  name         String
+  country      Int // País
+  state        Int // Autonomía
+  city         Int // Provincia
+  town         Int // Ciudad-Población
+  district     Int // Distrito
+  neighborhood Int // Barrio
+  level        level[]
 }
