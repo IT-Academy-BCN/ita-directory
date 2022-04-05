@@ -20,7 +20,7 @@ export const Card = styled.div`
 		flex-direction: column;
 	}
 
-	@media ${Device.max1040} {
+	@media ${Device.maxLaptop} {
 		display: flex;
 		width: 100%;
 		flex-direction: column;

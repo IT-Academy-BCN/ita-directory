@@ -1,65 +1,79 @@
 import styled from "styled-components";
+import {Device, responsiveSizes} from "../../theme/mediaQueries";
 
-export const ContainerExterior = styled.div` 
-    display: flex ;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center ;
+export const ContainerExterior = styled.div`
+	width: 100%;
+	max-width: ${responsiveSizes.desktop};
+	margin: inherit auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
+	position: relative;
+
+	@media ${Device.maxTablet} {
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+	@media ${Device.maxDesktop} {
+		flex-wrap: wrap;
+		flex-direction: column-reverse;
+		justify-self: center;
+	}
 `;
 
-export const Container = styled.div` 
-    max-width: 1090px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-items: flex-start;
-    align-content: flex-start;
-    margin-top: 3rem;
+export const Container = styled.div`
+	width: 100%;
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;
+	margin-top: 3rem;
 
-    @media screen and (max-width: 1151px){
-        justify-content: space-between ;
-    }
+	@media ${Device.maxMobileXl} {
+		width: 100%;
+	}
+	@media ${Device.maxTablet} {
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+	@media ${Device.maxDesktop} {
+		justify-content: space-between;
+	}
+	@media ${Device.minLaptopLg} {
+		justify-content: space-around;
+	}
 `;
 
 export const GridItem = styled.div`
-    width: 15.8rem;
+	width: 25%;
+	z-index: 10;
 
-    @media screen and (max-width: 375px){
-        width:12rem;
-    }
-
+	@media ${Device.maxMobileXl} {
+		width: 100%;
+	}
+	@media ${Device.maxLaptop} {
+		width: 50%;
+	}
+	@media ${Device.maxTablet} {
+		width: 100%;
+	}
 `;
 
 export const Mapa = styled.div`
-    position:relative;
-    top: -27rem;
-    left: -2rem;
-    
-    @media screen and (max-width: 1534px){
-        top: -56rem;
-        left: 2rem;
-    }
-    @media screen and (max-width: 1440px){
-        top: -54rem;
-        left: 4rem;
-    }
-    @media screen and (max-width: 1151px){
-        top: -63rem;
-        left: 6rem;
-    }
-    @media screen and (max-width: 1050px){
-        top: -62rem;
-        left: 6rem;
-    }
-    @media screen and (max-width: 980px){
-        top: -57rem;
-        left: 7rem;
-    }
-    @media screen and (max-width: 770px){
-        top: -56rem;
-    }
-   @media screen and (max-width: 767px){
-        top: 0rem;
-        left: 0rem;
-    } 
+	position: absolute;
+	top: calc(50% - 20%);
+	left: calc(50% - 24%);
+
+	@media ${Device.maxMobileXl} {
+		position: absolute;
+		margin-left: 30vw;
+	}
+
+	@media ${Device.maxDesktop} {
+		position: relative;
+		top: 1rem;
+		left: calc(50% - 14rem);
+	}
 `;

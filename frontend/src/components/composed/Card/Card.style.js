@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
-import {Device} from "../../../theme/mediaQueries";
+import {Device, responsiveSizes} from "../../../theme/mediaQueries";
 
 export const CardStyled = styled.div`
 	display: flex;
@@ -27,7 +27,7 @@ export const CardStyled = styled.div`
 			margin-left: 0;
 			margin-top: 0.5rem;
 		}
-		@media only ${Device.between768and1024} {
+		@media only screen and (min-width: ${responsiveSizes.tablet}) and (max-width: ${responsiveSizes.laptop}) {
 			width: auto;
 			height: 100%;
 		}

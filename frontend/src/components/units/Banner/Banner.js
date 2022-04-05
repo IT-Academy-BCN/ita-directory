@@ -12,7 +12,7 @@ const Banner = () => {
 	return (
 		<section className="flex flex-col align-center static">
 			<BannerImage src={BarcelonaBanner} alt="body-banner" className="object-cover w-full" />
-			<p className="text-2xl text-pinkRed mt-96 mx-auto">
+			<p className="text-2xl text-pinkRed mt-96 mx-auto font-bold">
 				Un directorio abierto desarrollado por los alumnos de Barcelona Activa
 			</p>
 		</section>

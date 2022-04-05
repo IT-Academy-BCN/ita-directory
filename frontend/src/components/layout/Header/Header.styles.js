@@ -124,7 +124,7 @@ export const HeaderStyled = styled.header`
 `;
 
 export const StyledSubHeader = styled.div`
-	width: 100vw;
+	width: calc(100vw - 22px);
 	background-color: ${(props) =>
 		props.headerColor ? props.headerColor : `${Colors.transparentBlue}`};
 	border: ${(props) => (props.headerColor ? `` : `1px solid ${Colors.palerBlue}`)};

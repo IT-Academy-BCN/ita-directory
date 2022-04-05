@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Device} from "../theme/mediaQueries";
 
 export const Container = styled.div`
 	width: 100%;
@@ -8,7 +9,7 @@ export const Container = styled.div`
 	justify-content: center;
 	flex-direction: ${(props) => (props.column ? "column" : "row")};
 
-	@media (max-width: 1024px) {
+	@media ${Device.maxLaptop} {
 		flex-direction: column;
 	}
 `;

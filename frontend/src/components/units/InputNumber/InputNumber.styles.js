@@ -4,7 +4,7 @@ import {Device} from "../../../theme/mediaQueries";
 
 export const InputNumberStyled = styled.div`
 	display: flex;
-	@media ${Device.max600} {
+	@media ${Device.maxTablet} {
 		flex-direction: column;
 	}
 

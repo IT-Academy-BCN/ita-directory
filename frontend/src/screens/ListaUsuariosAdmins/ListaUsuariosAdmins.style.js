@@ -15,11 +15,11 @@ export const StyledTableWrapper = styled.div`
 	flex-wrap: nowrap;
 	padding: 0.5rem 1.8rem;
 
-	@media only ${Device.max650} {
+	@media only ${Device.maxTablet} {
 		width: 100%;
 		font: normal normal normal 6px/18px Arial;
 	}
-	@media only ${Device.max450} {
+	@media only ${Device.maxMobileXl} {
 		width: 100%;
 	}
 
@@ -57,7 +57,7 @@ export const StyledCell = styled.div`
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
 
-	@media only ${Device.max450} {
+	@media only ${Device.maxMobileXl} {
 		font-size: 14px;
 	}
 `;

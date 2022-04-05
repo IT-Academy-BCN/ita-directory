@@ -6,7 +6,7 @@ export const AdCardListStyled = styled.div`
 		display: grid;
 		grid-gap: 1.5rem;
 
-		@media ${Device.min640} {
+		@media ${Device.minTablet} {
 			grid-template-columns: repeat(2, 1fr);
 		}
 

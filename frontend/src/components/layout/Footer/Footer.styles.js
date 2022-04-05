@@ -29,13 +29,13 @@ export const StyledFooter = styled.footer`
 	margin: 1rem 0rem;
 	padding-top: 1rem;
 
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		flex-wrap: wrap;
 		justify-content: center;
 		margin: 1rem 0.5rem;
 	}
 
-	@media only ${Device.max600} {
+	@media only ${Device.maxTablet} {
 		margin: 0.5rem;
 	}
 `;
@@ -61,12 +61,12 @@ export const Logo = styled.div`
 		${tw`text-[15px] text-pinkRed ml-2`}
 	}
 
-	@media only ${Device.max1019} {
+	@media only ${Device.maxLaptop} {
 		min-width: 10rem;
 		flex: 2;
 	}
 
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		text-align: center;
 		flex: 4;
 	}
@@ -82,16 +82,16 @@ export const Information = styled.div`
 	padding-left: 0;
 	color: ${Colors.grey};
 
-	@media only ${Device.min1020} {
+	@media only ${Device.minLaptop} {
 		min-width: 10rem;
 		flex: 3;
 	}
-	@media only ${Device.min1019} {
+	@media only ${Device.minLaptop} {
 		margin: 0px;
 		min-width: 10rem;
 		flex: 3;
 	}
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		text-align: left;
 		margin-top: 0.5rem;
 		flex: 4;

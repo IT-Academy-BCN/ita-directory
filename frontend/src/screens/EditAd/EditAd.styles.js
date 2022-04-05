@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 		flex-basis: 150px;
 		color: #707070;
 	}
-	@media ${Device.max600} {
+	@media ${Device.maxTablet} {
 		padding-left: 5vw;
 		padding-right: 5vw;
 		label {

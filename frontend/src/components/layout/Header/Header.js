@@ -68,15 +68,15 @@ const Header = ({
 				</div>
 			</Container>
 			{/* {isTitleVisible && ( */}
-				<StyledSubHeader
-					headerColor={headerColor}
-					fontColor={fontColor}
-					justifyTitle={justifyTitleB}
-				>
-					<Container>
-						<h1>{title}</h1>
-					</Container>
-				</StyledSubHeader>
+			<StyledSubHeader
+				headerColor={headerColor}
+				fontColor={fontColor}
+				justifyTitle={justifyTitleB}
+			>
+				<Container>
+					<h1>{title}</h1>
+				</Container>
+			</StyledSubHeader>
 			{/* )} */}
 		</HeaderStyled>
 	);

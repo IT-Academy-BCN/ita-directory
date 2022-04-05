@@ -51,7 +51,7 @@ export const Wrapper = styled.div`
 		}
 	}
 
-	@media ${Device.max600} {
+	@media ${Device.maxTablet} {
 		padding-left: 5vw;
 		padding-right: 5vw;
 		label {
@@ -93,5 +93,4 @@ export const HeaderContent = styled.div`
 	font-size: 1.4em;
 	display: block;
 	width: 100%;
-
 `;

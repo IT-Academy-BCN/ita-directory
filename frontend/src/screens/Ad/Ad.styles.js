@@ -9,17 +9,17 @@ export const AdStyled = styled.div`
 	width: 100%;
 	align-items: right;
 
-	@media only ${Device.min1020} {
+	@media only ${Device.minLaptop} {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-	@media only ${Device.max1019} {
+	@media only ${Device.maxLaptop} {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -28,7 +28,7 @@ export const AdStyled = styled.div`
 	}
 
 	.Title {
-		@media only ${Device.min1020} {
+		@media only ${Device.minLaptop} {
 			color: ${Colors.darkRed};
 			padding-top: 0.5rem;
 			padding-bottom: 1.5rem;
@@ -36,7 +36,7 @@ export const AdStyled = styled.div`
 			font-size: 36px;
 			text-align: center;
 		}
-		@media only ${Device.max1019} {
+		@media only ${Device.maxLaptop} {
 			color: ${Colors.darkRed};
 			padding-top: 0.5rem;
 			padding-bottom: 1.5rem;
@@ -44,7 +44,7 @@ export const AdStyled = styled.div`
 			font-size: 36px;
 			text-align: center;
 		}
-		@media only ${Device.max468} {
+		@media only ${Device.maxMobileXl} {
 			color: ${Colors.darkRed};
 			padding-top: 0.5rem;
 			padding-bottom: 1.5rem;
@@ -63,21 +63,21 @@ export const AdStyled = styled.div`
 			padding-right: 1.5rem;
 			margin-top: 1rem;
 
-			@media only ${Device.min1020} {
+			@media only ${Device.minLaptop} {
 				display: flex;
 				flex-direction: column;
 				width: 60%;
 				padding-bottom: 3rem;
 				padding-top: 2rem;
 			}
-			@media only ${Device.max1019} {
+			@media only ${Device.maxLaptop} {
 				display: flex;
 				flex-direction: column;
 				width: 60%;
 				padding-bottom: 3rem;
 				padding-top: 2rem;
 			}
-			@media only ${Device.max468} {
+			@media only ${Device.maxMobileXl} {
 				display: flex;
 				flex-direction: column;
 				width: 90%;
@@ -118,7 +118,7 @@ export const AdStyled = styled.div`
 // `;
 
 export const StyledUl = styled.ul`
-	@media only ${Device.min1020} {
+	@media only ${Device.minLaptop} {
 		display: flex;
 		flex-direction: row;
 		align-items: flex-start;
@@ -127,7 +127,7 @@ export const StyledUl = styled.ul`
 		font-size: 16px;
 		margin-top: 1rem;
 	}
-	@media only ${Device.max1019} {
+	@media only ${Device.maxLaptop} {
 		display: flex;
 		flex-direction: row;
 		align-items: flex-start;
@@ -137,7 +137,7 @@ export const StyledUl = styled.ul`
 
 		margin-top: 1rem;
 	}
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		display: flex;
 		flex-direction: row;
 		align-items: flex-start;
@@ -149,19 +149,19 @@ export const StyledUl = styled.ul`
 `;
 
 export const StyledText = styled.div`
-	@media only ${Device.min1020} {
+	@media only ${Device.minLaptop} {
 		font-size: 16px;
 		text-align: left;
 		line-height: 1.5;
 		padding-bottom: 1rem;
 	}
-	@media only ${Device.max1019} {
+	@media only ${Device.maxLaptop} {
 		font-size: 16px;
 		text-align: left;
 		line-height: 1.5;
 		padding-bottom: 1rem;
 	}
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		font-size: 14px;
 		text-align: left;
 		line-height: 1.5;
@@ -179,21 +179,21 @@ export const BottomDiv = styled.div`
 	padding-right: 1.5rem;
 	margin-top: 1rem;
 
-	@media only ${Device.min1020} {
+	@media only ${Device.minLaptop} {
 		display: flex;
 		flex-direction: column;
 		width: 60%;
 		padding-bottom: 3rem;
 		padding-top: 2rem;
 	}
-	@media only ${Device.max1019} {
+	@media only ${Device.maxLaptop} {
 		display: flex;
 		flex-direction: column;
 		width: 60%;
 		padding-bottom: 3rem;
 		padding-top: 2rem;
 	}
-	@media only ${Device.max468} {
+	@media only ${Device.maxMobileXl} {
 		display: flex;
 		flex-direction: column;
 		width: 90%;

@@ -7,7 +7,7 @@ export const SearchStyled = styled.div`
 	grid-template-columns: 1fr;
 	grid-gap: 1.5rem;
 	width: 100%;
-	@media only ${Device.min1536} {
+	@media only ${Device.maxLaptopLg} {
 		grid-template-columns: 0.6fr 0.4fr;
 		position: relative;
 	}

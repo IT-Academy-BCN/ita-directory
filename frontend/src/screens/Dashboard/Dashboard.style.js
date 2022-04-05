@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
-import {Device} from "../../theme/mediaQueries";
+import {Device, responsiveSizes} from "../../theme/mediaQueries";
 
 export const DashboardContainer = styled(Container)`
-	@media ${Device.max600} {
+	@media ${Device.maxTablet} {
 		max-width: 95%;
 	}
-	@media ${Device.between481and768} {
+	@media screen and (min-width: ${responsiveSizes.mobileXl}) and (max-width: ${responsiveSizes.tablet}) {
 		max-width: 85%;
 	}
-	@media ${Device.between768and1400} {
+	@media screen and (min-width: ${responsiveSizes.tablet}) and (max-width: ${responsiveSizes.laptopLg}) {
 		max-width: 70%;
 	}
 `;
@@ -31,7 +31,7 @@ export const StyledDashboard = styled.div`
 	}
 	.marginLeft {
 		flex-grow: 1;
-		@media ${Device.min1400} {
+		@media ${Device.minLaptopLg} {
 			padding-left: 2rem;
 		}
 	}
@@ -51,7 +51,7 @@ export const StyledDashboard = styled.div`
 			flex-direction: column;
 		}
 
-		@media ${Device.max1400} {
+		@media ${Device.maxLaptopLg} {
 			display: flex;
 			width: 100%;
 			flex-direction: column;
@@ -60,7 +60,7 @@ export const StyledDashboard = styled.div`
 	}
 
 	.graphicMargin {
-		@media ${Device.max1030} {
+		@media ${Device.maxLaptop} {
 			margin-bottom: 3rem;
 			margin-top: 2rem;
 			margin-right: 0;

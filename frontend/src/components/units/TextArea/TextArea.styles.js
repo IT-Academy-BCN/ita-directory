@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 import Colors from "theme/Colors";
+import {Device} from "theme/mediaQueries";
 
 export const TextAreaStyled = styled.div.attrs({
 	className: "text-grey mt-4",
@@ -8,7 +9,7 @@ export const TextAreaStyled = styled.div.attrs({
 	& {
 		&.textAreaCreateNewAd {
 			${tw`mb-4 max-w-xl `}
-			@media screen and (max-width: 600px) {
+			@media ${Device.minTablet} {
 				${tw`flex-col`}
 			}
 		}

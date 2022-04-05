@@ -140,7 +140,7 @@ export const StyleNotificationError = styled.div.attrs({
 		margin-top: 1rem;
 		margin-right: min(2%);
 	}
-	@media ${Device.min931} {
+	@media ${Device.minLaptop} {
 		margin-right: min(10%);
 	}
 `;

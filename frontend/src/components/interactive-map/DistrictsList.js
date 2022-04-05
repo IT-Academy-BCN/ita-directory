@@ -5,14 +5,36 @@ import {allDistricts} from "./data/all-districts";
 import styled from "styled-components";
 import {MAP_ACTIONS} from "./store/reducer";
 import {Container, GridItem} from "./mapOfDistrictsStyles";
-
+import {Device} from "../../theme/mediaQueries";
 
 const StyledList = styled.div`
 	cursor: pointer;
+	width: 100%;
+
 	.district {
 		font-size: 12px;
 		font-weight: bold;
-		margin-bottom: 6px;
+		margin-bottom: 0.4rem;
+	}
+
+	ul {
+		/* list-style-position: inside; */
+		list-style: none;
+
+		/* margin-left: -10px; */
+		/* columns: 2;
+		-webkit-columns: 2;
+		-moz-columns: 2; */
+
+		li {
+			text-align: left;
+			padding: 0rem 0;
+			margin: 0;
+
+			@media ${Device.maxTablet} {
+				padding: 0.1rem;
+			}
+		}
 	}
 
 	.neighborhood {
@@ -34,7 +56,7 @@ const DistrictsList = () => {
 	const [rightColumnDistricts, setRightColumnDistricts] = useState([]);
 	const [centerLColumnDistricts, setCenterLColumnDistricts] = useState([]);
 	const [centerRColumnDistricts, setCenterRColumnDistricts] = useState([]);
-	
+
 	useEffect(() => {
 		if (allDistricts) {
 			const left = allDistricts.filter(
@@ -45,14 +67,8 @@ const DistrictsList = () => {
 					el.district === "Les-Corts" ||
 					el.district === "Sarria-Sant-Gervasi"
 			);
-			const centerL = allDistricts.filter(
-				(el) => 
-					el.district === "Gracia" 
-			);	
-			const centerR = allDistricts.filter(
-				(el) => 
-					el.district === "Horta-Guinardo" 
-			);	
+			const centerL = allDistricts.filter((el) => el.district === "Gracia");
+			const centerR = allDistricts.filter((el) => el.district === "Horta-Guinardo");
 			const right = allDistricts.filter(
 				(el) =>
 					el.district === "Nou-Barris" ||
@@ -107,21 +123,21 @@ const DistrictsList = () => {
 
 	return (
 		<Container>
-			<GridItem >
+			<GridItem>
 				{leftColumnDistricts.map(({district, neighborhoods}) =>
 					renderList(district, neighborhoods)
 				)}
 			</GridItem>
-		 	<GridItem >
-					{centerLColumnDistricts.map(({district, neighborhoods}) =>
-						renderList(district, neighborhoods)
-					)}
+			<GridItem>
+				{centerLColumnDistricts.map(({district, neighborhoods}) =>
+					renderList(district, neighborhoods)
+				)}
 			</GridItem>
-		 	<GridItem > 
-					{centerRColumnDistricts.map(({district, neighborhoods}) =>
-						renderList(district, neighborhoods)
-					)}
-			</GridItem> 
+			<GridItem>
+				{centerRColumnDistricts.map(({district, neighborhoods}) =>
+					renderList(district, neighborhoods)
+				)}
+			</GridItem>
 			<GridItem>
 				{rightColumnDistricts.map(({district, neighborhoods}) =>
 					renderList(district, neighborhoods)

@@ -53,7 +53,7 @@ export const HeaderStyled = styled.header.attrs({
 	className:
 		"bg-white flex flex-row justify-between items-end h-12 py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0",
 })`
-	@media ${Device.min893} {
+	@media ${Device.minTablet} {
 		padding: 0 2rem;
 	}
 	@media ${Device.minDesktop} {
@@ -109,20 +109,12 @@ export const TableWrapperStyled = styled.div.attrs({
 			&:last-child {
 				@media ${Device.maxMobileXl} {
 					display: flex;
-					justify-content: center !important;
-				}
-
-				@media ${Device.minMobileXl} {
+					justify-content: center !important; // TODO Center or Flex-End?
 					justify-content: flex-end;
 					padding-right: 2rem;
 				}
-
-				@media ${Device.min692} {
+				@media ${Device.minTablet} {
 					padding-right: 0rem;
-				}
-
-				@media ${Device.min893} {
-					padding-right: 2rem;
 				}
 				@media ${Device.minDesktop} {
 					padding-right: 4rem;
@@ -149,7 +141,7 @@ export const CalcTableStyled = styled.table`
 			${tw`flex justify-center items-center flex-grow text-tiny`}
 			min-width: 50px;
 			&:last-child {
-				@media ${Device.min893} {
+				@media ${Device.minTablet} {
 					padding-right: 2rem;
 					display: flex;
 					justify-content: flex-end;
@@ -178,7 +170,7 @@ export const TermsStyled = styled.section.attrs({
 		padding: 0rem;
 		max-width: 350px;
 	}
-	@media ${Device.min893} {
+	@media ${Device.minTablet} {
 		padding: 0 2rem;
 	}
 	@media ${Device.minDesktop} {
@@ -221,7 +213,7 @@ export const PaymentMethodStyled = styled.div.attrs({
 		padding-left: 0;
 	}
 
-	@media ${Device.min893} {
+	@media ${Device.minTablet} {
 		padding-left: 2rem;
 	}
 	@media ${Device.minDesktop} {
@@ -234,7 +226,7 @@ export const SignatureStyled = styled.div.attrs({
 })`
 	margin-top: 1.8rem;
 	width: fit-content;
-	@media ${Device.min893} {
+	@media ${Device.minTablet} {
 		padding-right: 2rem;
 	}
 	@media ${Device.minDesktop} {

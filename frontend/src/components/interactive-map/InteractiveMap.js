@@ -4,8 +4,7 @@ import {MAP_ACTIONS} from "./store/reducer";
 import styled from "styled-components";
 
 const SvgStyled = styled.svg`
-	width:30rem ;
-	height:30rem;
+	width: 100%;
 
 	path {
 		cursor: pointer;
@@ -28,10 +27,6 @@ const SvgStyled = styled.svg`
 		cursor: pointer;
 	}
 
-	/* #path li {
-		font-size: 8px;
-	} */
-
 	.lit-neighborhood {
 		color: #fff;
 		fill: #db2c7f !important;
@@ -40,51 +35,6 @@ const SvgStyled = styled.svg`
 	.lit-district {
 		fill: #db2c7f !important;
 	}
-
-	@media screen and (max-width: 1534px){
-		width:48rem;
-		height:48rem;
-	}
-	@media screen and (max-width: 1440px){
-		width:44rem;
-		height:44rem;
-	}
-	@media screen and (max-width: 1280px){
-		width:38rem;
-		height:38rem;
-	}
-	@media screen and (max-width: 1151px){
-		width:32rem;
-		height:32rem;
-	}
-	@media screen and (max-width: 1050px){
-		width:30rem;
-		height:30rem;
-	}
-	@media screen and (max-width: 980px){
-		width:26rem;
-		height:26rem;
-	} 
-	@media screen and (max-width: 880px){
-		width:24rem;
-		height:24rem;
-	} 
-	@media screen and (max-width: 810px){
-		width:22rem;
-		height:22rem;
-	} 
-	@media screen and (max-width: 450px){
-		width: 18rem;
-		height:18rem;
-    }
-	@media screen and (max-width: 375px){
-		width: 16rem;
-		height:16rem;
-    }
-	@media screen and (max-width: 325px){
-		width: 14rem;
-		height:14rem;
-    }
 `;
 
 const InteractiveMap = () => {
@@ -107,7 +57,7 @@ const InteractiveMap = () => {
 			<SvgStyled
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
-				width="427.543" 
+				width="427.543"
 				height="405.636"
 				viewBox="0 0 427.543 405.636"
 				onMouseOver={(e) => {

@@ -7,6 +7,7 @@
 
 @layer base {
 	html {
-		font-family: "Roboto Mono", monospace;
+		/* font-family: "Roboto Mono", monospace; */
+		font-family: Arial, Helvetica, sans-serif;
 	}
 }

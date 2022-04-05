@@ -1,13 +1,14 @@
 import styled from "styled-components";
+import {Device} from "../../../theme/mediaQueries";
 
 export const AdCardContainer = styled.div`
 	display: block;
 
-	@media only screen and (min-width: 480px) {
+	@media ${Device.minMobileXl} {
 		padding: 16px;
 		width: 50%;
 	}
-	@media only screen and (min-width: 1024px) {
+	@media only ${Device.minLaptop} {
 		padding: 16px;
 		width: 33.33%;
 	}

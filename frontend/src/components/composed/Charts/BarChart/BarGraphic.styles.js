@@ -125,7 +125,7 @@ export const StyledSvg = styled.svg`
 		font-size: small;
 		color: ${Colors.lightGrey};
 
-		@media ${Device.min600} {
+		@media ${Device.minTablet} {
 			font-size: large;
 		}
 	}

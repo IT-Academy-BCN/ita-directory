@@ -12,11 +12,11 @@ export const MyTableStyle = styled.table`
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid ${Colors.grey};
 
-	@media ${Device.max650} {
+	@media ${Device.maxTablet} {
 		width: 100%;
 		font: normal normal normal 6px/18px Arial;
 	}
-	@media ${Device.max450} {
+	@media ${Device.maxMobileXl} {
 		width: 100%;
 	}
 
@@ -43,10 +43,10 @@ export const StyledDiv = styled.div`
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
 
-	@media ${Device.max650} {
+	@media ${Device.maxTablet} {
 		font-size: 14px;
 	}
-	@media ${Device.max450} {
+	@media ${Device.maxMobileXl} {
 		font-size: 14px;
 	}
 `;
@@ -60,10 +60,10 @@ export const RowTableStyle = styled.div`
 
 	padding-left: ${(props) => props.paddingL};
 
-	@media ${Device.max650} {
+	@media ${Device.maxTablet} {
 		font-size: 14px;
 	}
-	@media ${Device.max450} {
+	@media ${Device.maxMobileXl} {
 		font-size: 14px;
 	}
 `;
@@ -76,10 +76,10 @@ export const HeaderTableStyle = styled.div`
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
 
-	@media ${Device.max650} {
+	@media ${Device.maxTablet} {
 		font-size: 14px;
 	}
-	@media ${Device.max450} {
+	@media ${Device.maxMobileXl} {
 		font-size: 14px;
 	}
 `;
