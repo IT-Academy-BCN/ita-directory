@@ -279,8 +279,4 @@ router.post(
 
 router.get("/v1/chart-data", adsController.activeAdsByLocationAndDate);
 
-
-router.get("/v1/chart-data", adsController.activeAdsByLocationAndDate);
-
-
 module.exports = router;
