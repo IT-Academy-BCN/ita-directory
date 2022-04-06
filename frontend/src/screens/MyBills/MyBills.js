@@ -30,7 +30,7 @@ const MyBills = () => {
 		{
 			Header: (
 				<HeaderTableStyle color={Colors.frenchBlue} style={{textAlign: "left"}}>
-					N.
+					N.Ref.
 				</HeaderTableStyle>
 			),
 			accessor: "id",
@@ -57,7 +57,7 @@ const MyBills = () => {
 		{
 			Header: (
 				<HeaderTableStyle color={Colors.frenchBlue} padding="0">
-					Coste sin IVA
+					Subtotal
 				</HeaderTableStyle>
 			),
 			accessor: "costeSinIVA",
@@ -85,7 +85,7 @@ const MyBills = () => {
 		{
 			Header: (
 				<HeaderTableStyle color={Colors.frenchBlue} padding="0">
-					Descuento
+					Desc.
 				</HeaderTableStyle>
 			),
 			accessor: "descuento",
@@ -98,7 +98,7 @@ const MyBills = () => {
 		},
 		{
 			Header: (
-				<HeaderTableStyle color={Colors.frenchBlue} paddingL="6px">
+				<HeaderTableStyle color={Colors.frenchBlue} paddingL="0">
 					Total
 				</HeaderTableStyle>
 			),
@@ -122,7 +122,7 @@ const MyBills = () => {
 			),
 			accessor: "acciones",
 			Cell: ({row}) => (
-				<RowTableStyle style={{textAlign: "right"}}>
+				<RowTableStyle style={{textAlign: "center"}}>
 					<Link to={`/my-bills/${row.values.id}`} title="Ver factura">
 						<FontAwesomeIcon icon={faEye} color={Colors.grey} />
 					</Link>
@@ -148,12 +148,12 @@ const MyBills = () => {
 		<Body
 			title="Mis facturas"
 			logoColor={Colors.darkRed}
-			headerColor={Colors.lightblue}
+			headerColor={Colors.lightblue} // TODO: This should be lightBlue but have no sense
 			fontColor={Colors.grey}
 			justifyTitle="flex-start"
 			isLoggedIn="true"
 		>
-			<MyTableStyle>
+			<MyTableStyle className="MyTableStyle">
 				<table {...getTableProps()}>
 					<thead>
 						{headerGroups.map((headerGroup) => (

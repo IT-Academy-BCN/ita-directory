@@ -8,8 +8,8 @@ export const TextAreaStyled = styled.div.attrs({
 })`
 	& {
 		&.textAreaCreateNewAd {
-			${tw`mb-4 max-w-xl `}
-			@media ${Device.minTablet} {
+			${tw`mb-2 max-w-xl `}
+			@media ${Device.Tablet} {
 				${tw`flex-col`}
 			}
 		}
@@ -21,7 +21,7 @@ export const TextAreaStyled = styled.div.attrs({
 `;
 
 export const TextAreaError = styled.div.attrs({
-	className: `w-full`,
+	className: `w-full justify-center`,
 })`
 	&.textAreaCreateNewAd {
 		${tw`border rounded text-grey`}
@@ -32,7 +32,7 @@ export const TextAreaInput = styled.textarea.attrs((props) => ({
 	rows: 8,
 	className: `textarea
 				border
-				w-full
+				
 				rounded
 				block
 				text-xs
@@ -43,6 +43,15 @@ export const TextAreaInput = styled.textarea.attrs((props) => ({
 				text-darkGray
 				`,
 }))`
+	width: 93%;
+	display: flex;
+	margin: 0 auto;
+	justify-self: center;
+
+	@media ${Device.Tablet} {
+		margin: 0;
+	}
+
 	&.error {
 		border: 1px solid #fecaca !important;
 	}

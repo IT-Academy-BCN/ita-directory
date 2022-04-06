@@ -4,7 +4,9 @@ import {Device} from "../../../theme/mediaQueries";
 
 export const InputNumberStyled = styled.div`
 	display: flex;
-	@media ${Device.maxTablet} {
+	flex-direction: row;
+
+	@media ${Device.Tablet} {
 		flex-direction: column;
 	}
 
@@ -18,6 +20,8 @@ export const InputNumberStyled = styled.div`
 	.inputsContainer {
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 `;
 
@@ -31,6 +35,7 @@ export const StyledContainer = styled.div`
 	height: 2.6rem;
 	padding: 5px;
 	border: 1px solid #707070;
+
 	&.error {
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;

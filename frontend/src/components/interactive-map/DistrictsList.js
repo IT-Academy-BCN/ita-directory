@@ -28,11 +28,11 @@ const StyledList = styled.div`
 
 		li {
 			text-align: left;
-			padding: 0rem 0;
+			padding: 0.1rem;
 			margin: 0;
 
-			@media ${Device.maxTablet} {
-				padding: 0.1rem;
+			@media ${Device.Tablet} {
+				padding: 0rem;
 			}
 		}
 	}

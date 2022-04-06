@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
+import {Device} from "theme/mediaQueries";
 
 export const HomeContainer = styled(Container)`
 	flex-direction: column;
-	min-height: 70vh;
+	min-height: calc(100vh - 360px);
+
+	@media ${Device.Tablet} {
+		min-height: calc(100vh - 300px);
+	}
 
 	ul {
 		text-align: center;

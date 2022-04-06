@@ -6,11 +6,11 @@ export const AdCardListStyled = styled.div`
 		display: grid;
 		grid-gap: 1.5rem;
 
-		@media ${Device.minTablet} {
+		@media ${Device.Tablet} {
 			grid-template-columns: repeat(2, 1fr);
 		}
 
-		@media ${Device.minLaptop} {
+		@media ${Device.Laptop} {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}

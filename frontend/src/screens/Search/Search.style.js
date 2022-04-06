@@ -7,9 +7,10 @@ export const SearchStyled = styled.div`
 	grid-template-columns: 1fr;
 	grid-gap: 1.5rem;
 	width: 100%;
-	@media only ${Device.maxLaptopLg} {
+	position: relative;
+
+	@media only ${Device.Tablet} {
 		grid-template-columns: 0.6fr 0.4fr;
-		position: relative;
 	}
 	.search-body {
 		width: 100%;
@@ -32,7 +33,7 @@ export const SearchStyled = styled.div`
 				transform: rotate(360deg);
 			}
 		}
-		@media only ${Device.minTablet} {
+		@media only ${Device.Tablet} {
 			width: 2.5rem;
 			height: 2.5rem;
 		}

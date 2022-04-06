@@ -53,7 +53,7 @@ export const AdCardStyled = styled.div`
 			}
 		}
 	}
-	@media ${Device.minTablet} {
+	@media ${Device.Tablet} {
 		display: grid;
 		grid-template-columns: 30% 70%;
 

@@ -6,74 +6,76 @@ export const ContainerExterior = styled.div`
 	max-width: ${responsiveSizes.desktop};
 	margin: inherit auto;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: space-between;
 	align-items: start;
 	position: relative;
+	flex-direction: column-reverse;
 
-	@media ${Device.maxTablet} {
-		flex-direction: row;
-		flex-wrap: nowrap;
-	}
-	@media ${Device.maxDesktop} {
+	@media ${Device.Tablet} {
 		flex-wrap: wrap;
-		flex-direction: column-reverse;
 		justify-self: center;
+	}
+	@media ${Device.Desktop} {
+		flex-wrap: nowrap;
+		flex-direction: column;
 	}
 `;
 
 export const Container = styled.div`
 	width: 100%;
 	display: flex;
-	gap: 2rem;
+	gap: 0.1rem;
 	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
+	flex-wrap: nowrap;
 	margin-top: 3rem;
 
-	@media ${Device.maxMobileXl} {
-		width: 100%;
-	}
-	@media ${Device.maxTablet} {
+	@media ${Device.Tablet} {
 		flex-direction: row;
-		flex-wrap: nowrap;
 	}
-	@media ${Device.maxDesktop} {
+	@media ${Device.Desktop} {
 		justify-content: space-between;
+		gap: 0.5rem;
 	}
-	@media ${Device.minLaptopLg} {
+	@media ${Device.LaptopLg} {
 		justify-content: space-around;
 	}
 `;
 
 export const GridItem = styled.div`
-	width: 25%;
+	width: 100%;
 	z-index: 10;
 
-	@media ${Device.maxMobileXl} {
-		width: 100%;
-	}
-	@media ${Device.maxLaptop} {
+	@media ${Device.Mobile} {
 		width: 50%;
 	}
-	@media ${Device.maxTablet} {
-		width: 100%;
+	@media ${Device.Tablet} {
+		width: 25%;
 	}
 `;
 
 export const Mapa = styled.div`
-	position: absolute;
-	top: calc(50% - 20%);
-	left: calc(50% - 24%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 
-	@media ${Device.maxMobileXl} {
-		position: absolute;
-		margin-left: 30vw;
+	@media ${Device.Tablet} {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
-
-	@media ${Device.maxDesktop} {
-		position: relative;
-		top: 1rem;
-		left: calc(50% - 14rem);
+	@media ${Device.Desktop} {
+		position: absolute;
+		top: calc(50% - 20%);
+		left: calc(50% - 42%);
+		width: 80%;
+	}
+	@media ${Device.LaptopLg} {
+		position: absolute;
+		top: calc(50% - 20%);
+		left: calc(50% - 45%);
 	}
 `;

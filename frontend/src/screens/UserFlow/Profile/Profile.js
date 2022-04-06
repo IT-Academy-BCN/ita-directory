@@ -120,7 +120,7 @@ const Profile = () => {
 						/>
 					</ProfileForm>
 				</Modal>
-				<ProfileWrapper>
+				<ProfileWrapper className="form-frame">
 					<ProfileForm className="profile-photo">
 						<ProfileImage>
 							<img
@@ -176,7 +176,7 @@ const Profile = () => {
 								/>
 								<p>
 									El email no se puede modificar. Ponte en
-									<Link to="#">contacto</Link> si necesitas actualizarlo.
+									<Link to="#"> contacto</Link> si necesitas actualizarlo.
 								</p>
 							</div>
 						</div>

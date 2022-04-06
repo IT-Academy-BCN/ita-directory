@@ -136,11 +136,11 @@ export const StyleNotificationError = styled.div.attrs({
 	background: #bc3434;
 	margin-top: 6.5rem;
 	margin-left: 1rem;
-	@media ${Device.minTablet} {
+	@media ${Device.Tablet} {
 		margin-top: 1rem;
 		margin-right: min(2%);
 	}
-	@media ${Device.minLaptop} {
+	@media ${Device.Laptop} {
 		margin-right: min(10%);
 	}
 `;

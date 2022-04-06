@@ -4,21 +4,65 @@ import {Device} from "../../theme/mediaQueries";
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
+
+	padding-left: 0vw;
+	padding-right: 0vw;
+
+	padding: 0.1rem;
+	background-color: #f7f7f7;
+	border-radius: 0.5em;
+	margin-bottom: 2rem;
+
+	label {
+		flex-basis: 50px;
+		padding: 5px;
+	}
+
+	@media ${Device.Tablet} {
+		padding-left: 5vw;
+		padding-right: 5vw;
+
+		label {
+			flex-basis: 50px;
+			padding: 5px;
+		}
+	}
+
+	form div {
+		/* display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-self: center;
+		width: 98%; */
+	}
 
 	form > div {
 		display: flex;
-		flex-direction: row;
+		justify-content: center;
+		text-align: start;
+		flex-direction: column;
 		align-items: center;
 		margin-bottom: 1rem;
 
+		@media ${Device.Tablet} {
+			flex-direction: row;
+		}
+
 		> div {
-			width: 10rem;
+			min-width: 10rem;
+
+			/* width: 100%; */
 
 			&:last-of-type {
 				// mapa
 				width: 100%;
+
+				& > div > div {
+					background-color: white;
+				}
 			}
 
 			&:not(.form-label) > label {
@@ -39,24 +83,23 @@ export const Wrapper = styled.div`
 			}
 
 			&.form-label label {
-				flex-basis: 150px;
+				flex-basis: 10px;
 				color: #707070;
-				width: 10rem;
+				width: 90%;
+				text-align: center;
 				font-weight: bold;
+
+				@media ${Device.Tablet} {
+					flex-basis: 150px;
+					color: #707070;
+					width: 10rem;
+					font-weight: bold;
+				}
 			}
 		}
 
 		.input-container {
 			margin-top: 0;
-		}
-	}
-
-	@media ${Device.maxTablet} {
-		padding-left: 5vw;
-		padding-right: 5vw;
-		label {
-			flex-basis: 50px;
-			padding: 5px;
 		}
 	}
 `;
@@ -69,8 +112,8 @@ export const MapText = styled.p`
 `;
 
 export const MapBox = styled.div`
-	width: 295%;
-	justify-content: flex-start;
+	width: 100%;
+	justify-content: center;
 `;
 
 export const CsvNotificationError = styled.div`

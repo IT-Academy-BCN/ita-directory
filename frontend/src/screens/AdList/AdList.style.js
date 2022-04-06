@@ -4,16 +4,17 @@ import {Device} from "../../theme/mediaQueries";
 
 export const AdListDiv = styled.div`
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 
-	@media only ${Device.maxLaptop} {
-		flex-direction: column;
+	@media only ${Device.Laptop} {
+		flex-direction: row;
 	}
 `;
 
 export const FilterDiv = styled.div`
 	width: ${(props) => props.width};
 	display: inline-block;
+
 	.WrapperFilter {
 		padding-bottom: 1.5rem;
 		padding-right: 1.5rem;
@@ -27,6 +28,7 @@ export const FilterDiv = styled.div`
 
 export const AdListStyled = styled.div`
 	width: 100%;
+
 	.tree-search {
 		text-align: left;
 		letter-spacing: 0px;

@@ -17,6 +17,7 @@ const Colors = {
 	darkGreen: "#249A36",
 	darkRed: "#823434",
 	grey: "#707070",
+	darkGrey: "#4A4A4A",
 	lighterGrey: "#dddddd",
 	lightGrey1: "#ffffff",
 	lightGrey2: "#eeeeee",
@@ -32,8 +33,7 @@ const Colors = {
 	shadow: "rgba(0, 0, 0, 0.2)",
 	lighterShadow: "rgba(0, 0, 0, 0.19)",
 	lightBeige: "#EFEEEA",
-	violet: "#8A82AF"
-  };
-  
-  export default Colors;
-  
+	violet: "#8A82AF",
+};
+
+export default Colors;

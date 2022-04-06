@@ -1,13 +1,13 @@
 .Mapa {
-	width: 95%;
+	width: 100%;
 	height: 285px;
 	margin-top: 1%;
 	z-index: 0;
 }
 
 .Container {
-	width: 50%;
-	height: 90%;
+	width: 100%;
+	height: 100%;
 }
 
 .ButtonIcons {
