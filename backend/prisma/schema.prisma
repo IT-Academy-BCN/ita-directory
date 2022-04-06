@@ -45,7 +45,6 @@ model user {
   media            media[]
   ads              ads[]
   developer_data   Json? //Added developer data (not a jsonb?)
-
 }
 
 // model developer_data {
@@ -71,12 +70,13 @@ model acces_log {
   user_id Int
 }
 
-model recover_password {
-  id          Int      @id @default(autoincrement())
-  hash        String
-  expire_time DateTime
-  user        user     @relation(fields: [user_id], references: [id])
-  user_id     Int
+model recover_password_log {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  password   String
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+
 }
 
 model media {
