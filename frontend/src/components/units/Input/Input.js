@@ -24,7 +24,8 @@ const Input = ({
 	minMarginTop,
 	register,
 	onChange,
-	ref
+	ref,
+	accept
 }) => {
 	const hasIcon = icon ? true : false;
 	return (
@@ -53,6 +54,7 @@ const Input = ({
 					style={inputStyles}
 					onChange={onChange}
 					ref={ref}
+					accept={accept}
 					{...(register && register)}
 				/>
 			</InputContainerStyled>

@@ -12,6 +12,7 @@ model user_role {
   id         Int     @id @default(autoincrement())
   name       String
   admin      Boolean @default(false)
+  developer  Boolean @default(false) //Developer role added
   manager    Boolean @default(false)
   registered Boolean @default(false)
   user       user[]
@@ -40,9 +41,10 @@ model user {
   user_role        user_role          @relation(fields: [user_role_id], references: [id])
   user_role_id     Int
   acces_log        acces_log[]
-  recover_password recover_password[]
+  recover_password recover_password_log[]
   media            media[]
   ads              ads[]
+  developer_data   Json? //Added developer data (not a jsonb?)
 }
 
 model acces_log {
@@ -53,12 +55,13 @@ model acces_log {
   user_id Int
 }
 
-model recover_password {
-  id          Int      @id @default(autoincrement())
-  hash        String
-  expire_time DateTime
-  user        user     @relation(fields: [user_id], references: [id])
-  user_id     Int
+model recover_password_log {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  password   String
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+
 }
 
 model media {
@@ -156,6 +159,7 @@ model ad_status {
 }
 
 model ads {
+
   id            Int       @id @default(autoincrement())
   user          user      @relation(fields: [user_id], references: [id])
   user_id       Int
@@ -174,4 +178,26 @@ model ads {
   ad_status_id  Int
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
+}
+
+model level {
+  id            Int        @id @default(autoincrement())
+  name          String
+  parent        level?     @relation("parent", fields: [parent_id], references: [id])
+  parent_id     Int?
+  child         level[]    @relation("parent")
+  level_type    level_type @relation(fields: [level_type_id], references: [id])
+  level_type_id Int
+}
+
+model level_type {
+  id                Int     @id @default(autoincrement())
+  name              String
+  country           Int // País
+  state             Int // Autonomía
+  city              Int // Provincia
+  town              Int // Ciudad-Población
+  district          Int // Distrito
+  neighborhood      Int // Barrio
+  level             level[]
 }

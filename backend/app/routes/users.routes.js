@@ -3,7 +3,7 @@ const UsersController = require("../controllers/users.controller");
 const uploadFile = require("../middleware/uploadFile");
 const authenticateToken = require("../middleware/verifyToken");
 
-router.get("/v1/get_me", UsersController.getUser);
+router.get("/v1/get_me", authenticateToken, UsersController.getUser);
 
 /**
  * Registration data
@@ -98,7 +98,7 @@ router.post("/v1/login", UsersController.login);
  * { "errCode":"errCode", "message":"User not found"}
  */
 //Update some field to User
-router.patch("/v1/update-user", UsersController.updateUser);
+router.patch("/v1/update-user", authenticateToken, UsersController.updateUser);
 
 /**
  * RecoverPassword data

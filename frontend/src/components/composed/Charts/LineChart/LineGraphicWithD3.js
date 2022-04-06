@@ -27,7 +27,6 @@ export default function LineGraphic({data, active, size, month, year}) {
 
 	useEffect(() => {
 		let z = svgRef.current.parentNode.clientWidth;
-		let s = 100;
 		let m = 350;
 		setDataToPrint(handleData(month, year));
 		setAnchura(active ? window.innerWidth - 200 : z - 150);
@@ -38,17 +37,10 @@ export default function LineGraphic({data, active, size, month, year}) {
 		d3.selectAll("#container > *").remove();
 	};
 
-	const reloadChart = () => {
-		clearChart();
-		setDataToPrint(handleData(month, year));
-		printChart();
-	};
-
 	function handleData(month, year) {
 		if (data) {
 			const dataAño = data.filter(dateYearFilter);
 			function dateYearFilter(date) {
-				const d = date.day.getFullYear();
 				return date.day.getFullYear() === parseInt(year);
 			}
 
@@ -63,7 +55,6 @@ export default function LineGraphic({data, active, size, month, year}) {
 			/// data por dias segun mes y año seleccionado
 			let dataMes = dataAño.filter(daysInMonth);
 			function daysInMonth(date) {
-				const d = date.day.getMonth();
 				return date.day.getMonth() === parseInt(month);
 			}
 			dataMes = dataMes.map((day) => {
@@ -119,7 +110,7 @@ export default function LineGraphic({data, active, size, month, year}) {
 				.select(svgRef.current)
 				.style("background", "white")
 				.attr("viewBox", `0, 0, ${anchura}, ${altura}`)
-				.attr("style", `max-width: ${anchura}; height: 100%; height: intrinsic;`)
+				.attr("style", `max-width: 100%; height: 100%; height: intrinsic;`)
 				.style("overflow", "visible")
 				.style("padding", "5% 10%")
 				.classed("svg-content-responsive", true);
@@ -188,7 +179,7 @@ export default function LineGraphic({data, active, size, month, year}) {
 						.style("visibility", "visible")
 						.text(`${meses[date + 1]} ${year} : ` + d);
 				})
-				.on("mousemove", (e, d) => {
+				.on("mousemove", (e) => {
 					tooldiv.style("top", e.pageY - 50 + "px").style("left", e.pageX - 50 + "px");
 				})
 				.on("mouseout", () => {
@@ -208,10 +199,10 @@ export default function LineGraphic({data, active, size, month, year}) {
 				.select(svgRef.current)
 				.style("background", "white")
 				.attr("viewBox", `0, 0, ${anchura}, ${altura}`)
-				.attr("style", `max-width: ${anchura}; height: 100%; height: intrinsic;`)
-				// .attr("style", `max-width: 100%; ${anchura}: auto; ${altura}: intrinsic;`)
+				.attr("style", `width: 90%`)
 				.style("overflow", "visible")
 				.style("padding", "5% 10%")
+				.style("margin", "0 auto")
 				.classed("svg-content-responsive", true);
 
 			const xScale = d3.scaleLinear().domain([0, xsDomain]).range([0, anchura]);
@@ -266,7 +257,7 @@ export default function LineGraphic({data, active, size, month, year}) {
 						.text(`${[day + 1]} / ${parseInt(month) + 1} / ${year} : ` + d)
 						.attr("z-index", "100");
 				})
-				.on("mousemove", (e, d) => {
+				.on("mousemove", (e) => {
 					tooldiv.style("top", e.pageY - 50 + "px").style("left", e.pageX - 50 + "px");
 				})
 				.on("mouseout", () => {
