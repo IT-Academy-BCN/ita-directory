@@ -18,6 +18,7 @@ const StyledList = styled.div`
 	.neighborhood {
 		font-size: 9px;
 		text-indent: 0rem;
+		font-size: 15px;
 	}
 
 	.lit-neighborhood,
@@ -34,7 +35,7 @@ const DistrictsList = () => {
 	const [rightColumnDistricts, setRightColumnDistricts] = useState([]);
 	const [centerLColumnDistricts, setCenterLColumnDistricts] = useState([]);
 	const [centerRColumnDistricts, setCenterRColumnDistricts] = useState([]);
-	
+
 	useEffect(() => {
 		if (allDistricts) {
 			const left = allDistricts.filter(
@@ -55,6 +56,7 @@ const DistrictsList = () => {
 			);	
 			const right = allDistricts.filter(
 				(el) =>
+
 					el.district === "Nou-Barris" ||
 					el.district === "Sant-Andreu" ||
 					el.district === "Sant-Marti"
@@ -62,6 +64,7 @@ const DistrictsList = () => {
 			setLeftColumnDistricts(left);
 			setCenterLColumnDistricts(centerL);
 			setCenterRColumnDistricts(centerR);
+
 			setRightColumnDistricts(right);
 		}
 	}, []);
@@ -83,6 +86,7 @@ const DistrictsList = () => {
 						: district.replace("-", " ")}
 				</li>
 				<ul className="flex flex-col mb-3">
+
 					{neighborhoods
 						.filter((neighborhoods) => Number.isFinite(neighborhoods.nr))
 						.map(({nr, id, name}) => (

@@ -5,6 +5,7 @@ import {reducer} from "./store/reducer";
 import {ContainerExterior, Mapa} from "./mapOfDistrictsStyles"
 import InteractiveMap from "./InteractiveMap";
 
+
 const initialState = {};
 
 const MapOfDistricts = () => {
