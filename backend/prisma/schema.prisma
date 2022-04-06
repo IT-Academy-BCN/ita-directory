@@ -41,26 +41,11 @@ model user {
   user_role        user_role          @relation(fields: [user_role_id], references: [id])
   user_role_id     Int
   acces_log        acces_log[]
-  recover_password recover_password[]
+  recover_password recover_password_log[]
   media            media[]
   ads              ads[]
   developer_data   Json? //Added developer data (not a jsonb?)
 }
-
-// model developer_data {
-//   id          Int      @id @default(autoincrement())
-//   user        user     @relation(fields: [user_id], references: [id])
-//   user_id     Int      @unique
-//   github      String?
-//   linkedin    String?
-//   website     String?
-//   tags        String[]
-//   description String
-//   media_id    media    @relation(fields: [mediaId], references: [id]) //¿cómo relacionar con tabla "media"?
-//   version     Int //como aumenta?
-//   layout_type String //?
-//   mediaId     Int
-// }
 
 model acces_log {
   id      Int      @id @default(autoincrement())
