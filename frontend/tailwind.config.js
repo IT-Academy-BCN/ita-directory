@@ -4,6 +4,7 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			sans: ["Roboto", "sans-serif"],
+
 		},
 		boxShadow: {
 			"button-shadow": "0px 2px 4px #00000029",
@@ -45,6 +46,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				roboto: ["'Roboto'"],
+
 			},
 			colors: {
 				white: "#FFFFFF",

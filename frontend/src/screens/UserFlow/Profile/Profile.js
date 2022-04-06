@@ -25,13 +25,14 @@ import initLoggedinUserInfo from "../fakeUser.json";
 import {msgs, validatePassword} from "utils/userFlow";
 
 const usersPhoto = {
-	people1b: people1b,
-	people4b: people4b,
-	people13b: people13b,
+    people1b: people1b,
+    people4b: people4b,
+    people13b: people13b,
 };
 // testing ***
 
 const Profile = () => {
+
 	const [newPassword, setNewPassword] = useState("");
 	const [newPasswordRepeated, setNewPasswordRepeated] = useState("");
 	const [newPhoto, setNewPhoto] = useState(null);

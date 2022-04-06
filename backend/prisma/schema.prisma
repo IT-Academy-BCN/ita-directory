@@ -12,6 +12,7 @@ model user_role {
   id         Int     @id @default(autoincrement())
   name       String
   admin      Boolean @default(false)
+  developer  Boolean @default(false) //Developer role added
   manager    Boolean @default(false)
   registered Boolean @default(false)
   user       user[]
@@ -40,9 +41,10 @@ model user {
   user_role        user_role          @relation(fields: [user_role_id], references: [id])
   user_role_id     Int
   acces_log        acces_log[]
-  recover_password recover_password[]
+  recover_password recover_password_log[]
   media            media[]
   ads              ads[]
+  developer_data   Json? //Added developer data (not a jsonb?)
 }
 
 model acces_log {
@@ -53,12 +55,13 @@ model acces_log {
   user_id Int
 }
 
-model recover_password {
-  id          Int      @id @default(autoincrement())
-  hash        String
-  expire_time DateTime
-  user        user     @relation(fields: [user_id], references: [id])
-  user_id     Int
+model recover_password_log {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  password   String
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+
 }
 
 model media {

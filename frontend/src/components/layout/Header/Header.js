@@ -7,8 +7,8 @@ import {Container} from "theme/GlobalStyles";
 import logo from "../../../assets/logos/logo.png";
 
 const profilePicture =
-	// "https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
-	"https://randomuser.me/api/portraits/men/21.jpg";
+    // "https://sites.google.com/site/ellibrorojoesdla/_/rsrc/1349808591712/personajes/ganda/Gandalf.jpg";
+    "https://randomuser.me/api/portraits/men/21.jpg";
 
 const Header = ({
 	isLoggedIn = true,
@@ -19,13 +19,14 @@ const Header = ({
 	justifyTitle,
 	isTitleVisible = true,
 }) => {
-	const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [dropdownVisible, setDropdownVisible] = useState(false);
 
-	const handleClick = () => {
-		setDropdownVisible(!dropdownVisible);
-	};
+    const handleClick = () => {
+        setDropdownVisible(!dropdownVisible);
+    };
 
-	const justifyTitleB = justifyTitle === "center" ? true : false;
+    const justifyTitleB = justifyTitle === "center" ? true : false;
+
 
 	//
 	return (
@@ -84,6 +85,7 @@ const Header = ({
 			{/* )} */}
 		</HeaderStyled>
 	);
+
 };
 
 export default Header;

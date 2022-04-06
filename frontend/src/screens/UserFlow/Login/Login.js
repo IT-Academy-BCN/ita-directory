@@ -63,84 +63,85 @@ const Login = () => {
 		}
 	};
 
-	const submitForm = (data) => {
-		const {email, password} = data;
-		setIsDisabled(true);
-		setIsLoading(true);
-		setAnimated(true);
-		setTimeout(() => {
-			setIsDisabled(false);
-			setIsLoading(false);
-			setAnimated(false);
-			loginUser({
-				email,
-				password,
-			});
-			setTimeout(() => {
-				setIsDisabled(false);
-				setIsLoading(false);
-			}, 2000);
-		});
-	};
 
-	return (
-		<>
-			{message ? (
-				<Notification
-					message={message}
-					isSuccess={loginSuccess}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
-			) : null}
+    const submitForm = (data) => {
+        const {email, password} = data;
+        setIsDisabled(true);
+        setIsLoading(true);
+        setAnimated(true);
+        setTimeout(() => {
+            setIsDisabled(false);
+            setIsLoading(false);
+            setAnimated(false);
+            loginUser({
+                email,
+                password,
+            });
+            setTimeout(() => {
+                setIsDisabled(false);
+                setIsLoading(false);
+            }, 2000);
+        });
+    };
 
-			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
-				<Container>
-					<Form onSubmit={handleSubmit(submitForm)} noValidate>
-						<Input
-							type="email"
-							placeholder="Introduce tu email"
-							id="emailName"
-							name="email"
-							disabled={disabled}
-							className="w-full"
-							error={errors.email?.message}
-							register={register("email")}
-						/>
-						<Input
-							type="password"
-							placeholder="Introduce tu contraseña"
-							id="passName"
-							name="password"
-							disabled={disabled}
-							className="w-full mt-2"
-							error={errors.password?.message}
-							register={register("password")}
-						/>
-						<AsyncButton
-							text="Acceder"
-							loadingText="Accediendo"
-							iconPosition="left"
-							type="submit"
-							className="blue-gradient w-full my-8"
-							isLoading={isLoading}
-							animated={animated}
-						/>
-						<div className="w-full">
-							<RedirectStyled>
-								Has olvidado tu contraseña?
-								<Link to="/recover-password">Recupérala</Link>
-							</RedirectStyled>
-							<RedirectStyled>
-								No tienes cuenta?
-								<Link to="/register">Regístrate</Link>
-							</RedirectStyled>
-						</div>
-					</Form>
-				</Container>
-			</Body>
-		</>
-	);
+    return (
+        <>
+            {message ? (
+                <Notification
+                    message={message}
+                    isSuccess={loginSuccess}
+                    closeNotification={closeNotification}
+                    autoClose={true}
+                />
+            ) : null}
+
+            <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
+                <Container>
+                    <Form onSubmit={handleSubmit(submitForm)} noValidate>
+                        <Input
+                            type="email"
+                            placeholder="Introduce tu email"
+                            id="emailName"
+                            name="email"
+                            disabled={disabled}
+                            className="w-full"
+                            error={errors.email?.message}
+                            register={register("email")}
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Introduce tu contraseña"
+                            id="passName"
+                            name="password"
+                            disabled={disabled}
+                            className="w-full mt-2"
+                            error={errors.password?.message}
+                            register={register("password")}
+                        />
+                        <AsyncButton
+                            text="Acceder"
+                            loadingText="Accediendo"
+                            iconPosition="left"
+                            type="submit"
+                            className="blue-gradient w-full my-8"
+                            isLoading={isLoading}
+                            animated={animated}
+                        />
+                        <div className="w-full">
+                            <RedirectStyled>
+                                Has olvidado tu contraseña?
+                                <Link to="/recover-password">Recupérala</Link>
+                            </RedirectStyled>
+                            <RedirectStyled>
+                                No tienes cuenta?
+                                <Link to="/register">Regístrate</Link>
+                            </RedirectStyled>
+                        </div>
+                    </Form>
+                </Container>
+            </Body>
+        </>
+    );
 };
 
 export default Login;
