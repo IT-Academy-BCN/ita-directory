@@ -12,6 +12,7 @@ model user_role {
   id         Int     @id @default(autoincrement())
   name       String
   admin      Boolean @default(false)
+  developer  Boolean @default(false) //Developer role added
   manager    Boolean @default(false)
   registered Boolean @default(false)
   user       user[]
@@ -39,11 +40,11 @@ model user {
   user_status_id   Int
   user_role        user_role          @relation(fields: [user_role_id], references: [id])
   user_role_id     Int
-  refresh_token    String
   acces_log        acces_log[]
-  recover_password recover_password[]
+  recover_password recover_password_log[]
   media            media[]
   ads              ads[]
+  developer_data   Json? //Added developer data (not a jsonb?)
 }
 
 model acces_log {
@@ -54,12 +55,13 @@ model acces_log {
   user_id Int
 }
 
-model recover_password {
-  id          Int      @id @default(autoincrement())
-  hash        String
-  expire_time DateTime
-  user        user     @relation(fields: [user_id], references: [id])
-  user_id     Int
+model recover_password_log {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  password   String
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+
 }
 
 model media {
@@ -126,8 +128,8 @@ model ad_type {
 }
 
 model ads {
-  id            Int     @id @default(autoincrement())
-  user          user    @relation(fields: [user_id], references: [id])
+  id            Int      @id @default(autoincrement())
+  user          user     @relation(fields: [user_id], references: [id])
   user_id       Int
   title         String
   description   String
@@ -139,7 +141,10 @@ model ads {
   map_lat       Decimal
   map_lon       Decimal
   ad_type_id    Int
-  ad_type       ad_type @relation(fields: [ad_type_id], references: [id])
+  ad_type       ad_type  @relation(fields: [ad_type_id], references: [id])
+  publish       Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updateAt      DateTime @updatedAt
 }
 
 model level {
@@ -153,12 +158,13 @@ model level {
 }
 
 model level_type {
-  id       Int     @id @default(autoincrement())
-  name     String
-  country  Int
-  state    Int
-  city     Int
-  town     Int
-  district Int
-  level    level[]
+  id           Int     @id @default(autoincrement())
+  name         String
+  country      Int // País
+  state        Int // Autonomía
+  city         Int // Provincia
+  town         Int // Ciudad-Población
+  district     Int // Distrito
+  neighborhood Int // Barrio
+  level        level[]
 }

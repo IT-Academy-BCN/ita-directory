@@ -23,6 +23,9 @@ const Input = ({
 	icon,
 	minMarginTop,
 	register,
+	onChange,
+	ref,
+	accept
 }) => {
 	const hasIcon = icon ? true : false;
 	return (
@@ -49,6 +52,9 @@ const Input = ({
 					error={error}
 					required={required}
 					style={inputStyles}
+					onChange={onChange}
+					ref={ref}
+					accept={accept}
 					{...(register && register)}
 				/>
 			</InputContainerStyled>
@@ -80,6 +86,8 @@ Input.propTypes = {
 	inputContainerClassName: PropTypes.string,
 	required: PropTypes.bool,
 	minMarginTop: PropTypes.bool,
+	onChange: PropTypes.func,
+	ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default Input;

@@ -1,6 +1,7 @@
 const authenticateToken = require("../middleware/verifyToken");
 const adsController = require("../controllers/ads.controller");
 const router = require("express").Router();
+const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
 
 /**
  * Ad data
@@ -59,7 +60,7 @@ const router = require("express").Router();
 }
  */
 
-router.post("/v1/post-ad", adsController.createAd);
+router.post("/v1/post-ad", authenticateToken, adsController.createAd);
 
 /**
  * GET /ads/v1/ads
@@ -266,5 +267,17 @@ router.get("/v1/ads/:location/:type", adsController.getAdsByTypeAndLocation);
 router.get("/v1/ads/search/location/:location", adsController.getAdsByLocation);
 
 router.delete("/v1/ads/:adId", adsController.deleteById);
+
+router.patch("/v1/ads/:adId", authenticateToken, adsController.updateAd);
+
+router.post(
+	"/v1/post-ads-csv",
+	authenticateToken,
+	uploadAdCSV,
+	adsController.createAdsFromCSVBuffer
+);
+
+router.get("/v1/chart-data", adsController.activeAdsByLocationAndDate);
+
 
 module.exports = router;

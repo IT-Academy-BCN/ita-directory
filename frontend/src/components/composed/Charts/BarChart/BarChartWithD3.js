@@ -3,10 +3,9 @@ import * as d3 from "d3";
 import {barColors, returnChartSize, returnLegendData} from "./barGraphicConst";
 import {StyledSvg, ChartLegend, D3SvgChartContainer} from "./BarGraphic.styles";
 
-const D3BarChart = ({data, active, size, selectedMonth}) => {
+const BarChartWithD3 = ({data, active, selectedMonth}) => {
 	const [chartWidth, setChartWidth] = useState();
 	const [chartHeight, setChartHeight] = useState();
-
 	const [displayLabels, setLabels] = useState(false);
 
 	const chartMargin = {top: 20, bottom: 20, left: 40, right: 40};
@@ -14,17 +13,9 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 	useEffect(() => {
 		setLabels(window.innerWidth < 992 ? false : true);
 		reloadChart();
-		// eslint-disable-next-line
-	}, [data, active, chartWidth, chartHeight]);
-
-	//Resize chart
-	useEffect(() => {
+		//Resize chart
 		window.addEventListener("resize", () => reloadChart());
-		return () => {
-			window.removeEventListener("resize", () => reloadChart());
-		};
-		// eslint-disable-next-line
-	}, []);
+	}, [data, active, chartWidth, chartHeight]);
 
 	const reloadChart = () => {
 		const [width, height] = !active
@@ -37,7 +28,11 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 	};
 
 	const clearChart = () => {
-		d3.selectAll(".bar-chart").selectAll("*").remove();
+		d3.selectAll(".bar-chart")
+			.selectAll("*")
+			.attr("viewBox", "0 0 100 100")
+			.attr("preserveAspectRatio", "xMinYMin")
+			.remove();
 	};
 
 	const drawLegend = (d) => {
@@ -178,7 +173,7 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 					.attr("y", (data) => y(data.value))
 					.attr("x", (data) => x(data))
 					.attr("fill", (data) => data.color)
-					.attr("rx", "")
+					.attr("rx", "0.25rem")
 					.classed("bar", true);
 
 				//Draw bar labels
@@ -210,11 +205,11 @@ const D3BarChart = ({data, active, size, selectedMonth}) => {
 	return (
 		<D3SvgChartContainer>
 			<StyledSvg className="bar-chart" />
-			<ChartLegend className="chart-legend">
+			<ChartLegend className="hart-legend">
 				<ul />
 			</ChartLegend>
 		</D3SvgChartContainer>
 	);
 };
 
-export default D3BarChart;
+export default BarChartWithD3;

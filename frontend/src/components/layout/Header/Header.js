@@ -18,7 +18,6 @@ const Header = ({
 	fontColor,
 	justifyTitle,
 	isTitleVisible = true,
-
 }) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -69,7 +68,7 @@ const Header = ({
 					) : null}
 				</div>
 			</Container>
-			{isTitleVisible && (
+			{/* {isTitleVisible && ( */}
 				<StyledSubHeader
 					headerColor={headerColor}
 					fontColor={fontColor}
@@ -79,7 +78,7 @@ const Header = ({
 						<h1>{title}</h1>
 					</Container>
 				</StyledSubHeader>
-			)}
+			{/* )} */}
 		</HeaderStyled>
 	);
 

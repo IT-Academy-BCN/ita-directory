@@ -36,7 +36,9 @@
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
     "husky": "^7.0.2",
-    "lint-staged": "^11.1.2"
+    "lint-staged": "^11.1.2",
+    "prisma": "^3.11.0"
   },
+
   "dependencies": {}
 }

@@ -36,14 +36,16 @@ const App = () => {
 				<Route exact path="/new-ad" component={CreateNewAd} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
-				<Route exact path="/profile" component={Profile} />
-				<Route exact path="/recover-password" component={RecoverPassword} />
-				<Route exact path="/ads" component={AdList} />
-				<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
-				<Route exact path="/dashboard" component={Dashboard} />
-				<Route exact path="/user-ads" component={UserAds} />
-				<Route exact path="/my-bills" component={MyBills} />
-				<Route path="/my-bills/:id" children={<Bill />} />
+				<ProtectedRoute>
+					<Route exact path="/profile" component={Profile} />
+					<Route exact path="/recover-password" component={RecoverPassword} />
+					<Route exact path="/ads" component={AdList} />
+					<Route exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
+					<Route exact path="/dashboard" component={Dashboard} />
+					<Route exact path="/user-ads" component={UserAds} />
+					<Route exact path="/my-bills" component={MyBills} />
+					<Route path="/my-bills/:id" children={<Bill />} />
+				</ProtectedRoute>
 				<Route path="mi-ruta" children={noExiste} />
 				<Route path="/search" component={Search} />
 				<Route path="/change-password/:token" component={ChangePassword} />

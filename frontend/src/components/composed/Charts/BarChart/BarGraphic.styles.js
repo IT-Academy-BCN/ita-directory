@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
+import Colors from "theme/Colors";
 
 export const BarGraphicStyled = styled.div`
 	min-width: 100%;
@@ -70,13 +71,99 @@ export const BarGraphicStyled = styled.div`
 			}
 		}
 	}
+`;
+
+export const D3SvgChartContainer = styled.div`
+	margin: 20px;
+`;
+
+export const StyledSvg = styled.svg`
+	overflow: visible;
+	margin: 0 auto;
+	.bar {
+		animation: fadeIn ease-in 1s;
+	}
+
+	.bar-label {
+		animation: fadeIn ease-in 1s;
+		fill: black;
+	}
 
 	.chart {
 		width: 100%;
 		height: 50vh;
 		margin: 12px;
 	}
+
+	.xaxis {
+		animation: fadeIn 2s;
+		display: block;
+		height: 50px;
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeInUp {
+		0% {
+			opacity: 0;
+			transform: translateY(100%);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0%);
+		}
+	}
+	text {
+		font-size: small;
+		color: ${Colors.lightGrey};
+
+		@media screen and (min-width: 600px) {
+			font-size: large;
+		}
+	}
 `;
 
-//La etiqueta select afecta a los selectores de los modals
-//La clase chart hace referencia a las propiedades dentro de la gráfica
+export const ChartLegend = styled.div`
+	margin: 20px auto;
+	ul {
+		animation: fadeIn ease-in 1s;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+	li {
+		margin: 0 10px;
+		display: flex;
+		flex-direction: row;
+		align-items: baseline;
+	}
+
+	.dot {
+		display: inline-block;
+		vertical-align: center;
+		width: 2rem;
+		height: 1rem;
+	}
+
+	.legend-text {
+		display: inline-block;
+		vertical-align: center;
+		color: gray;
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+`;
