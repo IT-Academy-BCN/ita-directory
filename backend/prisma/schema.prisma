@@ -12,6 +12,7 @@ model user_role {
   id         Int     @id @default(autoincrement())
   name       String
   admin      Boolean @default(false)
+  developer  Boolean @default(false) //Developer role added
   manager    Boolean @default(false)
   registered Boolean @default(false)
   user       user[]
@@ -28,21 +29,22 @@ model user_status {
 }
 
 model user {
-  id                   Int                    @id @default(autoincrement())
-  name                 String?
-  lastnames            String?
-  email                String                 @unique
-  password             String
-  created_at           DateTime               @default(now())
-  updated_at           DateTime               @updatedAt
-  user_status          user_status            @relation(fields: [user_status_id], references: [id])
-  user_status_id       Int
-  user_role            user_role              @relation(fields: [user_role_id], references: [id])
-  user_role_id         Int
-  acces_log            acces_log[]
-  recover_password_log recover_password_log[]
-  media                media[]
-  ads                  ads[]
+  id               Int                @id @default(autoincrement())
+  name             String?
+  lastnames        String?
+  email            String             @unique
+  password         String
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  user_status      user_status        @relation(fields: [user_status_id], references: [id])
+  user_status_id   Int
+  user_role        user_role          @relation(fields: [user_role_id], references: [id])
+  user_role_id     Int
+  acces_log        acces_log[]
+  recover_password recover_password_log[]
+  media            media[]
+  ads              ads[]
+  developer_data   Json? //Added developer data (not a jsonb?)
 }
 
 model acces_log {
@@ -157,6 +159,7 @@ model ad_status {
 }
 
 model ads {
+
   id            Int       @id @default(autoincrement())
   user          user      @relation(fields: [user_id], references: [id])
   user_id       Int
