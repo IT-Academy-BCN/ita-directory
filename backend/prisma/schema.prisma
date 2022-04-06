@@ -28,21 +28,21 @@ model user_status {
 }
 
 model user {
-  id               Int                @id @default(autoincrement())
-  name             String?
-  lastnames        String?
-  email            String             @unique
-  password         String
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  user_status      user_status        @relation(fields: [user_status_id], references: [id])
-  user_status_id   Int
-  user_role        user_role          @relation(fields: [user_role_id], references: [id])
-  user_role_id     Int
-  acces_log        acces_log[]
-  recover_password recover_password[]
-  media            media[]
-  ads              ads[]
+  id                   Int                    @id @default(autoincrement())
+  name                 String?
+  lastnames            String?
+  email                String                 @unique
+  password             String
+  created_at           DateTime               @default(now())
+  updated_at           DateTime               @updatedAt
+  user_status          user_status            @relation(fields: [user_status_id], references: [id])
+  user_status_id       Int
+  user_role            user_role              @relation(fields: [user_role_id], references: [id])
+  user_role_id         Int
+  acces_log            acces_log[]
+  recover_password_log recover_password_log[]
+  media                media[]
+  ads                  ads[]
 }
 
 model acces_log {
@@ -53,12 +53,13 @@ model acces_log {
   user_id Int
 }
 
-model recover_password {
-  id          Int      @id @default(autoincrement())
-  hash        String
-  expire_time DateTime
-  user        user     @relation(fields: [user_id], references: [id])
-  user_id     Int
+model recover_password_log {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  password   String
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+
 }
 
 model media {
@@ -174,4 +175,26 @@ model ads {
   ad_status_id  Int
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
+}
+
+model level {
+  id            Int        @id @default(autoincrement())
+  name          String
+  parent        level?     @relation("parent", fields: [parent_id], references: [id])
+  parent_id     Int?
+  child         level[]    @relation("parent")
+  level_type    level_type @relation(fields: [level_type_id], references: [id])
+  level_type_id Int
+}
+
+model level_type {
+  id                Int     @id @default(autoincrement())
+  name              String
+  country           Int // País
+  state             Int // Autonomía
+  city              Int // Provincia
+  town              Int // Ciudad-Población
+  district          Int // Distrito
+  neighborhood      Int // Barrio
+  level             level[]
 }

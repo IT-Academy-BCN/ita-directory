@@ -7,7 +7,7 @@ import {faExternalLinkAlt, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getMonthLength, startingCutPerMonth, startingCutPerYear} from "utils/generalFilter";
 import {useOptionSelectMonth} from "hooks/useOptionSelectMonth";
-function PieChart({data, hideModal, active, size, year, month}) {
+function PieChart({data, hideModal, active, year, month}) {
 	const chartRef = useRef(null); // Creo una referencia y la inicializo vacia.
 	const [curChart, setCurChart] = useState(undefined); // Creo una variable de estado y la inicializo sin definir.
 
