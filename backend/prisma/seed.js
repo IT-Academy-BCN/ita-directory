@@ -29,6 +29,10 @@ const user_roles = [
 		name: "Registered",
 		registered: true,
 	},
+	{
+		name: "Developer",
+		developer: true
+	}
 ];
 
 const user_status = [
@@ -91,6 +95,24 @@ const users = [
 		user_role_id: 3,
 		password: "test5",
 	},
+	{
+		name: "testDeveloper",
+		lastnames: "test test",
+		email: "testdev@test.test",
+		user_status_id: 1,
+		user_role_id: 4,
+		password: "testdev",
+		developer_data: {
+			github: "https://test.github.io",
+			linkedin: "linkedin.com/in/test",
+			website: "www.test.com",
+			tags: ["test","test"],
+			description: "test test test",
+			media_id: "", //?
+			version: 1,
+			layout_type: "" //?
+		}
+	}
 ];
 
 const medias = [
