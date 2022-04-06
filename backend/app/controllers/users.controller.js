@@ -9,6 +9,7 @@ const {
 	registerSchema,
 	hashPassword,
 	decodeHash,
+	isRepeatedPassword,
 } = require("../utils/utils");
 const prisma = require("../../prisma/indexPrisma");
 
@@ -85,7 +86,6 @@ exports.getUser = async (req, res, next) => {
 	}
 	try {
 		const USER = await prisma.user.findUnique({where: {id: parseInt(req.userId)}});
-		console.log("user", USER);
 		if (USER === null) {
 			return next({
 				code: "error",
@@ -257,7 +257,6 @@ exports.updateUser = async (req, res, next) => {
 	if (!req.body) {
 		return res.status(400).json({message: `Enter correct roles!, please`});
 	}
-	console.log("[1;31m llega al post de update");
 
 	try {
 		const updateUser = await prisma.user.update({
@@ -347,55 +346,20 @@ exports.deleteUser = async (req, res, next) => {
 // }
 // };
 
-exports.forgetPassword = async (req, res, next) => {
-	const {email} = req.body;
-	try {
-		const user = await prisma.user.findOne({where: {email}});
-		if (user) {
-			const token = JWT.sign(
-				{
-					iss: "itacademy",
-					sub: {
-						email,
-					},
-					iat: new Date().getTime(),
-					exp: new Date().setDate(new Date().getMinutes() + 20), // Expires in 20 Minutes
-				},
-				process.env.JWT_SECRET
-			);
-			await prisma.password_recovery_log.create({
-				id_mec_user: user.id,
-				recovery_date: new Date(),
-				recovery_active: true,
-				token_id: token,
-				password_old: user.password,
-			});
-			return res.status(200).json({
-				code: "success",
-				header: "Forget Pass succesful url temp",
-				message: "You have succesfuly forget Pass succesful url temp.",
-				hash: encodeURI(new Buffer(token).toString("base64")), // cambiar
-			});
-		} else {
-			return next({
-				code: "error",
-
-				header: "user",
-				message: "Email not found.",
-				statusCode: 404,
-			});
-		}
-	} catch (err) {
-		return next(new Error(err));
-	}
-};
-
 exports.receiveEmailGetToken = async (req, res, next) => {
 	try {
 		const {email} = req.body;
 		const user = await prisma.user.findUnique({where: {email}});
 
-		//console.log("user", passUser);
+		//Will store the password at password_recovery_log, then this log will be use to forbid the user from using old passwords. //!This might not be the best place to call it.
+
+		await prisma.recover_password_log.create({
+			data: {
+				password: user.password,
+				user_id: user.id,
+			},
+		});
+
 		if (!user) {
 			return res.status(404).json(
 				apiResponse({
@@ -409,7 +373,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 			mailOptions.to = email;
 			mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`;
 
-			await transporter.sendMail(mailOptions, (error, info) => {
+			transporter.sendMail(mailOptions, (error, info) => {
 				if (error) {
 					res.status(500).json(error.message);
 				} else {
@@ -450,16 +414,22 @@ exports.changePassword = async (req, res, next) => {
 		}
 
 		//TODO This verification should be implemented using middleware
-		JWT.verify(token, process.env.JWT_SECRET, async (err) => {
+		JWT.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 			if (err) {
 				return res.status(200).json({
 					code: "error",
 					message: "Something is wrong with the token",
 				});
 			}
-			const decodedToken = JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
-			const encodedUserId = decodedToken.sub.user_id;
-			let decodedId = decodeHash(encodedUserId);
+
+			let decodedId = decodeHash(decoded.sub.user_id);
+
+			if (await isRepeatedPassword(decodedId[0], password1)) {
+				return res.status(200).json({
+					code: "error",
+					message: "Can't repeat passwords",
+				});
+			}
 
 			const hashedPassword = await hashPassword(password1);
 
