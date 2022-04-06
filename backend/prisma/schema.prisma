@@ -111,20 +111,6 @@ model media_type {
 //   user_id                  Int
 // }
 
-model ad_type {
-  id           Int    @id @default(autoincrement())
-  name         String
-  house        Int
-  room         Int
-  garage       Int
-  storage      Int
-  office       Int
-  warehouse    Int
-  building     Int
-  new_building Int
-  ads          ads[]
-}
-
 model level_type {
   id           Int     @id @default(autoincrement())
   name         String
@@ -147,11 +133,25 @@ model level {
   level_type_id Int
 }
 
+model ad_type {
+  id           Int    @id @default(autoincrement())
+  name         String
+  house        Int
+  room         Int
+  garage       Int
+  storage      Int
+  office       Int
+  warehouse    Int
+  building     Int
+  new_building Int
+  ads          ads[]
+}
+
 model ad_status {
   id         Int    @id @default(autoincrement())
   name       String
-  publish    Int
   un_publish Int
+  publish    Int
   ads        ads[]
 }
 
@@ -168,10 +168,10 @@ model ads {
   n_bathrooms   Int
   map_lat       Decimal
   map_lon       Decimal
-  ad_type_id    Int
   ad_type       ad_type   @relation(fields: [ad_type_id], references: [id])
+  ad_type_id    Int
+  ad_status     ad_status @relation(fields: [ad_status_id], references: [id])
   ad_status_id  Int
-  ad_status     ad_status @relation(fields: [ad_status_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
 }

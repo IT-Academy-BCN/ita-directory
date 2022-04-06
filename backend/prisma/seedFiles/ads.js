@@ -12,9 +12,9 @@ module.exports = [
 		map_lat: 41.408096,
 		map_lon: 2.206178,
 		ad_type_id: 1,
-		ad_status_id: 1,
-  	created_at: new Date("2019-03-19T14:21:00+0200"),
-  	updated_at: new Date("2020-03-19T14:21:00+0200")
+		ad_status_id: 2,
+  	created_at: new Date("2019-3-19"),
+  	updated_at: new Date("2020-3-20")
 	},
 	{
 		user_id: 1,
@@ -28,9 +28,9 @@ module.exports = [
 		map_lat: 41.397528,
 		map_lon: 2.115692,
 		ad_type_id: 1,
-		ad_status_id: 0,
-  	created_at: new Date("2021-03-19T14:21:00+0200"),
-  	updated_at: new Date("2022-03-19T14:21:00+0200")
+		ad_status_id: 1,
+  	created_at: new Date("2021-03-19"),
+  	updated_at: new Date("2022-03-19")
 	},
 	{
 		user_id: 1,
@@ -44,9 +44,9 @@ module.exports = [
 		map_lat: 41.373817,
 		map_lon: 2.143247,
 		ad_type_id: 1,
-		ad_status_id: 0,
-  	created_at: new Date("2018-02-19T14:21:00+0200"),
-  	updated_at: new Date("2022-02-19T14:21:00+0200")
+		ad_status_id: 2,
+  	created_at: new Date("2018-02-19"),
+  	updated_at: new Date("2022-02-19")
 	},
 	{
 		user_id: 1,
@@ -60,9 +60,9 @@ module.exports = [
 		map_lat: 41.440082,
 		map_lon: 2.190728,
 		ad_type_id: 1,
-		ad_status_id: 1,
-  	created_at: new Date("2020-04-19T14:21:00+0200"),
-  	updated_at: new Date("2020-05-19T14:21:00+0200")
+		ad_status_id: 2,
+  	created_at: new Date("2020-4-19"),
+  	updated_at: new Date("2020-05-19")
 	},
 	{
 		user_id: 1,
@@ -76,9 +76,9 @@ module.exports = [
 		map_lat: 41.377679,
 		map_lon: 2.190640,
 		ad_type_id: 1,
-		ad_status_id: 1,
-  	created_at: new Date("2020-03-22T14:21:00+0200"),
-  	updated_at: new Date("2020-01-19T14:21:00+0200")
+		ad_status_id: 2,
+  	created_at: new Date("2020-03-22"),
+  	updated_at: new Date("2020-04-19")
 	},
 	{
 		user_id: 1,
@@ -92,8 +92,8 @@ module.exports = [
 		map_lat: 41.397528,
 		map_lon: 2.115692,
 		ad_type_id: 1,
-		ad_status_id: 1,
-  	created_at: new Date("2019-06-23T14:21:00+0200"),
-  	updated_at: new Date("2020-07-19T14:21:00+0200")
+		ad_status_id: 2,
+  	created_at: new Date("2020-2-2"),
+  	updated_at: new Date("2020-3-4"),
 	},
 ]

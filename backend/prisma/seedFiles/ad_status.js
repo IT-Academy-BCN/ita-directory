@@ -1,12 +1,12 @@
 module.exports = [
 	{
 		name: "un_publish",
-		un_publish: 1,
-		publish: 0
+		publish: 0,
+		un_publish: 1
 	},
 	{
 		name: "publish",
-		un_publish: 0,
 		publish: 1,
+		un_publish: 0
 	}
 ];
