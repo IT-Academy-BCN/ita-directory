@@ -13,8 +13,8 @@ module.exports = [
 		map_lon: 2.206178,
 		ad_type_id: 1,
 		ad_status_id: 2,
-  	created_at: new Date("2019-3-19"),
-  	updated_at: new Date("2020-3-20")
+  	created_at: new Date("2019-3-19 22:00:00Z"),
+  	updated_at: new Date("2020-3-20 17:30:00Z")
 	},
 	{
 		user_id: 1,
@@ -29,8 +29,8 @@ module.exports = [
 		map_lon: 2.115692,
 		ad_type_id: 1,
 		ad_status_id: 1,
-  	created_at: new Date("2021-03-19"),
-  	updated_at: new Date("2022-03-19")
+  	created_at: new Date("2021-03-19 22:00:00Z"),
+  	updated_at: new Date("2022-03-19 22:00:00Z")
 	},
 	{
 		user_id: 1,
@@ -45,8 +45,8 @@ module.exports = [
 		map_lon: 2.143247,
 		ad_type_id: 1,
 		ad_status_id: 2,
-  	created_at: new Date("2018-02-19"),
-  	updated_at: new Date("2022-02-19")
+  	created_at: new Date("2018-02-19 22:00:00Z"),
+  	updated_at: new Date("2022-02-19 03:16:00Z")
 	},
 	{
 		user_id: 1,
@@ -61,8 +61,8 @@ module.exports = [
 		map_lon: 2.190728,
 		ad_type_id: 1,
 		ad_status_id: 2,
-  	created_at: new Date("2020-4-19"),
-  	updated_at: new Date("2020-05-19")
+  	created_at: new Date("2020-4-19 22:00:00Z"),
+  	updated_at: new Date("2020-05-19 03:16:00Z")
 	},
 	{
 		user_id: 1,
@@ -77,8 +77,8 @@ module.exports = [
 		map_lon: 2.190640,
 		ad_type_id: 1,
 		ad_status_id: 2,
-  	created_at: new Date("2020-03-22"),
-  	updated_at: new Date("2020-04-19")
+  	created_at: new Date("2020-03-22 22:00:00Z"),
+  	updated_at: new Date("2020-04-19 17:00:00Z")
 	},
 	{
 		user_id: 1,
@@ -93,7 +93,7 @@ module.exports = [
 		map_lon: 2.115692,
 		ad_type_id: 1,
 		ad_status_id: 2,
-  	created_at: new Date("2020-2-2"),
-  	updated_at: new Date("2020-3-4"),
+  	created_at: new Date("2020-2-2 22:00:00Z"),
+  	updated_at: new Date("2020-3-4 17:00:00Z"),
 	},
 ]
