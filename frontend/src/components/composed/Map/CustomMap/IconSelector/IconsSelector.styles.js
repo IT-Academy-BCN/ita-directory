@@ -8,7 +8,7 @@ export const IconContainer = styled.div`
 	z-index: 999;
 	position: absolute;
 	transform: translate(10%, -140%);
-	display: felex;
+	display: flex;
 	align-items: center;
 	flex-direction: row;
 	flex-wrap: wrap;

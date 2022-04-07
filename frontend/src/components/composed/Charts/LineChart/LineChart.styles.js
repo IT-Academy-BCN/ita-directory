@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SelectArrow from "assets/images/select-arrow.svg";
 import Colors from "theme/Colors";
+import {Device} from "../../../../theme/mediaQueries";
 
 export const LineGraphicStyled = styled.div`
 	width: 100%;
@@ -20,7 +21,7 @@ export const LineGraphicStyled = styled.div`
 		justify-content: space-between;
 		padding-bottom: 1rem;
 
-		@media (min-width: 768px) {
+		@media ${Device.Tablet} {
 			flex-direction: row;
 			padding: 0.5rem 2rem;
 		}
@@ -41,7 +42,7 @@ export const LineGraphicStyled = styled.div`
 				appearance: none;
 				margin-right: 0.3rem;
 				padding-left: 0.5rem;
-				width: 110px;
+				width: 90px;
 				height: 30px;
 				box-shadow: 0 3px 6px #00000029;
 				border: none;
@@ -52,8 +53,9 @@ export const LineGraphicStyled = styled.div`
 				background-repeat: no-repeat;
 				background-size: 15px 12px;
 				background-color: #fff;
-				@media (max-width: 768px) {
-					width: 90px;
+
+				@media ${Device.Tablet} {
+					width: 110px;
 				}
 			}
 

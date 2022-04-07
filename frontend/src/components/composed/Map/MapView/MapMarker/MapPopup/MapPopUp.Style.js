@@ -22,7 +22,7 @@ export const Content = styled.div`
 	padding: 0 1rem;
 `;
 
-export const Adress = styled.div`
+export const Address = styled.div`
 	font-size: 16px;
 	color: #666;
 `;

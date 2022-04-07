@@ -4,7 +4,7 @@ import {faComments} from "@fortawesome/free-solid-svg-icons";
 import ContactModal from "components/composed/ContactModal/ContactModal.js";
 
 // Styles
-import {PopupStyled, Content, Adress, PropertyData, Span, Price} from "./MapPopUp.Style";
+import {PopupStyled, Content, Address, PropertyData, Span, Price} from "./MapPopUp.Style";
 import Colors from "theme/Colors";
 import Button from "components/units/Button/Button";
 
@@ -21,9 +21,9 @@ const MapPopup = (props) => {
 				</PopupStyled>
 				<Content>
 					<PropertyData>
-						<Adress>
+						<Address>
 							<p>{name}</p>
-						</Adress>
+						</Address>
 						<Price>{Number(price.toFixed(2)).toLocaleString()} €/mes</Price>
 						<div className="property-data-extra">
 							<Span>Gastos {gastosIncluidos ? " incluidos" : " no incluidos"}</Span>

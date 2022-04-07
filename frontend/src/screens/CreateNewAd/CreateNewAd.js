@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import Body from "components/layout/Body/Body";
 import InputNumber from "components/units/InputNumber/InputNumber";
@@ -8,11 +8,17 @@ import Input from "components/units/Input/Input";
 import Notification from "components/units/Notifications/Notification";
 import Modal from "components/composed/Modal/Modal";
 import {faMapMarkerAlt, faBed, faEuroSign, faHome, faBath} from "@fortawesome/free-solid-svg-icons";
-import {Wrapper, MapText, MapBox, CsvNotificationError, CsvNotificationSuccess} from "./CreateNewAd.styles";
+import {
+	Wrapper,
+	MapText,
+	MapBox,
+	CsvNotificationError,
+	CsvNotificationSuccess,
+} from "./CreateNewAd.styles";
 import {Container} from "theme/GlobalStyles";
 import CustomMap from "components/composed/Map/CustomMap/CustomMap";
 
-import { HeaderContent } from "./CreateNewAd.styles";
+import {HeaderContent} from "./CreateNewAd.styles";
 
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -146,47 +152,45 @@ const CreateNewAd = () => {
 		},
 	];
 
-
-	const[openModal, setOpenModal] = useState(false);
-	const[csvFile, setCsvFile] = useState(null);
-	const[validCsv, setValidCsv] = useState(null);
-	const[validCsvFile, setValidCsvFile] = useState(null);
-	const[notification, setNotification] = useState(null);
-	
-
-	
+	const [openModal, setOpenModal] = useState(false);
+	const [csvFile, setCsvFile] = useState(null);
+	const [validCsv, setValidCsv] = useState(null);
+	const [validCsvFile, setValidCsvFile] = useState(null);
+	const [notification, setNotification] = useState(null);
 
 	const updateCsvFiles = (e) => {
-	
 		setCsvFile(e);
+	};
 
-	}
-
-	const submitCsv = async() => {
+	const submitCsv = async () => {
 		if (csvFile == null) {
 			setValidCsvFile(false);
-		}
-		else{
+		} else {
 			const f = new FormData();
 			f.append("some_csv", csvFile);
 
 			console.table(Object.fromEntries(f));
 
-			await axios.post("http://localhost:10910/ads/v1/post-ads-csv", f, {headers: {'Content-Type':'multipart/form-data','authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpdGFjYWRlbXkiLCJzdWIiOnsidXNlcl9pZCI6IjlSQUtkMk9iSk0ifSwiaWF0IjoxNjQ3NDIxMDE3LCJleHAiOjE2NDc0MjE5MTd9.bJvx65yQRxtHA3aaU42_juZ2I5Q04bok3zqwWR8bO_A'}})
-			.then(response=>{
-				console.log(response.data);
-				setValidCsvFile(true);
-			}).catch(error=> {
-				console.log(error);
-				setValidCsvFile(false);
-			})
+			await axios
+				.post("http://localhost:10910/ads/v1/post-ads-csv", f, {
+					headers: {
+						"Content-Type": "multipart/form-data",
+						authorization:
+							"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpdGFjYWRlbXkiLCJzdWIiOnsidXNlcl9pZCI6IjlSQUtkMk9iSk0ifSwiaWF0IjoxNjQ3NDIxMDE3LCJleHAiOjE2NDc0MjE5MTd9.bJvx65yQRxtHA3aaU42_juZ2I5Q04bok3zqwWR8bO_A",
+					},
+				})
+				.then((response) => {
+					console.log(response.data);
+					setValidCsvFile(true);
+				})
+				.catch((error) => {
+					console.log(error);
+					setValidCsvFile(false);
+				});
 		}
 		setValidCsv(null);
 		setOpenModal(false);
-		
-	}
-
-
+	};
 
 	return (
 		<>
@@ -203,21 +207,17 @@ const CreateNewAd = () => {
 					isSuccess={true}
 				/>
 			)}
-
-				{/* <HeaderContent>
+			{/* <HeaderContent>
 					<h2>Publicar Anuncio</h2>
 				</HeaderContent> */}
-					
 			<Body
 				title="Publicar anuncio"
 				justifyTitle="flex-start"
 				paddingTitle="500px"
 				paddingTitle2="15vw"
 				isLoggedIn="true"
-				isTitleVisible = "true"
+				isTitleVisible="true"
 			>
-				
-			
 				<Container>
 					<Wrapper>
 						<Button
@@ -231,20 +231,24 @@ const CreateNewAd = () => {
 							className="green-gradient"
 							onClick={() => setOpenModal(true)}
 						/>
-						<Modal active={openModal} hideModal={() => setOpenModal(false)}> 
-							<Input type="file" accept=".csv" onChange={(e) => updateCsvFiles(e.target.files[0])} />
+						<Modal active={openModal} hideModal={() => setOpenModal(false)}>
+							<Input
+								type="file"
+								accept=".csv"
+								onChange={(e) => updateCsvFiles(e.target.files[0])}
+							/>
 
-							{ validCsv == null ? <></> : (
-								validCsv == false ?
-									<CsvNotificationError>
-										<p>Archivo No Válido</p>
-									</CsvNotificationError>
-									: 
-									<CsvNotificationSuccess>
-										<p>Archivo Válido</p>
-									</CsvNotificationSuccess>
-								)
-							}
+							{validCsv == null ? (
+								<></>
+							) : validCsv === false ? (
+								<CsvNotificationError>
+									<p>Archivo No Válido</p>
+								</CsvNotificationError>
+							) : (
+								<CsvNotificationSuccess>
+									<p>Archivo Válido</p>
+								</CsvNotificationSuccess>
+							)}
 							<Button
 								buttonStyles={{
 									width: "17rem",
@@ -257,31 +261,26 @@ const CreateNewAd = () => {
 								onClick={() => submitCsv()}
 							/>
 						</Modal>
-						
-						{ 
-							validCsvFile == null ? <></> : 
-								validCsvFile == false ?
-									<Notification
-										message={`Tus anuncios no se han podido publicar.`}
-										isSuccess={false}
-										autoClose={true}
-										closeNotification = {() => setNotification(false)}
-									
-									/> : 
-									<Notification
-										message={`Tus anuncios han sido publicados con exito`}
-										isSuccess={true}
-										autoClose={true}
-										closeNotification = {() => setNotification(false)}
-									/>
-						}
 
-						
-
+						{validCsvFile == null ? (
+							<></>
+						) : validCsvFile === false ? (
+							<Notification
+								message={`Tus anuncios no se han podido publicar.`}
+								isSuccess={false}
+								autoClose={true}
+								closeNotification={() => setNotification(false)}
+							/>
+						) : (
+							<Notification
+								message={`Tus anuncios han sido publicados con éxito`}
+								isSuccess={true}
+								autoClose={true}
+								closeNotification={() => setNotification(false)}
+							/>
+						)}
 
 						<form onSubmit={handleSubmit(submitForm)} noValidate>
-						
-
 							{inputComponentData.map((el, i) => {
 								const {
 									Component,
@@ -326,7 +325,6 @@ const CreateNewAd = () => {
 								type="normal"
 								className="blue-gradient"
 							/>
-						
 						</form>
 						{submittedData && (
 							<div>

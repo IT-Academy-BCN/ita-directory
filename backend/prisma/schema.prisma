@@ -143,8 +143,8 @@ model ads {
   ad_type_id    Int
   ad_type       ad_type  @relation(fields: [ad_type_id], references: [id])
   publish       Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updateAt      DateTime @updatedAt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
 model level {

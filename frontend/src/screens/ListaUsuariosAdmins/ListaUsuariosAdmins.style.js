@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../theme/mediaQueries";
 
 export const StyledTableWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	margin: 20px 0px;
-	font: normal normal normal 14px/18px Arial;
+	font: normal normal normal 6px/18px Arial;
 	width: 100%;
 	border-radius: 10px;
 	border: 0px 1px 1px 1px solid ${Colors.maroon};
@@ -14,12 +15,8 @@ export const StyledTableWrapper = styled.div`
 	flex-wrap: nowrap;
 	padding: 0.5rem 1.8rem;
 
-	@media only screen and (max-width: 650px) {
-		width: 100%;
-		font: normal normal normal 6px/18px Arial;
-	}
-	@media only screen and (max-width: 450px) {
-		width: 100%;
+	@media only ${Device.Tablet} {
+		font: normal normal normal 14px/18px Arial;
 	}
 
 	.actions-column {
@@ -53,10 +50,7 @@ export const StyledCell = styled.div`
 	justify-content: ${(props) => (props.justify ? props.justify : "start")};
 	color: ${(props) => props.color};
 	font-weight: bold;
+	font-size: 14px;
 	padding: 10px 0px;
 	padding-left: ${(props) => props.paddingL};
-
-	@media only screen and (max-width: 450px) {
-		font-size: 14px;
-	}
 `;
