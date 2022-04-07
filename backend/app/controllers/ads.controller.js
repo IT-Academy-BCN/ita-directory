@@ -449,17 +449,18 @@ async function activeAdsByLocationAndDate(req, res) {
 	try {
 		const location_id = JSON.parse(req.body.location_id);
 		const initialDate = new Date(req.body.initialDate);
-		const finalDate = new Date(req.body.finalDate);
+		const finalDate = new Date(req.body.finalDate)
+		const status_id = (req.body.status_id);
 		const ads = await prisma.ads.findMany({
 			where: {
-				id: location_id,
-				createdAt: {
-					gte: initialDate,
-					lte: finalDate
+				location: location_id,
+				created_at: {
+					gt: initialDate,
+					lt: finalDate
 				},
 				AND: [
 					{
-						publish: true,
+						ad_status_id: status_id
 					}
 				]
 			}
