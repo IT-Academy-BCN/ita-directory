@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
+import {Device, responsiveSizes} from "../../theme/mediaQueries";
+
 export const DashboardContainer = styled(Container)`
-	@media (max-width: 600px) {
-		max-width: 95%;
+	max-width: 90%;
+
+	@media ${Device.Tablet} {
+		max-width: 80%;
 	}
-	@media (min-width: 481px) and (max-width: 768px) {
-		max-width: 85%;
-	}
-	@media (min-width: 768px) and (max-width: 1400px) {
+	@media ${Device.Laptop} {
 		max-width: 70%;
 	}
 `;
@@ -17,7 +18,7 @@ export const StyledDashboard = styled.div`
 	flex-direction: column;
 	width: 100%;
 	justify-content: center;
-	
+
 	.marginTop {
 		margin-bottom: 2rem;
 		flex-grow: 1;
@@ -29,7 +30,7 @@ export const StyledDashboard = styled.div`
 	}
 	.marginLeft {
 		flex-grow: 1;
-		@media (min-width: 1400px) {
+		@media ${Device.LaptopLg} {
 			padding-left: 2rem;
 		}
 	}
@@ -37,31 +38,21 @@ export const StyledDashboard = styled.div`
 	.row {
 		display: flex;
 		justify-content: space-between;
+		width: 100%;
+		flex-direction: column;
 
-		@media (max-width: 480px) {
-			display: flex;
+		@media ${Device.Tablet} {
 			width: 100%;
-			flex-direction: column;
+			flex-direction: row;
 		}
-		@media (max-width: 768px) {
-			display: flex;
-			width: 100%;
-			flex-direction: column;
-		}
-
-		@media (max-width: 1400px) {
-			display: flex;
-			width: 100%;
-			flex-direction: column;
+		@media ${Device.Laptop} {
 			justify-content: space-between;
 		}
 	}
 
 	.graphicMargin {
-		@media (max-width: 1030px) {
-			margin-bottom: 3rem;
-			margin-top: 2rem;
-			margin-right: 0;
-		}
+		margin-bottom: 3rem;
+		margin-top: 2rem;
+		margin-right: 0;
 	}
 `;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const SearchBarContainer = styled.div`
 	width: 100%;
@@ -8,8 +9,7 @@ export const SearchBarContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 
-
-	@media only screen and (min-width: 768px) {
+	@media only ${Device.Tablet} {
 		margin: 0;
 		flex-direction: row;
 		justify-content: ${(props) => (props.isLoading === 1 ? "center" : "flex-start")};
@@ -20,7 +20,7 @@ export const SearchBarContainer = styled.div`
 		width: 100%;
 		margin-bottom: 0.5rem;
 
-		@media only screen and (min-width: 768px) {
+		@media only ${Device.Tablet} {
 			margin-bottom: 0;
 			margin-right: 0.5rem;
 			width: 35%;
@@ -31,7 +31,7 @@ export const SearchBarContainer = styled.div`
 		width: 100%;
 		margin: 0;
 
-		@media only screen and (min-width: 768px) {
+		@media only ${Device.Tablet} {
 			width: 2.4rem;
 			height: 2.4rem;
 			padding: 0;
@@ -56,7 +56,7 @@ export const SearchBarContainer = styled.div`
 				transform: rotate(360deg);
 			}
 		}
-		@media only screen and (min-width: 768px) {
+		@media only ${Device.Tablet} {
 			width: 2.5rem;
 			height: 2.5rem;
 		}

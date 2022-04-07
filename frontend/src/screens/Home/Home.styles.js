@@ -1,15 +1,20 @@
 import styled from "styled-components";
 import {Container} from "theme/GlobalStyles";
+import {Device} from "theme/mediaQueries";
 
 export const HomeContainer = styled(Container)`
 	flex-direction: column;
+	min-height: calc(100vh - 360px);
 
-	min-height: 70vh ul {
+	@media ${Device.Tablet} {
+		min-height: calc(100vh - 300px);
+	}
+
+	ul {
 		text-align: center;
-
-		li {
-			margin: 0.5rem;
-		}
+	}
+	li {
+		margin: 0.5rem;
 	}
 
 	a {

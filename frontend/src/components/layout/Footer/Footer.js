@@ -8,10 +8,12 @@ import logo from "../../../assets/logos/logo.png";
 const Footer = () => {
 	return (
 		<Container column>
-			<StyledFooter>
+			<StyledFooter className="footer">
 				<Logo>
-					<img src={logo} alt="corporate logo" />
-					<p className="directory">_directory</p>
+					<div className="footer__logo">
+						<img className="footer__logo-image" src={logo} alt="corporate logo" />
+						<p className="footer__logo-text">_directory</p>
+					</div>
 					<Credits>
 						<p>
 							Diseñado por <span>Kevin Mamaqui</span>
@@ -25,7 +27,10 @@ const Footer = () => {
 				<Information>
 					<Rights>Todos los derechos reservados.</Rights>
 					<Legal>
-						<Anchor href="#">Aviso Legal</Anchor>-<Anchor href="#">Privacidad</Anchor>-
+						<Anchor href="#">Aviso Legal</Anchor>
+						{" - "}
+						<Anchor href="#">Privacidad</Anchor>
+						{" - "}
 						<Anchor href="#">Cookies</Anchor>
 					</Legal>
 				</Information>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device, responsiveSizes} from "../../../theme/mediaQueries";
 
 export const CardStyled = styled.div`
 	display: flex;
@@ -9,10 +10,10 @@ export const CardStyled = styled.div`
 	border-radius: 6px;
 	opacity: 1;
 	align-items: center;
+	flex-direction: column;
 
-	@media only screen and (max-width: 768px) {
-		flex-direction: column;
-		align-items: center;
+	@media only ${Device.Tablet} {
+		flex-direction: row;
 	}
 
 	img {
@@ -21,22 +22,23 @@ export const CardStyled = styled.div`
 		height: auto;
 		object-fit: cover;
 		border-radius: 6px;
-		margin-left: 0.5rem;
-		@media only screen and (max-width: 768px) {
-			margin-left: 0;
-			margin-top: 0.5rem;
-		}
-		@media only screen and (min-width: 768px) and (max-width: 1024px) {
+		margin-left: 0rem;
+		margin-top: 0.5rem;
+
+		@media only ${Device.Tablet} {
+			margin-left: 0.5;
+			margin-top: 0;
 			width: auto;
 			height: 100%;
 		}
 	}
 
 	.info {
-		margin-left: 3rem;
+		margin-left: 0.5rem;
 		padding: 1rem;
-		@media only screen and (max-width: 768px) {
-			margin-left: 0.5rem;
+
+		@media only ${Device.Tablet} {
+			margin-left: 3rem;
 		}
 	}
 
@@ -51,15 +53,15 @@ export const CardStyled = styled.div`
 
 	.description {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-start;
 		margin-right: 0.2rem;
 		max-width: 60%;
 
-		@media only screen and (max-width: 1280px) {
-			flex-direction: column;
-			align-items: flex-start;
+		@media only ${Device.Tablet} {
+			flex-direction: row;
+			align-items: center;
 		}
 	}
 

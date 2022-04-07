@@ -21,6 +21,7 @@ export const InputStyled = styled.input.attrs((props) => ({
 	hover:opacity-90 `,
 }))`
 	height: 49px;
+
 	&.error {
 		border: 1px solid #fecaca !important;
 	}

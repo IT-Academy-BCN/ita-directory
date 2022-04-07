@@ -43,7 +43,7 @@ function getMaxMin(ads) {
 
 	//console.log("minlat", minLat);
 
-	if (ads.legth === 0) {
+	if (ads.length === 0) {
 		return {
 			topLeft: [41.478316, 2.073087],
 			bottomRight: [41.351637, 2.267592],
@@ -86,7 +86,6 @@ const MapView = ({filteredAds, localizedAdId}) => {
 			{filteredAds.map((ad, i) => (
 				<MapMarker key={i} ad={ad} activePopup={localizedAdId === i} />
 			))}
-
 		</MapContainer>
 	);
 };

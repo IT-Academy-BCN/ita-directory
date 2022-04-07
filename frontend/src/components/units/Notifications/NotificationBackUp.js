@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "theme/mediaQueries";
 // import tw, {theme} from "twin.macro";
 
 export const Container = styled.div`
@@ -135,11 +136,11 @@ export const StyleNotificationError = styled.div.attrs({
 	background: #bc3434;
 	margin-top: 6.5rem;
 	margin-left: 1rem;
-	@media (min-width: 768px) {
+	@media ${Device.Tablet} {
 		margin-top: 1rem;
 		margin-right: min(2%);
 	}
-	@media (min-width: 931px) {
+	@media ${Device.Laptop} {
 		margin-right: min(10%);
 	}
 `;

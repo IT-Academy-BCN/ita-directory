@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "theme/Colors";
+import {Device} from "../../theme/mediaQueries";
 
 export const AdStyled = styled.div`
 	display: flex;
@@ -7,54 +8,31 @@ export const AdStyled = styled.div`
 	align-items: center;
 	width: 100%;
 	align-items: right;
+	margin-left: 1rem;
+	margin-right: 1.5rem;
 
-	@media only screen and (min-width: 1020px) {
+	@media only ${Device.Tablet} {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-	@media only screen and (max-width: 1019px) {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	@media only screen and (max-width: 468px) {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-left: 1rem;
-		margin-right: 1.5rem;
 	}
 
 	.Title {
-		@media only screen and (min-width: 1020px) {
-			color: ${Colors.darkRed};
-			padding-top: 0.5rem;
-			padding-bottom: 1.5rem;
-			font-weight: bold;
-			font-size: 36px;
-			text-align: center;
-		}
-		@media only screen and (max-width: 1019px) {
-			color: ${Colors.darkRed};
-			padding-top: 0.5rem;
-			padding-bottom: 1.5rem;
-			font-weight: bold;
-			font-size: 36px;
-			text-align: center;
-		}
-		@media only screen and (max-width: 468px) {
-			color: ${Colors.darkRed};
-			padding-top: 0.5rem;
-			padding-bottom: 1.5rem;
-			font-weight: bold;
-			font-size: 36px;
-			text-align: center;
-		}
+		color: ${Colors.darkRed};
+		padding-top: 0.5rem;
+		padding-bottom: 1.5rem;
+		font-weight: bold;
+		font-size: 36px;
+		text-align: center;
 
 		.Bottom {
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
+			width: 85%;
+			padding-bottom: 3rem;
+			padding-top: 2rem;
+			padding-left: 2rem;
+			padding-right: 2rem;
 			align-items: space-between;
 			justify-content: space-between;
 			flex-wrap: wrap;
@@ -62,106 +40,35 @@ export const AdStyled = styled.div`
 			padding-right: 1.5rem;
 			margin-top: 1rem;
 
-			@media only screen and (min-width: 1020px) {
+			@media only ${Device.Laptop} {
 				display: flex;
-				flex-direction: column;
-				width: 60%;
+				flex-direction: row;
+				width: 70%;
 				padding-bottom: 3rem;
 				padding-top: 2rem;
-			}
-			@media only screen and (max-width: 1019px) {
-				display: flex;
-				flex-direction: column;
-				width: 60%;
-				padding-bottom: 3rem;
-				padding-top: 2rem;
-			}
-			@media only screen and (max-width: 468px) {
-				display: flex;
-				flex-direction: column;
-				width: 90%;
-				padding-bottom: 3rem;
-				padding-top: 2rem;
-				padding-left: 2rem;
-				padding-right: 2rem;
 			}
 		}
 	}
 `;
 
-// export const StyledTitle = styled.div`
-// 	@media only screen and (min-width: 1020px) {
-// 		color: ${Colors.darkRed};
-// 		padding-top: 0.5rem;
-// 		padding-bottom: 1.5rem;
-// 		font-weight: bold;
-// 		font-size: 36px;
-// 		text-align: center;
-// 	}
-// 	@media only screen and (max-width: 1019px) {
-// 		color: ${Colors.darkRed};
-// 		padding-top: 0.5rem;
-// 		padding-bottom: 1.5rem;
-// 		font-weight: bold;
-// 		font-size: 36px;
-// 		text-align: center;
-// 	}
-// 	@media only screen and (max-width: 468px) {
-// 		color: ${Colors.darkRed};
-// 		padding-top: 0.5rem;
-// 		padding-bottom: 1.5rem;
-// 		font-weight: bold;
-// 		font-size: 36px;
-// 		text-align: center;
-// 	}
-// `;
-
 export const StyledUl = styled.ul`
-	@media only screen and (min-width: 1020px) {
-		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		font-size: 16px;
-		margin-top: 1rem;
-	}
-	@media only screen and (max-width: 1019px) {
-		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		font-size: 16px;
-
-		margin-top: 1rem;
-	}
-	@media only screen and (max-width: 468px) {
-		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		font-size: 16px;
-		margin-top: 1rem;
-	}
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	font-size: 16px;
+	margin-top: 1rem;
 `;
 
 export const StyledText = styled.div`
-	@media only screen and (min-width: 1020px) {
+	font-size: 14px;
+	text-align: left;
+	line-height: 1.5;
+	padding-bottom: 1rem;
+
+	@media only ${Device.Tablet} {
 		font-size: 16px;
-		text-align: left;
-		line-height: 1.5;
-		padding-bottom: 1rem;
-	}
-	@media only screen and (max-width: 1019px) {
-		font-size: 16px;
-		text-align: left;
-		line-height: 1.5;
-		padding-bottom: 1rem;
-	}
-	@media only screen and (max-width: 468px) {
-		font-size: 14px;
 		text-align: left;
 		line-height: 1.5;
 		padding-bottom: 1rem;
@@ -170,40 +77,28 @@ export const StyledText = styled.div`
 
 export const BottomDiv = styled.div`
 	display: flex;
-	flex-direction: row;
-	align-items: space-between;
-	justify-content: right;
-	flex-wrap: wrap;
-	font-size: 16px;
-	padding-right: 1.5rem;
-	margin-top: 1rem;
+	flex-direction: column;
+	width: 90%;
+	padding-bottom: 3rem;
+	padding-top: 2rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	font-size: 12px;
 
-	@media only screen and (min-width: 1020px) {
+	@media only ${Device.Laptop} {
 		display: flex;
-		flex-direction: column;
-		width: 60%;
-		padding-bottom: 3rem;
-		padding-top: 2rem;
-	}
-	@media only screen and (max-width: 1019px) {
-		display: flex;
-		flex-direction: column;
-		width: 60%;
-		padding-bottom: 3rem;
-		padding-top: 2rem;
-	}
-	@media only screen and (max-width: 468px) {
-		display: flex;
-		flex-direction: column;
-		width: 90%;
-		padding-bottom: 3rem;
-		padding-top: 2rem;
-		padding-left: 2rem;
-		padding-right: 2rem;
+		flex-direction: row;
+		align-items: space-between;
+		justify-content: right;
+		flex-wrap: wrap;
+		font-size: 16px;
+		width: 70%;
+		padding-right: 1.5rem;
+		margin-top: 1rem;
 	}
 `;
 
-export const SyledButton = styled.button`
+export const StyledButton = styled.button`
 	margin: 0;
 	padding: 0;
 `;
