@@ -217,7 +217,7 @@ exports.login = async (req, res, next) => {
 				code: "error",
 				header: "User doesn't exist",
 				message: "There's no user with that email, please try again or get in touch.",
-				statusCode: 200,
+				statusCode: 400,
 			});
 		}
 
@@ -228,7 +228,7 @@ exports.login = async (req, res, next) => {
 				header: "Wrong password",
 				message:
 					"The password you introduced is incorrect, please try again or try to recover your password.",
-				statusCode: 200,
+				statusCode: 400,
 			});
 		} else {
 			const token = signToken(USER.id);
