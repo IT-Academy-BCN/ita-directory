@@ -1,7 +1,7 @@
 import {useState} from "react";
 import axios from "axios";
 import Notification from "components/units/Notifications/Notification";
-import {StyledParagraph} from "./RecoverPassword.styles";
+// import {StyledParagraph} from "./RecoverPassword.styles";
 
 // Layout Components
 import Body from "components/layout/Body/Body";
@@ -76,10 +76,14 @@ const RecoverPassword = () => {
             <Body title="Cambiar contraseña" justifyTitle="center">
                 <Container>
                     <Form onSubmit={handleSubmit(submitForm)} noValidation>
-                        <StyledParagraph>
+                        {/* <StyledParagraph>
                             Si has olvidado la contraseña introduce tu email y te enviaremos un
                             enlace para cambiarla.
-                        </StyledParagraph>
+                        </StyledParagraph> */}
+                        <p>
+                            Si has olvidado la contraseña introduce tu email y te enviaremos un
+                            enlace para cambiarla.
+                        </p>
                         <Input
                             type="email"
                             name="email"

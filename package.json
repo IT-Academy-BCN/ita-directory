@@ -26,7 +26,7 @@
     "node.js",
     "prisma",
     "directory",
-    "docosaurus"
+    "docusaurus"
   ],
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
@@ -39,6 +39,5 @@
     "lint-staged": "^11.1.2",
     "prisma": "^3.11.0"
   },
-
   "dependencies": {}
 }
