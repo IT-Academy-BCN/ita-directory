@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 
 export const InputContainerStyled = styled.div.attrs((props) => ({
 	className: `${props.minMarginTop ? "mt-0.5" : "mt-4"}`,

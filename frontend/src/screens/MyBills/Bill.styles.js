@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import tw from "twin.macro";
-import Colors from "theme/Colors";
+import Colors from "../../theme/Colors";
 import {Device} from "../../theme/mediaQueries";
 
 export const Error = styled.div`

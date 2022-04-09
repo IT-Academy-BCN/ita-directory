@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Container} from "theme/GlobalStyles";
+import {Container} from "../../theme/GlobalStyles";
 import {Device, responsiveSizes} from "../../theme/mediaQueries";
 
 export const DashboardContainer = styled(Container)`

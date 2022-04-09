@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 import {Device} from "../../../theme/mediaQueries";
 
 export const ProfileWrapper = styled.div`

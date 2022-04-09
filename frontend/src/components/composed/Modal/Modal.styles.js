@@ -1,6 +1,6 @@
 import styled, {keyframes} from "styled-components";
 import {fadeIn} from "react-animations";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 
 export const ModalBlock = styled.div`
 	align-items: center;
@@ -55,7 +55,7 @@ export const ModalBlock = styled.div`
 				font-size: 5px;
 				font-weight: 500;
 				color: ${(props) =>
-					props.colorModalTitle ? props.colorModalTitle : Colors.darkRed};
+		props.colorModalTitle ? props.colorModalTitle : Colors.darkRed};
 				font: normal normal bold 24px/20px Arial;
 				padding-left: 0px;
 			}

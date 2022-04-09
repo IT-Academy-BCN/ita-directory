@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import tw from "twin.macro";
-import Colors from "theme/Colors";
-import {Device} from "theme/mediaQueries";
+import Colors from "../../../theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const TextAreaStyled = styled.div.attrs({
 	className: "text-grey mt-4",

@@ -37,7 +37,7 @@
   "devDependencies": {
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
-    "prisma": "^3.11.0"
-  },
-  "dependencies": {}
+    "prisma": "^3.11.0",
+    "vite-plugin-shim-react-pdf": "^1.0.5"
+  }
 }

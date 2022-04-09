@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
-import {Device} from "theme/mediaQueries";
+import Colors from "../../../theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const HeaderStyled = styled.header`
 	width: 100%;
