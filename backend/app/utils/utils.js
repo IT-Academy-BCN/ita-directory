@@ -4,6 +4,7 @@ const Hashids = require("hashids");
 const client = require("../utils/initRedis");
 const argon2 = require("argon2");
 const prisma = require("../../prisma/indexPrisma");
+const logger = require("../../pino-loger/logger");
 
 const hashIds = new Hashids(process.env.HASH_ID_SECRET, 10);
 
@@ -12,7 +13,14 @@ const hashIds = new Hashids(process.env.HASH_ID_SECRET, 10);
 / data - The main data, defaults to an object, it can be any type
 / errors - An array of errors generated in processing, defaults to []
 **/
-const apiResponse = ({message = "", data = {}, errors = []}) => {
+const apiResponse = ({message = "", data = {}, errors = [], status}) => {
+	if (status >= 500) {
+		logger.error(message)
+	} else if (status > 400 && status < 500) {
+		logger.warn(message)
+	} else {
+		logger.info(message)
+	}
 	return {message, data, errors};
 };
 
