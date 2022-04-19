@@ -8,7 +8,7 @@ import Colors from "../../theme/Colors";
 import bills from "./billsData.json";
 import {Link} from "react-router-dom";
 import {MyTableStyle, RowTableStyle, HeaderTableStyle} from "./MyBills.styles";
-import DownloadPDF from "./DocumentComponent";
+// import DownloadPDF from "./DocumentComponent";
 import modelBill from "./modelBillData.json";
 
 // -----------------------------------
@@ -107,8 +107,8 @@ const MyBills = () => {
 				<RowTableStyle color={Colors.grey}>
 					{row.values.descuento
 						? row.values.costeSinIVA -
-						(row.values.costeSinIVA * row.values.descuento) / 100 +
-						(row.values.costeSinIVA * row.values.IVA) / 100
+						  (row.values.costeSinIVA * row.values.descuento) / 100 +
+						  (row.values.costeSinIVA * row.values.IVA) / 100
 						: row.values.costeSinIVA + (row.values.costeSinIVA * row.values.IVA) / 100}
 					<span>€</span>
 				</RowTableStyle>
@@ -127,12 +127,12 @@ const MyBills = () => {
 						<FontAwesomeIcon icon={faEye} color={Colors.grey} />
 					</Link>
 
-					{modelBill.map(
+					{/* {modelBill.map(
 						(invoice) =>
 							invoice.id === row.values.id && (
 								<DownloadPDF key={invoice.id} data={[invoice]} type={"icon"} />
 							)
-					)}
+					)} */}
 				</RowTableStyle>
 			),
 		},

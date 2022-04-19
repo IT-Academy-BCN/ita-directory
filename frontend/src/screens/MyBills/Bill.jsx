@@ -20,7 +20,7 @@ import {
 	AddressesWrapper,
 	TermsStyled,
 } from "./Bill.styles";
-import DownloadPDF from "./DocumentComponent";
+// import DownloadPDF from "./DocumentComponent";
 
 const Bill = (color_logo) => {
 	const {id} = useParams(); // The dynamic id
@@ -253,7 +253,7 @@ const Bill = (color_logo) => {
 
 	if (indexOfId !== -1) {
 		error = generatedBill;
-		downloadBtn = <DownloadPDF data={selectedBill} type={"button"} />;
+		// downloadBtn = <DownloadPDF data={selectedBill} type={"button"} />;
 	} else {
 		error = <Error>There are no bills available</Error>;
 	}
