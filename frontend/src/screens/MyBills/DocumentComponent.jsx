@@ -1,11 +1,14 @@
 import React from "react";
-import {Page, Text, View, Document, StyleSheet, Font} from "@react-pdf/renderer";
+import pdf from "@react-pdf/renderer";
 import DownLoadButton from "../../components/units/Button/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import Colors from "../../theme/Colors";
-import {PDFDownloadLink} from "@react-pdf/renderer";
 import robotoRegular from "../../assets/fonts/roboto/Roboto-Regular.ttf";
+
+
+// Import for React PDF to Vite
+const {Page, Text, View, Document, StyleSheet, Font, PDFDownloadLink} = pdf;
 
 // Create styles
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import tw from "twin.macro";
+// import tw from "twin.macro";
 import Colors from "../../../theme/Colors";
 import {Device} from "../../../theme/mediaQueries";
 
@@ -93,9 +93,9 @@ export const Information = styled.div`
 	}
 `;
 
+// ${tw`absolute bottom-0 left-0`}
+// font-size: 0.65rem;
 export const Credits = styled(Information)`
-	/* ${tw`absolute bottom-0 left-0`} */
-	/* font-size: 0.65rem; */
 	padding: 0.3rem 0;
 
 	& p {

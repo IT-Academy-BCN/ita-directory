@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
+import * as ReactRouterDOM from "react-router-dom";
 import App from "./App";
 import axios from "axios";
 import "./index.css";
-import {Provider} from "react-redux";
+import * as ReactRedux from "react-redux";
 import store from "./store/store";
+
+const {BrowserRouter} = ReactRouterDOM;
+const {Provider} = ReactRedux;
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 

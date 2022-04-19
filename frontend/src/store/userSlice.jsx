@@ -1,4 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
+import * as reduxToolkit from "@reduxjs/toolkit";
+
+const {createSlice} = reduxToolkit;
 
 const initialState = {
 	value: {},
@@ -22,3 +24,5 @@ export const {login, logout} = userSlice.actions;
 export const selectUser = (state) => state.user;
 
 export default userSlice.reducer;
+
+
