@@ -1,0 +1,113 @@
+{"level":30,"time":1650217614363,"pid":17912,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650217614367,"pid":17912,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650282994404,"pid":3544,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650282994407,"pid":3544,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650399972433,"pid":16516,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650399972436,"pid":16516,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":50,"time":1650400000247,"pid":16516,"hostname":"MSI","msg":"Something went wrong! Cannot read properties of undefined (reading 'filter')"}
+{"level":50,"time":1650400000344,"pid":16516,"hostname":"MSI","msg":"Something went wrong! Cannot read properties of undefined (reading 'filter')"}
+{"level":60,"time":1650400000345,"pid":16516,"hostname":"MSI","msg":"Route not found"}
+{"level":30,"time":1650400015721,"pid":13808,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400015724,"pid":13808,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":50,"time":1650400063492,"pid":13808,"hostname":"MSI","msg":"Something went wrong! Cannot read properties of undefined (reading 'filter')"}
+{"level":30,"time":1650400063505,"pid":13808,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650400159528,"pid":11844,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400159532,"pid":11844,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":50,"time":1650400227562,"pid":11844,"hostname":"MSI","msg":"Something went wrong! Cannot read properties of undefined (reading 'filter')"}
+{"level":30,"time":1650400227569,"pid":11844,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":50,"time":1650400279540,"pid":11844,"hostname":"MSI","msg":"Something went wrong! Cannot read properties of undefined (reading 'filter')"}
+{"level":30,"time":1650400279551,"pid":11844,"hostname":"MSI","msg":"Ad fetched correctly."}
+{"level":30,"time":1650400312834,"pid":6388,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400312837,"pid":6388,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650400316273,"pid":6388,"hostname":"MSI","msg":"route has benn acc ess by:\n                                            ip address: 192.168.0.18\n                                            method: GET \n                                            url: /v1/chart-data \n                                            browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650400316282,"pid":6388,"hostname":"MSI","msg":"Ad fetched correctly."}
+{"level":30,"time":1650400378325,"pid":17788,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400378329,"pid":17788,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650400425765,"pid":8812,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400425768,"pid":8812,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650400450513,"pid":9268,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400450516,"pid":9268,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":50,"time":1650400468317,"pid":9268,"hostname":"MSI","msg":"Something went wrong! ipAddress is not defined"}
+{"level":30,"time":1650400468327,"pid":9268,"hostname":"MSI","msg":"Ad fetched correctly."}
+{"level":50,"time":1650400477031,"pid":9268,"hostname":"MSI","msg":"Something went wrong! ipAddress is not defined"}
+{"level":30,"time":1650400477036,"pid":9268,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":50,"time":1650400488610,"pid":9268,"hostname":"MSI","msg":"Something went wrong! ipAddress is not defined"}
+{"level":30,"time":1650400488614,"pid":9268,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650400510586,"pid":18168,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400510589,"pid":18168,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650400513525,"pid":18168,"hostname":"MSI","msg":"route has benn acc ess by:\n                                            method: GET \n                                            url: /v1/ads \n                                            browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650400513531,"pid":18168,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650400627570,"pid":11744,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400627572,"pid":11744,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650400967534,"pid":7852,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650400967537,"pid":7852,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650401192032,"pid":7852,"hostname":"MSI","msg":"route has ben access by:\n        method: GET \n        url: /v1/ads \n        browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650401192039,"pid":7852,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650401238185,"pid":7852,"hostname":"MSI","msg":"route has been access by: \n        method: GET         \n        url: /v1/ads\n        browse: chrome       \n        version: 100.0.4896\n        plataform: Windows 10"}
+{"level":30,"time":1650401238189,"pid":7852,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650401238258,"pid":7852,"hostname":"MSI","msg":"route has been access by: \n        method: GET         \n        url: /favicon.ico\n        browse: chrome       \n        version: 100.0.4896\n        plataform: Windows 10"}
+{"level":60,"time":1650401238258,"pid":7852,"hostname":"MSI","msg":"Route not found"}
+{"level":30,"time":1650401308977,"pid":7852,"hostname":"MSI","msg":"route has been access by: \n        method: GET         \n        url: /v1/ads\n        browse: chrome       \n        version: 100.0.4896\n        plataform: Windows 10"}
+{"level":60,"time":1650401308977,"pid":7852,"hostname":"MSI","msg":"Route not found"}
+{"level":30,"time":1650401651048,"pid":7852,"hostname":"MSI","msg":"route has ben access by:\n        method: GET \n        url: /v1/ads \n        browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650401651064,"pid":7852,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650401910243,"pid":20196,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650401910246,"pid":20196,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650401924551,"pid":20196,"hostname":"MSI","msg":"route has ben access by:\n        method: GET \n        url: /v1/ads \n        browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650401924557,"pid":20196,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650401930430,"pid":14356,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650401930432,"pid":14356,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650401932781,"pid":14356,"hostname":"MSI","msg":"route has ben access by:\n        method: GET \n        url: /v1/ads \n        browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650401932787,"pid":14356,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650401945471,"pid":14440,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650401945475,"pid":14440,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650401948663,"pid":14440,"hostname":"MSI","msg":"route has ben access by:\n        method: GET \n        url: /v1/ads \n        browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650401948668,"pid":14440,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402008882,"pid":16804,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402008885,"pid":16804,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402116010,"pid":10668,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402116014,"pid":10668,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402117643,"pid":10668,"hostname":"MSI","msg":"route access. method: GET url: /v1/ads browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650402117648,"pid":10668,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402224143,"pid":10668,"hostname":"MSI","msg":"route access. method: GET url: /v1/ads browse: chrome version: 100.0.4896 plataform: Windows 10"}
+{"level":30,"time":1650402224148,"pid":10668,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402332428,"pid":10092,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402332431,"pid":10092,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402338980,"pid":10092,"hostname":"MSI","msg":"route access. \n                    method: GET \n                    url: /v1/ads \n                    browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650402338985,"pid":10092,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402365563,"pid":10092,"hostname":"MSI","msg":"route access. \n                    method: GET \n                    url: /v1/ads \n                    browse: chrome \n                    version: 100.0.4896 \n                    plataform: Windows 10"}
+{"level":30,"time":1650402365569,"pid":10092,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402423183,"pid":1888,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402423186,"pid":1888,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402427499,"pid":12224,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402427502,"pid":12224,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402463648,"pid":12224,"hostname":"MSI","msg":"route access. \n                    method: GET \n                    url: /v1/ads \n                    browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650402463654,"pid":12224,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402590199,"pid":21376,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402590201,"pid":21376,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402593644,"pid":21376,"hostname":"MSI","msg":"route access. method: GET url: /v1/ads browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650402593650,"pid":21376,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402608158,"pid":21376,"hostname":"MSI","msg":"route access. method: GET url: /v1/ads \n                    browse: chrome version: 100.0.4896 plataform: Windows 10"}
+{"level":30,"time":1650402608163,"pid":21376,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402641155,"pid":14288,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402641158,"pid":14288,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402652789,"pid":17392,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402652793,"pid":17392,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402655108,"pid":17392,"hostname":"MSI","msg":"route access. method: GET url: /v1/ads browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650402655113,"pid":17392,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402665836,"pid":17392,"hostname":"MSI","msg":"route access. method: GET url: /v1/ads\n      browse: chrome version: 100.0.4896 plataform: Windows 10"}
+{"level":30,"time":1650402665840,"pid":17392,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402725140,"pid":20792,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402725143,"pid":20792,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402727858,"pid":20792,"hostname":"MSI","msg":"\n      route access. method: GET url: /v1/ads\n      browse: chrome version: 100.0.4896 plataform: Windows 10"}
+{"level":30,"time":1650402727863,"pid":20792,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402771689,"pid":19428,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402771692,"pid":19428,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402774447,"pid":19428,"hostname":"MSI","msg":"route access:\n      method: GET url: /v1/ads\n      browse: chrome version: 100.0.4896 plataform: Windows 10"}
+{"level":30,"time":1650402774452,"pid":19428,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650402928879,"pid":17788,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650402928882,"pid":17788,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
+{"level":30,"time":1650402933198,"pid":17788,"hostname":"MSI","msg":"route access:\n      method: GET url: /v1/ads \n      browser: PostmanRuntime/7.29.0"}
+{"level":30,"time":1650402933204,"pid":17788,"hostname":"MSI","msg":"Data fetched correctly."}
+{"level":30,"time":1650403033659,"pid":17132,"hostname":"MSI","msg":"Server is running on port and working 10910."}
+{"level":40,"time":1650403033663,"pid":17132,"hostname":"MSI","msg":"Visit: http://localhost:10910/"}
