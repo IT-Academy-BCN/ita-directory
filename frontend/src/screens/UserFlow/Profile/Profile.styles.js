@@ -7,6 +7,7 @@ export const ProfileWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
+	max-width: 85%;
 	padding: 3rem;
 	background-color: ${Colors.extraLightGrey};
 	border-radius: 0.5em;
@@ -140,6 +141,10 @@ export const ProfileImage = styled.div`
 	border-radius: 0.25rem;
 	box-shadow: 0 2px 7px ${Colors.darkerShadow};
 	padding: 0.5rem;
+
+	img {
+		width: 100%;
+	}
 `;
 
 export const ProfileUploadPhoto = styled.div`

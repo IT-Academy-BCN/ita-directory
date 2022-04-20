@@ -16,7 +16,7 @@ const Body = ({
 	dashboard,
 }) => {
 	return (
-		<StyledBody>
+		<StyledBody className="styledBody">
 			{hideHeader && dashboard ? (
 				""
 			) : (

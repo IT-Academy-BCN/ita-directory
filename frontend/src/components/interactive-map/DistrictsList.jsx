@@ -10,37 +10,44 @@ import {Device} from "../../theme/mediaQueries";
 const StyledList = styled.div`
 	cursor: pointer;
 	width: 100%;
+	margin-bottom: 0.7rem;
+
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin: 0;
+		text-align: left;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 0.2rem;
+		margin-right: 1rem;
+
+		/* flex flex-col mb-3 */
+		ul {
+			margin:0;
+			padding:0;
+		}
+	}
 
 	.district {
 		font-size: 12px;
 		font-weight: bold;
-		margin-bottom: 0.4rem;
-	}
-
-	ul {
-		/* list-style-position: inside; */
-		list-style: none;
-
-		/* margin-left: -10px; */
-		/* columns: 2;
-		-webkit-columns: 2;
-		-moz-columns: 2; */
-
-		li {
-			text-align: left;
-			padding: 0.1rem;
-			margin: 0;
-
-			@media ${Device.Tablet} {
-				padding: 0rem;
-			}
-		}
+		margin: 0;
+		margin-bottom: 0.3rem;
+		text-align: left;
 	}
 
 	.neighborhood {
-		font-size: 9px;
 		text-indent: 0rem;
-		font-size: 15px;
+		text-align: left;
+		font-size: 0.8rem;
+		padding: 0.2rem 0;
+		margin: 0;
+
+		@media ${Device.Mobile} {
+			font-size: 0.6rem;
+			padding: 0.2rem 0;
+		}
 	}
 
 	.lit-neighborhood,
@@ -101,7 +108,7 @@ const DistrictsList = () => {
 						? district.replace("-", "´")
 						: district.replace("-", " ")}
 				</li>
-				<ul className="flex flex-col mb-3">
+				<ul className="">
 
 					{neighborhoods
 						.filter((neighborhoods) => Number.isFinite(neighborhoods.nr))
