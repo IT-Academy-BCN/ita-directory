@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -19,6 +19,8 @@ import Input from "components/units/Input/Input";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import registerSchema from "validation/registerUserSchema.js";
+import {useDispatch} from "react-redux";
+import {newNotification, NotificationTypes} from "store/notificationSlice";
 
 const Register = () => {
     const [registerSuccess, setRegisterSuccess] = useState(false);
@@ -33,6 +35,7 @@ const Register = () => {
     } = useForm({
         resolver: yupResolver(registerSchema),
     });
+    const dispatch = useDispatch();
 
     const closeNotification = () => setMessage(null);
 
@@ -43,12 +46,29 @@ const Register = () => {
                 user
             );
             setMessage(response.data.message);
-            if (response.data.code === "error") throw response.data.message;
+            if (response.data.code === "error") {
+                dispatch(
+                    newNotification({
+                        message: message,
+                        type: NotificationTypes.error,
+                    }))
+                throw response.data.message;
+            }
             setRegisterSuccess(true);
+            dispatch(
+                newNotification({
+                    message: message,
+                    type: NotificationTypes.succes,
+                }))
         } catch (error) {
             if (error.name === "Error")
                 setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
             setRegisterSuccess(false);
+            dispatch(
+                newNotification({
+                    message: message,
+                    type: NotificationTypes.error,
+                }))
         }
     };
 
@@ -72,17 +92,20 @@ const Register = () => {
         }, 2000);
     };
 
+    useEffect(() => {
+        if (message) {
+            dispatch(
+                newNotification({
+                    message: message,
+                    type: registerSuccess ? NotificationTypes.succes : NotificationTypes.error,
+                })
+            )
+            setMessage(null);
+        }
+    });
+
     return (
         <>
-            {message ? (
-                <Notification
-                    message={message}
-                    isSuccess={registerSuccess}
-                    closeNotification={closeNotification}
-                    autoClose={true}
-                />
-            ) : null}
-
             <Body title="Registro" justifyTitle="center">
                 <Container>
                     <Form onSubmit={handleSubmit(submitForm)} noValidate>

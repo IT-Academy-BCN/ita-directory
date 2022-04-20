@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import {useParams, useHistory} from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,8 @@ import AsyncButton from "components/units/Button/Button";
 import {Container, Form} from "../UserFlow.styles";
 import {msgs, validatePassword} from "utils/userFlow";
 import Input from "components/units/Input/Input";
+import {newNotification, NotificationTypes} from "store/notificationSlice";
+import {useDispatch} from "react-redux";
 
 const ChangePassword = () => {
 	const [animated, setAnimated] = useState(false);
@@ -21,7 +23,7 @@ const ChangePassword = () => {
 
 	const history = useHistory();
 	const {token} = useParams();
-	const closeNotification = () => setMessage(null);
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -43,8 +45,7 @@ const ChangePassword = () => {
 				history.push("/login");
 			}
 		} catch (error) {
-			if (error.name === "Error")
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
 		}
 		setTimeout(() => {
 			setIsDisabled(false);
@@ -55,17 +56,20 @@ const ChangePassword = () => {
 		}, 2000);
 	};
 
+	useEffect(() => {
+		if (message) {
+			dispatch(
+				newNotification({
+					message: message,
+					type: isSuccess ? NotificationTypes.succes : NotificationTypes.error,
+				})
+			)
+			setMessage(null);
+		}
+	});
+
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					closeNotification={closeNotification}
-					autoClose={true}
-					isSuccess={isSuccess}
-				/>
-			) : null}
-
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>

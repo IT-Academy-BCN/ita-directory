@@ -23,6 +23,8 @@ import {HeaderContent} from "./CreateNewAd.styles";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import newAdSchema from "validation/createNewAdSchema.js";
+import {useDispatch} from "react-redux";
+import {newNotification, NotificationTypes} from "store/notificationSlice";
 
 const CreateNewAd = () => {
 	const emptyForm = {
@@ -39,7 +41,7 @@ const CreateNewAd = () => {
 	};
 	const [form, setForm] = useState(emptyForm);
 	const [submittedData, setSubmittedData] = useState(""); //@todo -> remove -probably unecessary
-	const [error, setError] = useState(false);
+	const [error, setError] = useState(true);
 	const [successfulPost, setSuccessfulPost] = useState(false);
 	const [coordinates, setCoordinates] = useState([]);
 	const {
@@ -49,6 +51,7 @@ const CreateNewAd = () => {
 	} = useForm({
 		resolver: yupResolver(newAdSchema),
 	});
+	const dispatch = useDispatch;
 
 	const postAd = async (formInfo) => {
 		try {
@@ -60,10 +63,22 @@ const CreateNewAd = () => {
 			await console.log(res);
 			await setSuccessfulPost((prev) => true);
 			await setTimeout(() => setSuccessfulPost((prev) => false), 3000);
+			dispatch(
+				newNotification({
+					message: "Tu anuncio ha sido publicado con exito.",
+					type: NotificationTypes.succes,
+				})
+			)
 		} catch (err) {
 			console.log(err);
 			setError((prev) => true);
 			setTimeout(() => setError((prev) => false), 3000);
+			dispatch(
+				newNotification({
+					message: "Ha habido un error. Vuelve ha intentar ahora o mas tarde",
+					type: NotificationTypes.error,
+				})
+			)
 		}
 	};
 
@@ -74,6 +89,27 @@ const CreateNewAd = () => {
 			map_lon: Number(coordinates[1]),
 		});
 	}, [coordinates]);
+
+	/* useEffect(() => {
+		if (error) {
+			setError(false);
+			dispatch(
+				newNotification({
+					message: "Ha habido un error. Vuelve ha intentar ahora o mas tarde",
+					type: NotificationTypes.error,
+				})
+			)
+		}
+		if (successfulPost) {
+			setSuccessfulPost(false)
+			dispatch(
+				newNotification({
+					message: "Tu anuncio ha sido publicado con exito.",
+					type: NotificationTypes.succes,
+				})
+			)
+		} 
+	}, []); */
 
 	const submitForm = (data) => {
 		const formInfo = {
@@ -156,7 +192,6 @@ const CreateNewAd = () => {
 	const [csvFile, setCsvFile] = useState(null);
 	const [validCsv, setValidCsv] = useState(null);
 	const [validCsvFile, setValidCsvFile] = useState(null);
-	const [notification, setNotification] = useState(null);
 
 	const updateCsvFiles = (e) => {
 		setCsvFile(e);
@@ -194,19 +229,6 @@ const CreateNewAd = () => {
 
 	return (
 		<>
-			{" "}
-			{error && (
-				<Notification
-					message={"Ha habido un error. Vuelve ha intentar ahora o mas tarde"}
-					isSuccess={false}
-				/>
-			)}
-			{successfulPost && (
-				<Notification
-					message={`Tu anuncio ha sido publicado con exito.`}
-					isSuccess={true}
-				/>
-			)}
 			{/* <HeaderContent>
 					<h2>Publicar Anuncio</h2>
 				</HeaderContent> */}
@@ -265,19 +287,19 @@ const CreateNewAd = () => {
 						{validCsvFile == null ? (
 							<></>
 						) : validCsvFile === false ? (
-							<Notification
-								message={`Tus anuncios no se han podido publicar.`}
-								isSuccess={false}
-								autoClose={true}
-								closeNotification={() => setNotification(false)}
-							/>
+							dispatch(
+								newNotification({
+									message: "Tus anuncios no se han podido publicar.",
+									type: NotificationTypes.error,
+								})
+							)
 						) : (
-							<Notification
-								message={`Tus anuncios han sido publicados con éxito`}
-								isSuccess={true}
-								autoClose={true}
-								closeNotification={() => setNotification(false)}
-							/>
+							dispatch(
+								newNotification({
+									message: "Tus anuncios han sido publicados con éxito",
+									type: NotificationTypes.succes,
+								})
+							)
 						)}
 
 						<form onSubmit={handleSubmit(submitForm)} noValidate>

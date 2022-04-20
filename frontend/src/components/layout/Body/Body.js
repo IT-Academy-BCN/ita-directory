@@ -30,7 +30,6 @@ const Body = ({
 					isTitleVisible={false}
 				/>
 			)}
-
 			<Childrens>{children}</Childrens>
 			{hideFooter ? "" : <Footer />}
 		</StyledBody>

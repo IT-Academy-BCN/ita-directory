@@ -19,6 +19,7 @@ import ProtectedRoute from "components/composed/ProtectedRoute";
 import Search from "screens/Search/Search";
 import ChangePassword from "screens/UserFlow/ChangePassword/ChangePassword";
 import PageNotFound from "screens/PageNotFound/PageNotFound";
+import Notifications from "components/units/Notifications/Notifications";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
@@ -29,7 +30,7 @@ const noExiste = () => {
 
 const App = () => {
 	return (
-		<>
+		<><Notifications />
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/ad/:id" component={Ad} />

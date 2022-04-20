@@ -23,11 +23,13 @@ import people13b from "../../../assets/images/people13b.jpg";
 
 import initLoggedinUserInfo from "../fakeUser.json";
 import {msgs, validatePassword} from "utils/userFlow";
+import {useDispatch} from "react-redux";
+import {newNotification, NotificationTypes} from "store/notificationSlice";
 
 const usersPhoto = {
-    people1b: people1b,
-    people4b: people4b,
-    people13b: people13b,
+	people1b: people1b,
+	people4b: people4b,
+	people13b: people13b,
 };
 // testing ***
 
@@ -41,7 +43,7 @@ const Profile = () => {
 	const [submitSuccess, setSubmitSuccess] = useState(null);
 	const [message, setMessage] = useState(null);
 	const [firstLoad, setFirstLoad] = useState(null);
-
+	const dispatch = useDispatch();
 	// aquí deberá cargarse info de usuario autenticado correctamente
 	// (o de otro modo se le pasará o estará accesible para componente):
 	useEffect(() => {
@@ -59,11 +61,21 @@ const Profile = () => {
 			localStorage.setItem("loggedinUserInfo", JSON.stringify(loggedinUserInfo));
 			setSubmitSuccess(true);
 			setMessage("Your new account information was saved succesfully!");
+			dispatch(
+				newNotification({
+					message: message,
+					type: NotificationTypes.succes,
+				}))
 		} catch (e) {
 			setSubmitSuccess(false);
 			setMessage(
 				"Ups, something went wrong saving your new account information. Please, try later or contact us."
 			);
+			dispatch(
+				newNotification({
+					message: message,
+					type: NotificationTypes.error,
+				}))
 		} finally {
 			setNewPassword("");
 			setNewPhoto(null);
@@ -92,19 +104,21 @@ const Profile = () => {
 		});
 	};
 
-	const closeNotification = () => setMessage(null);
+	useEffect(() => {
+		if (message && !firstLoad) {
+			dispatch(
+				newNotification({
+					message: message,
+					type: submitSuccess ? NotificationTypes.succes : NotificationTypes.error,
+				})
+			)
+			setMessage(null);
+		}
+	});
 
 	return (
 		<Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn="true">
 			<Container>
-				{message && !firstLoad ? (
-					<Notification
-						message={message}
-						isSuccess={submitSuccess}
-						closeNotification={closeNotification}
-						autoClose={true}
-					/>
-				) : null}
 				<Modal
 					hideModal={() => setShowUploadPhotoModal(false)}
 					active={showUploadPhotoModal}
