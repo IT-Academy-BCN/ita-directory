@@ -10,7 +10,7 @@ const userRoutes = require("./routes/users.routes");
 const mediaRoutes = require("./routes/media.routes");
 const locationRoutes = require("./routes/location.routes");
 const contactRoutes = require("./routes/contact.routes");
-const logger = require('./middleware/handler-logger')
+const logger = require('./middleware/handlerLogger')
 
 // const constantsRoute = require("./routes/constants.routes");
 const adsRoutes = require("./routes/ads.routes");

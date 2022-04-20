@@ -4,10 +4,10 @@ require("dotenv").config({path: path.join(__dirname, `/./../${envFile}`)});
 const app = require("./app/app.js");
 const socketio = require("socket.io");
 const http = require("http");
-const handlerError = require("./app/middleware/handler-errors");
-const handlerLogger = require("./app/middleware/handler-logger");
+const handlerError = require("./app/middleware/handlerErrors");
+const handlerLogger = require("./app/middleware/handlerLogger");
 const client = require("./app/utils/initRedis");
-const logger = require("./pino-loger/logger.js");
+const logger = require("./logger.js");
 
 // Create IO server
 const server = http.createServer(app);
@@ -19,7 +19,7 @@ const io = socketio(server, {
 });
 require("./app/config/sockets")(io);
 
-//Back-end looger
+//Back-end logger
 app.use(handlerLogger);
 
 //No route found handler
@@ -35,5 +35,5 @@ app.use(handlerError.errorHandler);
 
 server.listen(process.env.PORT, () => {
 	logger.info(`Server is running on port and working ${process.env.PORT}.`);
-	logger.warn(`Visit: http://localhost:${process.env.PORT}/`);
+	logger.info(`Visit: http://localhost:${process.env.PORT}/`);
 });

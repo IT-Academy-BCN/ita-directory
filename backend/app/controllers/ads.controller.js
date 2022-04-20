@@ -9,7 +9,7 @@ const {
 	patchAdSchema,
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
-const logger = require("../../pino-loger/logger");
+const logger = require("../../logger");
 
 
 

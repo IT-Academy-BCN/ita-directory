@@ -29,3 +29,6 @@ yarn-error.log*
 
 /app/uploads/*
 /public
+
+# pino logger
+/server.log

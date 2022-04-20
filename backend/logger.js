@@ -6,6 +6,7 @@ const PinoPretty = require('pino-pretty');
 const streams = [
   {stream: fs.createWriteStream(`${__dirname}/server.log`, {flags: "a+"})},
   {stream: PinoPretty({singleLine: false, colorize: true, translateTime: "SYS:dd-mm-yyyy HH:MM:ss"}, process.stdout)},
+
 ]
 
 const logger = pino(

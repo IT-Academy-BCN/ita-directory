@@ -4,7 +4,7 @@ const Hashids = require("hashids");
 const client = require("../utils/initRedis");
 const argon2 = require("argon2");
 const prisma = require("../../prisma/indexPrisma");
-const logger = require("../../pino-loger/logger");
+const logger = require("../../logger");
 
 const hashIds = new Hashids(process.env.HASH_ID_SECRET, 10);
 
