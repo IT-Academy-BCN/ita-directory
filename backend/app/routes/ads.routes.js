@@ -3,6 +3,7 @@ const adsController = require("../controllers/ads.controller");
 const router = require("express").Router();
 const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
 
+
 /**
  * Ad data
  * @typedef {object} postAdData
@@ -271,10 +272,10 @@ router.delete("/v1/ads/:adId", adsController.deleteById);
 router.patch("/v1/ads/:adId", authenticateToken, adsController.updateAd);
 
 router.post(
-	"/v1/post-ads-csv",
-	authenticateToken,
-	uploadAdCSV,
-	adsController.createAdsFromCSVBuffer
+    "/v1/post-ads-csv",
+    authenticateToken,
+    uploadAdCSV,
+    adsController.createAdsFromCSVBuffer
 );
 
 router.get("/v1/chart-data", adsController.activeAdsByLocationAndDate);
