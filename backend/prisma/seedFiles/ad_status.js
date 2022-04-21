@@ -1,3 +1,5 @@
+// options for ads id_status related to publication status
+
 module.exports = [
 	{
 		name: "un_publish",
