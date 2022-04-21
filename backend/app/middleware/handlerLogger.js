@@ -6,8 +6,9 @@ async function handlerLogger(req, res, next) {
 
     const method = await req.method;
     const url = await req.url;
+    const browser = await req.headers["user-agent"]
 
-    logger.info(`route access: method: ${method} url: ${url}`);
+    logger.info(`route access: method: ${method} url: ${url} browser: ${browser}`);
 
 
   } catch (err) {
