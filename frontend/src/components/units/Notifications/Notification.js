@@ -1,9 +1,8 @@
 import {faCheckCircle, faCheckDouble, faChessKnight, faCross, faExclamationCircle, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {CheckCircledIcon, CircleIcon, ColumnsIcon, CrossCircledIcon} from '@radix-ui/react-icons';
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux';
-import {deleteNotification, NotificationTypes} from 'store/notificationSlice';
+import {deleteNotification} from 'store/notificationSlice';
 import styled, {keyframes} from 'styled-components';
 
 const InRight = keyframes`
@@ -15,7 +14,7 @@ to {
   transform: translateX(0);
 }
 `
-const ContainerStyled = styled.div`
+const NotificationStyled = styled.div`
     background-color: white;
     padding: 30px;
     width: 350px;
@@ -37,9 +36,7 @@ const NotificationIconStyled = styled.div`
     margin-right: 30px;
 `
 
-function Notification_Slice({message, type, id}) {
-    const [notificationState, setNotificationState] = useState(true);
-    const [notificationType, setNotificationType] = useState();
+function Notification({message, id, icon}) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -49,54 +46,21 @@ function Notification_Slice({message, type, id}) {
         return () => autoCloseFn;
     }, []);
 
-    useEffect(() => {
-        formatNotification(type);
-        console.log('format', notificationType)
-    }, []);
-
-    const formatNotification = (type) => {
-        switch (type) {
-            case NotificationTypes.error:
-                return (
-                    setNotificationType(
-                        <FontAwesomeIcon
-                            icon={faExclamationCircle}
-                            style={{color: "red", width: "50px", height: "30px"}}
-                        />
-                    ));
-            case NotificationTypes.succes:
-                return (
-                    setNotificationType(
-                        <FontAwesomeIcon
-                            icon={faCheckCircle}
-                            style={{color: "green", width: "50px", height: "30px"}}
-                        />
-                    ));
-            case NotificationTypes.info:
-                return (
-                    setNotificationType(
-                        <FontAwesomeIcon
-                            icon={faInfoCircle}
-                            style={{color: "blue", width: "50px", height: "30px"}}
-                        />
-                    ));
-            default:
-                break;
-        }
-    };
-
     const closeNotification = () => {
-        setNotificationState(false);
         dispatch(deleteNotification(id))
     }
 
     return (
-        notificationState == true ?
-            <ContainerStyled>
-                <NotificationIconStyled>{notificationType}</NotificationIconStyled>
-                <NotificationMessageStyled>{message}</NotificationMessageStyled>
-            </ContainerStyled> : <></>
+        <NotificationStyled>
+            <NotificationIconStyled>
+                <FontAwesomeIcon
+                    icon={icon}
+                    style={{color: "red", width: "50px", height: "30px"}}
+                />
+            </NotificationIconStyled>
+            <NotificationMessageStyled>{message}</NotificationMessageStyled>
+        </NotificationStyled>
     )
 }
 
-export default Notification_Slice
+export default Notification

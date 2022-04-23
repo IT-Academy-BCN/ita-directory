@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import Notification from "./Notification";
 
-const ContainerStyled = styled.div`
+const NotificationStyled = styled.div`
     box-sizing: border-box;
     position: absolute;
     z-index: 999999;
@@ -12,22 +12,17 @@ const ContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
     `
+
 function Notifications() {
     const notifications = useSelector((state) => state.notification.notifications);
-    const [workingNotifications, setWorkingNotifications] = useState([]);
 
-    useEffect(() => {
-        setWorkingNotifications(notifications)
-    }, [notifications, setWorkingNotifications]);
-
-    return <div>{workingNotifications.map((item) =>
-        <ContainerStyled>
+    return <div>{notifications.map((item) =>
+        <NotificationStyled>
             <Notification
-                id={Math.random().toString(36).slice(2)}
                 message={item.message}
-                type={item.type}
+                icon={item.icon}
             />
-        </ContainerStyled>
+        </NotificationStyled>
     )}</div>;
 }
 
