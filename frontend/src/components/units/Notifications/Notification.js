@@ -1,4 +1,4 @@
-import {faCheckCircle, faCheckDouble, faChessKnight, faCross, faExclamationCircle, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle, faCheckDouble, faExclamationCircle, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux';
@@ -34,6 +34,13 @@ const NotificationMessageStyled = styled.p`
 
 const NotificationIconStyled = styled.div`
     margin-right: 30px;
+`
+
+const ButtonStyled = styled.button`
+position: absolute;
+top: 5%;
+right: 5% ;
+font-size: 20px;
 `
 
 function Notification({message, id, icon}) {
