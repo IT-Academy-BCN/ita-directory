@@ -1,28 +1,32 @@
 import styled from "styled-components";
-import tw, {theme} from "twin.macro";
+import Colors from "../../../theme/Colors";
 
 const StyledButton = styled.button.attrs({
-	className: "font-bold text-white py-2 px-6 rounded my-2 shadow bg-lightBlue",
+	// className: "font-bold text-white py-2 px-6 rounded my-2 shadow bg-lightBlue",
 })`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-shadow: ${theme`boxShadow.button-shadow`};
+	background-color: ${Colors.redPink};
+	border: 0;
+	color: ${Colors.white};
+	padding: 0.5rem 1rem;
+	border-radius: 0.3rem;
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(1.1);
+	}
 
 	&.blue-gradient {
-		${tw`text-white opacity-100 bg-gradient-to-r from-lightBlue to-darkBlue hover:opacity-90`}
 	}
 	&.orange-gradient {
-		${tw`text-white opacity-100 bg-gradient-to-r from-lightOrange to-darkOrange hover:opacity-90`}
 	}
 	&.green-gradient {
-		${tw`w-36 text-white opacity-100 bg-gradient-to-r from-lightGreen to-darkGreen hover:opacity-90`}
 	}
 	&.darkRed {
-		${tw`w-36 text-white opacity-100 bg-darkRed hover:opacity-90`}
 	}
 	&.darkBlue {
-		${tw`w-28 text-white opacity-100 bg-darkBlue hover:opacity-90 m-1`}
 	}
 	&.disabled {
 		cursor: not-allowed;

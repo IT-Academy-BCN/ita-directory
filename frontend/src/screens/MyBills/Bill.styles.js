@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import tw from "twin.macro";
-import Colors from "theme/Colors";
+// import tw from "twin.macro";
+import Colors from "../../theme/Colors";
 import {Device} from "../../theme/mediaQueries";
 
 export const Error = styled.div`
@@ -9,7 +9,6 @@ export const Error = styled.div`
 	padding: 15px 10px 15px 15px;
 	background-position: 10px center;
 	max-width: 460px;
-	${tw`bg-paleRed text-center text-2xl text-bloodRed`}
 `;
 
 export const BillComponentStyled = styled.div.attrs({
@@ -19,7 +18,6 @@ export const BillComponentStyled = styled.div.attrs({
 	.logo {
 		color: ${(props) => (props.color_logo ? props.color_logo : Colors.darkRed)};
 		font: normal normal normal 15px/15px Korb-Bold;
-		${tw`flex items-center uppercase tracking-normal opacity-100 mt-6`};
 	}
 
 	.blue-gradient {
@@ -29,7 +27,7 @@ export const BillComponentStyled = styled.div.attrs({
 `;
 
 export const BillStyled = styled.div.attrs({
-	className: "flex flex-col w-full p-0 md:w-9/12 md:pt-6 md:pr-8 md:pb-0 md:pl-8 bg-lightGrey1",
+	// className: "flex flex-col w-full p-0 md:w-9/12 md:pt-6 md:pr-8 md:pb-0 md:pl-8 bg-lightGrey1",
 })`
 	transform: scale(0.8);
 	font-family: "Inter", sans-serif;
@@ -50,8 +48,7 @@ export const BillStyled = styled.div.attrs({
 `;
 
 export const HeaderStyled = styled.header.attrs({
-	className:
-		"bg-white flex flex-row justify-between items-end py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0",
+	// className: "bg-white flex flex-row justify-between items-end py-0 px-8 -mt-40 md:h-auto md:mt-0 md:p-0",
 })`
 	padding-top: 3rem;
 
@@ -64,14 +61,13 @@ export const HeaderStyled = styled.header.attrs({
 `;
 
 export const AddressesWrapper = styled.div.attrs({
-	className: "justify-between bg-white md:flex md:flex-row md:mt-0",
+	// className: "justify-between bg-white md:flex md:flex-row md:mt-0",
 })``;
 
 export const InvoiceRecipientStyled = styled.section.attrs({
-	className: "flex flex-col items-end width-full pt-8 pb-0 px-8",
+	// className: "flex flex-col items-end width-full pt-8 pb-0 px-8",
 })`
 	div {
-		${tw`w-full p-0`}
 	}
 	h2 {
 		font-weight: bold;
@@ -89,16 +85,14 @@ export const InvoiceSenderStyled = styled(InvoiceRecipientStyled)`
 		justify-content: flex-end;
 
 		@media ${Device.Desktop} {
-			${tw`pr-16 pl-24`}
 		}
 	}
 `;
 
 export const TableWrapperStyled = styled.div.attrs({
-	className: "mt-12 w-full border-t-2 border-lightGrey",
+	// className: "mt-12 w-full border-t-2 border-lightGrey",
 })`
 	table {
-		${tw`w-full flex flex-col`}
 		block-size: fit-content;
 		th,
 		tr {
@@ -113,7 +107,6 @@ export const TableWrapperStyled = styled.div.attrs({
 		}
 
 		th {
-			${tw` flex justify-center font-bold  uppercase pt-3 text-tiny`}
 
 			&:last-child {
 				display: flex;
@@ -134,11 +127,9 @@ export const TableWrapperStyled = styled.div.attrs({
 
 export const CalcTableStyled = styled.table`
 	border-collapse: collapse;
-	${tw`w-1/2 ml-auto pt-1 pb-0 pr-0 md:w-full md:ml-0`}
 
 	td,
 	th {
-		${tw`flex items-center font-normal text-tiny`}
 		justify-content: start;
 		min-height: 2rem;
 
@@ -156,7 +147,6 @@ export const CalcTableStyled = styled.table`
 		grid-template-columns: 1fr 1fr;
 
 		td {
-			${tw`flex justify-end items-center flex-grow text-tiny`}
 			/* min-width: 80px; */
 			padding-left: 0.5rem;
 			text-align: start;
@@ -176,7 +166,7 @@ export const CalcTableStyled = styled.table`
 	}
 `;
 export const TermsAndCalcStyled = styled.div.attrs({
-	className: "flex items-start flex-col-reverse",
+	// className: "flex items-start flex-col-reverse",
 })`
 	@media ${Device.Tablet} {
 		display: grid;
@@ -185,7 +175,7 @@ export const TermsAndCalcStyled = styled.div.attrs({
 `;
 
 export const TermsStyled = styled.section.attrs({
-	className: "mt-10 py-0 px-8 max-w-sm h-24",
+	// className: "mt-10 py-0 px-8 max-w-sm h-24",
 })`
 	@media ${Device.Tablet} {
 		margin-top: 4rem;
@@ -201,11 +191,9 @@ export const TermsStyled = styled.section.attrs({
 `;
 
 export const PaySignStyled = styled.section.attrs({
-	className:
-		"flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
+	//className: "flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
 })`
 	div {
-		${tw`flex flex-col pb-8`}
 
 		h4 {
 			margin: 0.5rem 0;
@@ -217,15 +205,13 @@ export const PaySignStyled = styled.section.attrs({
 `;
 
 export const PaymentMethodStyled = styled.div.attrs({
-	className: "flex flex-col justify-end pl-8",
+	// className: "flex flex-col justify-end pl-8",
 })`
 	h3 {
-		${tw`my-2 mx-0 pb-4`}
 		white-space: nowrap;
 	}
 
 	div {
-		${tw`pt-4 pb-0`}
 	}
 	@media ${Device.Mobile} {
 		padding-left: 2rem;
@@ -244,7 +230,7 @@ export const PaymentMethodStyled = styled.div.attrs({
 `;
 
 export const SignatureStyled = styled.div.attrs({
-	className: "flex flex-col w-full pb-8 pl-8 xsm:justify-end xsm:text-center xsm:w-4/12",
+	// className: "flex flex-col w-full pb-8 pl-8 xsm:justify-end xsm:text-center xsm:w-4/12",
 })`
 	margin-top: 1.8rem;
 	width: fit-content;
@@ -255,29 +241,24 @@ export const SignatureStyled = styled.div.attrs({
 		padding-right: 4rem;
 	}
 	p {
-		${tw`font-bold m-0`}
 		white-space: nowrap;
 	}
 
 	h4 {
-		${tw`text-sm`}
 		font-weight: lighter !important;
 	}
 
 	.signature-image {
-		${tw`h-4/5 pb-12`}
 	}
 `;
 
 export const FooterStyled = styled.footer.attrs({
-	className: "flex flex-col justify-center text-center -mt-12 mb-5 px-8 pb-8",
+	// className: "flex flex-col justify-center text-center -mt-12 mb-5 px-8 pb-8",
 })`
 	h4 {
-		${tw`m-0 font-bold`}
 	}
 
 	p {
-		${tw`text-sm`}
 	}
 `;
 

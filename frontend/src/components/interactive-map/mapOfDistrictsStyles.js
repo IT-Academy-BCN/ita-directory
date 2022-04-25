@@ -30,7 +30,7 @@ export const Container = styled.div`
 	align-items: flex-start;
 	align-content: flex-start;
 	flex-wrap: nowrap;
-	margin-top: 3rem;
+	margin: 2rem 0 6rem 0;
 
 	@media ${Device.Tablet} {
 		flex-direction: row;
@@ -75,7 +75,7 @@ export const Mapa = styled.div`
 	}
 	@media ${Device.LaptopLg} {
 		position: absolute;
-		top: calc(50% - 20%);
+		top: calc(50% - 25%);
 		left: calc(50% - 45%);
 	}
 `;

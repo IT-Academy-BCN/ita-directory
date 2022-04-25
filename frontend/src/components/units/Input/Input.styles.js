@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 
 export const InputContainerStyled = styled.div.attrs((props) => ({
 	className: `${props.minMarginTop ? "mt-0.5" : "mt-4"}`,
@@ -11,22 +11,25 @@ export const InputContainerStyled = styled.div.attrs((props) => ({
 `;
 
 export const InputStyled = styled.input.attrs((props) => ({
-	className: `
-	w-full 
-	text-sm 
-	py-1.5 
-	px-2
-	border 
-	rounded-md 
-	hover:opacity-90 `,
+	className: ``,
 }))`
-	height: 49px;
+	height: 40px;
+	width: 90%;
+	padding: 0.3rem 1rem;
+	border-radius: 0;
+	border: 1px solid ${Colors.transparent};
+	border-bottom: 1px solid ${Colors.lightGray};
 
+	&:hover {
+		border-radius: 1rem;
+		border-bottom: 1px solid ${Colors.redPink};
+	}
 	&.error {
 		border: 1px solid #fecaca !important;
 	}
 	&:focus {
 		outline: 0 none;
+		border-radius: 1rem;
 		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
 	}
 `;

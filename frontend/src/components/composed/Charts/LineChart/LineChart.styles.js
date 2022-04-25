@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import SelectArrow from "assets/images/select-arrow.svg";
-import Colors from "theme/Colors";
+import SelectArrow from "../../../../assets/images/select-arrow.svg";
+import Colors from "../../../../theme/Colors";
 import {Device} from "../../../../theme/mediaQueries";
 
 export const LineGraphicStyled = styled.div`

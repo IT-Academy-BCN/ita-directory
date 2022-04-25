@@ -14,7 +14,7 @@ const AdCardListPagination = () => {
 
 	const getAds = async () => {
 		try {
-			const response = await axios.get(`${process.env.REACT_APP_API_URL}/ads/v1/ads`);
+			const response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/ads/v1/ads`);
 			const newAds = response.data.data;
 			setAds(newAds);
 		} catch (e) {

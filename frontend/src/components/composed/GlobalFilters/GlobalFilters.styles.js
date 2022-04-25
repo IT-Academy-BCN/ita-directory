@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SelectArrow from "assets/images/select-arrow.svg";
+import SelectArrow from "../../../assets/images/select-arrow.svg";
 import {Device} from "../../../theme/mediaQueries";
 
 export const GlobalFiltersStyled = styled.div`
