@@ -1,21 +1,21 @@
 import styled from "styled-components";
-import tw from "twin.macro";
-import Colors from "theme/Colors";
-import {Device} from "theme/mediaQueries";
+// import tw from "twin.macro";
+import Colors from "../../../theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const TextAreaStyled = styled.div.attrs({
 	className: "text-grey mt-4",
 })`
 	& {
 		&.textAreaCreateNewAd {
-			${tw`mb-2 max-w-xl `}
+
 			@media ${Device.Tablet} {
-				${tw`flex-col`}
+
 			}
 		}
 
 		label {
-			${tw`py-3 pr-14 flex-grow text-grey font-bold`}
+
 		}
 	}
 `;
@@ -24,7 +24,7 @@ export const TextAreaError = styled.div.attrs({
 	className: `w-full justify-center`,
 })`
 	&.textAreaCreateNewAd {
-		${tw`border rounded text-grey`}
+
 	}
 `;
 
@@ -66,6 +66,6 @@ export const StyledError = styled.small.attrs({
 })`
 	display: inline-block;
 	&.errorProfile {
-		${tw`static`};
+
 	}
 `;

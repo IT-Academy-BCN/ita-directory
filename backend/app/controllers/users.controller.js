@@ -371,7 +371,7 @@ exports.receiveEmailGetToken = async (req, res, next) => {
 			const accessToken = signToken(user.id, "1h");
 
 			mailOptions.to = email;
-			mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`;
+			mailOptions.html = `${import.meta.env.VITE_URL}/change-password/${accessToken}`;
 
 			transporter.sendMail(mailOptions, (error, info) => {
 				if (error) {

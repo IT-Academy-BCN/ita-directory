@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
-import {Device} from "theme/mediaQueries";
+import Colors from "../../../theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
 export const HeaderStyled = styled.header`
 	width: 100%;
@@ -15,7 +15,7 @@ export const HeaderStyled = styled.header`
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
-		margin-top: 1rem;
+		margin-top: 0.25rem;
 		margin-bottom: 1rem;
 
 		@media ${Device.Tablet} {
@@ -47,6 +47,8 @@ export const HeaderStyled = styled.header`
 				font-weight: bold;
 				margin-left: 5px;
 				width: 77px;
+				display: flex;
+				align-self: center;
 				/* height: 18px; */
 				letter-spacing: -1.5px;
 				color: ${Colors.redPink};
@@ -61,6 +63,7 @@ export const HeaderStyled = styled.header`
 				/* border: none; */
 				background-color: white;
 				box-shadow: 0 2px 4px ${Colors.darkerShadow};
+				border: 0;
 				border-radius: 0.5rem;
 				padding: 0.3rem 0.5rem;
 				position: relative;
@@ -139,10 +142,15 @@ export const HeaderStyled = styled.header`
 
 						border-left: 0.3rem solid white;
 						border-right: 0.3rem solid white;
+
 						&:hover {
 							/* box-shadow: 0 2px 0.4rem ${Colors.redPink}; */
 							border-left: 0.3rem solid ${Colors.redPink};
 							border-right: 0.3rem solid ${Colors.redPink};
+
+							a {
+								color: ${Colors.redPink};
+							}
 						}
 
 						&:first-child {
@@ -153,6 +161,11 @@ export const HeaderStyled = styled.header`
 						&:last-child {
 							border-bottom-right-radius: 6px;
 							border-bottom-left-radius: 6px;
+						}
+
+						a {
+							text-decoration: none;
+							color: ${Colors.grey};
 						}
 					}
 				}

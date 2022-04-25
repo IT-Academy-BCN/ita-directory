@@ -1,4 +1,4 @@
-import {allMonths} from "utils/constant";
+import {allMonths} from "../../../../utils/constant";
 
 export const dataLabels = ["Pisos", "Garages", "Locales", "Chalets"];
 

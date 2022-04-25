@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import tw from "twin.macro";
+// import tw from "twin.macro";
 import Colors from "../../../theme/Colors";
 import {Device} from "../../../theme/mediaQueries";
 
@@ -49,12 +49,13 @@ export const Logo = styled.div`
 
 	.footer__logo {
 		display: flex;
-		align-items: center;
+		align-items: start;
+		height: 2.3rem;
 	}
 
 	& .footer__logo-image {
 		width: 144px;
-		height: 36px;
+		height: auto;
 	}
 
 	& .footer__logo-text {
@@ -67,6 +68,7 @@ export const Logo = styled.div`
 		color: ${Colors.redPink};
 		min-width: 10rem;
 		display: flex;
+		align-self: center;
 		flex: 2;
 	}
 
@@ -93,14 +95,15 @@ export const Information = styled.div`
 	}
 `;
 
+// ${tw`absolute bottom-0 left-0`}
+// font-size: 0.65rem;
 export const Credits = styled(Information)`
-	/* ${tw`absolute bottom-0 left-0`} */
-	/* font-size: 0.65rem; */
 	padding: 0.3rem 0;
 
 	& p {
 		color: ${Colors.black};
 		text-align: left;
+		margin: 0;
 	}
 	& span {
 		color: ${Colors.redPink};

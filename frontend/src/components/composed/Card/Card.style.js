@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 import {Device, responsiveSizes} from "../../../theme/mediaQueries";
 
 export const CardStyled = styled.div`

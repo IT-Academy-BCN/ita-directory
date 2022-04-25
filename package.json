@@ -27,7 +27,7 @@
     "node.js",
     "prisma",
     "directory",
-    "docosaurus"
+    "docusaurus"
   ],
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",

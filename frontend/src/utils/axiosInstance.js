@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = import.meta.env.REACT_APP_API_URL;
 
 let authToken = localStorage.getItem("token");
 
@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
 		if (error.response.status === 401) {
 			originalRequest._retry = true;
 			return axios
-				.get(`${process.env.REACT_APP_API_URL}/users/v1/refresh-token`, {
+				.get(`${import.meta.env.REACT_APP_API_URL}/users/v1/refresh-token`, {
 					headers: {refresh: refreshToken},
 				})
 				.then((response) => {

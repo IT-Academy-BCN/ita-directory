@@ -22,7 +22,7 @@ const UpdatePassword = () => {
 	const loginUser = async (user) => {
 		try {
 			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/users/v1/login`,
+				`${import.meta.env.REACT_APP_API_URL}/users/v1/login`,
 				user
 			);
 			setMessage(response.data.message);
