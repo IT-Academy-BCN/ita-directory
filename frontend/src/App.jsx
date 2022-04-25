@@ -2,23 +2,24 @@ import React from "react";
 import {Route, Switch} from "react-router-dom";
 // import ProtectedRoute from "components/composed/ProtectedRoute";
 
-import Home from "./screens/Home/Home";
-import Ad from "./screens/Ad/Ad";
-import CreateNewAd from "./screens/CreateNewAd/CreateNewAd";
-import Login from "./screens/UserFlow/Login/Login";
-import Registration from "./screens/UserFlow/Registration/Registration";
-import RecoverPassword from "./screens/UserFlow/RecoverPassword/RecoverPassword";
-import Profile from "./screens/UserFlow/Profile/Profile";
-import AdList from "./screens/AdList/AdList";
-import ListaUsuariosAdmins from "./screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
-import Dashboard from "./screens/Dashboard/Dashboard";
-import MyBills from "./screens/MyBills/MyBills";
-import Bill from "./screens/MyBills/Bill";
-import UserAds from "./screens/UserAds/UserAds";
-import ProtectedRoute from "./components/composed/ProtectedRoute";
-import Search from "./screens/Search/Search";
-import ChangePassword from "./screens/UserFlow/ChangePassword/ChangePassword";
-import PageNotFound from "./screens/PageNotFound/PageNotFound";
+import Home from "screens/Home/Home";
+import Ad from "screens/Ad/Ad";
+import CreateNewAd from "screens/CreateNewAd/CreateNewAd";
+import Login from "screens/UserFlow/Login/Login";
+import Registration from "screens/UserFlow/Registration/Registration";
+import RecoverPassword from "screens/UserFlow/RecoverPassword/RecoverPassword";
+import Profile from "screens/UserFlow/Profile/Profile";
+import AdList from "screens/AdList/AdList";
+import ListaUsuariosAdmins from "screens/ListaUsuariosAdmins/ListaUsuariosAdmins";
+import Dashboard from "screens/Dashboard/Dashboard";
+import MyBills from "screens/MyBills/MyBills";
+import Bill from "screens/MyBills/Bill";
+import UserAds from "screens/UserAds/UserAds";
+import ProtectedRoute from "components/composed/ProtectedRoute";
+import Search from "screens/Search/Search";
+import ChangePassword from "screens/UserFlow/ChangePassword/ChangePassword";
+import PageNotFound from "screens/PageNotFound/PageNotFound";
+import Notifications from "components/units/Notifications/Notifications";
 
 // import SalesLineChart from "screens/Sales/SalesLineChart";
 // import SalesByMonth from "screens/Sales/SalesByMonth";
@@ -30,6 +31,7 @@ const noExiste = () => {
 const App = () => {
 	return (
 		<>
+			<Notifications />
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/ad/:id" component={Ad} />

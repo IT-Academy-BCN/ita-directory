@@ -1,27 +1,26 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import {useParams, useHistory} from "react-router-dom";
 import axios from "axios";
-import Notification from "../../../components/units/Notifications/Notification";
 import Body from "../../../components/layout/Body/Body";
 import AsyncButton from "../../../components/units/Button/Button";
 
 import {Container, Form} from "../UserFlow.styles";
-import {msgs, validatePassword} from "../../../utils/userFlow";
-import Input from "../../../components/units/Input/Input";
+import {msgs, validatePassword} from "utils/userFlow";
+import Input from "components/units/Input/Input";
+import {newNotification, NotificationTypes} from "store/notificationSlice";
+import {useDispatch} from "react-redux";
 
 const ChangePassword = () => {
 	const [animated, setAnimated] = useState(false);
 	const [disabled, setIsDisabled] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isSuccess, setIsSuccess] = useState(null);
-	const [message, setMessage] = useState("");
 	const [password1, setPassword1] = useState("");
 	const [password2, setPassword2] = useState("");
 
 	const history = useHistory();
 	const {token} = useParams();
-	const closeNotification = () => setMessage(null);
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -33,18 +32,25 @@ const ChangePassword = () => {
 				`${import.meta.env.REACT_APP_API_URL}/users/v1/change-password/${token}`,
 				{password1, password2}
 			);
-			setMessage(response.data.message);
-			setIsSuccess(true);
+			dispatch(
+				newNotification({
+					message: response.data.message,
+					type: NotificationTypes.succes,
+				})
+			);
 			if (response.data.code === "error") {
-				setIsSuccess(false);
 				throw response.data.message;
 			}
 			if (response.data.statusCode === 200) {
 				history.push("/login");
 			}
 		} catch (error) {
-			if (error.name === "Error")
-				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			dispatch(
+				newNotification({
+					message: `Sorry, connection failed: "${error.message}". Please, try later.`,
+					type: NotificationTypes.error,
+				})
+			);
 		}
 		setTimeout(() => {
 			setIsDisabled(false);
@@ -57,15 +63,6 @@ const ChangePassword = () => {
 
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					closeNotification={closeNotification}
-					autoClose={true}
-					isSuccess={isSuccess}
-				/>
-			) : null}
-
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>

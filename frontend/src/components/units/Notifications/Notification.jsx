@@ -1,40 +1,73 @@
-import React, {useEffect, useState} from "react";
-import {NotificationStyled} from "./Notification.styles";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheckCircle, faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faCheckDouble, faExclamationCircle, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux';
+import {deleteNotification} from 'store/notificationSlice';
+import styled, {keyframes} from 'styled-components';
 
-const Notification = ({message, isSuccess, autoClose}) => {
-	useEffect(() => {
-		const autoCloseFn = window.setTimeout(() => {
-			if (autoClose) {
-				closeNotification();
-			}
-		}, 4500);
-		return () => autoCloseFn;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+const InRight = keyframes`
+from {
+  transform: translateX(100%);
+  
+}
+to {
+  transform: translateX(0);
+}
+`
+const NotificationStyled = styled.div`
+    background-color: white;
+    padding: 30px;
+    width: 350px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #999;
+    opacity: .8; 
+    animation: ${InRight} .5s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
 
-	const[notificationState, setNotificationState] = useState(true);
+const NotificationMessageStyled = styled.p`
+	text-align: left;
+`
 
-	const closeNotification = () => {
-		setNotificationState(false);
-	}
+const NotificationIconStyled = styled.div`
+    margin-right: 30px;
+`
 
-	return (
-			notificationState == true  ? 
-			<NotificationStyled isSuccess={isSuccess}>
-				<div className="color">
-					<FontAwesomeIcon
-						icon={isSuccess ? faCheckCircle : faExclamationCircle}
-						style={{color: "white", width: "30px", height: "30px"}}
-					/>
-					<p>{message}</p>
-					<button onClick={() => closeNotification()}>X</button>
-				</div>
-			</NotificationStyled> 
-		 
-		 : <></>
-	);
-};
+const ButtonStyled = styled.button`
+position: absolute;
+top: 5%;
+right: 5% ;
+font-size: 20px;
+`
 
-export default Notification;
+function Notification({message, id, icon}) {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const autoCloseFn = window.setTimeout(() => {
+            closeNotification();
+        }, 4500);
+        return () => autoCloseFn;
+    }, []);
+
+    const closeNotification = () => {
+        dispatch(deleteNotification(id))
+    }
+
+    return (
+        <NotificationStyled>
+            <NotificationIconStyled>
+                <FontAwesomeIcon
+                    icon={icon}
+                    style={{color: "red", width: "50px", height: "30px"}}
+                />
+            </NotificationIconStyled>
+            <NotificationMessageStyled>{message}</NotificationMessageStyled>
+        </NotificationStyled>
+    )
+}
+
+export default Notification
