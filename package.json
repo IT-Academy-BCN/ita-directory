@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "ITA Directory",
+  "type": "module",
   "scripts": {
     "frontend": "cd ./frontend && npm start",
     "backend": "cd ./backend && npm run dev",

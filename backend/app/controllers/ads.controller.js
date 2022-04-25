@@ -9,6 +9,7 @@ const {
 	patchAdSchema,
 } = require("../utils/utils");
 const {parseAdsFromCsvBuffer} = require("../utils/parseAdsFromCsvBuffer");
+const logger = require("../../logger");
 
 
 
@@ -48,6 +49,7 @@ async function createAd(req, res) {
 			apiResponse({
 				message: "Ad created successfully.",
 				data: ad,
+				status: 200
 			})
 		);
 	} catch (err) {
@@ -56,6 +58,7 @@ async function createAd(req, res) {
 				apiResponse({
 					message: "At least one of the required values is not defined.",
 					errors: err.message,
+					status: 400
 				})
 			);
 		} else if (err && err.code === "P2003") {
@@ -63,6 +66,7 @@ async function createAd(req, res) {
 				apiResponse({
 					message: "This value for user_id does not exist in users table.",
 					errors: err.message,
+					status: 422
 				})
 			);
 		}
@@ -71,6 +75,7 @@ async function createAd(req, res) {
 			apiResponse({
 				message: "An error occurred while posting your ad.",
 				errors: err.message,
+				status: 500
 			})
 		);
 	}
@@ -98,6 +103,7 @@ async function createAdsFromCSVBuffer(req, res) {
 				message: `${createMany.count} records have been created successfully`,
 				//createMany does not return created records. As a workaround, validatedAdsArray is returned. https://github.com/prisma/prisma/issues/8131
 				data: validatedAdsArray,
+				status: 200
 			})
 		);
 	} catch (err) {
@@ -106,6 +112,7 @@ async function createAdsFromCSVBuffer(req, res) {
 				apiResponse({
 					message: err.message,
 					errors: err.message,
+					status: 400
 				})
 			);
 		} else if (err.isJoi && err.name === "ValidationError") {
@@ -113,6 +120,7 @@ async function createAdsFromCSVBuffer(req, res) {
 				apiResponse({
 					message: "At least one of the required values is not defined.",
 					errors: err.message,
+					status: 400
 				})
 			);
 		} else {
@@ -120,6 +128,7 @@ async function createAdsFromCSVBuffer(req, res) {
 				apiResponse({
 					message: "An error occurred while posting the ads.",
 					errors: err.message,
+					status: 500
 				})
 			);
 		}
@@ -134,6 +143,7 @@ async function getAllAds(req, res) {
 			apiResponse({
 				message: "Data fetched correctly.",
 				data: ads,
+				status: 200
 			})
 		);
 	} catch (err) {
@@ -141,6 +151,7 @@ async function getAllAds(req, res) {
 			apiResponse({
 				message: "An error occurred with your query.",
 				err: err.message,
+				status: 500
 			})
 		);
 	}
@@ -163,6 +174,7 @@ async function getAdById(req, res) {
 			res.status(404).json(
 				apiResponse({
 					message: "This adId does not exist.",
+					status: 404
 				})
 			);
 		}
@@ -170,6 +182,7 @@ async function getAdById(req, res) {
 		res.status(200).json({
 			message: "Ad fetched correctly.",
 			data: ad,
+			status: 200
 		});
 	} catch (err) {
 		if (err.name === "ValidationError") {
@@ -177,6 +190,7 @@ async function getAdById(req, res) {
 				apiResponse({
 					message: "adId param must be an integer.",
 					err: err.message,
+					status: 400
 				})
 			);
 		} else {
@@ -184,6 +198,7 @@ async function getAdById(req, res) {
 				apiResponse({
 					message: "Something wrong occurred with your query.",
 					err: err.message,
+					status: 500
 				})
 			);
 		}
@@ -201,6 +216,7 @@ async function getAdsByType(req, res) {
 			return res.status(404).json(
 				apiResponse({
 					message: "Type not in the database",
+					status: 404
 				})
 			);
 		}
@@ -219,6 +235,7 @@ async function getAdsByType(req, res) {
 		return res.status(200).json({
 			message: "Ad fetched correctly.",
 			data: ads,
+			status: 200
 		});
 	} catch (err) {
 		if (err.name === "ValidationError") {
@@ -226,6 +243,7 @@ async function getAdsByType(req, res) {
 				apiResponse({
 					message: "adId param must be an integer.",
 					err: err.message,
+					status: 400
 				})
 			);
 		} else {
@@ -233,6 +251,7 @@ async function getAdsByType(req, res) {
 				apiResponse({
 					message: "Something wrong occurred with your query.",
 					err: err.message,
+					status: 500
 				})
 			);
 		}
@@ -255,6 +274,7 @@ async function getAdTypes(req, res) {
 			apiResponse({
 				message: "Something wrong occurred with your query.",
 				err: err.message,
+				status: 500
 			})
 		);
 	}
@@ -272,6 +292,7 @@ async function getAdsByTypeAndLocation(req, res) {
 			return res.status(404).json(
 				apiResponse({
 					message: "Type not in the database",
+					status: 404
 				})
 			);
 		}
@@ -303,6 +324,7 @@ async function getAdsByTypeAndLocation(req, res) {
 			apiResponse({
 				message: "Something wrong occurred with your query.",
 				err: err.message,
+				status: 500
 			})
 		);
 	}
@@ -319,6 +341,7 @@ async function getAdsByLocation(req, res) {
 			apiResponse({
 				message: "Something wrong occurred with your query.",
 				err: err.message,
+				status: 500
 			})
 		);
 	}
@@ -341,6 +364,7 @@ async function deleteById(req, res) {
 			apiResponse({
 				message: "Ad successfully deleted.",
 				data: deletedAd,
+				status: 200
 			})
 		);
 	} catch (err) {
@@ -349,6 +373,7 @@ async function deleteById(req, res) {
 				apiResponse({
 					message: "This adId does not exist.",
 					errors: err.message,
+					status: 404
 				})
 			);
 		}
@@ -357,6 +382,7 @@ async function deleteById(req, res) {
 			apiResponse({
 				message: "An error occurred with your query.",
 				errors: err,
+				status: 500
 			})
 		);
 	}
@@ -415,6 +441,7 @@ async function updateAd(req, res) {
 			apiResponse({
 				message: "Ad updated successfully.",
 				data: updatedAd,
+				status: 200
 			})
 		);
 	} catch (err) {
@@ -423,6 +450,7 @@ async function updateAd(req, res) {
 				apiResponse({
 					message: "At least one of the required values is not defined.",
 					errors: err.message,
+					status: 400
 				})
 			);
 			// P2025 Prisma error record not found
@@ -431,6 +459,7 @@ async function updateAd(req, res) {
 				apiResponse({
 					message: err.meta.cause,
 					errors: err.message,
+					status: 404
 				})
 			);
 		} else {
@@ -439,6 +468,7 @@ async function updateAd(req, res) {
 				apiResponse({
 					message: "An error occurred while posting your ad.",
 					errors: err.message,
+					status: 500
 				})
 			);
 		}
@@ -466,8 +496,16 @@ async function activeAdsByLocationAndDate(req, res) {
 			}
 		});
 		res.status(200).send(ads)
+		apiResponse({
+			message: "Ad fetched correctly.",
+			status: 200
+		})
 	} catch (err) {
-		console.log(err.message)
+		apiResponse({
+			message: "And error occurred with your query",
+			errors: err,
+			status: 500
+		});
 	}
 }
 
