@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {Device} from "../../theme/mediaQueries";
+import Colors from "../../theme/Colors";
 
 export const Wrapper = styled.div`
 	display: flex;
@@ -15,6 +16,33 @@ export const Wrapper = styled.div`
 	background-color: #f7f7f7;
 	border-radius: 0.5em;
 	margin-bottom: 2rem;
+
+	.style-input-create-new-ad {
+		/* border: 1px solid #707070; */
+		border-radius: 0;
+		/* border-bottom: 1px solid ${Colors.transparent}; */
+		border-bottom: 1px solid ${Colors.lightGray};
+
+
+	}
+	input.style-input-create-new-ad {
+		border: none;
+		border-bottom: 1px solid ${Colors.lightGray};
+		padding: 0.3rem 0.5rem;
+
+		&:hover {
+			border-radius: 1rem;
+			border-bottom: 1px solid ${Colors.redPink};
+		}
+		&.error {
+			border-bottom: 1px solid #fecaca !important;
+		}
+		&:focus {
+			outline: 0 none;
+			border-radius: 1rem;
+			border-bottom: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
+		}
+	}
 
 	label {
 		flex-basis: 50px;
@@ -53,6 +81,20 @@ export const Wrapper = styled.div`
 
 		> div {
 			min-width: 10rem;
+			/* border-bottom: 1px solid ${Colors.lightGray};
+
+			&:hover {
+				border-radius: 1rem;
+				border-bottom: 1px solid ${Colors.redPink};
+			}
+			&.error {
+				border: 1px solid #fecaca !important;
+			}
+			&:focus {
+				outline: 0 none;
+				border-radius: 1rem;
+				border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
+			} */
 
 			/* width: 100%; */
 
@@ -98,8 +140,14 @@ export const Wrapper = styled.div`
 			}
 		}
 
+		/* &.inputsContainer {
+			& div {
+				border: 1px solid #707070;
+			}
+		} */
+
 		.input-container {
-			margin-top: 0;
+			margin-top: 0;	
 		}
 	}
 `;

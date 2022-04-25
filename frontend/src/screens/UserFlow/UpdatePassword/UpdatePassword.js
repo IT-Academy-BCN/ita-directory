@@ -7,6 +7,8 @@ import AsyncButton from "components/units/Button/Button";
 import {Container, Form, RedirectStyled} from "../UserFlow.styles";
 import {msgs, validateEmail, validatePassword} from "utils/userFlow";
 import Input from "components/units/Input/Input";
+import {useDispatch} from "react-redux";
+import {newNotification, NotificationTypes} from "store/notificationSlice";
 
 const UpdatePassword = () => {
 	const [loginSuccess, setLoginSuccess] = useState(false);
@@ -16,21 +18,39 @@ const UpdatePassword = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState(null);
+	const dispatch = useDispatch();
 
 	const closeNotification = () => setMessage(null);
 
 	const loginUser = async (user) => {
 		try {
 			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/users/v1/login`,
+				`${import.meta.env.REACT_APP_API_URL}/users/v1/login`,
 				user
 			);
 			setMessage(response.data.message);
-			if (response.data.code === "error") throw response.data.message;
+			if (response.data.code === "error") {
+				dispatch(
+					newNotification({
+						message: message,
+						type: NotificationTypes.error,
+					}))
+				throw response.data.message
+			};
 			setLoginSuccess(true);
+			dispatch(
+				newNotification({
+					message: message,
+					type: NotificationTypes.succes,
+				}))
 		} catch (error) {
 			if (error.name === "Error")
 				setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`);
+			dispatch(
+				newNotification({
+					message: message,
+					type: NotificationTypes.error,
+				}))
 			setLoginSuccess(false);
 		}
 	};
@@ -55,17 +75,20 @@ const UpdatePassword = () => {
 		});
 	};
 
+	useEffect(() => {
+		if (message) {
+			dispatch(
+				newNotification({
+					message: message,
+					type: loginSuccess ? NotificationTypes.succes : NotificationTypes.error,
+				})
+			)
+			setMessage(null);
+		}
+	});
+
 	return (
 		<>
-			{message ? (
-				<Notification
-					message={message}
-					isSuccess={loginSuccess}
-					closeNotification={closeNotification}
-					autoClose={true}
-				/>
-			) : null}
-
 			<Body title="Acceso" isLoggedIn={false} justifyTitle="center">
 				<Container>
 					<Form onSubmit={handleSubmit} novalidate>

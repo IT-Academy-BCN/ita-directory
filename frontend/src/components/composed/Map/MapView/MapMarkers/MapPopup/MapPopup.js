@@ -17,7 +17,7 @@ const MapPopup = (props) => {
 		<React.Fragment>
 			<Popup>
 				<PopupStyled>
-					<img src={`${process.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
+					<img src={`${import.meta.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
 				</PopupStyled>
 				<Content>
 					<PropertyData>

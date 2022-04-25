@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
-import SelectArrow from "assets/images/select-arrow.svg";
+import Colors from "../../../../theme/Colors";
+import SelectArrow from "../../../../assets/images/select-arrow.svg";
 
 export const PieGraphicStyled = styled.div`
 	width: 100%;

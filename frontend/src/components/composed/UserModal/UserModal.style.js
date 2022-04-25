@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 
 export const UserModalStyled = styled.div`
 	margin-bottom: 25px;
@@ -26,16 +26,16 @@ export const UserModalStyled = styled.div`
 		width: 100%;
 
 		color: ${(props) =>
-			props.currentUserState === ("rejected" || 3)
-				? Colors.redColor
-				: props.currentUserState === ("aprobado" || 1)
+		props.currentUserState === ("rejected" || 3)
+			? Colors.redColor
+			: props.currentUserState === ("aprobado" || 1)
 				? Colors.darkGreen
 				: Colors.grey};
 
 		border-color: ${(props) =>
-			props.currentUserState === ("rejected" || 3)
-				? Colors.redColor
-				: props.currentUserState === ("aprobado" || 1)
+		props.currentUserState === ("rejected" || 3)
+			? Colors.redColor
+			: props.currentUserState === ("aprobado" || 1)
 				? Colors.darkGreen
 				: Colors.grey};
 

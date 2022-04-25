@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Colors from "theme/Colors";
+import Colors from "../../../theme/Colors";
 import {Device} from "../../../theme/mediaQueries";
 
 export const InputNumberStyled = styled.div`
@@ -34,15 +34,29 @@ export const StyledContainer = styled.div`
 	width: 18.6rem;
 	height: 2.6rem;
 	padding: 5px;
-	border: 1px solid #707070;
 
+	border-bottom: 1px solid ${Colors.lightGray};
+
+	&:hover {
+		border-radius: 1rem;
+		border-bottom: 1px solid ${Colors.redPink};
+	}
 	&.error {
+		border: 1px solid #fecaca !important;
+	}
+	&:focus {
+		outline: 0 none;
+		border-radius: 1rem;
+		border: 1px solid ${(props) => (props.error ? "red" : Colors.darkBlue)} !important;
+	}
+
+	/* &.error {
 		border: 1px solid ${Colors.redColor};
 		color: #7d868b;
-	}
+	} */
 	&:focus-within {
-		outline: 0 none;
-		border: 2px solid #000 !important;
+		/* outline: 0 none;
+		border: 2px solid #000 !important; */
 	}
 
 	&.error:focus-within {
