@@ -10,6 +10,7 @@ const userRoutes = require("./routes/users.routes");
 const mediaRoutes = require("./routes/media.routes");
 const locationRoutes = require("./routes/location.routes");
 const contactRoutes = require("./routes/contact.routes");
+const logger = require('./middleware/handlerLogger')
 
 // const constantsRoute = require("./routes/constants.routes");
 const adsRoutes = require("./routes/ads.routes");
@@ -53,7 +54,7 @@ app.get("/", (req, res) => {
 
 // Routes
 // app.use("/", constantsRoute);
-app.use("/ads", adsRoutes);
+app.use("/ads", logger, adsRoutes);
 app.use("/users", userRoutes);
 app.use("/media", mediaRoutes);
 app.use("/location", locationRoutes);

@@ -1,109 +1,109 @@
 import styled from "styled-components";
-import tw from "twin.macro";
+// import tw from "twin.macro";
 import Colors from "../../../theme/Colors";
+import {Device} from "../../../theme/mediaQueries";
 
-export const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	max-width: 600px;
-	margin: 0 auto;
-	padding-left: 30px;
-	padding-right: 30px;
+// export const Wrapper = styled.div`
+// 	display: flex;
+// 	flex-direction: column;
+// 	width: 100%;
+// 	max-width: 600px;
+// 	margin: 0 auto;
+// 	padding-left: 30px;
+// 	padding-right: 30px;
 
-	hr {
-		width: 100%;
-		display: block;
-		height: 1px;
-		background-color: black;
-	}
-`;
+// 	hr {
+// 		width: 100%;
+// 		display: block;
+// 		height: 1px;
+// 		background-color: black;
+// 	}
+// `;
 
 export const StyledFooter = styled.footer`
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
 	border-top: 1px solid ${Colors.lightGrey};
 	width: 100%;
-	margin: 1rem 0rem;
-	padding-top: 1rem;
+	padding: 1rem 0 1.5rem 0;
+	font-size: 0.65rem;
 
-	@media only screen and (max-width: 468px) {
+	@media only ${Device.Tablet} {
 		flex-wrap: wrap;
 		justify-content: center;
-		margin: 1rem 0.5rem;
-	}
 
-	@media only screen and (max-width: 600px) {
-		margin: 0.5rem;
+		flex-direction: row;
 	}
 `;
 
 export const Logo = styled.div`
+	cursor: default;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: start;
 	text-align: left;
 	letter-spacing: 0px;
 	color: ${Colors.black};
 	opacity: 1;
-	font-weight: bold;
-	padding-bottom: 1rem;
-	height: 80px;
-	position: relative;
 
-	& img {
+	.footer__logo {
+		display: flex;
+		align-items: start;
+		height: 2.3rem;
+	}
+
+	& .footer__logo-image {
 		width: 144px;
-		height: 36px;
+		height: auto;
 	}
 
-	& .directory {
-
-		${tw`text-[15px] text-pinkRed ml-2`}
-
-	}
-
-	@media only screen and (max-width: 1019px) {
+	& .footer__logo-text {
+		font-family: monospace;
+		font-size: 1rem;
+		font-weight: bold;
+		margin-left: 5px;
+		width: 77px;
+		letter-spacing: -1.5px;
+		color: ${Colors.redPink};
 		min-width: 10rem;
+		display: flex;
+		align-self: center;
 		flex: 2;
 	}
 
-	@media only screen and (max-width: 468px) {
-		text-align: center;
+	@media only ${Device.Tablet} {
+		text-align: start;
+		display: flex;
 		flex: 4;
 	}
 `;
 
 export const Information = styled.div`
-	text-align: right;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	text-align: left;
 	letter-spacing: 0;
-	opacity: 1;
 	list-style-type: none;
-	font: normal normal normal 0.7rem Arial;
 	margin: 0px;
 	padding-left: 0;
 	color: ${Colors.grey};
 
-	@media only screen and (min-width: 1020px) {
-		min-width: 10rem;
-		flex: 3;
-	}
-	@media only screen and (min-width: 1019px) {
-		margin: 0px;
-		min-width: 10rem;
-		flex: 3;
-	}
-	@media only screen and (max-width: 468px) {
-		text-align: left;
-		margin-top: 0.5rem;
-		flex: 4;
+	@media only ${Device.Tablet} {
+		text-align: right;
 	}
 `;
 
+// ${tw`absolute bottom-0 left-0`}
+// font-size: 0.65rem;
 export const Credits = styled(Information)`
-	${tw`absolute bottom-0 left-0`}
+	padding: 0.3rem 0;
+
 	& p {
 		color: ${Colors.black};
 		text-align: left;
+		margin: 0;
 	}
 	& span {
 		color: ${Colors.redPink};
@@ -111,12 +111,12 @@ export const Credits = styled(Information)`
 `;
 
 export const Rights = styled.div`
-	margin: 3px;
+	margin: 0px 0;
 	color: #000;
 `;
 
 export const Legal = styled.div`
-	margin: 3px;
+	margin: 2px 0;
 	white-space: nowrap;
 `;
 
@@ -124,7 +124,7 @@ export const Anchor = styled.a`
 	color: ${Colors.redPink};
 	text-decoration: none;
 	list-style-type: none;
-	padding: 2px;
+	padding: 2px 0;
 	&:hover {
 		color: ${Colors.lightGrey};
 	}

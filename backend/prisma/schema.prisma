@@ -29,16 +29,16 @@ model user_status {
 }
 
 model user {
-  id               Int                @id @default(autoincrement())
+  id               Int                    @id @default(autoincrement())
   name             String?
   lastnames        String?
-  email            String             @unique
+  email            String                 @unique
   password         String
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  user_status      user_status        @relation(fields: [user_status_id], references: [id])
+  created_at       DateTime               @default(now())
+  updated_at       DateTime               @updatedAt
+  user_status      user_status            @relation(fields: [user_status_id], references: [id])
   user_status_id   Int
-  user_role        user_role          @relation(fields: [user_role_id], references: [id])
+  user_role        user_role              @relation(fields: [user_role_id], references: [id])
   user_role_id     Int
   acces_log        acces_log[]
   recover_password recover_password_log[]
@@ -113,6 +113,29 @@ model media_type {
 //   user                     user         @relation(fields: [user_id], references: [id])
 //   user_id                  Int
 // }
+
+model level_type {
+  id           Int     @id @default(autoincrement())
+  name         String
+  country      Int // País
+  state        Int // Autonomía
+  city         Int // Provincia
+  town         Int // Ciudad-Población
+  district     Int // Distrito
+  neighborhood Int // Barrio
+  level        level[]
+}
+
+model level {
+  id            Int        @id @default(autoincrement())
+  name          String
+  parent        level?     @relation("parent", fields: [parent_id], references: [id])
+  parent_id     Int?
+  child         level[]    @relation("parent")
+  level_type    level_type @relation(fields: [level_type_id], references: [id])
+  level_type_id Int
+}
+
 model ad_type {
   id           Int    @id @default(autoincrement())
   name         String
@@ -127,44 +150,32 @@ model ad_type {
   ads          ads[]
 }
 
+model ad_status {
+  id         Int    @id @default(autoincrement())
+  name       String
+  un_publish Int
+  publish    Int
+  ads        ads[]
+}
+
 model ads {
-  id            Int      @id @default(autoincrement())
-  user          user     @relation(fields: [user_id], references: [id])
+
+  id            Int       @id @default(autoincrement())
+  user          user      @relation(fields: [user_id], references: [id])
   user_id       Int
   title         String
   description   String
-  city          String
+  location      Int
   n_rooms       Int
   price         Int
   square_meters Int
   n_bathrooms   Int
   map_lat       Decimal
   map_lon       Decimal
+  ad_type       ad_type   @relation(fields: [ad_type_id], references: [id])
   ad_type_id    Int
-  ad_type       ad_type  @relation(fields: [ad_type_id], references: [id])
-  publish       Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updateAt      DateTime @updatedAt
-}
-
-model level {
-  id            Int        @id @default(autoincrement())
-  name          String
-  parent        level?     @relation("parent", fields: [parent_id], references: [id])
-  parent_id     Int?
-  child         level[]    @relation("parent")
-  level_type    level_type @relation(fields: [level_type_id], references: [id])
-  level_type_id Int
-}
-
-model level_type {
-  id           Int     @id @default(autoincrement())
-  name         String
-  country      Int // País
-  state        Int // Autonomía
-  city         Int // Provincia
-  town         Int // Ciudad-Población
-  district     Int // Distrito
-  neighborhood Int // Barrio
-  level        level[]
+  ad_status     ad_status @relation(fields: [ad_status_id], references: [id])
+  ad_status_id  Int
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 }

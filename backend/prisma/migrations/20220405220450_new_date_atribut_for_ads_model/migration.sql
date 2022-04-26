@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "ads" ALTER COLUMN "created_at" SET DATA TYPE DATE,
+ALTER COLUMN "updated_at" SET DATA TYPE DATE;
