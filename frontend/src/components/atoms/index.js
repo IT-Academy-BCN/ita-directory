@@ -2,5 +2,6 @@ import CheckBox from './CheckBox'
 import Icon from './Icon'
 import SearchButton from './SearchButton'
 import Text from './Text'
+import Banner from './Banner'
 
-export { Icon, Text, CheckBox, SearchButton }
+export { Banner, Icon, Text, CheckBox, SearchButton }
