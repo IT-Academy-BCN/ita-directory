@@ -1,5 +1,5 @@
 {
-  "src/**/*.{js,ts,jsx,tsx}": [
+  "app/**/*.{js,ts,jsx,tsx}": [
     "eslint --cache --fix",
     "./node_modules/.bin/eslint --max-warnings=0",
     "./node_modules/.bin/prettier --write"

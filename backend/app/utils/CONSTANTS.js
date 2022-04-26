@@ -1,16 +1,16 @@
 // Internal modules
-const prisma = require('./../../prisma/indexPrisma')
+const prisma = require('../../prisma/indexPrisma')
 
 let CONSTANTS
 
 async function loadConstants() {
   try {
-    const user_role = await prisma.user_role.findMany()
-    const user_status = await prisma.user_status.findMany()
+    const userRole = await prisma.user_role.findMany()
+    const userStatus = await prisma.user_status.findMany()
     // console.log(user_role, user_status);
-    CONSTANTS = { user_role, user_status }
+    CONSTANTS = { userRole, userStatus }
   } catch (err) {
-    console.error(err)
+    // console.error(err)
   }
 }
 
@@ -22,35 +22,26 @@ function getConstants() {
   return CONSTANTS
 }
 
-const type_sw = (type) => {
-  let type_id = ''
+const typeSw = (type) => {
   switch (type) {
     case 'house':
-      return (type_id = 1)
-      break
+      return 1
     case 'room':
-      return (type_id = 2)
-      break
+      return 2
     case 'garage':
-      return (type_id = 3)
-      break
+      return 3
     case 'storage':
-      return (type_id = 4)
-      break
+      return 4
     case 'office':
-      return (type_id = 5)
-      break
+      return 5
     case 'warehouse':
-      return (type_id = 6)
-      break
+      return 6
     case 'building':
-      return (type_id = 7)
-      break
+      return 7
     case 'new_building':
-      return (type_id = 8)
-      break
+      return 8
     default:
-      type_id = 0
+      return 0
   }
 }
 
@@ -58,6 +49,6 @@ module.exports = {
   loadConstants,
   getConstants,
   setConstants,
-  type_sw,
+  typeSw,
   CONSTANTS,
 }
