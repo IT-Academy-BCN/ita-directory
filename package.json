@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "frontend": "cd ./frontend && npm start",
+    "lint-frontend": "cd ./frontend && npm run lint-staged",
     "backend": "cd ./backend && npm run dev",
     "install-deps": "npm install && cd ./frontend && npm install && cd .. && cd ./backend && npm install",
     "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
@@ -16,7 +17,8 @@
     "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
     "up": "npm run start-server && npm run start-prisma",
     "down": "cd ./scripts && bash down.sh",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -36,8 +38,7 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
-    "husky": "7.0.2",
-    "lint-staged": "11.1.2",
+    "husky": "^6.0.0",
     "prisma": "3.11.0"
   }
 }

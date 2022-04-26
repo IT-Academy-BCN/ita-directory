@@ -11,16 +11,11 @@ export default defineConfig({
     define: {
         "process.env.VITE_NAME": `"${process.env.VITE_NAME}"`,
     },
-    entryPoints: [
-        "....src/index.jsx",
-    ],
     plugins: [
         legacy({
             targets: ['defaults', 'not IE 11']
         }),
-        react({
-            include: '**/*.{js,jsx,tsx}',
-        }),
+        react(),
 
     ],
 
