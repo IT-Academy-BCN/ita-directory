@@ -22,9 +22,8 @@ export const Wrapper = styled.div`
 		border-radius: 0;
 		/* border-bottom: 1px solid ${Colors.transparent}; */
 		border-bottom: 1px solid ${Colors.lightGray};
-
-
 	}
+    
 	input.style-input-create-new-ad {
 		border: none;
 		border-bottom: 1px solid ${Colors.lightGray};
