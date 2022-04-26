@@ -5,9 +5,8 @@
   "description": "ITA Directory",
   "type": "module",
   "scripts": {
-    "frontend": "cd ./frontend && npm start",
-    "lint-frontend": "cd ./frontend && npm run lint-staged",
-    "backend": "cd ./backend && npm run dev",
+    "frontend": "cp .env.development ./frontend/.env && cd ./frontend && npm start",
+    "backend": "cp .env.development ./backend/.env && cd ./backend && npm run dev",
     "install-deps": "npm install && cd ./frontend && npm install && cd .. && cd ./backend && npm install",
     "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
     "start-redis": "cd ./scripts && source ./docker-utils.sh; launchRedis",
@@ -15,7 +14,7 @@
     "prisma-migrate": "cd ./backend && npx prisma migrate dev",
     "prisma-seed": "node ./backend/prisma/seed.js",
     "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
-    "up": "npm run start-server && npm run start-prisma",
+    "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma",
     "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install",
     "prepare": "husky install"
