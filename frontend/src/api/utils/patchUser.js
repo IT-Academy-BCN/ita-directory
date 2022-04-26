@@ -1,9 +1,9 @@
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.REACT_APP_API_URL;
 
 const patchUser = (user) => {
-	return fetch(`${process.env.REACT_APP_API_URL}/users/v1/user`, {
+	return fetch(`${import.meta.env.REACT_APP_API_URL}/users/v1/user`, {
 		method: "PATCH",
 		headers: {
 			"Content-Type": "application/json",

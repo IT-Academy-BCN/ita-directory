@@ -6,7 +6,7 @@
   },
   "[javascript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.workingDirectories": ["frontend", "backend"],
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false

@@ -1,7 +1,7 @@
-const authenticateToken = require("../middleware/verifyToken");
-const adsController = require("../controllers/ads.controller");
-const router = require("express").Router();
-const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
+const router = require('express').Router()
+const authenticateToken = require('../middleware/verifyToken')
+const adsController = require('../controllers/ads.controller')
+const { uploadAdCSV } = require('../middleware/uploadAdsCSV')
 
 /**
  * Ad data
@@ -60,7 +60,7 @@ const {uploadAdCSV} = require("../middleware/uploadAdsCSV");
 }
  */
 
-router.post("/v1/post-ad", authenticateToken, adsController.createAd);
+router.post('/v1/post-ad', authenticateToken, adsController.createAd)
 
 /**
  * GET /ads/v1/ads
@@ -104,7 +104,7 @@ router.post("/v1/post-ad", authenticateToken, adsController.createAd);
         }
 ]}
  */
-router.get("/v1/ads", adsController.getAllAds);
+router.get('/v1/ads', adsController.getAllAds)
 
 /**
  * GET /ads/v1/ads/:adId
@@ -143,7 +143,7 @@ router.get("/v1/ads", adsController.getAllAds);
 }
 */
 
-router.get("/v1/ads/:adId", adsController.getAdById);
+router.get('/v1/ads/:adId', adsController.getAdById)
 
 // TODO: Swagger documentation
 /**
@@ -197,7 +197,7 @@ router.get("/v1/ads/:adId", adsController.getAdById);
 }
  */
 
-router.get("/v1/ads/type/:type", adsController.getAdsByType);
+router.get('/v1/ads/type/:type', adsController.getAdsByType)
 
 /**
  * GET /ads/v1/ads/types/list
@@ -219,7 +219,7 @@ router.get("/v1/ads/type/:type", adsController.getAdsByType);
     ]
 }
  */
-router.get("/v1/ads/types/list", adsController.getAdTypes);
+router.get('/v1/ads/types/list', adsController.getAdTypes)
 
 /**
  * GET /ads/v1/ads/:location/:type 
@@ -262,22 +262,21 @@ router.get("/v1/ads/types/list", adsController.getAdTypes);
 }
  */
 
-router.get("/v1/ads/:location/:type", adsController.getAdsByTypeAndLocation);
+router.get('/v1/ads/:location/:type', adsController.getAdsByTypeAndLocation)
 
-router.get("/v1/ads/search/location/:location", adsController.getAdsByLocation);
+router.get('/v1/ads/search/location/:location', adsController.getAdsByLocation)
 
-router.delete("/v1/ads/:adId", adsController.deleteById);
+router.delete('/v1/ads/:adId', adsController.deleteById)
 
-router.patch("/v1/ads/:adId", authenticateToken, adsController.updateAd);
+router.patch('/v1/ads/:adId', authenticateToken, adsController.updateAd)
 
 router.post(
-	"/v1/post-ads-csv",
-	authenticateToken,
-	uploadAdCSV,
-	adsController.createAdsFromCSVBuffer
-);
+  '/v1/post-ads-csv',
+  authenticateToken,
+  uploadAdCSV,
+  adsController.createAdsFromCSVBuffer
+)
 
-router.get("/v1/chart-data", adsController.activeAdsByLocationAndDate);
+router.get('/v1/chart-data', adsController.activeAdsByLocationAndDate)
 
-
-module.exports = router;
+module.exports = router

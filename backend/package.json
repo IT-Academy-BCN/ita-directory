@@ -32,15 +32,20 @@
     "multer": "1.4.2",
     "nodemailer": "6.7.2",
     "pg": "8.6.0",
+    "pino": "^7.10.0",
     "redis": "4.0.1",
     "socket.io": "4.1.2"
   },
   "devDependencies": {
     "cross-env": "7.0.3",
     "ejs": "3.1.6",
-    "eslint": "7.28.0",
+    "eslint": "8.14.0",
+    "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "lint-staged": "12.4.0",
     "nodemon": "2.0.7",
+    "pino-pretty": "7.6.1",
     "prettier": "2.3.1",
     "prisma": "3.8.1"
   }
