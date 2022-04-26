@@ -159,7 +159,6 @@ model ad_status {
 }
 
 model ads {
-
   id            Int       @id @default(autoincrement())
   user          user      @relation(fields: [user_id], references: [id])
   user_id       Int
