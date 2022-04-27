@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Body from '../../components/layout/Body/Body'
-import InputNumber from '../../components/atoms/InputNumber/InputNumber'
-import TextArea from '../../components/atoms/TextArea/TextArea'
-import Button from '../../components/atoms/Button/Button'
-import Input from '../../components/atoms/Input/Input'
-import Modal from '../../components/organisms/Modal/Modal'
 import {
   faMapMarkerAlt,
   faBed,
@@ -13,6 +7,17 @@ import {
   faHome,
   faBath,
 } from '@fortawesome/free-solid-svg-icons'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useDispatch } from 'react-redux'
+import newAdSchema from '../../validation/createNewAdSchema'
+import { newNotification, NotificationTypes } from '../../store/notificationSlice'
+import Body from '../../components/layout/Body/Body'
+import InputNumber from '../../components/atoms/InputNumber/InputNumber'
+import TextArea from '../../components/atoms/TextArea/TextArea'
+import Button from '../../components/atoms/Button/Button'
+import Input from '../../components/atoms/Input/Input'
+import Modal from '../../components/organisms/Modal/Modal'
 import {
   Wrapper,
   MapText,
@@ -23,13 +28,7 @@ import {
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import newAdSchema from '../../validation/createNewAdSchema.js'
-import { useDispatch } from 'react-redux'
-import { newNotification, NotificationTypes } from '../../store/notificationSlice'
-
-const CreateNewAd = () => {
+function CreateNewAd() {
   const emptyForm = {
     user_id: 1,
     title: '',
@@ -43,9 +42,9 @@ const CreateNewAd = () => {
     map_lon: 0,
   }
   const [form, setForm] = useState(emptyForm)
-  const [submittedData, setSubmittedData] = useState('') //@todo -> remove -probably unecessary
-  const [error, setError] = useState(true)
-  const [successfulPost, setSuccessfulPost] = useState(false)
+  const [submittedData, setSubmittedData] = useState('') // @todo -> remove -probably unecessary
+  const [, setError] = useState(true)
+  const [, setSuccessfulPost] = useState(false)
   const [coordinates, setCoordinates] = useState([])
   const {
     register,
@@ -58,14 +57,9 @@ const CreateNewAd = () => {
 
   const postAd = async (formInfo) => {
     try {
-      const res = await axios({
-        method: 'post',
-        url: 'http://localhost:5000/ads/v1/post-ad',
-        data: formInfo,
-      })
-      await console.log(res)
-      await setSuccessfulPost((prev) => true)
-      await setTimeout(() => setSuccessfulPost((prev) => false), 3000)
+      //   console.log(res)
+      setSuccessfulPost(() => true)
+      setTimeout(() => setSuccessfulPost(() => false), 3000)
       dispatch(
         newNotification({
           message: 'Tu anuncio ha sido publicado con exito.',
@@ -73,9 +67,8 @@ const CreateNewAd = () => {
         })
       )
     } catch (err) {
-      console.log(err)
-      setError((prev) => true)
-      setTimeout(() => setError((prev) => false), 3000)
+      //   console.log(err)
+
       dispatch(
         newNotification({
           message: 'Ha habido un error. Vuelve ha intentar ahora o mas tarde',
@@ -94,27 +87,6 @@ const CreateNewAd = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinates])
 
-  /* useEffect(() => {
-		if (error) {
-			setError(false);
-			dispatch(
-				newNotification({
-					message: "Ha habido un error. Vuelve ha intentar ahora o mas tarde",
-					type: NotificationTypes.error,
-				})
-			)
-		}
-		if (successfulPost) {
-			setSuccessfulPost(false)
-			dispatch(
-				newNotification({
-					message: "Tu anuncio ha sido publicado con exito.",
-					type: NotificationTypes.succes,
-				})
-			)
-		} 
-	}, []); */
-
   const submitForm = (data) => {
     const formInfo = {
       ...form,
@@ -124,10 +96,10 @@ const CreateNewAd = () => {
     }
     postAd(formInfo)
     setSubmittedData(JSON.stringify(formInfo, 0, 2))
-    //variables reset
+    // variables reset
     setForm(emptyForm)
-    setError((prev) => false)
-    setSuccessfulPost((prev) => false)
+    setError(() => false)
+    setSuccessfulPost(() => false)
     setTimeout(() => setSubmittedData(''), 5000)
   }
 
@@ -208,8 +180,6 @@ const CreateNewAd = () => {
       const f = new FormData()
       f.append('some_csv', csvFile)
 
-      console.table(Object.fromEntries(f))
-
       await axios
         .post('http://localhost:10910/ads/v1/post-ads-csv', f, {
           headers: {
@@ -219,11 +189,11 @@ const CreateNewAd = () => {
           },
         })
         .then((response) => {
-          console.log(response.data)
+          //   console.log(response.data)
           setValidCsvFile(true)
         })
         .catch((error) => {
-          console.log(error)
+          //   console.log(error)
           setValidCsvFile(false)
         })
     }
@@ -232,134 +202,117 @@ const CreateNewAd = () => {
   }
 
   return (
-    <>
-      {/* <HeaderContent>
-					<h2>Publicar Anuncio</h2>
-				</HeaderContent> */}
-      <Body
-        title="Publicar anuncio"
-        justifyTitle="flex-start"
-        paddingTitle="500px"
-        paddingTitle2="15vw"
-        isLoggedIn="true"
-        isTitleVisible="true"
-      >
-        <Container>
-          <Wrapper>
+    <Body
+      title="Publicar anuncio"
+      justifyTitle="flex-start"
+      paddingTitle="500px"
+      paddingTitle2="15vw"
+      isLoggedIn="true"
+      isTitleVisible="true"
+    >
+      <Container>
+        <Wrapper>
+          <Button
+            buttonStyles={{
+              width: '17.25rem',
+              height: '2.125rem',
+              marginBottom: '2rem',
+            }}
+            text="Cargar Archivo CSV"
+            type="normal"
+            className="green-gradient"
+            onClick={() => setOpenModal(true)}
+          />
+          <Modal active={openModal} hideModal={() => setOpenModal(false)}>
+            <Input type="file" accept=".csv" onChange={(e) => updateCsvFiles(e.target.files[0])} />
+
+            {validCsv === null && null}
+            {validCsv === false ? (
+              <CsvNotificationError>
+                <p>Archivo No Válido</p>
+              </CsvNotificationError>
+            ) : (
+              <CsvNotificationSuccess>
+                <p>Archivo Válido</p>
+              </CsvNotificationSuccess>
+            )}
             <Button
               buttonStyles={{
-                width: '17.25rem',
+                width: '17rem',
                 height: '2.125rem',
                 marginBottom: '2rem',
               }}
-              text="Cargar Archivo CSV"
+              text="Subir Archivo"
               type="normal"
               className="green-gradient"
-              onClick={() => setOpenModal(true)}
+              onClick={() => submitCsv()}
             />
-            <Modal active={openModal} hideModal={() => setOpenModal(false)}>
-              <Input
-                type="file"
-                accept=".csv"
-                onChange={(e) => updateCsvFiles(e.target.files[0])}
-              />
+          </Modal>
 
-              {validCsv == null ? (
-                <></>
-              ) : validCsv === false ? (
-                <CsvNotificationError>
-                  <p>Archivo No Válido</p>
-                </CsvNotificationError>
-              ) : (
-                <CsvNotificationSuccess>
-                  <p>Archivo Válido</p>
-                </CsvNotificationSuccess>
-              )}
-              <Button
-                buttonStyles={{
-                  width: '17rem',
-                  height: '2.125rem',
-                  marginBottom: '2rem',
-                }}
-                text="Subir Archivo"
-                type="normal"
-                className="green-gradient"
-                onClick={() => submitCsv()}
-              />
-            </Modal>
+          {dispatch(
+            newNotification({
+              message:
+                validCsvFile === false
+                  ? 'Tus anuncios no se han podido publicar.'
+                  : 'Tus anuncios han sido publicados con éxito',
+              type: validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
+            })
+          )}
 
-            {validCsvFile == null ? (
-              <></>
-            ) : validCsvFile === false ? (
-              dispatch(
-                newNotification({
-                  message: 'Tus anuncios no se han podido publicar.',
-                  type: NotificationTypes.error,
-                })
-              )
-            ) : (
-              dispatch(
-                newNotification({
-                  message: 'Tus anuncios han sido publicados con éxito',
-                  type: NotificationTypes.succes,
-                })
-              )
-            )}
-
-            <form onSubmit={handleSubmit(submitForm)} noValidate>
-              {inputComponentData.map((el, i) => {
-                const {
-                  Component,
-                  label,
-                  type,
-                  name,
-                  inputClassName,
-                  icon,
-                  inputContainerClassName,
-                } = el
-                return (
-                  <div key={i}>
-                    <div className="form-label">
-                      <label>{label}</label>
-                    </div>
-                    <Component
-                      key={i}
-                      type={type}
-                      name={name}
-                      className={inputClassName}
-                      icon={icon && icon}
-                      inputContainerClassName={inputContainerClassName}
-                      register={register(`${name}`)}
-                      error={errors[name]?.message}
-                    />
+          <form onSubmit={handleSubmit(submitForm)} noValidate>
+            {inputComponentData.map((el, i) => {
+              const {
+                Component,
+                label,
+                type,
+                name,
+                inputClassName,
+                icon,
+                inputContainerClassName,
+              } = el
+              return (
+                <div key={label}>
+                  <div className="form-label">
+                    {/* @todo: fix label and import component Label */}
+                    <label htmlFor="sdasd">{label}</label>
                   </div>
-                )
-              })}
-              <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
-              <MapBox>
-                <CustomMap setCoordinates={setCoordinates} />
-              </MapBox>
-              <Button
-                buttonStyles={{
-                  width: '7.25rem',
-                  height: '2.125rem',
-                  marginBottom: '2rem',
-                }}
-                text="Enviar"
-                type="normal"
-                className="blue-gradient"
-              />
-            </form>
-            {submittedData && (
-              <div>
-                <p>The following data was submitted:</p>
-                <pre>{submittedData}</pre>
-              </div>
-            )}
-          </Wrapper>
-        </Container>
-      </Body>
-    </>
+                  <Component
+                    key={label}
+                    type={type}
+                    name={name}
+                    className={inputClassName}
+                    icon={icon && icon}
+                    inputContainerClassName={inputContainerClassName}
+                    register={register(`${name}`)}
+                    error={errors[name]?.message}
+                  />
+                </div>
+              )
+            })}
+            <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
+            <MapBox>
+              <CustomMap setCoordinates={setCoordinates} />
+            </MapBox>
+            <Button
+              buttonStyles={{
+                width: '7.25rem',
+                height: '2.125rem',
+                marginBottom: '2rem',
+              }}
+              text="Enviar"
+              type="normal"
+              className="blue-gradient"
+            />
+          </form>
+          {submittedData && (
+            <div>
+              <p>The following data was submitted:</p>
+              <pre>{submittedData}</pre>
+            </div>
+          )}
+        </Wrapper>
+      </Container>
+    </Body>
   )
 }
 

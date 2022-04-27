@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { generateData, generateDataLine, daysBetween } from '../../utils/generateData'
 import GlobalFilters from '../../components/organisms/GlobalFilters/GlobalFilters'
-import BarChart from '../../components/organisms/Charts/BarChart/BarChart'
-import LineChart from '../../components/organisms/Charts/LineChart/LineChart'
-import PieChart from '../../components/organisms/Charts/PieChart/PieChart'
+import { BarChart, LineChart, PieChart } from '../../components/organisms'
 
 // STYLES
 import { StyledDashboard, DashboardContainer } from './Dashboard.style'
@@ -22,9 +20,9 @@ function Dashboard() {
   const [globalMonth, setGlobalMonth] = useState('all')
 
   useEffect(() => {
-    let windowH = window.innerHeight
-    let windowW = window.innerWidth
-    let graphW = windowW - windowW * 0.1
+    const windowH = window.innerHeight
+    const windowW = window.innerWidth
+    const graphW = windowW - windowW * 0.1
     let graphH
     active ? (graphH = windowH - windowH * 0.6) : (graphH = windowH - windowH * 0.6)
     setGraphSize([graphW, graphH]) // eslint-disable-next-line
