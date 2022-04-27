@@ -11,6 +11,7 @@
     "react/react-in-jsx-scope": ["off"],
     "react/forbid-prop-types": ["off"],
     "react/jsx-props-no-spreading": ["off"],
-    "linebreak-style": ["on"] // changed to on to avoid 'delete cr error'
+    "no-param-reassign": ["error", { "props": false }],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   }
 }
