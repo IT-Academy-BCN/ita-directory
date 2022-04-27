@@ -14,7 +14,6 @@ function Input({
   minlength,
   maxlength,
   size,
-  errorStyles,
   error,
   disabled,
   label,
@@ -47,7 +46,7 @@ function Input({
         accept={accept}
         {...(register && register)}
       />
-      <ErrorStyled styles={errorStyles}>{error}</ErrorStyled>
+      <ErrorStyled>{error}</ErrorStyled>
     </ContainerInput>
   )
 }
@@ -69,7 +68,6 @@ Input.propTypes = {
   size: PropTypes.number,
   disabled: PropTypes.bool,
   errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   success: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
