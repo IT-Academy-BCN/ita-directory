@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { device } from '../../../theme'
 
-export const AdCardListStyled = styled.div`
+const AdCardListStyled = styled.div`
   .list-scroll {
     display: grid;
     grid-gap: 1.5rem;
@@ -15,3 +15,4 @@ export const AdCardListStyled = styled.div`
     }
   }
 `
+export default AdCardListStyled

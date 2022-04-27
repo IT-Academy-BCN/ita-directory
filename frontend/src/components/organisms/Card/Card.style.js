@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { device, responsiveSizes, colors } from '../../../theme'
 
-export const CardStyled = styled.div`
+const CardStyled = styled.div`
   display: flex;
   background: ${colors.white} 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
@@ -78,3 +78,4 @@ export const CardStyled = styled.div`
     display: flex;
   }
 `
+export default CardStyled

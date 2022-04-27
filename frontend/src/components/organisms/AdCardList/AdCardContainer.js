@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { device } from '../../../theme'
 
-export const AdCardContainer = styled.div`
+const AdCardContainer = styled.div`
   display: block;
 
   @media ${device.Mobile} {
@@ -13,3 +13,4 @@ export const AdCardContainer = styled.div`
     width: 33.33%;
   }
 `
+export default AdCardContainer
