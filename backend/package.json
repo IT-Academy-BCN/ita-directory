@@ -10,8 +10,8 @@
   },
   "keywords": [
     "node",
-    "sequelize",
-    "mysql"
+    "prisma",
+    "postgresql"
   ],
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
