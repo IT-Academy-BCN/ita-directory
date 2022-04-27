@@ -1,36 +1,41 @@
-import {useState} from "react";
-import PieGraphicWithD3 from "./PieGraphicWithD3";
-import ModalGraphic from "../../ModalGraphic/ModalGraphic";
+import { useState } from 'react'
+import PropType from 'prop-types'
+import PieGraphicWithD3 from './PieGraphicWithD3'
+import ModalGraphic from '../../ModalGraphic/ModalGraphic'
 
-export const PieChart = ({data, size, year, month}) => {
-	const [active, setActive] = useState(false);
-	const hideModal = () => setActive(!active);
+function PieChart({ data, size, year, month }) {
+  const [active, setActive] = useState(false)
+  const hideModal = () => setActive(!active)
 
-	return (
-		<div>
-			<PieGraphicWithD3
-				data={data}
-				size={size}
-				active={active}
-				hideModal={() => hideModal()}
-				year={year}
-				month={month}
-			/>
-			<ModalGraphic
-				active={active}
-				hideModal={hideModal}
-				children={
-					<PieGraphicWithD3
-						data={data}
-						size={size}
-						active={active}
-						hideModal={() => hideModal()}
-						year={year}
-						month={month}
-					/>
-				}
-			/>
-		</div>
-	);
-};
-export default PieChart;
+  return (
+    <div>
+      <PieGraphicWithD3
+        data={data}
+        size={size}
+        active={active}
+        hideModal={() => hideModal()}
+        year={year}
+        month={month}
+      />
+      <ModalGraphic active={active} hideModal={hideModal}>
+        <PieGraphicWithD3
+          data={data}
+          size={size}
+          active={active}
+          hideModal={() => hideModal()}
+          year={year}
+          month={month}
+        />
+      </ModalGraphic>
+    </div>
+  )
+}
+
+PieChart.propTypes = {
+  data: PropType.object,
+  size: PropType.number,
+  year: PropType.number,
+  month: PropType.number,
+}
+
+export default PieChart
