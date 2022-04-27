@@ -1,11 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Colors from '../../../theme/Colors'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
-import Button from '../../../components/atoms/Button/Button'
+import Button from '../../atoms/Button/Button'
 import { AdCardItemStyled } from './AdCardItem.styles'
-import { AdCardContainer } from './AdCardContainer'
+import AdCardContainer from './AdCardContainer'
 
-const AdCardItem = ({ ad, openSelectedAdPopup }) => {
+function AdCardItem({ ad, openSelectedAdPopup }) {
   return (
     <AdCardItemStyled>
       <img src={casaPiscinaAd} alt="" />
@@ -17,10 +18,15 @@ const AdCardItem = ({ ad, openSelectedAdPopup }) => {
           type="button"
           text="Localizar"
           onClick={openSelectedAdPopup}
-        ></Button>
+        />
       </div>
     </AdCardItemStyled>
   )
+}
+
+AdCardItem.propTypes = {
+  ad: PropTypes.object,
+  openSelectedAdPopup: PropTypes.string,
 }
 
 export default AdCardItem
