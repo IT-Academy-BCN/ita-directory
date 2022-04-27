@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Body from '../../components/layout/Body/Body'
-import Button from '../../components/atoms/Button/Button'
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { useParams } from 'react-router'
-import { AdStyled, StyledUl, StyledText, BottomDiv, StyledStreet, StyledItems } from './Ad.styles'
 import {
   faMapMarkerAlt,
   faBed,
@@ -10,8 +9,12 @@ import {
   faHome,
   faBath,
 } from '@fortawesome/free-solid-svg-icons'
+import Body from '../../components/layout/Body/Body'
+import Button from '../../components/atoms/Button/Button'
+import { AdStyled, StyledUl, StyledText, BottomDiv, StyledStreet, StyledItems } from './Ad.styles'
 import Gallery from '../../components/organisms/Gallery/Gallery'
-import ContactModal from '../../components/organisms/ContactModal/ContactModal.jsx'
+
+import ContactModal from '../../components/organisms/ContactModal/ContactModal'
 import {
   adImage1,
   adImage2,
@@ -32,7 +35,7 @@ import { getAd } from '../../api/ads'
 // 	{name: `${ad.numBaths} baños`, icon: faBath},
 // ];
 
-const Ad = () => {
+function Ad() {
   const { id } = useParams()
 
   const [ad, setAd] = useState(null)
@@ -52,7 +55,7 @@ const Ad = () => {
   // 		thumbnailAlt: image.altThumbnail,
   // 	}));
 
-  let LIST_ICONS = ad && [
+  const LIST_ICONS = ad && [
     { name: ad.city, icon: faMapMarkerAlt },
     { name: `${ad.n_rooms} habitaciones`, icon: faBed },
     { name: ad.price, icon: faEuroSign },
@@ -82,7 +85,7 @@ const Ad = () => {
   ]
 
   return (
-    <>
+    <div>
       {ad && (
         <Body
           title="Anuncio"
@@ -91,7 +94,7 @@ const Ad = () => {
           paddingTitle2="15vw"
           isLoggedIn="true"
         >
-          <>
+          <div>
             <AdStyled>
               <div className="Title">{ad.title}</div>
               <Gallery images={images} />
@@ -131,10 +134,10 @@ const Ad = () => {
                 <ContactModal active={active} hideModal={() => setActive(false)} />
               </BottomDiv>
             </AdStyled>
-          </>
+          </div>
         </Body>
       )}
-    </>
+    </div>
   )
 }
 
