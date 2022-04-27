@@ -1,5 +1,5 @@
 // import Body from "components/layout/Body/Body";
-// import {LineChart} from "../../components/composed/Charts/LineChart";
+// import {LineChart} from "../../components/organisms/Charts/LineChart";
 // import {generateDataLine, daysBetween} from "utils/generateData";
 
 // const initialDate = "2012-01-01";

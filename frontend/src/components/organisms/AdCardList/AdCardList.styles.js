@@ -1,17 +1,18 @@
-import styled from "styled-components";
-import {Device} from "../../../theme/mediaQueries";
+import styled from 'styled-components'
+import { device } from '../../../theme'
 
-export const AdCardListStyled = styled.div`
-	.list-scroll {
-		display: grid;
-		grid-gap: 1.5rem;
+const AdCardListStyled = styled.div`
+  .list-scroll {
+    display: grid;
+    grid-gap: 1.5rem;
 
-		@media ${Device.Tablet} {
-			grid-template-columns: repeat(2, 1fr);
-		}
+    @media ${device.Tablet} {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-		@media ${Device.Laptop} {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-`;
+    @media ${device.Laptop} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+`
+export default AdCardListStyled

@@ -1,6 +1,6 @@
 // import React from "react";
 // import pdf from "@react-pdf/renderer";
-// import DownLoadButton from "../../components/units/Button/Button";
+// import DownLoadButton from "../../components/atoms/Button/Button";
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {faDownload} from "@fortawesome/free-solid-svg-icons";
 // import Colors from "../../theme/Colors";
@@ -461,4 +461,4 @@
 // };
 
 // export default DownloadPDF;
-export {};
+export {}

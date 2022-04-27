@@ -1,9 +1,9 @@
 // /* eslint-disable no-unused-vars */
 // import React, {useState, useEffect} from "react";
 // import Body from "components/layout/Body/Body";
-// import PieChart from "components/composed/Chart/PieChart/PieChart";
+// import PieChart from "components/organisms/Chart/PieChart/PieChart";
 // import {generateData, daysBetween} from "utils/generateData";
-// import ModalGraphic from "components/composed/ModalGraphic/ModalGraphic";
+// import ModalGraphic from "components/organisms/ModalGraphic/ModalGraphic";
 
 // const initialDate = "2012-01-01";
 // const days = daysBetween(initialDate, "2016-12-31");
