@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('it-directory e2e testing', () => {
 
-  test('verify token retuen from login page', async ({ page }) => {
+  test('verify token adquisicion from login page', async ({ page }) => {
     
     await page.goto('http://localhost:3000/login');
     

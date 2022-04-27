@@ -1,13 +1,14 @@
 const path = require("path");
-let envFile = process.env.NODE === "development" ? ".env.development" : ".env";
+
+const envFile = process.env.NODE === "development" ? ".env.development" : ".env";
 require("dotenv").config({path: path.join(__dirname, `/./../${envFile}`)});
-const app = require("./app/app.js");
 const socketio = require("socket.io");
 const http = require("http");
+const app = require("./app/app");
 const handlerError = require("./app/middleware/handlerErrors");
 const handlerLogger = require("./app/middleware/handlerLogger");
 const client = require("./app/utils/initRedis");
-const logger = require("./logger.js");
+const logger = require("./logger");
 
 // Create IO server
 const server = http.createServer(app);
@@ -19,16 +20,16 @@ const io = socketio(server, {
 });
 require("./app/config/sockets")(io);
 
-//Back-end logger
+// Back-end logger
 app.use(handlerLogger);
 
-//No route found handler
+// No route found handler
 app.use(handlerError.routeFoundHandler);
 
-//Error handler
+// Error handler
 app.use(handlerError.errorHandler);
 
-//Redis connect
+// Redis connect
 (async () => {
 	await client.connect();
 })();
