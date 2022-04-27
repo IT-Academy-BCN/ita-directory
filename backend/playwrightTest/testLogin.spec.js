@@ -10,7 +10,7 @@ const playwright = require('playwright');
   for (const browserType of [chromium, webkit, firefox]) {
 
     // Launch browser
-    const browser = await browserType.launch()({
+    const browser = await browserType.launch({
       headless: false
     });
     

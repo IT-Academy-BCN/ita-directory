@@ -16,7 +16,7 @@ test.describe('it-directory e2e testing', () => {
 
     await page.locator('button:has-text("Acceder")').click();
     
-    await expect(page.locator('.status')).toHaveText('200 OK');
+    await expect(page.locator('code')).toHaveText('success');
     
   });
 });

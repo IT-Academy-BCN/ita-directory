@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
 import Input from '../../../components/atoms/Input/Input'
 
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import loginSchema from '../../../validation/loginSchema.js'
+import loginSchema from '../../../validation/loginSchema'
 
 import { login } from '../../../store/userSlice'
-import { useDispatch } from 'react-redux'
 
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 
-const Login = () => {
+function Login() {
   const dispatch = useDispatch()
 
   const [animated, setAnimated] = useState(false)
@@ -44,9 +44,7 @@ const Login = () => {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('refreshToken', response.data.refreshToken)
 
-        const userData = await axiosInstance
-          .get(`/users/v1/get_me`)
-          .then((response) => response.data)
+        const userData = await axiosInstance.get(`/users/v1/get_me`).then((res) => res.data)
 
         if (userData) dispatch(login(userData))
       }
@@ -90,53 +88,51 @@ const Login = () => {
   }
 
   return (
-    <>
-      <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
-        <Container>
-          <Form onSubmit={handleSubmit(submitForm)} noValidate>
-            <Input
-              type="email"
-              placeholder="Introduce tu email"
-              id="emailName"
-              name="email"
-              disabled={disabled}
-              className="w-full"
-              error={errors.email?.message}
-              register={register('email')}
-            />
-            <Input
-              type="password"
-              placeholder="Introduce tu contraseña"
-              id="passName"
-              name="password"
-              disabled={disabled}
-              className="w-full mt-2"
-              error={errors.password?.message}
-              register={register('password')}
-            />
-            <AsyncButton
-              text="Acceder"
-              loadingText="Accediendo"
-              iconPosition="left"
-              type="submit"
-              className="blue-gradient w-full my-8"
-              isLoading={isLoading}
-              animated={animated}
-            />
-            <div className="w-full">
-              <RedirectStyled>
-                Has olvidado tu contraseña?
-                <Link to="/recover-password">Recupérala</Link>
-              </RedirectStyled>
-              <RedirectStyled>
-                No tienes cuenta?
-                <Link to="/register">Regístrate</Link>
-              </RedirectStyled>
-            </div>
-          </Form>
-        </Container>
-      </Body>
-    </>
+    <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
+      <Container>
+        <Form onSubmit={handleSubmit(submitForm)} noValidate>
+          <Input
+            type="email"
+            placeholder="Introduce tu email"
+            id="emailName"
+            name="email"
+            disabled={disabled}
+            className="w-full"
+            error={errors.email?.message}
+            register={register('email')}
+          />
+          <Input
+            type="password"
+            placeholder="Introduce tu contraseña"
+            id="passName"
+            name="password"
+            disabled={disabled}
+            className="w-full mt-2"
+            error={errors.password?.message}
+            register={register('password')}
+          />
+          <AsyncButton
+            text="Acceder"
+            loadingText="Accediendo"
+            iconPosition="left"
+            type="submit"
+            className="blue-gradient w-full my-8"
+            isLoading={isLoading}
+            animated={animated}
+          />
+          <div className="w-full">
+            <RedirectStyled>
+              Has olvidado tu contraseña?
+              <Link to="/recover-password">Recupérala</Link>
+            </RedirectStyled>
+            <RedirectStyled>
+              No tienes cuenta?
+              <Link to="/register">Regístrate</Link>
+            </RedirectStyled>
+          </div>
+        </Form>
+      </Container>
+    </Body>
   )
 }
 

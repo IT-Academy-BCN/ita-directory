@@ -1,9 +1,8 @@
-const router = require("express").Router();
-const UsersController = require("../controllers/users.controller");
-const uploadFile = require("../middleware/uploadFile");
-const authenticateToken = require("../middleware/verifyToken");
+const router = require('express').Router()
+const UsersController = require('../controllers/users.controller')
+const authenticateToken = require('../middleware/verifyToken')
 
-router.get("/v1/get_me", authenticateToken, UsersController.getUser);
+router.get('/v1/get_me', authenticateToken, UsersController.getUser)
 
 /**
  * Registration data
@@ -33,14 +32,14 @@ router.get("/v1/get_me", authenticateToken, UsersController.getUser);
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
 
-//Register
-router.post("/v1/register", UsersController.registerUser);
+// Register
+router.post('/v1/register', UsersController.registerUser)
 
-//Read All Users (for testing purpose)
-router.get("/", authenticateToken, UsersController.getAllUsers);
+// Read All Users (for testing purpose)
+router.get('/', authenticateToken, UsersController.getAllUsers)
 
-//Refresh-token
-router.get("/v1/refresh-token", UsersController.getRefreshToken);
+// Refresh-token
+router.get('/v1/refresh-token', UsersController.getRefreshToken)
 
 /**
  * Login data
@@ -70,7 +69,7 @@ router.get("/v1/refresh-token", UsersController.getRefreshToken);
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */
-router.post("/v1/login", UsersController.login);
+router.post('/v1/login', UsersController.login)
 
 /**
  * Update data
@@ -97,8 +96,8 @@ router.post("/v1/login", UsersController.login);
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"User not found"}
  */
-//Update some field to User
-router.patch("/v1/update-user", authenticateToken, UsersController.updateUser);
+// Update some field to User
+router.patch('/v1/update-user', authenticateToken, UsersController.updateUser)
 
 /**
  * RecoverPassword data
@@ -122,7 +121,7 @@ router.patch("/v1/update-user", authenticateToken, UsersController.updateUser);
  * { "errCode":"errCode", "message":"email not found"}
  */
 
-router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
+router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
 
 /**
  * NewPassword data
@@ -152,9 +151,9 @@ router.post("/v1/recover-password", UsersController.receiveEmailGetToken);
 }
  */
 
-router.post("/v1/change-password/:token", UsersController.changePassword);
+router.post('/v1/change-password/:token', UsersController.changePassword)
 
-//Route delete create
-router.delete("/v1/delete-user", UsersController.deleteUser);
+// Route delete create
+router.delete('/v1/delete-user', UsersController.deleteUser)
 
-module.exports = router;
+module.exports = router
