@@ -1,22 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import colors from '../../../theme/Colors'
+import fonts from '../../../theme/font'
 
 const ErrorStyled = styled.p`
-  display: block;
-  margin: 0px 0px 8px 0px;
-  font-size: 0.6rem;
+  margin: 0px 0px 8px 10px;
+  font-size: ${fonts.xss};
   font-style: oblique;
-  text-align: center;
-  font-size: 12px;
-  color: red;
+  color: ${colors.bloodRed};
 `
-function ErrorMessage({ error }) {
-  return <ErrorStyled>{error}</ErrorStyled>
+function ErrorMessage({ text }) {
+  return <ErrorStyled as="span">{text}</ErrorStyled>
 }
 
 ErrorMessage.propTypes = {
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  text: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 }
 
 export default styled(ErrorMessage)``

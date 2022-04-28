@@ -28,7 +28,6 @@ function InputGroup({
   htmlFor,
   isError = false,
 }) {
-  console.log(error)
   return (
     <InputGroupStyled>
       <Label as="label" htmlFor={htmlFor} text={label} />
@@ -50,7 +49,7 @@ function InputGroup({
         accept={accept}
         {...(register && register)}
       />
-      <ErrorMessage error={error} />
+      <ErrorMessage text={error} />
     </InputGroupStyled>
   )
 }
