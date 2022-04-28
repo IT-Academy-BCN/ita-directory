@@ -47,6 +47,13 @@ export const StyleRedirect = styled.div`
     color: ${Colors.darkBlue};
   }
 `
+export const ContainerCheckBox = styled.div`
+  display: flex;
+`
+export const SentenceCheckBox = styled.div`
+  font-size: 0.8rem;
+  margin: 13px 5px;
+`
 export const StyleNotificationSuccess = styled.div`
   display: flex;
   align-items: center;

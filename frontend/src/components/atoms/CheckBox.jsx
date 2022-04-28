@@ -18,10 +18,10 @@ export const CheckBoxContainer = styled.div`
   }
 `
 
-function CheckBox(props) {
+function CheckBox() {
   return (
     <CheckBoxContainer className="CheckBoxContainer">
-      <Input type="checkbox" className="Input" {...props} />
+      <Input type="checkbox" className="Input " />
     </CheckBoxContainer>
   )
 }

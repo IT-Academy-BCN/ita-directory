@@ -21,6 +21,7 @@ import Input from '../../../components/molecules/InputGroup'
 // eslint-disable-next-line import/extensions
 import registerSchema from '../../../validation/registerUserSchema.js'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
+import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 
 function Register() {
   const [registerSuccess, setRegisterSuccess] = useState(false)
@@ -152,9 +153,9 @@ function Register() {
             error={errors.password?.message}
             register={register('password')}
           />
-          <div className="w-full mt-2">
+          <ContainerCheckBox className="w-full mt-2">
             <CheckBox
-              label={
+              text={
                 <RedirectStyled>
                   Acepto la <Link to="#">politica de privacidad</Link>.
                 </RedirectStyled>
@@ -165,7 +166,10 @@ function Register() {
               error={errors.privacy?.message}
               register={register('privacy')}
             />
-          </div>
+            <SentenceCheckBox>
+              Acepto la <Link to="#">politica de privacidad</Link>.
+            </SentenceCheckBox>
+          </ContainerCheckBox>
           <AsyncButton
             text="Registrarme"
             loadingText="Registrando..."
