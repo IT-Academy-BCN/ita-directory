@@ -16,7 +16,7 @@ import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
 
 // Utilities
-import Input from '../../../components/atoms/Forms/Input'
+import Input from '../../../components/molecules/InputGroup'
 
 // eslint-disable-next-line import/extensions
 import registerSchema from '../../../validation/registerUserSchema.js'
