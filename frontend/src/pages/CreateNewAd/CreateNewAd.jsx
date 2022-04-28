@@ -41,6 +41,7 @@ function CreateNewAd() {
     map_lat: 0,
     map_lon: 0,
   }
+
   const [form, setForm] = useState(emptyForm)
   const [submittedData, setSubmittedData] = useState('') // @todo -> remove -probably unecessary
   const [, setError] = useState(true)
