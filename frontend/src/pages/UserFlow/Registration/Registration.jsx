@@ -155,11 +155,6 @@ function Register() {
           />
           <ContainerCheckBox className="w-full mt-2">
             <CheckBox
-              text={
-                <RedirectStyled>
-                  Acepto la <Link to="#">politica de privacidad</Link>.
-                </RedirectStyled>
-              }
               id="privacyPolicy"
               name="privacyPolicy"
               className="w-full mt-2"
