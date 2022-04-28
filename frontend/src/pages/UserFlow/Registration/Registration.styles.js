@@ -12,11 +12,8 @@ export const Container = styled.div`
 `
 
 export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2.19rem;
+  padding: 2rem;
+  width: 22rem;
 
   & > .classInput {
     margin-bottom: 1.69rem;

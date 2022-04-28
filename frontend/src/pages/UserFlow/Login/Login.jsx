@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import Input from '../../../components/atoms/Forms/Input'
+import Input from '../../../components/molecules/InputGroup'
 
 // eslint-disable-next-line import/extensions
 import loginSchema from '../../../validation/loginSchema.js'
