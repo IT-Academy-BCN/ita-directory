@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import colors from '../../../theme/Colors'
+import { colors, fonts } from '../../../theme'
 import fonts from '../../../theme/font'
 
 const ErrorStyled = styled.p`
