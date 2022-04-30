@@ -12,7 +12,6 @@ function InputGroup({
   placeholder,
   onFocus,
   onBlur,
-  inputStyles,
   className,
   id,
   name,
@@ -22,9 +21,9 @@ function InputGroup({
   required,
   register,
   onChange,
-  ref,
   accept,
   label,
+  inputRef,
   htmlFor,
   isError = false,
 }) {
@@ -41,15 +40,13 @@ function InputGroup({
         name={name}
         disabled={disabled}
         size={size}
-        error={error}
         required={required}
-        style={inputStyles}
         onChange={onChange}
-        ref={ref}
         accept={accept}
-        {...(register && register)}
+        innerRef={inputRef}
+        register={register}
       />
-      <ErrorMessage text={error} />
+      <ErrorMessage error={error} />
     </InputGroupStyled>
   )
 }
@@ -57,26 +54,22 @@ function InputGroup({
 InputGroup.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   size: PropTypes.number,
   disabled: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  success: PropTypes.bool,
-  inputContainerClassName: PropTypes.string,
   required: PropTypes.bool,
   onChange: PropTypes.func,
-  ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   accept: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  htmlFor: PropTypes.string.isRequired,
+  inputRef: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  label: PropTypes.string,
+  htmlFor: PropTypes.string,
   isError: PropTypes.bool,
 }
 
-export default InputGroup
+export default styled(InputGroup)``

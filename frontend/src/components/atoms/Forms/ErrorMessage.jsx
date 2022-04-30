@@ -10,12 +10,12 @@ const ErrorStyled = styled.p`
   font-style: oblique;
   color: ${colors.bloodRed};
 `
-function ErrorMessage({ text }) {
-  return <ErrorStyled as="span">{text}</ErrorStyled>
+function ErrorMessage({ error }) {
+  return <ErrorStyled>{error}</ErrorStyled>
 }
 
 ErrorMessage.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 }
 
 export default styled(ErrorMessage)``

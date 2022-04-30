@@ -16,7 +16,7 @@ import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
 
 // Utilities
-import Input from '../../../components/molecules/InputGroup'
+import InputGroup from '../../../components/molecules/InputGroup'
 
 // eslint-disable-next-line import/extensions
 import registerSchema from '../../../validation/registerUserSchema.js'
@@ -110,7 +110,7 @@ function Register() {
     <Body title="Registro" justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
-          <Input
+          <InputGroup
             type="text"
             placeholder="Nombre"
             id="name"
@@ -121,7 +121,7 @@ function Register() {
             register={register('name')}
           />
 
-          <Input
+          <InputGroup
             type="text"
             placeholder="Apellido"
             id="lastname"
@@ -132,7 +132,7 @@ function Register() {
             register={register('lastname')}
           />
 
-          <Input
+          <InputGroup
             type="email"
             placeholder="Email"
             id="emailName"
@@ -143,7 +143,7 @@ function Register() {
             register={register('email')}
           />
 
-          <Input
+          <InputGroup
             type="password"
             placeholder="Contraseña"
             id="password"

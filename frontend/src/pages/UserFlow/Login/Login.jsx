@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import Input from '../../../components/molecules/InputGroup'
+import InputGroup from '../../../components/molecules/InputGroup'
 
 // eslint-disable-next-line import/extensions
 import loginSchema from '../../../validation/loginSchema.js'
@@ -95,7 +95,7 @@ function Login() {
     <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
-          <Input
+          <InputGroup
             type="email"
             placeholder="Introduce tu email"
             id="emailName"
@@ -105,11 +105,10 @@ function Login() {
             error={errors.email?.message}
             register={register('email')}
           />
-          <Input
+          <InputGroup
             type="password"
             placeholder="Introduce tu contraseña"
             id="passName"
-            name="password"
             disabled={disabled}
             className="w-full mt-2"
             error={errors.password?.message}

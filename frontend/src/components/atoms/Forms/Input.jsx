@@ -1,13 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { InputStyled } from './Input.styled'
+import styled from 'styled-components'
+import { colors, font } from '../../../theme'
+
+const InputStyled = styled.input`
+  height: 40px;
+  width: 90%;
+  padding: 0rem 1rem;
+  margin: 5px 0px;
+  border-radius: 0.5rem;
+  border: 1px solid #b0b0b0;
+  font-size: ${font.base};
+
+  &:hover {
+    border: 1px solid ${colors.redPink};
+  }
+  &.error {
+    border: 1px solid #fecaca !important;
+  }
+  &:focus {
+    outline: 0 none;
+    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+  }
+`
 
 function Input({
   type,
   placeholder,
   onFocus,
   onBlur,
-  inputStyles,
   className,
   id,
   name,
@@ -17,7 +38,7 @@ function Input({
   required,
   register,
   onChange,
-  ref,
+  innerRef,
   accept,
 }) {
   return (
@@ -31,11 +52,9 @@ function Input({
       name={name}
       disabled={disabled}
       size={size}
-      error={error}
       required={required}
-      style={inputStyles}
       onChange={onChange}
-      ref={ref}
+      ref={innerRef}
       accept={accept}
       {...(register && register)}
     />
@@ -48,7 +67,6 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -59,9 +77,9 @@ Input.propTypes = {
   inputContainerClassName: PropTypes.string,
   required: PropTypes.bool,
   onChange: PropTypes.func,
-  ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  innerRef: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   accept: PropTypes.string,
 }
 
-export default Input
+export default styled(Input)``
