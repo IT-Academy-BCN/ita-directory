@@ -17,6 +17,7 @@
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
   "dependencies": {
+    "@playwright/test": "^1.21.1",
     "@prisma/client": "3.8.1",
     "argon2": "0.28.2",
     "cors": "2.8.5",
@@ -38,7 +39,6 @@
     "socket.io": "4.1.2"
   },
   "devDependencies": {
-    "@playwright/test": "^1.21.1",
     "cross-env": "7.0.3",
     "ejs": "3.1.6",
     "eslint": "8.14.0",

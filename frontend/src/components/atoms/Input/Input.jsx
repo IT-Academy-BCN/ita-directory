@@ -90,7 +90,7 @@ Input.propTypes = {
   ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   label: PropTypes.string,
   icon: PropTypes.node,
-  register: PropTypes.bool,
+  register: PropTypes.object,
   accept: PropTypes.string,
 }
 

@@ -1,31 +1,23 @@
+const { devices } = require('@playwright/test')
 
 const config = {
   use: {
     headless: false,
-    viewport: {width: 1280, height: 720 }
   },
-
   projects: [
     {
-      name: 'Chrome Stable',
-      use: {
-        browserName: 'chromium',
-        channel: 'chrome',
-      },
+      name: 'chrome',
+      use: { ...devices['Desktop chrome'] },
     },
     {
-      name: 'Safari',
-      use: {
-        browserName: 'webkit',
-      }
+      name: 'firefox',
+      use: { ...devices['Desktop firefox'] },
     },
     {
-      name: 'Firefox',
-      use: {
-        browserName: 'firefox',
-      }
+      name: 'webkit',
+      use: { ...devices['Desktop safari'] },
     },
   ],
-};
+}
 
-module.exports = config;
+module.exports = config

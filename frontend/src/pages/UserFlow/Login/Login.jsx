@@ -29,10 +29,10 @@ function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
   })
-
+  // ! From backend: we change process.env.VITE_REACT_APP_API_URL for testig the user login.
   const loginUser = async (user) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/v1/login`, user)
+      const response = await axios.post(`http://localhost:10910/users/v1/login`, user)
       dispatch(
         newNotification({
           message: response.data.message,
@@ -43,7 +43,6 @@ function Login() {
       if (response) {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('refreshToken', response.data.refreshToken)
-
         const userData = await axiosInstance.get(`/users/v1/get_me`).then((res) => res.data)
 
         if (userData) dispatch(login(userData))
