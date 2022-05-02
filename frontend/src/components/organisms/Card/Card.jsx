@@ -15,7 +15,6 @@ function Card({ image, title, description, text, footer, name }) {
     </CardStyled>
   )
 }
-
 Card.propTypes = {
   image: PropTypes.object,
   title: PropTypes.string,

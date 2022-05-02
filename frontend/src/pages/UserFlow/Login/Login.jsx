@@ -7,15 +7,12 @@ import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import Input from '../../../components/molecules/InputGroup'
-
-// eslint-disable-next-line import/extensions
-import loginSchema from '../../../validation/loginSchema.js'
-
+import { InputGroup } from '../../../components/molecules'
+import loginSchema from '../../../validation/loginSchema'
 import { login } from '../../../store/userSlice'
-
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
+import Urls from '../../../utils/urls'
 
 function Login() {
   const dispatch = useDispatch()
@@ -33,7 +30,7 @@ function Login() {
 
   const loginUser = async (user) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/users/v1/login`, user)
+      const response = await axios.post(Urls.login, user)
       dispatch(
         newNotification({
           message: response.data.message,
@@ -95,7 +92,8 @@ function Login() {
     <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
-          <Input
+          <InputGroup
+            label="email"
             type="email"
             placeholder="Introduce tu email"
             id="emailName"
@@ -105,7 +103,8 @@ function Login() {
             error={errors.email?.message}
             register={register('email')}
           />
-          <Input
+          <InputGroup
+            label="password"
             type="password"
             placeholder="Introduce tu contraseña"
             id="passName"

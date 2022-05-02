@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import AdCardListStyled from './AdCardItem.styles'
+import AdCardListStyled from './AdCardList.styles'
 import Button from '../../atoms/Button/Button'
 import AdCardItem from './AdCardItem'
 
@@ -19,8 +19,9 @@ function AdCardListLoadMore({ ads, setLocalizedAdId }) {
     <AdCardListStyled>
       <div className="list-scroll">
         {ads &&
-          adsToShow.map((ad) => (
-            <AdCardItem key={ad.id} ad={ad} openSelectedAdPopup={() => setLocalizedAdId(ad.id)} />
+          adsToShow.map((ad, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <AdCardItem key={index} ad={ad} openSelectedAdPopup={() => setLocalizedAdId(index)} />
           ))}
       </div>
       <Button type="button" text="Load more" onClick={showMoreItems} className="mt-5" />
@@ -29,8 +30,7 @@ function AdCardListLoadMore({ ads, setLocalizedAdId }) {
 }
 
 AdCardListLoadMore.propTypes = {
-  ads: PropTypes.arrayOf(PropTypes.object),
-  setLocalizedAdId: PropTypes.func,
+  ads: PropTypes.object,
+  setLocalizedAdId: PropTypes.string,
 }
-
 export default AdCardListLoadMore

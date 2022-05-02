@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import colors from '../../../theme'
+import Colors from '../../../theme/Colors'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
 import Button from '../../atoms/Button/Button'
-import AdCardItemStyled from './AdCardItem.styles'
+import { AdCardItemStyled } from './AdCardItem.styles'
+import AdCardContainer from './AdCardContainer'
 
 function AdCardItem({ ad, openSelectedAdPopup }) {
   return (
@@ -23,13 +24,9 @@ function AdCardItem({ ad, openSelectedAdPopup }) {
   )
 }
 
-// props Type validation
 AdCardItem.propTypes = {
-  ad: PropTypes.shape({
-    description: PropTypes.string,
-    price: PropTypes.number,
-  }),
-  openSelectedAdPopup: PropTypes.func,
+  ad: PropTypes.object,
+  openSelectedAdPopup: PropTypes.string,
 }
 
 export default AdCardItem

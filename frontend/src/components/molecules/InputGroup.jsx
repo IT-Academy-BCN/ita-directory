@@ -8,29 +8,28 @@ const InputGroupStyled = styled.div`
 `
 
 function InputGroup({
-  type,
-  placeholder,
-  onFocus,
-  onBlur,
-  inputStyles,
-  className,
-  id,
-  name,
-  size,
-  error,
-  disabled,
-  required,
-  register,
-  onChange,
-  ref,
   accept,
-  label,
-  htmlFor,
+  className,
+  disabled,
+  error,
+  id,
+  inputStyles,
   isError = false,
+  label,
+  name,
+  onBlur,
+  onChange,
+  onFocus,
+  placeholder,
+  ref,
+  register,
+  required,
+  size,
+  type,
 }) {
   return (
     <InputGroupStyled>
-      <Label as="label" htmlFor={htmlFor} text={label} />
+      <Label as="label" htmlFor={id} text={label} />
       <Input
         type={type}
         placeholder={placeholder}
@@ -47,36 +46,32 @@ function InputGroup({
         onChange={onChange}
         ref={ref}
         accept={accept}
-        {...(register && register)}
+        register={register}
       />
-      <ErrorMessage text={error} />
+      {isError && <ErrorMessage text={error} />}
     </InputGroupStyled>
   )
 }
 
 InputGroup.propTypes = {
-  type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  accept: PropTypes.string,
   className: PropTypes.string,
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  size: PropTypes.number,
   disabled: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  success: PropTypes.bool,
-  inputContainerClassName: PropTypes.string,
-  required: PropTypes.bool,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  isError: PropTypes.bool,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  placeholder: PropTypes.string,
   ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  accept: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  htmlFor: PropTypes.string.isRequired,
-  isError: PropTypes.bool,
+  required: PropTypes.bool,
+  size: PropTypes.number,
+  type: PropTypes.string.isRequired,
 }
 
-export default InputGroup
+export default styled(InputGroup)``
