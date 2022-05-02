@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-//styles
-import { SearchStyled } from './Search.style.js'
-import { Container } from '../../theme'
-
-//fontawesome
+// fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
-//components
-import Body from '../../components/layout/Body/Body.jsx'
-import SearchBar from '../../components/organisms/SearchBar/SearchBar.jsx'
+// styles
+import { SearchStyled } from './Search.style'
+import { Container } from '../../theme'
+
+// components
+import Body from '../../components/layout/Body/Body'
+import SearchBar from '../../components/organisms/SearchBar/SearchBar'
 import AdCardListLoadMore from '../../components/organisms/AdCardList/AdCardListLoadMoreBtn'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 
-const Search = () => {
+function Search() {
   const [loading, setLoading] = useState(0)
   const [ads, setAds] = useState([])
   const [adType, setAdType] = useState(null)
@@ -27,17 +27,17 @@ const Search = () => {
     try {
       setLoading(1)
       let response = null
-      //if type and location have been selected by user, send an api request for filtered ads
+      // if type and location have been selected by user, send an api request for filtered ads
       if (adType && adRegion) {
         response = await axios.get(
           `${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/${adRegion.label}/${adType.label}`
         )
-        //if only type was selected, API request for type filtered ads
+        // if only type was selected, API request for type filtered ads
       } else if (adType && !adRegion) {
         response = await axios.get(
           `${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/type/${adType.label}`
         )
-        //if only location was selected, API request for type filtered ads
+        // if only location was selected, API request for type filtered ads
       } else if (!adType && adRegion) {
         response = await axios.get(
           `${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/search/location/${adRegion.label}`
@@ -47,7 +47,7 @@ const Search = () => {
       } else {
         response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/ads/v1/ads`)
       }
-      let filteredAds = response.data.data || []
+      const filteredAds = response.data.data || []
       setAds(filteredAds)
       setLoading(0)
       setFirstSearch(true)
@@ -64,6 +64,7 @@ const Search = () => {
       <Container>
         <SearchStyled>
           <div className="search-body">
+            {/* eslint-disable-next-line no-nested-ternary */}
             {loading ? (
               <FontAwesomeIcon icon={faSpinner} className="spinner" />
             ) : ads.length === 0 && firstSearch ? (

@@ -1,17 +1,23 @@
-import React from "react";
-import {IconImg} from "../IconsSelector.styles";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { IconImg } from '../IconsSelector.styles'
 
-const CustomIcon = ({icono, handelOnClickIcon}) => {
-	return (
-		<IconImg
-			key={icono.key}
-			onClick={() => {
-				handelOnClickIcon(icono.url);
-			}}
-		>
-			<img src={icono.url} alt={icono.key} />
-		</IconImg>
-	);
-};
+function CustomIcon({ icono, handelOnClickIcon }) {
+  return (
+    <IconImg
+      key={icono.key}
+      onClick={() => {
+        handelOnClickIcon(icono.url)
+      }}
+    >
+      <img src={icono.url} alt={icono.key} />
+    </IconImg>
+  )
+}
 
-export default CustomIcon;
+CustomIcon.propTypes = {
+  icono: PropTypes.object.isRequired,
+  handelOnClickIcon: PropTypes.func.isRequired,
+}
+
+export default CustomIcon

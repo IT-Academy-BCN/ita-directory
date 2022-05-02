@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import SelectArrow from '../../../../assets/images/select-arrow.svg'
 import { device, colors } from '../../../../theme'
 
-export const LineGraphicStyled = styled.div`
+const LineGraphicStyled = styled.div`
   width: 100%;
   box-shadow: 0 3px 6px #00000029;
   border: 1px solid #ddd;
@@ -80,6 +80,7 @@ export const LineGraphicStyled = styled.div`
     transform: translate(2%, 0);
   }
 `
+export default LineGraphicStyled
 
-//La etiqueta select afecta a los selectores de los modals
-//La clase chart hace referencia a las propiedades dentro de la gráfica
+// La etiqueta select afecta a los selectores de los modals
+// La clase chart hace referencia a las propiedades dentro de la gráfica

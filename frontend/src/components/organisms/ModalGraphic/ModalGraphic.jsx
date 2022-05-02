@@ -1,15 +1,20 @@
-import React from "react";
-import {ModalGraphicStyled} from "./ModalGraphic.styles";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { ModalGraphicStyled } from './ModalGraphic.styles'
 
-const ModalGraphic = ({children, active, hideModal}) => {
-	return active ? (
-		<ModalGraphicStyled>
-			<div className="modalOverlay" onClick={() => hideModal()}></div>
-			<div className="modalBody">{children}</div>
-		</ModalGraphicStyled>
-	) : (
-		<></>
-	);
-};
+function ModalGraphic({ children, active, hideModal }) {
+  return active ? (
+    <ModalGraphicStyled>
+      <div className="modalOverlay" onClick={() => hideModal()} />
+      <div className="modalBody">{children}</div>
+    </ModalGraphicStyled>
+  ) : null
+}
 
-export default ModalGraphic;
+ModalGraphic.propTypes = {
+  children: PropTypes.node.isRequired,
+  active: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
+}
+
+export default ModalGraphic

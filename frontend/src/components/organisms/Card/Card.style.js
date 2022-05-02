@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device, responsiveSizes, colors } from '../../../theme'
+import { device, colors } from '../../../theme'
 
 const CardStyled = styled.div`
   display: flex;

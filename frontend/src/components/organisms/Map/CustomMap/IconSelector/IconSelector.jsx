@@ -1,20 +1,20 @@
-import CustomIcon from "./CustomIcon/CustomIcon";
-import {IconContainer} from "./IconsSelector.styles";
+import PropTypes from 'prop-types'
+import CustomIcon from './CustomIcon/CustomIcon'
+import { IconContainer } from './IconsSelector.styles'
 
-const IconSelector = ({customIcons, handelOnClickIcon}) => {
-	return (
-		<IconContainer>
-			{customIcons.map((icono) => {
-				return (
-					<CustomIcon
-						key={icono.key}
-						icono={icono}
-						handelOnClickIcon={handelOnClickIcon}
-					/>
-				);
-			})}
-		</IconContainer>
-	);
-};
+function IconSelector({ customIcons, handelOnClickIcon }) {
+  return (
+    <IconContainer>
+      {customIcons.map((icono) => {
+        return <CustomIcon key={icono.key} icono={icono} handelOnClickIcon={handelOnClickIcon} />
+      })}
+    </IconContainer>
+  )
+}
 
-export default IconSelector;
+IconSelector.propTypes = {
+  customIcons: PropTypes.array.isRequired,
+  handelOnClickIcon: PropTypes.func.isRequired,
+}
+
+export default IconSelector

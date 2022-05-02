@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Colors from '../../theme/Colors'
+import Colors from '../../theme/colors'
 import { device } from '../../theme'
 
 export const AdStyled = styled.div`
