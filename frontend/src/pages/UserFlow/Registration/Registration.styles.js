@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Colors from '../../../theme/Colors'
+import { colors } from '../../../theme'
 
 export const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -27,7 +27,7 @@ export const Form = styled.form`
 `
 
 export const StyledError = styled.div`
-  color: ${Colors.redColor};
+  color: ${colors.redColor};
   font-weight: 800;
   margin: 0 0 40px 0;
 `
@@ -39,12 +39,12 @@ export const StyleRedirect = styled.div`
 
   & > a {
     text-decoration: none;
-    color: ${Colors.darkOrange};
+    color: ${colors.darkOrange};
     margin: 0 0 0 0.2rem;
   }
 
   & > a:hover {
-    color: ${Colors.darkBlue};
+    color: ${colors.darkBlue};
   }
 `
 export const ContainerCheckBox = styled.div`

@@ -3,7 +3,7 @@ import PropType from 'prop-types'
 import { faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LineGraphicWithD3 from './LineGraphicWithD3'
-import { LineGraphicStyled } from './LineChart.styles'
+import LineGraphicStyled from './LineChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
 
 function LineGraphic({ data, active, hideModal, size, month, year }) {

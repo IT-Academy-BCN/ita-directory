@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Colors from '../../../theme/Colors'
+import { colors } from '../../../theme'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
 import Button from '../../atoms/Button/Button'
 import { AdCardItemStyled } from './AdCardItem.styles'
-import AdCardContainer from './AdCardContainer'
 
 function AdCardItem({ ad, openSelectedAdPopup }) {
   return (
@@ -14,7 +13,7 @@ function AdCardItem({ ad, openSelectedAdPopup }) {
       <div className="itemsInLine">
         <span className="price">{`${ad.price}€`}</span>{' '}
         <Button
-          buttonStyles={{ backgroundColor: Colors.violet }}
+          buttonStyles={{ backgroundColor: colors.violet }}
           type="button"
           text="Localizar"
           onClick={openSelectedAdPopup}
