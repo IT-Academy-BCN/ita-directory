@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal'
 import Input from '../../atoms/Input/Input'
 import useInput from '../../../hooks/useInput'
 import { Wrapper, StyledSmall, ButtonWrapper } from './DeleteModal.style'
-import colors from '../../../theme'
+import { colors } from '../../../theme'
 
 function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hideModal }) {
   const [error, setError] = useState('')

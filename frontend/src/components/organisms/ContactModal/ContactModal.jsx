@@ -10,7 +10,7 @@ import Input from '../../atoms/Input/Input'
 import TextArea from '../../atoms/TextArea/TextArea'
 
 import { ButtonWrapper } from './ContactModal.style'
-import colors from '../../../theme'
+import { colors } from '../../../theme'
 
 import contactSchema from '../../../validation/contactModalSchema'
 

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 import { fadeIn } from 'react-animations'
-import colors from '../../../theme'
+import { colors } from '../../../theme'
 
 export const ModalBlock = styled.div`
   align-items: center;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import colors from '../../../../../../theme'
+import { colors } from '../../../../../../theme'
 
 export const PopupStyled = styled.div`
   display: flex;

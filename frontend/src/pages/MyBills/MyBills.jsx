@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { useTable } from 'react-table'
 import Body from '../../components/layout/Body/Body'
-import colors from '../../theme'
+import { colors } from '../../theme'
 import bills from './billsData.json'
 import { MyTableStyle, RowTableStyle, HeaderTableStyle } from './MyBills.styles'
 // import DownloadPDF from "./DocumentComponent";

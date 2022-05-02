@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactTable from '../../components/organisms/Table/ReactTable'
-import colors from '../../theme'
+import { colors } from '../../theme'
 import modelBill from './modelBillData.json'
 import {
   BillComponentStyled,

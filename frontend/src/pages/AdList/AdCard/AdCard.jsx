@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../../components/atoms/Button/Button'
-import colors from '../../../theme'
+import { colors } from '../../../theme'
 import ContactModal from '../../../components/organisms/ContactModal/ContactModal'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
 
