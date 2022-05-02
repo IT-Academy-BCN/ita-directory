@@ -77,7 +77,7 @@ function RecoverPassword() {
     if (message) {
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: isSuccess ? NotificationTypes.succes : NotificationTypes.error,
         })
       )

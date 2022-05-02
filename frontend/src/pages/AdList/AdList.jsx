@@ -5,7 +5,7 @@ import _ from 'lodash'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
 import Button from '../../components/atoms/Forms/Button'
-import Colors from '../../theme/colors'
+import Colors from '../../theme/Colors'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 import AdListFilter from './AdListFilter/AdListFilter'
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // Layout Components
+import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 
 // Units Components
@@ -23,17 +24,16 @@ import people13b from '../../../assets/images/people13b.jpg'
 
 import initLoggedinUserInfo from '../fakeUser.json'
 import { msgs, validatePassword } from '../../../utils/userFlow'
-import { useDispatch } from 'react-redux'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 
 const usersPhoto = {
-  people1b: people1b,
-  people4b: people4b,
-  people13b: people13b,
+  people1b,
+  people4b,
+  people13b,
 }
 // testing ***
 
-const Profile = () => {
+function Profile() {
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
   const [newPhoto, setNewPhoto] = useState(null)
@@ -62,7 +62,7 @@ const Profile = () => {
       setMessage('Your new account information was saved succesfully!')
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: NotificationTypes.succes,
         })
       )
@@ -73,7 +73,7 @@ const Profile = () => {
       )
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: NotificationTypes.error,
         })
       )
@@ -109,7 +109,7 @@ const Profile = () => {
     if (message && !firstLoad) {
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: submitSuccess ? NotificationTypes.succes : NotificationTypes.error,
         })
       )

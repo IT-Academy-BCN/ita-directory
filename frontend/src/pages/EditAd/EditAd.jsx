@@ -12,13 +12,13 @@ import {
 import Container from '../../theme/globalStyles'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 import Button from '../../components/atoms/Forms/Button'
-import InputNumber from '../../components/atoms/InputNumber/InputNumber'
+import InputNumber from '../../components/atoms/Forms/InputNumber'
 import Input from '../../components/atoms/Input/Input'
 import Body from '../../components/layout/Body/Body'
 import { Wrapper, MapText } from './EditAd.styles'
 import TextArea from '../../components/atoms/Forms/TextArea'
 
-const EditAd = (props) => {
+function EditAd(props) {
   const originalAd = Object.assign({}, props.location.state.ad)
   const { geometry, id } = props.location.state.ad
 
@@ -30,7 +30,7 @@ const EditAd = (props) => {
     const { name, value, type } = e.target
     setAd({
       ...ad,
-      [name]: type === 'number' ? parseInt(value) : value,
+      [name]: type === 'number' ? parseInt(value, 10) : value,
     })
   }
 
@@ -41,7 +41,7 @@ const EditAd = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setSubmittedData(JSON.stringify({ ...ad, geometry: position, id: id }, 0, 2))
-    //if using an API, delete the stringify and pass the object to the API
+    // if using an API, delete the stringify and pass the object to the API
   }
 
   const history = useHistory()
@@ -108,8 +108,8 @@ const EditAd = (props) => {
   ]
 
   return (
-    <>
-      <Body title="Editar anuncio" isLoggedIn={true}>
+    <div>
+      <Body title="Editar anuncio" isLoggedIn>
         <Container>
           <Wrapper>
             <form onSubmit={handleSubmit}>
@@ -159,7 +159,7 @@ const EditAd = (props) => {
           </Wrapper>
         </Container>
       </Body>
-    </>
+    </div>
   )
 }
 
