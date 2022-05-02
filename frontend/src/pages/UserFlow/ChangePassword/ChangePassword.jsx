@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react'
 
 import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
-import AsyncButton from '../../../components/atoms/Button/Button'
+import AsyncButton from '../../../components/atoms/Forms/Button'
 
 import { Container, Form } from '../UserFlow.styles'
 import { msgs, validatePassword } from '../../../utils/userFlow'
 import Input from '../../../components/atoms/Input/Input'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
-import { useDispatch } from 'react-redux'
 
-const ChangePassword = () => {
+function ChangePassword() {
   const [animated, setAnimated] = useState(false)
   const [disabled, setIsDisabled] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -62,7 +62,7 @@ const ChangePassword = () => {
   }
 
   return (
-    <>
+    <div>
       <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
         <Container>
           <Form onSubmit={handleSubmit} novalidate>
@@ -107,7 +107,7 @@ const ChangePassword = () => {
           </Form>
         </Container>
       </Body>
-    </>
+    </div>
   )
 }
 

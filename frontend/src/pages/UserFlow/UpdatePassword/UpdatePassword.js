@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Notification from 'components/atoms/Notifications/Notification'
-import Body from 'components/layout/Body/Body'
-import AsyncButton from 'components/atoms/Button/Button'
-import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import { msgs, validateEmail, validatePassword } from 'utils/userFlow'
-import Input from 'components/atoms/Input/Input'
 import { useDispatch } from 'react-redux'
-import { newNotification, NotificationTypes } from 'store/notificationSlice'
+import { msgs, validateEmail, validatePassword } from '../../../utils/userFlow'
+import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
+import Input from '../../../components/atoms/Input/Input'
+import Body from '../../../components/layout/Body/Body'
+import { Container, Form, RedirectStyled } from '../UserFlow.styles'
+import Notification from '../../../components/atoms/Notifications/Notification'
+import AsyncButton from '../../../components/atoms/Forms/Button'
 
-const UpdatePassword = () => {
+function UpdatePassword() {
   const [loginSuccess, setLoginSuccess] = useState(false)
   const [animated, setAnimated] = useState(false)
   const [disabled, setIsDisabled] = useState(false)

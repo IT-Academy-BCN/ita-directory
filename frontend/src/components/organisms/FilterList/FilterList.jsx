@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
 import InputNumber from '../../atoms/InputNumber/InputNumber'
-import Button from '../../atoms/Button/Button'
+import Button from '../../atoms/Forms/Button'
 import FilterListStyled from './FilterList.styles'
 
 function FilterList(props) {

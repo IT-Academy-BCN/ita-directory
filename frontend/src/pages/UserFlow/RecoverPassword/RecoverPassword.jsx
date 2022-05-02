@@ -2,23 +2,23 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 // Layout Components
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 
 // Units Components
-import AsyncButton from '../../../components/atoms/Button/Button'
+import AsyncButton from '../../../components/atoms/Forms/Button'
 import Input from '../../../components/atoms/Input/Input'
 
 // Styles
 import { Container, Form } from '../UserFlow.styles'
 
-//Form validation
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+// Form validation
 import recoverPasswordSchema from '../../../validation/recoverPasswordSchema'
-import { useDispatch } from 'react-redux'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 
-const RecoverPassword = () => {
+function RecoverPassword() {
   const [animatedState, setAnimatedState] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -55,7 +55,7 @@ const RecoverPassword = () => {
       setMessage('The instructions to recover your password has been sent to your email')
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: NotificationTypes.succes,
         })
       )
@@ -65,7 +65,7 @@ const RecoverPassword = () => {
         setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`)
         dispatch(
           newNotification({
-            message: message,
+            message,
             type: NotificationTypes.error,
           })
         )
@@ -86,7 +86,7 @@ const RecoverPassword = () => {
   })
 
   return (
-    <>
+    <div>
       <Body title="Cambiar contraseña" justifyTitle="center">
         <Container>
           <Form onSubmit={handleSubmit(submitForm)} noValidation>
@@ -109,7 +109,7 @@ const RecoverPassword = () => {
           </Form>
         </Container>
       </Body>
-    </>
+    </div>
   )
 }
 

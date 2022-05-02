@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Body from '../../../components/layout/Body/Body'
 
 // Units Components
-import AsyncButton from '../../../components/atoms/Button/Button'
+import AsyncButton from '../../../components/atoms/Forms/Button'
 import Input from '../../../components/atoms/Input/Input'
 import Notification from '../../../components/atoms/Notifications/Notification'
 

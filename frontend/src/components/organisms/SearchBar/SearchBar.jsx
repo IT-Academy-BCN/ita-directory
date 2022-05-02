@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { SearchBarContainer, customStyles } from './SearchBarStyles'
-import { StyledSubHeader } from '../../../components/layout/Header/Header.styles'
-import Button from '../../atoms/Button/Button'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
+import { SearchBarContainer, customStyles } from './SearchBarStyles'
+import { StyledSubHeader } from '../../../components/layout/Header/Header.styles'
+import Button from '../../atoms/Forms/Button'
 
 const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
   const [loading, setLoading] = useState(1)

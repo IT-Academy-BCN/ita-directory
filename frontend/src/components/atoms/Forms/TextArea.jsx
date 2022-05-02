@@ -1,12 +1,74 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TextAreaStyled, TextAreaError, TextAreaInput, StyledError } from './TextArea.styles'
+import styled from 'styled-components'
+import { colors, device } from '../../../theme'
+
+const TextAreaStyled = styled.div.attrs({
+  className: 'text-grey mt-4',
+})`
+  & {
+    &.textAreaCreateNewAd {
+      @media ${device.Tablet} {
+      }
+    }
+
+    label {
+    }
+  }
+`
+
+const TextAreaError = styled.div.attrs({
+  className: `w-full justify-center`,
+})`
+  &.textAreaCreateNewAd {
+  }
+`
+
+const TextAreaInput = styled.textarea.attrs((props) => ({
+  rows: 8,
+  className: `textarea
+				border
+				
+				rounded
+				block
+				text-xs
+				text-1x2
+				p-3
+				overflow-y-auto
+				resize-none
+				text-darkGray
+				`,
+}))`
+  width: 93%;
+  display: flex;
+  margin: 0 auto;
+  justify-self: center;
+
+  @media ${device.Tablet} {
+    margin: 0;
+  }
+
+  &.error {
+    border: 1px solid #fecaca !important;
+  }
+  &:focus {
+    outline: 0 none;
+    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+  }
+`
+
+const StyledError = styled.small.attrs({
+  className: `visible text-redColor mb-9`,
+})`
+  display: inline-block;
+  &.errorProfile {
+  }
+`
 
 function TextArea({
   placeholder,
   onFocus,
   onBlur,
-  textAreaStyles,
   labelStyles,
   className,
   id,
@@ -17,7 +79,6 @@ function TextArea({
   required = false,
   rows,
   cols,
-  errorStyles,
   error,
   label,
   inputContainerClassName,
@@ -30,7 +91,6 @@ function TextArea({
       </label>
       <TextAreaError className={inputContainerClassName}>
         <TextAreaInput
-          style={textAreaStyles}
           placeholder={placeholder}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -46,9 +106,7 @@ function TextArea({
           error={error}
           {...(register && register)}
         />
-        <StyledError className={className} style={errorStyles}>
-          {error}
-        </StyledError>
+        <StyledError className={className}>{error}</StyledError>
       </TextAreaError>
     </TextAreaStyled>
   )
@@ -56,12 +114,10 @@ function TextArea({
 
 TextArea.propTypes = {
   placeholder: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   required: PropTypes.bool,
   textStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  textAreaStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   label: PropTypes.string,
   labelStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   inputContainerClassName: PropTypes.string,
@@ -76,8 +132,7 @@ TextArea.propTypes = {
   rows: PropTypes.number,
   cols: PropTypes.number,
   errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   error: PropTypes.string,
 }
 
-export default TextArea
+export default styled(TextArea)``

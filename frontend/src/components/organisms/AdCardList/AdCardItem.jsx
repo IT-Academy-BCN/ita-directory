@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { colors } from '../../../theme'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
-import Button from '../../atoms/Button/Button'
+import Button from '../../atoms/Forms/Button'
 import { AdCardItemStyled } from './AdCardItem.styles'
 
 function AdCardItem({ ad, openSelectedAdPopup }) {
