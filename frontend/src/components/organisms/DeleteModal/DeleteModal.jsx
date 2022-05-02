@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
-import Button from '../../atoms/Button/Button'
-import Modal from '../Modal/Modal.jsx'
-import Input from '../../atoms/Input/Input.jsx'
-import useInput from '../../../hooks/useInput'
-import {
-  Wrapper,
-  StyledSmall,
-  ButtonWrapper,
-} from '../../../components/organisms/DeleteModal/DeleteModal.style.js'
+import PropTypes from 'prop-types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Colors from '../../../theme/Colors'
+import Button from '../../atoms/Button/Button'
+import Modal from '../Modal/Modal'
+import Input from '../../atoms/Input/Input'
+import useInput from '../../../hooks/useInput'
+import { Wrapper, StyledSmall, ButtonWrapper } from './DeleteModal.style'
+import colors from '../../../theme'
 
-const DeleteModal = ({ currentUserName, columnSelect, updateDelete, active, hideModal }) => {
+function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hideModal }) {
   const [error, setError] = useState('')
 
   const [name, bindName, resetName] = useInput('')
@@ -40,7 +37,7 @@ const DeleteModal = ({ currentUserName, columnSelect, updateDelete, active, hide
 
   return (
     <Modal
-      colorModalTitle={Colors.extraDarkBlue}
+      colorModalTitle={colors.extraDarkBlue}
       active={active}
       hideModal={resetForm}
       title="Eliminar Usuario"
@@ -53,7 +50,7 @@ const DeleteModal = ({ currentUserName, columnSelect, updateDelete, active, hide
             icon={faTimes}
             onClick={resetForm}
             buttonStyles={{
-              color: Colors.lightGrey,
+              color: colors.lightGrey,
               background: 'transparent',
               boxShadow: 'none',
               fontSize: '0.95rem',
@@ -92,6 +89,14 @@ const DeleteModal = ({ currentUserName, columnSelect, updateDelete, active, hide
       <StyledSmall>{error}</StyledSmall>
     </Modal>
   )
+}
+
+DeleteModal.propTypes = {
+  currentUserName: PropTypes.string.isRequired,
+  columnSelect: PropTypes.string.isRequired,
+  updateDelete: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
 }
 
 export default DeleteModal

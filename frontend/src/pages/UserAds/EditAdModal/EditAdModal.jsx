@@ -4,7 +4,7 @@ import Modal from '../../../components/organisms/Modal/Modal.jsx'
 import Input from '../../../components/atoms/Input/Input.jsx'
 import { Wrapper, ButtonWrapper } from './EditAdModal.style'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Colors from '../../../theme/Colors'
+import Colors from '../../../theme/colors'
 import Map from '../../../components/organisms/Map/Map/Map'
 
 const EditAdModal = ({ ad, active, hideModal }) => {

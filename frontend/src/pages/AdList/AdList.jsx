@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import AdCard from '../../pages/AdList/AdCard/AdCard'
-import Body from '../../components/layout/Body/Body'
 import { faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons'
-import Button from '../../components/atoms/Button/Button'
-import Colors from '../../theme/Colors'
-import MapView from '../../components/organisms/Map/MapView/MapView.jsx'
 import axios from 'axios'
 import _ from 'lodash'
-import AdListFilter from '../../pages/AdList/AdListFilter/AdListFilter'
+import AdCard from './AdCard/AdCard'
+import Body from '../../components/layout/Body/Body'
+import Button from '../../components/atoms/Button/Button'
+import Colors from '../../theme/colors'
+import MapView from '../../components/organisms/Map/MapView/MapView'
+import AdListFilter from './AdListFilter/AdListFilter'
 
 // Styles
-import { AdListStyled } from './AdList.style.js'
+import { AdListStyled } from './AdList.style'
 import { Container } from '../../theme'
 
 const buttonStyle = {
@@ -27,7 +27,7 @@ const buttonStyle = {
   paddingRight: 0,
 }
 
-const AdList = () => {
+function AdList() {
   const [filtro, setFiltro] = useState()
   const [mapView, setMapView] = useState(false)
   const [filteredAdList, setFilteredAdlist] = useState([])
@@ -47,10 +47,10 @@ const AdList = () => {
     fetchAds()
   }, [])
 
-  //console.log(AdList);
+  // console.log(AdList);
   useEffect(() => {
-    let _filteredAds = []
-    _filteredAds =
+    let filteredAds = []
+    filteredAds =
       filtro === undefined
         ? adList
         : _.filter(adList, function (e) {
@@ -61,13 +61,15 @@ const AdList = () => {
               filtro.maxSize === ''
             ) {
               return filtro.gastosInc ? e.gastosIncluidos : e
-            } else if (filtro.maxPrice === '' && filtro.minPrice === '') {
+            }
+            if (filtro.maxPrice === '' && filtro.minPrice === '') {
               return (
                 (filtro.gastosInc ? e.gastosIncluidos : e) &&
                 e.m2 <= filtro.maxSize &&
                 e.m2 >= filtro.minSize
               )
-            } else if (filtro.maxSize === '' && filtro.maxSize === '') {
+            }
+            if (filtro.maxSize === '' && filtro.maxSize === '') {
               return (
                 (filtro.gastosInc ? e.gastosIncluidos : e) &&
                 e.price <= filtro.maxPrice &&
@@ -82,19 +84,19 @@ const AdList = () => {
               e.price >= filtro.minPrice
             )
           })
-    setFilteredAdlist(_filteredAds)
+    setFilteredAdlist(filteredAds)
   }, [filtro, adList])
 
-  const renderList = filteredAdList.map((e, index) => <AdCard {...e} key={index} />)
+  const renderList = filteredAdList.map((e) => <AdCard {...e} key={e.id} />)
 
   useEffect(() => {
     if (loading === false) {
-      let priceValue = Array.from(renderList, (o) => o.props.price)
-      let maxPV = Math.max(...priceValue)
-      let minPV = Math.min(...priceValue)
-      let sizeValue = Array.from(renderList, (o) => o.props.m2)
-      let mxM2 = Math.max(...sizeValue)
-      let mnM2 = Math.min(...sizeValue)
+      const priceValue = Array.from(renderList, (o) => o.props.price)
+      const maxPV = Math.max(...priceValue)
+      const minPV = Math.min(...priceValue)
+      const sizeValue = Array.from(renderList, (o) => o.props.m2)
+      const mxM2 = Math.max(...sizeValue)
+      const mnM2 = Math.min(...sizeValue)
 
       setMaxPriceValue(maxPV)
       setMinPriceValue(minPV)

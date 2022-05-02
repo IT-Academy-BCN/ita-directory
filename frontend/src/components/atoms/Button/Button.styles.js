@@ -8,9 +8,11 @@ const StyledButton = styled.button.attrs({})`
   background-color: ${colors.redPink};
   border: 0;
   color: ${colors.white};
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 0.3rem;
   cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0px;
 
   &:hover {
     filter: brightness(1.1);

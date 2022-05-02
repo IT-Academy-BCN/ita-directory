@@ -1,27 +1,28 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../../components/atoms/Button/Button'
-import Colors from '../../../theme/Colors'
-import ContactModal from '../../../components/organisms/ContactModal/ContactModal.jsx'
+import colors from '../../../theme'
+import ContactModal from '../../../components/organisms/ContactModal/ContactModal'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
 
 // Styles
 import { AdCardStyled } from './AdCard.style'
 
-const AdCard = ({
+function AdCard({
   title,
   city,
-  map_lon,
-  map_lat,
-  user_id,
+  mapLon,
+  mapLat,
+  userId,
   price,
-  square_meters,
+  squareMeters,
   description,
-  n_rooms,
-  n_bathrooms,
+  nRooms,
+  nBathrooms,
   id,
-}) => {
+}) {
   const [active, setActive] = useState(false)
 
   const gastosIncluidos = true
@@ -39,11 +40,11 @@ const AdCard = ({
           <p className="address">{`${title} en ${city}`}</p>
           <div className="property-data">
             <span className="price">{price} €</span>
-            <span>{n_rooms} habitaciones</span>
-            <span>{square_meters}m2</span>
+            <span>{nRooms} habitaciones</span>
+            <span>{squareMeters}m2</span>
             <span>Gastos {gastosIncluidos ? ' incluidos' : ' no incluidos'}</span>
           </div>
-          <div className="description">"{description}"</div>
+          <div className="description">&quot;{description}&quot;</div>
           <Button
             buttonStyles={{
               display: 'flex',
@@ -53,7 +54,7 @@ const AdCard = ({
               marginTop: 'auto',
               fontSize: '1.125rem',
               fontFamily: 'Arial',
-              color: Colors.strongBlue,
+              color: colors.strongBlue,
               background: 'transparent',
               boxShadow: 'none',
               paddingLeft: '0',
@@ -74,4 +75,19 @@ const AdCard = ({
     </AdCardStyled>
   )
 }
+
+AdCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  mapLon: PropTypes.number.isRequired,
+  mapLat: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  squareMeters: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  nRooms: PropTypes.number.isRequired,
+  nBathrooms: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+}
+
 export default AdCard

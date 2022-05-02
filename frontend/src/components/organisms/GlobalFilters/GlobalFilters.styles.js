@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import SelectArrow from '../../../assets/images/select-arrow.svg'
 import { device } from '../../../theme'
 
-export const GlobalFiltersStyled = styled.div`
+const GlobalFiltersStyled = styled.div`
   min-width: 90%;
   height: auto;
   box-shadow: 0 3px 6px #00000029;
@@ -60,5 +60,5 @@ export const GlobalFiltersStyled = styled.div`
     }
   }
 `
-
-//select afecta a los selectores de los modals
+export default GlobalFiltersStyled
+// select afecta a los selectores de los modals

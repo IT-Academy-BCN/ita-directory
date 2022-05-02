@@ -1,7 +1,7 @@
 import dimensions from './dimensions'
-import font from './font'
+import fonts from './fonts'
 import colors from './colors'
 import { responsiveSizes, device } from './mediaQueries'
 import { Container, Grid } from './wrappers'
 
-export { colors, dimensions, font, device, responsiveSizes, Container, Grid }
+export { dimensions, fonts, colors, device, responsiveSizes, Container, Grid }

@@ -1,23 +1,30 @@
-import React, {useRef, useEffect} from "react";
-import {Marker, useMap} from "react-leaflet";
+import React, { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Marker, useMap } from 'react-leaflet'
 
-//components
-import {icon} from "./MapIcon/MapIcon";
-import MapPopup from "./MapPopup/MapPopup";
+// components
+import icon from './MapIcon/MapIcon'
+import MapPopup from './MapPopup/MapPopup'
 
-const MapMarker = ({ad, activePopup}) => {
-	const map = useMap();
-	const markerRef = useRef(null);
+function MapMarker({ ad, activePopup }) {
+  const map = useMap()
+  const markerRef = useRef(null)
 
-	useEffect(() => {
-		if (activePopup) map.openPopup(markerRef.current._popup);
-	}, [activePopup]);
+  useEffect(() => {
+    // eslint-disable-next-line no-underscore-dangle
+    if (activePopup) map.openPopup(markerRef.current._popup)
+  }, [activePopup, map])
 
-	return (
-		<Marker position={[ad.map_lat, ad.map_lon]} icon={icon} ref={markerRef}>
-			<MapPopup data={ad} />
-		</Marker>
-	);
-};
+  return (
+    <Marker position={[ad.map_lat, ad.map_lon]} icon={icon} ref={markerRef}>
+      <MapPopup data={ad} />
+    </Marker>
+  )
+}
 
-export default MapMarker;
+MapMarker.propTypes = {
+  ad: PropTypes.object.isRequired,
+  activePopup: PropTypes.bool.isRequired,
+}
+
+export default MapMarker
