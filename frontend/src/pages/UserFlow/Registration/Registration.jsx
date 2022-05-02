@@ -24,7 +24,6 @@ function Register() {
   const [animated, setAnimated] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState(null)
   const {
     register,
     handleSubmit,
@@ -40,11 +39,10 @@ function Register() {
         `${import.meta.env.REACT_APP_API_URL}/users/v1/register`,
         user
       )
-      setMessage(response.data.message)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({
-            message,
+            message: response.data.message,
             type: NotificationTypes.error,
           })
         )
@@ -52,7 +50,7 @@ function Register() {
       }
       dispatch(
         newNotification({
-          message,
+          message: response.data.message,
           type: NotificationTypes.succes,
         })
       )
