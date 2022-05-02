@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = import.meta.env.REACT_APP_API_URL
+const baseURL = import.meta.env.VITE_API_URL
 let authToken = localStorage.getItem('token')
 let refreshToken = localStorage.getItem('refreshToken')
 
