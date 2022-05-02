@@ -193,7 +193,7 @@ InputNumber.propTypes = {
   error: PropTypes.bool,
   icon: PropTypes.node,
   label: PropTypes.string,
-  register: PropTypes.bool,
+  register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   type: PropTypes.string,
 }
 

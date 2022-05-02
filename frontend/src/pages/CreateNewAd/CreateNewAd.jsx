@@ -16,7 +16,7 @@ import Body from '../../components/layout/Body/Body'
 import InputNumber from '../../components/atoms/Forms/InputNumber'
 import TextArea from '../../components/atoms/Forms/TextArea'
 import Button from '../../components/atoms/Forms/Button'
-import Input from '../../components/atoms/Input/Input'
+import Input from '../../components/atoms/Forms/Input'
 import Modal from '../../components/organisms/Modal/Modal'
 import {
   Wrapper,

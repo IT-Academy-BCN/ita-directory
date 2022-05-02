@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '../../atoms/Forms/Button'
 import Modal from '../Modal/Modal'
-import Input from '../../atoms/Input/Input'
+import Input from '../../atoms/Forms/Input'
 import TextArea from '../../atoms/Forms/TextArea'
 
 import { ButtonWrapper } from './ContactModal.style'

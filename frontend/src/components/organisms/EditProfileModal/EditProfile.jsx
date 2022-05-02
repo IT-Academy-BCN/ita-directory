@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../atoms/Forms/Button'
 import Modal from '../Modal/Modal'
-import Input from '../../atoms/Input/Input'
+import Input from '../../atoms/Forms/Input'
 // STYLES
 import { ButtonWrapper, EditModalStyled, PhotoWrapper } from './EditProfile.style'
 import Colors from '../../../theme/colors'

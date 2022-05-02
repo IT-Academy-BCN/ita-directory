@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
 import { colors } from '../../../theme'
 
@@ -26,6 +27,7 @@ const InputStyled = styled.input`
 
 function Input({
   type,
+  icon,
   placeholder,
   onFocus,
   onBlur,
@@ -43,24 +45,27 @@ function Input({
   accept,
 }) {
   return (
-    <InputStyled
-      type={type}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      className={`${className} ${error ? 'error' : ''}`}
-      id={id}
-      name={name}
-      disabled={disabled}
-      size={size}
-      error={error}
-      required={required}
-      style={inputStyles}
-      onChange={onChange}
-      ref={ref}
-      accept={accept}
-      {...(register && register)}
-    />
+    <div>
+      {icon && <FontAwesomeIcon icon={icon} />}
+      <InputStyled
+        type={type}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        className={`${className} ${error ? 'error' : ''}`}
+        id={id}
+        name={name}
+        disabled={disabled}
+        size={size}
+        error={error}
+        required={required}
+        style={inputStyles}
+        onChange={onChange}
+        ref={ref}
+        accept={accept}
+        {...(register && register)}
+      />
+    </div>
   )
 }
 
@@ -81,6 +86,7 @@ Input.propTypes = {
   inputContainerClassName: PropTypes.string,
   required: PropTypes.bool,
   onChange: PropTypes.func,
+  icon: PropTypes.node,
   ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   accept: PropTypes.string,

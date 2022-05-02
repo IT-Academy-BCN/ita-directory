@@ -9,7 +9,7 @@ import Body from '../../../components/layout/Body/Body'
 
 // Units Components
 import AsyncButton from '../../../components/atoms/Forms/Button'
-import Input from '../../../components/atoms/Input/Input'
+import Input from '../../../components/atoms/Forms/Input'
 
 // Styles
 import { Container, Form } from '../UserFlow.styles'

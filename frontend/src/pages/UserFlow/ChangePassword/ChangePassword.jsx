@@ -8,7 +8,7 @@ import AsyncButton from '../../../components/atoms/Forms/Button'
 
 import { Container, Form } from '../UserFlow.styles'
 import { msgs, validatePassword } from '../../../utils/userFlow'
-import Input from '../../../components/atoms/Input/Input'
+import Input from '../../../components/atoms/Forms/Input'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 
 function ChangePassword() {
@@ -77,7 +77,7 @@ function ChangePassword() {
               className="w-full"
               success={password1 !== '' && validatePassword(password1)}
               error={password1 !== '' && !validatePassword(password1)}
-              errorText={msgs[`passwordError`]}
+              errorText={msgs.passwordError}
             />
             <Input
               type="password"

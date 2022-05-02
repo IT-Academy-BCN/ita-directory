@@ -43,7 +43,7 @@ Body.propTypes = {
   logoColor: PropTypes.string,
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,
-  isLoggedIn: PropTypes.bool,
+  isLoggedIn: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   justifyTitle: PropTypes.string,
   hideHeader: PropTypes.bool,
   hideFooter: PropTypes.bool,

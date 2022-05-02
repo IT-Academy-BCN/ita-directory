@@ -121,7 +121,7 @@ TextArea.propTypes = {
   label: PropTypes.string,
   labelStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   inputContainerClassName: PropTypes.string,
-  register: PropTypes.bool,
+  register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
