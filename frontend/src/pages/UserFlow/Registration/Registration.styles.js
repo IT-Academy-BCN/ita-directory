@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Colors from '../../../theme/Colors'
+import Colors from '../../../theme/colors'
 
 export const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
