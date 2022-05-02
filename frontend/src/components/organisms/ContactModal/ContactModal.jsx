@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-import Button from '../../atoms/Button/Button'
-import Modal from '../Modal/Modal.jsx'
-import Input from '../../atoms/Input/Input.jsx'
-import TextArea from '../../atoms/TextArea/TextArea.jsx'
-
-import { ButtonWrapper } from './ContactModal.style.js'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Colors from '../../../theme/Colors'
-
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import contactSchema from '../../../validation/contactModalSchema.js'
+import Button from '../../atoms/Button/Button'
+import Modal from '../Modal/Modal'
+import Input from '../../atoms/Input/Input'
+import TextArea from '../../atoms/TextArea/TextArea'
 
-const ContactModal = ({ active, hideModal }) => {
+import { ButtonWrapper } from './ContactModal.style'
+import { colors } from '../../../theme'
+
+import contactSchema from '../../../validation/contactModalSchema'
+
+function ContactModal({ active, hideModal }) {
   const [animatedState, setAnimatedState] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -28,7 +29,7 @@ const ContactModal = ({ active, hideModal }) => {
   const submitForm = (data) => {
     const { name, email, message } = data
     sendContact(name, email, message, (err) => {
-      console.log(err)
+      // console.log(err)
     })
   }
 
@@ -40,7 +41,7 @@ const ContactModal = ({ active, hideModal }) => {
       setAnimatedState(false)
       setIsDisabled(false)
       setIsLoading(false)
-      console.log(`send contact => ${name}, ${email}, ${message}`)
+      // console.log(`send contact => ${name}, ${email}, ${message}`)
       callback('The message could not be sent')
     }, 2000)
   }
@@ -92,7 +93,7 @@ const ContactModal = ({ active, hideModal }) => {
             marginRight: 0,
             paddingRight: '15px',
             paddingLeft: '15px',
-            backgroundColor: Colors.extraDarkBlue,
+            backgroundColor: colors.extraDarkBlue,
           }}
           iconStyles={{
             width: '1.5rem',
@@ -109,7 +110,7 @@ const ContactModal = ({ active, hideModal }) => {
           onClick={() => hideModal()}
           icon={faTimes}
           buttonStyles={{
-            color: Colors.lightGrey,
+            color: colors.lightGrey,
             background: 'transparent',
             boxShadow: 'none',
             fontSize: '0.95rem',
@@ -127,6 +128,11 @@ const ContactModal = ({ active, hideModal }) => {
       </ButtonWrapper>
     </Modal>
   )
+}
+
+ContactModal.propTypes = {
+  active: PropTypes.bool.isRequired,
+  hideModal: PropTypes.bool.isRequired,
 }
 
 export default ContactModal

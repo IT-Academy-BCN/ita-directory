@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import Button from '../../atoms/Button/Button'
-import Modal from '../Modal/Modal.jsx'
-import { UserModalStyled, ButtonWrapper } from './UserModal.style.js'
+import PropTypes from 'prop-types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Colors from '../../../theme/Colors'
+import Button from '../../atoms/Button/Button'
+import Modal from '../Modal/Modal'
+import { UserModalStyled, ButtonWrapper } from './UserModal.style'
+import Colors from '../../../theme/colors'
 
-const UserModal = ({ nombreUsuario, currentUserState, active, hideModal, updateUserStatus }) => {
+function UserModal({ nombreUsuario, currentUserState, active, hideModal, updateUserStatus }) {
   // Aquí ponemos el estado inicial, pero no se actualiza al volver a renderizar cuando se actualizan las props.
   const [selectValue, setSelectValue] = useState(currentUserState)
 
@@ -18,7 +19,7 @@ const UserModal = ({ nombreUsuario, currentUserState, active, hideModal, updateU
     setSelectValue(val)
   }
 
-  const handleClick = (val, nombreUsuario) => {
+  const handleClick = (val) => {
     setSelectValue(val)
     updateUserStatus(nombreUsuario, val)
     closeModal()
@@ -73,6 +74,7 @@ const UserModal = ({ nombreUsuario, currentUserState, active, hideModal, updateU
       <UserModalStyled currentUserState={currentUserState}>
         <p>Cambiar el estado del usuario {nombreUsuario}</p>
 
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="estado-usuario">Estado usuario</label>
         <select
           name="estado-usuario"
@@ -96,6 +98,14 @@ const UserModal = ({ nombreUsuario, currentUserState, active, hideModal, updateU
       </UserModalStyled>
     </Modal>
   )
+}
+
+UserModal.propTypes = {
+  nombreUsuario: PropTypes.string.isRequired,
+  currentUserState: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
+  updateUserStatus: PropTypes.func.isRequired,
 }
 
 export default UserModal

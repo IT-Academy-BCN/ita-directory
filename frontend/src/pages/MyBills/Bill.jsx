@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
-import ReactTable from '../../components/organisms/Table/ReactTable'
-import Colors from '../../theme/Colors'
 import { useParams } from 'react-router-dom'
+import ReactTable from '../../components/organisms/Table/ReactTable'
+import { colors } from '../../theme'
 import modelBill from './modelBillData.json'
 import {
   BillComponentStyled,
@@ -22,20 +22,20 @@ import {
 } from './Bill.styles'
 // import DownloadPDF from "./DocumentComponent";
 
-const Bill = (color_logo) => {
+function Bill(colorLogo) {
   const { id } = useParams() // The dynamic id
   const [billData] = useState(modelBill)
 
   const indexOfId = billData.findIndex((i) => id === String(i.id))
-  console.log('indexOfId' + indexOfId)
-  const [chosenBill] = useState(modelBill[indexOfId]['tradeData']['items'])
-  //const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
+  // console.log(`indexOfId${indexOfId}`)
+  const [chosenBill] = useState(modelBill[indexOfId].tradeData.items)
+  // const [chosenBill, setChosenBill] = useState(modelBill[indexOfId]["tradeData"]["items"]);
 
   const data = useMemo(() => [...chosenBill], [chosenBill])
 
   // Selecting the right bill...
   const selectedBill = billData.filter((selected) => {
-    let res = selected.id === parseInt(id, 10)
+    const res = selected.id === parseInt(id, 10)
     return res
   })
 
@@ -43,7 +43,7 @@ const Bill = (color_logo) => {
     if (Number(row.original.itemID) % 2 === 0) {
       return { backgroundColor: 'white' }
     }
-    return { backgroundColor: `${Colors.lightBeige}` }
+    return { backgroundColor: `${colors.lightBeige}` }
   }
 
   // Columns for datatables
@@ -75,7 +75,7 @@ const Bill = (color_logo) => {
         Cell: ({ row }) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
       },
       {
-        Header: <div className="lastColumn">{'Amount'}</div>,
+        Header: <div className="lastColumn">Amount</div>,
         accessor: 'amount',
         Cell: ({ row }) => (
           <div className={`${customRowStyle} lastColumn1`}>
@@ -90,7 +90,7 @@ const Bill = (color_logo) => {
 
   const generatedBill = selectedBill.map((bill) => {
     return (
-      <BillStyled key={bill.id} color={Colors.lightGray}>
+      <BillStyled key={bill.id} color={colors.lightGray}>
         <HeaderStyled>
           <h2 className="logo-company">Logo Company {bill.header.logoCompany}</h2>
           <h2 className="invoice">INVOICE {bill.header.invoiceID}</h2>
@@ -102,7 +102,7 @@ const Bill = (color_logo) => {
               <h2>{bill.emisorReceiver.emisor.emName}</h2>
               <p>{bill.emisorReceiver.emisor.emPosition}</p>
             </div>
-            <br></br>
+            <br />
             <div className="address-recipient">
               <p>Address:</p>
               <p>{bill.emisorReceiver.emisor.emStreet}</p>
@@ -115,7 +115,7 @@ const Bill = (color_logo) => {
               <h2>{bill.emisorReceiver.receiver.reName}</h2>
               <p>{bill.emisorReceiver.receiver.rePosition}</p>
             </div>
-            <br></br>
+            <br />
             <div className="address-recipient">
               <p>Address:</p>
               <p>{bill.emisorReceiver.emisor.emStreet}</p>
@@ -144,7 +144,7 @@ const Bill = (color_logo) => {
                 <td>
                   €{' '}
                   {selectedBill.map((amount) => {
-                    let itemsArr = amount.tradeData.items
+                    const itemsArr = amount.tradeData.items
                     const itemsAmount = itemsArr.map((it) => {
                       return it.itemPrice * it.itemQuant
                     })
@@ -160,15 +160,15 @@ const Bill = (color_logo) => {
                 <td>
                   €{' '}
                   {selectedBill.map((amount) => {
-                    let itemsArr = amount.tradeData.items
+                    const itemsArr = amount.tradeData.items
                     const itemsAmount = itemsArr.map((it) => {
                       return it.itemPrice * it.itemQuant
                     })
                     let sum = 0
                     itemsAmount.map((i) => (sum += i))
-                    let tax = amount.calculation.calcs
-                    let taxItem = tax.map((t) => t.tax)
-                    let taxCalc = (taxItem / 100) * sum
+                    const tax = amount.calculation.calcs
+                    const taxItem = tax.map((t) => t.tax)
+                    const taxCalc = (taxItem / 100) * sum
                     return taxCalc.toFixed()
                   })}
                 </td>
@@ -179,17 +179,17 @@ const Bill = (color_logo) => {
                 <td>
                   €{' '}
                   {selectedBill.map((amount) => {
-                    let itemsArr = amount.tradeData.items
+                    const itemsArr = amount.tradeData.items
                     const itemsAmount = itemsArr.map((it) => {
                       return it.itemPrice * it.itemQuant
                     })
                     let sum = 0
                     itemsAmount.map((i) => (sum += i))
-                    let tax = amount.calculation.calcs
-                    let taxItem = tax.map((t) => t.tax)
-                    let taxCalc = sum + (taxItem / 100) * sum
-                    let disc = tax.map((t) => t.discount)
-                    let discCalc = (disc / 100) * taxCalc
+                    const tax = amount.calculation.calcs
+                    const taxItem = tax.map((t) => t.tax)
+                    const taxCalc = sum + (taxItem / 100) * sum
+                    const disc = tax.map((t) => t.discount)
+                    const discCalc = (disc / 100) * taxCalc
                     return discCalc.toFixed()
                   })}
                 </td>
@@ -200,17 +200,17 @@ const Bill = (color_logo) => {
                   <div className="font-bold">
                     €{' '}
                     {selectedBill.map((amount) => {
-                      let itemsArr = amount.tradeData.items
+                      const itemsArr = amount.tradeData.items
                       const itemsAmount = itemsArr.map((it) => {
                         return it.itemPrice * it.itemQuant
                       })
                       let sum = 0
                       itemsAmount.map((i) => (sum += i))
-                      let tax = amount.calculation.calcs
-                      let taxItem = tax.map((t) => t.tax)
-                      let taxCalc = (taxItem / 100) * sum
-                      let disc = tax.map((t) => t.discount)
-                      let discCalc = (disc / 100) * taxCalc
+                      const tax = amount.calculation.calcs
+                      const taxItem = tax.map((t) => t.tax)
+                      const taxCalc = (taxItem / 100) * sum
+                      const disc = tax.map((t) => t.discount)
+                      const discCalc = (disc / 100) * taxCalc
                       const grandTotal = sum + taxCalc + discCalc
                       return grandTotal.toFixed()
                     })}
@@ -249,7 +249,8 @@ const Bill = (color_logo) => {
     )
   })
 
-  let error, downloadBtn
+  let error
+  let downloadBtn
 
   if (indexOfId !== -1) {
     error = generatedBill
@@ -260,7 +261,7 @@ const Bill = (color_logo) => {
 
   return (
     <BillComponentStyled>
-      <h2 className="logo " color_logo={color_logo}>
+      <h2 className="logo " colorLogo={colorLogo}>
         LOGO EMPRESA
       </h2>
       {downloadBtn}

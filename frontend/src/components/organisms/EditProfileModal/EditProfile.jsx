@@ -1,18 +1,16 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
-import Button from '../../atoms/Button/Button'
-import Modal from '../Modal/Modal.jsx'
-import Input from '../../atoms/Input/Input.jsx'
-// STYLES
-import {
-  ButtonWrapper,
-  EditModalStyled,
-  PhotoWrapper,
-} from '../../../components/organisms/EditProfileModal/EditProfile.style.js'
+import PropTypes from 'prop-types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Colors from '../../../theme/Colors'
+import Button from '../../atoms/Button/Button'
+import Modal from '../Modal/Modal'
+import Input from '../../atoms/Input/Input'
+// STYLES
+import { ButtonWrapper, EditModalStyled, PhotoWrapper } from './EditProfile.style'
+import Colors from '../../../theme/colors'
 import { msgs, validateEmail, validateName, validatePassword } from '../../../utils/userFlow'
 
-const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUserData }) => {
+function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUserData }) {
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
 
@@ -22,6 +20,7 @@ const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUse
 
   const actualizar = () => {
     if (newName === '') {
+      // eslint-disable-next-line no-alert
       alert('Debes rellenar el nombre de usuario')
     } else {
       updateUserData(newName, newEmail)
@@ -95,7 +94,7 @@ const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUse
         </PhotoWrapper>
 
         <div className="inputsWrapper">
-          <label>
+          <label htmlFor="userName">
             <Input
               id="userName"
               name="userName"
@@ -107,7 +106,7 @@ const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUse
               className="errorProfile"
               success={newName !== '' && validateName(newName)}
               error={newName !== '' && !validateName(newName)}
-              errorText={msgs[`nameError`]}
+              errorText={msgs.nameError}
             />
           </label>
 
@@ -122,7 +121,7 @@ const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUse
               onChange={(e) => setNewEmail(e.target.value)}
               success={newEmail !== '' && validateEmail(newEmail)}
               error={newEmail !== '' && !validateEmail(newEmail)}
-              errorText={msgs[`emailError`]}
+              errorText={msgs.emailError}
             />
           </label>
         </div>
@@ -139,7 +138,7 @@ const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUse
               name="passName"
               success={password !== '' && validatePassword(password)}
               error={password !== '' && !validatePassword(password)}
-              errorText={msgs[`passwordError`]}
+              errorText={msgs.passwordError}
             />
           </label>
           <label>
@@ -174,6 +173,14 @@ const EditProfile = ({ currentNombre, currentEmail, active, hideModal, updateUse
       </EditModalStyled>
     </Modal>
   )
+}
+
+EditProfile.propTypes = {
+  currentNombre: PropTypes.string,
+  currentEmail: PropTypes.string,
+  active: PropTypes.bool,
+  hideModal: PropTypes.func,
+  updateUserData: PropTypes.func,
 }
 
 export default EditProfile

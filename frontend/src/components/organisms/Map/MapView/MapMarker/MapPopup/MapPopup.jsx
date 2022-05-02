@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Popup } from 'react-leaflet'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
 import ContactModal from '../../../../ContactModal/ContactModal'
 
 // Styles
 import { PopupStyled, Content, Address, PropertyData, Span, Price } from './MapPopUp.Style'
-import Colors from '../../../../../../theme/Colors'
-import Button from '../../../../../../components/atoms/Button/Button'
+import { colors } from '../../../../../../theme'
+import Button from '../../../../../atoms/Button/Button'
 
-const MapPopup = (props) => {
+function MapPopup({ data }) {
+  const newData = data
   // aqui borré ContactPerson y contactPhone porque no hay datos iguales en el json
   // https://api-casas.kevinmamaqi.com/api-casas
-  const { price, image, name, habitaciones, m2, gastosIncluidos } = props.data
+  const { price, image, name, habitaciones, m2, gastosIncluidos } = newData
   const [active, setActive] = useState(false)
   return (
-    <React.Fragment>
+    <>
       <Popup>
         <PopupStyled>
           <img src={`${import.meta.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
@@ -40,7 +42,7 @@ const MapPopup = (props) => {
               marginTop: 'auto',
               fontSize: '1.125rem',
               fontFamily: 'Arial',
-              color: Colors.strongBlue,
+              color: colors.strongBlue,
               background: 'transparent',
               boxShadow: 'none',
               paddingLeft: '0',
@@ -58,8 +60,12 @@ const MapPopup = (props) => {
         </Content>
       </Popup>
       <ContactModal active={active} hideModal={() => setActive(false)} />
-    </React.Fragment>
+    </>
   )
+}
+
+MapPopup.propTypes = {
+  data: PropTypes.object,
 }
 
 export default MapPopup

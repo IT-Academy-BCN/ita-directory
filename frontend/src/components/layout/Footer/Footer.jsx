@@ -5,7 +5,7 @@ import { Logo, Credits, Anchor, Rights, Information, Legal, StyledFooter } from 
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
 
-const Footer = () => {
+function Footer() {
   return (
     <Container column>
       <StyledFooter className="footer">

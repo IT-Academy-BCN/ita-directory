@@ -56,7 +56,7 @@ export const TextAreaInput = styled.textarea.attrs((props) => ({
 `
 
 export const StyledError = styled.small.attrs({
-  className: ` visible text-redColor mb-9`,
+  className: `visible text-redColor mb-9`,
 })`
   display: inline-block;
   &.errorProfile {

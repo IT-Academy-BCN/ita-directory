@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
-import InputNumber from 'components/atoms/InputNumber/InputNumber'
-import Button from 'components/atoms/Button/Button'
-import { FilterListStyled } from './FilterList.styles'
+import InputNumber from '../../atoms/InputNumber/InputNumber'
+import Button from '../../atoms/Button/Button'
+import FilterListStyled from './FilterList.styles'
 
 function FilterList(props) {
   const noFilters = {
@@ -21,24 +22,25 @@ function FilterList(props) {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = ({ e, onSubmit }) => {
     e.preventDefault()
-    props.onSubmit(filters)
+    onSubmit(filters)
   }
-  const handleReset = (e) => {
+  const handleReset = ({ e, onSubmit }) => {
     e.preventDefault()
     document.getElementById('filterList').reset()
     setFilters(noFilters)
-    props.onSubmit(noFilters)
+    onSubmit(noFilters)
   }
 
   return (
     <FilterListStyled className="styleFilter">
       <form onSubmit={handleSubmit} id="filterList">
         <h3>Filtros</h3>
-        <label>Precio</label>
+        <label htmlFor="priceMin">Precio</label>
         <div className="styledContainerInputs">
           <InputNumber
+            id="priceMin"
             name="priceMin"
             type="number"
             value={filters.priceMin}
