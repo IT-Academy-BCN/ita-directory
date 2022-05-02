@@ -1,17 +1,16 @@
 import styled from 'styled-components'
-import { colors } from '../../../theme'
+import { colors, font } from '../../../theme'
 
 const StyledButton = styled.button.attrs({})`
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: ${colors.redPink};
+  background: ${colors.redPink};
   border: 0;
   color: ${colors.white};
   padding: 0.8rem 1rem;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 16px;
+  font-size: ${font.base};
   margin: 10px 0px;
 
   &:hover {
@@ -19,14 +18,19 @@ const StyledButton = styled.button.attrs({})`
   }
 
   &.blue-gradient {
+    background: linear-gradient(90deg, ${colors.lightBlue}, ${colors.darkBlue});
   }
   &.orange-gradient {
+    background: linear-gradient(90deg, ${colors.lightOrange}, ${colors.darkOrange});
   }
   &.green-gradient {
+    background: linear-gradient(90deg, ${colors.lightGreen}, ${colors.darkGreen});
   }
   &.darkRed {
+    background: ${colors.extraDarkRed};
   }
   &.darkBlue {
+    background: ${colors.extraDarkBlue};
   }
   &.disabled {
     cursor: not-allowed;
