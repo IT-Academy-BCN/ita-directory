@@ -42,9 +42,8 @@ const playwright = require('playwright')
 test('check the web site designer', async ({ page }) => {
   const browser = await playwright.chromium.launch()
   await page.goto('http://localhost:3000')
-  const name = await page.$eval(
-    '#root > div.sc-dlMDgC.krMeen.styledBody > div.sc-bdnxRM.YjZxD > footer > div.sc-fnVZcZ.hEDFIa > div.sc-fFSPTT.sc-bkbkJK.jXHZLN.bugydy',
-    (designer) => designer.textContent.trim()
+  const name = await page.$eval('//*[@id="root"]/div[2]/div[2]/footer/div[1]/div[2]', (designer) =>
+    designer.textContent.trim()
   )
   expect(name).toEqual('Diseñado por Kevin Mamaquipara ITAcademy de Barcelona Activa')
 
