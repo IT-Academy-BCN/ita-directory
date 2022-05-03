@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -24,11 +24,9 @@ import { newNotification, NotificationTypes } from '../../../store/notificationS
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 
 function Register() {
-  const [registerSuccess, setRegisterSuccess] = useState(false)
   const [animated, setAnimated] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState(null)
   const {
     register,
     handleSubmit,
@@ -44,30 +42,25 @@ function Register() {
         `${import.meta.env.REACT_APP_API_URL}/users/v1/register`,
         user
       )
-      setMessage(response.data.message)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({
-            message,
+            message: response.data.code,
             type: NotificationTypes.error,
           })
         )
         throw response.data.message
       }
-      setRegisterSuccess(true)
       dispatch(
         newNotification({
-          message,
+          message: response.data.code,
           type: NotificationTypes.succes,
         })
       )
     } catch (error) {
-      if (error.name === 'Error')
-        setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`)
-      setRegisterSuccess(false)
       dispatch(
         newNotification({
-          message,
+          message: `Sorry, connection failed: "${error.message}". Please, try later.`,
           type: NotificationTypes.error,
         })
       )
@@ -93,18 +86,6 @@ function Register() {
       setIsLoading(false)
     }, 2000)
   }
-
-  useEffect(() => {
-    if (message) {
-      dispatch(
-        newNotification({
-          message,
-          type: registerSuccess ? NotificationTypes.succes : NotificationTypes.error,
-        })
-      )
-      setMessage(null)
-    }
-  })
 
   return (
     <Body title="Registro" justifyTitle="center">

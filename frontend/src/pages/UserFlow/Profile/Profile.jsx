@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -39,8 +40,6 @@ function Profile() {
   const [newPhoto, setNewPhoto] = useState(null)
   const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(null)
-  const [message, setMessage] = useState(null)
   const [firstLoad, setFirstLoad] = useState(null)
   const dispatch = useDispatch()
   // aquí deberá cargarse info de usuario autenticado correctamente
@@ -58,22 +57,17 @@ function Profile() {
   useEffect(() => {
     try {
       localStorage.setItem('loggedinUserInfo', JSON.stringify(loggedinUserInfo))
-      setSubmitSuccess(true)
-      setMessage('Your new account information was saved succesfully!')
       dispatch(
         newNotification({
-          message,
+          message: 'Your new account information was saved succesfully!',
           type: NotificationTypes.succes,
         })
       )
     } catch (e) {
-      setSubmitSuccess(false)
-      setMessage(
-        'Ups, something went wrong saving your new account information. Please, try later or contact us.'
-      )
       dispatch(
         newNotification({
-          message,
+          message:
+            'Ups, something went wrong saving your new account information. Please, try later or contact us.',
           type: NotificationTypes.error,
         })
       )
@@ -105,18 +99,6 @@ function Profile() {
     })
   }
 
-  useEffect(() => {
-    if (message && !firstLoad) {
-      dispatch(
-        newNotification({
-          message,
-          type: submitSuccess ? NotificationTypes.succes : NotificationTypes.error,
-        })
-      )
-      setMessage(null)
-    }
-  })
-
   return (
     <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn="true">
       <Container>
@@ -139,7 +121,7 @@ function Profile() {
         <ProfileWrapper className="form-frame">
           <ProfileForm className="profile-photo">
             <ProfileImage>
-              <img src={usersPhoto[newPhoto || loggedinUserInfo.photo]} alt={'Foto de perfil'} />
+              <img src={usersPhoto[newPhoto || loggedinUserInfo.photo]} alt="Foto de perfil" />
             </ProfileImage>
             <ProfileUploadPhoto>
               <div>
@@ -206,7 +188,7 @@ function Profile() {
                   minMarginTop
                   success={newPassword !== '' && validatePassword(newPassword)}
                   error={newPassword !== '' && !validatePassword(newPassword)}
-                  errorText={msgs[`passwordError`]}
+                  errorText={msgs.passwordError}
                 />
               </div>
               <div>
