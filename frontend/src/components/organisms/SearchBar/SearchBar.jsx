@@ -7,7 +7,7 @@ import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import { SearchBarContainer, customStyles } from './SearchBarStyles'
 import { StyledSubHeader } from '../../../components/layout/Header/Header.styles'
-import Button from '../../atoms/Forms/Button'
+import Button from '../../atoms/Button'
 
 const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
   const [loading, setLoading] = useState(1)

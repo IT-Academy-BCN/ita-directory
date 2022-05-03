@@ -11,12 +11,12 @@ import {
 // Styles
 import Container from '../../theme/globalStyles'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
-import Button from '../../components/atoms/Forms/Button'
+import Button from '../../components/atoms/Button'
 import InputNumber from '../../components/atoms/Forms/InputNumber'
-import Input from '../../components/atoms/Input/Input'
+import Input from '../../components/atoms/Forms/Input'
 import Body from '../../components/layout/Body/Body'
 import { Wrapper, MapText } from './EditAd.styles'
-import TextArea from '../../components/atoms/Forms/TextArea'
+import TextArea from '../../components/molecules/TextAreaGroup'
 
 function EditAd(props) {
   const originalAd = Object.assign({}, props.location.state.ad)

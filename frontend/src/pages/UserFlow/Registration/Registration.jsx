@@ -10,7 +10,7 @@ import Body from '../../../components/layout/Body/Body'
 
 // Units Components
 import CheckBox from '../../../components/atoms/CheckBox'
-import AsyncButton from '../../../components/atoms/Forms/Button'
+import AsyncButton from '../../../components/atoms/Button'
 
 // Styles
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'

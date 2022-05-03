@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { ModalBlock } from './Modal.styles'
 import { colors } from '../../../theme'
-import Button from '../../atoms/Forms/Button'
+import Button from '../../atoms/Button'
 
 function Modal({ title, footer, children, active, hideModal }) {
   return (

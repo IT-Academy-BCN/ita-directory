@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { StyledCity, StyledP } from './AdCard.style'
-import Button from '../../../components/atoms/Forms/Button'
+import Button from '../../../components/atoms/Button'
 import Card from '../../../components/organisms/Card/Card'
 import EditAdModal from '../EditAdModal/EditAdModal'
 

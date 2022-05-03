@@ -7,7 +7,7 @@ import ContactModal from '../../../../ContactModal/ContactModal'
 // Styles
 import { PopupStyled, Content, Address, PropertyData, Span, Price } from './MapPopUp.Style'
 import Colors from '../../../../../../theme'
-import Button from '../../../../../atoms/Forms/Button'
+import Button from '../../../../../atoms/Button'
 
 function MapPopup({ data }) {
   // aqui borré ContactPerson y contactPhone porque no hay datos iguales en el json

@@ -78,7 +78,7 @@ Header.propTypes = {
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,
   justifyTitle: PropTypes.string,
-  isLoggedIn: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  isLoggedIn: PropTypes.bool,
   isTitleVisible: PropTypes.bool,
 }
 

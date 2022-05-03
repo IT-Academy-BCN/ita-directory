@@ -8,7 +8,7 @@ import Input from '../../../components/atoms/Forms/Input'
 import Body from '../../../components/layout/Body/Body'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
 import Notification from '../../../components/atoms/Notifications/Notification'
-import AsyncButton from '../../../components/atoms/Forms/Button'
+import AsyncButton from '../../../components/atoms/Button'
 
 function UpdatePassword() {
   const [loginSuccess, setLoginSuccess] = useState(false)

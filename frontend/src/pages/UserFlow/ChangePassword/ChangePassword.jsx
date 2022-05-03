@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
-import AsyncButton from '../../../components/atoms/Forms/Button'
+import AsyncButton from '../../../components/atoms/Button'
 
 import { Container, Form } from '../UserFlow.styles'
 import { msgs, validatePassword } from '../../../utils/userFlow'

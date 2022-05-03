@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
-import { colors, font } from '../../../theme'
+import { colors, font } from '../../theme'
 
 const StyledButton = styled.button.attrs({})`
   display: flex;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import Button from '../../../components/atoms/Forms/Button'
+import Button from '../../../components/atoms/Button'
 import Modal from '../../../components/organisms/Modal/Modal'
 import Input from '../../../components/atoms/Forms/Input'
 import { Wrapper, ButtonWrapper } from './EditAdModal.style'

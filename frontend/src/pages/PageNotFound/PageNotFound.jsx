@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 // components
 import Body from '../../components/layout/Body/Body'
-import Button from '../../components/atoms/Forms/Button'
+import Button from '../../components/atoms/Button'
 
 function PageNotFound() {
   return (
