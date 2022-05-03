@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
@@ -73,13 +73,13 @@ function Header({
 }
 
 Header.propTypes = {
-  title: PropType.string.isRequired,
-  logoColor: PropType.string,
-  headerColor: PropType.string,
-  fontColor: PropType.string,
-  justifyTitle: PropType.string,
-  isLoggedIn: PropType.bool,
-  isTitleVisible: PropType.bool,
+  title: PropTypes.string.isRequired,
+  logoColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  fontColor: PropTypes.string,
+  justifyTitle: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  isTitleVisible: PropTypes.bool,
 }
 
 export default Header

@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
 
-//components
+// components
 import Body from '../../components/layout/Body/Body'
-import Button from '../../components/atoms/Button/Button'
+import Button from '../../components/atoms/Button'
 
-const PageNotFound = () => {
+function PageNotFound() {
   return (
     <Body title="404" justifyTitle="center">
       <div className="h-full m-auto">
         <p>Ops, parece que la página que estas buscando no existe.</p>
         <p>Vuelve a la página de inicio. Si se trata de un error, ponte en contacto.</p>
         <Link to="/">
-          <Button text="Visit HomePage"></Button>
+          <Button text="Visit HomePage" />
         </Link>
       </div>
     </Body>
