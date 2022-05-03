@@ -9,7 +9,6 @@ import Body from '../../../components/layout/Body/Body'
 // Units Components
 import AsyncButton from '../../../components/atoms/Button'
 import Input from '../../../components/atoms/Forms/Input'
-import Notification from '../../../components/atoms/Notifications/Notification'
 
 // Composed Components
 import Modal from '../../../components/organisms/Modal/Modal'
