@@ -61,7 +61,7 @@ app.use('/users', userRoutes)
 app.use('/media', mediaRoutes)
 app.use('/location', locationRoutes)
 app.use('/contact', contactRoutes)
-app.use('/chat', chatRoutes)
+app.use('/chat', authenticateToken, chatRoutes)
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
@@ -69,8 +69,8 @@ app.use('/chat', chatRoutes)
 // });
 
 // Routes for testing chat
-app.get('/chat', (req, res) => {
-  res.status(200).send('Hello World')
-})
+// app.get('/chat', (req, res) => {
+//   res.status(200).send('Hello World')
+// })
 
 module.exports = app

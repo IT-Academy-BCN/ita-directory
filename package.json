@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
-    "husky": "^6.0.0",
+    "husky": "^6.0.0"
   },
   "dependencies": {
     "playwright": "1.21.1"

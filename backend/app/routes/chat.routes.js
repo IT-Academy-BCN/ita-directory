@@ -1,12 +1,7 @@
 const router = require('express').Router()
 const chatController = require('../controllers/chat.controller')
 
-/* 
-getConversations: get user conversations
-getConversation: get user conversation by id
-getMessages: get user conversation messages by userId and conversationId
-postConversation: create new conversation between 2 users
- */
+// TODO document routes!!!
 
 router.get('/v1/conversations', chatController.getConversations)
 

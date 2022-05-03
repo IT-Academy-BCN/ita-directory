@@ -2,20 +2,21 @@ const prisma = require('../../prisma/indexPrisma')
 const { apiResponse } = require('../utils/utils')
 
 async function createConversation(req, res) {
-  // const userId = { req }
   try {
-    // fields -> user1Id, user2Id
-    const { ...fields } = req.body
-    // @todo: user1Id might be removed from adsSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
-    /* await adsSchema.validateAsync(fields) */
+    const { userId } = req
+    const user1Id = userId
+    const { user } = req.body
+    const user2Id = user
 
-    if (fields.user1Id === fields.user2Id) {
+    /* await adsSchema.validateAsync(fields) // TODO */
+
+    if (user1Id === user2Id) {
       // We want not to talk to ourself
       return res.status(400).json(
         apiResponse({
           message: 'Bad request.',
           errors: ['Bad request.'],
-          status: 422,
+          status: 400,
         })
       )
     }
@@ -23,7 +24,7 @@ async function createConversation(req, res) {
     const userConversations = await prisma.user_conversation.findMany({
       where: {
         user_id: {
-          in: [fields.user1Id, fields.user2Id],
+          in: [user1Id, user2Id],
         },
       },
     })
@@ -38,7 +39,7 @@ async function createConversation(req, res) {
       const conversation = await prisma.conversation.create({
         data: {
           participants: {
-            create: [{ user_id: fields.user1Id }, { user_id: fields.user2Id }],
+            create: [{ user_id: user1Id }, { user_id: user2Id }],
           },
         },
       })
@@ -87,11 +88,16 @@ async function createConversation(req, res) {
 
 async function getConversations(req, res) {
   try {
+    const { userId } = req
     const conversations = await prisma.conversation.findMany({
-      include: {
+      select: {
+        id: true,
+      },
+      // distinct: ['id'],
+      where: {
         participants: {
-          select: {
-            user_id: true,
+          some: {
+            user_id: userId,
           },
         },
       },
@@ -119,7 +125,7 @@ async function getConversationById(req, res) {
     const conversationId = parseInt(req.params.id, 10)
 
     // Validates if integer.
-    // await AdByIdParamSchema.validateAsync(adId)
+    // await AdByIdParamSchema.validateAsync(adId) // TODO
 
     const conversation = await prisma.conversation.findUnique({
       where: {
@@ -171,7 +177,33 @@ async function getConversationById(req, res) {
 }
 
 async function getMessages(req, res) {
-  //
+  try {
+    const { conversation } = req.body
+    const convWithMessages = await prisma.conversation.findUnique({
+      where: {
+        id: conversation,
+      },
+      include: {
+        messages: true,
+      },
+    })
+    const { messages } = convWithMessages
+    res.status(200).json(
+      apiResponse({
+        message: 'Data fetched correctly.',
+        data: { messages },
+        status: 200,
+      })
+    )
+  } catch (err) {
+    res.status(500).json(
+      apiResponse({
+        message: 'An error occurred with your query.',
+        errors: [err.message],
+        status: 500,
+      })
+    )
+  }
 }
 
 module.exports = {
