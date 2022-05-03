@@ -1,6 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { InputStyled } from './Input.styled'
+import styled from 'styled-components'
+import { colors } from '../../../theme'
+
+const InputStyled = styled.input`
+  height: 40px;
+  width: 90%;
+  padding: 0rem 1rem;
+  margin: 5px 0px;
+  border-radius: 0.5rem;
+  border: 1px solid #b0b0b0;
+  font-size: 16px;
+
+  &:hover {
+    border: 1px solid ${colors.redPink};
+  }
+  &.error {
+    border: 1px solid #fecaca !important;
+  }
+  &:focus {
+    outline: 0 none;
+    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+  }
+`
 
 function Input({
   type,
@@ -21,24 +43,26 @@ function Input({
   accept,
 }) {
   return (
-    <InputStyled
-      type={type}
-      placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      className={`${className} ${error ? 'error' : ''}`}
-      id={id}
-      name={name}
-      disabled={disabled}
-      size={size}
-      error={error}
-      required={required}
-      style={inputStyles}
-      onChange={onChange}
-      ref={ref}
-      accept={accept}
-      {...(register && register)}
-    />
+    <div>
+      <InputStyled
+        type={type}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        className={`${className} ${error ? 'error' : ''}`}
+        id={id}
+        name={name}
+        disabled={disabled}
+        size={size}
+        error={error}
+        required={required}
+        style={inputStyles}
+        onChange={onChange}
+        ref={ref}
+        accept={accept}
+        {...(register && register)}
+      />
+    </div>
   )
 }
 
@@ -64,4 +88,4 @@ Input.propTypes = {
   accept: PropTypes.string,
 }
 
-export default Input
+export default styled(Input)``

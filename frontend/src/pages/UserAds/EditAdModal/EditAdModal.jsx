@@ -1,13 +1,13 @@
 import React from 'react'
-import Button from '../../../components/atoms/Button/Button'
-import Modal from '../../../components/organisms/Modal/Modal.jsx'
-import Input from '../../../components/atoms/Input/Input.jsx'
-import { Wrapper, ButtonWrapper } from './EditAdModal.style'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import Button from '../../../components/atoms/Button'
+import Modal from '../../../components/organisms/Modal/Modal'
+import Input from '../../../components/atoms/Forms/Input'
+import { Wrapper, ButtonWrapper } from './EditAdModal.style'
 import Colors from '../../../theme/colors'
 import Map from '../../../components/organisms/Map/Map/Map'
 
-const EditAdModal = ({ ad, active, hideModal }) => {
+function EditAdModal({ ad, active, hideModal }) {
   const { name, m2, desc, habitaciones, gastosIncluidos, price, lat, long } = ad
   // const [error, setError] = useState("");
 

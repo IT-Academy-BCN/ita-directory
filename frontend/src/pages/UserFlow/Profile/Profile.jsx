@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 
 // Units Components
-import AsyncButton from '../../../components/atoms/Button/Button'
-import Input from '../../../components/atoms/Input/Input'
+import AsyncButton from '../../../components/atoms/Button'
+import Input from '../../../components/atoms/Forms/Input'
 
 // Composed Components
 import Modal from '../../../components/organisms/Modal/Modal'

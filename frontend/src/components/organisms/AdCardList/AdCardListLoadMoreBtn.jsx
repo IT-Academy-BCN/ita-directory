@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import AdCardListStyled from './AdCardList.styles'
-import Button from '../../atoms/Button/Button'
+import Button from '../../atoms/Button'
 import AdCardItem from './AdCardItem'
 
 function AdCardListLoadMore({ ads, setLocalizedAdId }) {

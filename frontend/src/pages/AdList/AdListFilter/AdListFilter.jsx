@@ -11,7 +11,7 @@ import {
   FilterHr,
 } from './AdListFilter.style'
 
-import Button from '../../../components/atoms/Button/Button.jsx'
+import Button from '../../../components/atoms/Button'
 
 function AdFilters({ filtrar, maxPriceValue, minPriceValue, maxM2, minM2 }) {
   const [maxPrice, setMaxPrice] = useState('')
