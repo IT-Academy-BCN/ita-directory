@@ -1,5 +1,10 @@
 const prisma = require('../../prisma/indexPrisma')
-const { apiResponse } = require('../utils/utils')
+const {
+  apiResponse,
+  conversationUsersSchema,
+  conversationSchema,
+  conversationUserSchema,
+} = require('../utils/utils')
 
 async function createConversation(req, res) {
   try {
@@ -8,7 +13,7 @@ async function createConversation(req, res) {
     const { user } = req.body
     const user2Id = user
 
-    /* await adsSchema.validateAsync(fields) // TODO */
+    await conversationUsersSchema.validateAsync({ user1Id, user2Id })
 
     if (user1Id === user2Id) {
       // We want not to talk to ourself
@@ -67,14 +72,6 @@ async function createConversation(req, res) {
           status: 400,
         })
       )
-    } else if (err && err.code === 'P2003') {
-      res.status(422).json(
-        apiResponse({
-          message: 'This value for user_id does not exist in conversation table.',
-          errors: [err.message],
-          status: 422,
-        })
-      )
     }
     return res.status(500).json(
       apiResponse({
@@ -89,6 +86,8 @@ async function createConversation(req, res) {
 async function getConversations(req, res) {
   try {
     const { userId } = req
+    await conversationUserSchema.validateAsync({ userId })
+
     const conversations = await prisma.conversation.findMany({
       select: {
         id: true,
@@ -122,10 +121,9 @@ async function getConversations(req, res) {
 
 async function getConversationById(req, res) {
   try {
+    const { userId } = req
     const conversationId = parseInt(req.params.id, 10)
-
-    // Validates if integer.
-    // await AdByIdParamSchema.validateAsync(adId) // TODO
+    await conversationSchema.validateAsync({ userId, conversationId })
 
     const conversation = await prisma.conversation.findUnique({
       where: {
@@ -149,11 +147,24 @@ async function getConversationById(req, res) {
         })
       )
     } else {
-      res.status(200).json({
-        message: 'Conversation fetched correctly.',
-        data: { conversation },
-        status: 200,
-      })
+      const itsMyConversation =
+        userId === conversation.participants[0].user_id ||
+        userId === conversation.participants[1].user_id
+      if (!itsMyConversation) {
+        res.status(400).json(
+          apiResponse({
+            message: 'This conversation is not yours',
+            errors: ['This conversation is not yours'],
+            status: 400,
+          })
+        )
+      } else {
+        res.status(200).json({
+          message: 'Conversation fetched correctly.',
+          data: { conversation },
+          status: 200,
+        })
+      }
     }
   } catch (err) {
     if (err.name === 'ValidationError') {
@@ -178,23 +189,61 @@ async function getConversationById(req, res) {
 
 async function getMessages(req, res) {
   try {
-    const { conversation } = req.body
-    const convWithMessages = await prisma.conversation.findUnique({
+    const { userId } = req
+    const conversationId = req.body.conversation
+    await conversationSchema.validateAsync({ userId, conversationId })
+
+    const conversation = await prisma.conversation.findUnique({
       where: {
-        id: conversation,
+        id: conversationId,
       },
       include: {
-        messages: true,
+        participants: {
+          select: {
+            user_id: true,
+          },
+        },
       },
     })
-    const { messages } = convWithMessages
-    res.status(200).json(
-      apiResponse({
-        message: 'Data fetched correctly.',
-        data: { messages },
-        status: 200,
-      })
-    )
+    if (!conversation) {
+      res.status(404).json(
+        apiResponse({
+          message: 'This conversation does not exist.',
+          status: 404,
+          errors: ['This conversation does not exist.'],
+        })
+      )
+    } else {
+      const itsMyConversation =
+        userId === conversation.participants[0].user_id ||
+        userId === conversation.participants[1].user_id
+      if (!itsMyConversation) {
+        res.status(400).json(
+          apiResponse({
+            message: 'This conversation is not yours',
+            errors: ['This conversation is not yours'],
+            status: 400,
+          })
+        )
+      } else {
+        const convWithMessages = await prisma.conversation.findUnique({
+          where: {
+            id: conversation,
+          },
+          include: {
+            messages: true,
+          },
+        })
+        const { messages } = convWithMessages
+        res.status(200).json(
+          apiResponse({
+            message: 'Data fetched correctly.',
+            data: { messages },
+            status: 200,
+          })
+        )
+      }
+    }
   } catch (err) {
     res.status(500).json(
       apiResponse({

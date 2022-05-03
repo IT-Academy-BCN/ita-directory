@@ -68,9 +68,4 @@ app.use('/chat', authenticateToken, chatRoutes)
 // 	res.json({message: "Correct Token !", data: {user_id: req.userId}});
 // });
 
-// Routes for testing chat
-// app.get('/chat', (req, res) => {
-//   res.status(200).send('Hello World')
-// })
-
 module.exports = app
