@@ -27,7 +27,6 @@ function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
   })
-
   const loginUser = async (user) => {
     try {
       const response = await axios.post(Urls.login, user)
