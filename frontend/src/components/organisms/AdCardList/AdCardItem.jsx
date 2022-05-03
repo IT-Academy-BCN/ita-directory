@@ -1,10 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-<<<<<<< HEAD
-import Colors from '../../../theme/Colors'
-=======
 import { colors } from '../../../theme'
->>>>>>> develop
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
 import Button from '../../atoms/Button/Button'
 import { AdCardItemStyled } from './AdCardItem.styles'

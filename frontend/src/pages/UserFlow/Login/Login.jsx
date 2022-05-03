@@ -1,29 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-<<<<<<< HEAD
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-=======
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
->>>>>>> develop
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import AsyncButton from '../../../components/atoms/Button/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-<<<<<<< HEAD
-import Input from '../../../components/atoms/Input/Input'
-
-import loginSchema from '../../../validation/loginSchema'
-
-import { login } from '../../../store/userSlice'
-
-=======
 import { InputGroup } from '../../../components/molecules'
 import loginSchema from '../../../validation/loginSchema'
 import { login } from '../../../store/userSlice'
->>>>>>> develop
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import Urls from '../../../utils/urls'
@@ -41,14 +27,9 @@ function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
   })
-  // ! From backend: we change process.env.VITE_REACT_APP_API_URL for testig the user login.
   const loginUser = async (user) => {
     try {
-<<<<<<< HEAD
-      const response = await axios.post(`http://localhost:10910/users/v1/login`, user)
-=======
       const response = await axios.post(Urls.login, user)
->>>>>>> develop
       dispatch(
         newNotification({
           message: response.data.message,
@@ -59,15 +40,11 @@ function Login() {
       if (response) {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('refreshToken', response.data.refreshToken)
-<<<<<<< HEAD
-        const userData = await axiosInstance.get(`/users/v1/get_me`).then((res) => res.data)
-=======
 
         const userData = await axiosInstance
           .get(`/users/v1/get_me`)
           // eslint-disable-next-line no-shadow
           .then((response) => response.data)
->>>>>>> develop
 
         if (userData) dispatch(login(userData))
       }
@@ -114,12 +91,8 @@ function Login() {
     <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
-<<<<<<< HEAD
-          <Input
-=======
           <InputGroup
             label="email"
->>>>>>> develop
             type="email"
             placeholder="Introduce tu email"
             id="emailName"
@@ -129,12 +102,8 @@ function Login() {
             error={errors.email?.message}
             register={register('email')}
           />
-<<<<<<< HEAD
-          <Input
-=======
           <InputGroup
             label="password"
->>>>>>> develop
             type="password"
             placeholder="Introduce tu contraseña"
             id="passName"
