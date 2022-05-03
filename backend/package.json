@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "set NODE_ENV=development && nodemon --legacy-watch server.js",
     "test": "vitest",
-    "e2e": "npx playwright test --config=playwrightTest/playwright.config.js",
     "fmt": "npx prettier --write ./app"
   },
   "keywords": [
@@ -17,7 +16,6 @@
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
   "dependencies": {
-    "@playwright/test": "^1.21.1",
     "@prisma/client": "3.8.1",
     "argon2": "0.28.2",
     "cors": "2.8.5",
@@ -34,7 +32,6 @@
     "nodemailer": "6.7.2",
     "pg": "8.6.0",
     "pino": "^7.10.0",
-    "playwright": "^1.21.1",
     "redis": "4.0.1",
     "socket.io": "4.1.2"
   },
