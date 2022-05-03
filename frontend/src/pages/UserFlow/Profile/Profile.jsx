@@ -1,13 +1,14 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // Layout Components
+import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 
 // Units Components
 import AsyncButton from '../../../components/atoms/Button/Button'
 import Input from '../../../components/atoms/Input/Input'
-import Notification from '../../../components/atoms/Notifications/Notification'
 
 // Composed Components
 import Modal from '../../../components/organisms/Modal/Modal'
@@ -23,24 +24,21 @@ import people13b from '../../../assets/images/people13b.jpg'
 
 import initLoggedinUserInfo from '../fakeUser.json'
 import { msgs, validatePassword } from '../../../utils/userFlow'
-import { useDispatch } from 'react-redux'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 
 const usersPhoto = {
-  people1b: people1b,
-  people4b: people4b,
-  people13b: people13b,
+  people1b,
+  people4b,
+  people13b,
 }
 // testing ***
 
-const Profile = () => {
+function Profile() {
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
   const [newPhoto, setNewPhoto] = useState(null)
   const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(null)
-  const [message, setMessage] = useState(null)
   const [firstLoad, setFirstLoad] = useState(null)
   const dispatch = useDispatch()
   // aquí deberá cargarse info de usuario autenticado correctamente
@@ -58,22 +56,17 @@ const Profile = () => {
   useEffect(() => {
     try {
       localStorage.setItem('loggedinUserInfo', JSON.stringify(loggedinUserInfo))
-      setSubmitSuccess(true)
-      setMessage('Your new account information was saved succesfully!')
       dispatch(
         newNotification({
-          message: message,
+          message: 'Your new account information was saved succesfully!',
           type: NotificationTypes.succes,
         })
       )
     } catch (e) {
-      setSubmitSuccess(false)
-      setMessage(
-        'Ups, something went wrong saving your new account information. Please, try later or contact us.'
-      )
       dispatch(
         newNotification({
-          message: message,
+          message:
+            'Ups, something went wrong saving your new account information. Please, try later or contact us.',
           type: NotificationTypes.error,
         })
       )
@@ -105,18 +98,6 @@ const Profile = () => {
     })
   }
 
-  useEffect(() => {
-    if (message && !firstLoad) {
-      dispatch(
-        newNotification({
-          message: message,
-          type: submitSuccess ? NotificationTypes.succes : NotificationTypes.error,
-        })
-      )
-      setMessage(null)
-    }
-  })
-
   return (
     <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn="true">
       <Container>
@@ -139,7 +120,7 @@ const Profile = () => {
         <ProfileWrapper className="form-frame">
           <ProfileForm className="profile-photo">
             <ProfileImage>
-              <img src={usersPhoto[newPhoto || loggedinUserInfo.photo]} alt={'Foto de perfil'} />
+              <img src={usersPhoto[newPhoto || loggedinUserInfo.photo]} alt="Foto de perfil" />
             </ProfileImage>
             <ProfileUploadPhoto>
               <div>
@@ -206,7 +187,7 @@ const Profile = () => {
                   minMarginTop
                   success={newPassword !== '' && validatePassword(newPassword)}
                   error={newPassword !== '' && !validatePassword(newPassword)}
-                  errorText={msgs[`passwordError`]}
+                  errorText={msgs.passwordError}
                 />
               </div>
               <div>
