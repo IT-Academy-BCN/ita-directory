@@ -37,7 +37,6 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
-    "husky": "^6.0.0",
-    "prisma": "3.11.0"
+    "husky": "^6.0.0"
   }
 }
