@@ -68,7 +68,6 @@ function Header({
               </Dropdown>
             ) : null}
           </div>
-          {/* <Dropdown isLoggedIn={isLoggedIn} profilePicture={profilePicture} /> */}
         </div>
       </Container>
       <StyledSubHeader headerColor={headerColor} fontColor={fontColor} justifyTitle={justifyTitleB}>
