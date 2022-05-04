@@ -143,7 +143,6 @@ exports.registerUser = async (req, res, next) => {
         password: passwordHashed,
         user_status_id: 1,
         user_role_id: 3,
-        refresh_token: '20',
       },
     })
     return res.status(200).json(
