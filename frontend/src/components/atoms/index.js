@@ -4,11 +4,13 @@ import Text from './Text'
 import Banner from './Banner'
 import Button from './Button'
 import Title from './Title'
+import Card from './Card'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
 
 export {
   Banner,
   Icon,
+  Card,
   Text,
   Title,
   CheckBox,

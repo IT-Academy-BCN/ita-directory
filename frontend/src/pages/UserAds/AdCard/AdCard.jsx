@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { StyledCity, StyledP } from './AdCard.style'
 import Button from '../../../components/atoms/Button'
-import Card from '../../../components/organisms/Card/Card'
+import CardOrganism from '../../../components/organisms/Card/CardOrganism'
 import EditAdModal from '../EditAdModal/EditAdModal'
 
 function AdCard({ ad, containerClassName }) {
   const { name, m2, desc, habitaciones, image, id } = ad
-  console.log(ad)
   const [active, setActive] = useState(false)
   return (
-    <Card
+    <CardOrganism
       titleClassName="titleClassName"
       containerClassName={containerClassName}
       descriptionClassName="descriptionContainer"
@@ -26,7 +26,7 @@ function AdCard({ ad, containerClassName }) {
       text={desc}
       footer={
         <>
-          <Link style={{ textDecoration: 'none' }} to={{ pathname: `ad/${id}`, state: { ad: ad } }}>
+          <Link style={{ textDecoration: 'none' }} to={{ pathname: `ad/${id}`, state: { ad } }}>
             <Button
               className="blue-gradient"
               text="Ver Anuncio"
@@ -70,4 +70,10 @@ function AdCard({ ad, containerClassName }) {
     />
   )
 }
+
+AdCard.propTypes = {
+  ad: PropTypes.object,
+  containerClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+}
+
 export default AdCard
