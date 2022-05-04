@@ -38,10 +38,7 @@ function Register() {
 
   const registerUser = async (user) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.REACT_APP_API_URL}/users/v1/register`,
-        user
-      )
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/v1/register`, user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({
