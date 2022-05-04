@@ -5,6 +5,7 @@ import Banner from './Banner'
 import Button from './Button'
 import Title from './Title'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
+import { Notification, Notifications } from './Notifications'
 
 export {
   Banner,
@@ -19,4 +20,6 @@ export {
   InputNumber,
   TextArea,
   SelectUnit,
+  Notification,
+  Notifications,
 }

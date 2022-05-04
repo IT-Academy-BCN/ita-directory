@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Childrens, StyledBody } from './Body.styles'
+import { Notifications } from '../../atoms'
 
 function Body({
   children,
@@ -33,6 +34,7 @@ function Body({
       )}
       <Childrens>{children}</Childrens>
       {hideFooter ? '' : <Footer />}
+      <Notifications />
     </StyledBody>
   )
 }

@@ -6,13 +6,12 @@ import styled, { keyframes } from 'styled-components'
 import { deleteNotification } from '../../../store/notificationSlice'
 
 const InRight = keyframes`
-from {
-  transform: translateX(100%);
-  
-}
-to {
-  transform: translateX(0);
-}
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 `
 const NotificationStyled = styled.div`
   background-color: white;
@@ -42,7 +41,7 @@ function Notification({ message, id, icon }) {
   useEffect(() => {
     const autoCloseFn = window.setTimeout(() => {
       closeNotification()
-    }, 4500)
+    }, 8000)
     return () => autoCloseFn
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -64,7 +63,7 @@ function Notification({ message, id, icon }) {
 Notification.propTypes = {
   message: PropType.string.isRequired,
   id: PropType.string,
-  icon: PropType.node,
+  icon: PropType.object,
 }
 
-export default Notification
+export default React.memo(Notification)

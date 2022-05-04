@@ -22,6 +22,7 @@ import InputGroup from '../../../components/molecules/InputGroup'
 import registerSchema from '../../../validation/registerUserSchema.js'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function Register() {
   const [animated, setAnimated] = useState(false)
@@ -38,10 +39,7 @@ function Register() {
 
   const registerUser = async (user) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.REACT_APP_API_URL}/users/v1/register`,
-        user
-      )
+      const response = await axiosInstance.post('/users/v1/register', user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
@@ -7,15 +8,8 @@ import logo from '../../../assets/logos/logo.png'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/21.jpg'
 
-function Header({
-  title,
-  logoColor,
-  headerColor,
-  fontColor,
-  justifyTitle,
-  isLoggedIn = true,
-  isTitleVisible = true,
-}) {
+function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitleVisible = true }) {
+  const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
   const [dropdownVisible, setDropdownVisible] = useState(false)
 
   const handleClick = () => {
@@ -78,7 +72,6 @@ Header.propTypes = {
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,
   justifyTitle: PropTypes.string,
-  isLoggedIn: PropTypes.bool,
   isTitleVisible: PropTypes.bool,
 }
 
