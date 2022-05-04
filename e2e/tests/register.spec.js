@@ -1,4 +1,4 @@
-const { default: test, expect } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 const { chromium } = require('playwright')
 
 test.describe('register', () => {

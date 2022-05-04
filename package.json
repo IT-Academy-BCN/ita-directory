@@ -38,11 +38,6 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
-    "@playwright/test": "^1.21.1",
     "husky": "^6.0.0"
-  },
-  "dependencies": {
-    "dotenv": "^16.0.0",
-    "playwright": "1.21.1"
   }
 }
