@@ -1,67 +1,65 @@
-import styled from 'styled-components'
-import { colors } from '../../../theme'
+import styled from "styled-components";
+import Colors from "../../../theme/Colors";
 
 export const UserModalStyled = styled.div`
-  margin-bottom: 25px;
-  p {
-    color: ${colors.grey};
-    width: auto;
-    letter-spacing: 0px;
-    opacity: 1;
-    font-size: 16px;
-    width: 90%;
-    margin-bottom: 2px;
-  }
+	margin-bottom: 25px;
+	p {
+		color: ${Colors.grey};
+		width: auto;
+		letter-spacing: 0px;
+		opacity: 1;
+		font-size: 16px;
+		width: 90%;
+		margin-bottom: 2px;
+	}
 
-  label {
-    display: none;
-  }
+	label {
+		display: none;
+	}
 
-  select {
-    text-transform: uppercase;
-    padding: 0.2em;
-    font-size: 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    width: 100%;
+	select {
+		text-transform: uppercase;
+		padding: 0.2em;
+		font-size: 20px;
+		border-radius: 5px;
+		font-weight: bold;
+		width: 100%;
 
-    color: ${(props) =>
-      // eslint-disable-next-line no-nested-ternary
-      props.currentUserState === ('rejected' || 3)
-        ? colors.redColor
-        : props.currentUserState === ('aprobado' || 1)
-        ? colors.darkGreen
-        : colors.grey};
+		color: ${(props) =>
+		props.currentUserState === ("rejected" || 3)
+			? Colors.redColor
+			: props.currentUserState === ("aprobado" || 1)
+				? Colors.darkGreen
+				: Colors.grey};
 
-    border-color: ${(props) =>
-      // eslint-disable-next-line no-nested-ternary
-      props.currentUserState === ('rejected' || 3)
-        ? colors.redColor
-        : props.currentUserState === ('aprobado' || 1)
-        ? colors.darkGreen
-        : colors.grey};
+		border-color: ${(props) =>
+		props.currentUserState === ("rejected" || 3)
+			? Colors.redColor
+			: props.currentUserState === ("aprobado" || 1)
+				? Colors.darkGreen
+				: Colors.grey};
 
-    option {
-      text-transform: uppercase;
-    }
-    option.aprobado {
-      color: ${colors.darkGreen};
-    }
-    option.pending {
-      color: ${colors.grey};
-    }
-    option.rejected {
-      color: ${colors.redColor};
-    }
-  }
-`
+		option {
+			text-transform: uppercase;
+		}
+		option.aprobado {
+			color: ${Colors.darkGreen};
+		}
+		option.pending {
+			color: ${Colors.grey};
+		}
+		option.rejected {
+			color: ${Colors.redColor};
+		}
+	}
+`;
 
 // export const StyledOption = styled.option``;
 
 // export const StyledSelect = styled.select`
 // 	font-size: 20px;
-// 	color: ${(props) => (props.value = 1 ? colors.darkGreen : colors.darkRed)};
-// 	border-color: ${(props) => (props.value = 1 ? colors.darkGreen : colors.darkRed)};
+// 	color: ${(props) => (props.value = 1 ? Colors.darkGreen : Colors.darkRed)};
+// 	border-color: ${(props) => (props.value = 1 ? Colors.darkGreen : Colors.darkRed)};
 // 	padding: 10px;
 // 	border-radius: 5px;
 // 	font-weight: bold;
@@ -69,7 +67,7 @@ export const UserModalStyled = styled.div`
 // `;
 
 export const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+`;
