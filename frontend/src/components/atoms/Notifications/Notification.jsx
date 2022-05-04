@@ -63,7 +63,7 @@ function Notification({ message, id, icon }) {
 
 Notification.propTypes = {
   message: PropType.string.isRequired,
-  id: PropType.string.isRequired,
+  id: PropType.string,
   icon: PropType.node,
 }
 

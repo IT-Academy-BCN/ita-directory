@@ -29,22 +29,24 @@ model user_status {
 }
 
 model user {
-  id               Int                    @id @default(autoincrement())
-  name             String?
-  lastnames        String?
-  email            String                 @unique
-  password         String
-  created_at       DateTime               @default(now())
-  updated_at       DateTime               @updatedAt
-  user_status      user_status            @relation(fields: [user_status_id], references: [id])
-  user_status_id   Int
-  user_role        user_role              @relation(fields: [user_role_id], references: [id])
-  user_role_id     Int
-  acces_log        acces_log[]
-  recover_password recover_password_log[]
-  media            media[]
-  ads              ads[]
-  developer_data   Json? //Added developer data (not a jsonb?)
+  id                 Int                    @id @default(autoincrement())
+  name               String?
+  lastnames          String?
+  email              String                 @unique
+  password           String
+  created_at         DateTime               @default(now())
+  updated_at         DateTime               @updatedAt
+  user_status        user_status            @relation(fields: [user_status_id], references: [id])
+  user_status_id     Int
+  user_role          user_role              @relation(fields: [user_role_id], references: [id])
+  user_role_id       Int
+  acces_log          acces_log[]
+  recover_password   recover_password_log[]
+  media              media[]
+  ads                ads[]
+  developer_data     Json? //Added developer data (not a jsonb?)
+  messages_sent      message[]              @relation("sender")
+  user_conversations user_conversation[]    @relation("conv_user")
 }
 
 model acces_log {
@@ -94,25 +96,6 @@ model media_type {
   original   Boolean
   media_meta media_meta[]
 }
-
-// TODO: Figure out the user - conversation - message schemas in prisma.
-// model conversation {
-//   user_id_one Int
-//   user_id_two Int
-//   created_at  DateTime
-// }
-
-// model message {
-//   id                       Int          @id @default(autoincrement())
-//   content                  String
-//   created_at               DateTime
-//   conversation             conversation @relation(fields: [conversation_user_id_one], references: [id])
-//   conversation_user_id_one Int
-//   conversation             conversation @relation(fields: [conversation_user_id_two], references: [id])
-//   conversation_user_id_two Int
-//   user                     user         @relation(fields: [user_id], references: [id])
-//   user_id                  Int
-// }
 
 model level_type {
   id           Int     @id @default(autoincrement())
@@ -177,4 +160,28 @@ model ads {
   ad_status_id  Int
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
+}
+
+model conversation {
+  id           Int                 @id @default(autoincrement())
+  messages     message[]           @relation("conv")
+  participants user_conversation[] @relation("user_conv")
+}
+
+model user_conversation {
+  id              Int          @id @default(autoincrement())
+  user            user         @relation("conv_user", fields: [user_id], references: [id])
+  user_id         Int
+  conversation    conversation @relation("user_conv", fields: [conversation_id], references: [id])
+  conversation_id Int
+}
+
+model message {
+  id              Int          @id @default(autoincrement())
+  sender          user         @relation("sender", fields: [sender_id], references: [id])
+  sender_id       Int
+  conversation    conversation @relation("conv", fields: [conversation_id], references: [id])
+  conversation_id Int
+  text            String
+  created_at      DateTime     @default(now())
 }

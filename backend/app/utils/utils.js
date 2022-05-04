@@ -100,6 +100,18 @@ const isRepeatedPassword = async (userId, password) => {
   return repeatedPass.includes(true)
 }
 
+const conversationUsersSchema = Joi.object({
+  user1Id: Joi.number().required(),
+  user2Id: Joi.number().required(),
+})
+const conversationUserSchema = Joi.object({
+  userId: Joi.number().required(),
+})
+const conversationSchema = Joi.object({
+  userId: Joi.number().required(),
+  conversationId: Joi.number().required(),
+})
+
 module.exports = {
   // generateBlob,
   apiResponse,
@@ -114,4 +126,7 @@ module.exports = {
   getAdsByTypeSchema,
   patchAdSchema,
   isRepeatedPassword,
+  conversationUsersSchema,
+  conversationUserSchema,
+  conversationSchema,
 }
