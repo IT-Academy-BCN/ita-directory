@@ -10,7 +10,7 @@ import {
   faBath,
 } from '@fortawesome/free-solid-svg-icons'
 import Body from '../../components/layout/Body/Body'
-import Button from '../../components/atoms/Button/Button'
+import Button from '../../components/atoms/Button'
 import { AdStyled, StyledUl, StyledText, BottomDiv, StyledStreet, StyledItems } from './Ad.styles'
 import Gallery from '../../components/organisms/Gallery/Gallery'
 

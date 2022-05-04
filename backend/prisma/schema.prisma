@@ -29,24 +29,24 @@ model user_status {
 }
 
 model user {
-  id                Int                    @id @default(autoincrement())
-  name              String?
-  lastnames         String?
-  email             String                 @unique
-  password          String
-  created_at        DateTime               @default(now())
-  updated_at        DateTime               @updatedAt
-  user_status       user_status            @relation(fields: [user_status_id], references: [id])
-  user_status_id    Int
-  user_role         user_role              @relation(fields: [user_role_id], references: [id])
-  user_role_id      Int
-  acces_log         acces_log[]
-  recover_password  recover_password_log[]
-  media             media[]
-  ads               ads[]
-  developer_data    Json? //Added developer data (not a jsonb?)
-  messages_sent     message[]              @relation("sender")
-  user_conversation user_conversation[]    @relation("conv_user")
+  id                 Int                    @id @default(autoincrement())
+  name               String?
+  lastnames          String?
+  email              String                 @unique
+  password           String
+  created_at         DateTime               @default(now())
+  updated_at         DateTime               @updatedAt
+  user_status        user_status            @relation(fields: [user_status_id], references: [id])
+  user_status_id     Int
+  user_role          user_role              @relation(fields: [user_role_id], references: [id])
+  user_role_id       Int
+  acces_log          acces_log[]
+  recover_password   recover_password_log[]
+  media              media[]
+  ads                ads[]
+  developer_data     Json? //Added developer data (not a jsonb?)
+  messages_sent      message[]              @relation("sender")
+  user_conversations user_conversation[]    @relation("conv_user")
 }
 
 model acces_log {
@@ -165,8 +165,8 @@ model ads {
 
 model conversation {
   id           Int                 @id @default(autoincrement())
-  message      message[]           @relation("conv")
-  conversation user_conversation[] @relation("user_conv")
+  messages     message[]           @relation("conv")
+  participants user_conversation[] @relation("user_conv")
 }
 
 model user_conversation {

@@ -10,10 +10,13 @@ const userRoutes = require('./routes/users.routes')
 const mediaRoutes = require('./routes/media.routes')
 const locationRoutes = require('./routes/location.routes')
 const contactRoutes = require('./routes/contact.routes')
+const chatRoutes = require('./routes/chat.routes')
+
 const logger = require('./middleware/handlerLogger')
 
 // const constantsRoute = require("./routes/constants.routes");
 const adsRoutes = require('./routes/ads.routes')
+const authenticateToken = require('./middleware/verifyToken')
 
 // const UsersController = require("./controllers/users");
 // const {loadConstants} = require("./utils/CONSTANTS");
@@ -58,15 +61,11 @@ app.use('/users', userRoutes)
 app.use('/media', mediaRoutes)
 app.use('/location', locationRoutes)
 app.use('/contact', contactRoutes)
+app.use('/chat', authenticateToken, chatRoutes)
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
 // 	res.json({message: "Correct Token !", data: {user_id: req.userId}});
 // });
-
-// Routes for testing chat
-app.get('/chat', (req, res) => {
-  res.status(200).send('Hello World')
-})
 
 module.exports = app

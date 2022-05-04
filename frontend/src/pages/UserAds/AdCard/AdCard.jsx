@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { StyledCity, StyledP } from './AdCard.style.js'
-import Button from '../../../components/atoms/Button/Button'
+import { StyledCity, StyledP } from './AdCard.style'
+import Button from '../../../components/atoms/Button'
 import Card from '../../../components/organisms/Card/Card'
 import EditAdModal from '../EditAdModal/EditAdModal'
 
-const AdCard = ({ ad, containerClassName }) => {
+function AdCard({ ad, containerClassName }) {
   const { name, m2, desc, habitaciones, image, id } = ad
   console.log(ad)
   const [active, setActive] = useState(false)
