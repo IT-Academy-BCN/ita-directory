@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropType from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
@@ -19,6 +19,21 @@ function Header({
 }) {
   const justifyTitleB = justifyTitle === 'center'
 
+  // 'Mi Perfil' dropdown children useState/ArrayConst mockup
+  const children = [
+    { path: '/profile', text: 'Editar perfil' },
+    { path: '/my-bills', text: 'Mis facturas' },
+    { path: '/user-ads', text: 'Mis Anuncios' },
+    { path: '/new-ad', text: 'Publicar Anuncio' },
+    { path: '/ads', text: 'Anuncios' },
+    { path: '/', text: 'Cerrar sesión' },
+  ]
+
+  const [dropdownVisible, setDropdownVisible] = useState(false)
+  const handleClick = () => {
+    setDropdownVisible(!dropdownVisible)
+  }
+
   return (
     <HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
       <Container>
@@ -27,7 +42,37 @@ function Header({
             <img src={logo} alt="ITAcademy Logo" className="header__logo" />
             <span className="header__logo-text">_directory</span>
           </Link>
-          <Dropdown isLoggedIn={isLoggedIn} profilePicture={profilePicture} />
+          <div className="header__profile">
+            <button
+              id="dropdownButton"
+              type="button"
+              className="header__profile-button"
+              onClick={handleClick}
+            >
+              <img className="header__profile-image" src={profilePicture} alt="Profile" />
+              <span className="header__profile-title">Mi Perfil</span>
+            </button>
+            {dropdownVisible ? (
+              <Dropdown
+                dropdownVisible={dropdownVisible}
+                setDropdownVisible={setDropdownVisible}
+                parentId="dropdownButton"
+              >
+                {isLoggedIn ? (
+                  <ul>
+                    {children?.map(({ path, text }) => (
+                      <li key={text}>
+                        <Link key={text} to={path}>
+                          {text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </Dropdown>
+            ) : null}
+          </div>
+          {/* <Dropdown isLoggedIn={isLoggedIn} profilePicture={profilePicture} /> */}
         </div>
       </Container>
       <StyledSubHeader headerColor={headerColor} fontColor={fontColor} justifyTitle={justifyTitleB}>
