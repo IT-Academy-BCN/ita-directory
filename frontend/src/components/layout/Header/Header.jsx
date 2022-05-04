@@ -53,11 +53,7 @@ function Header({
               <span className="header__profile-title">Mi Perfil</span>
             </button>
             {dropdownVisible ? (
-              <Dropdown
-                dropdownVisible={dropdownVisible}
-                setDropdownVisible={setDropdownVisible}
-                parentId="dropdownButton"
-              >
+              <Dropdown setDropdownVisible={setDropdownVisible} parentId="dropdownButton">
                 {isLoggedIn ? (
                   <ul>
                     {children?.map(({ path, text }) => (

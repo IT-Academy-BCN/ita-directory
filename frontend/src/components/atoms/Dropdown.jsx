@@ -1,4 +1,3 @@
-// create dropdown component with props using useClickOutside hook
 import React, { useState, useRef, useEffect } from 'react'
 import PropType from 'prop-types'
 import styled from 'styled-components'
@@ -8,12 +7,10 @@ import useOnClickOutside from '../../hooks/useOnClickOutside'
 import useWindowSize from '../../hooks/useWindowSize'
 import getParentPosition from '../../utils/getParentPosition'
 
-function Dropdown({ dropdownVisible, setDropdownVisible, children, parentId }) {
+function Dropdown({ setDropdownVisible, children, parentId }) {
   const [width, height] = useWindowSize()
   const parentPosition = getParentPosition(parentId)
   const [position, setPosition] = useState(parentPosition)
-  // console.log(parentPosition)
-  // console.log('position', position)
 
   const ref = useRef(null)
   useOnClickOutside(ref, () => setDropdownVisible(false))
@@ -36,7 +33,6 @@ function Dropdown({ dropdownVisible, setDropdownVisible, children, parentId }) {
 Dropdown.propTypes = {
   children: PropType.object.isRequired,
   parentId: PropType.string.isRequired,
-  dropdownVisible: PropType.bool.isRequired,
   setDropdownVisible: PropType.func.isRequired,
 }
 
