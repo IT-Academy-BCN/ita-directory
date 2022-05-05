@@ -4,7 +4,7 @@ import PropType from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
-import Dropdown from '../../atoms/Dropdown'
+import { Text, Dropdown } from '../../atoms'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
@@ -36,11 +36,12 @@ function Header({
 
   return (
     <HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
+      <Text as="p" text="HOOLA" />
       <Container>
         <div className="header__container">
           <Link className="header__logo-group" to="/">
             <img src={logo} alt="ITAcademy Logo" className="header__logo" />
-            <span className="header__logo-text">_directory</span>
+            <Text as="span" text="_directory" className="header__logo-text" />
           </Link>
           <div className="header__profile">
             <button
@@ -50,7 +51,7 @@ function Header({
               onClick={handleClick}
             >
               <img className="header__profile-image" src={profilePicture} alt="Profile" />
-              <span className="header__profile-title">Mi Perfil</span>
+              <Text as="span" text="Mi Perfil" className="header__profile-title" />
             </button>
             {dropdownVisible ? (
               <Dropdown setDropdownVisible={setDropdownVisible} parentId="dropdownButton">
