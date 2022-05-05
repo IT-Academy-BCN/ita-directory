@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Card from '../../atoms/Card'
-import { device, colors } from '../../../theme'
+import { device, colors, font } from '../../../theme'
 import { Text, Title } from '../../atoms'
 
 const Img = styled.img`
@@ -29,9 +29,7 @@ const ContainerInfo = styled.div.attrs({})`
     margin-left: 3rem;
   }
 }
-  h3 {
-    color: ${colors.grey};
-    font-size: 16px;
+  ${Title} {
     text-align: left;
     padding-bottom: 1rem;
     letter-spacing: 0px;
@@ -52,7 +50,7 @@ const ContainerInfo = styled.div.attrs({})`
     }
   }
 
-  p {
+  ${Text} {
     margin-top: 1rem;
     text-align: left;
     display: flex;
@@ -67,28 +65,47 @@ const ContainerInfo = styled.div.attrs({})`
   }
 `
 
-function CardAd({ image, title, description, text, footer, name }) {
+function CardAd({
+  image,
+  description,
+  text,
+  footer,
+  name,
+  fontSize,
+  color,
+  ad,
+  containerClassName,
+  titleClassName,
+}) {
   return (
-    <Card>
-      <Img src={`${import.meta.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
+    <Card ad={ad} containerClassName={containerClassName} titleClassName={titleClassName}>
+      <Img src={`${import.meta.env.VITE_REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
       <ContainerInfo>
-        <Title>{title}</Title>
+        <Title as="h3" fontSize={`${font.base}`} color={`${colors.grey}`} text={text}>
+          {text}
+        </Title>
         <div className="description">{description}</div>
-        <Text>{text}</Text>
+        <Text fontSize={fontSize} color={color} text={text}>
+          {text}
+        </Text>
         <div className="footer">{footer}</div>
       </ContainerInfo>
     </Card>
   )
 }
 CardAd.propTypes = {
+  containerClassName: PropTypes.string,
+  titleClassName: PropTypes.string,
+  ad: PropTypes.object,
   image: PropTypes.object,
-  title: PropTypes.string,
   description: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
     PropTypes.string,
   ]).isRequired,
-  text: PropTypes.string,
+  fontSize: PropTypes.string,
+  color: PropTypes.string,
+  text: PropTypes.string.isRequired,
   footer: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

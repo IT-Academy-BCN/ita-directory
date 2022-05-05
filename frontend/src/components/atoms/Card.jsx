@@ -17,10 +17,17 @@ const CardStyled = styled.div`
   }
 `
 
-function Card({ children }) {
-  return <CardStyled>{children}</CardStyled>
+function Card({ ad, titleClassName = '', containerClassName = '', children }) {
+  return (
+    <CardStyled ad={ad} containerClassName={containerClassName} titleClassName={titleClassName}>
+      {children}
+    </CardStyled>
+  )
 }
 Card.propTypes = {
+  ad: PropTypes.object,
+  titleClassName: PropTypes.string,
+  containerClassName: PropTypes.string,
   children: PropTypes.node,
 }
 

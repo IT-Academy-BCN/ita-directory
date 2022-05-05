@@ -73,7 +73,7 @@ function AdCard({ ad, containerClassName }) {
 
 AdCard.propTypes = {
   ad: PropTypes.object,
-  containerClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  containerClassName: PropTypes.string,
 }
 
 export default AdCard
