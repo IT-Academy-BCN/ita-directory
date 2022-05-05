@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Card from '../../atoms/Card'
 import { device, colors } from '../../../theme'
+import { Text, Title } from '../../atoms'
 
 const Img = styled.img`
   width: 100%;
@@ -20,7 +21,7 @@ const Img = styled.img`
     height: 100%;
   }
 `
-const ContainerInfo = styled.div`
+const ContainerInfo = styled.div.attrs({})`
   margin-left: 0.5rem;
   padding: 1rem;
 
@@ -71,9 +72,9 @@ function CardOrganism({ image, title, description, text, footer, name }) {
     <Card>
       <Img src={`${import.meta.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
       <ContainerInfo>
-        <h3>{title}</h3>
+        <Title>{title}</Title>
         <div className="description">{description}</div>
-        <p>{text}</p>
+        <Text>{text}</Text>
         <div className="footer">{footer}</div>
       </ContainerInfo>
     </Card>
