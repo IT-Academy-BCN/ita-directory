@@ -6,6 +6,7 @@ import Button from './Button'
 import Title from './Title'
 import Card from './Card'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
+import { Notification, Notifications } from './Notifications'
 
 export {
   Banner,
@@ -21,4 +22,6 @@ export {
   InputNumber,
   TextArea,
   SelectUnit,
+  Notification,
+  Notifications,
 }

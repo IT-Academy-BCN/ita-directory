@@ -75,7 +75,7 @@ exports.getToken = async (req, res, next) => {
   }
 }
 
-// Get User (/v1/get_me endPoint)
+// Get User (/v1/get-me endPoint)
 exports.getUser = async (req, res, next) => {
   // Check that the request isn't empty
   if (!req.userId) {
@@ -143,7 +143,6 @@ exports.registerUser = async (req, res, next) => {
         password: passwordHashed,
         user_status_id: 1,
         user_role_id: 3,
-        refresh_token: '20',
       },
     })
     return res.status(200).json(

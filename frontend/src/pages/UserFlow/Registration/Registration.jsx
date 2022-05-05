@@ -1,27 +1,17 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-
-// Layout Components
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
-
-// Units Components
 import CheckBox from '../../../components/atoms/CheckBox'
 import AsyncButton from '../../../components/atoms/Button'
-
-// Styles
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-
-// Utilities
 import InputGroup from '../../../components/molecules/InputGroup'
-
-// eslint-disable-next-line import/extensions
-import registerSchema from '../../../validation/registerUserSchema.js'
+import registerSchema from '../../../validation/registerUserSchema'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function Register() {
   const [animated, setAnimated] = useState(false)
@@ -38,10 +28,7 @@ function Register() {
 
   const registerUser = async (user) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.REACT_APP_API_URL}/users/v1/register`,
-        user
-      )
+      const response = await axiosInstance.post('/users/v1/register', user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({

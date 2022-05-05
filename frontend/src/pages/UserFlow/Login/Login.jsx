@@ -42,7 +42,7 @@ function Login() {
         localStorage.setItem('refreshToken', response.data.refreshToken)
 
         const userData = await axiosInstance
-          .get(`/users/v1/get_me`)
+          .get(`/users/v1/get-me`)
           // eslint-disable-next-line no-shadow
           .then((response) => response.data)
 

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { device } from '../../../theme'
+import { Notifications } from '../../atoms'
 
 const StyledBody = styled.div`
   min-height: 100vh;
@@ -61,6 +62,7 @@ function Body({
       )}
       <Childrens>{children}</Childrens>
       {hideFooter ? '' : <Footer />}
+      <Notifications />
     </StyledBody>
   )
 }
