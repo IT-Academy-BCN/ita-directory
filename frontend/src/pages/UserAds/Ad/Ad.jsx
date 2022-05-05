@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { StyledCity, StyledP } from './AdCard.style'
+import PropTypes from 'prop-types'
+import { StyledCity, StyledP } from './Ad.style'
 import Button from '../../../components/atoms/Button'
-import Card from '../../../components/organisms/Card/Card'
+import AdCard from '../../../components/organisms/AdCard/AdCard'
 import EditAdModal from '../EditAdModal/EditAdModal'
 
-function AdCard({ ad, containerClassName }) {
+function Ad({ ad, containerClassName }) {
   const { name, m2, desc, habitaciones, image, id } = ad
-  console.log(ad)
   const [active, setActive] = useState(false)
   return (
-    <Card
+    <AdCard
       titleClassName="titleClassName"
       containerClassName={containerClassName}
       descriptionClassName="descriptionContainer"
@@ -26,7 +26,7 @@ function AdCard({ ad, containerClassName }) {
       text={desc}
       footer={
         <>
-          <Link style={{ textDecoration: 'none' }} to={{ pathname: `ad/${id}`, state: { ad: ad } }}>
+          <Link style={{ textDecoration: 'none' }} to={{ pathname: `ad/${id}`, state: { ad } }}>
             <Button
               className="blue-gradient"
               text="Ver Anuncio"
@@ -70,4 +70,10 @@ function AdCard({ ad, containerClassName }) {
     />
   )
 }
-export default AdCard
+
+Ad.propTypes = {
+  ad: PropTypes.object,
+  containerClassName: PropTypes.string,
+}
+
+export default Ad
