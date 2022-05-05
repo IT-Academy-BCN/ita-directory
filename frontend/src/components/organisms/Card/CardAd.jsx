@@ -67,7 +67,7 @@ const ContainerInfo = styled.div.attrs({})`
   }
 `
 
-function CardOrganism({ image, title, description, text, footer, name }) {
+function CardAd({ image, title, description, text, footer, name }) {
   return (
     <Card>
       <Img src={`${import.meta.env.REACT_APP_STATIC_FILES_URL}/${image}`} alt={name} />
@@ -80,7 +80,7 @@ function CardOrganism({ image, title, description, text, footer, name }) {
     </Card>
   )
 }
-CardOrganism.propTypes = {
+CardAd.propTypes = {
   image: PropTypes.object,
   title: PropTypes.string,
   description: PropTypes.oneOfType([
@@ -97,4 +97,4 @@ CardOrganism.propTypes = {
   name: PropTypes.string,
 }
 
-export default styled(CardOrganism)``
+export default styled(CardAd)``

@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { StyledCity, StyledP } from './AdCard.style'
 import Button from '../../../components/atoms/Button'
-import CardOrganism from '../../../components/organisms/Card/CardOrganism'
+import CardAd from '../../../components/organisms/Card/CardAd'
 import EditAdModal from '../EditAdModal/EditAdModal'
 
 function AdCard({ ad, containerClassName }) {
   const { name, m2, desc, habitaciones, image, id } = ad
   const [active, setActive] = useState(false)
   return (
-    <CardOrganism
+    <CardAd
       titleClassName="titleClassName"
       containerClassName={containerClassName}
       descriptionClassName="descriptionContainer"
