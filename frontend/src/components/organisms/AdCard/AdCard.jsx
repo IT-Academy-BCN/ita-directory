@@ -65,7 +65,7 @@ const ContainerInfo = styled.div.attrs({})`
   }
 `
 
-function CardAd({
+function AdCard({
   image,
   description,
   text,
@@ -93,7 +93,7 @@ function CardAd({
     </Card>
   )
 }
-CardAd.propTypes = {
+AdCard.propTypes = {
   containerClassName: PropTypes.string,
   titleClassName: PropTypes.string,
   ad: PropTypes.object,
@@ -114,4 +114,4 @@ CardAd.propTypes = {
   name: PropTypes.string,
 }
 
-export default styled(CardAd)``
+export default styled(AdCard)``
