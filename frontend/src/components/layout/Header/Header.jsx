@@ -5,56 +5,64 @@ import PropTypes from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
+import { Text, Dropdown } from '../../atoms'
 
-const profilePicture = 'https://randomuser.me/api/portraits/men/21.jpg'
+const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
 function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitleVisible = true }) {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
   const [dropdownVisible, setDropdownVisible] = useState(false)
+  
+  // 'Mi Perfil' dropdown children useState/ArrayConst mockup
+  const children = [
+    { path: '/profile', text: 'Editar perfil' },
+    { path: '/my-bills', text: 'Mis facturas' },
+    { path: '/user-ads', text: 'Mis Anuncios' },
+    { path: '/new-ad', text: 'Publicar Anuncio' },
+    { path: '/ads', text: 'Anuncios' },
+    { path: '/', text: 'Cerrar sesión' },
+  ]
 
+  const [dropdownVisible, setDropdownVisible] = useState(false)
   const handleClick = () => {
     setDropdownVisible(!dropdownVisible)
   }
 
-  const justifyTitleB = justifyTitle === 'center'
-
   return (
     <HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
+      <Text as="p" text="HOOLA" />
       <Container>
         <div className="header__container">
           <Link className="header__logo-group" to="/">
             <img src={logo} alt="ITAcademy Logo" className="header__logo" />
-            <span className="header__logo-text">_directory</span>
+            <Text as="span" text="_directory" className="header__logo-text" />
           </Link>
-          {isLoggedIn ? (
-            <div className="header__profile">
-              <button type="button" className="header__profile-button" onClick={handleClick}>
-                <img className="header__profile-image" src={profilePicture} alt="Profile" />
-                <span className="header__profile-title">Mi perfil</span>
-              </button>
-              {dropdownVisible ? (
-                <div className="header__profile-dropdown">
+          <div className="header__profile">
+            <button
+              id="dropdownButton"
+              type="button"
+              className="header__profile-button"
+              onClick={handleClick}
+            >
+              <img className="header__profile-image" src={profilePicture} alt="Profile" />
+              <Text as="span" text="Mi Perfil" className="header__profile-title" />
+            </button>
+            {dropdownVisible ? (
+              <Dropdown setDropdownVisible={setDropdownVisible} parentId="dropdownButton">
+                {isLoggedIn ? (
                   <ul>
-                    <li>
-                      <Link to="/profile">Editar perfil</Link>
-                    </li>
-                    <li>
-                      <Link to="/my-bills">Mis facturas</Link>
-                    </li>
-                    <li>
-                      <Link to="/user-ads">Mis Anuncios</Link>
-                    </li>
-                    <li>
-                      <Link to="/new-ad">Publicar Anuncio</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Cerrar sesión</Link>
-                    </li>
+                    {children?.map(({ path, text }) => (
+                      <li key={text}>
+                        <Link key={text} to={path}>
+                          {text}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
-                </div>
-              ) : null}
-            </div>
-          ) : null}
+                ) : null}
+              </Dropdown>
+            ) : null}
+          </div>
         </div>
       </Container>
       <StyledSubHeader headerColor={headerColor} fontColor={fontColor} justifyTitle={justifyTitleB}>

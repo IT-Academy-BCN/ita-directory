@@ -6,8 +6,10 @@ import Button from './Button'
 import Title from './Title'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
 import { Notification, Notifications } from './Notifications'
+import Dropdown from './Dropdown'
 
 export {
+  Dropdown,
   Banner,
   Icon,
   Text,
