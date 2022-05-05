@@ -2,7 +2,7 @@ const router = require('express').Router()
 const UsersController = require('../controllers/users.controller')
 const authenticateToken = require('../middleware/verifyToken')
 
-router.get('/v1/get_me', authenticateToken, UsersController.getUser)
+router.get('/v1/get-me', authenticateToken, UsersController.getUser)
 
 /**
  * Registration data

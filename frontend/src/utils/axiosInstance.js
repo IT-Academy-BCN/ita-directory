@@ -9,25 +9,28 @@ const axiosInstance = axios.create({
   headers: { Authorization: `Bearer ${authToken}` },
 })
 
-axiosInstance.interceptors.request.use(async (req) => {
-  if (!authToken && !refreshToken) {
+axiosInstance.interceptors.request.use(
+  async (req) => {
     authToken = localStorage.getItem('token')
     refreshToken = localStorage.getItem('refreshToken')
     req.headers.Authorization = `Bearer ${authToken}`
+    return req
+  },
+  (error) => {
+    Promise.reject(error)
   }
-  return req
-})
+)
 
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config
-
-    if (error.response.status === 401) {
+    refreshToken = localStorage.getItem('refreshToken')
+    if (error?.response?.status === 401) {
       // eslint-disable-next-line no-underscore-dangle
       originalRequest._retry = true
       return axios
-        .get(`${import.meta.env.REACT_APP_API_URL}/users/v1/refresh-token`, {
+        .get(`${import.meta.env.VITE_REACT_APP_API_URL}/users/v1/refresh-token`, {
           headers: { refresh: refreshToken },
         })
         .then((response) => {
