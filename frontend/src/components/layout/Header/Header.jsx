@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import PropType from 'prop-types'
+import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
@@ -8,17 +9,10 @@ import { Text, Dropdown } from '../../atoms'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
-function Header({
-  title,
-  logoColor,
-  headerColor,
-  fontColor,
-  justifyTitle,
-  isLoggedIn = true,
-  isTitleVisible = true,
-}) {
-  const justifyTitleB = justifyTitle === 'center'
-
+function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitleVisible = true }) {
+  const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
+  const [dropdownVisible, setDropdownVisible] = useState(false)
+  
   // 'Mi Perfil' dropdown children useState/ArrayConst mockup
   const children = [
     { path: '/profile', text: 'Editar perfil' },
@@ -81,13 +75,12 @@ function Header({
 }
 
 Header.propTypes = {
-  title: PropType.string.isRequired,
-  logoColor: PropType.string,
-  headerColor: PropType.string,
-  fontColor: PropType.string,
-  justifyTitle: PropType.string,
-  isLoggedIn: PropType.bool,
-  isTitleVisible: PropType.bool,
+  title: PropTypes.string.isRequired,
+  logoColor: PropTypes.string,
+  headerColor: PropTypes.string,
+  fontColor: PropTypes.string,
+  justifyTitle: PropTypes.string,
+  isTitleVisible: PropTypes.bool,
 }
 
 export default Header

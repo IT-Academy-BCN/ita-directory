@@ -7,6 +7,7 @@
   "scripts": {
     "frontend": "cp .env.development ./frontend/.env && cd ./frontend && npm start",
     "backend": "cp .env.development ./backend/.env && cd ./backend && npm run dev",
+    "e2e": "cp .env.development ./e2e/.env && cd ./e2e && npm run test",
     "install-deps": "npm install && cd ./frontend && npm install && cd .. && cd ./backend && npm install",
     "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
     "start-redis": "cd ./scripts && source ./docker-utils.sh; launchRedis",
@@ -17,7 +18,7 @@
     "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma",
     "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install",
-    "prepare": "husky install"
+    "prepare": "husky install && chmod ug+x .husky/*"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,9 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
-    "husky": "^6.0.0",
-    "prisma": "3.11.0"
+    "husky": "6.0.0"
+  },
+  "dependencies": {
+    "playwright": "1.21.1"
   }
 }

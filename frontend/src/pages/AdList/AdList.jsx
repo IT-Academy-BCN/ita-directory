@@ -4,7 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
-import Button from '../../components/atoms/Button/Button'
+import Button from '../../components/atoms/Button'
 import Colors from '../../theme/colors'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 import AdListFilter from './AdListFilter/AdListFilter'
@@ -12,6 +12,7 @@ import AdListFilter from './AdListFilter/AdListFilter'
 // Styles
 import { AdListStyled } from './AdList.style'
 import { Container } from '../../theme'
+import axiosInstance from '../../utils/axiosInstance'
 
 const buttonStyle = {
   display: 'flex',
@@ -40,7 +41,7 @@ function AdList() {
 
   useEffect(() => {
     const fetchAds = async () => {
-      const result = await axios(`${import.meta.env.REACT_APP_API_URL}/ads/v1/ads`)
+      const result = await axiosInstance.get('/ads/v1/ads')
       setAdList(result.data.data)
       setLoading(false)
     }
@@ -106,7 +107,7 @@ function AdList() {
   }, [renderList, loading])
 
   return (
-    <Body title="Pisos en Alquiler en Madrid" isLoggedIn="true" justifyTitle="flex-start">
+    <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
       <AdListStyled>
         <Container row className="probando">
           {!loading ? (

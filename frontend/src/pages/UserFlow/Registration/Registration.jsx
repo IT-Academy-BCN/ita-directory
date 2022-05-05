@@ -1,34 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-
-// Layout Components
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
-
-// Units Components
 import CheckBox from '../../../components/atoms/CheckBox'
-import AsyncButton from '../../../components/atoms/Button/Button'
-
-// Styles
+import AsyncButton from '../../../components/atoms/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-
-// Utilities
-import Input from '../../../components/molecules/InputGroup'
-
-// eslint-disable-next-line import/extensions
-import registerSchema from '../../../validation/registerUserSchema.js'
+import InputGroup from '../../../components/molecules/InputGroup'
+import registerSchema from '../../../validation/registerUserSchema'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function Register() {
-  const [registerSuccess, setRegisterSuccess] = useState(false)
   const [animated, setAnimated] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState(null)
   const {
     register,
     handleSubmit,
@@ -40,34 +28,26 @@ function Register() {
 
   const registerUser = async (user) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.REACT_APP_API_URL}/users/v1/register`,
-        user
-      )
-      setMessage(response.data.message)
+      const response = await axiosInstance.post('/users/v1/register', user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({
-            message,
+            message: response.data.code,
             type: NotificationTypes.error,
           })
         )
         throw response.data.message
       }
-      setRegisterSuccess(true)
       dispatch(
         newNotification({
-          message,
+          message: response.data.code,
           type: NotificationTypes.succes,
         })
       )
     } catch (error) {
-      if (error.name === 'Error')
-        setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`)
-      setRegisterSuccess(false)
       dispatch(
         newNotification({
-          message,
+          message: `Sorry, connection failed: "${error.message}". Please, try later.`,
           type: NotificationTypes.error,
         })
       )
@@ -94,23 +74,12 @@ function Register() {
     }, 2000)
   }
 
-  useEffect(() => {
-    if (message) {
-      dispatch(
-        newNotification({
-          message,
-          type: registerSuccess ? NotificationTypes.succes : NotificationTypes.error,
-        })
-      )
-      setMessage(null)
-    }
-  })
-
   return (
     <Body title="Registro" justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
-          <Input
+          <InputGroup
+            label="text"
             type="text"
             placeholder="Nombre"
             id="name"
@@ -121,7 +90,8 @@ function Register() {
             register={register('name')}
           />
 
-          <Input
+          <InputGroup
+            label="text"
             type="text"
             placeholder="Apellido"
             id="lastname"
@@ -132,7 +102,8 @@ function Register() {
             register={register('lastname')}
           />
 
-          <Input
+          <InputGroup
+            label="email"
             type="email"
             placeholder="Email"
             id="emailName"
@@ -143,7 +114,8 @@ function Register() {
             register={register('email')}
           />
 
-          <Input
+          <InputGroup
+            label="password"
             type="password"
             placeholder="Contraseña"
             id="password"

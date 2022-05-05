@@ -1,6 +1,6 @@
 // Components
 import styled from 'styled-components'
-import Input from './Input/Input'
+import Input from './Forms/Input'
 
 export const CheckBoxContainer = styled.div`
   display: flex;

@@ -75,7 +75,7 @@ exports.getToken = async (req, res, next) => {
   }
 }
 
-// Get User (/v1/get_me endPoint)
+// Get User (/v1/get-me endPoint)
 exports.getUser = async (req, res, next) => {
   // Check that the request isn't empty
   if (!req.userId) {
@@ -143,7 +143,6 @@ exports.registerUser = async (req, res, next) => {
         password: passwordHashed,
         user_status_id: 1,
         user_role_id: 3,
-        refresh_token: '20',
       },
     })
     return res.status(200).json(
@@ -215,7 +214,7 @@ exports.login = async (req, res, next) => {
         code: 'error',
         header: "User doesn't exist",
         message: "There's no user with that email, please try again or get in touch.",
-        statusCode: 200,
+        statusCode: 400,
       })
     }
 
@@ -226,7 +225,7 @@ exports.login = async (req, res, next) => {
         header: 'Wrong password',
         message:
           'The password you introduced is incorrect, please try again or try to recover your password.',
-        statusCode: 200,
+        statusCode: 400,
       })
     }
     const token = signToken(USER.id)

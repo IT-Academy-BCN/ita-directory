@@ -1,16 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Notification from 'components/atoms/Notifications/Notification'
-import Body from 'components/layout/Body/Body'
-import AsyncButton from 'components/atoms/Button/Button'
-import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import { msgs, validateEmail, validatePassword } from 'utils/userFlow'
-import Input from 'components/atoms/Input/Input'
 import { useDispatch } from 'react-redux'
-import { newNotification, NotificationTypes } from 'store/notificationSlice'
+import { msgs, validateEmail, validatePassword } from '../../../utils/userFlow'
+import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
+import Input from '../../../components/atoms/Forms/Input'
+import Body from '../../../components/layout/Body/Body'
+import { Container, Form, RedirectStyled } from '../UserFlow.styles'
+import Notification from '../../../components/atoms/Notifications/Notification'
+import AsyncButton from '../../../components/atoms/Button'
 
-const UpdatePassword = () => {
+function UpdatePassword() {
   const [loginSuccess, setLoginSuccess] = useState(false)
   const [animated, setAnimated] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
@@ -29,7 +29,7 @@ const UpdatePassword = () => {
       if (response.data.code === 'error') {
         dispatch(
           newNotification({
-            message: message,
+            message,
             type: NotificationTypes.error,
           })
         )
@@ -38,7 +38,7 @@ const UpdatePassword = () => {
       setLoginSuccess(true)
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: NotificationTypes.succes,
         })
       )
@@ -47,7 +47,7 @@ const UpdatePassword = () => {
         setMessage(`Sorry, connection failed: "${error.message}". Please, try later.`)
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: NotificationTypes.error,
         })
       )
@@ -79,7 +79,7 @@ const UpdatePassword = () => {
     if (message) {
       dispatch(
         newNotification({
-          message: message,
+          message,
           type: loginSuccess ? NotificationTypes.succes : NotificationTypes.error,
         })
       )
