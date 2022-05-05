@@ -22,7 +22,7 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
     <HeaderStyled justifyTitle={justifyTitleB} logoColor={logoColor}>
       <Container>
         <div className="header__container">
-          <Link className="header__logo-group" to="/ads">
+          <Link className="header__logo-group" to="/">
             <img src={logo} alt="ITAcademy Logo" className="header__logo" />
             <span className="header__logo-text">_directory</span>
           </Link>
