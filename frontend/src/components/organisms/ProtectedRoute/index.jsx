@@ -8,16 +8,19 @@ import { login } from '../../../store/userSlice'
 function ProtectedRoute({ children, ...rest }) {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
+
   const getUser = useCallback(async () => {
     const userData = await axiosInstance.get(`/users/v1/get-me`).then((response) => response.data)
     if (userData) dispatch(login(userData))
-  }, [dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     getUser()
   }, [getUser])
 
-  return <Route {...rest}>{!token ? <Redirect to="/login" /> : children}</Route>
+  if (!token) return <Redirect to="/login" />
+  return <Route {...rest}>{children}</Route>
 }
 
 ProtectedRoute.propTypes = {

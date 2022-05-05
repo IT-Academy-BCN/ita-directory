@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import { deleteNotification } from '../../../store/notificationSlice'
+import Text from '../Text'
 
 const InRight = keyframes`
     from {
@@ -27,10 +28,6 @@ const NotificationStyled = styled.div`
   align-items: center;
 `
 
-const NotificationMessageStyled = styled.p`
-  text-align: left;
-`
-
 const NotificationIconStyled = styled.div`
   margin-right: 30px;
 `
@@ -42,7 +39,7 @@ function Notification({ message, id, icon }) {
     const autoCloseFn = window.setTimeout(() => {
       closeNotification()
     }, 8000)
-    return () => autoCloseFn
+    return () => window.clearTimeout(autoCloseFn)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -55,15 +52,15 @@ function Notification({ message, id, icon }) {
       <NotificationIconStyled>
         <FontAwesomeIcon icon={icon} style={{ color: 'red', width: '50px', height: '30px' }} />
       </NotificationIconStyled>
-      <NotificationMessageStyled>{message}</NotificationMessageStyled>
+      <Text text={message} />
     </NotificationStyled>
   )
 }
 
 Notification.propTypes = {
   message: PropType.string.isRequired,
-  id: PropType.string,
-  icon: PropType.object,
+  id: PropType.number.isRequired,
+  icon: PropType.object.isRequired,
 }
 
 export default React.memo(Notification)
