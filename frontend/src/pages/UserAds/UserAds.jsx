@@ -1,8 +1,10 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react'
-import AdCard from './AdCard/AdCard.jsx'
+import AdCard from '../AdList/AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
 // import {getUserAds} from "api/user";
-import { StyledCard, StyledUserAds } from './UserAds.style.js'
+import { StyledCard, StyledUserAds } from './UserAds.style'
 import { Container } from '../../theme'
 
 const REQ_STATUS = {
@@ -12,7 +14,7 @@ const REQ_STATUS = {
   FAILURE: 'FAILURE',
 }
 
-const UserAds = () => {
+function UserAds() {
   // const USER_ID = 1; //TODO change when login works
   const [ads, setAds] = useState([])
   const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL)
@@ -21,18 +23,18 @@ const UserAds = () => {
     setFetchStatus(REQ_STATUS.LOADING)
     fetch('https://api-casas.kevinmamaqi.com/api-casas')
       .then((res) => res.json())
-      .then((ads) => {
-        setAds(ads.slice(0, 3))
+      .then((ad) => {
+        setAds(ad.slice(0, 3))
         setFetchStatus(REQ_STATUS.SUCCESS)
       })
       .catch((e) => {
         setFetchStatus(REQ_STATUS.FAILURE)
-        console.error(e)
+        return e
       })
   }, [])
 
   return (
-    <Body title="Mis anuncios" isLoggedIn={true}>
+    <Body title="Mis anuncios" isLoggedIn>
       <Container row>
         <StyledUserAds>
           {fetchStatus === REQ_STATUS.INITIAL || fetchStatus === REQ_STATUS.LOADING ? (
