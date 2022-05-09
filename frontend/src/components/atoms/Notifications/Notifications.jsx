@@ -10,6 +10,7 @@ const NotificationsStyled = styled.div`
   top: 12px;
   right: 12px;
   display: flex;
+  max-height: 100vh;
   flex-direction: column;
 `
 
@@ -18,7 +19,7 @@ function Notifications() {
   return (
     <NotificationsStyled>
       {Object.values(notifications).map((n) => (
-        <Notification key={n.id} id={n.id} message={n.message} icon={n.icon} />
+        <Notification key={n.id} id={n.id} message={n.message} icon={n.icon} colorIcon={n.color} />
       ))}
     </NotificationsStyled>
   )

@@ -40,7 +40,7 @@ function Register() {
       }
       dispatch(
         newNotification({
-          message: response.data.code,
+          message: 'Your account has been successfully created!',
           type: NotificationTypes.succes,
         })
       )
@@ -145,6 +145,7 @@ function Register() {
             className="w-full my-8 orange-gradient"
             isLoading={isLoading}
             animated={animated}
+            onClick={submitForm}
           />
           <RedirectStyled>
             Tienes una cuenta? <Link to="/login">Inicia sesión</Link>

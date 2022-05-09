@@ -10,30 +10,36 @@ const NotificationTypes = { error: 'error', info: 'info', succes: 'succes', warn
 
 let id = 0
 let icon = ''
+let color = ''
 
 const addIdAndIcon = (notification) => {
   id += 1
   switch (notification.type) {
     case NotificationTypes.error:
       icon = faExclamationCircle
+      color = 'red'
       break
 
     case NotificationTypes.succes:
       icon = faCheckCircle
+      color = 'green'
       break
 
     case NotificationTypes.info:
       icon = faInfoCircle
+      color = 'blue'
       break
 
     default:
       icon = faExclamationTriangle
+      color = 'orange'
       break
   }
   return {
     ...notification,
     id,
     icon,
+    color,
   }
 }
 

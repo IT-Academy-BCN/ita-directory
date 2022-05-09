@@ -1,9 +1,11 @@
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropType from 'prop-types'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import { deleteNotification } from '../../../store/notificationSlice'
+import Button from '../Button'
 import Text from '../Text'
 
 const InRight = keyframes`
@@ -16,9 +18,10 @@ const InRight = keyframes`
 `
 const NotificationStyled = styled.div`
   background-color: white;
-  padding: 30px;
+  margin-top: 10px;
+  padding: 2px;
   width: 350px;
-  height: 100px;
+  height: 'auto';
   border-radius: 10px;
   box-shadow: 0 0 10px #999;
   opacity: 0.8;
@@ -27,12 +30,14 @@ const NotificationStyled = styled.div`
   flex-direction: row;
   align-items: center;
 `
-
 const NotificationIconStyled = styled.div`
-  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  margin-right: -40px;
+  margin-left: 5px;
 `
 
-function Notification({ message, id, icon }) {
+function Notification({ message, id, icon, colorIcon }) {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -50,8 +55,20 @@ function Notification({ message, id, icon }) {
   return (
     <NotificationStyled>
       <NotificationIconStyled>
-        <FontAwesomeIcon icon={icon} style={{ color: 'red', width: '50px', height: '30px' }} />
+        <FontAwesomeIcon icon={icon} style={{ color: colorIcon, width: '35px', height: '30px' }} />
       </NotificationIconStyled>
+      <Button
+        type="close"
+        text={<FontAwesomeIcon icon={faTimesCircle} style={{ color: 'black', width: '15px' }} />}
+        onClick={closeNotification}
+        buttonStyles={{
+          position: 'relative',
+          background: 'none',
+          bottom: '20px',
+          left: '315px',
+          alignSelf: 'flex-start',
+        }}
+      />
       <Text text={message} />
     </NotificationStyled>
   )
@@ -61,6 +78,7 @@ Notification.propTypes = {
   message: PropType.string.isRequired,
   id: PropType.number.isRequired,
   icon: PropType.object.isRequired,
+  colorIcon: PropType.string.isRequired,
 }
 
 export default React.memo(Notification)
