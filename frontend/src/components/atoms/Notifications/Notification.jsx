@@ -1,11 +1,10 @@
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropType from 'prop-types'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import { deleteNotification } from '../../../store/notificationSlice'
 import Button from '../Button'
+import Icon from '../Icon'
 import Text from '../Text'
 
 const InRight = keyframes`
@@ -19,12 +18,11 @@ const InRight = keyframes`
 const NotificationStyled = styled.div`
   background-color: white;
   margin-top: 10px;
-  padding: 2px;
+  padding: 5px;
   width: 350px;
   height: 'auto';
   border-radius: 10px;
   box-shadow: 0 0 10px #999;
-  opacity: 0.8;
   animation: ${InRight} 0.5s;
   display: flex;
   flex-direction: row;
@@ -33,8 +31,6 @@ const NotificationStyled = styled.div`
 const NotificationIconStyled = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -40px;
-  margin-left: 5px;
 `
 
 function Notification({ message, id, icon, colorIcon }) {
@@ -43,7 +39,7 @@ function Notification({ message, id, icon, colorIcon }) {
   useEffect(() => {
     const autoCloseFn = window.setTimeout(() => {
       closeNotification()
-    }, 8000)
+    }, 9000)
     return () => window.clearTimeout(autoCloseFn)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -55,21 +51,21 @@ function Notification({ message, id, icon, colorIcon }) {
   return (
     <NotificationStyled>
       <NotificationIconStyled>
-        <FontAwesomeIcon icon={icon} style={{ color: colorIcon, width: '35px', height: '30px' }} />
+        <Icon name={icon} color={colorIcon} />
       </NotificationIconStyled>
       <Button
         type="close"
-        text={<FontAwesomeIcon icon={faTimesCircle} style={{ color: 'black', width: '15px' }} />}
+        text={<Icon name="close" size="20px" />}
         onClick={closeNotification}
         buttonStyles={{
           position: 'relative',
           background: 'none',
-          bottom: '20px',
-          left: '315px',
+          bottom: '22px',
+          left: '290px',
           alignSelf: 'flex-start',
         }}
       />
-      <Text text={message} />
+      <Text text={message} style={{ marginLeft: '-45px' }} />
     </NotificationStyled>
   )
 }
@@ -77,7 +73,7 @@ function Notification({ message, id, icon, colorIcon }) {
 Notification.propTypes = {
   message: PropType.string.isRequired,
   id: PropType.number.isRequired,
-  icon: PropType.object.isRequired,
+  icon: PropType.string.isRequired,
   colorIcon: PropType.string.isRequired,
 }
 

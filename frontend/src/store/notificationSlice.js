@@ -1,9 +1,3 @@
-import {
-  faCheckCircle,
-  faExclamationCircle,
-  faExclamationTriangle,
-  faInfoCircle,
-} from '@fortawesome/free-solid-svg-icons'
 import { createSlice } from '@reduxjs/toolkit'
 
 const NotificationTypes = { error: 'error', info: 'info', succes: 'succes', warning: 'warning' }
@@ -16,22 +10,22 @@ const addIdAndIcon = (notification) => {
   id += 1
   switch (notification.type) {
     case NotificationTypes.error:
-      icon = faExclamationCircle
+      icon = 'cancel'
       color = 'red'
       break
 
     case NotificationTypes.succes:
-      icon = faCheckCircle
+      icon = 'check_circle'
       color = 'green'
       break
 
     case NotificationTypes.info:
-      icon = faInfoCircle
+      icon = 'info'
       color = 'blue'
       break
 
     default:
-      icon = faExclamationTriangle
+      icon = 'warning'
       color = 'orange'
       break
   }

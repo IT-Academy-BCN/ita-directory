@@ -5,12 +5,11 @@ import Notification from './Notification'
 
 const NotificationsStyled = styled.div`
   box-sizing: border-box;
-  position: absolute;
-  z-index: 999999;
-  top: 12px;
-  right: 12px;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
   display: flex;
-  max-height: 100vh;
+  max-height: 94vh;
   flex-direction: column;
 `
 
