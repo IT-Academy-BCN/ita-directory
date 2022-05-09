@@ -33,7 +33,7 @@ function Login() {
       dispatch(
         newNotification({
           message: response.data.message,
-          type: NotificationTypes.success,
+          type: NotificationTypes.succes,
         })
       )
 
@@ -42,7 +42,7 @@ function Login() {
         localStorage.setItem('refreshToken', response.data.refreshToken)
 
         const userData = await axiosInstance
-          .get(`/users/v1/get_me`)
+          .get(`/users/v1/get-me`)
           // eslint-disable-next-line no-shadow
           .then((response) => response.data)
 
@@ -121,6 +121,7 @@ function Login() {
             className="blue-gradient w-full my-8"
             isLoading={isLoading}
             animated={animated}
+            onClick={submitForm}
           />
           <div className="w-full">
             <RedirectStyled>

@@ -3,28 +3,26 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Notification from './Notification'
 
-const NotificationStyled = styled.div`
+const NotificationsStyled = styled.div`
   box-sizing: border-box;
   position: absolute;
   z-index: 999999;
   top: 12px;
   right: 12px;
   display: flex;
+  max-height: 100vh;
   flex-direction: column;
 `
 
 function Notifications() {
-  const notifications = useSelector((state) => state.notification.notifications)
-
+  const notifications = useSelector((s) => s.notification.notifications)
   return (
-    <div>
-      {notifications.map((item) => (
-        <NotificationStyled>
-          <Notification message={item.message} icon={item.icon} />
-        </NotificationStyled>
+    <NotificationsStyled>
+      {Object.values(notifications).map((n) => (
+        <Notification key={n.id} id={n.id} message={n.message} icon={n.icon} colorIcon={n.color} />
       ))}
-    </div>
+    </NotificationsStyled>
   )
 }
 
-export default Notifications
+export default React.memo(Notifications)
