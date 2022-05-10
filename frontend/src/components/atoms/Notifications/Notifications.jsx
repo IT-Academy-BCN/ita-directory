@@ -5,11 +5,11 @@ import Notification from './Notification'
 
 const NotificationsStyled = styled.div`
   box-sizing: border-box;
-  position: absolute;
-  z-index: 999999;
-  top: 12px;
-  right: 12px;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
   display: flex;
+  max-height: 94vh;
   flex-direction: column;
 `
 
@@ -18,7 +18,7 @@ function Notifications() {
   return (
     <NotificationsStyled>
       {Object.values(notifications).map((n) => (
-        <Notification key={n.id} id={n.id} message={n.message} icon={n.icon} />
+        <Notification key={n.id} id={n.id} message={n.message} icon={n.icon} colorIcon={n.color} />
       ))}
     </NotificationsStyled>
   )
