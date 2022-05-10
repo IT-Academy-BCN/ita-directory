@@ -33,7 +33,7 @@ function Login() {
       dispatch(
         newNotification({
           message: response.data.message,
-          type: NotificationTypes.success,
+          type: NotificationTypes.succes,
         })
       )
 
@@ -121,6 +121,7 @@ function Login() {
             className="blue-gradient w-full my-8"
             isLoading={isLoading}
             animated={animated}
+            onClick={submitForm}
           />
           <div className="w-full">
             <RedirectStyled>
