@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import AdCard from './AdCard/AdCard.jsx'
+import Ad from './Ad/Ad'
 import Body from '../../components/layout/Body/Body'
 // import {getUserAds} from "api/user";
-import { StyledCard, StyledUserAds } from './UserAds.style.js'
+import { StyledCard, StyledUserAds } from './UserAds.style'
 import { Container } from '../../theme'
 
 const REQ_STATUS = {
@@ -12,7 +12,7 @@ const REQ_STATUS = {
   FAILURE: 'FAILURE',
 }
 
-const UserAds = () => {
+function UserAds() {
   // const USER_ID = 1; //TODO change when login works
   const [ads, setAds] = useState([])
   const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL)
@@ -41,7 +41,7 @@ const UserAds = () => {
             <>
               {ads.map((ad, i) => (
                 <StyledCard key={i}>
-                  <AdCard key={ad.id} ad={ad} containerClassName="cardContainer" />
+                  <Ad key={ad.id} ad={ad} containerClassName="cardContainer" />
                 </StyledCard>
               ))}
             </>
