@@ -1,6 +1,8 @@
 const prisma = require('../../prisma/indexPrisma')
+const logger = require('../../logger')
 const {
   apiResponse,
+  tokenUser,
   conversationUsersSchema,
   conversationSchema,
   conversationUserSchema,
@@ -255,9 +257,53 @@ async function getMessages(req, res) {
   }
 }
 
+function chatSocket(socket) {
+  const token = socket.handshake.query['x-token']
+  const validUser = tokenUser(token)
+  if (!validUser) {
+    logger.warn('No valid socket token. Disconnecting.')
+    socket.disconnect()
+  }
+
+  // recoger las conversaciones donde esta el user
+  // guardar el estado en redis!
+
+  socket.on('online_users', () => {
+    socket.emit('online_users_response')
+  })
+
+  socket.on('chooseConversation', () => {
+    // join
+  })
+
+  socket.on('isTyping', (data) => {
+    logger.info(`user ${validUser} is typing on ${data.conversationId}`)
+    socket.to(data.conversationId).emit('isTypingResponse')
+  })
+  socket.on('isNotTyping', () => {
+    socket.to().emit('isNotTypingResponse')
+  })
+
+  socket.on('newMessage', async (message) => {
+    try {
+      // await messageSchema.validateAsync(message)
+
+      await prisma.message.create(message)
+      socket.to().emit('newMessageResponse', { success: true, data: message })
+    } catch (err) {
+      socket.to().emit('newMessageResponse', { success: false })
+    }
+  })
+
+  socket.on('disconnect', () => {
+    // socket.to().emit('offline')
+  })
+}
+
 module.exports = {
   getConversations,
   getConversationById,
   getMessages,
   createConversation,
+  chatSocket,
 }

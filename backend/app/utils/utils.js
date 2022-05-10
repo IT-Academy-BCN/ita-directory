@@ -85,6 +85,17 @@ const hashPassword = async (password) =>
 
 const decodeHash = (id) => hashIds.decode(id)
 
+const tokenUser = (token) =>
+  JWT.verify(token, process.env.JWT_SECRET, (err, authData) => {
+    if (err) {
+      return false
+    }
+    const hashedId = authData.sub.user_id
+    const dehashedId = decodeHash(hashedId)
+    const userId = dehashedId[0]
+    return userId
+  })
+
 const getRegionByLocationSchema = Joi.string().required()
 
 const getAdsByTypeSchema = Joi.string().required()
@@ -122,6 +133,7 @@ module.exports = {
   signRefreshToken,
   hashPassword,
   decodeHash,
+  tokenUser,
   getRegionByLocationSchema,
   getAdsByTypeSchema,
   patchAdSchema,
