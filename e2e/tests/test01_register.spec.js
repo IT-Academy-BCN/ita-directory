@@ -20,7 +20,7 @@ test.describe('register', () => {
     expect(title).toHaveText('Registro')
   })
 
-  test('user can register', async () => {
+  test('if user already exist can not register', async () => {
     await page.locator('[placeholder="Nombre"]').click()
     await page.locator('[placeholder="Nombre"]').fill(`${process.env.PLAYWRIGHT_NAME}`)
     await page.locator('[placeholder="Apellido"]').click()
@@ -32,7 +32,8 @@ test.describe('register', () => {
     await page.locator('input[type=checkbox]').check()
     await page.locator('button:has-text("Registrarme")').click()
 
-    page.waitForResponse((res) => {
+    await page.waitForResponse((res) => {
+      console.log(res.headersArray.map())
       expect(res.status()).toBe(400)
     })
   })

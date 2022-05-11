@@ -1,6 +1,3 @@
-/* eslint-disable import/newline-after-import */
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
 require('dotenv').config()
 const { test, expect } = require('@playwright/test')
 const { chromium } = require('playwright')
@@ -10,7 +7,6 @@ const TOKEN_KEYS = ['refresh', 'refreshToken']
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 test.describe('login', () => {
-  let browser, page, context
   test.beforeAll(async () => {
     browser = await chromium.launch()
     context = await browser.newContext()
@@ -19,6 +15,7 @@ test.describe('login', () => {
   })
 
   test.afterAll(async ({ browser }) => {
+    context.close()
     browser.close()
   })
 
