@@ -1,10 +1,10 @@
 const prisma = require('../../prisma/indexPrisma')
+const { apiResponse } = require('../utils/utils')
 const {
-  apiResponse,
   conversationUsersSchema,
   conversationSchema,
   conversationUserSchema,
-} = require('../utils/utils')
+} = require('../utils/schemaValidation')
 
 async function createConversation(req, res) {
   try {

@@ -9,6 +9,7 @@ import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from '.
 import { Notification, Notifications } from './Notifications'
 import Dropdown from './Dropdown'
 import { Li, Lists, Ol, Dl, Dt, Dd } from './List'
+import { TableStyle, THead, Th, TBody, Tr, Td } from './Table'
 
 export {
   Dropdown,
@@ -33,4 +34,10 @@ export {
   Dl,
   Dt,
   Dd,
+  TableStyle,
+  THead,
+  Th,
+  TBody,
+  Tr,
+  Td,
 }

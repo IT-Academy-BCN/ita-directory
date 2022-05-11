@@ -1,11 +1,57 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react'
-import AdCard from './Ad/Ad'
+import styled from 'styled-components'
+import Ad from './Ad/Ad'
 import Body from '../../components/layout/Body/Body'
-import { StyledCard, StyledUserAds } from './UserAds.style'
-import { Container } from '../../theme'
+import { Container, colors } from '../../theme'
 import { Text } from '../../components/atoms'
+
+const StyledUserAds = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+`
+
+const StyledCard = styled.div`
+  padding-top: 1rem;
+  padding-bottom: 0.75rem;
+
+  .cardContainer {
+    background: ${colors.white};
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid ${colors.grey};
+    padding-bottom: 2rem;
+
+    & > div:last-of-type {
+      padding-bottom: 0;
+      padding-left: 2.5rem;
+    }
+  }
+
+  &:last-of-type {
+    .cardContainer {
+      border: none;
+    }
+  }
+
+  .descriptionContainer {
+    justify-content: flex-start;
+
+    > label {
+      margin-right: 1rem;
+    }
+  }
+  .titleClassName {
+    text-align: left;
+    color: ${colors.darkRed};
+    font: normal normal normal 24px/32px Korb-Bold;
+    letter-spacing: 0px;
+    opacity: 1;
+  }
+`
 
 const REQ_STATUS = {
   INITIAL: 'INITIAL',
@@ -15,7 +61,6 @@ const REQ_STATUS = {
 }
 
 function UserAds() {
-
   const [ads, setAds] = useState([])
   const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL)
 
@@ -44,7 +89,7 @@ function UserAds() {
             <>
               {ads.map((ad) => (
                 <StyledCard key={ad.id}>
-                  <AdCard key={ad.id} ad={ad} containerClassName="cardContainer" />
+                  <Ad key={ad.id} ad={ad} containerClassName="cardContainer" />
                 </StyledCard>
               ))}
             </>
@@ -56,4 +101,4 @@ function UserAds() {
     </Body>
   )
 }
-export default UserAds
+export default styled(UserAds)``
