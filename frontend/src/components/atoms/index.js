@@ -8,6 +8,8 @@ import Card from './Card'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
 import { Notification, Notifications } from './Notifications'
 import Dropdown from './Dropdown'
+import { Li, Lists, Ol, Dl, Dt, Dd } from './List'
+import { TableStyle, THead, Th, TBody, Tr, Td } from './Table'
 
 export {
   Dropdown,
@@ -26,4 +28,16 @@ export {
   SelectUnit,
   Notification,
   Notifications,
+  Li,
+  Lists,
+  Ol,
+  Dl,
+  Dt,
+  Dd,
+  TableStyle,
+  THead,
+  Th,
+  TBody,
+  Tr,
+  Td,
 }
