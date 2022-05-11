@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { test, expect } = require('@playwright/test')
 const { chromium } = require('playwright')
 
@@ -14,12 +15,12 @@ test.describe('register', () => {
     browser.close()
   })
 
-  test('register', async () => {
+  test('register page working', async () => {
     const title = page.locator('h1')
     expect(title).toHaveText('Registro')
   })
 
-  test('user can register ans sets tokens in localstorage', async () => {
+  test('user can register', async () => {
     await page.locator('[placeholder="Nombre"]').click()
     await page.locator('[placeholder="Nombre"]').fill(`${process.env.PLAYWRIGHT_NAME}`)
     await page.locator('[placeholder="Apellido"]').click()
@@ -31,8 +32,8 @@ test.describe('register', () => {
     await page.locator('input[type=checkbox]').check()
     await page.locator('button:has-text("Registrarme")').click()
 
-    let storage = await context.storageState()
-    storage = storage.origins[0].localStorage.map((s) => s.name)
-    expect(storage.every((s) => TOKEN_KEYS.includes(s)))
+    page.waitForResponse((res) => {
+      expect(res.status()).toBe(400)
+    })
   })
 })

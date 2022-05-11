@@ -22,7 +22,7 @@ test.describe('login', () => {
     browser.close()
   })
 
-  test('login', async () => {
+  test('login page working', async () => {
     const title = page.locator('h1')
     expect(title).toHaveText('Acceso')
   })
