@@ -1,4 +1,3 @@
-const Joi = require('joi')
 const JWT = require('jsonwebtoken')
 const Hashids = require('hashids')
 const argon2 = require('argon2')
@@ -18,42 +17,6 @@ const apiResponse = ({ message = '', data = {}, errors = [], status }) => {
   }
   return { message, data, errors }
 }
-
-const AdByIdParamSchema = Joi.number().integer().required()
-
-const registerSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(2).required(),
-  privacy: Joi.boolean().valid(true).required(),
-})
-
-const adsSchema = Joi.object({
-  user_id: Joi.number().required(),
-  title: Joi.string().required(),
-  description: Joi.string().required(),
-  city: Joi.string().required(),
-  n_rooms: Joi.number().required(),
-  price: Joi.number().required(),
-  square_meters: Joi.number().required(),
-  n_bathrooms: Joi.number().required(),
-  map_lat: Joi.number().required(),
-  map_lon: Joi.number().required(),
-  ad_type_id: Joi.number().required(),
-})
-
-const patchAdSchema = Joi.object({
-  adId: Joi.number().integer().required(),
-  title: Joi.string(),
-  description: Joi.string(),
-  city: Joi.string(),
-  n_rooms: Joi.number(),
-  price: Joi.number(),
-  square_meters: Joi.number(),
-  n_bathrooms: Joi.number(),
-  map_lat: Joi.number(),
-  map_lon: Joi.number(),
-  ad_type_id: Joi.number(),
-})
 
 const signToken = (userid, maxAge = '15m') => {
   const hashedId = hashIds.encode(userid)
@@ -96,49 +59,20 @@ const tokenUser = (token) =>
     return userId
   })
 
-const getRegionByLocationSchema = Joi.string().required()
-
-const getAdsByTypeSchema = Joi.string().required()
-
 // Will test if provided password has already been used, if so, returns true.
 const isRepeatedPassword = async (userId, password) => {
   const pwLog = await prisma.recover_password_log.findMany({ where: { user_id: userId } })
-
   const promiseArray = pwLog.map((log) => argon2.verify(log.password, password))
-
   const repeatedPass = await Promise.all(promiseArray)
-
   return repeatedPass.includes(true)
 }
 
-const conversationUsersSchema = Joi.object({
-  user1Id: Joi.number().required(),
-  user2Id: Joi.number().required(),
-})
-const conversationUserSchema = Joi.object({
-  userId: Joi.number().required(),
-})
-const conversationSchema = Joi.object({
-  userId: Joi.number().required(),
-  conversationId: Joi.number().required(),
-})
-
 module.exports = {
-  // generateBlob,
   apiResponse,
-  registerSchema,
-  adsSchema,
-  AdByIdParamSchema,
   signToken,
   signRefreshToken,
   hashPassword,
   decodeHash,
   tokenUser,
-  getRegionByLocationSchema,
-  getAdsByTypeSchema,
-  patchAdSchema,
   isRepeatedPassword,
-  conversationUsersSchema,
-  conversationUserSchema,
-  conversationSchema,
 }
