@@ -29,6 +29,7 @@ const ContainerInfo = styled.div.attrs({})`
     margin-left: 3rem;
   }
 }
+
   ${Title} {
     text-align: left;
     padding-bottom: 1rem;
