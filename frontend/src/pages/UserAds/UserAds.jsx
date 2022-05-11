@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react'
-import AdCard from '../AdList/AdCard/AdCard'
+import AdCard from './Ad/Ad'
 import Body from '../../components/layout/Body/Body'
-// import {getUserAds} from "api/user";
 import { StyledCard, StyledUserAds } from './UserAds.style'
 import { Container } from '../../theme'
+import { Text } from '../../components/atoms'
 
 const REQ_STATUS = {
   INITIAL: 'INITIAL',
@@ -15,7 +15,7 @@ const REQ_STATUS = {
 }
 
 function UserAds() {
-  // const USER_ID = 1; //TODO change when login works
+
   const [ads, setAds] = useState([])
   const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL)
 
@@ -23,26 +23,27 @@ function UserAds() {
     setFetchStatus(REQ_STATUS.LOADING)
     fetch('https://api-casas.kevinmamaqi.com/api-casas')
       .then((res) => res.json())
-      .then((ad) => {
-        setAds(ad.slice(0, 3))
+      .then((res) => {
+        setAds(res.slice(0, 3))
+
         setFetchStatus(REQ_STATUS.SUCCESS)
       })
       .catch((e) => {
         setFetchStatus(REQ_STATUS.FAILURE)
-        return e
       })
   }, [])
 
   return (
-    <Body title="Mis anuncios" isLoggedIn>
+    <Body title="Mis anuncios">
       <Container row>
         <StyledUserAds>
-          {fetchStatus === REQ_STATUS.INITIAL || fetchStatus === REQ_STATUS.LOADING ? (
-            'loading...'
-          ) : fetchStatus === REQ_STATUS.SUCCESS ? (
+          {(fetchStatus === REQ_STATUS.INITIAL || fetchStatus === REQ_STATUS.LOADING) && (
+            <Text>Loading...</Text>
+          )}
+          {fetchStatus === REQ_STATUS.SUCCESS ? (
             <>
-              {ads.map((ad, i) => (
-                <StyledCard key={i}>
+              {ads.map((ad) => (
+                <StyledCard key={ad.id}>
                   <AdCard key={ad.id} ad={ad} containerClassName="cardContainer" />
                 </StyledCard>
               ))}

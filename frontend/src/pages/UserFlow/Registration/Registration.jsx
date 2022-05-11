@@ -7,7 +7,7 @@ import Body from '../../../components/layout/Body/Body'
 import CheckBox from '../../../components/atoms/CheckBox'
 import AsyncButton from '../../../components/atoms/Button'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import InputGroup from '../../../components/molecules/InputGroup'
+import { InputGroup } from '../../../components/molecules'
 import registerSchema from '../../../validation/registerUserSchema'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
@@ -40,7 +40,7 @@ function Register() {
       }
       dispatch(
         newNotification({
-          message: response.data.code,
+          message: 'Your account has been successfully created!',
           type: NotificationTypes.succes,
         })
       )
@@ -89,7 +89,6 @@ function Register() {
             error={errors.name?.message}
             register={register('name')}
           />
-
           <InputGroup
             label="text"
             type="text"
@@ -101,7 +100,6 @@ function Register() {
             error={errors.lastname?.message}
             register={register('lastname')}
           />
-
           <InputGroup
             label="email"
             type="email"
@@ -113,7 +111,6 @@ function Register() {
             error={errors.email?.message}
             register={register('email')}
           />
-
           <InputGroup
             label="password"
             type="password"
@@ -145,6 +142,7 @@ function Register() {
             className="w-full my-8 orange-gradient"
             isLoading={isLoading}
             animated={animated}
+            onClick={submitForm}
           />
           <RedirectStyled>
             Tienes una cuenta? <Link to="/login">Inicia sesión</Link>

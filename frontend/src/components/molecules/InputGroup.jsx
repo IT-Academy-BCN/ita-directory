@@ -14,7 +14,6 @@ function InputGroup({
   error,
   id,
   inputStyles,
-  isError = false,
   label,
   name,
   onBlur,
@@ -48,7 +47,7 @@ function InputGroup({
         accept={accept}
         register={register}
       />
-      {isError && <ErrorMessage text={error} />}
+      {error && <ErrorMessage text={error} />}
     </InputGroupStyled>
   )
 }
@@ -60,7 +59,6 @@ InputGroup.propTypes = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  isError: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onBlur: PropTypes.func,
