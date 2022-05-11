@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { StyledCity, StyledP } from './Ad.style'
 import Button from '../../../components/atoms/Button'
-import AdCard from '../../../components/organisms/AdCard/AdCard'
+import AdCard from '../../../components/organisms/AdCard'
 import EditAdModal from '../EditAdModal/EditAdModal'
 
 function Ad({ ad, containerClassName }) {

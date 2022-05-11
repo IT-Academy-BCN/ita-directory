@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Card from '../../atoms/Card'
-import { device, colors, font } from '../../../theme'
-import { Text, Title } from '../../atoms'
+import Card from '../atoms/Card'
+import { device, colors, font } from '../../theme'
+import { Text, Title } from '../atoms'
 
 const Img = styled.img`
   width: 100%;
@@ -28,7 +28,7 @@ const ContainerInfo = styled.div.attrs({})`
   @media only ${device.Tablet} {
     margin-left: 3rem;
   }
-}
+
   ${Title} {
     text-align: left;
     padding-bottom: 1rem;
