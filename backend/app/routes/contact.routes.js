@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const {contactController} = require("../controllers/contact.controller");
-const {schema} = require("../utils/schemaValidation");
-const validation = require("../middleware/validation");
+const router = require('express').Router()
+const { contactController } = require('../controllers/contact.controller')
+const { contactSchema } = require('../utils/schemaValidation')
+const validation = require('../middleware/validation')
 
-router.post("/v1/contact", validation(schema), contactController);
+router.post('/v1/contact', validation(contactSchema), contactController)
 
 /**
  * Contact data
@@ -32,4 +32,4 @@ router.post("/v1/contact", validation(schema), contactController);
  * { "message":"error"}
  */
 
-module.exports = router;
+module.exports = router
