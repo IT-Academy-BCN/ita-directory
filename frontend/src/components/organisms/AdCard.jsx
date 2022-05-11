@@ -28,7 +28,7 @@ const ContainerInfo = styled.div.attrs({})`
   @media only ${device.Tablet} {
     margin-left: 3rem;
   }
-}
+
   ${Title} {
     text-align: left;
     padding-bottom: 1rem;
