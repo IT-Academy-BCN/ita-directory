@@ -4,9 +4,7 @@ const { chromium } = require('playwright')
 
 const TOKEN_KEYS = ['refresh', 'refreshToken']
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-
-test.describe('login', () => {
+test.describe.serial('login', () => {
   test.beforeAll(async () => {
     browser = await chromium.launch()
     context = await browser.newContext()
@@ -33,7 +31,6 @@ test.describe('login', () => {
       .fill(`${process.env.PLAYWRIGHT_PASSWORD}`)
 
     await page.locator('button:has-text("Acceder")').click()
-    await delay(2000)
 
     let storage = await context.storageState()
     storage = storage.origins[0].localStorage.map((s) => s.name)

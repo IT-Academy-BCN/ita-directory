@@ -15,12 +15,26 @@ test.describe.serial('register', () => {
     browser.close()
   })
 
-  test('register page working', async () => {
-    const title = page.locator('h1')
-    expect(title).toHaveText('Registro')
+  test('unable to register a user with wrong password', async () => {
+    await page.locator('[placeholder="Nombre"]').click()
+    await page.locator('[placeholder="Nombre"]').fill(`${process.env.PLAYWRIGHT_NAME}`)
+    await page.locator('[placeholder="Apellido"]').click()
+    await page.locator('[placeholder="Apellido"]').fill(`${process.env.PLAYWRIGHT_LASTNAME}`)
+    await page.locator('[placeholder="Email"]').click()
+    await page.locator('[placeholder="Email"]').fill(`${process.env.PLAYWRIGHT_MAIL}`)
+    await page.locator('[placeholder="Contraseña"]').click()
+    await page
+      .locator('[placeholder="Contraseña"]')
+      .fill(`${process.env.PLAYWRIGHT_WRONG_PASSWORD}`)
+    await page.locator('input[type=checkbox]').check()
+    await page.locator('button:has-text("Registrarme")').click()
+
+    page.waitForResponse((res) => {
+      expect(res.status()).toBe(400)
+    })
   })
 
-  test('A user can register', async () => {
+  test('unable to register an already existing user', async () => {
     await page.locator('[placeholder="Nombre"]').click()
     await page.locator('[placeholder="Nombre"]').fill(`${process.env.PLAYWRIGHT_NAME}`)
     await page.locator('[placeholder="Apellido"]').click()
@@ -34,23 +48,6 @@ test.describe.serial('register', () => {
 
     page.waitForResponse((res) => {
       expect(res.status()).toBe(200)
-    })
-  })
-
-  test('unable to register a user with wrong name', async () => {
-    await page.locator('[placeholder="Nombre"]').click()
-    await page.locator('[placeholder="Nombre"]').fill(`${process.env.PLAYWRIGHT_WRONG_NAME}`)
-    await page.locator('[placeholder="Apellido"]').click()
-    await page.locator('[placeholder="Apellido"]').fill(`${process.env.PLAYWRIGHT_LASTNAME}`)
-    await page.locator('[placeholder="Email"]').click()
-    await page.locator('[placeholder="Email"]').fill(`${process.env.PLAYWRIGHT_MAIL}`)
-    await page.locator('[placeholder="Contraseña"]').click()
-    await page.locator('[placeholder="Contraseña"]').fill(`${process.env.PLAYWRIGHT_PASSWORD}`)
-    await page.locator('input[type=checkbox]').check()
-    await page.locator('button:has-text("Registrarme")').click()
-
-    page.waitForResponse((res) => {
-      expect(res.status()).toBe(400)
     })
   })
 })
