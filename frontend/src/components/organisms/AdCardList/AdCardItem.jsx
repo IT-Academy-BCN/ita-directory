@@ -1,9 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { colors } from '../../../theme'
 import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
 import Button from '../../atoms/Button'
-import { AdCardItemStyled } from './AdCardItem.styles'
+
+const AdCardItemStyled = styled.div`
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    border-radius: inherit;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  .description {
+    padding: 1rem 1.5rem;
+  }
+  .itemsInLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+  }
+  span.price {
+    font-weight: bold;
+    font-size: 18px;
+  }
+`
 
 function AdCardItem({ ad, openSelectedAdPopup }) {
   return (
@@ -28,4 +56,4 @@ AdCardItem.propTypes = {
   openSelectedAdPopup: PropTypes.string,
 }
 
-export default AdCardItem
+export default styled(AdCardItem)``
