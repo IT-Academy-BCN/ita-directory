@@ -1,13 +1,13 @@
 const prisma = require('../../prisma/indexPrisma')
 const { typeSw } = require('../utils/CONSTANTS')
 const { formatLocation } = require('../utils/formatLocation')
+const { apiResponse } = require('../utils/utils')
 const {
-  apiResponse,
   adsSchema,
   AdByIdParamSchema,
   getAdsByTypeSchema,
   patchAdSchema,
-} = require('../utils/utils')
+} = require('../utils/schemaValidation')
 const { parseAdsFromCsvBuffer } = require('../utils/parseAdsFromCsvBuffer')
 
 async function createAd(req, res) {
