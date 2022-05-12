@@ -12,6 +12,7 @@ function InputGroup({
   className,
   disabled,
   error,
+  hiddenLabel = false,
   id,
   inputStyles,
   label,
@@ -28,7 +29,7 @@ function InputGroup({
 }) {
   return (
     <InputGroupStyled>
-      <Label as="label" htmlFor={id} text={label} />
+      <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} />
       <Input
         type={type}
         placeholder={placeholder}
@@ -59,6 +60,7 @@ InputGroup.propTypes = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  hiddenLabel: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onBlur: PropTypes.func,
