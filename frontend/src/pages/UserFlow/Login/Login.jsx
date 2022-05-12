@@ -92,7 +92,8 @@ function Login() {
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
           <InputGroup
-            label="email"
+            label="Email"
+            hiddenLabel
             type="email"
             placeholder="Introduce tu email"
             id="emailName"
@@ -103,7 +104,8 @@ function Login() {
             register={register('email')}
           />
           <InputGroup
-            label="password"
+            label="Password"
+            hiddenLabel
             type="password"
             placeholder="Introduce tu contraseña"
             id="passName"
