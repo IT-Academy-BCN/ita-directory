@@ -256,13 +256,19 @@ async function getMessages(req, res) {
   }
 }
 
-function chatSocket(socket) {
-  const token = socket.handshake.query['x-token']
+function chatSocket(io, socket) {
+  // console.log(socket)
+  // console.log(socket.handshake.headers.authorization)
+  // console.log(socket.handshake.headers.authorization.replace('Bearer ', '').trim())
+  // const token = socket.handshake.query['x-token']
+  const token = socket.handshake.headers.authorization.replace('Bearer ', '').trim()
   const validUser = tokenUser(token)
   if (!validUser) {
     logger.warn('No valid socket token. Disconnecting.')
     socket.disconnect()
+    return
   }
+  console.log(`user ${validUser} connected`)
 
   // recoger las conversaciones donde esta el user
   // guardar el estado en redis!
@@ -271,31 +277,34 @@ function chatSocket(socket) {
     socket.emit('online_users_response')
   })
 
-  socket.on('chooseConversation', () => {
-    // join
+  socket.on('choose_conversation', (conversationId) => {
+    console.log('choose_conversation', conversationId)
+    socket.join(conversationId)
   })
 
-  socket.on('isTyping', (data) => {
-    logger.info(`user ${validUser} is typing on ${data.conversationId}`)
-    socket.to(data.conversationId).emit('isTypingResponse')
+  socket.on('is_typing', (conversationId) => {
+    logger.info(`user ${validUser} is typing on ${conversationId}`)
+    io.to(conversationId).emit('is_typing_response', `user ${validUser} typing`)
+    // socket.emit('is_typing_response', conversationId)
   })
-  socket.on('isNotTyping', () => {
-    socket.to().emit('isNotTypingResponse')
+  socket.on('is_not_typing', (conversationId) => {
+    logger.info(`user ${validUser} stop typing on ${conversationId}`)
+    io.to(conversationId).emit('is_not_typing_response', `user ${validUser} stop typing`)
   })
 
-  socket.on('newMessage', async (message) => {
+  socket.on('new_message', async (message) => {
     try {
       // await messageSchema.validateAsync(message)
 
       await prisma.message.create(message)
-      socket.to().emit('newMessageResponse', { success: true, data: message })
+      socket.to().emit('new_message_response', { success: true, data: message })
     } catch (err) {
-      socket.to().emit('newMessageResponse', { success: false })
+      socket.to().emit('new_message_response', { success: false })
     }
   })
 
   socket.on('disconnect', () => {
-    // socket.to().emit('offline')
+    socket.emit('offline')
   })
 }
 
