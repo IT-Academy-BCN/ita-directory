@@ -322,7 +322,7 @@ async function chatSocket(io, socket) {
     try {
       await client.SREM('online_users', validUser.toString())
       const result = await client.SMEMBERS('online_users')
-      console.log('online_users:', result)
+      // console.log('online_users:', result)
       const users = result.map((x) => parseInt(x, 10))
       io.emit('online_users', users)
     } catch (err) {
