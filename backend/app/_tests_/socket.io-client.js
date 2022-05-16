@@ -1,5 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
+
+/**
+ * Ejemplo de cliente socket.io para probar el server.
+ * Hay que usar un token valido
+ */
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 const io = require('socket.io-client')
 
