@@ -1,10 +1,12 @@
 const prisma = require('../../prisma/indexPrisma')
 const logger = require('../../logger')
 const { apiResponse, tokenUser } = require('../utils/utils')
+const client = require('../utils/initRedis')
 const {
   conversationUsersSchema,
   conversationSchema,
   conversationUserSchema,
+  messageSchema,
 } = require('../utils/schemaValidation')
 
 async function createConversation(req, res) {
@@ -256,11 +258,7 @@ async function getMessages(req, res) {
   }
 }
 
-function chatSocket(io, socket) {
-  // console.log(socket)
-  // console.log(socket.handshake.headers.authorization)
-  // console.log(socket.handshake.headers.authorization.replace('Bearer ', '').trim())
-  // const token = socket.handshake.query['x-token']
+async function chatSocket(io, socket) {
   const token = socket.handshake.headers.authorization.replace('Bearer ', '').trim()
   const validUser = tokenUser(token)
   if (!validUser) {
@@ -268,24 +266,26 @@ function chatSocket(io, socket) {
     socket.disconnect()
     return
   }
-  console.log(`user ${validUser} connected`)
+  logger.info(`user ${validUser} connected`)
 
-  // recoger las conversaciones donde esta el user
-  // guardar el estado en redis!
-
-  socket.on('online_users', () => {
-    socket.emit('online_users_response')
-  })
+  try {
+    await client.SADD('online_users', validUser.toString())
+    const result = await client.SMEMBERS('online_users')
+    // console.log('online_users:', result)
+    const users = result.map((x) => parseInt(x, 10))
+    socket.emit('online_users', users)
+  } catch (err) {
+    logger.error(err)
+  }
 
   socket.on('choose_conversation', (conversationId) => {
-    console.log('choose_conversation', conversationId)
+    logger.info(`choose_conversation, ${conversationId}`)
     socket.join(conversationId)
   })
 
   socket.on('is_typing', (conversationId) => {
     logger.info(`user ${validUser} is typing on ${conversationId}`)
     io.to(conversationId).emit('is_typing_response', `user ${validUser} typing`)
-    // socket.emit('is_typing_response', conversationId)
   })
   socket.on('is_not_typing', (conversationId) => {
     logger.info(`user ${validUser} stop typing on ${conversationId}`)
@@ -294,17 +294,40 @@ function chatSocket(io, socket) {
 
   socket.on('new_message', async (message) => {
     try {
-      // await messageSchema.validateAsync(message)
-
-      await prisma.message.create(message)
-      socket.to().emit('new_message_response', { success: true, data: message })
+      await messageSchema.validateAsync(message)
+      await prisma.message.create({
+        data: {
+          conversation: {
+            connect: {
+              id: message.conversationId,
+            },
+          },
+          sender: {
+            connect: {
+              id: message.senderId,
+            },
+          },
+          text: message.text,
+        },
+      })
+      io.to(message.conversationId).emit('new_message_response', { success: true, data: message })
+      logger.info('Message created successfully')
     } catch (err) {
-      socket.to().emit('new_message_response', { success: false })
+      logger.error('Cannot save message')
+      io.to(message.conversationId).emit('new_message_response', { success: false })
     }
   })
 
-  socket.on('disconnect', () => {
-    socket.emit('offline')
+  socket.on('disconnect', async () => {
+    try {
+      await client.SREM('online_users', validUser.toString())
+      const result = await client.SMEMBERS('online_users')
+      console.log('online_users:', result)
+      const users = result.map((x) => parseInt(x, 10))
+      io.emit('online_users', users)
+    } catch (err) {
+      logger.error(err)
+    }
   })
 }
 
