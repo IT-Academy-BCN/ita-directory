@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const io = require('socket.io-client')
 
 const socket = io('http://localhost:10910/', {
