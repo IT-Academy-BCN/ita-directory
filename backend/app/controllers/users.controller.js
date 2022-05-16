@@ -129,7 +129,7 @@ exports.registerUser = async (req, res, next) => {
         code: 'error',
         header: 'Invalid email',
         message: 'This email has already been registered.',
-        statusCode: 200,
+        statusCode: 400,
       })
     }
 

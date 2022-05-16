@@ -1,6 +1,5 @@
 const prisma = require('../../prisma/indexPrisma')
-const logger = require('../../logger')
-const { apiResponse, tokenUser } = require('../utils/utils')
+const { apiResponse } = require('../utils/utils')
 const {
   conversationUsersSchema,
   conversationSchema,

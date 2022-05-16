@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Ad from './Ad/Ad'
@@ -68,6 +70,7 @@ function UserAds() {
       .then((res) => res.json())
       .then((res) => {
         setAds(res.slice(0, 3))
+
         setFetchStatus(REQ_STATUS.SUCCESS)
       })
       .catch((e) => {
