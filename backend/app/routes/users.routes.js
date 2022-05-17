@@ -36,7 +36,8 @@ router.get('/v1/get-me', authenticateToken, UsersController.getUser)
 router.post('/v1/register', UsersController.registerUser)
 
 // Read All Users (for testing purpose)
-router.get('/', authenticateToken, UsersController.getAllUsers)
+// router.get('/', authenticateToken, UsersController.getAllUsers)
+router.get('/', UsersController.getAllUsers)
 
 // Refresh-token
 router.get('/v1/refresh-token', UsersController.getRefreshToken)
