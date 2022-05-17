@@ -3,9 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "description": "ITA Directory",
+  "type": "module",
   "scripts": {
-    "frontend": "cd ./frontend && npm start",
-    "backend": "cd ./backend && npm run dev",
+    "frontend": "cp .env.development ./frontend/.env && cd ./frontend && npm start",
+    "backend": "cp .env.development ./backend/.env && cd ./backend && npm run dev",
+    "e2e": "cp .env.development ./e2e/.env && cd ./e2e && npm run test",
     "install-deps": "npm install && cd ./frontend && npm install && cd .. && cd ./backend && npm install",
     "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
     "start-redis": "cd ./scripts && source ./docker-utils.sh; launchRedis",
@@ -13,9 +15,10 @@
     "prisma-migrate": "cd ./backend && npx prisma migrate dev",
     "prisma-seed": "node ./backend/prisma/seed.js",
     "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
-    "up": "npm run start-server && npm run start-prisma",
+    "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma",
     "down": "cd ./scripts && bash down.sh",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prepare": "husky install && chmod ug+x .husky/*"
   },
   "repository": {
     "type": "git",
@@ -26,7 +29,7 @@
     "node.js",
     "prisma",
     "directory",
-    "docosaurus"
+    "docusaurus"
   ],
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
@@ -35,12 +38,6 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
-    "husky": "^7.0.2",
-    "lint-staged": "^11.1.2",
-    "prisma": "^3.11.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^3.11.0",
-    "csvtojson": "^2.0.10"
+    "husky": "6.0.0"
   }
 }

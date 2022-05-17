@@ -1,0 +1,17 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "playwright.config.js",
+  "scripts": {
+    "test": "npx playwright test --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "1.21.1",
+    "dotenv": "16.0.0",
+    "playwright": "^1.21.1"
+  }
+}

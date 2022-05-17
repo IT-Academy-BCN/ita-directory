@@ -1,3 +1,17 @@
 {
-	"extends": ["react-app", "react-app/jest"]
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "react-app",
+    "react-app/jest",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "react/require-default-props": ["off"],
+    "react/react-in-jsx-scope": ["off"],
+    "react/forbid-prop-types": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "no-param-reassign": ["error", { "props": false }],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+  }
 }

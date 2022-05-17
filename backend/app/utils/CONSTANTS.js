@@ -1,63 +1,54 @@
 // Internal modules
-const prisma = require("./../../prisma/indexPrisma");
+const prisma = require('../../prisma/indexPrisma')
 
-let CONSTANTS = undefined;
+let CONSTANTS
 
 async function loadConstants() {
-	try {
-		const user_role = await prisma.user_role.findMany();
-		const user_status = await prisma.user_status.findMany();
-		// console.log(user_role, user_status);
-		CONSTANTS = {user_role, user_status};
-	} catch (err) {
-		console.error(err);
-	}
+  try {
+    const userRole = await prisma.user_role.findMany()
+    const userStatus = await prisma.user_status.findMany()
+    // console.log(user_role, user_status);
+    CONSTANTS = { userRole, userStatus }
+  } catch (err) {
+    // console.error(err)
+  }
 }
 
 function setConstants() {
-	loadConstants();
+  loadConstants()
 }
 
 function getConstants() {
-	return CONSTANTS;
+  return CONSTANTS
 }
 
-const type_sw = (type) => {
-	let type_id = "";
-	switch (type) {
-		case "house":
-			return (type_id = 1);
-			break;
-		case "room":
-			return (type_id = 2);
-			break;
-		case "garage":
-			return (type_id = 3);
-			break;
-		case "storage":
-			return (type_id = 4);
-			break;
-		case "office":
-			return (type_id = 5);
-			break;
-		case "warehouse":
-			return (type_id = 6);
-			break;
-		case "building":
-			return (type_id = 7);
-			break;
-		case "new_building":
-			return (type_id = 8);
-			break;
-		default:
-			type_id = 0;
-	}
-};
+const typeSw = (type) => {
+  switch (type) {
+    case 'house':
+      return 1
+    case 'room':
+      return 2
+    case 'garage':
+      return 3
+    case 'storage':
+      return 4
+    case 'office':
+      return 5
+    case 'warehouse':
+      return 6
+    case 'building':
+      return 7
+    case 'new_building':
+      return 8
+    default:
+      return 0
+  }
+}
 
 module.exports = {
-	loadConstants,
-	getConstants,
-	setConstants,
-	type_sw,
-	CONSTANTS,
-};
+  loadConstants,
+  getConstants,
+  setConstants,
+  typeSw,
+  CONSTANTS,
+}
