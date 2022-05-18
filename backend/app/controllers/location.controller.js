@@ -24,8 +24,9 @@ async function getRegion(req, res) {
 
     data.push(location[0])
 
-    for (let i = location[0].level_type_id; i >= 3; i--) {
-      let id = location[0].parent_id
+    for (let i = location[0].level_type_id; i >= 3; i - 1) {
+      const id = location[0].parent_id
+      // eslint-disable-next-line no-await-in-loop
       const parent = await prisma.level.findUnique({
         where: {
           id,
@@ -37,7 +38,7 @@ async function getRegion(req, res) {
       }
     }
 
-    if (location.length == 0) {
+    if (location.length === 0) {
       res.status(404).json(
         apiResponse({
           message: 'The location is not in the database or you spelled it wrong',
@@ -87,26 +88,26 @@ async function getParentChild(req, res) {
       ],
     })
 
-    for (let i = 0; i < location.length; i++) {
+    for (let i = 0; i < location.length; i + 1) {
       data.push(location[i])
-      const parent = await prisma.level.findMany({
+      const parent = prisma.level.findMany({
         where: {
           id: location[i].parent_id,
         },
       })
 
-      data[i] = { ...data[i], parent: parent }
+      data[i] = { ...data[i], parent }
 
-      const children = await prisma.level.findMany({
+      const children = prisma.level.findMany({
         where: {
           parent_id: location[i].id,
         },
       })
 
-      data[i] = { ...data[i], children: children }
+      data[i] = { ...data[i], children }
     }
 
-    if (location.length == 0) {
+    if (location.length === 0) {
       res.status(404).json(
         apiResponse({
           message: 'The location is not in the database or you spelled it wrong',
