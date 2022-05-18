@@ -42,8 +42,8 @@ function Ad() {
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    getAd(id).then((ad) => setAd(ad))
-  }, [id])
+    getAd(id).then(() => setAd(ad))
+  }, [ad, id])
 
   // const images =
   // 	ad &&
@@ -101,13 +101,11 @@ function Ad() {
 
               <BottomDiv>
                 <StyledUl>
-                  {LIST_ICONS.map((el, index) => {
-                    return (
-                      <StyledItems>
-                        <Icon key={index} icon={el.icon} text={el.name} />
-                      </StyledItems>
-                    )
-                  })}
+                  {LIST_ICONS.map((el) => (
+                    <StyledItems>
+                      <Icon key={el.id} icon={el.icon} text={el.name} />
+                    </StyledItems>
+                  ))}
                 </StyledUl>
 
                 <StyledText>

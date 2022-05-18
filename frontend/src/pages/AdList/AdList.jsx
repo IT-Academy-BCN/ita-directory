@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 import _ from 'lodash'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
@@ -54,7 +53,7 @@ function AdList() {
     filteredAds =
       filtro === undefined
         ? adList
-        : _.filter(adList, function (e) {
+        : _.filter(adList, (e) => {
             if (
               filtro.maxPrice === '' &&
               filtro.minPrice === '' &&

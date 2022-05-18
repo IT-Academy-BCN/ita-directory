@@ -29,7 +29,6 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
 
   return (
     <HeaderStyled logoColor={logoColor}>
-      <Text as="p" text="HOOLA" />
       <Container>
         <div className="header__container">
           <Link className="header__logo-group" to="/">
