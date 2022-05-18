@@ -1,8 +1,6 @@
-// const { devices } = require("@playwright/test");
-require('dotenv').config()
-
 const config = {
-  testDir: 'tests',
+  testDir: './tests',
+  workers: 1,
   use: {},
 }
 

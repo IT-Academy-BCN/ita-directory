@@ -57,6 +57,11 @@ const conversationSchema = Joi.object({
   userId: Joi.number().required(),
   conversationId: Joi.number().required(),
 })
+const messageSchema = Joi.object({
+  senderId: Joi.number().required(),
+  conversationId: Joi.number().required(),
+  text: Joi.string().required(),
+})
 
 module.exports = {
   contactSchema,
@@ -69,4 +74,5 @@ module.exports = {
   conversationUsersSchema,
   conversationUserSchema,
   conversationSchema,
+  messageSchema,
 }
