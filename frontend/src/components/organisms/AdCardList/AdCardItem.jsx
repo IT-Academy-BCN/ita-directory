@@ -28,8 +28,8 @@ function AdCardItem({ ad, openSelectedAdPopup, image }) {
   return (
     <Card>
       <ImgStyle src={image} alt="" />
-      <Text className="description">{ad.description}</Text>
-      <ContainerInLine className="itemsInLine">
+      <Text>{ad.description}</Text>
+      <ContainerInLine>
         <Text as="span" className="price">{`${ad.price}€`}</Text>{' '}
         <Button
           buttonStyles={{ backgroundColor: colors.violet }}
