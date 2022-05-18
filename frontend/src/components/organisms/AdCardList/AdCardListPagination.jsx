@@ -5,18 +5,16 @@ import AdCardItem from './AdCardItem'
 import Pagination from '../Pagination/Pagination'
 import { device } from '../../../theme'
 
-const AdCardListStyled = styled.div`
-  .list-scroll {
-    display: grid;
-    grid-gap: 1.5rem;
+const ListScroll = styled.div`
+  display: grid;
+  grid-gap: 1.5rem;
 
-    @media ${device.Tablet} {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  @media ${device.Tablet} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    @media ${device.Laptop} {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @media ${device.Laptop} {
+    grid-template-columns: repeat(3, 1fr);
   }
 `
 
@@ -45,17 +43,15 @@ function AdCardListPagination() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (
-    <AdCardListStyled>
-      <div className="list-scroll">
-        {ads && adsToShow.map((ad) => <AdCardItem key={ad.id} ad={ad} />)}
-      </div>
+    <div>
+      <ListScroll>{ads && adsToShow.map((ad) => <AdCardItem key={ad.id} ad={ad} />)}</ListScroll>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={ads.length}
         currentPage={currentPage}
         paginate={paginate}
       />
-    </AdCardListStyled>
+    </div>
   )
 }
 export default styled(AdCardListPagination)``
