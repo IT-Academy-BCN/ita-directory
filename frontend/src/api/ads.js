@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import axiosInstance from '../utils/axiosInstance'
 
 export async function getAds(filters) {
@@ -21,20 +22,20 @@ export async function getAds(filters) {
       }
     }
 
-    const data = await axiosInstance.get('ads', { params })
+    const data = await axiosInstance.get('/ads', { params })
     const ads = await data.data
     return ads
   } catch (e) {
-    throw new Error(e)
+    throw new Error(`${e}`)
   }
 }
 
 export async function getAd(adId) {
   try {
-    const response = await axiosInstance.get(`/v1/ads/${adId}`)
+    const response = await axiosInstance.get(`/ads/v1/ads/${adId}`)
     return response.data.data
   } catch (e) {
-    throw new Error(e)
+    throw new Error(`${e}`)
   }
 }
 // try {
