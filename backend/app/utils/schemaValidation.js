@@ -63,6 +63,11 @@ const messageSchema = Joi.object({
   text: Joi.string().required(),
 })
 
+const logSchema = Joi.object().keys({
+  msg: Joi.string().required(),
+  level: Joi.string().valid('trace', 'debug', 'info', 'warn', 'error', 'fatal'),
+});
+
 module.exports = {
   contactSchema,
   registerSchema,
@@ -75,4 +80,5 @@ module.exports = {
   conversationUserSchema,
   conversationSchema,
   messageSchema,
+  logSchema
 }
