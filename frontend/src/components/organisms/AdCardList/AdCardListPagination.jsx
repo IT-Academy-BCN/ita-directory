@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import styled from 'styled-components'
 import AdCardItem from './AdCardItem'
 import Pagination from '../Pagination/Pagination'
-import { device } from '../../../theme'
-
-const ListScroll = styled.div`
-  display: grid;
-  grid-gap: 1.5rem;
-
-  @media ${device.Tablet} {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media ${device.Laptop} {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`
+import { Grid } from '../../../theme'
 
 function AdCardListPagination() {
   const [ads, setAds] = useState([])
@@ -44,7 +30,9 @@ function AdCardListPagination() {
 
   return (
     <div>
-      <ListScroll>{ads && adsToShow.map((ad) => <AdCardItem key={ad.id} ad={ad} />)}</ListScroll>
+      <Grid gridGap="1.5rem">
+        {ads && adsToShow.map((ad) => <AdCardItem key={ad.id} ad={ad} />)}
+      </Grid>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={ads.length}
@@ -54,4 +42,4 @@ function AdCardListPagination() {
     </div>
   )
 }
-export default styled(AdCardListPagination)``
+export default AdCardListPagination

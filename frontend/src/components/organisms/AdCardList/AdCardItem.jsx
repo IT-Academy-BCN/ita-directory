@@ -1,43 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { colors } from '../../../theme'
 import { Button, Text, Card } from '../../atoms'
+import { FlexBox } from '../../../theme/wrappers'
 
-const ImgStyle = styled.img`
-  width: 100%;
-  height: 175px;
-  object-fit: cover;
-  border-radius: inherit;
-  :hover {
-    cursor: pointer;
-  }
-`
-const ContainerInLine = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  .price {
-    font-weight: bold;
-    font-size: 18px;
-  }
-`
-
-function AdCardItem({ ad, openSelectedAdPopup, image }) {
+function AdCardItem({ ad, openSelectedAdPopup }) {
   return (
     <Card>
-      <ImgStyle src={image} alt="" />
-      <Text>{ad.description}</Text>
-      <ContainerInLine>
-        <Text as="span" className="price">{`${ad.price}€`}</Text>{' '}
+      <Text text={ad.description} />
+      <FlexBox justifyContent="space-between" alignItems="center" padding>
+        <Text as="span" text={`${ad.price}€`} fontSize="18px" />{' '}
         <Button
           buttonStyles={{ backgroundColor: colors.violet }}
           type="button"
           text="Localizar"
           onClick={openSelectedAdPopup}
         />
-      </ContainerInLine>
+      </FlexBox>
     </Card>
   )
 }
@@ -45,7 +24,6 @@ function AdCardItem({ ad, openSelectedAdPopup, image }) {
 AdCardItem.propTypes = {
   ad: PropTypes.object,
   openSelectedAdPopup: PropTypes.string,
-  image: PropTypes.string,
 }
 
-export default styled(AdCardItem)``
+export default AdCardItem
