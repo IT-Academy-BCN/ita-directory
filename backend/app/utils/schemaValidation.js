@@ -46,6 +46,8 @@ const getRegionByLocationSchema = Joi.string().required()
 
 const getAdsByTypeSchema = Joi.string().required()
 
+const getUserAdsSchema = Joi.number().required()
+
 const conversationUsersSchema = Joi.object({
   user1Id: Joi.number().required(),
   user2Id: Joi.number().required(),
@@ -70,6 +72,7 @@ module.exports = {
   AdByIdParamSchema,
   getRegionByLocationSchema,
   getAdsByTypeSchema,
+  getUserAdsSchema,
   patchAdSchema,
   conversationUsersSchema,
   conversationUserSchema,

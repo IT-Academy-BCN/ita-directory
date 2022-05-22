@@ -107,6 +107,33 @@ router.post('/v1/post-ad', authenticateToken, adsController.createAd)
 router.get('/v1/ads', adsController.getAllAds)
 
 /**
+ * GET /ads/v1/user-ads/{userId}
+ * @summary Gets all user ads from the database.
+ * @tags Ad
+ * @param {number} userId.path - User id to get ads from database
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+ * {"message": "Data fetched correctly.",
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "title": "ad1",
+            "description": "ad house 1",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 1
+        }
+    ]}
+ */
+router.get('/v1/user-ads/:userId', adsController.getUserAds)
+
+/**
  * GET /ads/v1/ads/:adId
  * @summary Gets ad by id
  * @tags Ad
