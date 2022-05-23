@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import AdCardListStyled from './AdCardList.styles'
-import Button from '../../atoms/Button'
+import Button from '../../atoms'
 import AdCardItem from './AdCardItem'
+import { Grid } from '../../../theme'
 
 function AdCardListLoadMore({ ads, setLocalizedAdId }) {
   const [currentPage, setCurrentPage] = useState(1)
@@ -16,16 +16,16 @@ function AdCardListLoadMore({ ads, setLocalizedAdId }) {
   }
 
   return (
-    <AdCardListStyled>
-      <div className="list-scroll">
+    <div>
+      <Grid gridGap="1.5rem">
         {ads &&
           adsToShow.map((ad, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <AdCardItem key={index} ad={ad} openSelectedAdPopup={() => setLocalizedAdId(index)} />
           ))}
-      </div>
+      </Grid>
       <Button type="button" text="Load more" onClick={showMoreItems} className="mt-5" />
-    </AdCardListStyled>
+    </div>
   )
 }
 

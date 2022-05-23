@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import AdCardListStyled from './AdCardList.styles'
 import AdCardItem from './AdCardItem'
 import Pagination from '../Pagination/Pagination'
+import { Grid } from '../../../theme'
 
 function AdCardListPagination() {
   const [ads, setAds] = useState([])
@@ -18,7 +18,7 @@ function AdCardListPagination() {
       const newAds = response.data.data
       setAds(newAds)
     } catch (e) {
-      console.error(e)
+      //  console.error(e)
     }
   }
 
@@ -29,19 +29,17 @@ function AdCardListPagination() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
-    <AdCardListStyled>
-      <div className="list-scroll">
+    <div>
+      <Grid gridGap="1.5rem">
         {ads && adsToShow.map((ad) => <AdCardItem key={ad.id} ad={ad} />)}
-      </div>
-
+      </Grid>
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={ads.length}
         currentPage={currentPage}
         paginate={paginate}
       />
-    </AdCardListStyled>
+    </div>
   )
 }
 export default AdCardListPagination
