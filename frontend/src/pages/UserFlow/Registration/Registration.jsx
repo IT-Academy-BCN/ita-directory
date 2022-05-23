@@ -80,6 +80,7 @@ function Register() {
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
           <InputGroup
             label="text"
+            hiddenLabel
             type="text"
             placeholder="Nombre"
             id="name"
@@ -91,6 +92,7 @@ function Register() {
           />
           <InputGroup
             label="text"
+            hiddenLabel
             type="text"
             placeholder="Apellido"
             id="lastname"
@@ -102,6 +104,7 @@ function Register() {
           />
           <InputGroup
             label="email"
+            hiddenLabel
             type="email"
             placeholder="Email"
             id="emailName"
@@ -113,6 +116,7 @@ function Register() {
           />
           <InputGroup
             label="password"
+            hiddenLabel
             type="password"
             placeholder="Contraseña"
             id="password"
