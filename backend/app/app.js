@@ -1,5 +1,4 @@
 const express = require('express')
-// const bodyParser = require("body-parser");
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
@@ -11,6 +10,7 @@ const mediaRoutes = require('./routes/media.routes')
 const locationRoutes = require('./routes/location.routes')
 const contactRoutes = require('./routes/contact.routes')
 const chatRoutes = require('./routes/chat.routes')
+const logRoutes = require('./routes/log.routes')
 
 const logger = require('./middleware/handlerLogger')
 
@@ -18,8 +18,6 @@ const logger = require('./middleware/handlerLogger')
 const adsRoutes = require('./routes/ads.routes')
 const authenticateToken = require('./middleware/verifyToken')
 
-// const UsersController = require("./controllers/users");
-// const {loadConstants} = require("./utils/CONSTANTS");
 const { loadConstants } = require('./utils/CONSTANTS')
 
 // Check the connection with the DB
@@ -62,6 +60,7 @@ app.use('/media', mediaRoutes)
 app.use('/location', locationRoutes)
 app.use('/contact', contactRoutes)
 app.use('/chat', authenticateToken, chatRoutes)
+app.use('/log', logRoutes)
 
 // app.get("/get-token", UsersController.getToken);
 // app.get("/test-token", authenticateToken, (req, res) => {
