@@ -23,15 +23,11 @@ describe('POST /users/v1/login', () => {
   // describe("given a user that doesn't exist", () => {})
   // describe('given empty fields', () => {})
 })
+
 describe('GET /users/', () => {
   test('test ', async () => {
     const response = await request(app).get('/users')
     expect(response.statusCode).toBe(200)
     expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
-  })
-})
-describe('test control, eliminar luego', () => {
-  test('prova', () => {
-    expect(1 + 1).toBe(2)
   })
 })
