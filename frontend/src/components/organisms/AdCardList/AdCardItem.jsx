@@ -1,25 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { colors } from '../../../theme'
-import casaPiscinaAd from '../../../assets/images/casaPiscinaAd2.jpg'
-import Button from '../../atoms/Button'
-import { AdCardItemStyled } from './AdCardItem.styles'
+import { Button, Text, Card } from '../../atoms'
+import { FlexBox } from '../../../theme/wrappers'
 
 function AdCardItem({ ad, openSelectedAdPopup }) {
   return (
-    <AdCardItemStyled>
-      <img src={casaPiscinaAd} alt="" />
-      <p className="description">{ad.description}</p>
-      <div className="itemsInLine">
-        <span className="price">{`${ad.price}€`}</span>{' '}
+    <Card>
+      <Text text={ad.description} />
+      <FlexBox justifyContent="space-between" alignItems="center" padding>
+        <Text as="span" text={`${ad.price}€`} fontSize="18px" />{' '}
         <Button
           buttonStyles={{ backgroundColor: colors.violet }}
           type="button"
           text="Localizar"
           onClick={openSelectedAdPopup}
         />
-      </div>
-    </AdCardItemStyled>
+      </FlexBox>
+    </Card>
   )
 }
 
