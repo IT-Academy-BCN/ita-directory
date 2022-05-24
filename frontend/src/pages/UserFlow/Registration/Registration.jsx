@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
-import { Body } from '../../../components/layout'
+import Body from '../../../components/layout/Body/Body'
 import { Button, CheckBox, Text } from '../../../components/atoms'
 import { Container, Form } from '../UserFlow.styles'
 import { InputGroup } from '../../../components/molecules'
@@ -30,7 +30,7 @@ function Register() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(registerSchema),
   })
@@ -66,15 +66,13 @@ function Register() {
 
   const submitForm = (data) => {
     const { name, lastname, email, password, privacy } = data
-    if (isValid) {
-      registerUser({
-        name,
-        lastnames: lastname,
-        email,
-        password,
-        privacy,
-      })
-    }
+    registerUser({
+      name,
+      lastname,
+      email,
+      password,
+      privacy,
+    })
   }
 
   return (
@@ -140,7 +138,7 @@ function Register() {
             loadingText="Registrando..."
             iconPosition="left"
             type="submit"
-            onClick={submitForm}
+            className="orange-gradient"
           />
           <Text>
             Tienes una cuenta? <Link to="/login">Inicia sesión</Link>

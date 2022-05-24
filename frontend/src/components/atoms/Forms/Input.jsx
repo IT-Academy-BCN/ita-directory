@@ -13,7 +13,7 @@ const InputStyled = styled.input`
   font-size: 16px;
 
   &:hover {
-    border: 1px solid ${colors.redPink};
+    border: 1px solid ${colors.lightBlue};
   }
   &.error {
     border: 1px solid #fecaca !important;

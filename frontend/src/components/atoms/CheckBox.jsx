@@ -29,8 +29,8 @@ function CheckBox({ error, register }) {
 }
 
 CheckBox.propTypes = {
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  register: PropTypes.func,
+  error: PropTypes.bool,
+  register: PropTypes.object,
 }
 
 export default CheckBox
