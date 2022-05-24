@@ -19,10 +19,10 @@ export const CheckBoxContainer = styled.div`
   }
 `
 
-function CheckBox({ error }) {
+function CheckBox({ error, register }) {
   return (
-    <CheckBoxContainer className="CheckBoxContainer">
-      <Input type="checkbox" className="Input " />
+    <CheckBoxContainer className="check-box-container">
+      <Input type="checkbox" className="input" register={register} />
       {error && <ErrorMessage text={error} />}
     </CheckBoxContainer>
   )
@@ -30,6 +30,7 @@ function CheckBox({ error }) {
 
 CheckBox.propTypes = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  register: PropTypes.func,
 }
 
 export default CheckBox
