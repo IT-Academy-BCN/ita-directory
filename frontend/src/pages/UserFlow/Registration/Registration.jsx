@@ -1,22 +1,32 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
-import CheckBox from '../../../components/atoms/CheckBox'
-import AsyncButton from '../../../components/atoms/Button'
-import { Container, Form, RedirectStyled } from '../UserFlow.styles'
+import { Button, CheckBox, Text } from '../../../components/atoms'
+import { Container, Form } from '../UserFlow.styles'
 import { InputGroup } from '../../../components/molecules'
-import registerSchema from '../../../validation/registerUserSchema'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 import axiosInstance from '../../../utils/axiosInstance'
 
+const registerSchema = yup.object().shape({
+  name: yup.string().required('this field is required'),
+  lastname: yup.string().required('this field is required'),
+  email: yup.string().email('must be a valid email').required('email is required'),
+  password: yup
+    .string()
+    .required('No password provided.')
+    .min(6, 'Password is too short - should be 6 chars minimum.')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+      'Debe contener un carácter especial (@ $ ! % * # ? &) y al menos un número'
+    ),
+  privacy: yup.boolean().oneOf([true], 'You must accept the terms and conditions').required(),
+})
+
 function Register() {
-  const [animated, setAnimated] = useState(false)
-  const [disabled, setIsDisabled] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -56,22 +66,13 @@ function Register() {
 
   const submitForm = (data) => {
     const { name, lastname, email, password, privacy } = data
-    setAnimated(true)
-    setIsDisabled(true)
-    setIsLoading(true)
-
     registerUser({
       name,
-      lastnames: lastname,
+      lastname,
       email,
       password,
       privacy,
     })
-    setTimeout(() => {
-      setAnimated(false)
-      setIsDisabled(false)
-      setIsLoading(false)
-    }, 2000)
   }
 
   return (
@@ -80,53 +81,51 @@ function Register() {
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
           <InputGroup
             label="text"
+            hiddenLabel
             type="text"
             placeholder="Nombre"
             id="name"
             name="name"
-            disabled={disabled}
             className="w-full"
             error={errors.name?.message}
             register={register('name')}
           />
           <InputGroup
             label="text"
+            hiddenLabel
             type="text"
             placeholder="Apellido"
             id="lastname"
             name="lastname"
-            disabled={disabled}
             className="w-full"
             error={errors.lastname?.message}
             register={register('lastname')}
           />
           <InputGroup
             label="email"
+            hiddenLabel
             type="email"
             placeholder="Email"
             id="emailName"
             name="email"
-            disabled={disabled}
-            className="w-full"
             error={errors.email?.message}
             register={register('email')}
           />
           <InputGroup
             label="password"
+            hiddenLabel
             type="password"
             placeholder="Contraseña"
             id="password"
             name="password"
-            disabled={disabled}
-            className="w-full mt-2"
+            className="w-full"
             error={errors.password?.message}
             register={register('password')}
           />
           <ContainerCheckBox className="w-full mt-2">
             <CheckBox
-              id="privacyPolicy"
-              name="privacyPolicy"
-              className="w-full mt-2"
+              id="privacy-policy"
+              name="privacy-policy"
               error={errors.privacy?.message}
               register={register('privacy')}
             />
@@ -134,19 +133,16 @@ function Register() {
               Acepto la <Link to="#">politica de privacidad</Link>.
             </SentenceCheckBox>
           </ContainerCheckBox>
-          <AsyncButton
+          <Button
             text="Registrarme"
             loadingText="Registrando..."
             iconPosition="left"
             type="submit"
-            className="w-full my-8 orange-gradient"
-            isLoading={isLoading}
-            animated={animated}
-            onClick={submitForm}
+            className="orange-gradient"
           />
-          <RedirectStyled>
+          <Text>
             Tienes una cuenta? <Link to="/login">Inicia sesión</Link>
-          </RedirectStyled>
+          </Text>
         </Form>
       </Container>
     </Body>

@@ -12,7 +12,6 @@ const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitleVisible = true }) {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 
-  // 'Mi Perfil' dropdown children useState/ArrayConst mockup
   const children = [
     { path: '/profile', text: 'Editar perfil' },
     { path: '/my-bills', text: 'Mis facturas' },
@@ -29,7 +28,6 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
 
   return (
     <HeaderStyled logoColor={logoColor}>
-      <Text as="p" text="HOOLA" />
       <Container>
         <div className="header__container">
           <Link className="header__logo-group" to="/">
