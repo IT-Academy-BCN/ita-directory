@@ -42,8 +42,8 @@ function Ad() {
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    getAd(id).then(() => setAd(ad))
-  }, [ad, id])
+    getAd(id).then((data) => setAd(data))
+  }, [id])
 
   // const images =
   // 	ad &&
@@ -83,6 +83,8 @@ function Ad() {
       thumbnailAlt: 'Casa piscina',
     },
   ]
+
+  // console.log('ad', ad)
 
   return (
     <div>

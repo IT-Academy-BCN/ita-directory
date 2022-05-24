@@ -3,6 +3,7 @@ import Icon from './Icon'
 import Text from './Text'
 import Banner from './Banner'
 import Button from './Button'
+import ImageButton from './ImageButton'
 import Title from './Title'
 import Card from './Card'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
@@ -23,6 +24,7 @@ export {
   ErrorMessage,
   Input,
   Button,
+  ImageButton,
   InputNumber,
   TextArea,
   SelectUnit,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
+// import Icon from './Icon'
 import { colors, font } from '../../theme'
 
 const StyledButton = styled.button.attrs({})`
@@ -29,6 +30,10 @@ const StyledButton = styled.button.attrs({})`
   }
   &.green-gradient {
     background: linear-gradient(90deg, ${colors.lightGreen}, ${colors.darkGreen});
+  }
+  &.transparent {
+    background: transparent;
+    color: ${colors.darkBlue};
   }
   &.darkRed {
     background: ${colors.extraDarkRed};
