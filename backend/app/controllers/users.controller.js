@@ -175,7 +175,6 @@ exports.getAllUsers = async (req, res, next) => {
         updated_at: true,
         user_status_id: true,
         user_role_id: true,
-        refresh_token: true,
         media: {
           select: {
             path: true,
@@ -194,7 +193,6 @@ exports.getAllUsers = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   const { body = {} } = req
   // Check that the request isn't empty
-
   if (!body.email || !body.password) {
     const message = 'Content can not be empty!'
     return next({
@@ -229,7 +227,7 @@ exports.login = async (req, res, next) => {
       })
     }
     const token = signToken(USER.id)
-    const refreshToken = signRefreshToken(USER.id)
+    const refreshToken = await signRefreshToken(USER.id)
 
     return res.status(200).json({
       code: 'success',
@@ -239,7 +237,10 @@ exports.login = async (req, res, next) => {
       refreshToken,
     })
   } catch (err) {
-    return next(new Error(err))
+    return res.status(500).json({
+      code: 'error',
+      message: 'Internal Server Error.',
+    })
   }
 }
 
