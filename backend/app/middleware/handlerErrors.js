@@ -12,16 +12,33 @@ const routeFoundHandler = (req, res, next) => {
   })
 }
 
+// Validation error handler
+// const validationErrorHandler = (err, req, res, next) => {
+//   if (err.name === 'ValidationError') {
+//     const { statusCode = 400, code, header, message } = err
+//     logger.error({ code, header, message })
+//     res.status(statusCode).json({
+//       code,
+//       header,
+//       message,
+//     })
+//   }
+//   next(err)
+// }
+
 // Error handler
 const errorHandler = (err, req, res, next) => {
   const { statusCode = 500, code, header, message } = err
-  logger.error({ code, header, message })
-  res.status(statusCode)
-  res.json({
+  const resp = {
     code,
     header,
     message,
-  })
+  }
+  if (err.name === 'ValidationError') {
+    resp.code = 400
+  }
+  logger.error({ code, header, message })
+  res.status(statusCode).json(resp)
 }
 
 function wrapAsync(fn) {
@@ -32,4 +49,8 @@ function wrapAsync(fn) {
   }
 }
 
-module.exports = { routeFoundHandler, errorHandler, wrapAsync }
+module.exports = {
+  routeFoundHandler,
+  errorHandler,
+  wrapAsync,
+}
