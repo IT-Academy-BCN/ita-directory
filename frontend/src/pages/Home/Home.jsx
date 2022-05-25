@@ -4,7 +4,6 @@ import { Banner } from '../../components/atoms'
 import { MapOfDistricts } from '../../components/organisms'
 import { Container, device } from '../../theme'
 
-// eslint-disable-next-line import/prefer-default-export
 const HomeContainer = styled(Container)`
   flex-direction: column;
   min-height: calc(100vh - 360px);
