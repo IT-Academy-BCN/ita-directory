@@ -55,7 +55,7 @@ function Notification({ message, id, icon, colorIcon }) {
       </NotificationIconStyled>
       <Button
         type="close"
-        text={<Icon name="close" size="20px" />}
+        text={<Icon name="close" size={20} />}
         onClick={closeNotification}
         buttonStyles={{
           position: 'relative',

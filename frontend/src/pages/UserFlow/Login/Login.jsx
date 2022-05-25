@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
@@ -7,14 +8,26 @@ import Body from '../../../components/layout/Body/Body'
 import { Button } from '../../../components/atoms'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
 import { InputGroup } from '../../../components/molecules'
-import loginSchema from '../../../validation/loginSchema'
 import { login } from '../../../store/userSlice'
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import Urls from '../../../utils/urls'
 
+const loginSchema = yup.object().shape({
+  email: yup.string().email('must be a valid email').required('email is required'),
+  password: yup
+    .string()
+    .required('No password provided.')
+    .min(6, 'Password is too short - should be 6 chars minimum.'),
+  /* .matches(
+			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+			"Debe contener un carácter especial (@ $ ! % * # ? &) y al menos un número"
+		), */
+})
+
 function Login() {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const {
     register,
@@ -37,11 +50,8 @@ function Login() {
       if (response) {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('refreshToken', response.data.refreshToken)
-
-        const userData = await axiosInstance
-          .get(`/users/v1/get-me`)
-          // eslint-disable-next-line no-shadow
-          .then((response) => response.data)
+        history.push('/')
+        const userData = await axiosInstance.get(`/users/v1/get-me`).then((res) => res.data)
 
         if (userData) dispatch(login(userData))
       }
@@ -94,7 +104,6 @@ function Login() {
             placeholder="Introduce tu contraseña"
             id="passName"
             name="password"
-            className="w-full mt-2"
             error={errors.password?.message}
             register={register('password')}
           />
@@ -103,9 +112,9 @@ function Login() {
             loadingText="Accediendo"
             iconPosition="left"
             type="submit"
-            className="blue-gradient w-full my-8"
+            className="blue-gradient"
           />
-          <div className="w-full">
+          <div>
             <RedirectStyled>
               Has olvidado tu contraseña?
               <Link to="/recover-password">Recupérala</Link>
