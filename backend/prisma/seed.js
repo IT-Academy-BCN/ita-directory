@@ -1,21 +1,23 @@
-const argon2 = require('argon2')
+// TODO: Refactor code to pass eslint checks!!!
+
+/* eslint-disable camelcase */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-await-in-loop */
+
+// const argon2 = require('argon2')
 const { PrismaClient } = require('@prisma/client')
+
 const prisma = new PrismaClient()
 const ads = require('./seedFiles/ads')
 const ad_types = require('./seedFiles/ad_types')
 const ad_status = require('./seedFiles/ad_status')
 const levels = require('./seedFiles/levels')
 const level_types = require('./seedFiles/level_types')
+// const { hashPassword } = require('../app/utils/utils')
+const checkAndHashPassword = require('./middleware/checkAndHashPassword')
 
-//TODO hashPassword should be imported from utils ?
-const hashPassword = async (password) => {
-  return await argon2.hash(password, {
-    type: argon2.argon2id,
-    memoryCost: 15360,
-    timeCost: 2,
-    parallelism: 1,
-  })
-}
+// Middleware to check and Hash the password provided
+prisma.$use(checkAndHashPassword)
 
 const user_roles = [
   {
@@ -62,7 +64,7 @@ const users = [
     email: 'test@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'Test-test',
+    password: 'Test-test99@',
   },
   {
     name: 'test2',
@@ -109,9 +111,9 @@ const users = [
       website: 'www.test.com',
       tags: ['test', 'test'],
       description: 'test test test',
-      media_id: '', //?
+      media_id: '', // ?
       version: 1,
-      layout_type: '', //?
+      layout_type: '', // ?
     },
   },
 ]
@@ -249,7 +251,6 @@ async function main() {
       update: {},
       create: {
         ...user,
-        password: await hashPassword(user.password),
       },
     })
   }
