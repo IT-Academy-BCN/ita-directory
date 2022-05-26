@@ -5,19 +5,20 @@
 /* eslint-disable no-await-in-loop */
 
 // const argon2 = require('argon2')
-const { PrismaClient } = require('@prisma/client')
+// const { PrismaClient } = require('@prisma/client')
 
-const prisma = new PrismaClient()
+// const prisma = new PrismaClient()
+const prisma = require('./indexPrisma')
 const ads = require('./seedFiles/ads')
 const ad_types = require('./seedFiles/ad_types')
 const ad_status = require('./seedFiles/ad_status')
 const levels = require('./seedFiles/levels')
 const level_types = require('./seedFiles/level_types')
 // const { hashPassword } = require('../app/utils/utils')
-const checkAndHashPassword = require('./middleware/checkAndHashPassword')
+// const checkAndHashPassword = require('./middleware/checkAndHashPassword')
 
 // Middleware to check and Hash the password provided
-prisma.$use(checkAndHashPassword)
+// prisma.$use(checkAndHashPassword)
 
 const user_roles = [
   {
