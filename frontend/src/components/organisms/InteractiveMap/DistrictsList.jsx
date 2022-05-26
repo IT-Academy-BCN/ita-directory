@@ -6,28 +6,12 @@ import allDistricts from './data/all-districts'
 import { MAP_ACTIONS } from './store/reducer'
 import { Container, GridItem } from './mapOfDistrictsStyles'
 import { device } from '../../../theme'
+import { Lists } from '../../atoms'
 
 const StyledList = styled.div`
   cursor: pointer;
   width: 100%;
   margin-bottom: 0.7rem;
-
-  ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.2rem;
-    margin-right: 1rem;
-
-    /* flex flex-col mb-3 */
-    ul {
-      margin: 0;
-      padding: 0;
-    }
-  }
 
   .district {
     font-size: 12px;
@@ -93,7 +77,7 @@ function DistrictsList() {
 
   const renderList = (district, neighborhoods) => (
     <StyledList key={district}>
-      <ul>
+      <Lists>
         <li
           className={state.districtID === district ? 'district lit-district' : 'district'}
           onMouseOver={() =>
@@ -105,7 +89,7 @@ function DistrictsList() {
         >
           {district === 'L-Eixample' ? district.replace('-', '´') : district.replace('-', ' ')}
         </li>
-        <ul className="">
+        <ul>
           {neighborhoods
             .filter((n) => Number.isFinite(n.nr))
             .map(({ nr, id, name }) => (
@@ -122,7 +106,7 @@ function DistrictsList() {
               </li>
             ))}
         </ul>
-      </ul>
+      </Lists>
     </StyledList>
   )
 
