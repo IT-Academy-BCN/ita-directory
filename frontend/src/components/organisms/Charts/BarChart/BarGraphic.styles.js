@@ -132,18 +132,6 @@ export const StyledSvg = styled.svg`
 
 export const ChartLegend = styled.div`
   margin: 20px auto;
-  ul {
-    animation: fadeIn ease-in 1s;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  li {
-    margin: 0 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-  }
 
   .dot {
     display: inline-block;
