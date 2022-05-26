@@ -4,8 +4,9 @@ const checkAndHashPassword = async (params, next) => {
   // console.log('Prisma middleware!!')
 
   const checkAndHashPass = async (pass) => {
-    // const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
-    const regex = /^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%&*?])\S*$/
+    let regexStr = process.env.PASSWORD_REGEX
+    regexStr = regexStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // escape regex string
+    const regex = new RegExp(regexStr)
     return regex.test(pass) ? hashPassword(pass) : null
   }
 
