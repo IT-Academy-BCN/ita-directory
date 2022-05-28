@@ -20,7 +20,7 @@ const registerSchema = yup.object().shape({
     .required('No password provided.')
     .min(6, 'Password is too short - should be 6 chars minimum.')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+      /^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%&*?])\S*$/,
       'Debe contener un carácter especial (@ $ ! % * # ? &) y al menos un número'
     ),
   privacy: yup.boolean().oneOf([true], 'You must accept the terms and conditions').required(),

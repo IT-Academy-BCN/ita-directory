@@ -19,11 +19,8 @@ const loginSchema = yup.object().shape({
   password: yup
     .string()
     .required('No password provided.')
-    .min(6, 'Password is too short - should be 6 chars minimum.'),
-  /* .matches(
-			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-			"Debe contener un carácter especial (@ $ ! % * # ? &) y al menos un número"
-		), */
+    .min(6, 'Password is too short - should be 6 chars minimum.')
+    .matches(/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%&*?])\S*$/),
 })
 
 function Login() {
