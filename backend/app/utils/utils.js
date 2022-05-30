@@ -27,15 +27,20 @@ const signToken = (userid, maxAge = '15m') => {
 }
 
 // maxAge = "1d" => 86400 must be a number for Redis expiration time
-const signRefreshToken = (userId, maxAge = 86400) => {
-  const hashedId = hashIds.encode(userId)
-  const payload = { iss: 'itacademy', sub: { user_id: hashedId } }
-  const secret = process.env.JWT_REFRESH_TOKEN_SECRET
-  const options = { expiresIn: maxAge }
-  const token = JWT.sign(payload, secret, options)
+const signRefreshToken = async (userId, maxAge = 86400) => {
+  try {
+    const hashedId = hashIds.encode(userId)
+    const payload = { iss: 'itacademy', sub: { user_id: hashedId } }
+    const secret = process.env.JWT_REFRESH_TOKEN_SECRET
+    const options = { expiresIn: maxAge }
+    const token = JWT.sign(payload, secret, options)
 
-  client.set(userId.toString(), token, { EX: maxAge })
-  return token
+    await client.SET(userId.toString(), token, { EX: maxAge })
+    return token
+  } catch (err) {
+    logger.error(err)
+    throw new Error(err)
+  }
 }
 
 const hashPassword = async (password) =>

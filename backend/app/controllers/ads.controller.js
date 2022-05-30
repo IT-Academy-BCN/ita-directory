@@ -6,6 +6,7 @@ const {
   adsSchema,
   AdByIdParamSchema,
   getAdsByTypeSchema,
+  getUserAdsSchema,
   patchAdSchema,
 } = require('../utils/schemaValidation')
 const { parseAdsFromCsvBuffer } = require('../utils/parseAdsFromCsvBuffer')
@@ -125,6 +126,40 @@ async function createAdsFromCSVBuffer(req, res) {
       apiResponse({
         message: 'An error occurred while posting the ads.',
         errors: err.message,
+        status: 500,
+      })
+    )
+  }
+}
+
+async function getUserAds(req, res) {
+  try {
+    const userId = parseInt(req.params.userId, 10)
+    await getUserAdsSchema.validateAsync(userId)
+    const ads = await prisma.ads.findMany({
+      where: { user_id: userId },
+    })
+    return res.status(200).json(
+      apiResponse({
+        message: 'Data fetched correctly.',
+        data: ads,
+        status: 200,
+      })
+    )
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      return res.status(400).json(
+        apiResponse({
+          message: 'userId not provided or wrong format.',
+          err: err.message,
+          status: 400,
+        })
+      )
+    }
+    return res.status(500).json(
+      apiResponse({
+        message: 'An error occurred with your query.',
+        err: err.message,
         status: 500,
       })
     )
@@ -501,6 +536,7 @@ module.exports = {
   getAdTypes,
   getAdsByLocation,
   getAdsByTypeAndLocation,
+  getUserAds,
   deleteById,
   updateAd,
   createAdsFromCSVBuffer,

@@ -95,8 +95,8 @@ function Button({
 }
 
 Button.propTypes = {
-  type: PropTypes.string,
-  text: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   loadingText: PropTypes.string,
   isLoading: PropTypes.bool,
   iconPosition: PropTypes.string,

@@ -5,14 +5,13 @@ import PropTypes from 'prop-types'
 import { HeaderStyled, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
-import { Text, Dropdown } from '../../atoms'
+import { Text, Dropdown, Li, Ul } from '../../atoms'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
 function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitleVisible = true }) {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 
-  // 'Mi Perfil' dropdown children useState/ArrayConst mockup
   const children = [
     { path: '/profile', text: 'Editar perfil' },
     { path: '/my-bills', text: 'Mis facturas' },
@@ -48,15 +47,15 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
             {dropdownVisible ? (
               <Dropdown setDropdownVisible={setDropdownVisible} parentId="dropdownButton">
                 {isLoggedIn ? (
-                  <ul>
+                  <Ul>
                     {children?.map(({ path, text }) => (
-                      <li key={text}>
+                      <Li key={text}>
                         <Link key={text} to={path}>
                           {text}
                         </Link>
-                      </li>
+                      </Li>
                     ))}
-                  </ul>
+                  </Ul>
                 ) : null}
               </Dropdown>
             ) : null}

@@ -14,7 +14,7 @@ import { device } from '../../../theme'
 //   FilterHr,
 // } from './AdListFilter.style'
 
-import Button from '../../../components/atoms/Button'
+import { Button } from '../../../components/atoms'
 
 const Card = styled.div`
   width: 30%;

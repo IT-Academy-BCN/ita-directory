@@ -46,6 +46,8 @@ const getRegionByLocationSchema = Joi.string().required()
 
 const getAdsByTypeSchema = Joi.string().required()
 
+const getUserAdsSchema = Joi.number().required()
+
 const conversationUsersSchema = Joi.object({
   user1Id: Joi.number().required(),
   user2Id: Joi.number().required(),
@@ -63,6 +65,11 @@ const messageSchema = Joi.object({
   text: Joi.string().required(),
 })
 
+const logSchema = Joi.object().keys({
+  msg: Joi.string().required(),
+  level: Joi.string().valid('trace', 'debug', 'info', 'warn', 'error', 'fatal'),
+})
+
 module.exports = {
   contactSchema,
   registerSchema,
@@ -70,9 +77,11 @@ module.exports = {
   AdByIdParamSchema,
   getRegionByLocationSchema,
   getAdsByTypeSchema,
+  getUserAdsSchema,
   patchAdSchema,
   conversationUsersSchema,
   conversationUserSchema,
   conversationSchema,
   messageSchema,
+  logSchema,
 }

@@ -9,7 +9,7 @@ import Card from './Card'
 import { Label, ErrorMessage, Input, InputNumber, TextArea, SelectUnit } from './Forms'
 import { Notification, Notifications } from './Notifications'
 import Dropdown from './Dropdown'
-import { Li, Lists, Ol, Dl, Dt, Dd } from './List'
+import { Li, Lists, Ol, Dl, Dt, Dd, Ul } from './List'
 import { TableStyle, THead, Th, TBody, Tr, Td } from './Table'
 
 export {
@@ -31,6 +31,7 @@ export {
   Notification,
   Notifications,
   Li,
+  Ul,
   Lists,
   Ol,
   Dl,
