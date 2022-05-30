@@ -78,16 +78,16 @@ const CardInput = styled.input`
   color: #e22e2e;
 `
 
-const CardCheckbox = styled.input`
-  margin-right: 0.3rem;
-  padding-left: 0.5rem;
-  width: 20px;
-  height: 20px;
-  box-shadow: 0 3px 6px #00000029;
-  border: none;
-  border-radius: 4px;
-  color: #e22e2e;
-`
+// const CardCheckbox = styled.input`
+//   margin-right: 0.3rem;
+//   padding-left: 0.5rem;
+//   width: 20px;
+//   height: 20px;
+//   box-shadow: 0 3px 6px #00000029;
+//   border: none;
+//   border-radius: 4px;
+//   color: #e22e2e;
+// `
 
 const CardSelectorWrapper = styled.div`
   display: flex;
@@ -121,7 +121,7 @@ const FilterHr = styled.hr`
 //   color: white;
 // `
 
-function AdFilters({ filtrar, maxPriceValue, minPriceValue, maxM2, minM2 }) {
+function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2 }) {
   const [maxPrice, setMaxPrice] = useState('')
   const [maxSize, setMaxSize] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -134,7 +134,7 @@ function AdFilters({ filtrar, maxPriceValue, minPriceValue, maxM2, minM2 }) {
     setMinPrice('')
     setMinSize('')
     setGastosInc(false)
-    filtrar(undefined)
+    filter(undefined)
   }
 
   return (
@@ -178,18 +178,18 @@ function AdFilters({ filtrar, maxPriceValue, minPriceValue, maxM2, minM2 }) {
             onChange={(e) => setMaxSize(e.target.value)}
           />
         </CardSelectorWrapper>
-        <CardSelectorWrapper>
+        {/* <CardSelectorWrapper>
           <CardCheckbox
             type="checkbox"
             defaultChecked={gastosInc}
             onClick={() => (gastosInc ? setGastosInc(false) : setGastosInc(true))}
           />
           Gastos Incluidos
-        </CardSelectorWrapper>
+        </CardSelectorWrapper> */}
         <Button
           text="Filtrar"
           className="blue-gradient"
-          onClick={() => filtrar({ gastosInc, maxPrice, minPrice, maxSize, minSize })}
+          onClick={() => filter({ gastosInc, maxPrice, minPrice, maxSize, minSize })}
         />
       </CardHeader>
     </Card>
@@ -197,11 +197,11 @@ function AdFilters({ filtrar, maxPriceValue, minPriceValue, maxM2, minM2 }) {
 }
 
 AdFilters.propTypes = {
-  filtrar: PropTypes.object.isRequired,
-  maxPriceValue: PropTypes.number.isRequired,
-  minPriceValue: PropTypes.number.isRequired,
-  maxM2: PropTypes.number.isRequired,
-  minM2: PropTypes.number.isRequired,
+  filter: PropTypes.func.isRequired,
+  maxPriceValue: PropTypes.string,
+  minPriceValue: PropTypes.string,
+  maxM2: PropTypes.string,
+  minM2: PropTypes.string,
 }
 
 export default AdFilters

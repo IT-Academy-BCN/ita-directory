@@ -30,8 +30,8 @@ function Map({ lat = 41.3879, lng = 2.16992 }) {
 }
 
 Map.propTypes = {
-  lat: PropTypes.number,
-  lng: PropTypes.number,
+  lat: PropTypes.string,
+  lng: PropTypes.string,
 }
 
 export default Map

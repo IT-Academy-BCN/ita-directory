@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 // import Icon from './Icon'
 import { colors, font } from '../../theme'
+import Icon from './Icon'
+import Text from './Text'
 
 const StyledButton = styled.button.attrs({})`
   display: flex;
@@ -84,22 +86,22 @@ function Button({
       onClick={onClick}
     >
       {iconPosition === 'left' &&
-        (isLoading && icon ? <FontAwesomeIcon icon={faSpinner} style={{ ...iconStyles }} /> : null)}
-      <span style={{ ...textStyles }}>{isLoading ? loadingText : text}</span>
+        (isLoading && icon ? <Icon name={icon} style={{ ...iconStyles }} /> : null)}
+      <Text as="span" text={isLoading ? loadingText : text} style={{ ...textStyles }} />
       {iconPosition === 'right' &&
-        (isLoading && icon ? <FontAwesomeIcon icon={faSpinner} style={{ ...iconStyles }} /> : null)}
+        (isLoading && icon ? <Icon name={icon} style={{ ...iconStyles }} /> : null)}
     </StyledButton>
   )
 }
 
 Button.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   text: PropTypes.string,
   loadingText: PropTypes.string,
   isLoading: PropTypes.bool,
   iconPosition: PropTypes.string,
   className: PropTypes.string,
-  icon: PropTypes.node,
+  icon: PropTypes.string,
   buttonStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   textStyles: PropTypes.object,
   iconStyles: PropTypes.object,

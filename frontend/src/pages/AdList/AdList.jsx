@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons'
-import _ from 'lodash'
+import React, { useEffect, useState, useMemo } from 'react'
+// import _ from 'lodash'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
-import Button from '../../components/atoms/Button'
-import Colors from '../../theme/colors'
+import { Button } from '../../components/atoms'
+import { colors, Container } from '../../theme'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 import AdListFilter from './AdListFilter/AdListFilter'
 
 // Styles
 import { AdListStyled } from './AdList.style'
-import { Container } from '../../theme'
 import axiosInstance from '../../utils/axiosInstance'
 
 const buttonStyle = {
@@ -20,7 +18,7 @@ const buttonStyle = {
   height: 'auto',
   fontSize: '0.95rem',
   fontFamily: 'Arial',
-  color: Colors.lightGray,
+  color: colors.lightGray,
   background: 'transparent',
   boxShadow: 'none',
   outline: 'none',
@@ -28,15 +26,27 @@ const buttonStyle = {
 }
 
 function AdList() {
-  const [filtro, setFiltro] = useState()
+  const [filterParams, setFilterParams] = useState()
   const [mapView, setMapView] = useState(false)
-  const [filteredAdList, setFilteredAdlist] = useState([])
   const [adList, setAdList] = useState([])
   const [loading, setLoading] = useState(true)
-  const [maxPriceValue, setMaxPriceValue] = useState()
-  const [minPriceValue, setMinPriceValue] = useState()
-  const [maxM2, setMaxM2] = useState()
-  const [minM2, setMinM2] = useState()
+
+  // Added filters by Kevin
+  const byPrice = (min, max) => (ad) => {
+    if (min == null && max == null) return true
+    return min <= ad.price && ad.price <= max
+  }
+
+  const bySize = (min, max) => (ad) => {
+    if (min == null && max == null) return true
+    return min <= ad.square_meters && ad.square_meters <= max
+  }
+
+  // const byIncludedExpenses = (included) => (ad) => {
+  //   console.log('byIncludedExpenses', ad, included)
+  //   if (!included) return true
+  //   return ad.gastosIncluidos === included
+  // }
 
   useEffect(() => {
     const fetchAds = async () => {
@@ -47,63 +57,30 @@ function AdList() {
     fetchAds()
   }, [])
 
-  // console.log(AdList);
-  useEffect(() => {
-    let filteredAds = []
-    filteredAds =
-      filtro === undefined
-        ? adList
-        : _.filter(adList, (e) => {
-            if (
-              filtro.maxPrice === '' &&
-              filtro.minPrice === '' &&
-              filtro.maxSize === '' &&
-              filtro.maxSize === ''
-            ) {
-              return filtro.gastosInc ? e.gastosIncluidos : e
-            }
-            if (filtro.maxPrice === '' && filtro.minPrice === '') {
-              return (
-                (filtro.gastosInc ? e.gastosIncluidos : e) &&
-                e.m2 <= filtro.maxSize &&
-                e.m2 >= filtro.minSize
-              )
-            }
-            if (filtro.maxSize === '' && filtro.maxSize === '') {
-              return (
-                (filtro.gastosInc ? e.gastosIncluidos : e) &&
-                e.price <= filtro.maxPrice &&
-                e.price >= filtro.minPrice
-              )
-            }
-            return (
-              (filtro.gastosInc ? e.gastosIncluidos : e) &&
-              e.m2 <= filtro.maxSize &&
-              e.m2 >= filtro.minSize &&
-              e.price <= filtro.maxPrice &&
-              e.price >= filtro.minPrice
-            )
-          })
-    setFilteredAdlist(filteredAds)
-  }, [filtro, adList])
+  const filteredAdList = useMemo(() => {
+    const filteredAds = adList
+      .filter(byPrice(filterParams?.minPrice || null, filterParams?.maxPrice || null))
+      .filter(bySize(filterParams?.minSize || null, filterParams?.maxSize || null))
+    return filteredAds
+  }, [filterParams, adList])
 
-  const renderList = filteredAdList.map((e) => <AdCard {...e} key={e.id} />)
-
-  useEffect(() => {
-    if (loading === false) {
-      const priceValue = Array.from(renderList, (o) => o.props.price)
-      const maxPV = Math.max(...priceValue)
-      const minPV = Math.min(...priceValue)
-      const sizeValue = Array.from(renderList, (o) => o.props.m2)
-      const mxM2 = Math.max(...sizeValue)
-      const mnM2 = Math.min(...sizeValue)
-
-      setMaxPriceValue(maxPV)
-      setMinPriceValue(minPV)
-      setMaxM2(mxM2)
-      setMinM2(mnM2)
-    }
-  }, [renderList, loading])
+  const renderList = filteredAdList.map((e) => (
+    <AdCard
+      id={e.id}
+      userId={e.user_id}
+      title={e.title}
+      description={e.description}
+      city={e.city}
+      nRooms={e.n_rooms}
+      price={e.price}
+      squareMeters={e.square_meters}
+      nBathrooms={e.n_bathrooms}
+      mapLat={e.map_lat}
+      mapLon={e.map_lon}
+      adTypeId={e.ad_type_id}
+      key={e.id}
+    />
+  ))
 
   return (
     <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
@@ -112,11 +89,11 @@ function AdList() {
           {!loading ? (
             <>
               <AdListFilter
-                filtrar={(data) => setFiltro(data)}
-                maxPriceValue={maxPriceValue}
-                minPriceValue={minPriceValue}
-                maxM2={maxM2}
-                minM2={minM2}
+                filter={setFilterParams}
+                maxPriceValue={filterParams?.maxPrice}
+                minPriceValue={filterParams?.minPrice}
+                maxM2={filterParams?.maxSize}
+                minM2={filterParams?.minSize}
               />
               <div className="ads">
                 <div className="tree-search">Madrid - Alquiler</div>
@@ -126,7 +103,7 @@ function AdList() {
                     <Button
                       type="button"
                       text="Vista de detalles"
-                      icon={faBars}
+                      icon="search"
                       iconPosition="left"
                       iconStyles={{
                         marginRight: 5,
@@ -139,7 +116,7 @@ function AdList() {
                     <Button
                       type="button"
                       text="Vista de mapa"
-                      icon={faMapMarkerAlt}
+                      icon="map"
                       iconPosition="left"
                       iconStyles={{
                         marginRight: 5,

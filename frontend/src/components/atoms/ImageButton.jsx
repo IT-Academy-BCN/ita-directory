@@ -19,15 +19,15 @@ const ImageButtonStyled = Styled.button`
   cursor: pointer;
   border: none;
   padding: 0;
-  overflow: hidden;
 
   & img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+    width: 170px;      
+    height: 170px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
     border: 2px solid #fff;
   }
-
   &:focus img { 
     border: 2px solid #000;
   }

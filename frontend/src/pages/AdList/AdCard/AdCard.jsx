@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 // import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { colors, device } from '../../../theme'
-import { Button, ImageButton } from '../../../components/atoms'
-import ContactModal from '../../../components/organisms/ContactModal/ContactModal'
+import { Button, ImageButton, Text } from '../../../components/atoms'
+import { ContactModal } from '../../../components/organisms'
 import adImage from '../../../assets/images/casaPiscinaAd2.jpg'
 
 const AdCardStyled = styled.div`
@@ -15,103 +15,63 @@ const AdCardStyled = styled.div`
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   margin-bottom: 1.5rem;
-  height: 175px;
   overflow: hidden;
 
-  ${
-    '' /* img {
-    height: 170px;
-    width: 200px;
-    object-fit: contain;
-    border-radius: 6px;
-    cursor: pointer;
-  } */
-  }
-
-  .content {
+  .ad-card__content {
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.5rem;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    gap: 0.7rem;
 
-    .content-text {
-      .wrapper-buttons {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-      }
-      p.address {
-        font-size: 14px;
-        color: #666;
-      }
+    .ad-card__address {
+      font-size: 14px;
+      color: ${colors.grey};
+    }
+    .ad-card__property-data {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: bold;
+      color: ${colors.grey};
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ad-card__price {
+      color: ${colors.darkOrange};
 
-      .property-data {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
+      font-size: 18px;
+    }
+    .ad-card__description {
+      font-size: 14px;
+      color: ${colors.grey};
+    }
 
-        span {
-          font-size: 14px;
-        }
-
-        span.price {
-          color: ${colors.darkOrange};
-          font-weight: bold;
-          font-size: 18px;
-        }
-      }
-
-      .description {
-        font-size: 14px;
-      }
-
-      button {
-        ${
-          '' /* display: 'flex',
-        alignItems: 'center',
-        width: '7.5rem',
-        height: '2.2rem',
-        marginTop: 'auto',
-        fontSize: '1.125rem',
-        fontFamily: 'Arial', */
-        }
-        font-weight: bold;
-        color: ${colors.strongBlue}
-        background: 'transparent',
-        ${
-          '' /* boxShadow: 'none',
-        paddingLeft: '0', */
-        }
-      }
+    .ad-card__contact-button {
+      justify-content: start;
+      font-weight: bold;
+      color: ${colors.strongBlue};
+      background: 'transparent';
+      margin: 0;
     }
   }
-  @media ${device.Tablet} {
-    display: grid;
-    grid-template-columns: 30% 70%;
 
-    img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-
-    .content {
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-      height: 100%;
-    }
-
-    .address,
-    .property-data {
-      padding-bottom: 1rem;
+  @media ${device.Laptop} {
+    .ad-card__content {
+      .ad-card__property-data {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
     }
   }
 `
 
 function AdCard({
-  e,
   title,
   city,
   mapLon,
@@ -144,31 +104,28 @@ function AdCard({
         tabIndex={id}
         adImage={adImage}
       />
-      <div className="content">
-        <div className="content-text">
-          <p className="address">{`${title} en ${city}`}</p>
-          <div className="property-data">
-            <span className="price">{price}€/mes</span>
-            <span>{nRooms} habitaciones</span>
-            <span>{squareMeters}m2</span>
-            <span>Gastos {gastosIncluidos ? ' incluidos' : ' no incluidos'}</span>
-          </div>
-          <div className="description">&quot;{description}&quot;</div>
-          <div className="wrapper-buttons">
-            <Button
-              className="transparent"
-              text="Contactar"
-              // icon={faComments}
-              iconPosition="left"
-              iconStyles={{
-                marginRight: 5,
-                paddingLeft: 0,
-              }}
-              onClick={() => setActive(true)}
-              tabIndex={id + 10}
-            />
-          </div>
+      <div className="ad-card__content">
+        <Text as="span" text={`${title} en ${city}`} className="ad-card__address" />
+        <div className="ad-card__property-data">
+          <Text as="span" text={`${price}€/mes`} className="ad-card__price" />
+          <Text as="span" text={`${nRooms} habitaciones`} />
+          <Text as="span" text={`${squareMeters}m2`} />
+          <Text as="span" text={`Gastos ${gastosIncluidos ? ' incluidos' : ' no incluidos'}`} />
         </div>
+        <div className="ad-card__description">&quot;{description}&quot;</div>
+        <Button
+          className="transparent ad-card__contact-button"
+          text="Contactar"
+          icon="chat"
+          color={colors.strongBlue}
+          iconPosition="left"
+          iconStyles={{
+            marginRight: 5,
+            paddingLeft: 0,
+          }}
+          onClick={() => setActive(true)}
+          tabIndex={id + 10}
+        />
       </div>
       <ContactModal active={active} hideModal={() => setActive(false)} />
     </AdCardStyled>
@@ -176,11 +133,10 @@ function AdCard({
 }
 
 AdCard.propTypes = {
-  e: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  mapLon: PropTypes.number.isRequired,
-  mapLat: PropTypes.number.isRequired,
+  city: PropTypes.string,
+  mapLon: PropTypes.string.isRequired,
+  mapLat: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   squareMeters: PropTypes.number.isRequired,
