@@ -14,7 +14,7 @@ import MyBills from './pages/MyBills/MyBills'
 import Bill from './pages/MyBills/Bill'
 import UserAds from './pages/UserAds/UserAds'
 import ProtectedRoute from './components/organisms/ProtectedRoute'
-import PathsMenu from './components/atoms/menu/PathsMenu'
+import Collaborators from './pages/Collaborators/Collaborators'
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/new-ad" component={CreateNewAd} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Registration} />
-      <PathsMenu />
+      <Route exact path="/collaborators" component={Collaborators} />
       <ProtectedRoute exact path="/profile" component={Profile} />
       <ProtectedRoute exact path="/recover-password" component={RecoverPassword} />
       <ProtectedRoute exact path="/ads" component={AdList} />
