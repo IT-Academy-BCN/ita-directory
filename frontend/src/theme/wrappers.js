@@ -19,8 +19,8 @@ const Box = styled.div`
 
 const FlexBox = styled.div`
   display: flex;
+  padding: ${({ padding }) => (padding ? '1rem 1.5rem' : '0rem')};
   ${flexbox}
-  padding: ${({ padding }) => (padding ? '1rem 1.5rem' : '0rem')}
 `
 
 const Grid = styled.div`

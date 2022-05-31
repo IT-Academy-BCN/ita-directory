@@ -19,5 +19,4 @@ const logController = require('../controllers/log.controller')
  */
 router.post('/', logController.createLog)
 
-
 module.exports = router

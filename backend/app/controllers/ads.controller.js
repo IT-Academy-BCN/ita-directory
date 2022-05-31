@@ -137,7 +137,7 @@ async function getUserAds(req, res) {
     const userId = parseInt(req.params.userId, 10)
     await getUserAdsSchema.validateAsync(userId)
     const ads = await prisma.ads.findMany({
-      where: { user_id: userId }
+      where: { user_id: userId },
     })
     return res.status(200).json(
       apiResponse({

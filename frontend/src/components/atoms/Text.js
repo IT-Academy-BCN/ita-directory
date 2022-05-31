@@ -1,12 +1,14 @@
 import styled from 'styled-components'
+import { space, typography } from 'styled-system'
 import { colors, font } from '../../theme'
 
-const Text = styled.p.attrs((props) => {
-  return {
-    fontSize: props.fontSize || `${font.base}`,
-    color: props.color || `${colors.grey}`,
-    children: props.text,
-  }
-})``
+const Text = styled.p.attrs((props) => ({
+  children: props.text,
+}))`
+  font-size: ${(props) => props.fontSize || font.base}px;
+  color: ${(props) => props.color || colors.grey};
+  ${space}
+  ${typography}
+`
 
 export default Text
