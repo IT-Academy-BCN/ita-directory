@@ -5,7 +5,7 @@ const { apiResponse } = require('../utils/utils')
 async function createLog(req, res) {
   const { msg, level } = req.body
   try {
-    await logSchema.validateAsync({msg, level})
+    await logSchema.validateAsync({ msg, level })
   } catch (err) {
     if (err.isJoi && err.name === 'ValidationError') {
       return res.status(400).json(
@@ -27,22 +27,22 @@ async function createLog(req, res) {
   switch (level) {
     case 'trace':
       logger.trace(msg)
-      break;
+      break
     case 'debug':
       logger.debug(msg)
-      break;
+      break
     case 'warn':
       logger.warn(msg)
-      break;
+      break
     case 'error':
       logger.error(msg)
-      break;
+      break
     case 'fatal':
       logger.fatal(msg)
-      break;
+      break
     default:
       logger.info(msg)
-      break;
+      break
   }
   return res.status(200).json(
     apiResponse({
@@ -50,9 +50,8 @@ async function createLog(req, res) {
       status: 200,
     })
   )
-
 }
 
 module.exports = {
-  createLog
+  createLog,
 }

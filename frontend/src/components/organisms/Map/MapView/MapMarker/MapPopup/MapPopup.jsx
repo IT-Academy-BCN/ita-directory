@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Popup } from 'react-leaflet'
 import { faComments } from '@fortawesome/free-solid-svg-icons'
-import ContactModal from '../../../../ContactModal/ContactModal'
+import { ContactModal } from '../../../..'
 
 // Styles
 import { PopupStyled, Content, Address, PropertyData, Span, Price } from './MapPopUp.Style'
 import { colors } from '../../../../../../theme'
-import Button from '../../../../../atoms/Button'
+import { Button } from '../../../../../atoms'
 
 function MapPopup({ data }) {
   const newData = data

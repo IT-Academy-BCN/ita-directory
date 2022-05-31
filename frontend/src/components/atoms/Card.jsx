@@ -1,34 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { colors, device } from '../../theme'
+import { colors, dimensions } from '../../theme'
+import { FlexBox } from '../../theme/wrappers'
 
-const CardStyled = styled.div`
-  display: flex;
-  background: ${colors.white} 0% 0% no-repeat padding-box;
+const CardStyled = styled(FlexBox)`
+  background: white;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid ${colors.extraLightGrey};
-  border-radius: 6px;
-  opacity: 1;
-  align-items: center;
-  flex-direction: column;
-  @media only ${device.Tablet} {
-    flex-direction: row;
-  }
+  border-radius: ${dimensions.borderRadius}px;
+  padding: 1rem;
 `
 
-function Card({ ad, titleClassName = '', containerClassName = '', children }) {
-  return (
-    <CardStyled ad={ad} containerClassName={containerClassName} titleClassName={titleClassName}>
-      {children}
-    </CardStyled>
-  )
+function Card({ children, className = '' }) {
+  return <CardStyled className={className}>{children}</CardStyled>
 }
 Card.propTypes = {
-  ad: PropTypes.object,
-  titleClassName: PropTypes.string,
-  containerClassName: PropTypes.string,
   children: PropTypes.node,
+  className: PropTypes.string,
 }
 
 export default styled(Card)``

@@ -1,21 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 import { colors, font } from '../../theme'
+import Icon from './Icon'
+import Text from './Text'
 
-const StyledButton = styled.button.attrs({})`
+const StyledButton = styled.button`
   display: flex;
+  align-items: center;
   justify-content: center;
   background: ${colors.redPink};
   border: 0;
-  color: ${colors.white};
   padding: 0.8rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: ${font.base};
   margin: 10px 0px;
+
+  ${Text} {
+    color: ${(props) => props.textColor || colors.white};
+  }
 
   &:hover {
     filter: brightness(1.1);
@@ -29,6 +33,10 @@ const StyledButton = styled.button.attrs({})`
   }
   &.green-gradient {
     background: linear-gradient(90deg, ${colors.lightGreen}, ${colors.darkGreen});
+  }
+  &.transparent {
+    background: transparent;
+    color: ${colors.darkBlue};
   }
   &.darkRed {
     background: ${colors.extraDarkRed};
@@ -56,8 +64,9 @@ const StyledButton = styled.button.attrs({})`
 `
 
 function Button({
-  type,
+  type = 'submit',
   text,
+  textColor = 'white',
   loadingText,
   isLoading,
   disabled,
@@ -77,25 +86,31 @@ function Button({
       className={`${className} ${animated ? 'animated' : ''} ${disabled ? 'disabled' : ''}`}
       style={{ ...buttonStyles }}
       onClick={onClick}
+      textColor={textColor}
     >
       {iconPosition === 'left' &&
-        (isLoading && icon ? <FontAwesomeIcon icon={faSpinner} style={{ ...iconStyles }} /> : null)}
-      <span style={{ ...textStyles }}>{isLoading ? loadingText : text}</span>
+        (!isLoading && icon ? (
+          <Icon color={textColor} name={icon} mr="0.5rem" style={{ ...iconStyles }} />
+        ) : null)}
+      <Text as="span" text={isLoading ? loadingText : text} style={{ ...textStyles }} />
       {iconPosition === 'right' &&
-        (isLoading && icon ? <FontAwesomeIcon icon={faSpinner} style={{ ...iconStyles }} /> : null)}
+        (!isLoading && icon ? (
+          <Icon color={textColor} name={icon} ml="0.5rem" style={{ ...iconStyles }} />
+        ) : null)}
     </StyledButton>
   )
 }
 
 Button.propTypes = {
-  type: PropTypes.string.isRequired,
-  text: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  type: PropTypes.string,
+  text: PropTypes.string,
+  textColor: PropTypes.string,
   loadingText: PropTypes.string,
   isLoading: PropTypes.bool,
   iconPosition: PropTypes.string,
   className: PropTypes.string,
-  icon: PropTypes.node,
-  buttonStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  icon: PropTypes.string,
+  buttonStyles: PropTypes.object,
   textStyles: PropTypes.object,
   iconStyles: PropTypes.object,
   animated: PropTypes.bool,
