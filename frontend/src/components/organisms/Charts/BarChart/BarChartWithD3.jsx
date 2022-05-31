@@ -207,9 +207,7 @@ function BarChartWithD3({ data, active, selectedMonth }) {
   return (
     <D3SvgChartContainer>
       <StyledSvg className="bar-chart" />
-      <ChartLegend className="hart-legend">
-        <ul />
-      </ChartLegend>
+      <ChartLegend className="hart-legend" />
     </D3SvgChartContainer>
   )
 }

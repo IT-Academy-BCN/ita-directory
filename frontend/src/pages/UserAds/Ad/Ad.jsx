@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { StyledCity, StyledP } from './Ad.style'
-import Button from '../../../components/atoms/Button'
-import AdCard from '../../../components/organisms/AdCard'
+import { Button } from '../../../components/atoms'
+import { AdCard } from '../../../components/organisms'
 import EditAdModal from '../EditAdModal/EditAdModal'
 
 function Ad({ ad, containerClassName }) {
@@ -11,7 +11,7 @@ function Ad({ ad, containerClassName }) {
   const [active, setActive] = useState(false)
   return (
     <AdCard
-      titleClassName="titleClassName"
+      titleClassName="title-classname"
       containerClassName={containerClassName}
       descriptionClassName="descriptionContainer"
       image={image}
