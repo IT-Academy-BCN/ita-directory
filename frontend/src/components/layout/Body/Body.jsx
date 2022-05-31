@@ -69,7 +69,7 @@ function Body({
 
 Body.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   logoColor: PropTypes.string,
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,

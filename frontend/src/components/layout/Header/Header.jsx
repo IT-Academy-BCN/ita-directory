@@ -72,7 +72,7 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
 }
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   logoColor: PropTypes.string,
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,
