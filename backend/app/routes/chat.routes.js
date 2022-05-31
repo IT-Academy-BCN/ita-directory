@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const chatController = require('../controllers/chat.controller')
-const { wrapAsync } = require('../middleware/handlerErrors')
 
 /**
  * POST /chat/v1/conversation
@@ -22,7 +21,7 @@ router.post('/v1/conversation', chatController.createConversation)
  * @return {object} 200 - Success response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.get('/v1/conversations', wrapAsync(chatController.getConversations))
+router.get('/v1/conversations', chatController.getConversations)
 
 /**
  * GET /chat/v1/conversation/:id

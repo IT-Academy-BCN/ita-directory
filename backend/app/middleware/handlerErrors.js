@@ -12,20 +12,6 @@ const routeFoundHandler = (req, res, next) => {
   })
 }
 
-// Validation error handler
-// const validationErrorHandler = (err, req, res, next) => {
-//   if (err.name === 'ValidationError') {
-//     const { statusCode = 400, code, header, message } = err
-//     logger.error({ code, header, message })
-//     res.status(statusCode).json({
-//       code,
-//       header,
-//       message,
-//     })
-//   }
-//   next(err)
-// }
-
 // Error handler
 const errorHandler = (err, req, res, next) => {
   const { statusCode = 500, code, header, message } = err
@@ -41,16 +27,7 @@ const errorHandler = (err, req, res, next) => {
   res.status(statusCode).json(resp)
 }
 
-function wrapAsync(fn) {
-  return (req, res, next) => {
-    // Make sure to `.catch()` any errors and pass them along to the `next()`
-    // middleware in the chain, in this case the error handler.
-    fn(req, res, next).catch(next)
-  }
-}
-
 module.exports = {
   routeFoundHandler,
   errorHandler,
-  wrapAsync,
 }

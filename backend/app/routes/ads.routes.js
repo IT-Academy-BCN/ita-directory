@@ -2,7 +2,6 @@ const router = require('express').Router()
 const authenticateToken = require('../middleware/verifyToken')
 const adsController = require('../controllers/ads.controller')
 const { uploadAdCSV } = require('../middleware/uploadAdsCSV')
-const { wrapAsync } = require('../middleware/handlerErrors')
 
 /**
  * Ad data
@@ -61,7 +60,7 @@ const { wrapAsync } = require('../middleware/handlerErrors')
 }
  */
 
-router.post('/v1/post-ad', authenticateToken, wrapAsync(adsController.createAd))
+router.post('/v1/post-ad', authenticateToken, adsController.createAd)
 
 /**
  * GET /ads/v1/ads
@@ -105,7 +104,7 @@ router.post('/v1/post-ad', authenticateToken, wrapAsync(adsController.createAd))
         }
 ]}
  */
-router.get('/v1/ads', wrapAsync(adsController.getAllAds))
+router.get('/v1/ads', adsController.getAllAds)
 
 /**
  * GET /ads/v1/user-ads/{userId}
@@ -132,7 +131,7 @@ router.get('/v1/ads', wrapAsync(adsController.getAllAds))
         }
     ]}
  */
-router.get('/v1/user-ads/:userId', wrapAsync(adsController.getUserAds))
+router.get('/v1/user-ads/:userId', adsController.getUserAds)
 
 /**
  * GET /ads/v1/ads/:adId
@@ -171,7 +170,7 @@ router.get('/v1/user-ads/:userId', wrapAsync(adsController.getUserAds))
 }
 */
 
-router.get('/v1/ads/:adId', wrapAsync(adsController.getAdById))
+router.get('/v1/ads/:adId', adsController.getAdById)
 
 // TODO: Swagger documentation
 /**
@@ -247,7 +246,7 @@ router.get('/v1/ads/type/:type', adsController.getAdsByType)
     ]
 }
  */
-router.get('/v1/ads/types/list', wrapAsync(adsController.getAdTypes))
+router.get('/v1/ads/types/list', adsController.getAdTypes)
 
 /**
  * GET /ads/v1/ads/:location/:type 
@@ -294,7 +293,7 @@ router.get('/v1/ads/:location/:type', adsController.getAdsByTypeAndLocation)
 
 router.get('/v1/ads/search/location/:location', adsController.getAdsByLocation)
 
-router.delete('/v1/ads/:adId', wrapAsync(adsController.deleteById))
+router.delete('/v1/ads/:adId', adsController.deleteById)
 
 router.patch('/v1/ads/:adId', authenticateToken, adsController.updateAd)
 
@@ -302,7 +301,7 @@ router.post(
   '/v1/post-ads-csv',
   authenticateToken,
   uploadAdCSV,
-  wrapAsync(adsController.createAdsFromCSVBuffer)
+  adsController.createAdsFromCSVBuffer
 )
 
 router.get('/v1/chart-data', adsController.activeAdsByLocationAndDate)
