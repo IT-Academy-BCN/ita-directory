@@ -1,21 +1,15 @@
-const argon2 = require('argon2')
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
+// TODO: Refactor code to pass eslint checks!!!
+
+/* eslint-disable camelcase */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-await-in-loop */
+
+const prisma = require('./indexPrisma')
 const ads = require('./seedFiles/ads')
 const ad_types = require('./seedFiles/ad_types')
 const ad_status = require('./seedFiles/ad_status')
 const levels = require('./seedFiles/levels')
 const level_types = require('./seedFiles/level_types')
-
-//TODO hashPassword should be imported from utils ?
-const hashPassword = async (password) => {
-  return await argon2.hash(password, {
-    type: argon2.argon2id,
-    memoryCost: 15360,
-    timeCost: 2,
-    parallelism: 1,
-  })
-}
 
 const user_roles = [
   {
@@ -62,7 +56,7 @@ const users = [
     email: 'test@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'Test-test',
+    password: 'Test-test99',
   },
   {
     name: 'test2',
@@ -70,7 +64,7 @@ const users = [
     email: 'test2@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test2',
+    password: 'Test2@test',
   },
   {
     name: 'test3',
@@ -78,7 +72,7 @@ const users = [
     email: 'test3@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test3',
+    password: 'Test3@test',
   },
   {
     name: 'test4',
@@ -86,7 +80,7 @@ const users = [
     email: 'test4@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test4',
+    password: 'Test4@test',
   },
   {
     name: 'Mariano5',
@@ -94,7 +88,7 @@ const users = [
     email: 'yenab48812@snece.com',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test5',
+    password: 'Test5@test',
   },
   {
     name: 'testDeveloper',
@@ -102,16 +96,16 @@ const users = [
     email: 'testdev@test.test',
     user_status_id: 1,
     user_role_id: 4,
-    password: 'testdev',
+    password: 'Testdev@99',
     developer_data: {
       github: 'https://test.github.io',
       linkedin: 'linkedin.com/in/test',
       website: 'www.test.com',
       tags: ['test', 'test'],
       description: 'test test test',
-      media_id: '', //?
+      media_id: '', // ?
       version: 1,
-      layout_type: '', //?
+      layout_type: '', // ?
     },
   },
 ]
@@ -249,7 +243,6 @@ async function main() {
       update: {},
       create: {
         ...user,
-        password: await hashPassword(user.password),
       },
     })
   }
