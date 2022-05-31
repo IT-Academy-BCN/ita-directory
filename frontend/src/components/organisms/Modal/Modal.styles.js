@@ -42,33 +42,6 @@ export const ModalBlock = styled.div`
     border-radius: 12px;
     opacity: 1;
 
-    .modalHeader {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 38px;
-      padding-bottom: 10px;
-      color: #303742;
-      border-bottom: 1px solid ${colors.lightGray};
-
-      span {
-        font-size: 5px;
-        font-weight: 500;
-        color: ${(props) => (props.colorModalTitle ? props.colorModalTitle : colors.darkRed)};
-        font: normal normal bold 24px/20px Arial;
-        padding-left: 0px;
-      }
-
-      .modalClose {
-        float: left !important;
-        text-decoration: none !important;
-        cursor: pointer;
-        font-size: 1rem;
-        color: ${colors.lightGray};
-        font: normal normal normal 1rem Arial;
-      }
-    }
-
     .modalBody {
       overflow-y: auto;
       position: relative;

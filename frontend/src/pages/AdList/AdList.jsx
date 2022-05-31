@@ -1,29 +1,34 @@
 import React, { useEffect, useState, useMemo } from 'react'
-// import _ from 'lodash'
+import styled from 'styled-components'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
 import { Button } from '../../components/atoms'
 import { colors, Container } from '../../theme'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 import AdListFilter from './AdListFilter/AdListFilter'
-
-// Styles
-import { AdListStyled } from './AdList.style'
 import axiosInstance from '../../utils/axiosInstance'
+import { FlexBox } from '../../theme/wrappers'
 
 const buttonStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  width: 'auto',
-  height: 'auto',
-  fontSize: '0.95rem',
-  fontFamily: 'Arial',
-  color: colors.lightGray,
   background: 'transparent',
   boxShadow: 'none',
   outline: 'none',
-  paddingRight: 0,
 }
+
+const AdListStyled = styled(FlexBox)``
+
+const AdsStyled = styled(Container)`
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  ${AdListFilter} {
+  }
+
+  ${AdListStyled} {
+    width: 70%;
+    flex-grow: 1;
+  }
+`
 
 function AdList() {
   const [filterParams, setFilterParams] = useState()
@@ -59,8 +64,8 @@ function AdList() {
 
   const filteredAdList = useMemo(() => {
     const filteredAds = adList
-      .filter(byPrice(filterParams?.minPrice || null, filterParams?.maxPrice || null))
-      .filter(bySize(filterParams?.minSize || null, filterParams?.maxSize || null))
+      .filter(byPrice(filterParams?.minPrice || 0, filterParams?.maxPrice || Infinity))
+      .filter(bySize(filterParams?.minSize || 0, filterParams?.maxSize || Infinity))
     return filteredAds
   }, [filterParams, adList])
 
@@ -84,57 +89,55 @@ function AdList() {
 
   return (
     <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
-      <AdListStyled>
-        <Container row className="probando">
-          {!loading ? (
-            <>
-              <AdListFilter
-                filter={setFilterParams}
-                maxPriceValue={filterParams?.maxPrice}
-                minPriceValue={filterParams?.minPrice}
-                maxM2={filterParams?.maxSize}
-                minM2={filterParams?.minSize}
-              />
-              <div className="ads">
-                <div className="tree-search">Madrid - Alquiler</div>
-                <div className="h3">Mapa de pisos</div>
-                <div className="rowWrapper">
-                  {mapView ? (
-                    <Button
-                      type="button"
-                      text="Vista de detalles"
-                      icon="search"
-                      iconPosition="left"
-                      iconStyles={{
-                        marginRight: 5,
-                        paddingLeft: 0,
-                      }}
-                      onClick={() => setMapView(!mapView)}
-                      buttonStyles={buttonStyle}
-                    />
-                  ) : (
-                    <Button
-                      type="button"
-                      text="Vista de mapa"
-                      icon="map"
-                      iconPosition="left"
-                      iconStyles={{
-                        marginRight: 5,
-                        paddingLeft: 0,
-                      }}
-                      onClick={() => setMapView(!mapView)}
-                      buttonStyles={buttonStyle}
-                    />
-                  )}
-                </div>
-                {mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
-              </div>
-            </>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </Container>
-      </AdListStyled>
+      <AdsStyled>
+        <AdListFilter
+          filter={setFilterParams}
+          maxPriceValue={filterParams?.maxPrice}
+          minPriceValue={filterParams?.minPrice}
+          maxM2={filterParams?.maxSize}
+          minM2={filterParams?.minSize}
+        />
+        {!loading ? (
+          <AdListStyled flexDirection="column">
+            <div className="tree-search">Madrid - Alquiler</div>
+            <div className="h3">Mapa de pisos</div>
+            <div className="rowWrapper">
+              {mapView ? (
+                <Button
+                  type="button"
+                  text="Vista de detalles"
+                  textColor={colors.lightGray}
+                  icon="search"
+                  iconPosition="left"
+                  iconStyles={{
+                    marginRight: 5,
+                    paddingLeft: 0,
+                  }}
+                  onClick={() => setMapView(!mapView)}
+                  buttonStyles={buttonStyle}
+                />
+              ) : (
+                <Button
+                  type="button"
+                  text="Vista de mapa"
+                  textColor={colors.lightGray}
+                  icon="map"
+                  iconPosition="left"
+                  iconStyles={{
+                    marginRight: 5,
+                    paddingLeft: 0,
+                  }}
+                  onClick={() => setMapView(!mapView)}
+                  buttonStyles={buttonStyle}
+                />
+              )}
+            </div>
+            {mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
+          </AdListStyled>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </AdsStyled>
     </Body>
   )
 }

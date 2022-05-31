@@ -41,16 +41,6 @@ function Ad() {
     getAd(id).then((data) => setAd(data))
   }, [id])
 
-  // const images =
-  // 	ad &&
-  // 	ad.gallery &&
-  // 	ad.gallery.map((image) => ({
-  // 		original: image.url,
-  // 		thumbnail: image.urlThumbnail,
-  // 		originalAlt: image.alt,
-  // 		thumbnailAlt: image.altThumbnail,
-  // 	}));
-
   const images = [
     {
       original: adImage1,

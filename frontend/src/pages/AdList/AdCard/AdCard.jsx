@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-// import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { colors, device } from '../../../theme'
 import { Button, ImageButton, Text } from '../../../components/atoms'
 import { ContactModal } from '../../../components/organisms'
@@ -21,6 +20,7 @@ const AdCardStyled = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
     padding: 1rem;
     gap: 0.7rem;
@@ -49,14 +49,6 @@ const AdCardStyled = styled.div`
     .ad-card__description {
       font-size: 14px;
       color: ${colors.grey};
-    }
-
-    .ad-card__contact-button {
-      justify-content: start;
-      font-weight: bold;
-      color: ${colors.strongBlue};
-      background: 'transparent';
-      margin: 0;
     }
   }
 
@@ -114,17 +106,14 @@ function AdCard({
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
         <Button
-          className="transparent ad-card__contact-button"
           text="Contactar"
           icon="chat"
-          color={colors.strongBlue}
+          textColor={colors.strongBlue}
           iconPosition="left"
-          iconStyles={{
-            marginRight: 5,
-            paddingLeft: 0,
-          }}
           onClick={() => setActive(true)}
           tabIndex={id + 10}
+          buttonStyles={{ padding: 0 }}
+          className="transparent"
         />
       </div>
       <ContactModal active={active} hideModal={() => setActive(false)} />

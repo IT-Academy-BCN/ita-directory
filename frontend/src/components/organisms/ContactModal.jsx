@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
-// import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button } from '../atoms'
 import Modal from './Modal/Modal'
 import Input from '../atoms/Forms/Input'
 import { TextArea } from '../molecules'
-
-// import { ButtonWrapper } from './ContactModal.style'
 import { colors } from '../../theme'
 
 import contactSchema from '../../validation/contactModalSchema'

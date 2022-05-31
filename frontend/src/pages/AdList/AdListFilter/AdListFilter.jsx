@@ -2,27 +2,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { device } from '../../../theme'
+import { Button, Card, Text, Title } from '../../../components/atoms'
 
-// import {
-//   Card,
-//   CardHeader,
-//   CardValue,
-//   CardTitle,
-//   CardInput,
-//   CardSelectorWrapper,
-//   CardCheckbox,
-//   FilterHr,
-// } from './AdListFilter.style'
-
-import { Button } from '../../../components/atoms'
-
-const Card = styled.div`
+const AdListFilterStyled = styled(Card)`
   width: 30%;
   min-width: 206px;
   max-width: 300px;
-  height: 50%;
-  box-shadow: 0 3px 6px #00000029;
-  border: 1px solid #ddd;
   border-radius: 6px;
   overflow: hidden;
   background: #f4f4f4;
@@ -40,28 +25,6 @@ const Card = styled.div`
     justify-content: space-between;
   }
 `
-// const CardBody = styled.div`
-//   background-color: #f4f4f4;
-//   display: flex;
-//   flex-direction: row;
-//   align-items: left;
-//   justify-content: space-evenly;
-
-//   @media only ${device.Laptop} {
-//     flex-direction: column;
-//   }
-// `
-
-const CardHeader = styled.div`
-  background-color: #f4f4f4;
-  justify-content: center;
-`
-
-const CardTitle = styled.h2`
-  font-weight: 400;
-  color: black;
-  margin: 0;
-`
 
 // Afecta a los selectores de los modals
 const CardInput = styled.input`
@@ -78,17 +41,6 @@ const CardInput = styled.input`
   color: #e22e2e;
 `
 
-// const CardCheckbox = styled.input`
-//   margin-right: 0.3rem;
-//   padding-left: 0.5rem;
-//   width: 20px;
-//   height: 20px;
-//   box-shadow: 0 3px 6px #00000029;
-//   border: none;
-//   border-radius: 4px;
-//   color: #e22e2e;
-// `
-
 const CardSelectorWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -96,32 +48,11 @@ const CardSelectorWrapper = styled.div`
   padding-top: 1rem;
 `
 
-const CardValue = styled.div`
-  font-size: 12px;
-`
-
-// const Chart = styled.div`
-//   width: 100%;
-//   height: 50vh;
-//   margin: 12px;
-// `
-
 const FilterHr = styled.hr`
   width: '100%';
 `
 
-// const Button = styled.button`
-//   height: 35px;
-//   box-shadow: 0 3px 6px #00000029;
-//   border: none;
-//   border-radius: 4px;
-//   background: #006bb9;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-//   color: white;
-// `
-
-function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2 }) {
+function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, className = '' }) {
   const [maxPrice, setMaxPrice] = useState('')
   const [maxSize, setMaxSize] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -138,61 +69,56 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2 }) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Filtros</CardTitle>
-        <Button className="blue-gradient" text="Limpiar busqueda" onClick={() => ClearFilter()} />
-        <CardValue>
-          Precio mín y máx: {minPriceValue} {maxPriceValue}
-        </CardValue>
-        <CardValue>
-          Tamaño mín y máx: {minM2} {maxM2}
-        </CardValue>
-        <FilterHr style={{ width: '100%' }} /> Precio
-        <CardSelectorWrapper>
-          <CardInput
-            type="number"
-            placeholder="Mín"
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-          />
-          <CardInput
-            type="number"
-            placeholder="Máx"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-          />
-        </CardSelectorWrapper>
-        Tamaño
-        <CardSelectorWrapper>
-          <CardInput
-            type="number"
-            placeholder="Mín"
-            value={minSize}
-            onChange={(e) => setMinSize(e.target.value)}
-          />
-          <CardInput
-            type="number"
-            placeholder="Máx"
-            value={maxSize}
-            onChange={(e) => setMaxSize(e.target.value)}
-          />
-        </CardSelectorWrapper>
-        {/* <CardSelectorWrapper>
-          <CardCheckbox
-            type="checkbox"
-            defaultChecked={gastosInc}
-            onClick={() => (gastosInc ? setGastosInc(false) : setGastosInc(true))}
-          />
-          Gastos Incluidos
-        </CardSelectorWrapper> */}
-        <Button
-          text="Filtrar"
-          className="blue-gradient"
-          onClick={() => filter({ gastosInc, maxPrice, minPrice, maxSize, minSize })}
+    <AdListFilterStyled className={className}>
+      <Title order={3} text="Filtros" mt={0} />
+      <Button
+        type="button"
+        className="blue-gradient"
+        text="Limpiar busqueda"
+        onClick={() => ClearFilter()}
+      />
+      <Text
+        fontSize={12}
+        text={`Precio mín y máx: ${minPriceValue || ''} ${maxPriceValue || ''}`}
+        mb={0}
+      />
+      <Text fontSize={12} text={`Tamaño mín y máx: ${minM2 || ''} ${maxM2 || ''}`} />
+      <FilterHr style={{ width: '100%' }} /> Precio
+      <CardSelectorWrapper>
+        <CardInput
+          type="number"
+          placeholder="Mín"
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
         />
-      </CardHeader>
-    </Card>
+        <CardInput
+          type="number"
+          placeholder="Máx"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+        />
+      </CardSelectorWrapper>
+      Tamaño
+      <CardSelectorWrapper>
+        <CardInput
+          type="number"
+          placeholder="Mín"
+          value={minSize}
+          onChange={(e) => setMinSize(e.target.value)}
+        />
+        <CardInput
+          type="number"
+          placeholder="Máx"
+          value={maxSize}
+          onChange={(e) => setMaxSize(e.target.value)}
+        />
+      </CardSelectorWrapper>
+      <Button
+        text="Filtrar"
+        className="blue-gradient"
+        onClick={() => filter({ gastosInc, maxPrice, minPrice, maxSize, minSize })}
+      />
+    </AdListFilterStyled>
   )
 }
 
@@ -202,6 +128,7 @@ AdFilters.propTypes = {
   minPriceValue: PropTypes.string,
   maxM2: PropTypes.string,
   minM2: PropTypes.string,
+  className: PropTypes.string,
 }
 
-export default AdFilters
+export default styled(AdFilters)``
