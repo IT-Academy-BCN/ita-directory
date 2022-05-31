@@ -56,7 +56,7 @@ const users = [
     email: 'test@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'Test-test99@',
+    password: 'Test-test99',
   },
   {
     name: 'test2',
@@ -64,7 +64,7 @@ const users = [
     email: 'test2@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test2',
+    password: 'Test2@test',
   },
   {
     name: 'test3',
@@ -72,7 +72,7 @@ const users = [
     email: 'test3@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test3',
+    password: 'Test3@test',
   },
   {
     name: 'test4',
@@ -80,7 +80,7 @@ const users = [
     email: 'test4@test.test',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test4',
+    password: 'Test4@test',
   },
   {
     name: 'Mariano5',
@@ -88,7 +88,7 @@ const users = [
     email: 'yenab48812@snece.com',
     user_status_id: 1,
     user_role_id: 3,
-    password: 'test5',
+    password: 'Test5@test',
   },
   {
     name: 'testDeveloper',
@@ -96,7 +96,7 @@ const users = [
     email: 'testdev@test.test',
     user_status_id: 1,
     user_role_id: 4,
-    password: 'testdev',
+    password: 'Testdev@99',
     developer_data: {
       github: 'https://test.github.io',
       linkedin: 'linkedin.com/in/test',

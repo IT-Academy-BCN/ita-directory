@@ -1,16 +1,7 @@
-const { hashPassword } = require('../../app/utils/utils')
+const { checkAndHashPass } = require('../../app/utils/utils')
 
 const checkAndHashPassword = async (params, next) => {
-  // console.log('Prisma middleware!!')
-
-  const checkAndHashPass = async (pass) => {
-    let regexStr = process.env.PASSWORD_REGEX
-    regexStr = regexStr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // escape regex string
-    const regex = new RegExp(regexStr)
-    return regex.test(pass) ? hashPassword(pass) : null
-  }
-
-  const newParams = params
+  const newParams = { ...params }
   // Check incoming query type
   if (params.model === 'user') {
     if (params.action === 'create' || params.action === 'update' || params.action === 'upsert') {
@@ -31,7 +22,6 @@ const checkAndHashPassword = async (params, next) => {
       }
     }
   }
-  // console.log(newParams.args)
   return next(newParams)
 }
 
