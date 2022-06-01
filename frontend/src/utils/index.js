@@ -1,14 +1,16 @@
-import axios from "axios";
+import paths from './paths'
 
-export const refresh = () => {
-	window.location.reload();
-};
+const refresh = () => {
+  window.location.reload()
+}
 
-export const redirectHome = () => {
-	document.location.href = "/";
-};
+const redirectHome = () => {
+  document.location.href = '/'
+}
 
-export const logout = () => {
-	localStorage.removeItem("itacademy");
-	refresh();
-};
+const logout = () => {
+  localStorage.removeItem('itacademy')
+  refresh()
+}
+
+export { refresh, redirectHome, logout, paths }

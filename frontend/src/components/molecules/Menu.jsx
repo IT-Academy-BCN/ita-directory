@@ -1,14 +1,34 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import LinkMenu from '../atoms/LinkMenu'
+import { paths } from '../../utils'
 import { colors } from '../../theme'
+import { Text } from '../atoms'
 
+const menu = [
+  {
+    to: paths,
+    name: 'El directorio',
+  },
+  {
+    to: '/alumnos',
+    name: 'Para alumnos',
+  },
+  {
+    to: '/empresas',
+    name: 'Para empresas',
+  },
+]
 function Menu() {
   return (
     <Container>
-      <LinkMenu to="/" as="span" text="El directorio" fontSize={3} />
-      <LinkMenu to="/collaborators" as="span" text="Para alumnos" fontSize={3} />
-      <LinkMenu to="/" as="span" text="Para empresas" fontSize={3} />
+      {menu.map((item) => {
+        return (
+          <Link to={item.to}>
+            <Text as="span" text={item.name} />
+          </Link>
+        )
+      })}
     </Container>
   )
 }
