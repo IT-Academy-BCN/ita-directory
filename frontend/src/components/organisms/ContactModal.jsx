@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Button from '../../atoms/Button'
-import Modal from '../Modal/Modal'
-import Input from '../../atoms/Forms/Input'
-import TextArea from '../../molecules/TextAreaGroup'
+import { Button } from '../atoms'
+import Modal from './Modal/Modal'
+import Input from '../atoms/Forms/Input'
+import { TextArea } from '../molecules'
+import { colors } from '../../theme'
 
-import { ButtonWrapper } from './ContactModal.style'
-import { colors } from '../../../theme'
-
-import contactSchema from '../../../validation/contactModalSchema'
+import contactSchema from '../../validation/contactModalSchema'
 
 function ContactModal({ active, hideModal }) {
   const [animatedState, setAnimatedState] = useState(false)
@@ -52,6 +49,7 @@ function ContactModal({ active, hideModal }) {
         <Input
           type="text"
           name="name"
+          placeholder="Nombre"
           label="Nombre"
           inputContainerClassName="input-container"
           register={register('name')}
@@ -61,16 +59,18 @@ function ContactModal({ active, hideModal }) {
         <Input
           type="text"
           name="email"
+          placeholder="Email"
           label="Email"
           inputContainerClassName="input-container"
           register={register('email')}
           error={errors.email?.message}
         />
 
-        <TextArea
+        <TextAreaStyled
           name="message"
           label="Mensaje"
-          textAreaStyles={{ width: '100%' }}
+          placeholder="Escribe aquí tu mensaje"
+          className="contact-modal__textarea"
           register={register('message')}
           error={errors.message?.message}
         />
@@ -108,7 +108,7 @@ function ContactModal({ active, hideModal }) {
           iconPosition="left"
           type="submit"
           onClick={() => hideModal()}
-          icon={faTimes}
+          icon="cancel"
           buttonStyles={{
             color: colors.lightGrey,
             background: 'transparent',
@@ -132,7 +132,47 @@ function ContactModal({ active, hideModal }) {
 
 ContactModal.propTypes = {
   active: PropTypes.bool.isRequired,
-  hideModal: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
 }
 
 export default ContactModal
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
+`
+
+const TextAreaStyled = styled(TextArea)`
+  width: 95%;
+  max-width: 95%;
+  min-width: 95%;
+  margin: 0;
+`
+
+// const Wrapper = styled.div`
+//   margin-bottom: 25px;
+//   p {
+//     color: ${colors.grey};
+//     font-size: 0.95rem;
+//     font-family: 'Arial';
+//     width: auto;
+//     letter-spacing: 0px;
+//     opacity: 1;
+//     width: auto;
+//   }
+
+//   .input-container {
+//     width: 100%;
+//   }
+
+//   label {
+//     padding-right: 0;
+//     width: auto;
+//   }
+// `
+
+// const StyledSmall = styled.small`
+//   color: ${colors.redColor};
+// `
