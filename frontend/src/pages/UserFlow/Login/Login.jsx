@@ -14,13 +14,15 @@ import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import Urls from '../../../utils/urls'
 
+const regex = import.meta.env.VITE_PASSWORD_REGEX
+
 const loginSchema = yup.object().shape({
   email: yup.string().email('must be a valid email').required('email is required'),
   password: yup
     .string()
     .required('No password provided.')
     .min(6, 'Password is too short - should be 6 chars minimum.')
-    .matches(/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%&*?])\S*$/),
+    .matches(regex),
 })
 
 function Login() {
