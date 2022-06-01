@@ -8,96 +8,112 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
 }
 
-model user_role {
+model UserRole {
   id         Int     @id @default(autoincrement())
   name       String
   admin      Boolean @default(false)
   developer  Boolean @default(false) //Developer role added
   manager    Boolean @default(false)
   registered Boolean @default(false)
-  user       user[]
+  users      User[] //@map("user")
+
+  @@map("user_role")
 }
 
-model user_status {
+model UserStatus {
   id        Int     @id @default(autoincrement())
   name      String
   active    Boolean @default(false)
   pending   Boolean @default(false)
   suspended Boolean @default(false)
   deleted   Boolean @default(false)
-  user      user[]
+  user      User[] // No puedo mapearlas  - Error parsing attribute "@map": The attribute `@map` cannot be used on relation fields.
+
+  @@map("user_status")
 }
 
-model user {
-  id                 Int                    @id @default(autoincrement())
+model User {
+  id                 Int                  @id @default(autoincrement())
   name               String?
   lastnames          String?
-  email              String                 @unique
+  email              String               @unique
   password           String
-  created_at         DateTime               @default(now())
-  updated_at         DateTime               @updatedAt
-  user_status        user_status            @relation(fields: [user_status_id], references: [id])
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  user_status        UserStatus           @relation(fields: [user_status_id], references: [id])
   user_status_id     Int
-  user_role          user_role              @relation(fields: [user_role_id], references: [id])
+  user_role          UserRole             @relation(fields: [user_role_id], references: [id])
   user_role_id       Int
-  acces_log          acces_log[]
-  recover_password   recover_password_log[]
-  media              media[]
-  ads                ads[]
+  acces_log          AccesLog[]
+  recover_password   RecoverPasswordLog[]
+  media              Media[]
+  ads                Ads[]
   developer_data     Json? //Added developer data (not a jsonb?)
-  messages_sent      message[]              @relation("sender")
-  user_conversations user_conversation[]    @relation("conv_user")
+  messages_sent      Message[]            @relation("sender")
+  user_conversations UserConversation[]   @relation("conv_user")
+
+  @@map("user")
 }
 
-model acces_log {
+model AccesLog {
   id      Int      @id @default(autoincrement())
   login   DateTime
   logout  DateTime
-  user    user     @relation(fields: [user_id], references: [id])
+  user    User     @relation(fields: [user_id], references: [id])
   user_id Int
+
+  @@map("acces_log")
 }
 
-model recover_password_log {
+model RecoverPasswordLog {
   id         Int      @id @default(autoincrement())
   created_at DateTime @default(now())
   password   String
-  user       user     @relation(fields: [user_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
   user_id    Int
 
+
+  @@map("recover_password_log")
 }
 
-model media {
-  id         Int          @id @default(autoincrement())
+model Media {
+  id         Int         @id @default(autoincrement())
   path       String
   mime_type  String
   file_size  String
-  user       user         @relation(fields: [user_id], references: [id])
+  user       User        @relation(fields: [user_id], references: [id])
   user_id    Int
-  media_meta media_meta[]
+  media_meta MediaMeta[]
+
+  @@map("media")
 }
 
-model media_meta {
-  id            Int        @id @default(autoincrement())
+model MediaMeta {
+  id            Int       @id @default(autoincrement())
   path          String
   mime_type     String
   file_size     String
-  media         media      @relation(fields: [media_id], references: [id])
+  media         Media     @relation(fields: [media_id], references: [id])
   media_id      Int
-  media_type    media_type @relation(fields: [media_type_id], references: [id])
+  media_type    MediaType @relation(fields: [media_type_id], references: [id])
   media_type_id Int
+
+  @@map("media_meta")
 }
 
-model media_type {
-  id         Int          @id @default(autoincrement())
+model MediaType {
+  id         Int         @id @default(autoincrement())
   name       String
   thumnail   Boolean
   medium     Boolean
   large      Boolean
   original   Boolean
-  media_meta media_meta[]
+  media_meta MediaMeta[]
+
+  @@map("media_type")
 }
 
-model level_type {
+model LevelType {
   id           Int     @id @default(autoincrement())
   name         String
   country      Int // País
@@ -106,20 +122,24 @@ model level_type {
   town         Int // Ciudad-Población
   district     Int // Distrito
   neighborhood Int // Barrio
-  level        level[]
+  level        Level[]
+
+  @@map("level_type")
 }
 
-model level {
-  id            Int        @id @default(autoincrement())
+model Level {
+  id            Int       @id @default(autoincrement())
   name          String
-  parent        level?     @relation("parent", fields: [parent_id], references: [id])
+  parent        Level?    @relation("parent", fields: [parent_id], references: [id])
   parent_id     Int?
-  child         level[]    @relation("parent")
-  level_type    level_type @relation(fields: [level_type_id], references: [id])
+  child         Level[]   @relation("parent")
+  level_type    LevelType @relation(fields: [level_type_id], references: [id])
   level_type_id Int
+
+  @@map("level")
 }
 
-model ad_type {
+model AdType {
   id           Int    @id @default(autoincrement())
   name         String
   house        Int
@@ -130,21 +150,25 @@ model ad_type {
   warehouse    Int
   building     Int
   new_building Int
-  ads          ads[]
+  ads          Ads[]
+
+  @@map("ad_type")
 }
 
-model ad_status {
+model AdStatus {
   id         Int    @id @default(autoincrement())
   name       String
   un_publish Int
   publish    Int
-  ads        ads[]
+  ads        Ads[]
+
+  @@map("ad_status")
 }
 
-model ads {
+model Ads {
 
-  id            Int       @id @default(autoincrement())
-  user          user      @relation(fields: [user_id], references: [id])
+  id            Int      @id @default(autoincrement())
+  user          User     @relation(fields: [user_id], references: [id])
   user_id       Int
   title         String
   description   String
@@ -155,34 +179,42 @@ model ads {
   n_bathrooms   Int
   map_lat       Decimal
   map_lon       Decimal
-  ad_type       ad_type   @relation(fields: [ad_type_id], references: [id])
+  ad_type       AdType   @relation(fields: [ad_type_id], references: [id])
   ad_type_id    Int
-  ad_status     ad_status @relation(fields: [ad_status_id], references: [id])
+  ad_status     AdStatus @relation(fields: [ad_status_id], references: [id])
   ad_status_id  Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@map("ads")
 }
 
-model conversation {
-  id           Int                 @id @default(autoincrement())
-  messages     message[]           @relation("conv")
-  participants user_conversation[] @relation("user_conv")
+model Conversation {
+  id           Int                @id @default(autoincrement())
+  messages     Message[]          @relation("conv")
+  participants UserConversation[] @relation("user_conv")
+
+  @@map("conversation")
 }
 
-model user_conversation {
+model UserConversation {
   id              Int          @id @default(autoincrement())
-  user            user         @relation("conv_user", fields: [user_id], references: [id])
+  user            User         @relation("conv_user", fields: [user_id], references: [id])
   user_id         Int
-  conversation    conversation @relation("user_conv", fields: [conversation_id], references: [id])
+  conversation    Conversation @relation("user_conv", fields: [conversation_id], references: [id])
   conversation_id Int
+
+  @@map("user_conversation")
 }
 
-model message {
+model Message {
   id              Int          @id @default(autoincrement())
-  sender          user         @relation("sender", fields: [sender_id], references: [id])
+  sender          User         @relation("sender", fields: [sender_id], references: [id])
   sender_id       Int
-  conversation    conversation @relation("conv", fields: [conversation_id], references: [id])
+  conversation    Conversation @relation("conv", fields: [conversation_id], references: [id])
   conversation_id Int
   text            String
   created_at      DateTime     @default(now())
+
+  @@map("message")
 }
