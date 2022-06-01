@@ -87,39 +87,39 @@ async function createConversation(req, res) {
 }
 
 async function getConversations(req, res) {
-  try {
-    const { userId } = req
-    await conversationUserSchema.validateAsync({ userId })
+  // try {
+  const { userId } = req
+  await conversationUserSchema.validateAsync({ userId })
 
-    const conversations = await prisma.conversation.findMany({
-      select: {
-        id: true,
-      },
-      // distinct: ['id'],
-      where: {
-        participants: {
-          some: {
-            user_id: userId,
-          },
+  const conversations = await prisma.conversation.findMany({
+    select: {
+      id: true,
+    },
+    // distinct: ['id'],
+    where: {
+      participants: {
+        some: {
+          user_id: userId,
         },
       },
+    },
+  })
+  res.status(200).json(
+    apiResponse({
+      message: 'Data fetched correctly.',
+      data: { conversations },
+      status: 200,
     })
-    res.status(200).json(
-      apiResponse({
-        message: 'Data fetched correctly.',
-        data: { conversations },
-        status: 200,
-      })
-    )
-  } catch (err) {
-    res.status(500).json(
-      apiResponse({
-        message: 'An error occurred with your query.',
-        errors: [err.message],
-        status: 500,
-      })
-    )
-  }
+  )
+  // } catch (err) {
+  //   res.status(500).json(
+  //     apiResponse({
+  //       message: 'An error occurred with your query.',
+  //       errors: [err.message],
+  //       status: 500,
+  //     })
+  //   )
+  // }
 }
 
 async function getConversationById(req, res) {

@@ -4,26 +4,8 @@ const { apiResponse } = require('../utils/utils')
 
 async function createLog(req, res) {
   const { msg, level } = req.body
-  try {
-    await logSchema.validateAsync({ msg, level })
-  } catch (err) {
-    if (err.isJoi && err.name === 'ValidationError') {
-      return res.status(400).json(
-        apiResponse({
-          message: 'At least one of the required values is not well formed.',
-          errors: [err.message],
-          status: 400,
-        })
-      )
-    }
-    return res.status(500).json(
-      apiResponse({
-        message: 'Unknown error',
-        errors: [err.message],
-        status: 500,
-      })
-    )
-  }
+  await logSchema.validateAsync({ msg, level })
+
   switch (level) {
     case 'trace':
       logger.trace(msg)
@@ -44,7 +26,7 @@ async function createLog(req, res) {
       logger.info(msg)
       break
   }
-  return res.status(200).json(
+  res.status(200).json(
     apiResponse({
       message: 'Log created successfully.',
       status: 200,
