@@ -72,6 +72,12 @@ const isRepeatedPassword = async (userId, password) => {
   return repeatedPass.includes(true)
 }
 
+// Check password format and hash it if correct
+const checkAndHashPass = async (pass) => {
+  const regex = new RegExp(process.env.PASSWORD_REGEX)
+  return regex.test(pass) ? hashPassword(pass) : null
+}
+
 module.exports = {
   apiResponse,
   signToken,
@@ -80,4 +86,5 @@ module.exports = {
   decodeHash,
   tokenUser,
   isRepeatedPassword,
+  checkAndHashPass,
 }

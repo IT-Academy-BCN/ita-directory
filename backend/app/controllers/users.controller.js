@@ -13,96 +13,85 @@ const {
 const prisma = require('../../prisma/indexPrisma')
 
 // Refresh token
-// eslint-disable-next-line consistent-return
 exports.getRefreshToken = (req, res, next) => {
   const refreshToken = req.headers.refresh
 
   if (!refreshToken) {
-    return next({
+    next({
       code: 'error',
       message: 'refresh token missing',
       statusCode: 400,
     })
-  }
+  } else {
+    JWT.verify(
+      refreshToken,
+      process.env.JWT_REFRESH_TOKEN_SECRET,
+      { ignoreExpiration: true },
+      async (err, payload) => {
+        if (err) res.sendStatus(401)
+        else {
+          const hashedId = payload.sub.user_id
+          const dehashedId = decodeHash(hashedId)
+          const userId = dehashedId[0]
 
-  JWT.verify(
-    refreshToken,
-    process.env.JWT_REFRESH_TOKEN_SECRET,
-    { ignoreExpiration: true },
-    async (err, payload) => {
-      try {
-        if (err) return res.sendStatus(401)
-        const hashedId = payload.sub.user_id
-        const dehashedId = decodeHash(hashedId)
-        const userId = dehashedId[0]
-
-        const result = await client.get(userId.toString())
-        if (refreshToken !== result) {
-          const counterKey = `C${userId}`
-          await client.incr(counterKey)
-          return res.sendStatus(401)
+          const result = await client.get(userId.toString())
+          if (refreshToken !== result) {
+            const counterKey = `C${userId}`
+            await client.incr(counterKey)
+            res.sendStatus(401)
+          } else {
+            const accessToken = signToken(userId)
+            res.status(200).json(
+              apiResponse({
+                data: { accessToken },
+              })
+            )
+          }
         }
-        const accessToken = signToken(userId)
-
-        return res.status(200).json(
-          apiResponse({
-            data: {
-              accessToken,
-            },
-          })
-        )
-      } catch (error) {
-        return next(new Error(error))
       }
-    }
-  )
+    )
+  }
 }
 
 // Get token //! This could be deleted. Not in use.
-exports.getToken = async (req, res, next) => {
+exports.getToken = async (req, res) => {
   const idUser = '100001'
   const accessToken = signToken(idUser)
-  try {
-    const refreshToken = await signRefreshToken(idUser)
-    return res.status(200).json(
-      apiResponse({
-        message: 'Your token',
-        data: { accessToken, refreshToken },
-      })
-    )
-  } catch (err) {
-    return next(new Error(err))
-  }
+  const refreshToken = await signRefreshToken(idUser)
+  return res.status(200).json(
+    apiResponse({
+      message: 'Your token',
+      data: { accessToken, refreshToken },
+    })
+  )
 }
 
 // Get User (/v1/get-me endPoint)
 exports.getUser = async (req, res, next) => {
   // Check that the request isn't empty
   if (!req.userId) {
-    return next({
+    next({
       code: 'error',
       message: 'Request is empty.',
       statusCode: 400,
     })
-  }
-  try {
+  } else {
     const USER = await prisma.user.findUnique({ where: { id: parseInt(req.userId, 10) } })
     if (USER === null) {
-      return next({
+      next({
         code: 'error',
         success: 'false',
         message: 'user not found',
         statusCode: 204,
       })
+    } else {
+      res.status(200).json({
+        // TODO: Cambiar por el método API RESPONSE
+        success: 'true',
+        name: USER.name,
+        lastnames: USER.lastnames,
+      })
     }
-    return res.status(200).json({
-      // Cambiar por el método API RESPONSE
-      success: 'true',
-      name: USER.name,
-      lastnames: USER.lastnames,
-    })
-  } catch (err) {
-    return next(new Error(err))
   }
 }
 
@@ -111,82 +100,67 @@ exports.registerUser = async (req, res, next) => {
   const { name, lastnames, email, password } = req.body
 
   const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
-  try {
-    if (!regex.test(password)) {
-      return next({
-        code: 'error',
-        header: 'Invalid password',
-        message: 'This password does not meet the requirements.',
-        statusCode: 400,
-      })
-    }
 
-    // Checking if valid email, password and privacy policy.
-    const doesExist = await prisma.user.findUnique({ where: { email } })
-
-    if (doesExist !== null) {
-      return next({
-        code: 'error',
-        header: 'Invalid email',
-        message: 'This email has already been registered.',
-        statusCode: 400,
-      })
-    }
-
-    // Creating user without name or lastnames
-    const passwordHashed = await hashPassword(req.body.password)
-    await prisma.user.create({
-      data: {
-        name,
-        lastnames,
-        email,
-        password: passwordHashed,
-        user_status_id: 1,
-        user_role_id: 3,
-      },
+  if (!regex.test(password)) {
+    return next({
+      code: 'error',
+      header: 'Invalid password',
+      message: 'This password does not meet the requirements.',
+      statusCode: 400,
     })
-    return res.status(200).json(
-      apiResponse({
-        message: 'User registered correctly.',
-      })
-    )
-  } catch (err) {
-    if (err.isJoi === true) {
-      return next({
-        code: 'error',
-        message: 'Some error ocurred while creating your account.',
-        statusCode: 422,
-      })
-    }
-    return next(new Error(err))
   }
+
+  // Checking if valid email, password and privacy policy.
+  const doesExist = await prisma.user.findUnique({ where: { email } })
+
+  if (doesExist !== null) {
+    return next({
+      code: 'error',
+      header: 'Invalid email',
+      message: 'This email has already been registered.',
+      statusCode: 400,
+    })
+  }
+
+  // Creating user without name or lastnames
+  const passwordHashed = await hashPassword(req.body.password)
+  await prisma.user.create({
+    data: {
+      name,
+      lastnames,
+      email,
+      password: passwordHashed,
+      user_status_id: 1,
+      user_role_id: 3,
+    },
+  })
+  return res.status(200).json(
+    apiResponse({
+      message: 'User registered correctly.',
+    })
+  )
 }
 
 // get all users (FOR TESTING PURPOSE)
-exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await prisma.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        lastnames: true,
-        email: true,
-        created_at: true,
-        updated_at: true,
-        user_status_id: true,
-        user_role_id: true,
-        media: {
-          select: {
-            path: true,
-          },
+exports.getAllUsers = async (req, res) => {
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      lastnames: true,
+      email: true,
+      created_at: true,
+      updated_at: true,
+      user_status_id: true,
+      user_role_id: true,
+      media: {
+        select: {
+          path: true,
         },
       },
-    })
-
-    return res.status(200).json(users)
-  } catch (err) {
-    return next(new Error(err))
-  }
+    },
+  })
+  return res.status(200).json(users)
 }
 
 // Login
@@ -202,46 +176,39 @@ exports.login = async (req, res, next) => {
     })
   }
 
-  try {
-    const USER = await prisma.user.findUnique({
-      where: { email: body.email },
-    })
+  const USER = await prisma.user.findUnique({
+    where: { email: body.email },
+  })
 
-    if (!USER) {
-      return next({
-        code: 'error',
-        header: "User doesn't exist",
-        message: "There's no user with that email, please try again or get in touch.",
-        statusCode: 400,
-      })
-    }
-
-    const value = await argon2.verify(USER.password, body.password)
-    if (value === false) {
-      return next({
-        code: 'error',
-        header: 'Wrong password',
-        message:
-          'The password you introduced is incorrect, please try again or try to recover your password.',
-        statusCode: 400,
-      })
-    }
-    const token = signToken(USER.id)
-    const refreshToken = await signRefreshToken(USER.id)
-
-    return res.status(200).json({
-      code: 'success',
-      header: 'Welcome back',
-      message: 'We are redirecting you to your account.',
-      token,
-      refreshToken,
-    })
-  } catch (err) {
-    return res.status(500).json({
+  if (!USER) {
+    return next({
       code: 'error',
-      message: 'Internal Server Error.',
+      header: "User doesn't exist",
+      message: "There's no user with that email, please try again or get in touch.",
+      statusCode: 400,
     })
   }
+
+  const value = await argon2.verify(USER.password, body.password)
+  if (value === false) {
+    return next({
+      code: 'error',
+      header: 'Wrong password',
+      message:
+        'The password you introduced is incorrect, please try again or try to recover your password.',
+      statusCode: 400,
+    })
+  }
+  const token = signToken(USER.id)
+  const refreshToken = await signRefreshToken(USER.id)
+
+  return res.status(200).json({
+    code: 'success',
+    header: 'Welcome back',
+    message: 'We are redirecting you to your account.',
+    token,
+    refreshToken,
+  })
 }
 
 // Update user //TODO Improve error handling
@@ -255,31 +222,27 @@ exports.updateUser = async (req, res) => {
     return res.status(400).json({ message: `Enter correct roles!, please` })
   }
 
-  try {
-    const updateUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        name,
-        lastnames,
-        email,
-        password,
-        // eslint-disable-next-line camelcase
-        user_role_id,
-        // eslint-disable-next-line camelcase
-        user_status_id,
-      },
-    })
-    //! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
-    if (updateUser === null || undefined) {
-      return res.status(204).json({ massage: `User not found. Entry data, please` })
-    }
-    return res.status(200).json({
-      updateUser,
-      message: `Data user updated successfully`,
-    })
-  } catch (error) {
-    return new Error(error)
+  const updateUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      name,
+      lastnames,
+      email,
+      password,
+      // eslint-disable-next-line camelcase
+      user_role_id,
+      // eslint-disable-next-line camelcase
+      user_status_id,
+    },
+  })
+  //! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
+  if (updateUser === null || undefined) {
+    return res.status(204).json({ massage: `User not found. Entry data, please` })
   }
+  return res.status(200).json({
+    updateUser,
+    message: `Data user updated successfully`,
+  })
 }
 
 // Delete user
@@ -288,115 +251,104 @@ exports.deleteUser = async (req, res) => {
 
   if (!email) return res.status(404).json({ message: 'Enter correct email!' })
 
-  try {
-    const deleteUser = await prisma.user.delete({
-      where: { email },
-    })
-    return res.status(200).json({ user: deleteUser, msg: `User successfully deleted` })
-  } catch (error) {
-    return new Error(error)
-  }
+  const deleteUser = await prisma.user.delete({
+    where: { email },
+  })
+  return res.status(200).json({ user: deleteUser, msg: `User successfully deleted` })
 }
 
-exports.receiveEmailGetToken = async (req, res, next) => {
-  try {
-    const { email } = req.body
-    const user = await prisma.user.findUnique({ where: { email } })
+exports.receiveEmailGetToken = async (req, res) => {
+  const { email } = req.body
+  const user = await prisma.user.findUnique({ where: { email } })
 
-    // Will store the password at password_recovery_log, then this log will be use to forbid the user from using old passwords. //!This might not be the best place to call it.
-    await prisma.recover_password_log.create({
-      data: {
-        password: user.password,
-        user_id: user.id,
-      },
-    })
+  // Will store the password at password_recovery_log, then this log will be use to forbid the user from using old passwords.
+  // !This might not be the best place to call it.
+  await prisma.recover_password_log.create({
+    data: {
+      password: user.password,
+      user_id: user.id,
+    },
+  })
 
-    if (!user) {
-      return res.status(404).json(
-        apiResponse({
-          code: 'error',
-          message: 'Email not found',
-        })
-      )
-    }
-    const accessToken = signToken(user.id, '1h')
-    mailOptions.to = email
-    mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`
-
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        res.status(500).json(error.message)
-      } else {
-        res.status(200).json({
-          // id: info.messageId,
-          msg: 'Email sent',
-        })
-      }
-    })
-    return res.sendStatus(204)
-  } catch (err) {
-    return next(new Error(err))
+  if (!user) {
+    return res.status(404).json(
+      apiResponse({
+        code: 'error',
+        message: 'Email not found',
+      })
+    )
   }
+  const accessToken = signToken(user.id, '1h')
+  mailOptions.to = email
+  mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`
+
+  transporter.sendMail(mailOptions, (error) => {
+    if (error) {
+      res.status(500).json(error.message)
+    } else {
+      res.status(200).json({
+        // id: info.messageId,
+        msg: 'Email sent',
+      })
+    }
+  })
+  return res.sendStatus(204)
 }
 
 exports.changePassword = async (req, res, next) => {
-  try {
-    const { password1, password2 } = req.body
-    const { token } = req.params
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
+  const { password1, password2 } = req.body
+  const { token } = req.params
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
 
-    if (password1 !== password2) {
-      return res.status(200).json(
-        apiResponse({
-          code: 'error',
-          message: 'The password does not match',
-        })
-      )
-    }
-
-    if (!regex.test(password1)) {
-      return next({
-        code: 'error',
-        header: 'Invalid password',
-        message: 'This password does not meet the requirements.',
-        statusCode: 400,
-      })
-    }
-
-    // @todo: This verification should be implemented using middleware
-    // eslint-disable-next-line consistent-return
-    JWT.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-      if (err) {
-        return res.status(200).json({
-          code: 'error',
-          message: 'Something is wrong with the token',
-        })
-      }
-
-      const decodedId = decodeHash(decoded.sub.user_id)
-      if (await isRepeatedPassword(decodedId[0], password1)) {
-        return res.status(200).json({
-          code: 'error',
-          message: "Can't repeat passwords",
-        })
-      }
-
-      const hashedPassword = await hashPassword(password1)
-      await prisma.user.update({
-        where: {
-          id: decodedId[0],
-        },
-        data: {
-          password: hashedPassword,
-        },
-      })
-    })
+  if (password1 !== password2) {
     return res.status(200).json(
       apiResponse({
-        message: 'Your password has been successfully changed.',
+        code: 'error',
+        message: 'The password does not match',
       })
     )
-  } catch (err) {
-    return next(new Error(err))
   }
+
+  if (!regex.test(password1)) {
+    return next({
+      code: 'error',
+      header: 'Invalid password',
+      message: 'This password does not meet the requirements.',
+      statusCode: 400,
+    })
+  }
+
+  // @todo: This verification should be implemented using middleware
+  // eslint-disable-next-line consistent-return
+  JWT.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      return res.status(200).json({
+        code: 'error',
+        message: 'Something is wrong with the token',
+      })
+    }
+
+    const decodedId = decodeHash(decoded.sub.user_id)
+    if (await isRepeatedPassword(decodedId[0], password1)) {
+      return res.status(200).json({
+        code: 'error',
+        message: "Can't repeat passwords",
+      })
+    }
+
+    const hashedPassword = await hashPassword(password1)
+    await prisma.user.update({
+      where: {
+        id: decodedId[0],
+      },
+      data: {
+        password: hashedPassword,
+      },
+    })
+  })
+  return res.status(200).json(
+    apiResponse({
+      message: 'Your password has been successfully changed.',
+    })
+  )
 }

@@ -1,8 +1,8 @@
 const path = require('path')
-
 require('dotenv').config({ path: path.join(__dirname, `.env`) })
 const socketio = require('socket.io')
 const http = require('http')
+
 const app = require('./app/app')
 const handlerError = require('./app/middleware/handlerErrors')
 const handlerLogger = require('./app/middleware/handlerLogger')
