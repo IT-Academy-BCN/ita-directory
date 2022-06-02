@@ -35,6 +35,7 @@ async function createAd(req, res, next) {
         n_bathrooms: parseInt(req.body.n_bathrooms, 10),
         map_lat: parseFloat(req.body.map_lat),
         map_lon: parseFloat(req.body.map_lon),
+        included_expenses: req.body.included_expenses === 'true',
         ad_type: {
           connect: {
             id: parseInt(req.body.ad_type_id, 10),

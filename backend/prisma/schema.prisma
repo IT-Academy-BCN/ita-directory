@@ -143,24 +143,26 @@ model ad_status {
 
 model ads {
 
-  id            Int       @id @default(autoincrement())
-  user          user      @relation(fields: [user_id], references: [id])
-  user_id       Int
-  title         String
-  description   String
-  location      Int
-  n_rooms       Int
-  price         Int
-  square_meters Int
-  n_bathrooms   Int
-  map_lat       Decimal
-  map_lon       Decimal
-  ad_type       ad_type   @relation(fields: [ad_type_id], references: [id])
-  ad_type_id    Int
-  ad_status     ad_status @relation(fields: [ad_status_id], references: [id])
-  ad_status_id  Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  id                Int       @id @default(autoincrement())
+  user              user      @relation(fields: [user_id], references: [id])
+  user_id           Int
+  title             String
+  description       String
+  location          Int
+  n_rooms           Int
+  price             Int
+  included_expenses Boolean   @default(false)
+  square_meters     Int
+  n_bathrooms       Int
+  city              String
+  map_lat           Decimal
+  map_lon           Decimal
+  ad_type           ad_type   @relation(fields: [ad_type_id], references: [id])
+  ad_type_id        Int
+  ad_status         ad_status @relation(fields: [ad_status_id], references: [id])
+  ad_status_id      Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
 }
 
 model conversation {
