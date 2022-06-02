@@ -2,7 +2,7 @@ import React from 'react'
 import Body from '../../components/layout/Body/Body'
 import Menu from '../../components/molecules/Menu'
 
-function Collaborators() {
+function Students() {
   return (
     <Body title={<Menu />}>
       <p>Collaborators</p>
@@ -10,4 +10,4 @@ function Collaborators() {
   )
 }
 
-export default Collaborators
+export default Students

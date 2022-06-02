@@ -7,15 +7,15 @@ import { Text } from '../atoms'
 
 const menu = [
   {
-    to: paths,
+    to: paths.home,
     name: 'El directorio',
   },
   {
-    to: '/alumnos',
+    to: '/students',
     name: 'Para alumnos',
   },
   {
-    to: '/empresas',
+    to: '/business',
     name: 'Para empresas',
   },
 ]
@@ -25,7 +25,7 @@ function Menu() {
       {menu.map((item) => {
         return (
           <Link to={item.to}>
-            <Text as="span" text={item.name} />
+            <Text as="span" text={item.name} pr={item.name === 'Para empresas' ? '0px' : '15px'} />
           </Link>
         )
       })}
