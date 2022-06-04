@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { paths } from '../../utils'
 import { colors } from '../../theme'
@@ -20,12 +20,18 @@ const menu = [
   },
 ]
 function Menu() {
+  const location = useLocation()
   return (
     <Container>
-      {menu.map((item) => {
+      {menu.map((item, index) => {
         return (
-          <Link to={item.to}>
-            <Text as="span" text={item.name} pr={item.name === 'Para empresas' ? '0px' : '15px'} />
+          <Link to={item.to} key={item.to}>
+            <Text
+              as="span"
+              text={item.name}
+              style={{ color: location.pathname === item.to ? colors.redPink : colors.black }}
+              pr={index === menu.length - 1 ? '0px' : '15px'}
+            />
           </Link>
         )
       })}
@@ -36,9 +42,6 @@ function Menu() {
 const Container = styled.div`
   a {
     text-decoration: none;
-    &:active {
-      color: ${colors.redPink};
-    }
   }
 `
 

@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import { HeaderStyled, StyledSubHeader } from './Header.styles'
+import { ContainerMenu, HeaderStyled, StyledHeaderHome, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
 import { Text, Dropdown, Li, Ul } from '../../atoms'
+import { paths } from '../../../utils'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
-function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitleVisible = true }) {
+function Header({ title, logoColor, headerColor, fontColor }) {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 
   const children = [
@@ -22,9 +23,25 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
   ]
 
   const [dropdownVisible, setDropdownVisible] = useState(false)
+  const [showView, setShowView] = useState(false)
+
   const handleClick = () => {
     setDropdownVisible(!dropdownVisible)
   }
+
+  const location = useLocation()
+  const currentLocation = location.pathname
+  useEffect(() => {
+    if (
+      currentLocation === paths.home ||
+      currentLocation === '/students' ||
+      currentLocation === '/business'
+    ) {
+      setShowView(true)
+    } else {
+      setShowView(false)
+    }
+  }, [currentLocation])
 
   return (
     <HeaderStyled logoColor={logoColor}>
@@ -62,11 +79,19 @@ function Header({ title, logoColor, headerColor, fontColor, justifyTitle, isTitl
           </div>
         </div>
       </Container>
-      <StyledSubHeader headerColor={headerColor} fontColor={fontColor}>
-        <Container>
-          <h1>{title}</h1>
-        </Container>
-      </StyledSubHeader>
+      {showView ? (
+        <StyledHeaderHome headerColor={headerColor} fontColor={fontColor}>
+          <Container>
+            <ContainerMenu>{title}</ContainerMenu>
+          </Container>
+        </StyledHeaderHome>
+      ) : (
+        <StyledSubHeader headerColor={headerColor} fontColor={fontColor}>
+          <Container>
+            <h1>{title}</h1>
+          </Container>
+        </StyledSubHeader>
+      )}
     </HeaderStyled>
   )
 }
@@ -76,8 +101,6 @@ Header.propTypes = {
   logoColor: PropTypes.string,
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,
-  justifyTitle: PropTypes.string,
-  isTitleVisible: PropTypes.bool,
 }
 
 export default Header

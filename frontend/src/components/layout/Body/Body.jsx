@@ -17,7 +17,6 @@ const Childrens = styled.div`
   display: flex;
   justify-content: center;
   /* padding-top: 3.5rem; */
-  padding-top: 1rem;
   min-height: calc(100vh - 360px);
 
   @media ${device.Tablet} {
