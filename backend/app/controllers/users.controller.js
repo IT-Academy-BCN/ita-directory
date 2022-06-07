@@ -30,7 +30,7 @@ exports.getRefreshToken = (req, res, next) => {
       async (err, payload) => {
         if (err) res.sendStatus(401)
         else {
-          const hashedId = payload.sub.user_id
+          const hashedId = payload.sub.userId
           const dehashedId = decodeHash(hashedId)
           const userId = dehashedId[0]
 
@@ -130,8 +130,8 @@ exports.registerUser = async (req, res, next) => {
       lastnames,
       email,
       password: passwordHashed,
-      user_status_id: 1,
-      user_role_id: 3,
+      userStatusId: 1,
+      userRoleId: 3,
     },
   })
   return res.status(200).json(
@@ -149,10 +149,10 @@ exports.getAllUsers = async (req, res) => {
       name: true,
       lastnames: true,
       email: true,
-      created_at: true,
-      updated_at: true,
-      user_status_id: true,
-      user_role_id: true,
+      createdAt: true,
+      updatedAt: true,
+      userStatusId: true,
+      userRoleId: true,
       media: {
         select: {
           path: true,
@@ -214,7 +214,7 @@ exports.login = async (req, res, next) => {
 // Update user //TODO Improve error handling
 exports.updateUser = async (req, res) => {
   // eslint-disable-next-line camelcase
-  const { email, name, lastnames, password, user_role_id, user_status_id } = req.body
+  const { email, name, lastnames, password, userRoleId, userStatusId } = req.body
   const userId = { req }
 
   // @todo: req.body fields should be validated using joi
@@ -230,9 +230,9 @@ exports.updateUser = async (req, res) => {
       email,
       password,
       // eslint-disable-next-line camelcase
-      user_role_id,
+      userRoleId,
       // eslint-disable-next-line camelcase
-      user_status_id,
+      userStatusId,
     },
   })
   //! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
@@ -266,7 +266,7 @@ exports.receiveEmailGetToken = async (req, res) => {
   await prisma.recover_password_log.create({
     data: {
       password: user.password,
-      user_id: user.id,
+      userId: user.id,
     },
   })
 
@@ -328,7 +328,7 @@ exports.changePassword = async (req, res, next) => {
       })
     }
 
-    const decodedId = decodeHash(decoded.sub.user_id)
+    const decodedId = decodeHash(decoded.sub.userId)
     if (await isRepeatedPassword(decodedId[0], password1)) {
       return res.status(200).json({
         code: 'error',

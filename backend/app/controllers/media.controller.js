@@ -8,8 +8,8 @@ exports.uploadMedia = async (req, res) => {
     await prisma.media.create({
       data: {
         path: req.file.path,
-        mime_type: req.file.mimetype,
-        file_size: req.file.size.toString(),
+        mimeType: req.file.mimetype,
+        fileSize: req.file.size.toString(),
         user: {
           connect: {
             id: parseInt(req.body.userId, 10),

@@ -80,7 +80,7 @@ model Media {
   id        Int         @id @default(autoincrement())
   path      String
   mimeType  String      @map("mime_type")
-  file_size String
+  fileSize  String      @map("file_size")
   user      User        @relation(fields: [userId], references: [id])
   userId    Int         @map("user_id")
   mediaMeta MediaMeta[]
@@ -92,7 +92,7 @@ model MediaMeta {
   id          Int       @id @default(autoincrement())
   path        String
   mimeType    String    @map("mime_type")
-  file_size   String
+  fileSize    String    @map("file_size")
   media       Media     @relation(fields: [mediaId], references: [id])
   mediaId     Int       @map("media_id")
   mediaType   MediaType @relation(fields: [mediaTypeId], references: [id])
