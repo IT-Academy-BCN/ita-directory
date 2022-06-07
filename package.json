@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "ITA Directory",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint --max-warnings=0",
     "frontend": "cd ./frontend && npm start",
     "backend": "cd ./backend && npm run dev",
     "start-db": "cd ./scripts && source ./docker-utils.sh; launchPostgres",
@@ -36,5 +37,8 @@
   "devDependencies": {
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2"
+  },
+  "dependencies": {
+    "eslint": "^8.17.0"
   }
 }
