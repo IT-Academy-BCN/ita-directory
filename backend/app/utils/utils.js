@@ -2,7 +2,6 @@ const JWT = require('jsonwebtoken')
 const Hashids = require('hashids')
 const argon2 = require('argon2')
 const client = require('./initRedis')
-const prisma = require('../../prisma/indexPrisma')
 const logger = require('../../logger')
 
 const hashIds = new Hashids(process.env.HASH_ID_SECRET, 10)
@@ -64,14 +63,6 @@ const tokenUser = (token) =>
     return userId
   })
 
-// Will test if provided password has already been used, if so, returns true.
-const isRepeatedPassword = async (userId, password) => {
-  const pwLog = await prisma.recover_password_log.findMany({ where: { user_id: userId } })
-  const promiseArray = pwLog.map((log) => argon2.verify(log.password, password))
-  const repeatedPass = await Promise.all(promiseArray)
-  return repeatedPass.includes(true)
-}
-
 // Check password format and hash it if correct
 const checkAndHashPass = async (pass) => {
   const regex = new RegExp(process.env.PASSWORD_REGEX)
@@ -85,6 +76,5 @@ module.exports = {
   hashPassword,
   decodeHash,
   tokenUser,
-  isRepeatedPassword,
   checkAndHashPass,
 }
