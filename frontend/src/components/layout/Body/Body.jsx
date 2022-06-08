@@ -9,14 +9,11 @@ import { Notifications } from '../../atoms'
 const StyledBody = styled.div`
   min-height: 100vh;
   width: 100vw;
-  /* display: flex;
-	flex-direction: column; */
 `
 
 const Childrens = styled.div`
   display: flex;
   justify-content: center;
-  /* padding-top: 3.5rem; */
   min-height: calc(100vh - 360px);
 
   @media ${device.Tablet} {
@@ -43,6 +40,7 @@ function Body({
   hideHeader,
   hideFooter,
   dashboard,
+  menu,
 }) {
   return (
     <StyledBody className="styledBody">
@@ -51,6 +49,7 @@ function Body({
       ) : (
         <Header
           title={title}
+          menu={menu}
           logoColor={logoColor}
           headerColor={headerColor}
           fontColor={fontColor}
@@ -68,7 +67,8 @@ function Body({
 
 Body.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  title: PropTypes.string,
+  menu: PropTypes.object,
   logoColor: PropTypes.string,
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,

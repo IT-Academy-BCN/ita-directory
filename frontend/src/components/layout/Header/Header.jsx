@@ -10,7 +10,7 @@ import { paths } from '../../../utils'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
-function Header({ title, logoColor, headerColor, fontColor }) {
+function Header({ title, logoColor, headerColor, fontColor, menu }) {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 
   const children = [
@@ -82,7 +82,7 @@ function Header({ title, logoColor, headerColor, fontColor }) {
       {showView ? (
         <StyledHeaderHome headerColor={headerColor} fontColor={fontColor}>
           <Container>
-            <ContainerMenu>{title}</ContainerMenu>
+            <ContainerMenu>{menu}</ContainerMenu>
           </Container>
         </StyledHeaderHome>
       ) : (
@@ -97,8 +97,9 @@ function Header({ title, logoColor, headerColor, fontColor }) {
 }
 
 Header.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  title: PropTypes.string,
   logoColor: PropTypes.string,
+  menu: PropTypes.object,
   headerColor: PropTypes.string,
   fontColor: PropTypes.string,
 }

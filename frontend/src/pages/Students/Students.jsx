@@ -4,7 +4,7 @@ import Menu from '../../components/molecules/Menu'
 
 function Students() {
   return (
-    <Body title={<Menu />}>
+    <Body menu={<Menu />}>
       <p>Collaborators</p>
     </Body>
   )

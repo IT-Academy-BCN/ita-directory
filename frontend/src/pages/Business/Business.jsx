@@ -4,7 +4,7 @@ import Menu from '../../components/molecules/Menu'
 
 function Business() {
   return (
-    <Body title={<Menu />}>
+    <Body menu={<Menu />}>
       <p>Empresas</p>
     </Body>
   )

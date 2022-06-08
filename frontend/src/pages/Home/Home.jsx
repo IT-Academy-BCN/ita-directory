@@ -41,7 +41,7 @@ const HomeContainer = styled(Container)`
 
 function Home() {
   return (
-    <Body title={<Menu />} justifyTitle="center">
+    <Body menu={<Menu />} justifyTitle="center">
       <HomeContainer>
         <Banner />
         <MapOfDistricts />
