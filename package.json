@@ -18,7 +18,8 @@
     "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma",
     "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install",
-    "prepare": "husky install && chmod ug+x .husky/*"
+    "prepare": "husky install && chmod ug+x .husky/*",
+    "lint": "./node_modules/.bin/eslint --max-warnings=0"
   },
   "repository": {
     "type": "git",
