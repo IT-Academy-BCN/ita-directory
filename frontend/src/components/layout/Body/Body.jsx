@@ -33,8 +33,6 @@ function Body({
   children,
   title,
   logoColor,
-  headerColor,
-  fontColor,
   isLoggedIn,
   justifyTitle,
   hideHeader,
@@ -51,8 +49,6 @@ function Body({
           title={title}
           menu={menu}
           logoColor={logoColor}
-          headerColor={headerColor}
-          fontColor={fontColor}
           isLoggedIn={isLoggedIn}
           justifyTitle={justifyTitle}
           isTitleVisible={false}
@@ -70,8 +66,6 @@ Body.propTypes = {
   title: PropTypes.string,
   menu: PropTypes.object,
   logoColor: PropTypes.string,
-  headerColor: PropTypes.string,
-  fontColor: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   justifyTitle: PropTypes.string,
   hideHeader: PropTypes.bool,

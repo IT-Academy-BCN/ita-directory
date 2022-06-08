@@ -1,47 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ContainerMenu, HeaderStyled, StyledHeaderHome, StyledSubHeader } from './Header.styles'
 import { Container } from '../../../theme'
 import logo from '../../../assets/logos/logo.png'
-import { Text, Dropdown, Li, Ul } from '../../atoms'
+import { Text, Dropdown, Li, Ul, Title } from '../../atoms'
 import { paths } from '../../../utils'
 
 const profilePicture = 'https://randomuser.me/api/portraits/men/22.jpg'
 
-function Header({ title, logoColor, headerColor, fontColor, menu }) {
+function Header({ title, logoColor, menu }) {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 
   const children = [
-    { path: '/profile', text: 'Editar perfil' },
-    { path: '/my-bills', text: 'Mis facturas' },
-    { path: '/user-ads', text: 'Mis Anuncios' },
-    { path: '/new-ad', text: 'Publicar Anuncio' },
-    { path: '/ads', text: 'Anuncios' },
-    { path: '/', text: 'Cerrar sesión' },
+    { path: paths.profile, text: 'Editar perfil' },
+    { path: paths.bills, text: 'Mis facturas' },
+    { path: paths.userAds, text: 'Mis Anuncios' },
+    { path: paths.newAd, text: 'Publicar Anuncio' },
+    { path: paths.ads, text: 'Anuncios' },
+    { path: paths.home, text: 'Cerrar sesión' },
   ]
 
   const [dropdownVisible, setDropdownVisible] = useState(false)
-  const [showView, setShowView] = useState(false)
 
   const handleClick = () => {
     setDropdownVisible(!dropdownVisible)
   }
-
-  const location = useLocation()
-  const currentLocation = location.pathname
-  useEffect(() => {
-    if (
-      currentLocation === paths.home ||
-      currentLocation === '/students' ||
-      currentLocation === '/business'
-    ) {
-      setShowView(true)
-    } else {
-      setShowView(false)
-    }
-  }, [currentLocation])
 
   return (
     <HeaderStyled logoColor={logoColor}>
@@ -79,16 +64,17 @@ function Header({ title, logoColor, headerColor, fontColor, menu }) {
           </div>
         </div>
       </Container>
-      {showView ? (
-        <StyledHeaderHome headerColor={headerColor} fontColor={fontColor}>
+      {menu && (
+        <StyledHeaderHome>
           <Container>
             <ContainerMenu>{menu}</ContainerMenu>
           </Container>
         </StyledHeaderHome>
-      ) : (
-        <StyledSubHeader headerColor={headerColor} fontColor={fontColor}>
+      )}
+      {title && (
+        <StyledSubHeader>
           <Container>
-            <h1>{title}</h1>
+            <Title text={title} order={1} />
           </Container>
         </StyledSubHeader>
       )}
@@ -100,8 +86,6 @@ Header.propTypes = {
   title: PropTypes.string,
   logoColor: PropTypes.string,
   menu: PropTypes.object,
-  headerColor: PropTypes.string,
-  fontColor: PropTypes.string,
 }
 
 export default Header

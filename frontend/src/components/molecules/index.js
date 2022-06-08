@@ -2,6 +2,6 @@ import InputGroup from './InputGroup'
 import SearchButton from './SearchButton'
 import TextAreaGroup from './TextAreaGroup'
 import { TextArea } from '../atoms'
+import Menu from './Menu'
 
-// eslint-disable-next-line import/prefer-default-export
-export { InputGroup, SearchButton, TextAreaGroup, TextArea }
+export { InputGroup, SearchButton, TextAreaGroup, TextArea, Menu }

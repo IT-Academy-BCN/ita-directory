@@ -1,6 +1,6 @@
 import React from 'react'
 import Body from '../../components/layout/Body/Body'
-import Menu from '../../components/molecules/Menu'
+import { Menu } from '../../components/molecules'
 
 function Students() {
   return (

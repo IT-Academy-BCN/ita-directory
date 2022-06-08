@@ -3,7 +3,7 @@ import Body from '../../components/layout/Body/Body'
 import { Banner } from '../../components/atoms'
 import { MapOfDistricts } from '../../components/organisms'
 import { Container, device } from '../../theme'
-import Menu from '../../components/molecules/Menu'
+import { Menu } from '../../components/molecules'
 
 const HomeContainer = styled(Container)`
   flex-direction: column;
