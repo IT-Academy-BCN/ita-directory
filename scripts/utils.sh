@@ -76,7 +76,7 @@ timeout() {
 
 loadEnv() {
     if [ -f "$1" ]; then
-        export $(echo $(cat "$1" | sed 's/#.*//g' | xargs) | envsubst)
+        set -a; . "$1"; set +a  # export environment variables from "$1" .env file
     else
         echo "You must create a valid .env file in your root directory"
     fi
