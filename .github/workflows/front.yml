@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-      - run: npm ci
+      - run: cd ./frontend && npm ci
       - run: cd ./frontend && npm run lint
 
   test:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-      - run: npm ci
+      - run: cd ./frontend && npm ci
       - run: cd ./frontend && npm run test
 
   build:
@@ -40,5 +40,5 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-      - run: npm ci
+      - run: cd ./frontend && npm ci
       - run: cd ./frontend && npm run build
