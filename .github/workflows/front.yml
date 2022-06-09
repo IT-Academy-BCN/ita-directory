@@ -1,4 +1,4 @@
-name: lint
+name: frontend
 
 on:
   pull_request:
@@ -7,7 +7,19 @@ on:
       - ./frontend/**
 
 jobs:
-  build:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - run: npm ci
+      - run: cd ./frontend && npm run lint
+
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +30,15 @@ jobs:
           node-version: "16.x"
       - run: npm ci
       - run: cd ./frontend && npm run test
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - run: npm ci
+      - run: cd ./frontend && npm run build

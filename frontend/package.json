@@ -6,7 +6,8 @@
     "start": "vite --config vite.config.js",
     "build": "vite build",
     "dev": "vite serve",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "./node_modules/.bin/eslint --max-warnings=0"
   },
   "browserslist": [
     ">0.2%",
