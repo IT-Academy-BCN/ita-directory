@@ -8,7 +8,6 @@ const {
   signRefreshToken,
   hashPassword,
   decodeHash,
-  isRepeatedPassword,
 } = require('../utils/utils')
 const prisma = require('../../prisma/indexPrisma')
 
@@ -298,7 +297,7 @@ exports.receiveEmailGetToken = async (req, res) => {
 exports.changePassword = async (req, res, next) => {
   const { password1, password2 } = req.body
   const { token } = req.params
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
+  const regex = new RegExp(process.env.PASSWORD_REGEX)
 
   if (password1 !== password2) {
     return res.status(200).json(
@@ -316,6 +315,14 @@ exports.changePassword = async (req, res, next) => {
       message: 'This password does not meet the requirements.',
       statusCode: 400,
     })
+  }
+
+  // Will test if provided password has already been used, if so, returns true.
+  const isRepeatedPassword = async (userId, password) => {
+    const pwLog = await prisma.recover_password_log.findMany({ where: { user_id: userId } })
+    const promiseArray = pwLog.map((log) => argon2.verify(log.password, password))
+    const repeatedPass = await Promise.all(promiseArray)
+    return repeatedPass.includes(true)
   }
 
   // @todo: This verification should be implemented using middleware
@@ -346,6 +353,7 @@ exports.changePassword = async (req, res, next) => {
       },
     })
   })
+
   return res.status(200).json(
     apiResponse({
       message: 'Your password has been successfully changed.',

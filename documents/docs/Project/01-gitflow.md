@@ -56,4 +56,4 @@ If the feature development is approved by the project mentor this will be merged
 
 ## 6. Pull request to develop
 
-Once develop has acquired enough features for a release version (or a predetermined release date is approaching), the develop branch gets merged into main.
+Once develop has acquired enough features for a release version (or a predetermined release date is approaching), the develop branch its merged into main.

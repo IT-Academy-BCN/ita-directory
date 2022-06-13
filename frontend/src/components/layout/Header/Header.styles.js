@@ -27,7 +27,6 @@ export const HeaderStyled = styled.header`
       justify-content: ${(props) => (props.justifyTitle ? 'center' : 'left')};
       width: 229px;
       color: ${(props) => (props.logoColor ? props.logoColor : colors.darkRed)};
-      /* font-family: Roboto Mono Medium for Powerline; */
       font-size: 15px;
       opacity: 1;
       text-decoration: none;
@@ -48,7 +47,6 @@ export const HeaderStyled = styled.header`
         width: 77px;
         display: flex;
         align-self: center;
-        /* height: 18px; */
         letter-spacing: -1.5px;
         color: ${colors.redPink};
       }
@@ -59,7 +57,6 @@ export const HeaderStyled = styled.header`
         display: flex;
         align-items: center;
         justify-content: center;
-        /* border: none; */
         background-color: white;
         box-shadow: 0 2px 4px ${colors.darkerShadow};
         border: 0;
@@ -76,7 +73,6 @@ export const HeaderStyled = styled.header`
         border-left: 0.3rem solid white;
         border-right: 0.3rem solid white;
         &:hover {
-          /* box-shadow: 0 2px 0.4rem ${colors.redPink}; */
           border-left: 0.3rem solid ${colors.redPink};
           border-right: 0.3rem solid ${colors.redPink};
         }
@@ -138,32 +134,26 @@ export const StyledSubHeader = styled.div`
     color: ${(props) => (props.fontColor ? props.fontColor : `${colors.grey}`)};
   }
 `
+export const StyledHeaderHome = styled.div`
+  width: 100vw;
+  background-color: ${colors.lightGrey2};
+  border: ${(props) => (props.headerColor ? `` : `1px solid ${colors.lightGrey2}`)};
+  border-left: none;
+  border-right: none;
 
-// export const StyledMiPerfil = styled.div`
-// 	position: relative;
-// 	display: inline-block;
-// `;
-
-// export const StyledLogo = styled.div`
-// 	display: flex;
-// 	justify-content: flex-end;
-// 	align-items: center;
-// 	text-align: left;
-// 	max-width: 50%;
-// 	color: ${colors.grey};
-// 	text-transform: none;
-// 	opacity: 1;
-// 	border-radius: 10px;
-// 	border: 0px 1px 1px 1px solid ${colors.maroon};
-// 	box-shadow: 1px 4px 8px 0 ${colors.shadow}, 1px 6px 20px 0 ${colors.lighterShadow};
-// 	padding: 6px;
-// 	margin-left: 1060px;
-// `;
-
-// export const StyledImg = styled.img`
-// 	width: 35px;
-// 	height: 35px;
-// 	border-radius: 50%;
-// 	margin-left: 0px;
-// 	margin-right: 5px;
-// `;
+  p {
+    width: 100%;
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: normal;
+    margin: 10px 0px;
+    text-align: ${(props) => (props.justifyTitle ? 'center' : 'left')};
+    color: ${(props) => (props.fontColor ? props.fontColor : `${colors.grey}`)};
+  }
+`
+export const ContainerMenu = styled.div`
+  width: 100%;
+  font-size: 20px;
+  line-height: 36px;
+  margin: 10px 0px;
+`

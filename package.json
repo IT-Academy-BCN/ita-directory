@@ -18,7 +18,8 @@
     "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma",
     "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install",
-    "prepare": "husky install && chmod ug+x .husky/*"
+    "prepare": "husky install && chmod ug+x .husky/*",
+    "lint": "./node_modules/.bin/eslint --max-warnings=0"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
+    "eslint": "8.17.0",
     "husky": "6.0.0"
   }
 }
