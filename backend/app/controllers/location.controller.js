@@ -16,15 +16,15 @@ async function getRegion(req, res) {
     },
     orderBy: [
       {
-        level_type_id: 'desc',
+        levelTypeId: 'desc',
       },
     ],
   })
 
   data.push(location[0])
 
-  for (let i = location[0].level_type_id; i >= 3; i - 1) {
-    const id = location[0].parent_id
+  for (let i = location[0].levelTypeId; i >= 3; i - 1) {
+    const id = location[0].parentId
     // eslint-disable-next-line no-await-in-loop
     const parent = await prisma.level.findUnique({
       where: {
@@ -32,7 +32,7 @@ async function getRegion(req, res) {
       },
     })
     location[0] = parent
-    if (parent.level_type_id === 2) {
+    if (parent.levelTypeId === 2) {
       data.push(parent)
     }
   }
@@ -64,7 +64,7 @@ async function getParentChild(req, res) {
     },
     orderBy: [
       {
-        level_type_id: 'asc',
+        levelTypeId: 'asc',
       },
     ],
   })
@@ -73,7 +73,7 @@ async function getParentChild(req, res) {
     data.push(location[i])
     const parent = prisma.level.findMany({
       where: {
-        id: location[i].parent_id,
+        id: location[i].parentId,
       },
     })
 
@@ -81,7 +81,7 @@ async function getParentChild(req, res) {
 
     const children = prisma.level.findMany({
       where: {
-        parent_id: location[i].id,
+        parentId: location[i].id,
       },
     })
 
