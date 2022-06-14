@@ -175,8 +175,10 @@ model Ads {
   location     Int
   nRooms       Int      @map("n_rooms")
   price        Int
+  includedExpenses Boolean   @default(false) @map("included_expenses")
   squareMeters Int      @map("square_meters")
   nBathrooms   Int      @map("n_bathrooms")
+  city         String
   mapLat       Decimal  @map("map_lat")
   mapLon       Decimal  @map("map_lon")
   adType       AdType   @relation(fields: [adTypeId], references: [id])
