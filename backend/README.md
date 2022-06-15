@@ -14,5 +14,3 @@ Synchronize your schema with the database:
 
 Database will be created with the values in your .env. Here the name of the db would be "db\_name":
 `DATABASE_URL = mysql://user:password@localhost:3306/db_name`
-
-Test
