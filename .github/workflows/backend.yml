@@ -1,9 +1,9 @@
-name: Demo Backend GitHub Actions
-on:
-  pull_request:
-    branches: [main, develop]
-    paths: 
-      - "backend/**"
+name: Backend GitHub Actions
+on: [push]
+  # pull_request:
+  #   branches: [main, develop]
+  #   paths: 
+  #     - "backend/**"
 
 jobs:
   lint:
