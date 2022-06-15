@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "set NODE_ENV=development && nodemon --legacy-watch server.js",
     "test": "vitest",
-    "fmt": "npx prettier --write ./app"
+    "fmt": "npx prettier --write ./app",
+    "lint": "./node_modules/.bin/eslint --max-warnings=0"
   },
   "keywords": [
     "node",
