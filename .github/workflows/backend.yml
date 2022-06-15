@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 name: Backend GitHub Actions
 on: [push]
   # pull_request:
   #   branches: [main, develop]
   #   paths: 
   #     - "backend/**"
+=======
+name: Demo Backend GitHub Actions
+on: [push]
+#  pull_request:
+#    branches: [main, develop]
+#    paths: 
+#      - "backend/**"
+>>>>>>> refs/remotes/origin/656-generate-backend-gitflow
 
 jobs:
   lint:
