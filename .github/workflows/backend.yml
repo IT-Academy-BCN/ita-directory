@@ -1,5 +1,10 @@
 name: Demo Backend GitHub Actions
-on: [push]
+on:
+  pull_request:
+    branches: [main, develop]
+    paths: 
+      - "backend/**"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
