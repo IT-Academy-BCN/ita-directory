@@ -1,13 +1,27 @@
 name: Demo Backend GitHub Actions
 on: [push]
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
+
     steps: 
       - uses: actions/checkout@v3
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-      - run: npm ci
-      - run: cd ./backend && npm run test
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+      - run: cd ./backend && npm ci
+      - run: cd ./backend && npm run lint
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "16.x"
+  #     - run: npm ci
+  #     - run: cd ./backend && npm run test
