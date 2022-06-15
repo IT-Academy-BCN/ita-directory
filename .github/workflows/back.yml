@@ -2,7 +2,7 @@ name: lint
 
 on: 
   pull_request: 
-    branches: [main, develop]
+    branches: [main, develop, 656-generate-backend-gitflow]
     paths:
       - ./backend/**
 
