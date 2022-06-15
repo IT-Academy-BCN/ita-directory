@@ -2,9 +2,9 @@ name: lint
 
 on: 
   pull_request: 
-  branches: [main, develop]
-  paths:
-    - ./backend/**
+    branches: [main, develop]
+    paths:
+      - ./backend/**
 
 jobs:
   build:
