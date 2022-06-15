@@ -1,6 +1,6 @@
-name: lint 
+name: Backend
 
-on: 
+on:
   pull_request: 
     branches: [main, develop, 656-generate-backend-gitflow]
     paths:
