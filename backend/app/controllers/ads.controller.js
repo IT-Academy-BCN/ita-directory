@@ -14,9 +14,9 @@ const { parseAdsFromCsvBuffer } = require('../utils/parseAdsFromCsvBuffer')
 async function createAd(req, res, next) {
   const userId = { req }
   try {
-    // fields -> user_id, title, description, city, n_rooms, price, square_meters, n_bathrooms, map_lat, map_lon
+    // fields -> userId, title, description, city, nRooms, price, squareMeters, nBathrooms, mapLat, mapLon
     const { ...fields } = req.body
-    // @todo: user_id might be removed from adsSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
+    // @todo: userId might be removed from adsSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
     await adsSchema.validateAsync(fields)
 
     const ad = await prisma.ads.create({
@@ -29,16 +29,16 @@ async function createAd(req, res, next) {
         title: req.body.title,
         description: req.body.description,
         city: req.body.city,
-        n_rooms: parseInt(req.body.n_rooms, 10),
+        nRooms: parseInt(req.body.nRooms, 10),
         price: parseInt(req.body.price, 10),
-        square_meters: parseInt(req.body.square_meters, 10),
-        n_bathrooms: parseInt(req.body.n_bathrooms, 10),
-        map_lat: parseFloat(req.body.map_lat),
-        map_lon: parseFloat(req.body.map_lon),
-        included_expenses: req.body.included_expenses === 'true',
-        ad_type: {
+        squareMeters: parseInt(req.body.squareMeters, 10),
+        nBathrooms: parseInt(req.body.nBathrooms, 10),
+        mapLat: parseFloat(req.body.mapLat),
+        mapLon: parseFloat(req.body.mapLon),
+        includedExpenses: req.body.includedExpenses === 'true',
+        adType: {
           connect: {
-            id: parseInt(req.body.ad_type_id, 10),
+            id: parseInt(req.body.adTypeId, 10),
           },
         },
       },
@@ -55,7 +55,7 @@ async function createAd(req, res, next) {
     if (err && err.code === 'P2003') {
       res.status(422).json(
         apiResponse({
-          message: 'This value for user_id does not exist in users table.',
+          message: 'This value for userId does not exist in users table.',
           errors: err.message,
           status: 422,
         })
@@ -71,8 +71,8 @@ async function createAdsFromCSVBuffer(req, res, next) {
     const adsArray = await parseAdsFromCsvBuffer(req)
     const userId = { req }
 
-    // Append user_id to each ad entry
-    const adsArrayWithUserId = adsArray.map((ad) => ({ ...ad, user_id: userId.toString() }))
+    // Append userId to each ad entry
+    const adsArrayWithUserId = adsArray.map((ad) => ({ ...ad, userId: userId.toString() }))
 
     const promiseArray = adsArrayWithUserId.map((ad) => adsSchema.validateAsync(ad))
     const validatedAdsArray = await Promise.all(promiseArray)
@@ -109,7 +109,7 @@ async function getUserAds(req, res) {
   const userId = parseInt(req.params.userId, 10)
   await getUserAdsSchema.validateAsync(userId)
   const ads = await prisma.ads.findMany({
-    where: { user_id: userId },
+    where: { userId },
   })
   return res.status(200).json(
     apiResponse({
@@ -172,7 +172,7 @@ async function getAdsByType(req, res) {
       })
     )
   }
-  const { id } = await prisma.ad_type.findUnique({
+  const { id } = await prisma.adType.findUnique({
     where: {
       id: typeId,
     },
@@ -180,7 +180,7 @@ async function getAdsByType(req, res) {
 
   const ads = await prisma.ads.findMany({
     where: {
-      ad_type_id: id,
+      adTypeId: id,
     },
   })
 
@@ -192,7 +192,7 @@ async function getAdsByType(req, res) {
 }
 
 async function getAdTypes(req, res) {
-  const typeNames = await prisma.ad_type.findMany()
+  const typeNames = await prisma.adType.findMany()
   const data = []
   typeNames.forEach((type) => {
     data.push(type.name)
@@ -217,7 +217,7 @@ async function getAdsByTypeAndLocation(req, res) {
       })
     )
   }
-  const { id } = await prisma.ad_type.findUnique({
+  const { id } = await prisma.adType.findUnique({
     where: {
       id: typeId,
     },
@@ -226,7 +226,7 @@ async function getAdsByTypeAndLocation(req, res) {
   const ads = await prisma.ads.findMany({
     where: {
       city: formattedLocation,
-      ad_type_id: id,
+      adTypeId: id,
     },
   })
 
@@ -294,7 +294,7 @@ async function updateAd(req, res, next) {
     // This extra query is the only way I found to check that the ad intended to be updated belongs to the user that is attempting to update it. Might me improved.
     const result = await prisma.ads.findMany({
       where: {
-        user_id: userID,
+        userId: userID,
         id: validatedFields.adId,
       },
     })
@@ -316,15 +316,15 @@ async function updateAd(req, res, next) {
           title: req.body.title || undefined,
           description: req.body.description || undefined,
           city: req.body.city || undefined,
-          n_rooms: parseInt(req.body.n_rooms, 10) || undefined,
+          nRooms: parseInt(req.body.nRooms, 10) || undefined,
           price: parseInt(req.body.price, 10) || undefined,
-          square_meters: parseInt(req.body.square_meters, 10) || undefined,
-          n_bathrooms: parseInt(req.body.n_bathrooms, 10) || undefined,
-          map_lat: parseFloat(req.body.map_lat) || undefined,
-          map_lon: parseFloat(req.body.map_lon) || undefined,
-          ad_type: {
+          squareMeters: parseInt(req.body.squareMeters, 10) || undefined,
+          nBathrooms: parseInt(req.body.nBathrooms, 10) || undefined,
+          mapLat: parseFloat(req.body.mapLat) || undefined,
+          mapLon: parseFloat(req.body.mapLon) || undefined,
+          adType: {
             connect: {
-              id: parseInt(req.body.ad_type_id, 10) || undefined,
+              id: parseInt(req.body.adTypeId, 10) || undefined,
             },
           },
         },
@@ -362,13 +362,13 @@ async function activeAdsByLocationAndDate(req, res) {
   const ads = await prisma.ads.findMany({
     where: {
       location: locationId,
-      created_at: {
+      createdAt: {
         gt: initialDate,
         lt: finalDate,
       },
       AND: [
         {
-          ad_status_id: statusId,
+          adStatusId: statusId,
         },
       ],
     },
