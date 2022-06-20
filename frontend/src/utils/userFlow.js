@@ -1,6 +1,6 @@
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-const PASSWORD_REGEX = import.meta.env.VITE_PASSWORD_REGEX
+const PASSWORD_REGEX = /(import.meta.env.VITE_PASSWORD_REGEX)/
 const NAME_REGEX = /^[a-z ,.'-]+$/i
 
 export const validateEmail = (email) => EMAIL_REGEX.test(email.toLowerCase())
