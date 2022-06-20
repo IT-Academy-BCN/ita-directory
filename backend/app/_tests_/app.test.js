@@ -13,7 +13,7 @@ describe('POST /users/v1/login', () => {
     test('should respond with a 200 status code', async () => {
       const response = await request(app).post('/users/v1/login').send({
         email: 'test@test.test',
-        password: 'Test-test99',
+        password: 'Test-test',
       })
       expect(response.statusCode).toBe(200)
       expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
