@@ -20,6 +20,30 @@ jobs:
       - run: cd ./backend && npm ci
       - run: cd ./backend && npm run lint
 
+  container-job:
+    runs-on: ubuntu-latest
+    container:
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Check out repo code
+      - uses: actions/checkout@v3
+      
+      - name: Instalar dependencias
+      - run: cd ./backend && npm ci
+
+      - name: Conectar a Redis
+      - run: node cd ./backend/utils/initiRedis.js
+      - env:
+          REDIS_HOST: ita_directory_redis
+          REDIS_PORT: 10912
+
   test:
     needs: lint
     runs-on: ubuntu-latest
