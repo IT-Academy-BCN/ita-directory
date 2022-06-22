@@ -21,7 +21,7 @@ jobs:
       - name: install dependencies
         run: cd ./frontend && npm ci
 
-      - name: lind
+      - name: lint
         run: cd ./frontend && npm run lint
 
       - name: test
