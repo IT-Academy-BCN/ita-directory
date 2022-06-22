@@ -189,7 +189,7 @@ export const TermsStyled = styled.section.attrs({
 `
 
 export const PaySignStyled = styled.section.attrs({
-  //className: "flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
+  // className: "flex flex-col items-start p-0 mx-0 mt-10 mb-16 xsm:flex-row xsm:justify-between xsm:items-end ",
 })`
   div {
     h4 {
