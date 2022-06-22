@@ -1,5 +1,5 @@
 import React from 'react'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types'
 import Button from '../../../components/atoms/Button'
 import Modal from '../../../components/organisms/Modal/Modal'
 import Input from '../../../components/atoms/Forms/Input'
@@ -23,7 +23,7 @@ function EditAdModal({ ad, active, hideModal }) {
             iconPosition="left"
             type="submit"
             onClick={() => hideModal()}
-            icon={faTimes}
+            name="close"
             buttonStyles={{
               color: Colors.lightGrey,
               background: 'transparent',
@@ -112,6 +112,12 @@ function EditAdModal({ ad, active, hideModal }) {
       {/* <StyledSmall>{error}</StyledSmall> */}
     </Modal>
   )
+}
+
+EditAdModal.propTypes = {
+  ad: PropTypes.string,
+  active: PropTypes.bool,
+  hideModal: PropTypes.bool,
 }
 
 export default EditAdModal

@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import * as echarts from 'echarts'
-import { faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { groupByTypePie, daysBetween } from '../../../../utils/generateData'
 import {
   getMonthLength,
@@ -12,6 +10,7 @@ import {
 import useOptionSelectMonth from '../../../../hooks/useOptionSelectMonth'
 import options from './defaultOptions'
 import PieGraphicStyled from './PieChart.styles'
+import { Icon } from '../../../atoms'
 
 function PieChart({ data, hideModal, active, year, month }) {
   const chartRef = useRef(null) // Creo una referencia y la inicializo vacia.
@@ -115,7 +114,7 @@ function PieChart({ data, hideModal, active, year, month }) {
             {optionsSelectYear}
           </select>
           <button type="button" onClick={hideModal}>
-            <FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+            <Icon className={active ? 'close' : 'drive_folder_upload'} />
           </button>
         </div>
       </div>
