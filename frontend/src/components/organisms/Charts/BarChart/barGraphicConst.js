@@ -25,7 +25,7 @@ export const returnLegendData = () => {
 }
 
 export const returnChartSize = ([chartW, chartH]) => {
-  chartH *= 0.5
-  chartW = chartW < 768 ? (chartW *= 0.85) : (chartW *= 0.7)
-  return [chartW, chartH]
+  const nChartH = chartH * 0.5
+  const nChartW = chartW < 768 ? chartW * 0.85 : chartW * 0.7
+  return [nChartW, nChartH]
 }

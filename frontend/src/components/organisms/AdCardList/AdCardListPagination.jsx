@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import AdCardItem from './AdCardItem'
-import Pagination from '../Pagination/Pagination'
+import Pagination from '../Pagination'
 import { Grid } from '../../../theme'
 
 function AdCardListPagination() {
