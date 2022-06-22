@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import * as d3 from 'd3'
-import { faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PieGraphicStyled from './PieChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
+import { Icon } from '../../../atoms'
 
 function PieChart({ data, hideModal, active, year, month }) {
   const [selectedYear, setSelectedYear] = useState(year)
@@ -48,6 +47,7 @@ function PieChart({ data, hideModal, active, year, month }) {
   const totalGarages = filterDataByDate.reduce((prev, curr) => prev + curr.garages, 0)
   const totalLocales = filterDataByDate.reduce((prev, curr) => prev + curr.locales, 0)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const chartData = [
     { type: 'Pisos', total: totalPisos },
     { type: 'Garages', total: totalGarages },
@@ -109,7 +109,7 @@ function PieChart({ data, hideModal, active, year, month }) {
             {optionsSelectYear}
           </select>
           <button type="button" onClick={hideModal}>
-            <FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+            <Icon className={active ? 'close' : 'drive_folder_upload'} />
           </button>
         </div>
       </div>

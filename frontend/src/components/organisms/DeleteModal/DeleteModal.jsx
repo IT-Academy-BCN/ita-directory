@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
 import Input from '../../atoms/Forms/Input'
@@ -47,7 +46,7 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
             text="Cancelar"
             iconPosition="left"
             type="submit"
-            icon={faTimes}
+            name="close"
             onClick={resetForm}
             buttonStyles={{
               color: colors.lightGrey,

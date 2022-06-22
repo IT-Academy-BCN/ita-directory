@@ -4,7 +4,6 @@
 import { defineConfig } from 'vite'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import react from '@vitejs/plugin-react'
-import legacy from '@vitejs/plugin-legacy'
 
 export default defineConfig({
   base: '/',
@@ -12,12 +11,7 @@ export default defineConfig({
     port: 3000,
   },
   publicDir: './public',
-  plugins: [
-    legacy({
-      targets: ['defaults', 'not IE 11'],
-    }),
-    react(),
-  ],
+  plugins: [react()],
   test: {
     globals: true,
     environment: 'jsdom',

@@ -3,14 +3,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useState, useMemo } from 'react'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { useTable } from 'react-table'
 import Body from '../../components/layout/Body/Body'
 import { colors } from '../../theme'
 import bills from './billsData.json'
 import { MyTableStyle, RowTableStyle, HeaderTableStyle } from './MyBills.styles'
+import { Icon } from '../../components/atoms'
 // import DownloadPDF from "./DocumentComponent";
 // import modelBill from './modelBillData.json'
 
@@ -126,7 +125,7 @@ function MyBills() {
       Cell: ({ row }) => (
         <RowTableStyle style={{ textAlign: 'center' }}>
           <Link to={`/my-bills/${row.values.id}`} title="Ver factura">
-            <FontAwesomeIcon icon={faEye} color={colors.grey} />
+            <Icon className="vivibility" color={colors.grey} />
           </Link>
 
           {/* {modelBill.map(

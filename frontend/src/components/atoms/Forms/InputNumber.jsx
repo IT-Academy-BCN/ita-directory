@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
 import { device, colors } from '../../../theme'
+import Icon from '../Icon'
 
 const InputNumberStyled = styled.div`
   display: flex;
@@ -132,6 +132,8 @@ function InputNumber({
   label,
   register,
   type,
+  iconStyles,
+  textColor,
 }) {
   return (
     <InputNumberStyled>
@@ -140,7 +142,7 @@ function InputNumber({
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
             <div className="styledIcon">
-              <FontAwesomeIcon icon={icon} />
+              <Icon color={textColor} name={icon} mr="0.5rem" style={{ ...iconStyles }} />
             </div>
           )}
           <StyledInput
@@ -195,6 +197,8 @@ InputNumber.propTypes = {
   label: PropTypes.string,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   type: PropTypes.string,
+  iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  textColor: PropTypes.string,
 }
 
 export default styled(InputNumber)``
