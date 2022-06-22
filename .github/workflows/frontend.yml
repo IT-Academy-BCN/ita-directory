@@ -7,7 +7,7 @@ on:
       - "frontend/**"
 
 jobs:
-  lint:
+  frontend:
     runs-on: ubuntu-latest
 
     steps:
