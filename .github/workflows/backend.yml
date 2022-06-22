@@ -39,7 +39,7 @@ jobs:
         run: cd ./backend && npm ci
 
       - name: Conectar a Redis
-        run: node ./backend/utils/initRedis.js
+        run: node ./backend/app/utils/initRedis.js
         env:
           REDIS_HOST: ita_directory_redis
           REDIS_PORT: 10912
