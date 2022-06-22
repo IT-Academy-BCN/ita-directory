@@ -33,14 +33,14 @@ jobs:
           --health-retries 5
     steps:
       - name: Check out repo code
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       
       - name: Instalar dependencias
-      - run: cd ./backend && npm ci
+        run: cd ./backend && npm ci
 
       - name: Conectar a Redis
-      - run: node cd ./backend/utils/initiRedis.js
-      - env:
+        run: node cd ./backend/utils/initiRedis.js
+        env:
           REDIS_HOST: ita_directory_redis
           REDIS_PORT: 10912
 
