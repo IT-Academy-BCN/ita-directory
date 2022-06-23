@@ -1,77 +1,34 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const generatorHelper = require('@prisma/generator-helper')
-// const { z } = require('zod')
 const fs = require('fs')
 
-// function fieldToZod(f) {
-//   let zodType = 'z.unknown()'
-//   const extraModifiers = ['']
-//   switch (f.type) {
-//     case 'String':
-//       zodType = 'z.string()'
-//       break
-//     case 'Number':
-//       zodType = 'z.number()'
-//       break
-//     case 'Int':
-//       zodType = 'z.number().int()'
-//       break
-//     case 'Boolean':
-//       zodType = 'z.boolean()'
-//       break
-//     case 'Datetime':
-//       zodType = 'z.date()'
-//       break
-//     case '':
-//       zodType = 'z.date()'
-//       break
-//     default:
-//       break
-//   }
-//   if (!f.isRequired) {
-//     extraModifiers.push('nullish()')
-//   }
-//   return `${f.name}: ${zodType}${extraModifiers.join('.')}`
-// }
+const writeTypeSpecificSchemas = (model) => {
+  let out = ''
+  if (model.fields.some((f) => f.type === 'Json')) {
+    out += '// Helper schema for Json fields\n'
+    out += `const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()])\n`
+    out += `const jsonSchema = z.lazy(() => z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]))\n\n`
+  }
 
-// const writeTypeSpecificSchemas = (model, sourceFile, config, _prismaOptions) => {
-//   if (model.fields.some((f) => f.type === 'Json')) {
-//     sourceFile.addStatements((writer) => {
-//       writer.newLine()
-//       writeArray(writer, [
-//         '// Helper schema for JSON fields',
-//         `type Literal = boolean | number | string${config.prismaJsonNullability ? '' : '| null'}`,
-//         'type Json = Literal | { [key: string]: Json } | Json[]',
-//         `const literalSchema = z.union([z.string(), z.number(), z.boolean()${
-//           config.prismaJsonNullability ? '' : ', z.null()'
-//         }])`,
-//         'const jsonSchema: z.ZodSchema<Json> = z.lazy(() => z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]))',
-//       ])
-//     })
-//   }
+  // if (model.fields.some((f) => f.type === 'Decimal')) {
+  //   out += '// Helper schema for Decimal fields\n'
+  //   out += 'z\n'
+  //   out += '.instanceof(Decimal)\n'
+  //   out += '.or(z.string())\n'
+  //   out += '.or(z.number())\n'
+  //   out += '.refine((value) => {\n'
+  //   out += '  try {\n'
+  //   out += '    return new Decimal(value)\n'
+  //   out += '  } catch (error) {\n'
+  //   out += '    return false\n'
+  //   out += '  }\n'
+  //   out += '})\n'
+  //   out += '.transform((value) => new Decimal(value))\n'
+  // }
 
-//   if (config.useDecimalJs && model.fields.some((f) => f.type === 'Decimal')) {
-//     sourceFile.addStatements((writer) => {
-//       writer.newLine()
-//       writeArray(writer, [
-//         '// Helper schema for Decimal fields',
-//         'z',
-//         '.instanceof(Decimal)',
-//         '.or(z.string())',
-//         '.or(z.number())',
-//         '.refine((value) => {',
-//         '  try {',
-//         '    return new Decimal(value);',
-//         '  } catch (error) {',
-//         '    return false;',
-//         '  }',
-//         '})',
-//         '.transform((value) => new Decimal(value));',
-//       ])
-//     })
-//   }
-// }
+  return `\n${out}`
+}
 
 const getZodConstructor = (field, getRelatedModelName = (name) => name.toString()) => {
   let zodType = 'z.unknown()'
@@ -98,7 +55,7 @@ const getZodConstructor = (field, getRelatedModelName = (name) => name.toString(
         zodType = 'z.number()'
         break
       case 'Json':
-        zodType = 'jsonSchema'
+        zodType = `jsonSchema`
         break
       case 'Boolean':
         zodType = 'z.boolean()'
@@ -136,18 +93,15 @@ generatorHelper.generatorHandler({
       const zodSchemaName = `${m.name}Schema`
       let output = ''
       output += `const { z } = require('zod')\n`
-      output += '\n'
+      output += writeTypeSpecificSchemas(m)
       output += `const ${zodSchemaName} = z.object({\n`
       m.fields.forEach((f) => {
         if (f.kind === 'scalar') {
-          // output += `  ${fieldToZod(f)},\n`
           output += `  ${f.name}: ${getZodConstructor(f)},\n`
         }
       })
       output += `})\n\n`
-      output += `export default ${zodSchemaName}`
-
-      // console.log('OUTPUT:', `${outputDir}/${zodSchemaName}.js`)
+      output += `export default ${zodSchemaName}\n`
 
       fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output, (err) => {
         if (err) {
@@ -159,6 +113,8 @@ generatorHelper.generatorHandler({
     })
   },
 })
+
+// Example of generated files content:
 
 // const { z } = require('zod')
 
