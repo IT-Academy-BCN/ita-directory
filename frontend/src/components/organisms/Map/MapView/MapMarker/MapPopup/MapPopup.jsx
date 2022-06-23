@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Popup } from 'react-leaflet'
-import { faComments } from '@fortawesome/free-solid-svg-icons'
 import { ContactModal } from '../../../..'
 
 // Styles
@@ -49,7 +48,7 @@ function MapPopup({ data }) {
             }}
             text="Contactar"
             type="button"
-            icon={faComments}
+            name="forum"
             iconPosition="left"
             iconStyles={{
               marginRight: 5,

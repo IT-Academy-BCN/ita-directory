@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-// fontawesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-
 // styles
 import { SearchStyled } from './Search.style'
 import { Container } from '../../theme'
@@ -14,6 +10,7 @@ import Body from '../../components/layout/Body/Body'
 import SearchBar from '../../components/organisms/SearchBar/SearchBar'
 import AdCardListLoadMore from '../../components/organisms/AdCardList/AdCardListLoadMoreBtn'
 import MapView from '../../components/organisms/Map/MapView/MapView'
+import { Icon } from '../../components/atoms'
 
 function Search() {
   const [loading, setLoading] = useState(0)
@@ -52,6 +49,7 @@ function Search() {
       setLoading(0)
       setFirstSearch(true)
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e)
     }
   }
@@ -66,7 +64,7 @@ function Search() {
           <div className="search-body">
             {/* eslint-disable-next-line no-nested-ternary */}
             {loading ? (
-              <FontAwesomeIcon icon={faSpinner} className="spinner" />
+              <Icon className="rotate_right" />
             ) : ads.length === 0 && firstSearch ? (
               `There are no results.`
             ) : (

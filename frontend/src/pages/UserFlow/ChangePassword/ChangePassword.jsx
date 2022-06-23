@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react'
-
+import { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import AsyncButton from '../../../components/atoms/Button'
-
 import { Container, Form } from '../UserFlow.styles'
 import { msgs, validatePassword } from '../../../utils/userFlow'
 import Input from '../../../components/atoms/Forms/Input'

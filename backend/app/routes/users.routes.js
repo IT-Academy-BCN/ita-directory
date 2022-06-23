@@ -31,12 +31,36 @@ router.get('/v1/get-me', authenticateToken, UsersController.getUser)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
-
 // Register
 router.post('/v1/register', UsersController.registerUser)
 
-// Read All Users (for testing purpose)
+/**
+ * GET /users/
+ * @summary Gets all users from the database.
+ * @tags User
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+* {"message": "Data fetched correctly.",
+    "data": [
+        {
+            "id": 1,
+            "name": "test",
+            "lastnames": "test test",
+            "email": "test@test.test",
+            "createdAt": "2022-06-14T11:43:36.351Z",
+            "updatedAt": "2022-06-14T11:43:36.352Z",
+            "userStatusId": 1,
+            "userRoleId": 3,
+            "media": [
+                {
+                    "path": "/public/2021/10/image1.jpg"
+                }
+            ]
+        }
+]}
+ */
 router.get('/', authenticateToken, UsersController.getAllUsers)
+// router.get('/', UsersController.getAllUsers)
 
 // Refresh-token
 router.get('/v1/refresh-token', UsersController.getRefreshToken)

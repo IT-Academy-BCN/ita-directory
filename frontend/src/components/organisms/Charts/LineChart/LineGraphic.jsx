@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import PropType from 'prop-types'
-import { faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LineGraphicWithD3 from './LineGraphicWithD3'
 import LineGraphicStyled from './LineChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
+import { Icon } from '../../../atoms'
 
 function LineGraphic({ data, active, hideModal, size, month, year }) {
   const [selectedYear, setSelectedYear] = useState(year)
@@ -43,10 +42,7 @@ function LineGraphic({ data, active, hideModal, size, month, year }) {
             </select>
             {/* todo: Substitute with Button component and remove FontAwesome */}
             <button type="button" onClick={hideModal}>
-              <FontAwesomeIcon
-                icon={active ? faTimes : faExternalLinkAlt}
-                style={{ color: '#e22e2e' }}
-              />
+              <Icon className={active ? 'close' : 'drive_folder_upload'} color="#e22e2e" />
             </button>
           </div>
         </div>

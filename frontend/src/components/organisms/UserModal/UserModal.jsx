@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
 import { UserModalStyled, ButtonWrapper } from './UserModal.style'
@@ -42,7 +41,7 @@ function UserModal({ nombreUsuario, currentUserState, active, hideModal, updateU
             iconPosition="left"
             type="submit"
             onClick={closeModal}
-            icon={faTimes}
+            name="close"
             buttonStyles={{
               color: Colors.lightGrey,
               background: 'transparent',

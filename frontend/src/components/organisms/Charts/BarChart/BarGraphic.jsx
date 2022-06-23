@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import PropType from 'prop-types'
-import { faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
 import { groupByTypeYear, groupByTypeMonth, daysBetween } from '../../../../utils/generateData'
 import {
@@ -16,6 +14,7 @@ import { returnMonthsData, dataLabels } from './barGraphicConst'
 
 import { BarGraphicStyled } from './BarGraphic.styles'
 import BarChartWithD3 from './BarChartWithD3'
+import { Icon } from '../../../atoms'
 
 function BarGraphic({ data, hideModal, active, size, year, month }) {
   const [selectedYear, setSelectedYear] = useState(year)
@@ -111,7 +110,7 @@ function BarGraphic({ data, hideModal, active, size, year, month }) {
             {optionsSelectYear}
           </select>
           <button type="button" onClick={hideModal}>
-            <FontAwesomeIcon icon={active ? faTimes : faExternalLinkAlt} />
+            <Icon className={active ? 'close' : 'drive_folder_upload'} />
           </button>
         </div>
       </div>

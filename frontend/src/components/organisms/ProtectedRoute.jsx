@@ -2,8 +2,8 @@ import React, { useEffect, useCallback } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import axiosInstance from '../../../utils/axiosInstance'
-import { login } from '../../../store/userSlice'
+import axiosInstance from '../../utils/axiosInstance'
+import { login } from '../../store/userSlice'
 
 function ProtectedRoute({ children, ...rest }) {
   const dispatch = useDispatch()

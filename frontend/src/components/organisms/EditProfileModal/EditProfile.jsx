@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
 import Input from '../../atoms/Forms/Input'
@@ -45,7 +44,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
             text="Cancelar"
             iconPosition="left"
             type="submit"
-            icon={faTimes}
+            name="close"
             onClick={resetForm}
             buttonStyles={{
               color: Colors.lightGrey,
