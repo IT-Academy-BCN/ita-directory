@@ -60,6 +60,7 @@ jobs:
       
         - name: Instalar dependencias
           run: cd ./backend && npm ci
+          
         - name: Conectar a PostgreSQL
           run: cd ./scripts && source ./docker-utils.sh; launchPostgres
         env: 
