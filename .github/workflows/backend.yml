@@ -53,9 +53,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          DB_PASS: 123456
+          POSTGRES_PASSWORD: 123456
       options: >-
-        --health-cmd pg_isready
+        --health-cmd "pg_isready"
         --health-interavl 10s 
         --health-timeout 5s
         --health-retries 5
