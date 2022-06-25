@@ -40,7 +40,6 @@ jobs:
         run: cd ./backend && npm ci
 
       - name: Conectar a Redis
-        run: npm run up
         run: node ./backend/app/utils/initRedis.js
         env:
           REDIS_HOST: ita_directory_redis
