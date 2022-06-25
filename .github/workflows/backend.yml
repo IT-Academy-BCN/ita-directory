@@ -20,7 +20,7 @@ jobs:
       - run: cd ./backend && npm ci
       - run: cd ./backend && npm run lint
 
-  container-job:
+  redis-container:
     needs: lint
     runs-on: ubuntu-latest
     container:
@@ -40,6 +40,7 @@ jobs:
         run: cd ./backend && npm ci
 
       - name: Conectar a Redis
+        run: npm run up
         run: node ./backend/app/utils/initRedis.js
         env:
           REDIS_HOST: ita_directory_redis
@@ -67,7 +68,7 @@ jobs:
         run: cd ./backend && npm ci
 
       - name: Conectar a PostgreSQL
-        run: cd ./scripts && source ./docker-utils.sh; launchPostgres
+        run: cp .env.development ./backend/.env && npm run start-server && npm run start-prisma
         env: 
           POSTGRES_HOST: ita_directory_postgres
           POSTGRES_POST: 10911
