@@ -44,8 +44,12 @@ jobs:
         env:
           REDIS_HOST: ita_directory_redis
           REDIS_PORT: 10912
+  container-job:
+    needs: lint
+    runs-on: ubuntu-latest
+    container:
     services:
-      posgres:
+      postgres:
       image: postgres
       env:
         DB_PASS: 123456
@@ -60,7 +64,7 @@ jobs:
       
         - name: Instalar dependencias
           run: cd ./backend && npm ci
-          
+
         - name: Conectar a PostgreSQL
           run: cd ./scripts && source ./docker-utils.sh; launchPostgres
         env: 
