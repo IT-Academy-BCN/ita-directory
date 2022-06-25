@@ -58,15 +58,15 @@ jobs:
         --health-interavl 10s 
         --health-timeout 5s
         --health-retries 5
-      steps:
-        - name: Check out repo code
-          uses: actions/checkout@v3
+    steps:
+      - name: Check out repo code
+        uses: actions/checkout@v3      
       
-        - name: Instalar dependencias
-          run: cd ./backend && npm ci
+      - name: Instalar dependencias
+        run: cd ./backend && npm ci
 
-        - name: Conectar a PostgreSQL
-          run: cd ./scripts && source ./docker-utils.sh; launchPostgres
+      - name: Conectar a PostgreSQL
+        run: cd ./scripts && source ./docker-utils.sh; launchPostgres
         env: 
           POSTGRES_HOST: ita_directory_postgres
           POSTGRES_POST: 10911
