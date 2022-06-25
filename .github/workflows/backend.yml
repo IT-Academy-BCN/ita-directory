@@ -44,15 +44,16 @@ jobs:
         env:
           REDIS_HOST: ita_directory_redis
           REDIS_PORT: 10912
-  container-job:
+  
+  postgres-container:
     needs: lint
     runs-on: ubuntu-latest
     container:
     services:
       postgres:
-      image: postgres
-      env:
-        DB_PASS: 123456
+        image: postgres
+        env:
+          DB_PASS: 123456
       options: >-
         --health-cmd pg_isready
         --health-interavl 10s 
