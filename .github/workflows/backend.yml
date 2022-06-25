@@ -54,11 +54,11 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: 123456
-      options: >-
-        --health-cmd "pg_isready"
-        --health-interavl 10s 
-        --health-timeout 5s
-        --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Check out repo code
         uses: actions/checkout@v3      
@@ -74,7 +74,7 @@ jobs:
 
 
   test:
-    needs: container-job
+    needs: container-job, postgres-container
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v3
