@@ -7,4 +7,4 @@ const AdStatusSchema = z.object({
   publish: z.number().int(),
 })
 
-export default AdStatusSchema
+module.exports = AdStatusSchema

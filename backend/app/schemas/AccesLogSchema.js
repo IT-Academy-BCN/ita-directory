@@ -7,4 +7,4 @@ const AccesLogSchema = z.object({
   userId: z.number().int(),
 })
 
-export default AccesLogSchema
+module.exports = AccesLogSchema

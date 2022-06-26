@@ -6,4 +6,4 @@ const UserConversationSchema = z.object({
   conversationId: z.number().int(),
 })
 
-export default UserConversationSchema
+module.exports = UserConversationSchema

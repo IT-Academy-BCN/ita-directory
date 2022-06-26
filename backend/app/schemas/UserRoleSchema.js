@@ -9,4 +9,4 @@ const UserRoleSchema = z.object({
   registered: z.boolean().optional(),
 })
 
-export default UserRoleSchema
+module.exports = UserRoleSchema

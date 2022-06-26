@@ -13,4 +13,4 @@ const AdTypeSchema = z.object({
   newBuilding: z.number().int(),
 })
 
-export default AdTypeSchema
+module.exports = AdTypeSchema

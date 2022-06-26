@@ -8,4 +8,4 @@ const MediaSchema = z.object({
   userId: z.number().int(),
 })
 
-export default MediaSchema
+module.exports = MediaSchema

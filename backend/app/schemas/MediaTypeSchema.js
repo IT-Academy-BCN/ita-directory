@@ -9,4 +9,4 @@ const MediaTypeSchema = z.object({
   original: z.boolean(),
 })
 
-export default MediaTypeSchema
+module.exports = MediaTypeSchema

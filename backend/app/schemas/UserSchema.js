@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 // Helper schema for Json fields
-const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()])
+const literalSchema = z.union([z.object().partial(), z.null(), z.undefined()])
 const jsonSchema = z.lazy(() => z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]))
 
 const UserSchema = z.object({
@@ -17,4 +17,4 @@ const UserSchema = z.object({
   developerData: jsonSchema,
 })
 
-export default UserSchema
+module.exports = UserSchema

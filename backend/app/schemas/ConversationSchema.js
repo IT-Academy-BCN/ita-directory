@@ -4,4 +4,4 @@ const ConversationSchema = z.object({
   id: z.number().int().optional(),
 })
 
-export default ConversationSchema
+module.exports = ConversationSchema

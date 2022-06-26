@@ -9,4 +9,4 @@ const UserStatusSchema = z.object({
   deleted: z.boolean().optional(),
 })
 
-export default UserStatusSchema
+module.exports = UserStatusSchema

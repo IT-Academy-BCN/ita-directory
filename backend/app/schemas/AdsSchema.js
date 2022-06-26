@@ -20,4 +20,4 @@ const AdsSchema = z.object({
   updatedAt: z.date(),
 })
 
-export default AdsSchema
+module.exports = AdsSchema

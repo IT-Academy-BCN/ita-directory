@@ -7,4 +7,4 @@ const LevelSchema = z.object({
   levelTypeId: z.number().int(),
 })
 
-export default LevelSchema
+module.exports = LevelSchema

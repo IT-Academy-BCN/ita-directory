@@ -7,26 +7,9 @@ const writeTypeSpecificSchemas = (model) => {
   let out = ''
   if (model.fields.some((f) => f.type === 'Json')) {
     out += '// Helper schema for Json fields\n'
-    out += `const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()])\n`
+    out += `const literalSchema = z.union([z.object().partial(), z.null(), z.undefined()])\n`
     out += `const jsonSchema = z.lazy(() => z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]))\n\n`
   }
-
-  // if (model.fields.some((f) => f.type === 'Decimal')) {
-  //   out += '// Helper schema for Decimal fields\n'
-  //   out += 'z\n'
-  //   out += '.instanceof(Decimal)\n'
-  //   out += '.or(z.string())\n'
-  //   out += '.or(z.number())\n'
-  //   out += '.refine((value) => {\n'
-  //   out += '  try {\n'
-  //   out += '    return new Decimal(value)\n'
-  //   out += '  } catch (error) {\n'
-  //   out += '    return false\n'
-  //   out += '  }\n'
-  //   out += '})\n'
-  //   out += '.transform((value) => new Decimal(value))\n'
-  // }
-
   return `\n${out}`
 }
 
@@ -101,7 +84,7 @@ generatorHelper.generatorHandler({
         }
       })
       output += `})\n\n`
-      output += `export default ${zodSchemaName}\n`
+      output += `module.exports = ${zodSchemaName}\n`
 
       fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output, (err) => {
         if (err) {
@@ -127,4 +110,4 @@ generatorHelper.generatorHandler({
 //   registered: z.boolean(),
 // })
 
-// export default UserRoleSchema
+// module.exports =  UserRoleSchema

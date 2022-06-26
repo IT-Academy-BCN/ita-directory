@@ -7,4 +7,4 @@ const RecoverPasswordLogSchema = z.object({
   userId: z.number().int(),
 })
 
-export default RecoverPasswordLogSchema
+module.exports = RecoverPasswordLogSchema

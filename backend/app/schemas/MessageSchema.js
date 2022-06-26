@@ -8,4 +8,4 @@ const MessageSchema = z.object({
   createdAt: z.date().optional(),
 })
 
-export default MessageSchema
+module.exports = MessageSchema

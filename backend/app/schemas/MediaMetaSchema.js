@@ -9,4 +9,4 @@ const MediaMetaSchema = z.object({
   mediaTypeId: z.number().int(),
 })
 
-export default MediaMetaSchema
+module.exports = MediaMetaSchema

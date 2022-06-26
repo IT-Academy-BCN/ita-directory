@@ -11,4 +11,4 @@ const LevelTypeSchema = z.object({
   neighborhood: z.number().int(),
 })
 
-export default LevelTypeSchema
+module.exports = LevelTypeSchema
