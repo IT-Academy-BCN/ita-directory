@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 const UserStatusSchema = z.object({
-  id: z.number().int().optional(),
+  id: z.number().int(),
   name: z.string(),
   active: z.boolean().optional(),
   pending: z.boolean().optional(),

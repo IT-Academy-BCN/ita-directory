@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 const AdTypeSchema = z.object({
-  id: z.number().int().optional(),
+  id: z.number().int(),
   name: z.string(),
   house: z.number().int(),
   room: z.number().int(),

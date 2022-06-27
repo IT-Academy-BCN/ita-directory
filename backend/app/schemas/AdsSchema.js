@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 const AdsSchema = z.object({
-  id: z.number().int().optional(),
+  id: z.number().int(),
   userId: z.number().int(),
   title: z.string(),
   description: z.string(),

@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 const MediaTypeSchema = z.object({
-  id: z.number().int().optional(),
+  id: z.number().int(),
   name: z.string(),
   thumnail: z.boolean(),
   medium: z.boolean(),

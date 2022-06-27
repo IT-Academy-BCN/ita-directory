@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 const LevelTypeSchema = z.object({
-  id: z.number().int().optional(),
+  id: z.number().int(),
   name: z.string(),
   country: z.number().int(),
   state: z.number().int(),
