@@ -1,41 +1,43 @@
-export const citiesOptions = [
-	{
-		value: "Barcelona",
-		label: "Barcelona",
-	},
-	{
-		value: "Berlin",
-		label: "Berlin",
-	},
-	{
-		value: "Rotterdam",
-		label: "Rotterdam",
-	},
-	{
-		value: "Mallorca",
-		label: "Mallorca",
-	},
-	{
-		value: "Lyon",
-		label: "Lyon",
-	},
-	{
-		value: "Braga",
-		label: "Braga",
-	},
-	{
-		value: "Napoli",
-		label: "Napoli",
-	},
-	{
-		value: "Paris",
-		label: "Paris",
-	},
-	{
-		value: "London",
-		label: "London",
-	},
-];
+const citiesOptions = [
+  {
+    value: 'Barcelona',
+    label: 'Barcelona',
+  },
+  {
+    value: 'Berlin',
+    label: 'Berlin',
+  },
+  {
+    value: 'Rotterdam',
+    label: 'Rotterdam',
+  },
+  {
+    value: 'Mallorca',
+    label: 'Mallorca',
+  },
+  {
+    value: 'Lyon',
+    label: 'Lyon',
+  },
+  {
+    value: 'Braga',
+    label: 'Braga',
+  },
+  {
+    value: 'Napoli',
+    label: 'Napoli',
+  },
+  {
+    value: 'Paris',
+    label: 'Paris',
+  },
+  {
+    value: 'London',
+    label: 'London',
+  },
+]
+// eslint-disable-next-line import/prefer-default-export
+export { citiesOptions }
 // export const fetchCities = async () => {
 // 	const apiRequest = await fetch(`http://localhost/:10091/ads/v1/ads`, {
 // 		method: "GET"

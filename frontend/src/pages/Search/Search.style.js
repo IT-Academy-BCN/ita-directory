@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { device, colors } from '../../theme'
 
+// eslint-disable-next-line import/prefer-default-export
 export const SearchStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr;

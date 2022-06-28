@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Popup } from 'react-leaflet'
-import { faComments } from '@fortawesome/free-solid-svg-icons'
-import ContactModal from '../../../../ContactModal/ContactModal'
 
 // Styles
 import { PopupStyled, Content, Address, PropertyData, Span, Price } from './MapPopUp.Style'
 import Colors from '../../../../../../theme'
 import Button from '../../../../../atoms/Button'
+import ContactModal from '../../../../ContactModal'
 
 function MapPopup({ data }) {
   // aqui borré ContactPerson y contactPhone porque no hay datos iguales en el json
@@ -48,7 +47,7 @@ function MapPopup({ data }) {
             }}
             text="Contactar"
             type="button"
-            icon={faComments}
+            name="forum"
             iconPosition="left"
             iconStyles={{
               marginRight: 5,

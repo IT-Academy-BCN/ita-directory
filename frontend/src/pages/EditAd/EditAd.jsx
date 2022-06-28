@@ -1,12 +1,8 @@
+/* eslint-disable prefer-object-spread */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import {
-  faMapMarkerAlt,
-  faBed,
-  faEuroSign,
-  faHome,
-  faBath,
-} from '@fortawesome/free-solid-svg-icons'
 
 // Styles
 import Container from '../../theme/globalStyles'
@@ -40,7 +36,7 @@ function EditAd(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setSubmittedData(JSON.stringify({ ...ad, geometry: position, id: id }, 0, 2))
+    setSubmittedData(JSON.stringify({ ...ad, geometry: position, id }, 0, 2))
     // if using an API, delete the stringify and pass the object to the API
   }
 
@@ -73,13 +69,13 @@ function EditAd(props) {
       name: 'city',
       required: true,
       inputContainerClassName: 'createNewAd',
-      icon: faMapMarkerAlt,
+      icon: 'Map',
     },
     {
       Component: InputNumber,
       label: 'Habitaciones',
       name: 'numRooms',
-      icon: faBed,
+      icon: 'Bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -87,7 +83,7 @@ function EditAd(props) {
       label: 'Precio',
       name: 'monthlyRent',
       required: true,
-      icon: faEuroSign,
+      icon: 'Euro',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -95,14 +91,14 @@ function EditAd(props) {
       label: 'M\u00B2',
       name: 'squareMeters',
       required: true,
-      icon: faHome,
+      icon: 'Home',
       inputClassName: 'style-input-create-new-ad',
     },
     {
       Component: InputNumber,
       label: 'Baños',
       name: 'numBaths',
-      icon: faBath,
+      icon: 'Bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
   ]
@@ -114,10 +110,10 @@ function EditAd(props) {
           <Wrapper>
             <form onSubmit={handleSubmit}>
               {inputComponentData.map((el, i) => {
-                const Component = el.Component
+                const { Component } = el
                 return (
                   <Component
-                    key={i}
+                    key={el.name}
                     type={el.type}
                     label={el.label}
                     name={el.name}

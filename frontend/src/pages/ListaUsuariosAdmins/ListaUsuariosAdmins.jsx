@@ -1,42 +1,97 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
-import {
-  faUserClock,
-  faUserCheck,
-  faUserAltSlash,
-  faTrash,
-  faEye,
-} from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types'
 import Body from '../../components/layout/Body/Body'
-import { Container } from '../../theme'
-import { colors } from '../../theme'
+import { Container, colors } from '../../theme'
 import ReactTable from '../../components/organisms/Table/ReactTable'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import UserModal from '../../components/organisms/UserModal/UserModal.jsx'
-import DeleteModal from '../../components/organisms/DeleteModal/DeleteModal.jsx'
-import EditProfile from '../../components/organisms/EditProfileModal/EditProfile.jsx'
+import UserModal from '../../components/organisms/UserModal/UserModal'
+import DeleteModal from '../../components/organisms/DeleteModal/DeleteModal'
+import EditProfile from '../../components/organisms/EditProfileModal/EditProfile'
 import patchUser from '../../api/utils/patchUser'
-
-// Styles
 import { StyledTableWrapper, StyledImage, StyledCell } from './ListaUsuariosAdmins.style'
-// import {array} from "prop-types";
+import { Icon } from '../../components/atoms'
 
-const ListaUsuariosAdmins = () => {
-  //if active show Modal Status
+function MediaCell({ path }) {
+  return (
+    <StyledCell>
+      <StyledImage
+        src={
+          path || `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 100)}.jpg`
+        }
+        alt="user"
+        width="50px"
+        height="50px"
+      />
+    </StyledCell>
+  )
+}
+
+MediaCell.propTypes = {
+  path: PropTypes.string,
+}
+
+const getStatusIcon = (userStatusId) => {
+  switch (userStatusId) {
+    case 3:
+      return 'person_off'
+    case 1:
+      return 'how_to_reg'
+    default:
+      return 'browse_gallery'
+  }
+}
+
+const getStatusColor = (userStatusId) => {
+  switch (userStatusId) {
+    case 3:
+      return colors.redColor
+    case 1:
+      return colors.darkGreen
+    default:
+      return colors.grey
+  }
+}
+
+function ActionsColumn({ row, handleModalStatus, handleModalEdit, handleModalDelete }) {
+  const { id, name, email, userStatusId } = row
+  return (
+    <div className="actions-column">
+      <button type="button" onClick={() => handleModalStatus(name, userStatusId)}>
+        <Icon name={getStatusIcon(userStatusId)} color={getStatusColor(userStatusId)} />
+      </button>
+      <button type="button" onClick={() => handleModalEdit(name, email, id)}>
+        <Icon name="visibility" color={colors.prussianBlue} />
+      </button>
+      <button type="button" onClick={() => handleModalDelete(row)}>
+        <Icon name="delete" color={colors.redColor} />
+      </button>
+    </div>
+  )
+}
+
+ActionsColumn.propTypes = {
+  row: PropTypes.shape({
+    createdAt: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.string,
+    lastnames: PropTypes.string,
+    media: PropTypes.arrayOf(PropTypes.shape({ path: PropTypes.string })),
+    name: PropTypes.string,
+    userRoleId: PropTypes.number,
+    userStatusId: PropTypes.number,
+  }),
+  handleModalStatus: PropTypes.func,
+  handleModalEdit: PropTypes.func,
+  handleModalDelete: PropTypes.func,
+}
+
+function ListaUsuariosAdmins() {
   const [showModalStatus, setShowModalStatus] = useState(false)
-
   const [dataUsers, setDataUsers] = useState([])
-  const data = useMemo(() => [...dataUsers], [dataUsers])
-
-  //Delete user
   const [eliminar, setEliminar] = useState(false)
   const [currentColum, setCurrentColum] = useState('')
-
-  // Current user
   const [currentName, setCurrentName] = useState('')
   const [editar, setEditar] = useState(false)
   const [currentUserStatus, setCurrentUserStatus] = useState('')
-
-  //Edit Profile
   const [currentEmail, setCurrentEmail] = useState('')
 
   useEffect(() => {
@@ -50,8 +105,8 @@ const ListaUsuariosAdmins = () => {
         .then((response) => {
           return response.json()
         })
-        .then((dataUsers) => {
-          const newDataUsers = dataUsers.filter((user) => user.user_status_id !== 4)
+        .then((du) => {
+          const newDataUsers = du.filter((user) => user.user_status_id !== 4)
           setDataUsers(newDataUsers)
         })
     }
@@ -84,9 +139,8 @@ const ListaUsuariosAdmins = () => {
       const newUsers = dataUsers.filter((user) => {
         if (user.email.localeCompare(currentColum.email) !== 0) {
           return true
-        } else {
-          return false
         }
+        return false
       })
       setDataUsers(newUsers)
     },
@@ -120,16 +174,15 @@ const ListaUsuariosAdmins = () => {
       function evaluateStatus(status) {
         if (status === 'rejected') return 3
         if (status === 'pending') return 2
-        if (status === 'aprobado') return 1
+        return 1 // aprobado
       }
       setDataUsers(
         dataUsers.map((user) => {
           if (user.name === name) {
             patchUser({ ...user, user_status_id: evaluateStatus(userStatus) })
             return { ...user, user_status_id: evaluateStatus(userStatus) }
-          } else {
-            return user
           }
+          return user
         })
       )
     },
@@ -148,6 +201,7 @@ const ListaUsuariosAdmins = () => {
 
   const columns = useMemo(
     () => [
+      { accessor: 'id', show: false },
       {
         Header: (
           <StyledCell color={colors.bahamaBlue} paddingL="0px">
@@ -155,24 +209,8 @@ const ListaUsuariosAdmins = () => {
           </StyledCell>
         ),
         accessor: 'media',
-        Cell: ({ row }) => (
-          <StyledCell>
-            {
-              <StyledImage
-                src={
-                  row.values.media[0] !== undefined
-                    ? row.values.media[0].path
-                    : `https://randomuser.me/api/portraits/women/${Math.floor(
-                        Math.random() * 100
-                      )}.jpg`
-                }
-                alt="foto"
-                width="50px"
-                height="50px"
-              />
-            }
-          </StyledCell>
-        ),
+        // eslint-disable-next-line react/prop-types
+        Cell: ({ value }) => <MediaCell path={value} />,
         minWidth: '32px',
       },
       {
@@ -182,56 +220,47 @@ const ListaUsuariosAdmins = () => {
           </StyledCell>
         ),
         accessor: 'name',
-        Cell: ({ row }) => <StyledCell color={colors.bahamaBlue}>{row.values.name}</StyledCell>,
+        // eslint-disable-next-line react/prop-types
+        Cell: ({ value }) => <StyledCell color={colors.bahamaBlue}>{value}</StyledCell>,
         minWidth: '50px',
       },
       {
         Header: <StyledCell color={colors.bahamaBlue}>Email</StyledCell>,
         accessor: 'email',
-        Cell: ({ row }) => <StyledCell color={colors.prussianBlue}>{row.values.email}</StyledCell>,
+        // eslint-disable-next-line react/prop-types
+        Cell: ({ value }) => <StyledCell color={colors.prussianBlue}>{value}</StyledCell>,
         minWidth: '60px',
       },
       {
         Header: (
-          <StyledCell color={colors.bahamaBlue} justify={'center'}>
+          <StyledCell color={colors.bahamaBlue} justify="center">
             Acciones
           </StyledCell>
         ),
         accessor: 'user_status_id',
         minWidth: '60px',
+        // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => (
-          <div className="actions-column">
-            <button onClick={() => handleModalStatus(row.values.name, row.values.user_status_id)}>
-              <FontAwesomeIcon
-                icon={
-                  row.values.user_status_id === 3
-                    ? faUserAltSlash
-                    : row.values.user_status_id === 1
-                    ? faUserCheck
-                    : faUserClock
-                }
-                color={
-                  row.values.user_status_id === 3
-                    ? colors.redColor
-                    : row.values.user_status_id === 1
-                    ? colors.darkGreen
-                    : colors.grey
-                }
-              />
-            </button>
-            <button
-              onClick={() => handleModalEdit(row.values.name, row.values.email, row.values.id)}
-            >
-              <FontAwesomeIcon icon={faEye} color={colors.prussianBlue} />
-            </button>
-            <button onClick={() => handleModalDelete(row.values)}>
-              <FontAwesomeIcon icon={faTrash} color={colors.redColor} />
-            </button>
-          </div>
+          <ActionsColumn
+            row={row}
+            handleModalDelete={handleModalDelete}
+            handleModalEdit={handleModalEdit}
+            handleModalStatus={handleModalStatus}
+          />
         ),
       },
     ],
     [handleModalDelete, handleModalEdit, handleModalStatus]
+  )
+
+  const data = useMemo(
+    () =>
+      dataUsers.map((du) => ({
+        media: du.media[0]?.path,
+        name: du.name,
+        email: du.email,
+      })),
+    [dataUsers]
   )
 
   return (

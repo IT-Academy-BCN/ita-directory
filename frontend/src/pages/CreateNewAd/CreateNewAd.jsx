@@ -1,12 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import {
-  faMapMarkerAlt,
-  faBed,
-  faEuroSign,
-  faHome,
-  faBath,
-} from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
@@ -126,14 +119,14 @@ function CreateNewAd() {
       name: 'city',
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
-      icon: faMapMarkerAlt,
+      icon: 'Map',
     },
     {
       Component: InputNumber,
       type: 'number',
       label: 'Habitaciones',
       name: 'n_rooms',
-      icon: faBed,
+      icon: 'Bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -142,7 +135,7 @@ function CreateNewAd() {
       label: 'Precio',
       name: 'price',
       required: true,
-      icon: faEuroSign,
+      icon: 'Euro',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -151,7 +144,7 @@ function CreateNewAd() {
       label: 'M\u00B2',
       name: 'square_meters',
       required: true,
-      icon: faHome,
+      icon: 'Home',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -159,7 +152,7 @@ function CreateNewAd() {
       type: 'number',
       label: 'Baños',
       name: 'n_bathrooms',
-      icon: faBath,
+      icon: 'Bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
   ]

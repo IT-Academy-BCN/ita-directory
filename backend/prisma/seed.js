@@ -54,58 +54,58 @@ const users = [
     name: 'test',
     lastnames: 'test test',
     email: 'test@test.test',
-    user_status_id: 1,
-    user_role_id: 3,
+    userStatusId: 1,
+    userRoleId: 3,
     password: 'Test-test99',
   },
   {
     name: 'test2',
     lastnames: 'test test',
     email: 'test2@test.test',
-    user_status_id: 1,
-    user_role_id: 3,
+    userStatusId: 1,
+    userRoleId: 3,
     password: 'Test2@test',
   },
   {
     name: 'test3',
     lastnames: 'test test',
     email: 'test3@test.test',
-    user_status_id: 1,
-    user_role_id: 3,
+    userStatusId: 1,
+    userRoleId: 3,
     password: 'Test3@test',
   },
   {
     name: 'test4',
     lastnames: 'test test',
     email: 'test4@test.test',
-    user_status_id: 1,
-    user_role_id: 3,
+    userStatusId: 1,
+    userRoleId: 3,
     password: 'Test4@test',
   },
   {
     name: 'Mariano5',
     lastnames: 'test test',
     email: 'yenab48812@snece.com',
-    user_status_id: 1,
-    user_role_id: 3,
+    userStatusId: 1,
+    userRoleId: 3,
     password: 'Test5@test',
   },
   {
     name: 'testDeveloper',
     lastnames: 'test test',
     email: 'testdev@test.test',
-    user_status_id: 1,
-    user_role_id: 4,
+    userStatusId: 1,
+    userRoleId: 4,
     password: 'Testdev@99',
-    developer_data: {
+    developerData: {
       github: 'https://test.github.io',
       linkedin: 'linkedin.com/in/test',
       website: 'www.test.com',
       tags: ['test', 'test'],
       description: 'test test test',
-      media_id: '', // ?
+      mediaId: '', // ?
       version: 1,
-      layout_type: '', // ?
+      layoutType: '', // ?
     },
   },
 ]
@@ -113,33 +113,33 @@ const users = [
 const medias = [
   {
     path: '/public/2021/10/image1.jpg',
-    mime_type: 'jpeg',
-    file_size: '200',
-    user_id: 1,
+    mimeType: 'jpeg',
+    fileSize: '200',
+    userId: 1,
   },
   {
     path: '/public/2021/10/image2.jpg',
-    mime_type: 'jpeg',
-    file_size: '200',
-    user_id: 2,
+    mimeType: 'jpeg',
+    fileSize: '200',
+    userId: 2,
   },
   {
     path: '/public/2021/10/image3.png',
-    mime_type: 'png',
-    file_size: '200',
-    user_id: 3,
+    mimeType: 'png',
+    fileSize: '200',
+    userId: 3,
   },
   {
     path: '/public/2021/10/image4.png',
-    mime_type: 'png',
-    file_size: '200',
-    user_id: 4,
+    mimeType: 'png',
+    fileSize: '200',
+    userId: 4,
   },
   {
     path: '/public/2021/10/image5.jpg',
-    mime_type: 'jpeg',
-    file_size: '200',
-    user_id: 5,
+    mimeType: 'jpeg',
+    fileSize: '200',
+    userId: 5,
   },
 ]
 
@@ -177,45 +177,45 @@ const medias_types = [
 const medias_metas = [
   {
     path: '/public/2021/10/image1.jpg',
-    mime_type: 'jpeg',
-    file_size: '200',
-    media_id: 1,
-    media_type_id: 1,
+    mimeType: 'jpeg',
+    fileSize: '200',
+    mediaId: 1,
+    mediaTypeId: 1,
   },
   {
     path: '/public/2021/10/image2.jpg',
-    mime_type: 'jpeg',
-    file_size: '200',
-    media_id: 2,
-    media_type_id: 2,
+    mimeType: 'jpeg',
+    fileSize: '200',
+    mediaId: 2,
+    mediaTypeId: 2,
   },
   {
     path: '/public/2021/10/image3.png',
-    mime_type: 'png',
-    file_size: '200',
-    media_id: 3,
-    media_type_id: 3,
+    mimeType: 'png',
+    fileSize: '200',
+    mediaId: 3,
+    mediaTypeId: 3,
   },
   {
     path: '/public/2021/10/image4.png',
-    mime_type: 'png',
-    file_size: '200',
-    media_id: 4,
-    media_type_id: 4,
+    mimeType: 'png',
+    fileSize: '200',
+    mediaId: 4,
+    mediaTypeId: 4,
   },
   {
     path: '/public/2021/10/image5.jpg',
-    mime_type: 'jpeg',
-    file_size: '200',
-    media_id: 5,
-    media_type_id: 4,
+    mimeType: 'jpeg',
+    fileSize: '200',
+    mediaId: 5,
+    mediaTypeId: 4,
   },
 ]
 
 async function main() {
   for (let i = 0; i < user_roles.length; i++) {
     const ur = user_roles[i]
-    await prisma.user_role.upsert({
+    await prisma.UserRole.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -226,7 +226,7 @@ async function main() {
 
   for (let i = 0; i < user_status.length; i++) {
     const us = user_status[i]
-    await prisma.user_status.upsert({
+    await prisma.UserStatus.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -238,7 +238,7 @@ async function main() {
   // @todo: fix by students
   for (let i = 0; i < users.length; i++) {
     const user = users[i]
-    await prisma.user.upsert({
+    await prisma.User.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -249,7 +249,7 @@ async function main() {
 
   for (let i = 0; i < ad_types.length; i++) {
     const ad_type = ad_types[i]
-    await prisma.ad_type.upsert({
+    await prisma.AdType.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -260,7 +260,7 @@ async function main() {
 
   for (let i = 0; i < medias.length; i++) {
     const media = medias[i]
-    await prisma.media.upsert({
+    await prisma.Media.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -271,7 +271,7 @@ async function main() {
 
   for (let i = 0; i < medias_types.length; i++) {
     const media_type = medias_types[i]
-    await prisma.media_type.upsert({
+    await prisma.MediaType.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -281,7 +281,7 @@ async function main() {
   }
   for (let i = 0; i < medias_metas.length; i++) {
     const media_meta = medias_metas[i]
-    await prisma.media_meta.upsert({
+    await prisma.MediaMeta.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -291,7 +291,7 @@ async function main() {
   }
   for (let i = 0; i < level_types.length; i++) {
     const level_type = level_types[i]
-    await prisma.level_type.upsert({
+    await prisma.LevelType.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -302,7 +302,7 @@ async function main() {
   for (let i = 0; i < levels.length; i++) {
     const level = levels[i]
     console.log('level to upsert', level)
-    await prisma.level.upsert({
+    await prisma.Level.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -313,7 +313,7 @@ async function main() {
 
   for (let i = 0; i < ad_status.length; i++) {
     const adStatus = ad_status[i]
-    await prisma.ad_status.upsert({
+    await prisma.AdStatus.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -324,7 +324,7 @@ async function main() {
 
   for (let i = 0; i < ads.length; i++) {
     const ad = ads[i]
-    await prisma.ads.upsert({
+    await prisma.Ads.upsert({
       where: { id: i + 1 },
       update: {},
       create: {

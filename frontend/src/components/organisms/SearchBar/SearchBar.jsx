@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import { SearchBarContainer, customStyles } from './SearchBarStyles'
-import { StyledSubHeader } from '../../../components/layout/Header/Header.styles'
-import Button from '../../atoms/Button'
+import { Button, Icon } from '../../atoms'
 
-const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
+function SearchBar({ setAdType, setAdRegion, getAds }) {
   const [loading, setLoading] = useState(1)
   const [typesList, setTypesList] = useState([])
 
@@ -42,7 +39,7 @@ const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
   return (
     <SearchBarContainer isLoading={loading}>
       {loading ? (
-        <FontAwesomeIcon icon={faSpinner} className="spinner" />
+        <Icon className="rotate_right" />
       ) : (
         <>
           <Select
@@ -52,7 +49,7 @@ const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
             className="header-select"
             customStyles={customStyles}
             onChange={(value) => setAdType(value)}
-            isClearable={true}
+            isClearable
           />
 
           <AsyncSelect
@@ -62,11 +59,11 @@ const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
             customStyles={customStyles}
             loadOptions={loadOptions}
             onChange={(value) => setAdRegion(value)}
-            isClearable={true}
+            isClearable
           />
           <Button
             onClick={getAds}
-            icon={faSearch}
+            name="search"
             iconPosition="left"
             className="header-button"
             type="button"
@@ -75,6 +72,12 @@ const SearchBar = ({ setAdType, setAdRegion, getAds }) => {
       )}
     </SearchBarContainer>
   )
+}
+
+SearchBar.propTypes = {
+  setAdType: PropTypes.func,
+  setAdRegion: PropTypes.func,
+  getAds: PropTypes.func,
 }
 
 export default SearchBar
