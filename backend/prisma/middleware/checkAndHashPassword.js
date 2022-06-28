@@ -3,7 +3,7 @@ const { checkAndHashPass } = require('../../app/utils/utils')
 const checkAndHashPassword = async (params, next) => {
   const newParams = { ...params }
   // Check incoming query type
-  if (params.model === 'user') {
+  if (params.model === 'User') {
     if (params.action === 'create' || params.action === 'update' || params.action === 'upsert') {
       // Here we have to do something
       if (params.action === 'create' || params.action === 'update') {
