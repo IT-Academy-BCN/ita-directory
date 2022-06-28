@@ -256,7 +256,7 @@ function ListaUsuariosAdmins() {
   const data = useMemo(
     () =>
       dataUsers.map((du) => ({
-        media: du.media[0]?.path,
+        media: du.media[1]?.path,
         name: du.name,
         email: du.email,
       })),
@@ -272,7 +272,7 @@ function ListaUsuariosAdmins() {
       justifyTitle="flex-start"
       paddingTitle="0px"
       paddingTitle2="73px"
-      isLoggedIn="true"
+      isLoggedIn
     >
       <Container row>
         <StyledTableWrapper>

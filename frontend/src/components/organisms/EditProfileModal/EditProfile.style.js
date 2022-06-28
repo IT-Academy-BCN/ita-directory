@@ -17,11 +17,13 @@ export const EditModalStyled = styled.form`
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 
+    input {
+      margin-bottom: 50px;
+    }
     label {
       display: flex;
       flex-direction: row;
       margin-right: 3rem;
-      margin-bottom: 0.5rem;
       p {
         margin-top: 0;
         font-style: italic;

@@ -40,9 +40,11 @@ const StyledButton = styled.button`
   }
   &.darkRed {
     background: ${colors.extraDarkRed};
+    padding: 0.8rem 1.5rem;
   }
   &.darkBlue {
     background: ${colors.extraDarkBlue};
+    padding: 0.8rem 1.5rem;
   }
   &.disabled {
     cursor: not-allowed;

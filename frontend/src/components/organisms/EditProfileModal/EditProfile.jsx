@@ -3,11 +3,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
-import Input from '../../atoms/Forms/Input'
 // STYLES
 import { ButtonWrapper, EditModalStyled, PhotoWrapper } from './EditProfile.style'
 import Colors from '../../../theme/colors'
 import { msgs, validateEmail, validateName, validatePassword } from '../../../utils/userFlow'
+import InputGroup from '../../molecules/InputGroup'
+import { Text } from '../../atoms'
 
 function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUserData }) {
   const [password, setPassword] = useState('')
@@ -34,17 +35,20 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
 
   return (
     <Modal
-      colorModalTitle={Colors.extraDarkBlue}
+      color={Colors.extraDarkBlue}
+      fontSize="26px"
+      iconClose
       active={active}
       hideModal={resetForm}
-      title="Editar usuario"
+      title="Editar perfil"
       footer={
         <ButtonWrapper>
           <Button
             text="Cancelar"
             iconPosition="left"
             type="submit"
-            name="close"
+            icon="close"
+            textColor={Colors.lightGray}
             onClick={resetForm}
             buttonStyles={{
               color: Colors.lightGrey,
@@ -57,9 +61,8 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
             }}
             iconStyles={{
               paddingRight: '5px',
-              paddingLeft: '0px',
               width: '1rem',
-              height: '1rem',
+              fontSize: 20,
             }}
           />
           <Button
@@ -79,8 +82,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
           <div className="profileContain">
             <div className="StyledSubtitle">Fotografía de perfil</div>
             <div className="StyledTextProfile">
-              Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato.JPG, .JPEG, .PNG,
-              y .GIF.
+              <Text text="Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato.JPG, .JPEG, .PNG, y .GIF." />
             </div>
             <Button
               text="Subir"
@@ -94,10 +96,10 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
 
         <div className="inputsWrapper">
           <label htmlFor="userName">
-            <Input
+            <InputGroup
               id="userName"
               name="userName"
-              label="Nombre"
+              label="Nombre de usuario"
               type="text"
               value={newName}
               placeholder="Introduce un nuevo nombre"
@@ -110,7 +112,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
           </label>
 
           <label>
-            <Input
+            <InputGroup
               id="email"
               name="email"
               label="Email"
@@ -127,7 +129,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
 
         <div className="inputsWrapper">
           <label>
-            <Input
+            <InputGroup
               label="Nueva contraseña"
               type="password"
               placeholder="Introducir contraseña"
@@ -141,7 +143,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
             />
           </label>
           <label>
-            <Input
+            <InputGroup
               label="Confirmar contraseña"
               type="password"
               placeholder="Confirma tu contraseña"

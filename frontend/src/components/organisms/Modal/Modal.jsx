@@ -4,7 +4,7 @@ import { ModalBlock } from './Modal.styles'
 import { Icon, Title } from '../../atoms'
 import { FlexBox } from '../../../theme/wrappers'
 
-function Modal({ title, footer, children, active, hideModal }) {
+function Modal({ title, footer, children, active, hideModal, color, fontSize, iconClose }) {
   return (
     active && (
       <ModalBlock>
@@ -12,8 +12,8 @@ function Modal({ title, footer, children, active, hideModal }) {
         <div className="modalOverlay" onClick={() => hideModal((prev) => !prev)} />
         <div className="modalContainer">
           <FlexBox alignItems="center" justifyContent="space-between">
-            <Title order={3} text={title} />
-            <Icon name="close" onClick={hideModal} />
+            <Title order={3} text={title} color={color} fontSize={fontSize} />
+            {!iconClose && <Icon name="close" onClick={hideModal} />}
           </FlexBox>
           <div className="modalBody">{children}</div>
           <div className="modalFooter">{footer}</div>
@@ -25,6 +25,9 @@ function Modal({ title, footer, children, active, hideModal }) {
 
 Modal.propTypes = {
   title: PropTypes.string,
+  color: PropTypes.string,
+  fontSize: PropTypes.number,
+  iconClose: PropTypes.bool,
   footer: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

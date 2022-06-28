@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
-import Input from '../../atoms/Forms/Input'
 import useInput from '../../../hooks/useInput'
 import { Wrapper, StyledSmall, ButtonWrapper } from './DeleteModal.style'
 import { colors } from '../../../theme'
+import InputGroup from '../../molecules/InputGroup'
 
 function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hideModal }) {
   const [error, setError] = useState('')
@@ -36,7 +36,9 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
 
   return (
     <Modal
-      colorModalTitle={colors.extraDarkBlue}
+      color={colors.extraDarkBlue}
+      iconClose
+      fontSize="26px"
       active={active}
       hideModal={resetForm}
       title="Eliminar Usuario"
@@ -46,7 +48,8 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
             text="Cancelar"
             iconPosition="left"
             type="submit"
-            name="close"
+            icon="close"
+            textColor={colors.lightGray}
             onClick={resetForm}
             buttonStyles={{
               color: colors.lightGrey,
@@ -59,9 +62,8 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
             }}
             iconStyles={{
               paddingRight: '5px',
-              paddingLeft: '0px',
               width: '1rem',
-              height: '1rem',
+              fontSize: 20,
             }}
           />
           <Button
@@ -76,7 +78,7 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
       }
     >
       <Wrapper>
-        <Input
+        <InputGroup
           label="Escribe la palabra ELIMINAR para poder continuar"
           type="text"
           name="name"

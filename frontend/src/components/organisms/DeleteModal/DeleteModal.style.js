@@ -26,6 +26,11 @@ export const Wrapper = styled.div`
     padding-right: 0;
     width: auto;
     opacity: 0.8;
+    padding-bottom: 10px;
+  }
+  input {
+    padding: 15px 15px 5px 15px;
+    margin-top: 20px;
   }
 
   input::placeholder {
@@ -44,4 +49,5 @@ export const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
 `
