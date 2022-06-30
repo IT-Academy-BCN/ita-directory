@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Container } from '../../theme'
-import { device, responsiveSizes } from '../../theme'
+import { Container, device } from '../../theme'
 
 export const DashboardContainer = styled(Container)`
   max-width: 90%;

@@ -52,19 +52,23 @@ function Bill(colorLogo) {
       {
         Header: '#',
         accessor: 'itemID',
+        // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => <div>{row.original.itemID}</div>,
       },
       {
         Header: 'Item',
         accessor: 'itemTitle',
+        // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => <div>{row.original.itemTitle}</div>,
       },
       {
         Header: 'Price',
         accessor: 'itemPrice',
+        // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => (
           <div>
             <span>€ </span>
+            {/* eslint-disable-next-line react/prop-types */}
             {row.original.itemPrice}
           </div>
         ),
@@ -72,14 +76,17 @@ function Bill(colorLogo) {
       {
         Header: 'Quantity',
         accessor: 'itemQuant',
+        // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => <div className={customRowStyle}>{row.original.itemQuant}</div>,
       },
       {
         Header: <div className="lastColumn">Amount</div>,
         accessor: 'amount',
+        // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => (
           <div className={`${customRowStyle} lastColumn1`}>
             <span>€ </span>
+            {/* eslint-disable-next-line react/prop-types */}
             {row.original.itemPrice * row.original.itemQuant}
           </div>
         ),
@@ -148,8 +155,7 @@ function Bill(colorLogo) {
                     const itemsAmount = itemsArr.map((it) => {
                       return it.itemPrice * it.itemQuant
                     })
-                    let sum = 0
-                    itemsAmount.map((i) => (sum += i))
+                    const sum = itemsAmount.reduce((partialSum, a) => partialSum + a, 0)
                     return sum
                   })}
                 </td>
@@ -164,8 +170,7 @@ function Bill(colorLogo) {
                     const itemsAmount = itemsArr.map((it) => {
                       return it.itemPrice * it.itemQuant
                     })
-                    let sum = 0
-                    itemsAmount.map((i) => (sum += i))
+                    const sum = itemsAmount.reduce((partialSum, a) => partialSum + a, 0)
                     const tax = amount.calculation.calcs
                     const taxItem = tax.map((t) => t.tax)
                     const taxCalc = (taxItem / 100) * sum
@@ -183,8 +188,7 @@ function Bill(colorLogo) {
                     const itemsAmount = itemsArr.map((it) => {
                       return it.itemPrice * it.itemQuant
                     })
-                    let sum = 0
-                    itemsAmount.map((i) => (sum += i))
+                    const sum = itemsAmount.reduce((partialSum, a) => partialSum + a, 0)
                     const tax = amount.calculation.calcs
                     const taxItem = tax.map((t) => t.tax)
                     const taxCalc = sum + (taxItem / 100) * sum
@@ -204,8 +208,7 @@ function Bill(colorLogo) {
                       const itemsAmount = itemsArr.map((it) => {
                         return it.itemPrice * it.itemQuant
                       })
-                      let sum = 0
-                      itemsAmount.map((i) => (sum += i))
+                      const sum = itemsAmount.reduce((partialSum, a) => partialSum + a, 0)
                       const tax = amount.calculation.calcs
                       const taxItem = tax.map((t) => t.tax)
                       const taxCalc = (taxItem / 100) * sum
