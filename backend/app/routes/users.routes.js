@@ -107,21 +107,22 @@ router.post('/v1/login', UsersController.login)
  */
 
 /**
- * PATCH /users/v1/user
+ * PATCH /users/v1/update-user
  * @summary Allows Update some field to User
  * @tags User
  * @param {userUpdateData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "email": "email@example.com", "password":"secret", "privacy":true}
+ * { "name": "Example", "email": "email@example.com", "password":"secret$11", "userRoleId":1, "userStatusId":1}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "User updated correctly"}
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"User not found"}
  */
 // Update some field to User
-router.patch('/v1/update-user', authenticateToken, UsersController.updateUser)
+// router.patch('/v1/update-user', authenticateToken, UsersController.updateUser)
+router.patch('/v1/update-user', UsersController.updateUser)
 
 /**
  * RecoverPassword data

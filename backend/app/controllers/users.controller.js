@@ -212,36 +212,36 @@ exports.login = async (req, res, next) => {
 
 // Update user //TODO Improve error handling
 exports.updateUser = async (req, res) => {
-  // eslint-disable-next-line camelcase
   const { email, name, lastnames, password, userRoleId, userStatusId } = req.body
-  const userId = { req }
+  const { userId } = req
 
   // @todo: req.body fields should be validated using joi
-  if (!req.body) {
-    return res.status(400).json({ message: `Enter correct roles!, please` })
+  if (!req.userId || !req.body) {
+    return res.status(400).json({ message: `Enter correct values!, please` })
   }
-
-  const updateUser = await prisma.user.update({
-    where: { id: userId },
-    data: {
-      name,
-      lastnames,
-      email,
-      password,
-      // eslint-disable-next-line camelcase
-      userRoleId,
-      // eslint-disable-next-line camelcase
-      userStatusId,
-    },
-  })
-  //! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
-  if (updateUser === null || undefined) {
-    return res.status(204).json({ massage: `User not found. Entry data, please` })
+  try {
+    const updateUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        name,
+        lastnames,
+        email,
+        password,
+        userRoleId,
+        userStatusId,
+      },
+    })
+    //! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
+    if (updateUser === null || undefined) {
+      return res.status(204).json({ massage: `User not found. Entry data, please` })
+    }
+    return res.status(200).json({
+      updateUser,
+      message: `Data user updated successfully`,
+    })
+  } catch (err) {
+    return res.status(500).json({ message: `Error updating user ${userId}` })
   }
-  return res.status(200).json({
-    updateUser,
-    message: `Data user updated successfully`,
-  })
 }
 
 // Delete user
