@@ -188,16 +188,26 @@ exports.login = async (req, res, next) => {
     })
   }
 
-  const value = await argon2.verify(USER.password, body.password)
-  if (value === false) {
+  try {
+    const value = await argon2.verify(USER.password, body.password)
+    if (value === false) {
+      return next({
+        code: 'error',
+        header: 'Wrong password',
+        message:
+          'The password you introduced is incorrect, please try again or try to recover your password.',
+        statusCode: 400,
+      })
+    }
+  } catch (error) {
     return next({
       code: 'error',
-      header: 'Wrong password',
-      message:
-        'The password you introduced is incorrect, please try again or try to recover your password.',
+      header: 'Verify passwords failed',
+      message: 'The verify function from argon2 fails. Check arguments',
       statusCode: 400,
     })
   }
+
   const token = signToken(USER.id)
   const refreshToken = await signRefreshToken(USER.id)
 

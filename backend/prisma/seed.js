@@ -1,5 +1,6 @@
 // TODO: Refactor code to pass eslint checks!!!
 
+/* eslint-disable no-console */
 /* eslint-disable camelcase */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
@@ -301,7 +302,6 @@ async function main() {
   }
   for (let i = 0; i < levels.length; i++) {
     const level = levels[i]
-    console.log('level to upsert', level)
     await prisma.Level.upsert({
       where: { id: i + 1 },
       update: {},
