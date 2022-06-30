@@ -33,7 +33,7 @@ function UserModal({ nombreUsuario, currentUserState, active, hideModal, updateU
       active={active}
       iconClose
       color={Colors.extraDarkBlue}
-      fontSize="26px"
+      fontSize={26}
       hideModal={closeModal}
       title="Cambiar Estado"
       listAdmin

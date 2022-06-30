@@ -3,7 +3,6 @@ import { colors } from '../../../theme'
 
 export const EditModalStyled = styled.form`
   display: flex;
-  /* height: auto; */
   justify-content: center;
   flex-direction: column;
   font: normal normal normal 16px/24px Arial;
@@ -11,6 +10,9 @@ export const EditModalStyled = styled.form`
   border-radius: 6px;
   opacity: 1;
   color: #4a4a4a;
+  span {
+    margin: 0px;
+  }
 
   .inputsWrapper {
     display: flex;
@@ -18,7 +20,10 @@ export const EditModalStyled = styled.form`
     margin-bottom: 0.5rem;
 
     input {
-      margin-bottom: 50px;
+      &.disableInput {
+        background-color: ${colors.lightGrey2};
+        margin-bottom: 50px;
+      }
     }
     label {
       display: flex;
@@ -81,6 +86,7 @@ export const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
 `
 
 export const StyledSmall = styled.small`

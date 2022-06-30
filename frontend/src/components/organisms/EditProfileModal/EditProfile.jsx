@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal'
 // STYLES
 import { ButtonWrapper, EditModalStyled, PhotoWrapper } from './EditProfile.style'
 import Colors from '../../../theme/colors'
-import { msgs, validateEmail, validateName, validatePassword } from '../../../utils/userFlow'
+import { msgs, validatePassword } from '../../../utils/userFlow'
 import InputGroup from '../../molecules/InputGroup'
 import { Text } from '../../atoms'
 
@@ -14,16 +14,16 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
 
-  // MODIFY USERNAME / EMAIL
-  const [newName, setNewName] = useState(currentNombre)
-  const [newEmail, setNewEmail] = useState(currentEmail)
-
   const actualizar = () => {
-    if (newName === '') {
+    if (password === '') {
       // eslint-disable-next-line no-alert
-      alert('Debes rellenar el nombre de usuario')
+      alert('Debes introducir una nueva contraseña')
+    }
+    if ((password !== '' && !validatePassword(password)) || password2 !== password) {
+      // eslint-disable-next-line no-alert
+      alert('La contraseña no es correcta o no coincide')
     } else {
-      updateUserData(newName, newEmail)
+      updateUserData(currentNombre, currentEmail)
       hideModal()
     }
   }
@@ -36,7 +36,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
   return (
     <Modal
       color={Colors.extraDarkBlue}
-      fontSize="26px"
+      fontSize={26}
       iconClose
       active={active}
       hideModal={resetForm}
@@ -88,7 +88,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
               text="Subir"
               loadingText="Subiendo"
               type="submit"
-              className="blue-gradient"
+              className="blue-gradientWidth"
               isLoading={false}
             />
           </div>
@@ -101,13 +101,10 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
               name="userName"
               label="Nombre de usuario"
               type="text"
-              value={newName}
-              placeholder="Introduce un nuevo nombre"
-              onChange={(e) => setNewName(e.target.value)}
-              className="errorProfile"
-              success={newName !== '' && validateName(newName)}
-              error={newName !== '' && !validateName(newName)}
-              errorText={msgs.nameError}
+              value={currentNombre}
+              disabled
+              placeholder={currentNombre}
+              className="disableInput"
             />
           </label>
 
@@ -117,12 +114,10 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
               name="email"
               label="Email"
               type="text"
-              placeholder="Introduce un nuevo email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              success={newEmail !== '' && validateEmail(newEmail)}
-              error={newEmail !== '' && !validateEmail(newEmail)}
-              errorText={msgs.emailError}
+              disabled
+              placeholder={currentEmail}
+              className="disableInput"
+              value={currentEmail}
             />
           </label>
         </div>
@@ -134,12 +129,9 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
               type="password"
               placeholder="Introducir contraseña"
               onChange={(e) => setPassword(e.target.value)}
-              className="errorProfile"
               id="passName"
               name="passName"
-              success={password !== '' && validatePassword(password)}
-              error={password !== '' && !validatePassword(password)}
-              errorText={msgs.passwordError}
+              error={password !== '' && !validatePassword(password) ? msgs.passwordError : ''}
             />
           </label>
           <label>
@@ -148,12 +140,11 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
               type="password"
               placeholder="Confirma tu contraseña"
               onChange={(e) => setPassword2(e.target.value)}
-              className="errorProfile"
               id="confirmPassName"
               name="confirmPassName"
-              errorText="Both passwords must be equal"
-              success={password2 !== '' && password2 === password}
-              error={password2 !== '' && password2 !== password}
+              error={
+                password2 !== '' && password2 !== password ? 'Both passwords must be equal' : ''
+              }
             />
           </label>
         </div>
@@ -162,14 +153,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
           text="Guardar"
           type="submit"
           className="green-gradient"
-          disabled={
-            !(
-              validatePassword(password) &&
-              validateEmail(newEmail) &&
-              validateName(newName) &&
-              password2 === password
-            )
-          }
+          disabled={!(validatePassword(password) && password2 === password)}
         />
       </EditModalStyled>
     </Modal>

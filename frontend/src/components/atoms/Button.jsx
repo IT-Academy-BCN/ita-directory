@@ -28,11 +28,16 @@ const StyledButton = styled.button`
   &.blue-gradient {
     background: linear-gradient(90deg, ${colors.lightBlue}, ${colors.darkBlue});
   }
+  &.blue-gradientWidth {
+    background: linear-gradient(90deg, ${colors.lightBlue}, ${colors.darkBlue});
+    width: 40%;
+  }
   &.orange-gradient {
     background: linear-gradient(90deg, ${colors.lightOrange}, ${colors.darkOrange});
   }
   &.green-gradient {
     background: linear-gradient(90deg, ${colors.lightGreen}, ${colors.darkGreen});
+    width: 25%;
   }
   &.transparent {
     background: transparent;

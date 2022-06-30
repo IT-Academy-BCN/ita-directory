@@ -38,7 +38,7 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
     <Modal
       color={colors.extraDarkBlue}
       iconClose
-      fontSize="26px"
+      fontSize={26}
       active={active}
       hideModal={resetForm}
       title="Eliminar Usuario"
@@ -80,6 +80,7 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
       <Wrapper>
         <InputGroup
           label="Escribe la palabra ELIMINAR para poder continuar"
+          id="name"
           type="text"
           name="name"
           {...bindName}
