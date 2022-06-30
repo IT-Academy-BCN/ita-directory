@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_API_URL
 
 const patchUser = (user) => {
-  return fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/users/v1/update-user`, {
+  return fetch(`${import.meta.env.VITE_API_URL}/users/v1/update-user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
