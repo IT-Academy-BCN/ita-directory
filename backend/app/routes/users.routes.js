@@ -38,6 +38,7 @@ router.post('/v1/register', UsersController.registerUser)
  * GET /users/
  * @summary Gets all users from the database.
  * @tags User
+ * @security bearerAuth
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
 * {"message": "Data fetched correctly.",
@@ -81,7 +82,7 @@ router.get('/v1/refresh-token', UsersController.getRefreshToken)
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "email": "email@example.com", "password":"secret"}
+ * { "email": "test@test.test", "password":"Test-test99"}
  * @example response - 200 - Example success response
  * {
     "code": "success",
@@ -110,6 +111,7 @@ router.post('/v1/login', UsersController.login)
  * PATCH /users/v1/update-user
  * @summary Allows Update some field to User
  * @tags User
+ * @security bearerAuth
  * @param {userUpdateData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
@@ -121,8 +123,7 @@ router.post('/v1/login', UsersController.login)
  * { "errCode":"errCode", "message":"User not found"}
  */
 // Update some field to User
-// router.patch('/v1/update-user', authenticateToken, UsersController.updateUser)
-router.patch('/v1/update-user', UsersController.updateUser)
+router.patch('/v1/update-user', authenticateToken, UsersController.updateUser)
 
 /**
  * RecoverPassword data
@@ -175,10 +176,16 @@ router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
     "errors": []
 }
  */
-
 router.post('/v1/change-password/:token', UsersController.changePassword)
 
-// Route delete create
+/**
+ * DELETE /users/v1/delete-user
+ * @summary Delete user from the database.
+ * @tags User
+ * @security bearerAuth
+ * @return {object} 200 - Success response - application/json
+ */
+// Route delete user
 router.delete('/v1/delete-user', UsersController.deleteUser)
 
 module.exports = router
