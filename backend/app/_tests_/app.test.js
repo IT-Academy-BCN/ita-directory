@@ -5,6 +5,8 @@ import app from '../app'
 
 const client = require('../utils/initRedis')
 
+let token = null
+
 describe('POST /users/v1/login', () => {
   beforeAll(async () => {
     await client.connect()
@@ -15,6 +17,9 @@ describe('POST /users/v1/login', () => {
         email: 'test@test.test',
         password: 'Test-test99',
       })
+
+      token = response.body.token
+
       expect(response.statusCode).toBe(200)
       expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
     })
@@ -26,7 +31,7 @@ describe('POST /users/v1/login', () => {
 
 describe('GET /users/', () => {
   test('test ', async () => {
-    const response = await request(app).get('/users')
+    const response = await request(app).get('/users').set('Authorization', `Bearer ${token}`)
     expect(response.statusCode).toBe(200)
     expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
   })
