@@ -38,6 +38,7 @@ const { uploadAdCSV } = require('../middleware/uploadAdsCSV')
  * POST /ads/v1/post-ad
  * @summary Create new ad
  * @tags Ad
+ * @security bearerAuth
  * @param {postAdData} request.body.required - The payload looks like this:
  * @return {object} 200 - Success response - application/json
  * @return {object} 400 - Bad request response - application/json
@@ -66,6 +67,7 @@ router.post('/v1/post-ad', authenticateToken, adsController.createAd)
  * GET /ads/v1/ads
  * @summary Gets all ads from the database.
  * @tags Ad
+ * @security bearerAuth
  * @return {object} 200 - Success response - application/json
 * @example request - Correct ad payload
  * { "user_id": "1", "title": "Apartment in Barcelona",
@@ -110,6 +112,7 @@ router.get('/v1/ads', adsController.getAllAds)
  * GET /ads/v1/user-ads/{userId}
  * @summary Gets all user ads from the database.
  * @tags Ad
+ * @security bearerAuth
  * @param {number} userId.path - User id to get ads from database
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
@@ -137,6 +140,7 @@ router.get('/v1/user-ads/:userId', adsController.getUserAds)
  * GET /ads/v1/ads/:adId
  * @summary Gets ad by id
  * @tags Ad
+ * @security bearerAuth
  * @param {number} adId.path - Ad id to search in database
  * @return {object} 200 - Success response - application/json
  * @return {object} 400 - Bad request response - application/json
@@ -177,6 +181,7 @@ router.get('/v1/ads/:adId', adsController.getAdById)
  * DELETE /ads/v1/ads/:adId
  * @summary Delete ad by id
  * @tags Ad
+ * @security bearerAuth
  * @param {number} adId.path - Ad id to search in database
  * @return {object} 200 - Success response - application/json
  * @return {object} 400 - Bad request response - application/json

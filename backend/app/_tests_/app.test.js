@@ -36,3 +36,17 @@ describe('GET /users/', () => {
     expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
   })
 })
+
+describe('PATCH /users/v1/update-user', () => {
+  test('Update user ', async () => {
+    const response = await request(app)
+      .patch('/users/v1/update-user')
+      .send({
+        name: 'NewTest',
+        lastnames: 'NewLastNames',
+      })
+      .set('Authorization', `Bearer ${token}`)
+    expect(response.statusCode).toBe(200)
+    expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
+  })
+})
