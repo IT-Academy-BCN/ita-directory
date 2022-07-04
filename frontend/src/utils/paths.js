@@ -5,6 +5,8 @@ const paths = {
   userAds: '/user-ads',
   newAd: '/new-ad',
   ads: '/ads',
+  login: '/login',
+  register: '/register',
 }
 
 export default paths

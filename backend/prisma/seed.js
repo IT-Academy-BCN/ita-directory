@@ -216,7 +216,7 @@ const medias_metas = [
 async function main() {
   for (let i = 0; i < user_roles.length; i++) {
     const ur = user_roles[i]
-    await prisma.UserRole.upsert({
+    await prisma.userRole.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -227,7 +227,7 @@ async function main() {
 
   for (let i = 0; i < user_status.length; i++) {
     const us = user_status[i]
-    await prisma.UserStatus.upsert({
+    await prisma.userStatus.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -239,7 +239,7 @@ async function main() {
   // @todo: fix by students
   for (let i = 0; i < users.length; i++) {
     const user = users[i]
-    await prisma.User.upsert({
+    await prisma.user.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -250,7 +250,7 @@ async function main() {
 
   for (let i = 0; i < ad_types.length; i++) {
     const ad_type = ad_types[i]
-    await prisma.AdType.upsert({
+    await prisma.adType.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -261,7 +261,7 @@ async function main() {
 
   for (let i = 0; i < medias.length; i++) {
     const media = medias[i]
-    await prisma.Media.upsert({
+    await prisma.media.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -272,7 +272,7 @@ async function main() {
 
   for (let i = 0; i < medias_types.length; i++) {
     const media_type = medias_types[i]
-    await prisma.MediaType.upsert({
+    await prisma.mediaType.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -282,7 +282,7 @@ async function main() {
   }
   for (let i = 0; i < medias_metas.length; i++) {
     const media_meta = medias_metas[i]
-    await prisma.MediaMeta.upsert({
+    await prisma.mediaMeta.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -292,7 +292,7 @@ async function main() {
   }
   for (let i = 0; i < level_types.length; i++) {
     const level_type = level_types[i]
-    await prisma.LevelType.upsert({
+    await prisma.levelType.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -302,7 +302,7 @@ async function main() {
   }
   for (let i = 0; i < levels.length; i++) {
     const level = levels[i]
-    await prisma.Level.upsert({
+    await prisma.level.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -313,7 +313,7 @@ async function main() {
 
   for (let i = 0; i < ad_status.length; i++) {
     const adStatus = ad_status[i]
-    await prisma.AdStatus.upsert({
+    await prisma.adStatus.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
@@ -324,7 +324,7 @@ async function main() {
 
   for (let i = 0; i < ads.length; i++) {
     const ad = ads[i]
-    await prisma.Ads.upsert({
+    await prisma.ads.upsert({
       where: { id: i + 1 },
       update: {},
       create: {
