@@ -241,7 +241,7 @@ async function main() {
     const user = users[i]
     await prisma.user.upsert({
       where: { id: i + 1 },
-      update: { ...user },
+      update: {},
       create: {
         ...user,
       },
