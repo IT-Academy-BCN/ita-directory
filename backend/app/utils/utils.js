@@ -19,7 +19,7 @@ const apiResponse = ({ message = '', data = {}, errors = [], status }) => {
 
 const signToken = (userid, maxAge = '15m') => {
   const hashedId = hashIds.encode(userid)
-  const payload = { iss: 'itacademy', sub: { user_id: hashedId } }
+  const payload = { iss: 'itacademy', sub: { userId: hashedId } }
   const secret = process.env.JWT_SECRET
   const options = { expiresIn: maxAge }
   return JWT.sign(payload, secret, options)
@@ -29,7 +29,7 @@ const signToken = (userid, maxAge = '15m') => {
 const signRefreshToken = async (userId, maxAge = 86400) => {
   try {
     const hashedId = hashIds.encode(userId)
-    const payload = { iss: 'itacademy', sub: { user_id: hashedId } }
+    const payload = { iss: 'itacademy', sub: { userId: hashedId } }
     const secret = process.env.JWT_REFRESH_TOKEN_SECRET
     const options = { expiresIn: maxAge }
     const token = JWT.sign(payload, secret, options)
@@ -57,7 +57,7 @@ const tokenUser = (token) =>
     if (err) {
       return false
     }
-    const hashedId = authData.sub.user_id
+    const hashedId = authData.sub.userId
     const dehashedId = decodeHash(hashedId)
     const userId = dehashedId[0]
     return userId

@@ -63,9 +63,4 @@ app.use('/contact', contactRoutes)
 app.use('/chat', authenticateToken, chatRoutes)
 app.use('/log', logRoutes)
 
-// app.get("/get-token", UsersController.getToken);
-// app.get("/test-token", authenticateToken, (req, res) => {
-// 	res.json({message: "Correct Token !", data: {user_id: req.userId}});
-// });
-
 module.exports = app

@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       // eslint-disable-next-line no-underscore-dangle
       originalRequest._retry = true
       return axios
-        .get(`${import.meta.env.VITE_REACT_APP_API_URL}/users/v1/refresh-token`, {
+        .get(`${import.meta.env.VITE_API_URL}/users/v1/refresh-token`, {
           headers: { refresh: refreshToken },
         })
         .then((response) => {

@@ -7,7 +7,7 @@ const IconStyled = styled.span`
   font-variation-settings: 'FILL' ${(props) => props.fill}, 'wght' ${(props) => props.wght},
     'GRAD' ${(props) => props.grad}, 'opsz' ${(props) => props.opsz};
   color: ${(props) => props.color};
-  font-size: ${(props) => props.size};
+  font-size: ${(props) => props.size}px;
   ${space}
   ${typography}
 `
