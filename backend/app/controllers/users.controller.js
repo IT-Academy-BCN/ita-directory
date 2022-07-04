@@ -32,7 +32,6 @@ exports.getRefreshToken = (req, res, next) => {
           const hashedId = payload.sub.userId
           const dehashedId = decodeHash(hashedId)
           const userId = dehashedId[0]
-
           const result = await client.get(userId.toString())
           if (refreshToken !== result) {
             const counterKey = `C${userId}`
@@ -75,8 +74,11 @@ exports.getUser = async (req, res, next) => {
       statusCode: 400,
     })
   } else {
-    const USER = await prisma.user.findUnique({ where: { id: parseInt(req.userId, 10) } })
-    if (USER === null) {
+    const user = await prisma.user.findUnique({
+      where: { id: parseInt(req.userId, 10) },
+      include: { avatar: true },
+    })
+    if (user === null) {
       next({
         code: 'error',
         success: 'false',
@@ -84,11 +86,9 @@ exports.getUser = async (req, res, next) => {
         statusCode: 204,
       })
     } else {
+      delete user.password
       res.status(200).json({
-        // TODO: Cambiar por el método API RESPONSE
-        success: 'true',
-        name: USER.name,
-        lastnames: USER.lastnames,
+        user,
       })
     }
   }
@@ -329,7 +329,7 @@ exports.changePassword = async (req, res, next) => {
 
   // Will test if provided password has already been used, if so, returns true.
   const isRepeatedPassword = async (userId, password) => {
-    const pwLog = await prisma.recover_password_log.findMany({ where: { user_id: userId } })
+    const pwLog = await prisma.recoverPasswordLog.findMany({ where: { userId } })
     const promiseArray = pwLog.map((log) => argon2.verify(log.password, password))
     const repeatedPass = await Promise.all(promiseArray)
     return repeatedPass.includes(true)
