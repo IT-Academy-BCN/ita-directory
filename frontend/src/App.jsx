@@ -18,6 +18,7 @@ import {
   ListaUsuariosAdmins,
   Dashboard,
 } from './pages'
+import { paths } from './utils'
 
 function App() {
   return (
@@ -25,8 +26,8 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/ad/:id" component={Ad} />
       <Route exact path="/new-ad" component={CreateNewAd} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Registration} />
+      <Route exact path={paths.login} component={Login} />
+      <Route exact path={paths.register} component={Registration} />
       <Route exact path="/students" component={Students} />
       <Route exact path="/business" component={Business} />
       <ProtectedRoute exact path="/profile" component={Profile} />
