@@ -26,7 +26,7 @@ function Title({
 }
 
 Title.propTypes = {
-  fontSize: PropTypes.string,
+  fontSize: PropTypes.number,
   color: PropTypes.string,
   text: PropTypes.string.isRequired,
   order: PropTypes.number.isRequired,

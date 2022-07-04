@@ -4,13 +4,13 @@ import { colors } from '../../../theme'
 export const UserModalStyled = styled.div`
   margin-bottom: 25px;
   p {
-    color: ${colors.grey};
+    color: ${colors.lightGray};
     width: auto;
     letter-spacing: 0px;
     opacity: 1;
     font-size: 16px;
     width: 90%;
-    margin-bottom: 2px;
+    margin-bottom: 15px;
   }
 
   label {
@@ -19,7 +19,7 @@ export const UserModalStyled = styled.div`
 
   select {
     text-transform: uppercase;
-    padding: 0.2em;
+    padding: 0.5em;
     font-size: 20px;
     border-radius: 5px;
     font-weight: bold;
@@ -72,4 +72,5 @@ export const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
 `

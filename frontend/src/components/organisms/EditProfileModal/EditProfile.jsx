@@ -3,26 +3,27 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
-import Input from '../../atoms/Forms/Input'
 // STYLES
 import { ButtonWrapper, EditModalStyled, PhotoWrapper } from './EditProfile.style'
 import Colors from '../../../theme/colors'
-import { msgs, validateEmail, validateName, validatePassword } from '../../../utils/userFlow'
+import { msgs, validatePassword } from '../../../utils/userFlow'
+import InputGroup from '../../molecules/InputGroup'
+import { Text } from '../../atoms'
 
 function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUserData }) {
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
 
-  // MODIFY USERNAME / EMAIL
-  const [newName, setNewName] = useState(currentNombre)
-  const [newEmail, setNewEmail] = useState(currentEmail)
-
   const actualizar = () => {
-    if (newName === '') {
+    if (password === '') {
       // eslint-disable-next-line no-alert
-      alert('Debes rellenar el nombre de usuario')
+      alert('Debes introducir una nueva contraseña')
+    }
+    if ((password !== '' && !validatePassword(password)) || password2 !== password) {
+      // eslint-disable-next-line no-alert
+      alert('La contraseña no es correcta o no coincide')
     } else {
-      updateUserData(newName, newEmail)
+      updateUserData(currentNombre, currentEmail)
       hideModal()
     }
   }
@@ -34,17 +35,20 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
 
   return (
     <Modal
-      colorModalTitle={Colors.extraDarkBlue}
+      color={Colors.extraDarkBlue}
+      fontSize={26}
+      iconClose
       active={active}
       hideModal={resetForm}
-      title="Editar usuario"
+      title="Editar perfil"
       footer={
         <ButtonWrapper>
           <Button
             text="Cancelar"
             iconPosition="left"
             type="submit"
-            name="close"
+            icon="close"
+            textColor={Colors.lightGray}
             onClick={resetForm}
             buttonStyles={{
               color: Colors.lightGrey,
@@ -57,9 +61,8 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
             }}
             iconStyles={{
               paddingRight: '5px',
-              paddingLeft: '0px',
               width: '1rem',
-              height: '1rem',
+              fontSize: 20,
             }}
           />
           <Button
@@ -79,14 +82,13 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
           <div className="profileContain">
             <div className="StyledSubtitle">Fotografía de perfil</div>
             <div className="StyledTextProfile">
-              Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato.JPG, .JPEG, .PNG,
-              y .GIF.
+              <Text text="Sube tu fotografía de perfil, tamaño recomendado 1000x1000. Formato.JPG, .JPEG, .PNG, y .GIF." />
             </div>
             <Button
               text="Subir"
               loadingText="Subiendo"
               type="submit"
-              className="blue-gradient"
+              className="blue-gradientWidth"
               isLoading={false}
             />
           </div>
@@ -94,64 +96,55 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
 
         <div className="inputsWrapper">
           <label htmlFor="userName">
-            <Input
+            <InputGroup
               id="userName"
               name="userName"
-              label="Nombre"
+              label="Nombre de usuario"
               type="text"
-              value={newName}
-              placeholder="Introduce un nuevo nombre"
-              onChange={(e) => setNewName(e.target.value)}
-              className="errorProfile"
-              success={newName !== '' && validateName(newName)}
-              error={newName !== '' && !validateName(newName)}
-              errorText={msgs.nameError}
+              value={currentNombre}
+              disabled
+              placeholder={currentNombre}
+              className="disableInput"
             />
           </label>
 
           <label>
-            <Input
+            <InputGroup
               id="email"
               name="email"
               label="Email"
               type="text"
-              placeholder="Introduce un nuevo email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              success={newEmail !== '' && validateEmail(newEmail)}
-              error={newEmail !== '' && !validateEmail(newEmail)}
-              errorText={msgs.emailError}
+              disabled
+              placeholder={currentEmail}
+              className="disableInput"
+              value={currentEmail}
             />
           </label>
         </div>
 
         <div className="inputsWrapper">
           <label>
-            <Input
+            <InputGroup
               label="Nueva contraseña"
               type="password"
               placeholder="Introducir contraseña"
               onChange={(e) => setPassword(e.target.value)}
-              className="errorProfile"
               id="passName"
               name="passName"
-              success={password !== '' && validatePassword(password)}
-              error={password !== '' && !validatePassword(password)}
-              errorText={msgs.passwordError}
+              error={password !== '' && !validatePassword(password) ? msgs.passwordError : ''}
             />
           </label>
           <label>
-            <Input
+            <InputGroup
               label="Confirmar contraseña"
               type="password"
               placeholder="Confirma tu contraseña"
               onChange={(e) => setPassword2(e.target.value)}
-              className="errorProfile"
               id="confirmPassName"
               name="confirmPassName"
-              errorText="Both passwords must be equal"
-              success={password2 !== '' && password2 === password}
-              error={password2 !== '' && password2 !== password}
+              error={
+                password2 !== '' && password2 !== password ? 'Both passwords must be equal' : ''
+              }
             />
           </label>
         </div>
@@ -160,14 +153,7 @@ function EditProfile({ currentNombre, currentEmail, active, hideModal, updateUse
           text="Guardar"
           type="submit"
           className="green-gradient"
-          disabled={
-            !(
-              validatePassword(password) &&
-              validateEmail(newEmail) &&
-              validateName(newName) &&
-              password2 === password
-            )
-          }
+          disabled={!(validatePassword(password) && password2 === password)}
         />
       </EditModalStyled>
     </Modal>

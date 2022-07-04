@@ -30,20 +30,23 @@ function UserModal({ nombreUsuario, currentUserState, active, hideModal, updateU
 
   return (
     <Modal
-      colorModalTitle={Colors.extraDarkBlue}
       active={active}
+      iconClose
+      color={Colors.extraDarkBlue}
+      fontSize={26}
       hideModal={closeModal}
       title="Cambiar Estado"
+      listAdmin
       footer={
         <ButtonWrapper>
           <Button
             text="Cancelar"
+            icon="close"
             iconPosition="left"
             type="submit"
+            textColor={Colors.lightGray}
             onClick={closeModal}
-            name="close"
             buttonStyles={{
-              color: Colors.lightGrey,
               background: 'transparent',
               boxShadow: 'none',
               fontSize: '0.95rem',
@@ -53,11 +56,11 @@ function UserModal({ nombreUsuario, currentUserState, active, hideModal, updateU
             }}
             iconStyles={{
               paddingRight: '5px',
-              paddingLeft: '0px',
               width: '1rem',
-              height: '1rem',
+              fontSize: 20,
             }}
           />
+
           <Button
             text="Actualizar"
             loadingText="Actualizar"

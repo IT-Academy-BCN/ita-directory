@@ -52,13 +52,14 @@ const getStatusColor = (userStatusId) => {
 }
 
 function ActionsColumn({ row, handleModalStatus, handleModalEdit, handleModalDelete }) {
-  const { id, name, email, userStatusId } = row
+  const { values } = row
+  const { id, name, email, userStatusId, media } = values
   return (
     <div className="actions-column">
       <button type="button" onClick={() => handleModalStatus(name, userStatusId)}>
         <Icon name={getStatusIcon(userStatusId)} color={getStatusColor(userStatusId)} />
       </button>
-      <button type="button" onClick={() => handleModalEdit(name, email, id)}>
+      <button type="button" onClick={() => handleModalEdit(name, email, id, media)}>
         <Icon name="visibility" color={colors.prussianBlue} />
       </button>
       <button type="button" onClick={() => handleModalDelete(row)}>
@@ -70,14 +71,13 @@ function ActionsColumn({ row, handleModalStatus, handleModalEdit, handleModalDel
 
 ActionsColumn.propTypes = {
   row: PropTypes.shape({
-    createdAt: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.string,
-    lastnames: PropTypes.string,
-    media: PropTypes.arrayOf(PropTypes.shape({ path: PropTypes.string })),
-    name: PropTypes.string,
-    userRoleId: PropTypes.number,
-    userStatusId: PropTypes.number,
+    values: PropTypes.shape({
+      email: PropTypes.string,
+      id: PropTypes.string,
+      media: PropTypes.string,
+      name: PropTypes.string,
+      userStatusId: PropTypes.number,
+    }),
   }),
   handleModalStatus: PropTypes.func,
   handleModalEdit: PropTypes.func,
@@ -272,7 +272,7 @@ function ListaUsuariosAdmins() {
       justifyTitle="flex-start"
       paddingTitle="0px"
       paddingTitle2="73px"
-      isLoggedIn="true"
+      isLoggedIn
     >
       <Container row>
         <StyledTableWrapper>
