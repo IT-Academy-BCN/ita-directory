@@ -226,7 +226,7 @@ exports.updateUser = async (req, res) => {
   const { userId } = req
 
   // @todo: req.body fields should be validated using joi
-  if (!req.userId || !req.body) {
+  if (!userId || !req.body) {
     return res.status(400).json({ message: `Enter correct values!, please` })
   }
   try {
@@ -241,10 +241,6 @@ exports.updateUser = async (req, res) => {
         userStatusId,
       },
     })
-    //! AFAIK, prisma never returns null or undefined on update operation, instead, throws error. This statement might be useless
-    if (updateUser === null || undefined) {
-      return res.status(204).json({ massage: `User not found. Entry data, please` })
-    }
     return res.status(200).json({
       updateUser,
       message: `Data user updated successfully`,
