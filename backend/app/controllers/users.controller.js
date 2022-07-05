@@ -14,7 +14,6 @@ const prisma = require('../../prisma/indexPrisma')
 // Refresh token
 exports.getRefreshToken = (req, res, next) => {
   const refreshToken = req.headers.refresh
-
   if (!refreshToken) {
     next({
       code: 'error',
@@ -33,6 +32,7 @@ exports.getRefreshToken = (req, res, next) => {
           const dehashedId = decodeHash(hashedId)
           const userId = dehashedId[0]
           const result = await client.get(userId.toString())
+
           if (refreshToken !== result) {
             const counterKey = `C${userId}`
             await client.incr(counterKey)

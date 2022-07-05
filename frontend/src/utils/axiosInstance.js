@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
         .then((response) => {
           if (response.status === 200) {
             localStorage.setItem('token', response.data.data.accessToken)
-            originalRequest.headers.Authorization = `Bearer + ${response.data.data.accessToken}`
+            originalRequest.headers.Authorization = `Bearer ${response.data.data.accessToken}`
             return axios(originalRequest)
           }
           localStorage.removeItem('token')
