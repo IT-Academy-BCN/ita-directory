@@ -32,11 +32,14 @@ exports.getRefreshToken = (req, res, next) => {
           const dehashedId = decodeHash(hashedId)
           const userId = dehashedId[0]
           const result = await client.get(userId.toString())
-
           if (refreshToken !== result) {
             const counterKey = `C${userId}`
             await client.incr(counterKey)
-            res.sendStatus(401)
+            res.status(401).json(
+              apiResponse({
+                message: 'Refresh token does not match',
+              })
+            )
           } else {
             const accessToken = signToken(userId)
             res.status(200).json(
@@ -152,7 +155,7 @@ exports.getAllUsers = async (req, res) => {
       updatedAt: true,
       userStatusId: true,
       userRoleId: true,
-      media: {
+      avatar: {
         select: {
           path: true,
         },
