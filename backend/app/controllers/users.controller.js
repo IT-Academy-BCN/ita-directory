@@ -32,11 +32,14 @@ exports.getRefreshToken = (req, res, next) => {
           const dehashedId = decodeHash(hashedId)
           const userId = dehashedId[0]
           const result = await client.get(userId.toString())
-
           if (refreshToken !== result) {
             const counterKey = `C${userId}`
             await client.incr(counterKey)
-            res.sendStatus(401)
+            res.status(401).json(
+              apiResponse({
+                message: 'Refresh token does not match',
+              })
+            )
           } else {
             const accessToken = signToken(userId)
             res.status(200).json(
@@ -140,7 +143,7 @@ exports.registerUser = async (req, res, next) => {
   )
 }
 
-// get all users (FOR TESTING PURPOSE)
+// get all users
 exports.getAllUsers = async (req, res) => {
   const users = await prisma.user.findMany({
     select: {
@@ -152,7 +155,7 @@ exports.getAllUsers = async (req, res) => {
       updatedAt: true,
       userStatusId: true,
       userRoleId: true,
-      media: {
+      avatar: {
         select: {
           path: true,
         },
@@ -222,7 +225,7 @@ exports.login = async (req, res, next) => {
 
 // Update user //TODO Improve error handling
 exports.updateUser = async (req, res) => {
-  const { email, name, lastnames, password, userRoleId, userStatusId } = req.body
+  const { email, name, lastnames, password, userRoleId, userStatusId, avatarId } = req.body
   const { userId } = req
 
   // @todo: req.body fields should be validated using joi
@@ -239,6 +242,7 @@ exports.updateUser = async (req, res) => {
         password,
         userRoleId,
         userStatusId,
+        avatarId,
       },
     })
     return res.status(200).json({
