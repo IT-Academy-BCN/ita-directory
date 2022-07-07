@@ -91,7 +91,7 @@ exports.getUser = async (req, res, next) => {
     } else {
       delete user.password
       res.status(200).json({
-        user,
+        ...user,
       })
     }
   }

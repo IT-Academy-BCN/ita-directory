@@ -1,105 +1,53 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-// Layout Components
-import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
-
-// Units Components
-import AsyncButton from '../../../components/atoms/Button'
-import Input from '../../../components/atoms/Forms/Input'
-
-// Composed Components
+import { Button, Input } from '../../../components/atoms'
 import Modal from '../../../components/organisms/Modal/Modal'
-
-// Style Components
 import { ProfileWrapper, ProfileForm, ProfileImage, ProfileUploadPhoto } from './Profile.styles'
 import { Container } from '../../../theme'
-
-// *** testing
-import people1b from '../../../assets/images/people1b.jpg'
-import people4b from '../../../assets/images/people4b.jpg'
-import people13b from '../../../assets/images/people13b.jpg'
-
-import initLoggedinUserInfo from '../fakeUser.json'
 import { msgs, validatePassword } from '../../../utils/userFlow'
-import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
-
-const usersPhoto = {
-  people1b,
-  people4b,
-  people13b,
-}
-// testing ***
+import useUser from '../../../hooks/useUser'
+import { FlexBox } from '../../../theme/wrappers'
+import urls from '../../../utils/urls'
+import axiosInstance from '../../../utils/axiosInstance'
 
 function Profile() {
+  const user = useUser()
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
-  const [newPhoto, setNewPhoto] = useState(null)
+  const [avatar, setAvatar] = useState(null)
   const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
   const [firstLoad, setFirstLoad] = useState(null)
-  const dispatch = useDispatch()
-  // aquí deberá cargarse info de usuario autenticado correctamente
-  // (o de otro modo se le pasará o estará accesible para componente):
-  useEffect(() => {
-    // *** testing
-    const loggedinUserInfoOnLocalStorage = localStorage.getItem('loggedinUserInfo')
-    if (loggedinUserInfoOnLocalStorage)
-      setLoggedinUserInfo(JSON.parse(loggedinUserInfoOnLocalStorage))
-    else setLoggedinUserInfo(initLoggedinUserInfo)
-    setFirstLoad(true)
-    // testing ***
-  }, [])
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('loggedinUserInfo', JSON.stringify(loggedinUserInfo))
-      dispatch(
-        newNotification({
-          message: 'Your new account information was saved succesfully!',
-          type: NotificationTypes.succes,
-        })
-      )
-    } catch (e) {
-      dispatch(
-        newNotification({
-          message:
-            'Ups, something went wrong saving your new account information. Please, try later or contact us.',
-          type: NotificationTypes.error,
-        })
-      )
-    } finally {
-      setNewPassword('')
-      setNewPhoto(null)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedinUserInfo])
-
-  useEffect(() => {
-    setNewPasswordRepeated('')
-  }, [newPassword])
-
-  const changePhoto = () => {
-    const photos = Object.keys(usersPhoto)
-    const pos = photos.indexOf(newPhoto || loggedinUserInfo.photo)
-    setNewPhoto(pos === photos.length - 1 ? photos[0] : photos[pos + 1])
-    setShowUploadPhotoModal(false)
-  }
+  //   const dispatch = useDispatch()
 
   const submitUserInfo = () => {
     setLoggedinUserInfo((prev) => {
       return {
         ...prev,
-        photo: newPhoto || loggedinUserInfo.photo,
         password: newPassword === '' ? loggedinUserInfo.password : newPassword,
       }
     })
   }
 
+  const handlePhoto = (e) => {
+    const image = URL.createObjectURL(e.target.files[0])
+    setAvatar(image)
+  }
+
+  const handleSaveAvatar = async () => {
+    const f = new FormData()
+    f.append('avatar', avatar)
+    axiosInstance.post(urls.updateAvatar, f, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    //   .then((r) => console.log(r))
+    //   .catch((e) => console.error(e))
+  }
+
   return (
-    <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn="true">
+    <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn>
       <Container>
         <Modal
           hideModal={() => setShowUploadPhotoModal(false)}
@@ -107,20 +55,19 @@ function Profile() {
           title="Upload Profile's Photo"
         >
           <ProfileForm className="uploadphoto-modal">
-            <input type="file" name="selectfile" />
-            <AsyncButton
+            <input type="file" name="photo" onChange={handlePhoto} />
+            <Button
               text="Sube"
               loadingText="Subiendo"
               className="blue-gradient w-36"
               type="button"
-              onClick={changePhoto}
             />
           </ProfileForm>
         </Modal>
         <ProfileWrapper className="form-frame">
           <ProfileForm className="profile-photo">
             <ProfileImage>
-              <img src={usersPhoto[newPhoto || loggedinUserInfo.photo]} alt="Foto de perfil" />
+              <img src={avatar || user?.avatar?.path} alt="Foto de perfil" />
             </ProfileImage>
             <ProfileUploadPhoto>
               <div>
@@ -128,20 +75,21 @@ function Profile() {
                 <p>Tamaño recomendado: 1000x1000</p>
                 <p>Formatos admitidos: JPG, JPEG, PNG, o GIF</p>
               </div>
-              <div>
-                <AsyncButton
-                  text="Subir"
+              <FlexBox>
+                <Button
+                  text="Seleccionar"
                   type="button"
-                  className="blue-gradient w-28"
+                  className="blue-gradient"
                   onClick={() => setShowUploadPhotoModal(true)}
-                  isLoading={false}
                 />
-                {newPhoto && (
-                  <small className="info-photo-uploaded">
-                    Photo uploaded. Remember to save your data!
-                  </small>
-                )}
-              </div>
+                <Button
+                  text="Guardar"
+                  type="button"
+                  className="green-gradient"
+                  onClick={() => handleSaveAvatar()}
+                  buttonStyles={{ marginLeft: '0.5rem' }}
+                />
+              </FlexBox>
             </ProfileUploadPhoto>
           </ProfileForm>
           <ProfileForm className="profile-data">
@@ -208,7 +156,7 @@ function Profile() {
               </div>
             </div>
             <div>
-              <AsyncButton
+              <Button
                 text="Guardar"
                 loadingText="Guardando"
                 type="button"
@@ -218,7 +166,7 @@ function Profile() {
                 }}
                 className="green-gradient"
                 disabled={
-                  !newPhoto &&
+                  !avatar &&
                   (!validatePassword(newPassword) || !(newPassword === newPasswordRepeated))
                 }
               />

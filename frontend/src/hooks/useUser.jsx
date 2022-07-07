@@ -15,11 +15,14 @@ export default function useUser() {
   }, [])
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    const token = localStorage.getItem('token')
+    if (!isLoggedIn && token) {
       getUser()
     }
   }, [getUser, isLoggedIn])
 
-  if (user) return user
+  if (user) {
+    return user
+  }
   return null
 }
