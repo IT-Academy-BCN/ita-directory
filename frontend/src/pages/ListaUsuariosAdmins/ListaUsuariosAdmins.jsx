@@ -9,18 +9,18 @@ import EditProfile from '../../components/organisms/EditProfileModal/EditProfile
 import patchUser from '../../api/utils/patchUser'
 import { StyledTableWrapper, StyledImage, StyledCell } from './ListaUsuariosAdmins.style'
 import { Icon } from '../../components/atoms'
+import axiosInstance from '../../utils/axiosInstance'
+import urls from '../../utils/urls'
+import { ReqStatus } from '../../utils/constant'
 
 function MediaCell({ path }) {
   return (
     <StyledCell>
-      <StyledImage
-        src={
-          path || `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 100)}.jpg`
-        }
-        alt="user"
-        width="50px"
-        height="50px"
-      />
+      {path ? (
+        <StyledImage src={path} alt="user" width="50px" height="50px" />
+      ) : (
+        <Icon name="account_circle" size={50} />
+      )}
     </StyledCell>
   )
 }
@@ -93,22 +93,19 @@ function ListaUsuariosAdmins() {
   const [editar, setEditar] = useState(false)
   const [currentUserStatus, setCurrentUserStatus] = useState('')
   const [currentEmail, setCurrentEmail] = useState('')
+  const [reqStatus, setReqStatus] = useState(ReqStatus.INITIAL)
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('http://localhost:10910/users', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-        .then((response) => {
-          return response.json()
-        })
-        .then((du) => {
-          const newDataUsers = du.filter((user) => user.user_status_id !== 4)
-          setDataUsers(newDataUsers)
-        })
+      setReqStatus(ReqStatus.PENDING)
+      try {
+        const res = await axiosInstance.get(urls.users)
+        setReqStatus(ReqStatus.SUCCESS)
+
+        setDataUsers(res.data)
+      } catch (e) {
+        setReqStatus(ReqStatus.FAILURE)
+      }
     }
 
     fetchData()
@@ -256,7 +253,7 @@ function ListaUsuariosAdmins() {
   const data = useMemo(
     () =>
       dataUsers.map((du) => ({
-        media: du.media[0]?.path,
+        media: du.avatar?.path,
         name: du.name,
         email: du.email,
       })),
@@ -275,9 +272,13 @@ function ListaUsuariosAdmins() {
       isLoggedIn
     >
       <Container row>
-        <StyledTableWrapper>
-          <ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
-        </StyledTableWrapper>
+        {(reqStatus === ReqStatus.INITIAL || reqStatus === ReqStatus.PENDING) && 'Loading...'}
+        {reqStatus === ReqStatus.FAILURE && 'There was an error...'}
+        {reqStatus === ReqStatus.SUCCESS && (
+          <StyledTableWrapper>
+            <ReactTable columns={columns} data={data} customRowStyle={customRowStyle} />
+          </StyledTableWrapper>
+        )}
       </Container>
       <UserModal
         nombreUsuario={currentName}

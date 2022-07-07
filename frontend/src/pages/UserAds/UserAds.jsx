@@ -6,6 +6,8 @@ import Ad from './Ad/Ad'
 import Body from '../../components/layout/Body/Body'
 import { Container, colors } from '../../theme'
 import { Text } from '../../components/atoms'
+import axiosInstance from '../../utils/axiosInstance'
+import urls from '../../utils/urls'
 
 const StyledUserAds = styled.div`
   display: flex;
@@ -64,22 +66,24 @@ function UserAds() {
   const [ads, setAds] = useState([])
   const [fetchStatus, setFetchStatus] = useState(REQ_STATUS.INITIAL)
 
-  useEffect(() => {
+  const getMyAds = async () => {
     setFetchStatus(REQ_STATUS.LOADING)
-    fetch('https://api-casas.kevinmamaqi.com/api-casas')
-      .then((res) => res.json())
-      .then((res) => {
-        setAds(res.slice(0, 3))
 
-        setFetchStatus(REQ_STATUS.SUCCESS)
-      })
-      .catch((e) => {
-        setFetchStatus(REQ_STATUS.FAILURE)
-      })
+    try {
+      const res = axiosInstance.get(urls.userAds)
+      setAds(res.slice(0, 3))
+      setFetchStatus(REQ_STATUS.SUCCESS)
+    } catch (e) {
+      setFetchStatus(REQ_STATUS.FAILURE)
+    }
+  }
+
+  useEffect(() => {
+    getMyAds()
   }, [])
 
   return (
-    <Body title="Mis anuncios">
+    <Body title="Mis anuncios" isLoggedIn>
       <Container row>
         <StyledUserAds>
           {(fetchStatus === REQ_STATUS.INITIAL || fetchStatus === REQ_STATUS.LOADING) && (

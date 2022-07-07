@@ -134,7 +134,7 @@ router.get('/v1/ads', adsController.getAllAds)
         }
     ]}
  */
-router.get('/v1/user-ads/:userId', adsController.getUserAds)
+router.get('/v1/user-ads', adsController.getUserAds)
 
 /**
  * GET /ads/v1/ads/:adId
