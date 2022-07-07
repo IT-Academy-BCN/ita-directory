@@ -95,7 +95,6 @@ function UserAccess() {
   const history = useHistory()
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
   const user = useUser()
-  const { avatar } = user
 
   const children = [
     { path: paths.profile, text: 'Editar perfil' },
@@ -131,8 +130,8 @@ function UserAccess() {
             className="header__profile-button"
             onClick={handleClick}
           >
-            {avatar ? (
-              <img className="header__profile-image" src={avatar.path} alt="Profile" />
+            {user?.avatar ? (
+              <img className="header__profile-image" src={user?.avatar?.path} alt="Profile" />
             ) : (
               <Icon name="account_circle" size={32} />
             )}

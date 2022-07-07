@@ -30,7 +30,7 @@ function App() {
       <Route exact path={paths.register} component={Registration} />
       <Route exact path="/students" component={Students} />
       <Route exact path="/business" component={Business} />
-      <ProtectedRoute exact path="/profile" component={Profile} />
+      <ProtectedRoute exact path={paths.profile} component={Profile} />
       <ProtectedRoute exact path="/recover-password" component={RecoverPassword} />
       <ProtectedRoute exact path="/ads" component={AdList} />
       <ProtectedRoute exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
