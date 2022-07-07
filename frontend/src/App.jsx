@@ -35,7 +35,7 @@ function App() {
       <ProtectedRoute exact path="/ads" component={AdList} />
       <ProtectedRoute exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
       <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-      <ProtectedRoute exact path="/user-ads" component={UserAds} />
+      <ProtectedRoute exact path={paths.userAds} component={UserAds} />
       <ProtectedRoute exact path="/my-bills" component={MyBills} />
       <ProtectedRoute path="/my-bills/:id" component={Bill} />
     </Switch>

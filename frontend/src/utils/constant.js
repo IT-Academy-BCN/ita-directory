@@ -13,5 +13,11 @@ const allMonths = {
   11: { name: 'Diciembre', shortName: 'Dec' },
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { allMonths }
+const ReqStatus = {
+  INITIAL: 'INITIAL',
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  FAILURE: 'FAILURE',
+}
+
+export { allMonths, ReqStatus }

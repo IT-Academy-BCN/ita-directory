@@ -200,7 +200,7 @@ function CreateNewAd() {
       justifyTitle="flex-start"
       paddingTitle="500px"
       paddingTitle2="15vw"
-      isLoggedIn="true"
+      isLoggedIn
       isTitleVisible="true"
     >
       <Container>

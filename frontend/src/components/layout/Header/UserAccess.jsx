@@ -102,7 +102,6 @@ function UserAccess() {
     { path: paths.userAds, text: 'Mis Anuncios' },
     { path: paths.newAd, text: 'Publicar Anuncio' },
     { path: paths.ads, text: 'Anuncios' },
-    { path: paths.home, text: 'Cerrar sesión' },
   ]
   const [dropdownVisible, setDropdownVisible] = useState(false)
   const handleClick = () => {
@@ -147,6 +146,15 @@ function UserAccess() {
                     </Link>
                   </Li>
                 ))}
+                <Li
+                  onClick={() => {
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('refreshToken')
+                    window.location.reload()
+                  }}
+                >
+                  <Link to={paths.home}>Cerrar Sesión</Link>
+                </Li>
               </Ul>
             </Dropdown>
           ) : null}
