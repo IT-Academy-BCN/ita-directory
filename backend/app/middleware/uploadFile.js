@@ -69,5 +69,8 @@ const storage = multer.diskStorage({
     cb(null, finalName)
   },
 })
+const limits = {
+  fileSize: 8000000, // Compliant: 8MB
+}
 
-module.exports = multer({ storage, fileFilter }).single('image')
+module.exports = multer({ storage, fileFilter, limits }).single('image')
