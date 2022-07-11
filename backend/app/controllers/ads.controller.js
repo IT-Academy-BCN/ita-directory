@@ -106,7 +106,7 @@ async function createAdsFromCSVBuffer(req, res, next) {
 }
 
 async function getUserAds(req, res) {
-  const userId = parseInt(req.params.userId, 10)
+  const userId = { req }
   await getUserAdsSchema.validateAsync(userId)
   const ads = await prisma.ads.findMany({
     where: { userId },
@@ -286,7 +286,8 @@ async function deleteById(req, res, next) {
 
 async function updateAd(req, res, next) {
   try {
-    const userID = req.userId
+    const userId = { req }
+
     const { adId } = req.params
     const { ...fields } = req.body
     const validatedFields = await patchAdSchema.validateAsync({ adId, ...fields })
@@ -294,7 +295,7 @@ async function updateAd(req, res, next) {
     // This extra query is the only way I found to check that the ad intended to be updated belongs to the user that is attempting to update it. Might me improved.
     const result = await prisma.ads.findMany({
       where: {
-        userId: userID,
+        userId,
         id: validatedFields.adId,
       },
     })
