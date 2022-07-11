@@ -266,6 +266,27 @@ exports.deleteUser = async (req, res) => {
   return res.status(200).json({ user: deleteUser, msg: `User successfully deleted` })
 }
 
+// Update user avatar
+// TODO: updateAvatar //////////////////////////////////////////
+// eslint-disable-next-line no-unused-vars
+exports.updateAvatar = async (req, res, next) => {
+  /* const userId = { req }
+  try {
+    const { avatar } = req.body
+
+    const { file } = req
+    if (!file) {
+      const err = new Error("S'ha de pujar una imatge")
+      return res.status(400).send({ error: err.message })
+    }
+    console.log('Imatge pujada correctament')
+    return res.send(file)
+  } catch (err) {
+    console.error(err)
+    return false
+  } */
+}
+
 exports.receiveEmailGetToken = async (req, res) => {
   const { email } = req.body
   const user = await prisma.user.findUnique({ where: { email } })

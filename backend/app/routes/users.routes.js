@@ -188,4 +188,7 @@ router.post('/v1/change-password/:token', UsersController.changePassword)
 // Route delete user
 router.delete('/v1/delete-user', UsersController.deleteUser)
 
+// TODO: Swagger doc
+router.patch('/users/v1/update-avatar', UsersController.updateAvatar)
+
 module.exports = router
