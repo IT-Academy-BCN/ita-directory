@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Body from '../../components/layout/Body/Body'
 import { Container, colors } from '../../theme'
 import ReactTable from '../../components/organisms/Table/ReactTable'
-import UserModal from '../../components/organisms/UserModal/UserModal'
+import { UserStatus } from '../../components/organisms'
 import DeleteModal from '../../components/organisms/DeleteModal/DeleteModal'
 import EditProfile from '../../components/organisms/EditProfileModal/EditProfile'
 import patchUser from '../../api/utils/patchUser'
@@ -54,6 +54,7 @@ const getStatusColor = (userStatusId) => {
 function ActionsColumn({ row, handleModalStatus, handleModalEdit, handleModalDelete }) {
   const { values } = row
   const { id, name, email, userStatusId, media } = values
+
   return (
     <div className="actions-column">
       <button type="button" onClick={() => handleModalStatus(name, userStatusId)}>
@@ -128,7 +129,7 @@ function ListaUsuariosAdmins() {
         if (user.name === userName.name) {
           patchUser({
             ...user,
-            user_status_id: 4,
+            userStatusId: 4,
           })
         }
       })
@@ -149,7 +150,7 @@ function ListaUsuariosAdmins() {
       setDataUsers(
         dataUsers.map((item) => {
           if (item.name === currentName || item.email === currentEmail) {
-            setCurrentUserStatus(item.user_status_id)
+            setCurrentUserStatus(item.userStatusId)
             setCurrentName(item.name)
             patchUser({
               ...item,
@@ -166,30 +167,18 @@ function ListaUsuariosAdmins() {
     [dataUsers, currentName, currentEmail]
   )
 
-  const updateUserStatus = useCallback(
-    (name, userStatus) => {
-      function evaluateStatus(status) {
-        if (status === 'rejected') return 3
-        if (status === 'pending') return 2
-        return 1 // aprobado
-      }
-      setDataUsers(
-        dataUsers.map((user) => {
-          if (user.name === name) {
-            patchUser({ ...user, user_status_id: evaluateStatus(userStatus) })
-            return { ...user, user_status_id: evaluateStatus(userStatus) }
-          }
-          return user
-        })
-      )
-    },
-    [dataUsers]
-  )
+  const updateUserStatus = async (userStatus) => {
+    try {
+      axiosInstance.patch(urls.users, { userStatusId: userStatus })
+    } catch (e) {
+      throw new Error(e)
+    }
+  }
 
   const handleModalStatus = useCallback((name, userStatus) => {
-    setShowModalStatus((prev) => !prev)
-    setCurrentUserStatus(userStatus)
     setCurrentName(name)
+    setCurrentUserStatus(userStatus)
+    setShowModalStatus((prev) => !prev)
   }, [])
 
   const customRowStyle = () => {
@@ -234,7 +223,7 @@ function ListaUsuariosAdmins() {
             Acciones
           </StyledCell>
         ),
-        accessor: 'user_status_id',
+        accessor: 'userStatusId',
         minWidth: '60px',
         // eslint-disable-next-line react/prop-types
         Cell: ({ row }) => (
@@ -253,9 +242,11 @@ function ListaUsuariosAdmins() {
   const data = useMemo(
     () =>
       dataUsers.map((du) => ({
+        id: du.id,
         media: du.avatar?.path,
         name: du.name,
         email: du.email,
+        userStatusId: du.userStatusId,
       })),
     [dataUsers]
   )
@@ -280,9 +271,9 @@ function ListaUsuariosAdmins() {
           </StyledTableWrapper>
         )}
       </Container>
-      <UserModal
-        nombreUsuario={currentName}
-        currentUserState={currentUserStatus}
+      <UserStatus
+        name={currentName}
+        userStatusId={currentUserStatus}
         active={showModalStatus}
         hideModal={() => setShowModalStatus((prev) => !prev)}
         updateUserStatus={updateUserStatus}
