@@ -15,11 +15,12 @@
     "prisma-migrate": "cd ./backend && npx prisma migrate dev",
     "prisma-seed": "node ./backend/prisma/seed.js",
     "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
-    "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma",
+    "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma && npm run uml",
     "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install",
     "prepare": "husky install && chmod ug+x .husky/*",
-    "lint": "./node_modules/.bin/eslint --max-warnings=0"
+    "lint": "./node_modules/.bin/eslint --max-warnings=0",
+    "uml": "cd ./backend && npx prisma-uml prisma/schema.prisma > db/schema-db.puml && npx prisma-uml -o png -f db/schema-db.png prisma/schema.prisma"
   },
   "repository": {
     "type": "git",
