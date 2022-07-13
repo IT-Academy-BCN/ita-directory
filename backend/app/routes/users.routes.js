@@ -2,7 +2,7 @@ const router = require('express').Router()
 const UsersController = require('../controllers/users.controller')
 const authenticateToken = require('../middleware/verifyToken')
 
-router.get('/v1/user', authenticateToken, UsersController.getUser)
+router.get('/user', authenticateToken, UsersController.getUser)
 
 /**
  * Registration data
@@ -60,11 +60,11 @@ router.post('/v1/user', UsersController.registerUser)
         }
 ]}
  */
-router.get('/', authenticateToken, UsersController.getAllUsers)
+router.get('/users', authenticateToken, UsersController.getAllUsers)
 // router.get('/', UsersController.getAllUsers)
 
 // Refresh-token
-router.get('/v1/refresh-token', UsersController.getRefreshToken)
+router.get('/user/refresh-token', UsersController.getRefreshToken)
 
 /**
  * Login data
@@ -94,7 +94,7 @@ router.get('/v1/refresh-token', UsersController.getRefreshToken)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */
-router.post('/v1/login', UsersController.login)
+router.post('/user/login', UsersController.login)
 
 /**
  * Update data
@@ -123,7 +123,7 @@ router.post('/v1/login', UsersController.login)
  * { "errCode":"errCode", "message":"User not found"}
  */
 // Update some field to User
-router.patch('/v1/user', authenticateToken, UsersController.updateUser)
+router.patch('/user', authenticateToken, UsersController.updateUser)
 
 /**
  * RecoverPassword data

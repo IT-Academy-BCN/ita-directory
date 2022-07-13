@@ -96,7 +96,7 @@ function UserStatus({ name, userStatusId, active, hideModal, updateUserStatus })
 
   const handleClick = (val) => {
     setSelectValue(val)
-    updateUserStatus(name, val)
+    updateUserStatus(val)
     closeModal()
   }
 

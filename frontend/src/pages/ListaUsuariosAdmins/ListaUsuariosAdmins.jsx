@@ -167,9 +167,9 @@ function ListaUsuariosAdmins() {
     [dataUsers, currentName, currentEmail]
   )
 
-  const updateUserStatus = async (userStatus) => {
+  const updateUserStatus = async (userStatusId) => {
     try {
-      axiosInstance.patch(urls.users, { userStatusId: userStatus })
+      axiosInstance.patch(urls.user, { userStatusId: parseInt(userStatusId, 10) })
     } catch (e) {
       throw new Error(e)
     }

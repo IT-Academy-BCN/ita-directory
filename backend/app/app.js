@@ -6,18 +6,8 @@ const helmet = require('helmet')
 const expressJSDocSwagger = require('express-jsdoc-swagger')
 const path = require('path')
 const options = require('./utils/swaggerOptions')
-const userRoutes = require('./routes/users.routes')
-const mediaRoutes = require('./routes/media.routes')
-const locationRoutes = require('./routes/location.routes')
-const contactRoutes = require('./routes/contact.routes')
-const chatRoutes = require('./routes/chat.routes')
-const logRoutes = require('./routes/log.routes')
-
+const routes = require('./routes')
 const logger = require('./middleware/handlerLogger')
-
-// const constantsRoute = require("./routes/constants.routes");
-const adsRoutes = require('./routes/ads.routes')
-const authenticateToken = require('./middleware/verifyToken')
 
 const { loadConstants } = require('./utils/CONSTANTS')
 
@@ -51,14 +41,11 @@ app.get('/', (req, res) => {
   res.json({ message: 'ITA DIRECTORY API' })
 })
 
-// Routes
-// app.use("/", constantsRoute);
-app.use('/ads', logger, adsRoutes)
-app.use('/users', userRoutes)
-app.use('/media', mediaRoutes)
-app.use('/location', locationRoutes)
-app.use('/contact', contactRoutes)
-app.use('/chat', authenticateToken, chatRoutes)
-app.use('/log', logRoutes)
+// Initialize routes
+Object.values(routes).forEach((r, i) => {
+  // eslint-disable-next-line no-console
+  console.log(`${Object.keys(routes)[i]} has been initialized`)
+  app.use(r, logger)
+})
 
 module.exports = app
