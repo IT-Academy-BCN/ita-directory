@@ -15,7 +15,7 @@ router.get('/v1/user', authenticateToken, UsersController.getUser)
  */
 
 /**
- * POST /v1/user
+ * POST /users/v1/user
  * @summary Allows user to register
  * @tags User
  * @param {userRegistrationData} request.body.required - The payload looks like this:
@@ -110,7 +110,7 @@ router.post('/v1/login', UsersController.login)
  */
 
 /**
- * PATCH /v1/user
+ * PATCH /users/v1/user
  * @summary Allows Update some field to User
  * @tags User
  * @security bearerAuth
