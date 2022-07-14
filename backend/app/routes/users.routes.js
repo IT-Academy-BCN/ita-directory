@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const UsersController = require('../controllers/users.controller')
 const authenticateToken = require('../middleware/verifyToken')
+const checkRole = require('../middleware/roleAuth')
 
 router.get('/v1/user', authenticateToken, UsersController.getUser)
 
@@ -13,7 +14,7 @@ router.get('/v1/user', authenticateToken, UsersController.getUser)
  */
 
 /**
- * POST /users/v1/register
+ * POST /users/v1/user
  * @summary Allows user to register
  * @tags User
  * @param {userRegistrationData} request.body.required - The payload looks like this:
@@ -60,7 +61,7 @@ router.post('/v1/user', UsersController.registerUser)
         }
 ]}
  */
-router.get('/', authenticateToken, UsersController.getAllUsers)
+router.get('/', authenticateToken, checkRole('Admin'), UsersController.getAllUsers)
 // router.get('/', UsersController.getAllUsers)
 
 // Refresh-token
@@ -103,12 +104,12 @@ router.post('/v1/login', UsersController.login)
  * @property {string} lastnames- lastnames of the user
  * @property {string} email- Email of the user
  * @property {string} password - Pwd of the user
- * @property {integer} user_status_id- Status of the user
- * @property {integer} user_role_id- Role of the user
+ * @property {integer} userStatusId- Status of the user
+ * @property {integer} userRoleId- Role of the user
  */
 
 /**
- * PATCH /users/v1/update-user
+ * PATCH /users/v1/user
  * @summary Allows Update some field to User
  * @tags User
  * @security bearerAuth
@@ -116,7 +117,7 @@ router.post('/v1/login', UsersController.login)
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  * @example request - Payload example
- * { "name": "Example", "email": "email@example.com", "password":"secret$11", "userRoleId":1, "userStatusId":1}
+ * { "userStatusId":2}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "User updated correctly"}
  * @example response - 400 - Example error response
@@ -179,7 +180,7 @@ router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
 router.post('/v1/change-password/:token', UsersController.changePassword)
 
 /**
- * DELETE /users/v1/delete-user
+ * DELETE /v1/user
  * @summary Delete user from the database.
  * @tags User
  * @security bearerAuth
