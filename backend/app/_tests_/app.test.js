@@ -37,10 +37,10 @@ describe('GET /users/', () => {
   })
 })
 
-describe('PATCH /users/v1/update-user', () => {
+describe('PATCH /users/v1/user', () => {
   test('Update user ', async () => {
     const response = await request(app)
-      .patch('/users/v1/update-user')
+      .patch('/users/v1/user')
       .send({
         name: 'NewTest',
         lastnames: 'NewLastNames',
