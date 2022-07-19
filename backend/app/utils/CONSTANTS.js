@@ -14,6 +14,19 @@ async function loadConstants() {
   }
 }
 
+async function getUserRole() {
+  try {
+    const role = {}
+    const userRole = await prisma.userRole.findMany()
+    userRole.forEach((o) => {
+      role[o.name] = o.id
+    })
+    return role
+  } catch (err) {
+    throw new Error(err.message)
+  }
+}
+
 function setConstants() {
   loadConstants()
 }
@@ -51,4 +64,5 @@ module.exports = {
   setConstants,
   typeSw,
   CONSTANTS,
+  getUserRole,
 }

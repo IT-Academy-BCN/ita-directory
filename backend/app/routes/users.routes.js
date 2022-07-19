@@ -4,18 +4,27 @@ const authenticateToken = require('../middleware/verifyToken')
 const checkRole = require('../middleware/roleAuth')
 const validate = require('../middleware/zodValidation')
 const userSchema = require('../schemas/UserSchema')
+const { getUserRole } = require('../utils/CONSTANTS')
 
-router.get('/v1/user', authenticateToken, UsersController.getUser)
+// Get the user roles, format: {Admin:1, ...}
+let role = {}
+;(async () => {
+  role = await getUserRole()
 
-/**
- * Registration data
- * @typedef {object} userRegistrationData
- * @property {string} email.required - Email of the user
- * @property {string} password.required - Pwd of the user
- * @property {boolean} privacy.required - Accept privacy from user
- */
+  /**
+   * Get user data
+   */
+  router.get('/v1/user', authenticateToken, UsersController.getUser)
 
-/**
+  /**
+   * Registration data
+   * @typedef {object} userRegistrationData
+   * @property {string} email.required - Email of the user
+   * @property {string} password.required - Pwd of the user
+   * @property {boolean} privacy.required - Accept privacy from user
+   */
+
+  /**
  * POST /users/v1/user
  * @summary Allows user to register
  * @tags User
@@ -34,10 +43,10 @@ router.get('/v1/user', authenticateToken, UsersController.getUser)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
-// Register
-router.post('/v1/user', UsersController.registerUser)
+  // Register
+  router.post('/v1/user', UsersController.registerUser)
 
-/**
+  /**
  * GET /users/
  * @summary Gets all users from the database.
  * @tags User
@@ -63,21 +72,21 @@ router.post('/v1/user', UsersController.registerUser)
         }
 ]}
  */
-router.get('/', authenticateToken, checkRole('Admin'), UsersController.getAllUsers)
-// router.get('/', UsersController.getAllUsers)
+  router.get('/', authenticateToken, checkRole(role.Admin), UsersController.getAllUsers)
+  // router.get('/', UsersController.getAllUsers)
 
-// Refresh-token
-router.get('/v1/refresh-token', UsersController.getRefreshToken)
+  // Refresh-token
+  router.get('/v1/refresh-token', UsersController.getRefreshToken)
 
-/**
- * Login data
- * @typedef {object} userLoginData
- * @property {string} email.required - Email of the user
- * @property {string} password.required - Pwd of the user
- * @property {boolean} privacy.required - Accept privacy from user
- */
+  /**
+   * Login data
+   * @typedef {object} userLoginData
+   * @property {string} email.required - Email of the user
+   * @property {string} password.required - Pwd of the user
+   * @property {boolean} privacy.required - Accept privacy from user
+   */
 
-/**
+  /**
  * POST /users/v1/login
  * @summary Allows user to login
  * @tags User
@@ -97,74 +106,74 @@ router.get('/v1/refresh-token', UsersController.getRefreshToken)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */
-router.post('/v1/login', UsersController.login)
+  router.post('/v1/login', UsersController.login)
 
-/**
- * Update data
- * @typedef {object} userUpdateData
- * @property {string} name- name of the user
- * @property {string} lastnames- lastnames of the user
- * @property {string} email- Email of the user
- * @property {string} password - Pwd of the user
- * @property {integer} userStatusId- Status of the user
- * @property {integer} userRoleId- Role of the user
- */
+  /**
+   * Update data
+   * @typedef {object} userUpdateData
+   * @property {string} name- name of the user
+   * @property {string} lastnames- lastnames of the user
+   * @property {string} email- Email of the user
+   * @property {string} password - Pwd of the user
+   * @property {integer} userStatusId- Status of the user
+   * @property {integer} userRoleId- Role of the user
+   */
 
-/**
- * PATCH /users/v1/user
- * @summary Allows Update some field to User
- * @tags User
- * @security bearerAuth
- * @param {userUpdateData} request.body.required - The payload looks like this:
- * @return {object} 200 - success response - application/json
- * @return {object} 400 - Bad request response
- * @example request - Payload example
- * { "userStatusId":2}
- * @example response - 200 - Example success response
- * { "status":"200", "message": "User updated correctly"}
- * @example response - 400 - Example error response
- * { "errCode":"errCode", "message":"User not found"}
- */
-// Update some field to User
-router.patch(
-  '/v1/user',
-  authenticateToken,
-  validate(userSchema.partial()),
-  UsersController.updateUser
-)
+  /**
+   * PATCH /users/v1/user
+   * @summary Allows Update some field to User
+   * @tags User
+   * @security bearerAuth
+   * @param {userUpdateData} request.body.required - The payload looks like this:
+   * @return {object} 200 - success response - application/json
+   * @return {object} 400 - Bad request response
+   * @example request - Payload example
+   * { "userStatusId":2}
+   * @example response - 200 - Example success response
+   * { "status":"200", "message": "User updated correctly"}
+   * @example response - 400 - Example error response
+   * { "errCode":"errCode", "message":"User not found"}
+   */
+  // Update some field to User
+  router.patch(
+    '/v1/user',
+    authenticateToken,
+    validate(userSchema.partial()),
+    UsersController.updateUser
+  )
 
-/**
- * RecoverPassword data
- * @typedef {object} userRecoverData
- * @property {string} email.required - Email of the user
- * @property {boolean} privacy.required - Accept privacy from user
- */
+  /**
+   * RecoverPassword data
+   * @typedef {object} userRecoverData
+   * @property {string} email.required - Email of the user
+   * @property {boolean} privacy.required - Accept privacy from user
+   */
 
-/**
- * POST /users/v1/recover-password
- * @summary Allows user recover password
- * @tags User
- * @param {userRecoverData} request.body.required - The payload looks like this:
- * @return {object} 200 - success response - application/json
- * @return {object} 400 - Bad request response
- * @example request - Payload example
- * { "email": "email@example.com"}
- * @example response - 200 - Example success response
- * { "status":"200", "message": "email sent successfully"}
- * @example response - 400 - Example error response
- * { "errCode":"errCode", "message":"email not found"}
- */
+  /**
+   * POST /users/v1/recover-password
+   * @summary Allows user recover password
+   * @tags User
+   * @param {userRecoverData} request.body.required - The payload looks like this:
+   * @return {object} 200 - success response - application/json
+   * @return {object} 400 - Bad request response
+   * @example request - Payload example
+   * { "email": "email@example.com"}
+   * @example response - 200 - Example success response
+   * { "status":"200", "message": "email sent successfully"}
+   * @example response - 400 - Example error response
+   * { "errCode":"errCode", "message":"email not found"}
+   */
 
-router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
+  router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
 
-/**
- * NewPassword data
- * @typedef {object} newPasswordData
- * @property {string} password1.required
- * @property {string} password2.required
- */
+  /**
+   * NewPassword data
+   * @typedef {object} newPasswordData
+   * @property {string} password1.required
+   * @property {string} password2.required
+   */
 
-/**
+  /**
  * POST /users/v1/change-password/:token
  * @summary Checks the token in the params; if valid, changes the password for the associated user
  * @tags User
@@ -184,16 +193,17 @@ router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
     "errors": []
 }
  */
-router.post('/v1/change-password/:token', UsersController.changePassword)
+  router.post('/v1/change-password/:token', UsersController.changePassword)
 
-/**
- * DELETE /v1/user
- * @summary Delete user from the database.
- * @tags User
- * @security bearerAuth
- * @return {object} 200 - Success response - application/json
- */
-// Route delete user
-router.delete('/v1/user', UsersController.deleteUser)
+  /**
+   * DELETE /v1/user
+   * @summary Delete user from the database.
+   * @tags User
+   * @security bearerAuth
+   * @return {object} 200 - Success response - application/json
+   */
+  // Route delete user
+  router.delete('/v1/user', UsersController.deleteUser)
+})()
 
 module.exports = router
