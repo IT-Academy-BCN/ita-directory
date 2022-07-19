@@ -12,7 +12,7 @@ const checkRole =
 
     let permitted = false
     permittedRoles.forEach((key) => {
-      permitted = permitted || user.userRole.id === key
+      permitted = permitted || user.userRole.name === key
     })
 
     if (userId && permitted) {
