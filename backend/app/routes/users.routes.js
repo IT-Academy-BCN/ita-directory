@@ -2,6 +2,8 @@ const router = require('express').Router()
 const UsersController = require('../controllers/users.controller')
 const authenticateToken = require('../middleware/verifyToken')
 const checkRole = require('../middleware/roleAuth')
+const validate = require('../middleware/zodValidation')
+const userSchema = require('../schemas/UserSchema')
 
 router.get('/v1/user', authenticateToken, UsersController.getUser)
 
@@ -124,7 +126,12 @@ router.post('/v1/login', UsersController.login)
  * { "errCode":"errCode", "message":"User not found"}
  */
 // Update some field to User
-router.patch('/v1/user', authenticateToken, UsersController.updateUser)
+router.patch(
+  '/v1/user',
+  authenticateToken,
+  validate(userSchema.partial()),
+  UsersController.updateUser
+)
 
 /**
  * RecoverPassword data
