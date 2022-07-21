@@ -109,11 +109,10 @@ router.post('/v1/post-ad', authenticateToken, adsController.createAd)
 router.get('/v1/ads', adsController.getAllAds)
 
 /**
- * GET /ads/v1/user-ads/{userId}
+ * GET /ads/v1/user-ads
  * @summary Gets all user ads from the database.
  * @tags Ad
  * @security bearerAuth
- * @param {number} userId.path - User id to get ads from database
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
  * {"message": "Data fetched correctly.",
@@ -134,10 +133,10 @@ router.get('/v1/ads', adsController.getAllAds)
         }
     ]}
  */
-router.get('/v1/user-ads', adsController.getUserAds)
+router.get('/v1/user-ads', authenticateToken, adsController.getUserAds)
 
 /**
- * GET /ads/v1/ads/:adId
+ * GET /ads/v1/ads/{adId}
  * @summary Gets ad by id
  * @tags Ad
  * @security bearerAuth
@@ -173,7 +172,6 @@ router.get('/v1/user-ads', adsController.getUserAds)
     "errors": []
 }
 */
-
 router.get('/v1/ads/:adId', adsController.getAdById)
 
 // TODO: Swagger documentation
@@ -203,7 +201,7 @@ router.get('/v1/ads/:adId', adsController.getAdById)
 */
 
 /**
- * GET /ads/v1/ads/type/:type
+ * GET /ads/v1/ads/type/{type}
  * @summary Gets all ads filtered according to their type name.
  * @tags Ad
  * @return {object} 200 - Success response - application/json
@@ -291,14 +289,13 @@ router.get('/v1/ads/types/list', adsController.getAdTypes)
             "ad_type_id": 2
         }
     ]
-}
+  }
  */
-
 router.get('/v1/ads/:location/:type', adsController.getAdsByTypeAndLocation)
 
 router.get('/v1/ads/search/location/:location', adsController.getAdsByLocation)
 
-router.delete('/v1/ads/:adId', adsController.deleteById)
+router.delete('/v1/ads/:adId', authenticateToken, adsController.deleteById)
 
 router.patch('/v1/ads/:adId', authenticateToken, adsController.updateAd)
 

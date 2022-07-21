@@ -45,10 +45,18 @@ const typeSw = (type) => {
   }
 }
 
+const roleValues = {
+  Admin: 'Admin',
+  Manager: 'Manager',
+  Registered: 'Registered',
+  Developer: 'Developer',
+}
+
 module.exports = {
   loadConstants,
   getConstants,
   setConstants,
   typeSw,
   CONSTANTS,
+  roleValues,
 }

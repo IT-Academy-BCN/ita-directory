@@ -33,7 +33,7 @@ function App() {
       <ProtectedRoute exact path={paths.profile} component={Profile} />
       <ProtectedRoute exact path="/recover-password" component={RecoverPassword} />
       <ProtectedRoute exact path="/ads" component={AdList} />
-      <ProtectedRoute exact path="/lista-usuarios-admins" component={ListaUsuariosAdmins} />
+      <ProtectedRoute exact path={paths.userAdmin} component={ListaUsuariosAdmins} />
       <ProtectedRoute exact path="/dashboard" component={Dashboard} />
       <ProtectedRoute exact path={paths.userAds} component={UserAds} />
       <ProtectedRoute exact path="/my-bills" component={MyBills} />

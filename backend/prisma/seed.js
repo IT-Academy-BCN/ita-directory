@@ -358,6 +358,7 @@ async function main() {
 }
 main()
   .catch((e) => {
+    console.log('here')
     console.error(e)
     process.exit(1)
   })

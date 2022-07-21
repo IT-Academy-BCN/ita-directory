@@ -1,4 +1,5 @@
 import axios from 'axios'
+import urls from './urls'
 
 const baseURL = import.meta.env.VITE_API_URL
 let authToken = localStorage.getItem('token')
@@ -30,7 +31,7 @@ axiosInstance.interceptors.response.use(
       // eslint-disable-next-line no-underscore-dangle
       originalRequest._retry = true
       return axios
-        .get(`${import.meta.env.VITE_API_URL}/users/v1/refresh-token`, {
+        .get(urls.refreshToken, {
           headers: { refresh: refreshToken },
         })
         .then((response) => {

@@ -1,4 +1,5 @@
 import paths from './paths'
+import urls from './urls'
 
 const refresh = () => {
   window.location.reload()
@@ -13,4 +14,4 @@ const logout = () => {
   refresh()
 }
 
-export { refresh, redirectHome, logout, paths }
+export { refresh, redirectHome, logout, paths, urls }
