@@ -144,7 +144,7 @@ function UserStatus({ name, userStatusId, active, hideModal, updateUserStatus })
             type="submit"
             className="darkBlue"
             buttonStyles={{ marginRight: 0 }}
-            onClick={(e) => handleClick(selectValue, name)}
+            onClick={(e) => handleClick(selectValue)}
           />
         </ButtonWrapper>
       }
