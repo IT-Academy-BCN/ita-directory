@@ -249,7 +249,7 @@ exports.updateUser = async (req, res) => {
       message: `Data user updated successfully`,
     })
   } catch (err) {
-    return res.status(500).json({ message: `Error updating user ${userId}` })
+    return res.status(500).json({ message: `Error updating user ${userId}`, errors: err.errors })
   }
 }
 
