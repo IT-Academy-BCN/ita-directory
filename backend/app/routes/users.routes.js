@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const UsersController = require('../controllers/users.controller')
 const authenticateToken = require('../middleware/verifyToken')
+const checkRole = require('../middleware/roleAuth')
 const validate = require('../middleware/zodValidation')
 const userSchema = require('../schemas/UserSchema')
+const { roleValues } = require('../utils/CONSTANTS')
 
 router.get('/v1/user', authenticateToken, UsersController.getUser)
 
@@ -62,7 +64,7 @@ router.post('/v1/user', UsersController.registerUser)
         }
 ]}
  */
-router.get('/', authenticateToken, UsersController.getAllUsers)
+router.get('/', authenticateToken, checkRole(roleValues.Admin), UsersController.getAllUsers)
 // router.get('/', UsersController.getAllUsers)
 
 // Refresh-token
