@@ -2,6 +2,7 @@ import { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../store/userSlice'
 import axiosInstance from '../utils/axiosInstance'
+import urls from '../utils/urls'
 
 export default function useUser() {
   const dispatch = useDispatch()
@@ -9,7 +10,7 @@ export default function useUser() {
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 
   const getUser = useCallback(async () => {
-    const userData = await axiosInstance.get(`/users/v1/get-me`).then((response) => response.data)
+    const userData = await axiosInstance.get(urls.user).then((response) => response.data)
     if (userData) dispatch(login(userData))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

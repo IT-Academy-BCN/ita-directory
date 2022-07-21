@@ -227,7 +227,6 @@ exports.login = async (req, res, next) => {
 exports.updateUser = async (req, res) => {
   const { email, name, lastnames, password, userRoleId, userStatusId, avatarId } = req.body
   const { userId } = req
-
   // @todo: req.body fields should be validated using joi
   if (!userId || !req.body) {
     return res.status(400).json({ message: `Enter correct values!, please` })
@@ -241,7 +240,7 @@ exports.updateUser = async (req, res) => {
         email,
         password,
         userRoleId,
-        userStatusId,
+        userStatusId: parseInt(userStatusId, 10),
         avatarId,
       },
     })

@@ -6,7 +6,7 @@ const validate = require('../middleware/zodValidation')
 const userSchema = require('../schemas/UserSchema')
 const { roleValues } = require('../utils/CONSTANTS')
 
-router.get('/v1/user', authenticateToken, UsersController.getUser)
+router.get('/user', authenticateToken, UsersController.getUser)
 
 /**
  * Registration data
@@ -68,7 +68,7 @@ router.get('/', authenticateToken, checkRole(roleValues.Admin), UsersController.
 // router.get('/', UsersController.getAllUsers)
 
 // Refresh-token
-router.get('/v1/refresh-token', UsersController.getRefreshToken)
+router.get('/user/refresh-token', UsersController.getRefreshToken)
 
 /**
  * Login data
@@ -98,7 +98,7 @@ router.get('/v1/refresh-token', UsersController.getRefreshToken)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */
-router.post('/v1/login', UsersController.login)
+router.post('/user/login', UsersController.login)
 
 /**
  * Update data

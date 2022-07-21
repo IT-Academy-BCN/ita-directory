@@ -12,7 +12,7 @@ import { InputGroup } from '../../../components/molecules'
 import { login } from '../../../store/userSlice'
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
-import Urls from '../../../utils/urls'
+import { urls } from '../../../utils'
 
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
@@ -52,7 +52,7 @@ function Login() {
 
   const loginUser = async (user) => {
     try {
-      const response = await axios.post(Urls.login, user)
+      const response = await axios.post(urls.login, user)
       dispatch(
         newNotification({
           message: response.data.message,
@@ -64,7 +64,7 @@ function Login() {
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('refreshToken', response.data.refreshToken)
         history.push('/')
-        const userData = await axiosInstance.get(`/users/v1/get-me`).then((res) => res.data)
+        const userData = await axiosInstance.get(urls.users).then((res) => res.data)
 
         if (userData) {
           dispatch(login(userData))
