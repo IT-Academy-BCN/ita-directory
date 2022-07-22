@@ -8,7 +8,7 @@ const { roleValues } = require('../utils/CONSTANTS')
 const uploadFile = require('../middleware/uploadFile')
 
 /**
- * Get user datala documentación
+ * Get user data
  */
 router.get('/user', authenticateToken, UsersController.getUser)
 
