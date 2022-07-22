@@ -266,24 +266,38 @@ exports.deleteUser = async (req, res) => {
 }
 
 // Update user avatar
-// TODO: updateAvatar //////////////////////////////////////////
-// eslint-disable-next-line no-unused-vars
-exports.updateAvatar = async (req, res, next) => {
-  /* const userId = { req }
+exports.updateAvatar = async (req, res) => {
   try {
-    const { avatar } = req.body
+    const { userId, file } = req
 
-    const { file } = req
     if (!file) {
-      const err = new Error("S'ha de pujar una imatge")
-      return res.status(400).send({ error: err.message })
+      const err = new Error('There is no file to upload')
+      res.status(400).send({ error: err.message })
+    } else {
+      prisma.media
+        .create({
+          data: {
+            path: req.file.path,
+            mimeType: req.file.mimetype,
+            fileSize: req.file.size.toString(),
+            userId,
+          },
+        })
+        .then(async () => {
+          await prisma.user.update({
+            where: {
+              id: userId,
+            },
+            data: {
+              avatarId: 1,
+            },
+          })
+          res.status(201).json({ data: req.file.path, message: 'Avatar updated successfully' })
+        })
     }
-    console.log('Imatge pujada correctament')
-    return res.send(file)
   } catch (err) {
-    console.error(err)
-    return false
-  } */
+    res.status(400).json({ message: 'File/userId error', error: [err] })
+  }
 }
 
 exports.receiveEmailGetToken = async (req, res) => {

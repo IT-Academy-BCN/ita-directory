@@ -5,7 +5,11 @@ const checkRole = require('../middleware/roleAuth')
 const validate = require('../middleware/zodValidation')
 const userSchema = require('../schemas/UserSchema')
 const { roleValues } = require('../utils/CONSTANTS')
+const uploadFile = require('../middleware/uploadFile')
 
+/**
+ * Get user datala documentación
+ */
 router.get('/user', authenticateToken, UsersController.getUser)
 
 /**
@@ -198,6 +202,6 @@ router.post('/v1/change-password/:token', UsersController.changePassword)
 router.delete('/v1/user', UsersController.deleteUser)
 
 // TODO: Swagger doc
-router.patch('/users/v1/update-avatar', UsersController.updateAvatar)
+router.patch('/users/v1/update-avatar', authenticateToken, uploadFile, UsersController.updateAvatar)
 
 module.exports = router
