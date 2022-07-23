@@ -274,26 +274,23 @@ exports.updateAvatar = async (req, res) => {
       const err = new Error('There is no file to upload')
       res.status(400).send({ error: err.message })
     } else {
-      prisma.media
-        .create({
-          data: {
-            path: req.file.path,
-            mimeType: req.file.mimetype,
-            fileSize: req.file.size.toString(),
-            userId,
-          },
-        })
-        .then(async () => {
-          await prisma.user.update({
-            where: {
-              id: userId,
-            },
-            data: {
-              avatarId: 1,
-            },
-          })
-          res.status(201).json({ data: req.file.path, message: 'Avatar updated successfully' })
-        })
+      const result = await prisma.media.create({
+        data: {
+          path: req.file.path,
+          mimeType: req.file.mimetype,
+          fileSize: req.file.size.toString(),
+          userId,
+        },
+      })
+      await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          avatarId: result.id,
+        },
+      })
+      res.status(201).json({ data: result.path, message: 'Avatar updated successfully' })
     }
   } catch (err) {
     res.status(400).json({ message: 'File/userId error', error: [err] })
