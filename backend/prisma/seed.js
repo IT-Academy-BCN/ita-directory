@@ -52,7 +52,6 @@ const user_status = [
 
 const users = [
   {
-    id: 1,
     name: 'test',
     lastnames: 'test test',
     email: 'test@test.test',
@@ -61,7 +60,6 @@ const users = [
     password: 'Test-test99',
   },
   {
-    id: 2,
     name: 'test2',
     lastnames: 'test test',
     email: 'test2@test.test',
@@ -70,7 +68,6 @@ const users = [
     password: 'Test2@test',
   },
   {
-    id: 3,
     name: 'test3',
     lastnames: 'test test',
     email: 'test3@test.test',
@@ -79,7 +76,6 @@ const users = [
     password: 'Test3@test',
   },
   {
-    id: 4,
     name: 'test4',
     lastnames: 'test test',
     email: 'test4@test.test',
@@ -88,7 +84,6 @@ const users = [
     password: 'Test4@test',
   },
   {
-    id: 5,
     name: 'Mariano5',
     lastnames: 'test test',
     email: 'yenab48812@snece.com',
@@ -97,7 +92,6 @@ const users = [
     password: 'Test5@test',
   },
   {
-    id: 6,
     name: 'testDeveloper',
     lastnames: 'test test',
     email: 'testdev@test.test',
@@ -119,35 +113,30 @@ const users = [
 
 const medias = [
   {
-    id: 1,
     path: '/public/2021/10/image1.jpg',
     mimeType: 'jpeg',
     fileSize: '200',
     userId: 1,
   },
   {
-    id: 2,
     path: '/public/2021/10/image2.jpg',
     mimeType: 'jpeg',
     fileSize: '200',
     userId: 2,
   },
   {
-    id: 3,
     path: '/public/2021/10/image3.png',
     mimeType: 'png',
     fileSize: '200',
     userId: 3,
   },
   {
-    id: 4,
     path: '/public/2021/10/image4.png',
     mimeType: 'png',
     fileSize: '200',
     userId: 4,
   },
   {
-    id: 5,
     path: '/public/2021/10/image5.jpg',
     mimeType: 'jpeg',
     fileSize: '200',

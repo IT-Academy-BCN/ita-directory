@@ -265,6 +265,38 @@ exports.deleteUser = async (req, res) => {
   return res.status(200).json({ user: deleteUser, msg: `User successfully deleted` })
 }
 
+// Update user avatar
+exports.updateAvatar = async (req, res) => {
+  try {
+    const { userId, file } = req
+
+    if (!file) {
+      const err = new Error('There is no file to upload')
+      res.status(400).send({ error: err.message })
+    } else {
+      const result = await prisma.media.create({
+        data: {
+          path: req.file.path,
+          mimeType: req.file.mimetype,
+          fileSize: req.file.size.toString(),
+          userId,
+        },
+      })
+      await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          avatarId: result.id,
+        },
+      })
+      res.status(201).json({ data: result.path, message: 'Avatar updated successfully' })
+    }
+  } catch (err) {
+    res.status(400).json({ message: 'File/userId error', error: [err] })
+  }
+}
+
 exports.receiveEmailGetToken = async (req, res) => {
   const { email } = req.body
   const user = await prisma.user.findUnique({ where: { email } })

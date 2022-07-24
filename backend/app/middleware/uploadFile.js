@@ -58,7 +58,7 @@ const titleToSlug = (fileName, ext, destination) => {
 }
 
 const date = new Date()
-const dest = `public/${date.getFullYear()}/${date.getMonth() + 1}`
+const dest = `app/public/${date.getFullYear()}/${date.getMonth() + 1}`
 const storage = multer.diskStorage({
   destination: dest,
   filename: (req, file, cb) => {
