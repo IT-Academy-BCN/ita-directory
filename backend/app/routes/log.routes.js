@@ -17,6 +17,6 @@ const logController = require('../controllers/log.controller')
  * @return {object} 400 - Bad request response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.post('/', logController.createLog)
+router.post('/log', logController.createLog)
 
 module.exports = router

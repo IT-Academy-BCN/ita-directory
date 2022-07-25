@@ -3,8 +3,6 @@ const { contactController } = require('../controllers/contact.controller')
 const { contactSchema } = require('../utils/schemaValidation')
 const validation = require('../middleware/validation')
 
-router.post('/v1/contact', validation(contactSchema), contactController)
-
 /**
  * Contact data
  * @typedef {object} contactData
@@ -14,7 +12,7 @@ router.post('/v1/contact', validation(contactSchema), contactController)
  */
 
 /**
- * POST /contact/v1/contact
+ * POST /contact
  * @summary Send data to contact
  * @tags Contact
  * @param {contactData} request.body.required - The payload looks like this:
@@ -31,5 +29,6 @@ router.post('/v1/contact', validation(contactSchema), contactController)
  * @example response - 400 - Example error response
  * { "message":"error"}
  */
+router.post('/contact', validation(contactSchema), contactController)
 
 module.exports = router

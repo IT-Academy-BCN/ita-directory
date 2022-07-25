@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const MediaControllers = require("../controllers/media.controller");
-const uploadFile = require("../middleware/uploadFile");
+const router = require('express').Router()
+const MediaControllers = require('../controllers/media.controller')
+const uploadFile = require('../middleware/uploadFile')
 
 /**
  * Registration data
@@ -10,7 +10,7 @@ const uploadFile = require("../middleware/uploadFile");
  */
 
 /**
- * POST /media/v1/upload
+ * POST /media
  * @summary Allows upload media file
  * @tags Media
  * @param {mediaUploadData} request.body.required - The payload looks like this:
@@ -24,10 +24,10 @@ const uploadFile = require("../middleware/uploadFile");
  * { "errCode":"errCode", "msg": "File/userId error"}
  */
 
-router.post("/v1/upload", uploadFile, MediaControllers.uploadMedia);
+router.post('/media', uploadFile, MediaControllers.uploadMedia)
 
 /**
- * DELETE /media/v1/deleteMedia
+ * DELETE /media
  * @summary Allows delete media file
  * @tags Media
  * @param {mediaUploadData} request.body.required - The payload looks like this:
@@ -41,6 +41,6 @@ router.post("/v1/upload", uploadFile, MediaControllers.uploadMedia);
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"Failed deleting file"}
  */
-router.delete("/v1/delete", MediaControllers.deleteMedia);
+router.delete('/media', MediaControllers.deleteMedia)
 
-module.exports = router;
+module.exports = router

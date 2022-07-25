@@ -335,6 +335,7 @@ exports.receiveEmailGetToken = async (req, res) => {
   return res.sendStatus(204)
 }
 
+// TODO: refactor controller method to use middleware auth
 exports.changePassword = async (req, res, next) => {
   const { password1, password2 } = req.body
   const { token } = req.params
