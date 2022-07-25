@@ -13,8 +13,11 @@ const StyledList = styled.div`
   width: 100%;
   margin-bottom: 0.7rem;
 
+  @media ${device.Mobile} {
+    width: 40%;
+  }
   @media ${device.Tablet} {
-    width: 20%;
+    width: 30%;
   }
   .district {
     font-size: 12px;

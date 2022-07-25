@@ -33,6 +33,8 @@ export const Container = styled.div`
   align-content: flex-start;
   flex-wrap: nowrap;
   margin: 2rem 0 6rem 0;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   @media ${device.Tablet} {
     flex-direction: row;
@@ -54,10 +56,10 @@ export const GridItem = styled.div`
 
   @media ${device.Mobile} {
     width: 50%;
+    display: contents;
   }
   @media ${device.Tablet} {
     width: 25%;
-    display: contents;
   }
   @media ${device.Desktop} {
     display: block;
