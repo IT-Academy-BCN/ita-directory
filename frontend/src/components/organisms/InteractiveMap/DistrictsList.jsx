@@ -13,6 +13,9 @@ const StyledList = styled.div`
   width: 100%;
   margin-bottom: 0.7rem;
 
+  @media ${device.Tablet} {
+    width: 20%;
+  }
   .district {
     font-size: 12px;
     font-weight: bold;
@@ -32,6 +35,9 @@ const StyledList = styled.div`
       font-size: 0.6rem;
       padding: 0.2rem 0;
     }
+  }
+  @media ${device.Desktop} {
+    width: 100%;
   }
 
   .lit-neighborhood,

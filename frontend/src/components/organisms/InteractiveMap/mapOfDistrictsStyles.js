@@ -36,10 +36,12 @@ export const Container = styled.div`
 
   @media ${device.Tablet} {
     flex-direction: row;
+    flex-wrap: wrap;
   }
   @media ${device.Desktop} {
     justify-content: space-between;
     gap: 0.5rem;
+    flex-wrap: nowrap;
   }
   @media ${device.LaptopLg} {
     justify-content: space-around;
@@ -55,6 +57,10 @@ export const GridItem = styled.div`
   }
   @media ${device.Tablet} {
     width: 25%;
+    display: contents;
+  }
+  @media ${device.Desktop} {
+    display: block;
   }
 `
 
