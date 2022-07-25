@@ -15,6 +15,8 @@ export const ContainerExterior = styled.div`
   @media ${device.Tablet} {
     flex-wrap: wrap;
     justify-self: center;
+    margin-right: auto;
+    margin-left: auto;
   }
   @media ${device.Desktop} {
     flex-wrap: nowrap;
