@@ -55,7 +55,7 @@ function AdList() {
 
   useEffect(() => {
     const fetchAds = async () => {
-      const result = await axiosInstance.get('/ads/v1/ads')
+      const result = await axiosInstance.get('/ads')
       setAdList(result.data.data)
       setLoading(false)
     }

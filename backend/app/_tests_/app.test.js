@@ -7,13 +7,13 @@ const client = require('../utils/initRedis')
 
 let token = null
 
-describe('POST /users/v1/login', () => {
+describe('POST /login', () => {
   beforeAll(async () => {
     await client.connect()
   })
   describe('given a username and correct password', () => {
     test('should respond with a 200 status code', async () => {
-      const response = await request(app).post('/users/v1/login').send({
+      const response = await request(app).post('/login').send({
         email: 'test@test.test',
         password: 'Test-test99',
       })
@@ -37,10 +37,10 @@ describe('GET /users/', () => {
   })
 })
 
-describe('PATCH /users/v1/user', () => {
+describe('PATCH /users', () => {
   test('Update user ', async () => {
     const response = await request(app)
-      .patch('/users/v1/user')
+      .patch('/users')
       .send({
         name: 'NewTest',
         lastnames: 'NewLastNames',

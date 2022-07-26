@@ -37,7 +37,7 @@ function Register() {
 
   const registerUser = async (user) => {
     try {
-      const response = await axiosInstance.post('/users/v1/register', user)
+      const response = await axiosInstance.post('/register', user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({

@@ -362,13 +362,13 @@ router.patch('/ads/:adId', authenticateToken, adsController.updateAd)
 
 // TODO: swagger doc
 router.post(
-  '/v1/post-ads-csv',
+  '/ads/post-ads-csv',
   authenticateToken,
   uploadAdCSV,
   adsController.createAdsFromCSVBuffer
 )
 
 // TODO: swagger doc
-router.get('/v1/chart-data', adsController.activeAdsByLocationAndDate)
+router.get('/ads/chart-data', adsController.activeAdsByLocationAndDate)
 
 module.exports = router

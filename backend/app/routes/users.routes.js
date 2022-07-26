@@ -45,7 +45,7 @@ router.get('/user', authenticateToken, UsersController.getUser)
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
 // Register
-router.post('/user', UsersController.registerUser)
+router.post('/users', UsersController.registerUser)
 
 /**
  * GET /users/
@@ -73,7 +73,7 @@ router.post('/user', UsersController.registerUser)
         }
 ]}
  */
-router.get('/', authenticateToken, checkRole(roleValues.Admin), UsersController.getAllUsers)
+router.get('/users', authenticateToken, checkRole(roleValues.Admin), UsersController.getAllUsers)
 // router.get('/users', UsersController.getAllUsers)
 
 // Refresh-token

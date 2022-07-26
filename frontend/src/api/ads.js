@@ -32,7 +32,7 @@ export async function getAds(filters) {
 
 export async function getAd(adId) {
   try {
-    const response = await axiosInstance.get(`/ads/v1/ads/${adId}`)
+    const response = await axiosInstance.get(`/ads/${adId}`)
     return response.data.data
   } catch (e) {
     throw new Error(`${e}`)

@@ -19,7 +19,7 @@ function UpdatePassword() {
 
   const loginUser = async (user) => {
     try {
-      const response = await axios.post(`${import.meta.env.REACT_APP_API_URL}/users/v1/login`, user)
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({

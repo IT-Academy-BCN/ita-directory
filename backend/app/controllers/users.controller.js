@@ -67,7 +67,7 @@ exports.getToken = async (req, res) => {
   )
 }
 
-// Get User (/v1/get-me endPoint)
+// Get User (/user endPoint)
 exports.getUser = async (req, res, next) => {
   // Check that the request isn't empty
   if (!req.userId) {
@@ -240,16 +240,17 @@ exports.updateUser = async (req, res) => {
         email,
         password,
         userRoleId,
-        userStatusId: parseInt(userStatusId, 10),
+        userStatusId,
         avatarId,
       },
     })
+    delete updateUser.password // do not return password
     return res.status(200).json({
       updateUser,
       message: `Data user updated successfully`,
     })
   } catch (err) {
-    return res.status(500).json({ message: `Error updating user ${userId}`, errors: err.errors })
+    return res.status(500).json({ message: `Error updating user ${userId}`, errors: [err] })
   }
 }
 
