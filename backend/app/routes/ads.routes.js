@@ -112,6 +112,7 @@ router.get('/ads', adsController.getAllAds)
  * @summary Gets all user ads from the database.
  * @tags Ads
  * @security bearerAuth
+ * @param {number} userId.path - User id
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
  * {"message": "Data fetched correctly.",
