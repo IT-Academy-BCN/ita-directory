@@ -29,9 +29,17 @@ describe('POST /login', () => {
   // describe('given empty fields', () => {})
 })
 
-describe('GET /users/', () => {
+describe('GET /users', () => {
   test('test ', async () => {
     const response = await request(app).get('/users').set('Authorization', `Bearer ${token}`)
+    expect(response.statusCode).toBe(200)
+    expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
+  })
+})
+
+describe('GET /user', () => {
+  test('test ', async () => {
+    const response = await request(app).get('/user').set('Authorization', `Bearer ${token}`)
     expect(response.statusCode).toBe(200)
     expect(response.headers['content-type']).toEqual(expect.stringContaining('json'))
   })

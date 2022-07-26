@@ -15,7 +15,12 @@ const uploadFile = require('../middleware/uploadFile')
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
  */
-router.get('/user', authenticateToken, UsersController.getUser)
+router.get(
+  '/user',
+  authenticateToken,
+  validate(userSchema.pick({ id: true })),
+  UsersController.getUser
+)
 
 /**
  * Registration data
@@ -74,7 +79,6 @@ router.post('/users', UsersController.registerUser)
 ]}
  */
 router.get('/users', authenticateToken, checkRole(roleValues.Admin), UsersController.getAllUsers)
-// router.get('/users', UsersController.getAllUsers)
 
 // Refresh-token
 router.get('/refresh-token', UsersController.getRefreshToken)
