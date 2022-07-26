@@ -174,7 +174,7 @@ function CreateNewAd() {
       f.append('some_csv', csvFile)
 
       await axios
-        .post('http://localhost:10910/ads/v1/post-ads-csv', f, {
+        .post(`${import.meta.env.VITE_API_URL}/ads/post-ads-csv`, f, {
           headers: {
             'Content-Type': 'multipart/form-data',
             authorization:

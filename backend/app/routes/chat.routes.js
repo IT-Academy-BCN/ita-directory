@@ -2,31 +2,31 @@ const router = require('express').Router()
 const chatController = require('../controllers/chat.controller')
 
 /**
- * POST /chat/v1/conversation
+ * POST /chat/conversations
  * @summary Create new conversation
- * @tags Conversation
+ * @tags Chat
  * @param {integer} request.userId.required - The user logged
  * @param {integer} request.body.user.required - The user to talk with
  * @return {object} 200 - Success response - application/json
  * @return {object} 400 - Bad request response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.post('/v1/conversation', chatController.createConversation)
+router.post('/chat/conversations', chatController.createConversation)
 
 /**
- * GET /chat/v1/conversations
+ * GET /chat/conversations
  * @summary Gets all conversations from the database for the actual user
- * @tags Conversation
+ * @tags Chat
  * @param {integer} request.userId.required - The user logged
  * @return {object} 200 - Success response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.get('/v1/conversations', chatController.getConversations)
+router.get('/chat/conversations', chatController.getConversations)
 
 /**
- * GET /chat/v1/conversation/:id
+ * GET /chat/conversations/{id}
  * @summary Gets all conversations from the database for the actual user
- * @tags Conversation
+ * @tags Chat
  * @param {integer} request.params.id.required - The conversation id
  * @param {integer} request.userId.required - The user logged
  * @return {object} 200 - Success response - application/json
@@ -34,12 +34,12 @@ router.get('/v1/conversations', chatController.getConversations)
  * @return {object} 404 - Not Found response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.get('/v1/conversation/:id', chatController.getConversationById)
+router.get('/chat/conversations/:id', chatController.getConversationById)
 
 /**
- * GET /chat/v1/messages
+ * GET /chat/messages
  * @summary Gets all messages from the database for the conversation
- * @tags Messages
+ * @tags Chat
  * @param {integer} request.body.conversation.required - The conversation id
  * @param {integer} request.userId.required - The user logged
  * @return {object} 200 - Success response - application/json
@@ -47,6 +47,6 @@ router.get('/v1/conversation/:id', chatController.getConversationById)
  * @return {object} 404 - Not Found response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.get('/v1/messages', chatController.getMessages)
+router.get('/chat/messages', chatController.getMessages)
 
 module.exports = router

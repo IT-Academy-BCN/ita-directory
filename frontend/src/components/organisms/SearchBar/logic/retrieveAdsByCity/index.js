@@ -4,7 +4,7 @@ import { firstLetterUpperCase } from '../firstLetterUpperCase'
 async function retreiveAdsByCity(city) {
   try {
     const filteredArrayByQuery = []
-    const petition = await fetch(`http://localhost:10091/ads/v1/ads`, {
+    const petition = await fetch(`${import.meta.env.VITE_API_URL}/ads`, {
       method: 'GET',
     })
     const data = await petition.json()

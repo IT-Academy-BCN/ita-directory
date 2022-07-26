@@ -6,7 +6,7 @@ export async function getUserAds(userId) {
     const params = {
       userId,
     }
-    const data = await axios.get('http://localhost:5000/ads', { params })
+    const data = await axios.get(`${import.meta.env.VITE_API_URL}/ads`, { params })
     const ads = await data.data
     return ads
   } catch (e) {

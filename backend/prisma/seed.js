@@ -56,7 +56,7 @@ const users = [
     lastnames: 'test test',
     email: 'test@test.test',
     userStatusId: 1,
-    userRoleId: 3,
+    userRoleId: 1,
     password: 'Test-test99',
   },
   {

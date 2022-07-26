@@ -8,7 +8,12 @@ const { roleValues } = require('../utils/CONSTANTS')
 const uploadFile = require('../middleware/uploadFile')
 
 /**
- * Get user data
+ * GET /user
+ * @summary Get user data
+ * @tags Users
+ * @security bearerAuth
+ * @return {object} 200 - success response - application/json
+ * @return {object} 400 - Bad request response
  */
 router.get('/user', authenticateToken, UsersController.getUser)
 
@@ -21,9 +26,9 @@ router.get('/user', authenticateToken, UsersController.getUser)
  */
 
 /**
- * POST /users/v1/user
+ * POST /users
  * @summary Allows user to register
- * @tags User
+ * @tags Users
  * @param {userRegistrationData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
@@ -40,12 +45,12 @@ router.get('/user', authenticateToken, UsersController.getUser)
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
 // Register
-router.post('/v1/user', UsersController.registerUser)
+router.post('/users', UsersController.registerUser)
 
 /**
  * GET /users/
  * @summary Gets all users from the database.
- * @tags User
+ * @tags Users
  * @security bearerAuth
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
@@ -68,11 +73,11 @@ router.post('/v1/user', UsersController.registerUser)
         }
 ]}
  */
-router.get('/', authenticateToken, checkRole(roleValues.Admin), UsersController.getAllUsers)
-// router.get('/', UsersController.getAllUsers)
+router.get('/users', authenticateToken, checkRole(roleValues.Admin), UsersController.getAllUsers)
+// router.get('/users', UsersController.getAllUsers)
 
 // Refresh-token
-router.get('/user/refresh-token', UsersController.getRefreshToken)
+router.get('/refresh-token', UsersController.getRefreshToken)
 
 /**
  * Login data
@@ -83,9 +88,9 @@ router.get('/user/refresh-token', UsersController.getRefreshToken)
  */
 
 /**
- * POST /users/v1/login
+ * POST /login
  * @summary Allows user to login
- * @tags User
+ * @tags Users
  * @param {userLoginData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
@@ -102,7 +107,7 @@ router.get('/user/refresh-token', UsersController.getRefreshToken)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */
-router.post('/user/login', UsersController.login)
+router.post('/login', UsersController.login)
 
 /**
  * Update data
@@ -116,9 +121,9 @@ router.post('/user/login', UsersController.login)
  */
 
 /**
- * PATCH /users/v1/user
+ * PATCH /users
  * @summary Allows Update some field to User
- * @tags User
+ * @tags Users
  * @security bearerAuth
  * @param {userUpdateData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
@@ -132,7 +137,7 @@ router.post('/user/login', UsersController.login)
  */
 // Update some field to User
 router.patch(
-  '/v1/user',
+  '/users',
   authenticateToken,
   validate(userSchema.partial()),
   UsersController.updateUser
@@ -146,9 +151,9 @@ router.patch(
  */
 
 /**
- * POST /users/v1/recover-password
+ * POST /recover-password
  * @summary Allows user recover password
- * @tags User
+ * @tags Users
  * @param {userRecoverData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
@@ -160,7 +165,7 @@ router.patch(
  * { "errCode":"errCode", "message":"email not found"}
  */
 
-router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
+router.post('/recover-password', UsersController.receiveEmailGetToken)
 
 /**
  * NewPassword data
@@ -170,9 +175,9 @@ router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
  */
 
 /**
- * POST /users/v1/change-password/:token
+ * POST /change-password/{token}
  * @summary Checks the token in the params; if valid, changes the password for the associated user
- * @tags User
+ * @tags Users
  * @param {newPasswordData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
  * @return {object} 400 - Bad request response
@@ -189,19 +194,20 @@ router.post('/v1/recover-password', UsersController.receiveEmailGetToken)
     "errors": []
 }
  */
-router.post('/v1/change-password/:token', UsersController.changePassword)
+// TODO: refactor controller method to use middleware auth
+router.post('/change-password/:token', UsersController.changePassword)
 
 /**
- * DELETE /v1/user
+ * DELETE /users/{userId}
  * @summary Delete user from the database.
- * @tags User
+ * @tags Users
  * @security bearerAuth
  * @return {object} 200 - Success response - application/json
  */
 // Route delete user
-router.delete('/v1/user', UsersController.deleteUser)
+router.delete('/users', UsersController.deleteUser)
 
 // TODO: Swagger doc
-router.patch('/users/v1/update-avatar', authenticateToken, uploadFile, UsersController.updateAvatar)
+router.patch('/users/update-avatar', authenticateToken, uploadFile, UsersController.updateAvatar)
 
 module.exports = router

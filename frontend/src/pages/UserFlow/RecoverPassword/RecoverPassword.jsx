@@ -45,7 +45,7 @@ function RecoverPassword() {
     }, 2000)
 
     try {
-      await axios.post(`${import.meta.env.REACT_APP_API_URL}/users/v1/recover-password`, email)
+      await axios.post(`${import.meta.env.VITE_API_URL}/recover-password`, email)
       dispatch(
         newNotification({
           message: 'The instructions to recover your password has been sent to your email',

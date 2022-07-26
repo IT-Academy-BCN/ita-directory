@@ -1,11 +1,11 @@
 const urls = {
-  login: '/user/login',
-  register: '/users/v1/register',
-  updateAvatar: '/users/v1/update-avatar',
+  login: '/login',
+  register: '/register',
+  updateAvatar: '/users/update-avatar',
   user: '/user',
   users: '/users',
-  userAds: '/users/v1/user-ads',
-  refreshToken: '/user/refresh-token',
+  userAds: '/ads/users',
+  refreshToken: '/refresh-token',
 }
 
 export default urls

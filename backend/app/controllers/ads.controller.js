@@ -106,7 +106,7 @@ async function createAdsFromCSVBuffer(req, res, next) {
 }
 
 async function getUserAds(req, res) {
-  const userId = { req }
+  const { userId } = req
   await getUserAdsSchema.validateAsync(userId)
   const ads = await prisma.ads.findMany({
     where: { userId },

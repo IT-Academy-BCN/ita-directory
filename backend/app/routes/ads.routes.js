@@ -35,9 +35,9 @@ const { uploadAdCSV } = require('../middleware/uploadAdsCSV')
  */
 
 /**
- * POST /ads/v1/post-ad
+ * POST /ads
  * @summary Create new ad
- * @tags Ad
+ * @tags Ads
  * @security bearerAuth
  * @param {postAdData} request.body.required - The payload looks like this:
  * @return {object} 200 - Success response - application/json
@@ -60,13 +60,12 @@ const { uploadAdCSV } = require('../middleware/uploadAdsCSV')
     "errors": "\"title\" is required"
 }
  */
-
-router.post('/v1/post-ad', authenticateToken, adsController.createAd)
+router.post('/ads', authenticateToken, adsController.createAd)
 
 /**
- * GET /ads/v1/ads
+ * GET /ads
  * @summary Gets all ads from the database.
- * @tags Ad
+ * @tags Ads
  * @security bearerAuth
  * @return {object} 200 - Success response - application/json
 * @example request - Correct ad payload
@@ -106,13 +105,14 @@ router.post('/v1/post-ad', authenticateToken, adsController.createAd)
         }
 ]}
  */
-router.get('/v1/ads', adsController.getAllAds)
+router.get('/ads', adsController.getAllAds)
 
 /**
- * GET /ads/v1/user-ads
+ * GET /ads/user/{userId}
  * @summary Gets all user ads from the database.
- * @tags Ad
+ * @tags Ads
  * @security bearerAuth
+ * @param {number} userId.path - User id
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
  * {"message": "Data fetched correctly.",
@@ -133,12 +133,12 @@ router.get('/v1/ads', adsController.getAllAds)
         }
     ]}
  */
-router.get('/v1/user-ads', authenticateToken, adsController.getUserAds)
+router.get('/ads/user/:userId', authenticateToken, adsController.getUserAds)
 
 /**
- * GET /ads/v1/ads/{adId}
+ * GET /ads/{adId}
  * @summary Gets ad by id
- * @tags Ad
+ * @tags Ads
  * @security bearerAuth
  * @param {number} adId.path - Ad id to search in database
  * @return {object} 200 - Success response - application/json
@@ -172,38 +172,12 @@ router.get('/v1/user-ads', authenticateToken, adsController.getUserAds)
     "errors": []
 }
 */
-router.get('/v1/ads/:adId', adsController.getAdById)
-
-// TODO: Swagger documentation
-/**
- * DELETE /ads/v1/ads/:adId
- * @summary Delete ad by id
- * @tags Ad
- * @security bearerAuth
- * @param {number} adId.path - Ad id to search in database
- * @return {object} 200 - Success response - application/json
- * @return {object} 400 - Bad request response - application/json
- * @return {object} 404 - Id not found - application/json
- * @example response - 200 - Example success response
-*{"message":"Ad successfully deleted.","data":{"id":1,"user_id":1,"title":"asdf","description":"asf","city":"fff","n_rooms":1,"price":2,"square_meters":3,"n_bathrooms":4,"map_lat":"3.4","map_lon":"3.6"}} 
-  @example response - 400 - Example bad request response
-{
-    "message": "adId param must be an integer.",
-    "data": {},
-    "errors": []
-} 
-* @example response - 404 - The adId is not in the database
-{
-    "message": "This adId does not exist.",
-    "data": {},
-    "errors": []
-}
-*/
+router.get('/ads/:adId', adsController.getAdById)
 
 /**
- * GET /ads/v1/ads/type/{type}
+ * GET /ads/type/{type}
  * @summary Gets all ads filtered according to their type name.
- * @tags Ad
+ * @tags Ads
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
 *  {
@@ -226,13 +200,12 @@ router.get('/v1/ads/:adId', adsController.getAdById)
     ]
 }
  */
-
-router.get('/v1/ads/type/:type', adsController.getAdsByType)
+router.get('/ads/type/:type', adsController.getAdsByType)
 
 /**
- * GET /ads/v1/ads/types/list
+ * GET /ads/types
  * @summary Gets all ad type names.
- * @tags Ad
+ * @tags Ads
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
 *  {
@@ -249,12 +222,12 @@ router.get('/v1/ads/type/:type', adsController.getAdsByType)
     ]
 }
  */
-router.get('/v1/ads/types/list', adsController.getAdTypes)
+router.get('/ads/types', adsController.getAdTypes)
 
 /**
- * GET /ads/v1/ads/:location/:type 
+ * GET /ads/{location}/{type} 
  * @summary Gets ads filtered by location and type
- * @tags Ad
+ * @tags Ads
  * @return {object} 200 - Success response - application/json
  * @example response - 200 - Example success response
  * {
@@ -291,21 +264,112 @@ router.get('/v1/ads/types/list', adsController.getAdTypes)
     ]
   }
  */
-router.get('/v1/ads/:location/:type', adsController.getAdsByTypeAndLocation)
+router.get('/ads/:location/:type', adsController.getAdsByTypeAndLocation)
 
-router.get('/v1/ads/search/location/:location', adsController.getAdsByLocation)
+/**
+ * GET /ads/location/{location}
+ * @summary Gets ads filtered by location
+ * @tags Ads
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+ * {
+    "message": "Ad fetched correctly.",
+    "data": [
+        {
+            "id": 21,
+            "user_id": 1,
+            "title": "ad1",
+            "description": "ad house 1",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 2
+        },
+        {
+            "id": 22,
+            "user_id": 1,
+            "title": "ad123",
+            "description": "ad room 123",
+            "city": "Barcelona",
+            "n_rooms": 2,
+            "price": 900,
+            "square_meters": 80,
+            "n_bathrooms": 1,
+            "map_lat": "41.385063",
+            "map_lon": "2.173404",
+            "ad_type_id": 2
+        }
+    ]
+  }
+ */
+router.get('/ads/location/:location', adsController.getAdsByLocation)
 
-router.delete('/v1/ads/:adId', authenticateToken, adsController.deleteById)
+/**
+ * DELETE /ads/{adId}
+ * @summary Delete ad by id
+ * @tags Ads
+ * @security bearerAuth
+ * @param {number} adId.path - Ad id to search in database
+ * @return {object} 200 - Success response - application/json
+ * @return {object} 400 - Bad request response - application/json
+ * @return {object} 404 - Id not found - application/json
+ * @example response - 200 - Example success response
+*{"message":"Ad successfully deleted.","data":{"id":1,"user_id":1,"title":"asdf","description":"asf","city":"fff","n_rooms":1,"price":2,"square_meters":3,"n_bathrooms":4,"map_lat":"3.4","map_lon":"3.6"}} 
+  @example response - 400 - Example bad request response
+{
+    "message": "adId param must be an integer.",
+    "data": {},
+    "errors": []
+} 
+* @example response - 404 - The adId is not in the database
+{
+    "message": "This adId does not exist.",
+    "data": {},
+    "errors": []
+}
+*/
+router.delete('/ads/:adId', authenticateToken, adsController.deleteById)
 
-router.patch('/v1/ads/:adId', authenticateToken, adsController.updateAd)
+/**
+ * PATCH /ads/{adId}
+ * @summary Update ad by id
+ * @tags Ads
+ * @security bearerAuth
+ * @param {number} adId.path - Ad id to search in database
+ * @param {object} request.body.required - The payload 
+ * @return {object} 200 - Success response - application/json
+ * @return {object} 400 - Bad request response - application/json
+ * @return {object} 404 - Id not found - application/json
+ * @example response - 200 - Example success response
+*{"message":"Ad successfully updated.","data":{"id":1,"user_id":1,"title":"asdf","description":"asf","city":"fff","n_rooms":1,"price":2,"square_meters":3,"n_bathrooms":4,"map_lat":"3.4","map_lon":"3.6"}} 
+  @example response - 400 - Example bad request response
+{
+    "message": "adId param must be an integer.",
+    "data": {},
+    "errors": []
+} 
+* @example response - 404 - The adId is not in the database
+{
+    "message": "This adId does not exist.",
+    "data": {},
+    "errors": []
+}
+*/
+router.patch('/ads/:adId', authenticateToken, adsController.updateAd)
 
+// TODO: swagger doc
 router.post(
-  '/v1/post-ads-csv',
+  '/ads/post-ads-csv',
   authenticateToken,
   uploadAdCSV,
   adsController.createAdsFromCSVBuffer
 )
 
-router.get('/v1/chart-data', adsController.activeAdsByLocationAndDate)
+// TODO: swagger doc
+router.get('/ads/chart-data', adsController.activeAdsByLocationAndDate)
 
 module.exports = router

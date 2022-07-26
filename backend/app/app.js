@@ -45,6 +45,7 @@ app.get('/', (req, res) => {
 Object.values(routes).forEach((r, i) => {
   // eslint-disable-next-line no-console
   console.log(`${Object.keys(routes)[i]} has been initialized`)
+  app.use(process.env.PREFIX, r)
   app.use(r, logger)
 })
 

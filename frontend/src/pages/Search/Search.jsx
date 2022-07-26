@@ -27,22 +27,18 @@ function Search() {
       // if type and location have been selected by user, send an api request for filtered ads
       if (adType && adRegion) {
         response = await axios.get(
-          `${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/${adRegion.label}/${adType.label}`
+          `${import.meta.env.VITE_API_URL}/ads/${adRegion.label}/${adType.label}`
         )
         // if only type was selected, API request for type filtered ads
       } else if (adType && !adRegion) {
-        response = await axios.get(
-          `${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/type/${adType.label}`
-        )
+        response = await axios.get(`${import.meta.env.VITE_API_URL}/ads/type/${adType.label}`)
         // if only location was selected, API request for type filtered ads
       } else if (!adType && adRegion) {
-        response = await axios.get(
-          `${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/search/location/${adRegion.label}`
-        )
+        response = await axios.get(`${import.meta.env.VITE_API_URL}/ads/location/${adRegion.label}`)
 
         // API request for all ads
       } else {
-        response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/ads/v1/ads`)
+        response = await axios.get(`${import.meta.env.VITE_API_URL}/ads`)
       }
       const filteredAds = response.data.data || []
       setAds(filteredAds)

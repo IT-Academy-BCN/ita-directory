@@ -13,7 +13,7 @@ function SearchBar({ setAdType, setAdRegion, getAds }) {
   const components = { DropdownIndicator: () => null, IndicatorSeparator: () => null }
 
   const loadOptions = (inputValue) => {
-    return fetch(`${import.meta.env.REACT_APP_API_URL}/location/v1/relative/${inputValue}`)
+    return fetch(`${import.meta.env.VITE_API_URL}/location/relative/${inputValue}`)
       .then((res) => {
         return res.json()
       })
@@ -26,7 +26,7 @@ function SearchBar({ setAdType, setAdRegion, getAds }) {
   }
 
   const getTypes = async () => {
-    const response = await axios.get(`${import.meta.env.REACT_APP_API_URL}/ads/v1/ads/types/list`)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/ads/types`)
     const options = response.data.data
     setTypesList(options.map((element) => ({ label: element, value: element })))
   }
