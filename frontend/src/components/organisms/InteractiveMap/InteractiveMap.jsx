@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import MapContext from './store/context'
 import { MAP_ACTIONS } from './store/reducer'
+import { device } from '../../../theme'
 
 const SvgStyled = styled.svg`
   width: 100%;
@@ -34,6 +35,20 @@ const SvgStyled = styled.svg`
 
   .lit-district {
     fill: #db2c7f !important;
+  }
+
+  #Group_309 > path {
+    stroke: transparent;
+    @media ${device.Tablet} {
+      stroke: #000;
+    }
+  }
+
+  #Group_309 > text > tspan {
+    display: none;
+    @media ${device.Tablet} {
+      display: block;
+    }
   }
 `
 
