@@ -15,6 +15,8 @@ export const ContainerExterior = styled.div`
   @media ${device.Tablet} {
     flex-wrap: wrap;
     justify-self: center;
+    margin-right: auto;
+    margin-left: auto;
   }
   @media ${device.Desktop} {
     flex-wrap: nowrap;
@@ -31,13 +33,17 @@ export const Container = styled.div`
   align-content: flex-start;
   flex-wrap: nowrap;
   margin: 2rem 0 6rem 0;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   @media ${device.Tablet} {
     flex-direction: row;
+    flex-wrap: wrap;
   }
   @media ${device.Desktop} {
     justify-content: space-between;
     gap: 0.5rem;
+    flex-wrap: nowrap;
   }
   @media ${device.LaptopLg} {
     justify-content: space-around;
@@ -45,14 +51,15 @@ export const Container = styled.div`
 `
 
 export const GridItem = styled.div`
-  width: 100%;
+  width: 50%;
+  display: contents;
   z-index: 10;
 
-  @media ${device.Mobile} {
-    width: 50%;
-  }
   @media ${device.Tablet} {
     width: 25%;
+  }
+  @media ${device.Desktop} {
+    display: block;
   }
 `
 

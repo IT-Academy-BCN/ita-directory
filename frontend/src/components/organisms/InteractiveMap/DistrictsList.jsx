@@ -10,9 +10,12 @@ import { Lists } from '../../atoms'
 
 const StyledList = styled.div`
   cursor: pointer;
-  width: 100%;
+  width: 40%;
   margin-bottom: 0.7rem;
 
+  @media ${device.Tablet} {
+    width: 30%;
+  }
   .district {
     font-size: 12px;
     font-weight: bold;
@@ -27,11 +30,18 @@ const StyledList = styled.div`
     font-size: 0.8rem;
     padding: 0.2rem 0;
     margin: 0;
+    display: none;
 
     @media ${device.Mobile} {
       font-size: 0.6rem;
       padding: 0.2rem 0;
     }
+    @media ${device.Tablet} {
+      display: block;
+    }
+  }
+  @media ${device.Desktop} {
+    width: 100%;
   }
 
   .lit-neighborhood,
