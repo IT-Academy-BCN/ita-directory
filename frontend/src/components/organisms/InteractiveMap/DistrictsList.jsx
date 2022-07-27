@@ -10,12 +10,9 @@ import { Lists } from '../../atoms'
 
 const StyledList = styled.div`
   cursor: pointer;
-  width: 100%;
+  width: 40%;
   margin-bottom: 0.7rem;
 
-  @media ${device.Mobile} {
-    width: 40%;
-  }
   @media ${device.Tablet} {
     width: 30%;
   }

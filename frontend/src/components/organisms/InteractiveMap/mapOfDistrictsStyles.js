@@ -51,13 +51,10 @@ export const Container = styled.div`
 `
 
 export const GridItem = styled.div`
-  width: 100%;
+  width: 50%;
+  display: contents;
   z-index: 10;
 
-  @media ${device.Mobile} {
-    width: 50%;
-    display: contents;
-  }
   @media ${device.Tablet} {
     width: 25%;
   }
