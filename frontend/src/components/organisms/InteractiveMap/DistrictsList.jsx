@@ -33,10 +33,14 @@ const StyledList = styled.div`
     font-size: 0.8rem;
     padding: 0.2rem 0;
     margin: 0;
+    display: none;
 
     @media ${device.Mobile} {
       font-size: 0.6rem;
       padding: 0.2rem 0;
+    }
+    @media ${device.Tablet} {
+      display: block;
     }
   }
   @media ${device.Desktop} {
