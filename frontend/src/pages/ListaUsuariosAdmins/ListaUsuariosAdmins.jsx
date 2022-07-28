@@ -169,7 +169,7 @@ function ListaUsuariosAdmins() {
 
   const updateUserStatus = async (userStatusId) => {
     try {
-      axiosInstance.patch(urls.user, { userStatusId: parseInt(userStatusId, 10) })
+      axiosInstance.patch(urls.users, { userStatusId: parseInt(userStatusId, 10) })
     } catch (e) {
       throw new Error(e)
     }
