@@ -8,12 +8,12 @@ import useWindowSize from '../../hooks/useWindowSize'
 import getParentPosition from '../../utils/getParentPosition'
 
 function Dropdown({ setDropdownVisible, children, parentId }) {
-  const [width, height] = useWindowSize()
-  const parentPosition = getParentPosition(parentId)
+  const [width, height] = useWindowSize() // hook =>first render return ws
+  const parentPosition = getParentPosition(parentId) // fc=> information about size and position of an element relative to the viewport.
   const [position, setPosition] = useState(parentPosition)
 
   const ref = useRef(null)
-  useOnClickOutside(ref, () => setDropdownVisible(false))
+  useOnClickOutside(ref, () => setDropdownVisible(false)) // hook=> onClick outside DropdownStyled when DS change, or fc
 
   useEffect(() => {
     if (parentPosition.x !== position.x || parentPosition.y !== position.y) {

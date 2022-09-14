@@ -3,11 +3,13 @@ import { useEffect } from 'react'
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
     function listener(e) {
+      // collection(HTMLCollection object)
       if (!ref.current || ref.current.contains(e.target)) {
         return
       }
       handler(e)
     }
+
     document.addEventListener('mousedown', listener)
     document.addEventListener('touchstart', listener)
     return () => {
