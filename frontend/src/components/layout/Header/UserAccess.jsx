@@ -101,7 +101,10 @@ function UserAccess() {
   // const value = useSelector((s) => s.user.value)
   // console.log(value)
 
-  const user = useUser()
+
+  const user = useUser() //hook(appOwn)=>return ? user object data : null
+
+  // children will load paths + string for dropdown list menu
   const children = [
     { path: paths.profile, text: 'Editar perfil' },
     { path: paths.bills, text: 'Mis facturas' },
@@ -116,6 +119,7 @@ function UserAccess() {
 
   return (
     <UserAccessStyled>
+      {/* if not logged => Registrarme */}
       {!isLoggedIn ? (
         <div className="not-logged-in">
           <Link className="login-link" to={paths.login}>
@@ -129,6 +133,8 @@ function UserAccess() {
           />
         </div>
       ) : (
+        // if loggedIn=> render btn dropdown + 
+        // if user.avatar is not undefined=> render ? img with user data : Icon empty
         <>
           <button
             id="dropdownButton"
@@ -143,9 +149,12 @@ function UserAccess() {
             )}
             <Text as="span" text="Mi Perfil" className="header__profile-title" />
           </button>
+          {/* if drowpdown is true ? render Drowpdown component : null */}
+          {/* if render Drowpdown ? props(fc setDropdown to change visibility(true-false)), parent id(btn-dropdown))  */}
           {dropdownVisible ? (
             <Dropdown setDropdownVisible={setDropdownVisible} parentId="dropdownButton">
               <Ul>
+                {/* if children is not undefined ? map array of html node passing  to child (link) path + string for hrml */}
                 {children?.map(({ path, text }) => (
                   <Li key={text}>
                     <Link key={text} to={path}>
