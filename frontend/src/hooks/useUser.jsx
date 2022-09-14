@@ -5,7 +5,9 @@ import axiosInstance from '../utils/axiosInstance'
 import urls from '../utils/urls'
 
 export default function useUser() {
+  //hook(redux)=>access to all actions.type
   const dispatch = useDispatch()
+  //hook (redux)=>//It takes in a function argument that returns the part of the state that you want
   const user = useSelector((s) => s.user.value)
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
 

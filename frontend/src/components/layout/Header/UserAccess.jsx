@@ -92,10 +92,16 @@ const UserAccessStyled = styled.div`
 `
 
 function UserAccess() {
+  //hook(react)=> to navigate to route keeping in state directions
   const history = useHistory()
+  //hook (redux)=>//It takes in a function argument that returns the part of the state that you want
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
-  const user = useUser()
+  // Testing what is in user.value
+  // value=>{id: 1, name: 'test', lastnames: 'test test', email: 'test@test.test', createdAt: '2022-09-01T15:54:52.116Z', …}
+  // const value = useSelector((s) => s.user.value)
+  // console.log(value)
 
+  const user = useUser()
   const children = [
     { path: paths.profile, text: 'Editar perfil' },
     { path: paths.bills, text: 'Mis facturas' },
@@ -107,6 +113,7 @@ function UserAccess() {
   const handleClick = () => {
     setDropdownVisible(!dropdownVisible)
   }
+
   return (
     <UserAccessStyled>
       {!isLoggedIn ? (
