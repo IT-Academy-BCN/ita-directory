@@ -43,7 +43,6 @@ export const HeaderStyled = styled.header`
       }
 
       & .header__logo-text {
-        font-family: monospace;
         font-size: 1rem;
         font-weight: bold;
         margin-left: 5px;
