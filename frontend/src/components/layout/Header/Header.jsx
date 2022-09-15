@@ -109,9 +109,7 @@ function Header({ title, logoColor, menu }) {
             <img src={logo} alt="ITAcademy Logo" className="header__logo" />
             <Text as="span" text="_directory" className="header__logo-text" />
           </Link>
-{/* component to check if logged or not and render dropdown */}
           <UserAccess />
-
         </div>
       </Container>
       {menu && (
