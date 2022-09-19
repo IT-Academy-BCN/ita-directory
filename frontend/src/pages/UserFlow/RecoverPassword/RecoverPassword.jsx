@@ -22,8 +22,15 @@ import Text from '../../../components/atoms/Text'
 function RecoverPassword() {
   const [animatedState, setAnimatedState] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  // part of state
   const dispatch = useDispatch()
 
+  // hook(custom)=> -optional argument: resolver(function:allows you to use any external validation library such as Yup)
+  //                -deconstruction:
+  //                  ·register(method):register an input and apply validation rules to React Hook Form.
+  //                  ·handleSubmit(function):will receive the form data if form validation is successful.
+  //                  ·formstate(object):holds info about the entire form state
+  //                    {errors}(object):An object with field errors. There is also an ErrorMessage component to retrieve error message easily.
   const {
     register,
     handleSubmit,
@@ -33,11 +40,11 @@ function RecoverPassword() {
   })
 
   const submitForm = (data) => {
-    const { email } = data
-    sendEmail(email)
+    // const { email } = data
+    sendEmail(data)
   }
 
-  const sendEmail = async (email) => {
+  const sendEmail = async (data) => {
     setAnimatedState(true)
     setIsLoading(true)
     setTimeout(() => {
@@ -46,8 +53,10 @@ function RecoverPassword() {
     }, 2000)
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/recover-password`, email)
-      // await axios.post(`${process.env.VITE_API_URL}/recover-password`, email)
+      // Given a module you can access meta information about the module using the import.meta
+      // It returns an object with a url property indicating the base URL of the module
+      await axios.post(`${import.meta.env.VITE_API_URL}/recover-password`, data)
+      // await axios.post(`${process.env.VITE_API_URL}/recover-password`, dataEmail)
       dispatch(
         newNotification({
           message: 'The instructions to recover your password has been sent to your email',
@@ -72,7 +81,7 @@ function RecoverPassword() {
             text={
               <>
                 <b>¿Has olvidado tu contraseña?</b> Para recuperarla introduce tu email y te
-                enviaremos una nueva por correo.{' '}
+                enviaremos una nueva por correo.
               </>
             }
           />
