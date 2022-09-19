@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import font from './font'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -6,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     background: white;
-    font-family: 'Roboto'
+    font-family: ${font.fontFamily}
   }
 `
 
