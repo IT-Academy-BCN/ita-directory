@@ -8,6 +8,7 @@ const paths = {
   register: '/register',
   userAds: '/ads',
   userAdmin: '/lista-usuarios-admins',
+  recoverPassword: '/recover-password',
 }
 
 export default paths

@@ -28,7 +28,7 @@ function App() {
       <Route exact path="/new-ad" component={CreateNewAd} />
       <Route exact path={paths.login} component={Login} />
       <Route exact path={paths.register} component={Registration} />
-      <Route exact path="/recover-password" component={RecoverPassword} />
+      <Route exact path={paths.recoverPassword} component={RecoverPassword} />
       <Route exact path="/students" component={Students} />
       <Route exact path="/business" component={Business} />
       <ProtectedRoute exact path={paths.profile} component={Profile} />
