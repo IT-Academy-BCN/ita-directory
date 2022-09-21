@@ -129,12 +129,17 @@ The up command will:
 - Generate PRISMA migrations
 - Seed the Postgres database
 
-5. Once all of it is up and running launch the backend, to enable the API and the frontend (if necessary) in 2 different terminals.
+5. Once all of it is up and running launch the backend, to enable the API
+   `npm run backend`
 
-`npm run backend`
-`npm run frontend`
+6. Open another terminal and launch the frontend with the command:
+   `npm run frontend`
 
-6. Create and change to new branch for fixing the issue
+<img src="readme-step6.jpg" alt="run-frontend">
+
+7. Now the project is setup and running on local enviroment.
+
+8. In order to start contributing to the project and solvieng issues you must create and change to new branch for the issue number (#id) and the issue name, never work on main branch.
    `git checkout -b issueNumber-name-of-issue`
 
 ### Prerequisites
