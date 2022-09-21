@@ -118,21 +118,29 @@ Here's a blank template to get started:
 To get a local copy up and running follow these simple steps.
 
 1. Clone the repository: `git clone https://github.com/it-academyproject/ita-directory.git`
-2. Checkout to the develop **branch**, we don't work from **main**: `git checkout develop`
-3. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
-4. Install dependencies with: `npm run install-deps` _It installs the dependencies of the front, the back and the main directory_
-5. Make sure that you have docker installed and running, and from the main folder launch up: `npm run up`
+2. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
+3. Install dependencies with: `npm run install-deps` _It installs the dependencies of the front, the back and the main directory_
+4. Make sure that you have docker installed and running, and from the main folder launch up: `npm run up`(to initialize the local project in docker)
 
 The up command will:
+
 - Start PostgreSQL
 - Start Redis
 - Generate PRISMA migrations
 - Seed the Postgres database
 
-6. Once all of it is up and running launch the backend, to enable the API and the frontend if necessary
+5. Once all of it is up and running launch the backend, to enable the API
+   `npm run backend`
 
-`npm run backend`
-`npm run frontend`
+6. Open another terminal and launch the frontend with the command:
+   `npm run frontend`
+
+<img src="readme-step6.jpg" alt="run-frontend">
+
+7. Now the project is setup and running on local enviroment.
+
+8. In order to start contributing to the project and solvieng issues you must create and change to new branch for the issue number (#id) and the issue name, never work on main branch.
+   `git checkout -b issueNumber-name-of-issue`
 
 ### Prerequisites
 
