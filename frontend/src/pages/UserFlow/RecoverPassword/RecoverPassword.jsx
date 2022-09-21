@@ -17,12 +17,12 @@ import { Container, Form } from '../UserFlow.styles'
 // Form validation
 import recoverPasswordSchema from '../../../validation/recoverPasswordSchema'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
+import Text from '../../../components/atoms/Text'
 
 function RecoverPassword() {
   const [animatedState, setAnimatedState] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
-
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ function RecoverPassword() {
     sendEmail(email)
   }
 
-  const sendEmail = async (email) => {
+  const sendEmail = async (data) => {
     setAnimatedState(true)
     setIsLoading(true)
     setTimeout(() => {
@@ -45,7 +45,7 @@ function RecoverPassword() {
     }, 2000)
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/recover-password`, email)
+      await axios.post(`${import.meta.env.VITE_API_URL}/recover-password`, data)
       dispatch(
         newNotification({
           message: 'The instructions to recover your password has been sent to your email',
@@ -66,10 +66,18 @@ function RecoverPassword() {
     <Body title="Cambiar contraseña" justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidation>
+          <Text
+            text={
+              <>
+                <b>¿Has olvidado tu contraseña?</b> Para recuperarla introduce tu email y te
+                enviaremos una nueva por correo.
+              </>
+            }
+          />
           <Input
             type="email"
             name="email"
-            placeholder="enter your email"
+            placeholder="Email"
             register={register('email')}
             error={errors.email?.message}
           />
@@ -78,7 +86,7 @@ function RecoverPassword() {
             loadingText="Enviando"
             iconPosition="left"
             type="submit"
-            className="w-full blue-gradient mt-6"
+            className="w-full orange-gradient mt-6 shadow-lg"
             isLoading={isLoading}
             animated={animatedState}
           />
