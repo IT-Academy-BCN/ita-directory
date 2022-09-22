@@ -80,6 +80,7 @@ function RecoverPassword() {
             placeholder="Email"
             register={register('email')}
             error={errors.email?.message}
+            data-test-id="email"
           />
           <AsyncButton
             text="Enviar"
