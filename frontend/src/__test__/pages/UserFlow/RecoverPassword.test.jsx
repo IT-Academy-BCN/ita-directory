@@ -4,7 +4,10 @@ import { describe, it, expect } from 'vitest'
 import configureStore from 'redux-mock-store'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import axios from 'axios'
 import { RecoverPassword } from '../../../pages'
+
+jest.mock('axios')
 
 describe('<RecoverPassword>', () => {
   const initialState = {
@@ -55,8 +58,17 @@ describe('<RecoverPassword>', () => {
     fireEvent.change(input, { target: { value: 'test@mail.com' } })
     expect(input.value).toMatch(emailFormat)
   })
+
+  it('receives in post request an object', () => {
+    const mockedAxios = axios
+    const data = {}
+    const mockedPost = mockedAxios.post.mockReturnValueOnce(data)
+    expect(mockedPost).toBeTypeOf('object')
+    expect(axios.post).toHaveBeenCalled()
+  })
 })
 
+// Outro
 // it('renders without crashing', () => {
 //   const wrapper = shallow(
 //     <Provider store={store}>
