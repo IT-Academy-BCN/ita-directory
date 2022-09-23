@@ -94,6 +94,7 @@ const UserAccessStyled = styled.div`
 function UserAccess() {
   const history = useHistory()
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
+
   const user = useUser()
 
   const children = [

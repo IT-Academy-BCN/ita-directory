@@ -1,7 +1,103 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import RecoverPassword from '../../../pages/UserFlow/RecoverPassword/RecoverPassword'
+import configureStore from 'redux-mock-store'
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { RecoverPassword } from '../../../pages'
+
+describe('<RecoverPassword>', () => {
+  const initialState = {
+    user: {
+      isLoggedIn: false,
+      value: undefined,
+    },
+    notification: {
+      notifications: {},
+    },
+  }
+  // mockStore=>to read state if tests don’t rely on the store updates
+  const mockStore = configureStore()
+  let store
+
+  it('shows an input with an "Email" placeholder', () => {
+    store = mockStore(initialState)
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <RecoverPassword />
+        </BrowserRouter>
+      </Provider>
+    )
+    // const { getByText } = render(<Provider store={store}><BrowserRouter><RecoverPassword /></BrowserRouter></Provider>)
+    // let input = screen.getByRole("textbox", { name: "email" });
+    const input = screen.getByPlaceholderText('Email')
+    // expect(getByText(/email/i)).toBeInTheDocument()
+    expect(input).toBeInTheDocument()
+  })
+
+  it('pass valid email to test email input field', () => {
+    store = mockStore(initialState)
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <RecoverPassword />
+        </BrowserRouter>
+      </Provider>
+    )
+    const input = screen.getByPlaceholderText('Email')
+    const emailFormat = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    // userEvent()=>simulates full interactions, which may fire multiple events and do additional checks along the way.
+    //  userEvent.type(input, "test@mail.com");
+    // expect(input).toHaveValue("test@mail.com");
+    // fireEvent.change(input, { target: { value: "test@mail.com" } });
+    // expect(input.value).toEqual("test@mail.com");
+    fireEvent.change(input, { target: { value: 'test@mail.com' } })
+    expect(input.value).toMatch(emailFormat)
+  })
+})
+
+// it('renders without crashing', () => {
+//   const wrapper = shallow(
+//     <Provider store={store}>
+//       <RecoverPassword />
+//     </Provider>,
+//   );
+//   expect(wrapper).toMatchSnapshot();
+// });
+
+// function render(
+//   ui,
+//   {
+//     initialState,
+//     store = createStore(userSlice.reducer, initialState),
+//     ...renderOptions
+//   } = {}
+// ) {
+//   function Wrapper({ children }) {
+//     return <Provider store={store}><BrowserRouter>{children}</BrowserRouter></Provider>
+//   }
+//   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
+// }
+
+// it('Renders the connected app with initialState', () => {
+//   render(<RecoverPassword />, { initialState: { user: 'Redux User' } })
+
+//   expect(screen.getByText(/email/i)).toBeInTheDocument()
+// })
+
+// describe('With React Testing Library', () => {
+//   const initialState = false
+//   const mockStore = configureStore()
+//   let store,wrapper
+
+//   it('shows email in input"', () => {
+//     store = mockStore(initialState)
+//     const { getByText } = render(<Provider store={store}><BrowserRouter><RecoverPassword /></BrowserRouter></Provider>)
+
+//     expect(getByText(/email/i)).not.toBeNull()
+//   })
+// })
 
 // test
 // Arrange: inputs (email) and targets.
@@ -10,20 +106,20 @@ import RecoverPassword from '../../../pages/UserFlow/RecoverPassword/RecoverPass
 //    Act steps should cover the main thing to be tested. This could be calling a function or method, calling a REST API, or interacting with a web page. Keep actions focused on the target behavior.
 // Assert: expected outcomes('Check email). Act steps should elicit some sort of response. Assert steps verify the goodness or badness of that response. Sometimes, assertions are as simple as checking numeric or string values. Other times, they may require checking multiple facets of a system. Assertions will ultimately determine if the test passes or fails.
 
-describe('Recover Password', () => {
-  it.only('should render an input type email', () => {
-    // render(RecoverPassword)
-    render(<RecoverPassword />)
-    expect(screen.getByText(/email/i)).toBeInTheDocument()
-    // const inputEl = screen.getByText("email");
-    // const inputEl = screen.getAllByPlaceholderText(/email/i);
-    // expect(inputEl).toBeInTheDocument();
-    // expect(inputEl).toHaveAttribute("type", "email");
-    // const input = screen.getAllByRole(/email/i)
-    // expect(inputEl.outerHTML.includes('type="email"')).toBeTruthy()
-    // expect(inputEl.querySelector('input')).toBeInTheDocument()
-  })
-})
+// describe('Recover Password', () => {
+//   it.only('should render an input type email', () => {
+//     // render(RecoverPassword)
+//     render(<RecoverPassword />)
+//     expect(screen.getByText(/email/i)).toBeInTheDocument()
+//     // const inputEl = screen.getByText("email");
+//     // const inputEl = screen.getAllByPlaceholderText(/email/i);
+//     // expect(inputEl).toBeInTheDocument();
+//     // expect(inputEl).toHaveAttribute("type", "email");
+//     // const input = screen.getAllByRole(/email/i)
+//     // expect(inputEl.outerHTML.includes('type="email"')).toBeTruthy()
+//     // expect(inputEl.querySelector('input')).toBeInTheDocument()
+//   })
+// })
 
 // describe("<RecoverPassword />", () => {
 
@@ -31,7 +127,7 @@ describe('Recover Password', () => {
 //     render(RecoverPassword);
 //     const input = screen.getByTestId(/email/i)
 //     fireEvent.submit(input, { target: { value: 'test@test.test' }})
-//     // let output = document.getElementById("output");
+//     // let output =screen.getByTest("email");
 //     // expect(output).toHaveTextContent("abcdef");
 // });
 // });
