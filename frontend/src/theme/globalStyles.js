@@ -7,7 +7,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     background: white;
-    font-family: ${font.fontFamily}
+    font-family: ${font.fontFamily};
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 `
 
