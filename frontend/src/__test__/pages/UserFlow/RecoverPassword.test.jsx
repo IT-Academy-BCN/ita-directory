@@ -57,10 +57,10 @@ describe('<RecoverPassword>', () => {
     expect(input.value).toMatch(emailFormat)
   })
 
-  // it('receives in post request an object', () => {
+  // it('receives in axios post request an object', () => {
   //   const mockedAxios = axios
   //   const data = {}
-  //   const mockedPost = mockedAxios.post.mockReturnValueOnce(data)
+  //   const mockedPost = mockedAxios.post.mockReturnValueOnce()
   //   expect(mockedPost).toBeTypeOf('object')
   //   expect(axios.post).toHaveBeenCalled()
   // })
