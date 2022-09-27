@@ -60,7 +60,7 @@ describe('<RecoverPassword>', () => {
   // it('receives in axios post request an object', () => {
   //   const mockedAxios = axios
   //   const data = {}
-  //   const mockedPost = mockedAxios.post.mockReturnValueOnce()
+  //   const mockedPost = mockedAxios.post.mockReturnValueOnce(data)
   //   expect(mockedPost).toBeTypeOf('object')
   //   expect(axios.post).toHaveBeenCalled()
   // })
