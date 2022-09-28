@@ -21,7 +21,10 @@ const registerSchema = yup.object().shape({
     .string()
     .required('No password provided.')
     .min(6, 'Password is too short - should be 6 chars minimum.')
-    .matches(regex, 'Debe contener un carácter especial (@ $ ! % * # ? &) y al menos un número'),
+    .matches(
+      regex,
+      'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
+    ),
   privacy: yup.boolean().oneOf([true], 'You must accept the terms and conditions').required(),
 })
 
