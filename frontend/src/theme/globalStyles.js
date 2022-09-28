@@ -8,8 +8,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: white;
     font-family: ${font.fontFamily};
-    overflow-y: scroll;
-    overflow-x: hidden;
   }
 `
 
