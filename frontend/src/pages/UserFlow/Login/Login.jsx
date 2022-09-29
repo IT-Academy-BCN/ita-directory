@@ -134,6 +134,7 @@ function Login() {
               iconPosition="left"
               type="submit"
               className="blue-gradient"
+              data-testid="formLoginButton"
             />
             <div>
               <RedirectStyled>

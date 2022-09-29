@@ -83,6 +83,7 @@ function Button({
   iconStyles,
   animated,
   onClick,
+  ...props
 }) {
   return (
     <StyledButton
@@ -92,6 +93,7 @@ function Button({
       style={{ ...buttonStyles }}
       onClick={onClick}
       textColor={textColor}
+      {...props}
     >
       {iconPosition === 'left' &&
         (!isLoading && icon ? (
