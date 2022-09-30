@@ -8,8 +8,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { RecoverPassword } from '../../../pages'
 
-vi.mock('axios')
-
 const initialState = {
   user: {
     isLoggedIn: false,
@@ -23,6 +21,9 @@ const mockStore = configureStore()
 const store = mockStore(initialState)
 
 describe('<RecoverPassword>', () => {
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
   it('shows an input with an "Email" placeholder', () => {
     render(
       <Provider store={store}>
@@ -58,16 +59,12 @@ describe('<RecoverPassword>', () => {
         </BrowserRouter>
       </Provider>
     )
-    // given
     const submitBtn = screen.getByRole('button', { name: /enviar/i })
     const email = { email: 'test@test.test' }
-    axios.post.mockResolvedValueOnce(email)
-    // when
+    const url = 'http://localhost:3000/recover-password'
+    const spy = vi.spyOn(axios, 'post')
     await userEvent.click(submitBtn)
-    // then
-    expect(axios.post).toHaveBeenCalledWith(
-      `${import.meta.env.VITE_API_URL}/recover-password`,
-      email
-    )
+    axios.post(url, email)
+    expect(spy).toHaveBeenCalledWith(url, email)
   })
 })
