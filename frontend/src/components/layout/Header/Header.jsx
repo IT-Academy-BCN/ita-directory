@@ -65,7 +65,7 @@ export const StyledSubHeader = styled.div`
   border-left: none;
   border-right: none;
   margin-bottom: 1rem;
-  padding: 10px 0;
+  padding: 10px;
 
   h1 {
     width: 100%;
