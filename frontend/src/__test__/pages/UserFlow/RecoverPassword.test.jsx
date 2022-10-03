@@ -53,7 +53,7 @@ describe('<RecoverPassword>', () => {
     expect(input.value).toMatch(emailFormat)
   })
 
-  it('should submit form', async () => {
+  it.only('should submit form', async () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
@@ -69,20 +69,20 @@ describe('<RecoverPassword>', () => {
     expect(spy).toHaveBeenCalledWith(url, email)
   })
 
-  // it.only('should submit form and return status 200', async () => {
-  //   render(
-  //     <Provider store={store}>
-  //       <BrowserRouter>
-  //         <RecoverPassword />
-  //       </BrowserRouter>
-  //     </Provider>
-  //   )
-  //   const submitBtn = screen.getByRole('button', { name: /enviar/i })
-  //   const email = { email: 'test@test.test' }
-  //   const url = 'http://localhost:3000/recover-password'
-  //   const response = { status: 200 }
-  //   axios.post.mockResolvedValueOnce(response)
-  //   await userEvent.click(submitBtn)
-  //   expect(axios.post).toHaveBeenCalledWith(url, email)
-  // })
+  it('should submit form and return status 200', async () => {
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <RecoverPassword />
+        </BrowserRouter>
+      </Provider>
+    )
+    const submitBtn = screen.getByRole('button', { name: /enviar/i })
+    const email = { email: 'test@test.test' }
+    const url = 'http://localhost:3000/recover-password'
+    const response = { status: 200 }
+    axios.post.mockResolvedValueOnce(response)
+    await userEvent.click(submitBtn)
+    expect(axios.post).toHaveBeenCalledWith(url, email)
+  })
 })
