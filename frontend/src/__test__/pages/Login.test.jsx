@@ -3,7 +3,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Provider } from 'react-redux'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
+/* import userEvent from '@testing-library/user-event' */
 import { BrowserRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
 import Login from '../../pages/UserFlow/Login/Login'
@@ -87,7 +88,7 @@ describe('Login', async () => {
     fireEvent.change(emailInput, { target: { value: 'wrong email' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    await waitFor(() => expect(screen.getByText('must be a valid email')).toBeInTheDocument())
+    expect(await screen.findByText('must be a valid email')).toBeInTheDocument()
   })
 
   it('should show error message if no email is provided', async () => {
@@ -103,7 +104,7 @@ describe('Login', async () => {
     fireEvent.change(emailInput, { target: { value: '' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    await waitFor(() => expect(screen.getByText('email is required')).toBeInTheDocument())
+    expect(await screen.findByText('email is required')).toBeInTheDocument()
   })
 
   it('should show error message if no password is provided', async () => {
@@ -119,7 +120,7 @@ describe('Login', async () => {
     fireEvent.change(passwordInput, { target: { value: '' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    await waitFor(() => expect(screen.getByText('No password provided.')).toBeInTheDocument())
+    expect(await screen.findByText('No password provided.')).toBeInTheDocument()
   })
 
   it('should show error message if password is too short', async () => {
@@ -132,16 +133,31 @@ describe('Login', async () => {
     )
 
     const passwordInput = screen.getByLabelText('Password')
-    fireEvent.change(passwordInput, { target: { value: '12345' } })
+    fireEvent.change(passwordInput, { target: { value: '1aB' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    await waitFor(() =>
-      expect(
-        screen.getByText('Password is too short - should be 6 chars minimum.')
-      ).toBeInTheDocument()
-    )
+    expect(
+      await screen.findByText('Password is too short - should be 6 chars minimum.')
+    ).toBeInTheDocument()
   })
-/* 
+
+  /* it.only('should show error message if password does not match RegEx', async () => {
+    render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <Login />
+        </Provider>
+      </BrowserRouter>
+    )
+    const user = userEvent.setup()
+    const leftClick = { button: 0 }
+    const passwordInput = screen.getByLabelText('Password')
+    await userEvent.type(passwordInput, '')
+    const loginButton = screen.queryByTestId('formLoginButton')
+    await user.click(loginButton, leftClick)
+    expect(await screen.findByText('No password provided')).toBeInTheDocument()
+  }) */
+
   it.only('should show error message if password does not match RegEx', async () => {
     render(
       <BrowserRouter>
@@ -152,13 +168,13 @@ describe('Login', async () => {
     )
 
     const passwordInput = screen.getByLabelText('Password')
-    fireEvent.change(passwordInput, { target: { value: '1234567' } })
+    fireEvent.change(passwordInput, { target: { value: '1234564' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    await waitFor(() =>
-      expect(
-        screen.getByText('Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.')
-      ).toBeInTheDocument()
-    )
-  }) */
+    expect(
+      await screen.findByText(
+        'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
+      )
+    ).toBeInTheDocument()
+  })
 })
