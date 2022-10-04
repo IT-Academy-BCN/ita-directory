@@ -2,14 +2,13 @@
 import '@testing-library/jest-dom'
 import { describe, it, expect } from 'vitest'
 
+import readline from 'node:readline'
+import { screen, render } from '@testing-library/react'
+
 import events from 'node:events'
 import fs from 'node:fs'
-import readline from 'node:readline'
+import App from '../App'
 
-// todo: lectura del archivo con node
-// C:\Workspace\IT ACADEMY\Projecte IT\ita-directory\frontend\src\index.jsx
-
-// const filePath = 'C:\\Workspace\\IT ACADEMY\\Projecte IT\\ita-directory\\frontend\\src\\index.jsx'
 const filePathname = `${__dirname.split('__')[0]}index.jsx`
 
 const readFile = async (filePath) => {
@@ -43,5 +42,12 @@ const readFile = async (filePath) => {
 describe('testing normalize', () => {
   it('should be true if css found out', async () => {
     expect(await readFile(filePathname)).toBe(true)
+  })
+})
+
+describe('testing by ckecking a style property', () => {
+  it('should have box-sizing', () => {
+    render(<App />)
+    expect(screen.getByRole('container')).toHaveStyle('box-sizing: border-box')
   })
 })
