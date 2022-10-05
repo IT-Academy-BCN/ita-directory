@@ -6,7 +6,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import GlobalStyle from './theme/globalStyles'
 
 import store from './store/store'
-// import './modern-normalize.css'
 import './modern-normalize.css'
 import App from './App'
 

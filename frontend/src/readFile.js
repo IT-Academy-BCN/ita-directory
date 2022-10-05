@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 // Import fsPromises
 
@@ -8,7 +9,6 @@ const fs = require('fs')
 
 // const readIt = fs.readFile
 
-const expressionCommented = /[/+ ]import '.\/modern-normalize.css'/gi
 const expression = /import '.\/modern-normalize.css'/gi
 
 // const readData = (err, data) => {
@@ -25,11 +25,19 @@ const expression = /import '.\/modern-normalize.css'/gi
 // readIt('./index.jsx', 'utf8', readData)
 // console.log(readIt('./index.jsx', 'utf8', readData))
 
+let check = false
 fs.readFile('./index.jsx', 'utf-8', (err, data) => {
-  console.log(data)
-  if (data === expressionCommented) console.log('expressionCommented')
-  if (data === expression) return console.log(expression)
-  return false
+  const datarow = data.split(/\r?\n/)
+  for (const i in datarow)
+    if (datarow[i]) {
+      if (datarow[i].match(expression) && datarow[i].length <= 31) {
+        check = true
+        break
+      }
+    }
 })
 
 console.log('File has been reading Asynchronouly')
+setTimeout(() => {
+  console.log(check)
+}, 100)
