@@ -1,28 +1,22 @@
-/* eslint-disable no-console */
 import '@testing-library/jest-dom'
 import { describe, it, expect } from 'vitest'
 
 import readline from 'node:readline'
 
 import events from 'node:events'
-import fs from 'node:fs'
+import { createReadStream, readFile as readIt } from 'node:fs'
 
 const filePathname = `${__dirname.split('__')[0]}index.jsx`
 
 const readFile = async (filePath) => {
-  console.log('filePath -->', filePath)
   let checkedout = false
 
   try {
-    let lineNumber = 0
     const rl = readline.createInterface({
-      input: fs.createReadStream(filePath),
+      input: createReadStream(filePath),
     })
 
     rl.on('line', async (line) => {
-      lineNumber += 1
-      console.log(`Line from file ${lineNumber}: ${line}`)
-
       if (line === `import './modern-normalize.css'`) {
         checkedout = true
       }
@@ -30,11 +24,25 @@ const readFile = async (filePath) => {
 
     await events.once(rl, 'close')
   } catch (err) {
-    console.error(err)
     return false
   }
   return checkedout
 }
+
+const expressionCommented = /[/+ ]import '.\/modern-normalize.css'/gi
+const expression = /import '.\/modern-normalize.css'/gi
+
+const readData = (err, data) => {
+  try {
+    if (data === expressionCommented) return false
+    if (data === expression) return true
+    return false
+  } catch (e) {
+    return err
+  }
+}
+
+readIt('./index.jsx', 'utf8', readData)
 // test
 
 describe('testing normalize: read index.jsx and find out if imported css appears', () => {
