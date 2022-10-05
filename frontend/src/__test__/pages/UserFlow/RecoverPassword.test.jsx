@@ -1,28 +1,32 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios'
-import configureStore from 'redux-mock-store'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { RecoverPassword } from '../../../pages'
+import store from '../../../store/store'
 
-// vi.mock('axios')
+vi.mock('axios')
 
-const initialState = {
-  user: {
-    isLoggedIn: false,
-    value: undefined,
-  },
-  notification: {
-    notifications: {},
-  },
-}
-const mockStore = configureStore()
-const store = mockStore(initialState)
+vi.mock('../../../utils/axiosInstance', () => ({
+  create: vi.fn(() => ({
+    baseURL: 'adios',
+  })),
+}))
+
+vi.mock('../../../api/utils/patchUser', () => ({
+  create: vi.fn(() => ({
+    baseURL: 'adios',
+  })),
+}))
 
 describe('<RecoverPassword>', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+  })
+
   afterEach(() => {
     vi.clearAllMocks()
   })
@@ -53,7 +57,7 @@ describe('<RecoverPassword>', () => {
     expect(input.value).toMatch(emailFormat)
   })
 
-  it.only('should submit form', async () => {
+  it('should submit form', async () => {
     render(
       <Provider store={store}>
         <BrowserRouter>
@@ -64,24 +68,6 @@ describe('<RecoverPassword>', () => {
     const submitBtn = screen.getByRole('button', { name: /enviar/i })
     const email = { email: 'test@test.test' }
     const url = 'http://localhost:3000/recover-password'
-    const spy = vi.spyOn(axios, 'post')
-    await userEvent.click(submitBtn, axios.post(url, email))
-    expect(spy).toHaveBeenCalledWith(url, email)
-  })
-
-  it('should submit form and return status 200', async () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <RecoverPassword />
-        </BrowserRouter>
-      </Provider>
-    )
-    const submitBtn = screen.getByRole('button', { name: /enviar/i })
-    const email = { email: 'test@test.test' }
-    const url = 'http://localhost:3000/recover-password'
-    const response = { status: 200 }
-    axios.post.mockResolvedValueOnce(response)
     await userEvent.click(submitBtn)
     expect(axios.post).toHaveBeenCalledWith(url, email)
   })
