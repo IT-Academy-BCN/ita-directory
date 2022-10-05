@@ -43,23 +43,9 @@ const readData = (err, data) => {
 }
 
 readIt('./index.jsx', 'utf8', readData)
-// test
 
 describe('testing normalize: read index.jsx and find out if imported css appears', () => {
   it('should be true if css found out', async () => {
     expect(await readFile(filePathname)).toBe(true)
   })
 })
-
-// Comento este trozo para seguir investigando cómo se puede comprobar si se ha cargado
-// correctamente el css mirando en los estilos la propiedad característica del css principal
-// computados en un div del dom
-// describe('testing by ckecking a style property', () => {
-//   it('should have box-sizing', () => {
-//     render(<App />)
-//     const container = screen.getByRole('container')
-//     const styleComputed = window.getComputedStyle(container)
-//     console.log('styleComputed', styleComputed)
-//     expect(styleComputed.boxSizing).toBe('border-box')
-//   })
-// })
