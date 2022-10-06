@@ -3,6 +3,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import * as ReactRedux from 'react-redux'
+import PropTypes from 'prop-types'
 import store from '../store/store'
 
 const { Provider } = ReactRedux
@@ -21,3 +22,7 @@ const customRender = (ui, options) => render(StoreProvider)
 export * from '@testing-library/react'
 
 export { customRender as render }
+
+StoreProvider.prototype = {
+  children: PropTypes.node.isRequired,
+}
