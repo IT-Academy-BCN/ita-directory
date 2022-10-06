@@ -8,7 +8,7 @@ const filePathname = `${__dirname.split('__')[0]}index.jsx`
 
 const expression = /import '.\/modern-normalize.css'/gi
 
-const readFile = new Promise((resolve, reject) => {
+const readFile = new Promise((resolve) => {
   fs.readFile(filePathname, 'utf-8', (err, data) => {
     const datarow = data.split(/\r?\n/)
     datarow.forEach((line) => {
