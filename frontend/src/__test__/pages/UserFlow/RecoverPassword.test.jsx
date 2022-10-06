@@ -1,12 +1,11 @@
-// import { screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios'
 import { BrowserRouter } from 'react-router-dom'
-// import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 import { RecoverPassword } from '../../../pages'
-// import store from '../../../store/store'
-import { screen, render } from '../../test-utils'
+import store from '../../../store/store'
 
 vi.mock('axios')
 
@@ -31,27 +30,25 @@ describe('<RecoverPassword>', () => {
     vi.clearAllMocks()
   })
   it('shows an input with an "Email" placeholder', () => {
-    // render(
-    //   <Provider store={store}>
-    //     <BrowserRouter>
-    //       <RecoverPassword />
-    //     </BrowserRouter>
-    //   </Provider>
-    // )
-    render(<RecoverPassword />)
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <RecoverPassword />
+        </BrowserRouter>
+      </Provider>
+    )
     const input = screen.getByPlaceholderText(/email/i)
     expect(input).toBeInTheDocument()
   })
 
   it('pass valid email to test email input field', async () => {
-    render(<RecoverPassword />)
-    // render(
-    //   <Provider store={store}>
-    //     <BrowserRouter>
-    //       <RecoverPassword />
-    //     </BrowserRouter>
-    //   </Provider>
-    // )
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <RecoverPassword />
+        </BrowserRouter>
+      </Provider>
+    )
 
     const input = screen.getByPlaceholderText(/email/i)
     const emailFormat = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
