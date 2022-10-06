@@ -22,7 +22,10 @@ const loginSchema = yup.object().shape({
     .string()
     .required('No password provided.')
     .min(6, 'Password is too short - should be 6 chars minimum.')
-    .matches(regex),
+    .matches(
+      regex,
+      'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
+    ),
 })
 
 function Login() {
@@ -131,6 +134,7 @@ function Login() {
               iconPosition="left"
               type="submit"
               className="blue-gradient"
+              data-testid="formLoginButton"
             />
             <div>
               <RedirectStyled>
