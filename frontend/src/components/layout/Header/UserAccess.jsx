@@ -90,13 +90,10 @@ const UserAccessStyled = styled.div`
     }
   }
 `
-
 function UserAccess() {
   const history = useHistory()
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
-
   const user = useUser()
-
   const children = [
     { path: paths.profile, text: 'Editar perfil' },
     { path: paths.bills, text: 'Mis facturas' },

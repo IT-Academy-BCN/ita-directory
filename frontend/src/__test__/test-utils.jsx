@@ -24,6 +24,6 @@ export * from '@testing-library/react'
 
 export { customRender as render }
 
-StoreProvider.prototype = {
+StoreProvider.propTypes = {
   children: PropTypes.node.isRequired,
 }
