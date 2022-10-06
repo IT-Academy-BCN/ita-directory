@@ -23,6 +23,6 @@ const readFile = new Promise((resolve) => {
 
 describe('testing normalize: read index.jsx and find out if imported css appears', () => {
   it('should be true if css import is found out', () => {
-    readFile.then((data) => expect(data).toBe(true))
+    readFile.then((isCheck) => expect(isCheck).toBe(true))
   })
 })
