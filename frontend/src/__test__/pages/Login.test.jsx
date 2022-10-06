@@ -1,5 +1,3 @@
-/* eslint-disable testing-library/no-debugging-utils */
-/* eslint-disable jest/valid-describe-callback */
 import React from 'react'
 import axios from 'axios'
 import { Provider } from 'react-redux'
@@ -11,7 +9,7 @@ import store from '../../store/store'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-describe('Login', async () => {
+describe('Login', () => {
   beforeEach(() => {
     window.localStorage.clear()
   })

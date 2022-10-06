@@ -1,11 +1,9 @@
-/* eslint-disable testing-library/no-debugging-utils */
-/* eslint-disable jest/valid-describe-callback */
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import InputGroup from '../../components/molecules/InputGroup'
 
-describe('InputGroup', async () => {
+describe('InputGroup', () => {
   it('should render the InputGroup', () => {
     render(
       <InputGroup
