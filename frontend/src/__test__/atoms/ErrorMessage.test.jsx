@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import ErrorMessage from '../../components/atoms/Forms/ErrorMessage'
 
-describe('ErrorMessage', async () => {
+describe('ErrorMessage', () => {
   it('should render the given ErrorMessage', () => {
     render(<ErrorMessage text="some error" />)
     const errorMessage = screen.getByText('some error')
