@@ -1,4 +1,3 @@
-/* eslint-disable jest/valid-expect-in-promise */
 import '@testing-library/jest-dom'
 import { describe, it, expect } from 'vitest'
 
@@ -22,7 +21,8 @@ const readFile = new Promise((resolve) => {
 })
 
 describe('testing normalize: read index.jsx and find out if imported css appears', () => {
-  it('should be true if css import is found out', () => {
-    readFile.then((isCheck) => expect(isCheck).toBe(true))
+  it('should be true if css import is found out', async () => {
+    const isCheck = await readFile
+    expect(isCheck).toBe(true)
   })
 })
