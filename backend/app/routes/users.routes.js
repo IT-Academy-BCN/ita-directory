@@ -27,7 +27,6 @@ router.get(
  * @typedef {object} userRegistrationData
  * @property {string} email.required - Email of the user
  * @property {string} password.required - Pwd of the user
- * @property {boolean} privacy.required - Accept privacy from user
  */
 
 /**

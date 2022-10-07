@@ -101,7 +101,7 @@ exports.getUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
   const { name, lastnames, email, password } = req.body
 
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
+  const regex = new RegExp(process.env.PASSWORD_REGEX)
 
   if (!regex.test(password)) {
     return next({
@@ -325,7 +325,7 @@ exports.receiveEmailGetToken = async (req, res) => {
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      res.status(500).json(error.message)
+      res.status(400).json(error.message)
     } else {
       res.status(200).json({
         // id: info.messageId,
@@ -333,7 +333,7 @@ exports.receiveEmailGetToken = async (req, res) => {
       })
     }
   })
-  return res.sendStatus(204)
+  return res
 }
 
 // TODO: refactor controller method to use middleware auth

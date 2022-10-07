@@ -1,6 +1,6 @@
 const urls = {
   login: '/login',
-  register: '/register',
+  register: '/users',
   updateAvatar: '/users/update-avatar',
   user: '/user',
   users: '/users',
