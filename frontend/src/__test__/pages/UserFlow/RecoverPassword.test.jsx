@@ -1,11 +1,8 @@
-import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import userEvent from '@testing-library/user-event'
 import axios from 'axios'
-import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import userEvent from '@testing-library/user-event'
+import { render, screen } from '../../test-utils'
 import { RecoverPassword } from '../../../pages'
-import store from '../../../store/store'
 
 vi.mock('axios')
 
@@ -30,25 +27,13 @@ describe('<RecoverPassword>', () => {
     vi.clearAllMocks()
   })
   it('shows an input with an "Email" placeholder', () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <RecoverPassword />
-        </BrowserRouter>
-      </Provider>
-    )
+    render(<RecoverPassword />)
     const input = screen.getByPlaceholderText(/email/i)
     expect(input).toBeInTheDocument()
   })
 
   it('pass valid email to test email input field', async () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <RecoverPassword />
-        </BrowserRouter>
-      </Provider>
-    )
+    render(<RecoverPassword />)
 
     const input = screen.getByPlaceholderText(/email/i)
     const emailFormat = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -57,13 +42,7 @@ describe('<RecoverPassword>', () => {
   })
 
   it.skip('should submit form', async () => {
-    render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <RecoverPassword />
-        </BrowserRouter>
-      </Provider>
-    )
+    render(<RecoverPassword />)
     const submitBtn = screen.getByRole('button', { name: /enviar/i })
     const email = { email: 'test@test.test' }
     const url = 'http://localhost:3000/recover-password'
