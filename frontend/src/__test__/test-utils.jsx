@@ -8,7 +8,6 @@ import store from '../store/store'
 
 const { Provider } = ReactRedux
 
-// eslint-disable-next-line react/prop-types
 function StoreProvider({ children }) {
   return (
     <Provider store={store}>
