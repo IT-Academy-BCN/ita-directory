@@ -20,6 +20,7 @@ import {
 } from './CreateNewAd.styles'
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
+import { Label } from '../../components/atoms'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -98,7 +99,7 @@ function CreateNewAd() {
 
   const inputComponentData = [
     {
-      Component: InputNumber,
+      Component: Input,
       type: 'text',
       label: 'Título',
       name: 'title',
@@ -113,7 +114,7 @@ function CreateNewAd() {
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
-      Component: InputNumber,
+      Component: Input,
       type: 'text',
       label: 'Ciudad',
       name: 'city',
@@ -253,7 +254,7 @@ function CreateNewAd() {
           )}
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
-            {inputComponentData.map((el, i) => {
+            {inputComponentData.map((inputData, i) => {
               const {
                 Component,
                 label,
@@ -262,12 +263,12 @@ function CreateNewAd() {
                 inputClassName,
                 icon,
                 inputContainerClassName,
-              } = el
+              } = inputData
               return (
                 <div key={label}>
                   <div className="form-label">
                     {/* @todo: fix label and import component Label */}
-                    <label htmlFor="sdasd">{label}</label>
+                    <Label label={label} htmlFor={name} />
                   </div>
                   <Component
                     key={label}

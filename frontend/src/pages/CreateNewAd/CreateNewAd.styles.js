@@ -17,28 +17,29 @@ export const Wrapper = styled.div`
   margin-bottom: 2rem;
 
   .style-input-create-new-ad {
-    /* border: 1px solid #707070; */
     border-radius: 0;
     /* border-bottom: 1px solid ${colors.transparent}; */
-    border-bottom: 1px solid ${colors.lightGray};
+    // border-bottom: 1px solid ${colors.lightGray};
   }
 
   input.style-input-create-new-ad {
-    border: none;
-    border-bottom: 1px solid ${colors.lightGray};
-    padding: 0.3rem 0.5rem;
+    // border: 1px solid red;
+
+    // border-bottom: 1px solid ${colors.lightGray};
+    // padding: 0.2em 0.1em;
+    padding: 2px;
 
     &:hover {
-      border-radius: 1rem;
-      border-bottom: 1px solid ${colors.redPink};
+      // border-radius: 1rem;
+      // border-bottom: 1px solid ${colors.redPink};
     }
     &.error {
       border-bottom: 1px solid #fecaca !important;
     }
     &:focus {
-      outline: 0 none;
-      border-radius: 1rem;
-      border-bottom: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+      // outline: 0 none;
+      // border-radius: 1rem;
+      // border-bottom: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
     }
   }
 
