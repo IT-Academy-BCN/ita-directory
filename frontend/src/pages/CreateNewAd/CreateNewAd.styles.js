@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device, colors } from '../../theme'
+import { device } from '../../theme'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,30 +16,12 @@ export const Wrapper = styled.div`
   border-radius: 0.5em;
   margin-bottom: 2rem;
 
-  .style-input-create-new-ad {
-    border-radius: 0;
-    /* border-bottom: 1px solid ${colors.transparent}; */
-    // border-bottom: 1px solid ${colors.lightGray};
-  }
-
   input.style-input-create-new-ad {
-    // border: 1px solid red;
-
-    // border-bottom: 1px solid ${colors.lightGray};
-    // padding: 0.2em 0.1em;
-    padding: 2px;
-
     &:hover {
-      // border-radius: 1rem;
-      // border-bottom: 1px solid ${colors.redPink};
     }
     &.error {
-      border-bottom: 1px solid #fecaca !important;
     }
     &:focus {
-      // outline: 0 none;
-      // border-radius: 1rem;
-      // border-bottom: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
     }
   }
 
@@ -80,20 +62,16 @@ export const Wrapper = styled.div`
 
     > div {
       min-width: 10rem;
-      /* border-bottom: 1px solid ${colors.lightGray};
 
-			&:hover {
-				border-radius: 1rem;
-				border-bottom: 1px solid ${colors.redPink};
-			}
-			&.error {
-				border: 1px solid #fecaca !important;
-			}
-			&:focus {
-				outline: 0 none;
-				border-radius: 1rem;
-				border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-			} */
+      &:hover {
+      }
+      &.error {
+      }
+      &:focus {
+        outline: 0 none;
+        border-radius: 1rem;
+      }
+      */
 
       /* width: 100%; */
 
@@ -141,7 +119,6 @@ export const Wrapper = styled.div`
 
     /* &.inputsContainer {
 			& div {
-				border: 1px solid #707070;
 			}
 		} */
 

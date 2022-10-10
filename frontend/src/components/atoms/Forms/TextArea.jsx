@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
 
-const TextAreaStyled = styled.div.attrs({
-  className: 'text-grey mt-4',
-})`
+const TextAreaStyled = styled.div`
   & {
     &.textAreaCreateNewAd {
       @media ${device.Tablet} {
@@ -14,22 +12,10 @@ const TextAreaStyled = styled.div.attrs({
   }
 `
 
-const TextAreaInput = styled.textarea.attrs((props) => ({
-  rows: 8,
-  className: `textarea
-				border
-				
-				rounded
-				block
-				text-xs
-				text-1x2
-				p-3
-				overflow-y-auto
-				resize-none
-				text-darkGray
-				`,
-}))`
-  width: 93%;
+const TextAreaInput = styled.textarea`
+  width: 100%;
+  height: 8.8rem;
+  border-radius: 6px;
   display: flex;
   margin: 0 auto;
   justify-self: center;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
@@ -183,11 +184,11 @@ function CreateNewAd() {
           },
         })
         .then((response) => {
-          //   console.log(response.data)
+          console.log(response.data)
           setValidCsvFile(true)
         })
         .catch((error) => {
-          //   console.log(error)
+          console.log(error)
           setValidCsvFile(false)
         })
     }
@@ -239,19 +240,21 @@ function CreateNewAd() {
               text="Subir Archivo"
               type="normal"
               className="green-gradient"
-              onClick={() => submitCsv()}
+              onClick={() => {
+                submitCsv()
+                dispatch(
+                  newNotification({
+                    message:
+                      validCsvFile === false
+                        ? 'Tus anuncios no se han podido publicar.'
+                        : 'Tus anuncios han sido publicados con éxito',
+                    type:
+                      validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
+                  })
+                )
+              }}
             />
           </Modal>
-
-          {dispatch(
-            newNotification({
-              message:
-                validCsvFile === false
-                  ? 'Tus anuncios no se han podido publicar.'
-                  : 'Tus anuncios han sido publicados con éxito',
-              type: validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
-            })
-          )}
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
             {inputComponentData.map((inputData, i) => {
