@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-
 import Ad from './pages/Ad/Ad'
 import ProtectedRoute from './components/organisms/ProtectedRoute'
 import {
