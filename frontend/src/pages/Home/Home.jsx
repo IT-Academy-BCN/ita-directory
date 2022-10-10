@@ -5,7 +5,7 @@ import { MapOfDistricts } from '../../components/organisms'
 import { Container, device } from '../../theme'
 import { Menu } from '../../components/molecules'
 
-const HomeContainer = styled(Container).attrs({ role: 'container', title: 'Home' })`
+const HomeContainer = styled(Container)`
   flex-direction: column;
   min-height: calc(100vh - 360px);
 
