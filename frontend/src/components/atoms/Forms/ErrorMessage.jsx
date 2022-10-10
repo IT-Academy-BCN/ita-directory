@@ -10,7 +10,11 @@ const ErrorStyled = styled.p`
   color: ${colors.bloodRed};
 `
 function ErrorMessage({ text }) {
-  return <ErrorStyled as="span">{text}</ErrorStyled>
+  return (
+    <ErrorStyled as="span" data-testid="error">
+      {text}
+    </ErrorStyled>
+  )
 }
 
 ErrorMessage.propTypes = {

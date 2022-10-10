@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import axios from 'axios'
 import { Provider } from 'react-redux'
+import axios from 'axios'
 import { BrowserRouter as Router } from 'react-router-dom'
 import GlobalStyle from './theme/globalStyles'
-
 import store from './store/store'
 import './modern-normalize.css'
 import App from './App'

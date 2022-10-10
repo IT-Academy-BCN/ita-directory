@@ -40,7 +40,12 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
+    "@testing-library/dom": "8.18.1",
+    "@testing-library/user-event": "14.4.3",
     "eslint": "8.17.0",
     "husky": "6.0.0"
+  },
+  "dependencies": {
+    "@jest/globals": "29.1.0"
   }
 }
