@@ -6,21 +6,16 @@ import { colors } from '../../../theme'
 const InputStyled = styled.input`
   height: 40px;
   width: 90%;
-  padding: 0rem 1rem;
-  margin: 5px 0px;
-  border-radius: 0.5rem;
-  border: 1px solid #b0b0b0;
-  font-size: 16px;
 
   &:hover {
-    border: 1px solid ${colors.lightBlue};
+    // border: 1px solid ${colors.lightBlue};
   }
   &.error {
-    border: 1px solid #fecaca !important;
+    // border: 1px solid #fecaca !important;
   }
   &:focus {
-    outline: 0 none;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+    // outline: 0 none;
+    // border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
   }
 `
 

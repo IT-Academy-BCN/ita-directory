@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
@@ -20,6 +21,7 @@ import {
 } from './CreateNewAd.styles'
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
+import { Label } from '../../components/atoms'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -98,7 +100,7 @@ function CreateNewAd() {
 
   const inputComponentData = [
     {
-      Component: InputNumber,
+      Component: Input,
       type: 'text',
       label: 'Título',
       name: 'title',
@@ -113,7 +115,7 @@ function CreateNewAd() {
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
-      Component: InputNumber,
+      Component: Input,
       type: 'text',
       label: 'Ciudad',
       name: 'city',
@@ -182,11 +184,11 @@ function CreateNewAd() {
           },
         })
         .then((response) => {
-          //   console.log(response.data)
+          console.log(response.data)
           setValidCsvFile(true)
         })
         .catch((error) => {
-          //   console.log(error)
+          console.log(error)
           setValidCsvFile(false)
         })
     }
@@ -238,22 +240,24 @@ function CreateNewAd() {
               text="Subir Archivo"
               type="normal"
               className="green-gradient"
-              onClick={() => submitCsv()}
+              onClick={() => {
+                submitCsv()
+                dispatch(
+                  newNotification({
+                    message:
+                      validCsvFile === false
+                        ? 'Tus anuncios no se han podido publicar.'
+                        : 'Tus anuncios han sido publicados con éxito',
+                    type:
+                      validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
+                  })
+                )
+              }}
             />
           </Modal>
 
-          {dispatch(
-            newNotification({
-              message:
-                validCsvFile === false
-                  ? 'Tus anuncios no se han podido publicar.'
-                  : 'Tus anuncios han sido publicados con éxito',
-              type: validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
-            })
-          )}
-
           <form onSubmit={handleSubmit(submitForm)} noValidate>
-            {inputComponentData.map((el, i) => {
+            {inputComponentData.map((inputData, i) => {
               const {
                 Component,
                 label,
@@ -262,12 +266,12 @@ function CreateNewAd() {
                 inputClassName,
                 icon,
                 inputContainerClassName,
-              } = el
+              } = inputData
               return (
                 <div key={label}>
                   <div className="form-label">
                     {/* @todo: fix label and import component Label */}
-                    <label htmlFor="sdasd">{label}</label>
+                    <Label label={label} htmlFor={name} />
                   </div>
                   <Component
                     key={label}
