@@ -5,7 +5,7 @@ import axios from 'axios'
 import { BrowserRouter as Router } from 'react-router-dom'
 import GlobalStyle from './theme/globalStyles'
 import store from './store/store'
-import './modern-normalize.css'
+import 'modern-normalize/modern-normalize.css'
 import App from './App'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
