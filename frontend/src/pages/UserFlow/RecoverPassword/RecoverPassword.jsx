@@ -32,8 +32,7 @@ function RecoverPassword() {
   })
 
   const submitForm = (data) => {
-    const { email } = data
-    sendEmail(email)
+    sendEmail(data)
   }
 
   const sendEmail = async (data) => {
