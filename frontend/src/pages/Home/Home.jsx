@@ -42,7 +42,7 @@ const HomeContainer = styled(Container)`
 function Home() {
   return (
     <Body menu={<Menu />} justifyTitle="center">
-      <HomeContainer>
+      <HomeContainer data-testid="homeContainerTest">
         <Banner />
         <MapOfDistricts />
       </HomeContainer>
