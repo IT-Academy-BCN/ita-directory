@@ -159,13 +159,16 @@ router.patch(
  * @tags Users
  * @param {userRecoverData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
+ * @return {object} 404 - Not found
  * @return {object} 400 - Bad request response
  * @example request - Payload example
  * { "email": "email@example.com"}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "email sent successfully"}
- * @example response - 400 - Example error response
+ * @example response - 404 - Example error response
  * { "errCode":"errCode", "message":"email not found"}
+ * @example response - 400 - Example error response
+ * { "errCode":"errCode", "message":"some error"}
  */
 
 router.post('/recover-password', UsersController.receiveEmailGetToken)
