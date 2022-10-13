@@ -118,8 +118,8 @@ function CreateNewAd() {
       label: 'Ciudad',
       name: 'city',
       required: true,
-      inputContainerClassName: 'style-input-create-new-ad',
       icon: 'Map',
+      inputContainerClassName: 'style-input-create-new-ad',
     },
     {
       Component: InputNumber,
@@ -205,6 +205,57 @@ function CreateNewAd() {
     >
       <Container>
         <Wrapper>
+          <form onSubmit={handleSubmit(submitForm)} noValidate>
+            {inputComponentData.map((data) => {
+              const {
+                Component,
+                label,
+                type,
+                name,
+                inputClassName,
+                icon,
+                inputContainerClassName,
+              } = data
+              return (
+                <div key={label}>
+                  <div className="form-label">
+                    {/* @todo: fix label and import component Label */}
+                    <Label label={label} htmlFor={name} />
+                  </div>
+                  <Component
+                    key={label}
+                    type={type}
+                    name={name}
+                    className={inputClassName}
+                    icon={icon && icon}
+                    inputContainerClassName={inputContainerClassName}
+                    register={register(`${name}`)}
+                    error={errors[name]?.message}
+                  />
+                </div>
+              )
+            })}
+            <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
+            <MapBox>
+              <CustomMap setCoordinates={setCoordinates} />
+            </MapBox>
+            <Button
+              buttonStyles={{
+                width: '7.25rem',
+                height: '2.125rem',
+                marginBottom: '2rem',
+              }}
+              text="Enviar"
+              type="normal"
+              className="blue-gradient"
+            />
+          </form>
+          {submittedData && (
+            <div>
+              <p>The following data was submitted:</p>
+              <pre>{submittedData}</pre>
+            </div>
+          )}
           <Button
             buttonStyles={{
               width: '17.25rem',
@@ -253,58 +304,6 @@ function CreateNewAd() {
               }}
             />
           </Modal>
-
-          <form onSubmit={handleSubmit(submitForm)} noValidate>
-            {inputComponentData.map((inputData) => {
-              const {
-                Component,
-                label,
-                type,
-                name,
-                inputClassName,
-                icon,
-                inputContainerClassName,
-              } = inputData
-              return (
-                <div key={label}>
-                  <div className="form-label">
-                    {/* @todo: fix label and import component Label */}
-                    <Label label={label} htmlFor={name} />
-                  </div>
-                  <Component
-                    key={label}
-                    type={type}
-                    name={name}
-                    className={inputClassName}
-                    icon={icon && icon}
-                    inputContainerClassName={inputContainerClassName}
-                    register={register(`${name}`)}
-                    error={errors[name]?.message}
-                  />
-                </div>
-              )
-            })}
-            <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
-            <MapBox>
-              <CustomMap setCoordinates={setCoordinates} />
-            </MapBox>
-            <Button
-              buttonStyles={{
-                width: '7.25rem',
-                height: '2.125rem',
-                marginBottom: '2rem',
-              }}
-              text="Enviar"
-              type="normal"
-              className="blue-gradient"
-            />
-          </form>
-          {submittedData && (
-            <div>
-              <p>The following data was submitted:</p>
-              <pre>{submittedData}</pre>
-            </div>
-          )}
         </Wrapper>
       </Container>
     </Body>

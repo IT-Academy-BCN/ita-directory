@@ -6,15 +6,9 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin-top: 1.4rem;
 
-  padding-left: 0vw;
-  padding-right: 0vw;
-
-  padding: 0.1rem;
   background-color: ${colors.extraLightGrey};
-  border-radius: 0.5em;
-  margin-bottom: 2rem;
 
   input.style-input-create-new-ad {
     &:hover {
@@ -40,21 +34,17 @@ export const Wrapper = styled.div`
     }
   }
 
-  form div {
-    /* display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-self: center;
-		width: 98%; */
-  }
-
   form > div {
     display: flex;
     justify-content: center;
     text-align: start;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 1rem;
+
+    /* just propose of design, it must be deleted 👇 */
+    border: 2px solid green;
+    /* ******************************************** */
 
     @media ${device.Tablet} {
       flex-direction: row;
@@ -63,16 +53,17 @@ export const Wrapper = styled.div`
     > div {
       min-width: 10rem;
 
+      /* just propose of design, it must be deleted 👇 */
+      margin: 5px;
+      border: 1px solid red;
+      /* ******************************************** */
+
       &:hover {
       }
       &.error {
       }
       &:focus {
-        outline: 0 none;
-        border-radius: 1rem;
       }
-
-      /* width: 100%; */
 
       &:last-of-type {
         // mapa
@@ -91,7 +82,7 @@ export const Wrapper = styled.div`
         margin-right: 0.5rem;
       }
 
-      /*       &:not(:first-of-type) {
+      /* &:not(:first-of-type) {
         width: 100%;
         input,
         textarea {
