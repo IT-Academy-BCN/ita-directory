@@ -5,14 +5,18 @@ import { colors } from '../../../theme'
 
 const InputStyled = styled.input`
   height: 40px;
-  width: 90%;
-  border: 10px solid red;
+  width: 100%;
+  padding: 0rem 1rem;
+  margin: 5px 0px;
+  border-radius: 6px;
+  border: 1px solid ${colors.grey};
+  font-size: 16px;
 
   &:hover {
-    border: 1px solid ${colors.darkOrange};
+    border-color: ${colors.darkGrey};
   }
   &.error {
-    // border: 1px solid #fecaca !important;
+    border-color: ${colors.darkRed};
   }
   &:focus {
     // outline: 0 none;
