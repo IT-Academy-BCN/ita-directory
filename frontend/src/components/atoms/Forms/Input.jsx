@@ -6,9 +6,10 @@ import { colors } from '../../../theme'
 const InputStyled = styled.input`
   height: 40px;
   width: 90%;
+  border: 10px solid red;
 
   &:hover {
-    // border: 1px solid ${colors.lightBlue};
+    border: 1px solid ${colors.darkOrange};
   }
   &.error {
     // border: 1px solid #fecaca !important;

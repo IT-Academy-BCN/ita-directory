@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device } from '../../theme'
+import { device, colors } from '../../theme'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   padding-right: 0vw;
 
   padding: 0.1rem;
-  background-color: #f7f7f7;
+  background-color: ${colors.extraLightGrey};
   border-radius: 0.5em;
   margin-bottom: 2rem;
 
@@ -71,7 +71,6 @@ export const Wrapper = styled.div`
         outline: 0 none;
         border-radius: 1rem;
       }
-      */
 
       /* width: 100%; */
 
@@ -92,35 +91,34 @@ export const Wrapper = styled.div`
         margin-right: 0.5rem;
       }
 
-      &:not(:first-of-type) {
-        width: 20rem;
-
+      /*       &:not(:first-of-type) {
+        width: 100%;
         input,
         textarea {
-          border-color: #707070;
+          border-color: ${colors.grey};
         }
-      }
+      } */
 
       &.form-label label {
-        flex-basis: 10px;
-        color: #707070;
+        // flex-basis: 10px;
+        color: ${colors.grey};
         width: 90%;
         text-align: center;
         font-weight: bold;
 
         @media ${device.Tablet} {
           flex-basis: 150px;
-          color: #707070;
+          color: ${colors.grey};
           width: 10rem;
           font-weight: bold;
         }
       }
     }
 
-    /* &.inputsContainer {
-			& div {
-			}
-		} */
+    &.inputsContainer {
+      & div {
+      }
+    }
 
     .input-container {
       margin-top: 0;

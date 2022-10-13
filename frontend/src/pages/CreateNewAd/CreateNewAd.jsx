@@ -6,11 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
-import Body from '../../components/layout/Body/Body'
-import InputNumber from '../../components/atoms/Forms/InputNumber'
-import TextArea from '../../components/molecules/TextAreaGroup'
-import Button from '../../components/atoms/Button'
-import Input from '../../components/atoms/Forms/Input'
+import { Body } from '../../components/layout'
+import { Input, InputNumber } from '../../components/atoms/Forms'
+import { TextArea } from '../../components/molecules'
+import { Label, Button } from '../../components/atoms'
 import Modal from '../../components/organisms/Modal/Modal'
 import {
   Wrapper,
@@ -21,7 +20,6 @@ import {
 } from './CreateNewAd.styles'
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
-import { Label } from '../../components/atoms'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -48,7 +46,7 @@ function CreateNewAd() {
   } = useForm({
     resolver: yupResolver(newAdSchema),
   })
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   const postAd = async (formInfo) => {
     try {
@@ -257,7 +255,7 @@ function CreateNewAd() {
           </Modal>
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
-            {inputComponentData.map((inputData, i) => {
+            {inputComponentData.map((inputData) => {
               const {
                 Component,
                 label,
