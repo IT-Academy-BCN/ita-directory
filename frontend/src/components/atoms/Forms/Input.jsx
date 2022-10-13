@@ -5,7 +5,7 @@ import { colors } from '../../../theme'
 
 const InputStyled = styled.input`
   height: 40px;
-  width: 90%;
+  width: 100%;
   padding: 0rem 1rem;
   margin: 5px 0px;
   border-radius: 0.5rem;
