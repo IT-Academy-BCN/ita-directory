@@ -1,54 +1,35 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors } from '../../../theme'
 import Icon from '../Icon'
 
-const InputStyled = styled.input`
-  height: 2.5rem;
-  padding: 0rem 1rem;
-  margin: 5px 0px;
-  border-radius: 6px;
-  border: 1px solid ${colors.grey};
-  font-size: 1rem;
-
-  &:hover {
-    border-color: ${colors.darkGrey};
-  }
-  &.error {
-    border-color: ${colors.darkRed};
-  }
-  &:focus {
-    // outline: 0 none;
-    // border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-  }
-`
 const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: nowrap;
   width: 18.6rem;
   height: 2.6rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0.5rem;
 
-  &:hover {
-  }
-  &.error {
+  border: none;
+  border-radius: 4px;
+  outline: 1px solid ${colors.grey};
+  &:focus-within {
+    outline: 1px solid ${colors.bahamaBlue};
+    border: none;
   }
   &:focus {
+    outline: 0 none;
+    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
   }
+`
 
-  &:focus-within {
-  }
-
-  &.error:focus-within {
-  }
-
-  .styledIcon {
-    display: flex;
-    margin-right: 6px;
-    color: #999999;
-    flex-basis: 20px;
+const InputStyled = styled.input`
+  width: 100%;
+  font: normal normal normal 16px/32px Helvetica Neue;
+  border: none;
+  &:focus {
+    outline: 0 none;
   }
 `
 
@@ -74,33 +55,29 @@ function Input({
   textColor,
 }) {
   return (
-    <div>
-      <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
-        {icon && (
-          <div className="styledIcon">
-            <Icon color={textColor} name={icon} fill={1} mr="0.5rem" style={{ ...iconStyles }} />
-          </div>
-        )}
-        <InputStyled
-          type={type}
-          placeholder={placeholder}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          className={`${className} ${error ? 'error' : ''}`}
-          id={id}
-          name={name}
-          disabled={disabled}
-          size={size}
-          error={error}
-          required={required}
-          style={inputStyles}
-          onChange={onChange}
-          ref={ref}
-          accept={accept}
-          {...(register && register)}
-        />
-      </StyledContainer>
-    </div>
+    <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
+      {icon && (
+        <Icon color={textColor} name={icon} fill={1} mr="0.5rem" style={{ ...iconStyles }} />
+      )}
+      <InputStyled
+        type={type}
+        placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        className={`${className} ${error ? 'error' : ''}`}
+        id={id}
+        name={name}
+        disabled={disabled}
+        size={size}
+        error={error}
+        required={required}
+        style={inputStyles}
+        onChange={onChange}
+        ref={ref}
+        accept={accept}
+        {...(register && register)}
+      />
+    </StyledContainer>
   )
 }
 

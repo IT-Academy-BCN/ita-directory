@@ -1,33 +1,36 @@
 .Mapa {
-	width: 100%;
-	height: 285px;
-	margin-top: 1%;
-	z-index: 0;
+  width: 100%;
+  height: 285px;
+  z-index: 0;
 }
-
+@media (min-width: 846px) {
+  .Mapa {
+    width: 800px;
+    height: 285px;
+  }
+}
 .Container {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .ButtonIcons {
-	width: 35px;
-	height: 35px;
-	line-height: 35px;
-	transform: translate(0, -40px);
-	z-index: 999;
-	position: absolute;
-	background-color: #fff;
-	margin: 0 10px;
-	border: 3px solid rgba(0, 0, 0, 0.3);
-	text-align: center;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  transform: translate(0, -40px);
+  z-index: 999;
+  position: absolute;
+  background-color: #fff;
+  margin: 0 10px;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 .ButtonIcons:hover {
-	background-color: #f4f4f4;
+  background-color: #f4f4f4;
 }
 
 .IconIMG {
-	width: 20px;
-	height: 20px;
+  width: 20px;
+  height: 20px;
 }
-

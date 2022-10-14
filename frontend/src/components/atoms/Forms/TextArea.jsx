@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
@@ -13,23 +12,28 @@ const TextAreaStyled = styled.div`
 `
 
 const TextAreaInput = styled.textarea`
-  width: 100%;
+  width: 22rem;
   height: 8.8rem;
-  border-radius: 6px;
   display: flex;
-  margin: 0 auto;
   justify-self: center;
+  padding: 0.9rem;
 
+  border: none;
+  outline: 1px solid ${colors.grey};
+  border-radius: 4px;
+  &:focus-within {
+    outline: 1px solid ${colors.bahamaBlue};
+    border: none;
+  }
   @media ${device.Tablet} {
     margin: 0;
   }
 
   &.error {
-    border: 1px solid #fecaca !important;
+    outline: 1px solid #fecaca !important;
   }
   &:focus {
-    outline: 0 none;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+    outline: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
   }
 `
 

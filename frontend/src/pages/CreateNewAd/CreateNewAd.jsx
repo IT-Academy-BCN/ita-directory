@@ -218,12 +218,10 @@ function CreateNewAd() {
               } = data
               return (
                 <div key={label}>
-                  <div className="form-label">
-                    {/* @todo: fix label and import component Label */}
-                    <Label label={label} htmlFor={name} />
-                  </div>
+                  <Label label={label} htmlFor={name} />
                   <Component
                     key={label}
+                    label={label}
                     type={type}
                     name={name}
                     className={inputClassName}
