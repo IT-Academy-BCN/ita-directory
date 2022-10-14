@@ -16,7 +16,7 @@ const IconStyled = styled.span`
 function Icon({
   name,
   size = 24,
-  color = colors.grey,
+  color = colors.lightGrey,
   fill = 0,
   wght = 400,
   grad = 0,

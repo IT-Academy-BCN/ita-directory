@@ -1,8 +1,11 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
 
-const TextAreaStyled = styled.div`
+const TextAreaStyled = styled.div.attrs({
+  className: 'text-grey mt-4',
+})`
   & {
     &.textAreaCreateNewAd {
       @media ${device.Tablet} {
@@ -11,29 +14,36 @@ const TextAreaStyled = styled.div`
   }
 `
 
-const TextAreaInput = styled.textarea`
-  width: 22rem;
-  height: 8.8rem;
+const TextAreaInput = styled.textarea.attrs((props) => ({
+  rows: 8,
+  className: `textarea
+				border
+				
+				rounded
+				block
+				text-xs
+				text-1x2
+				p-3
+				overflow-y-auto
+				resize-none
+				text-darkGray
+				`,
+}))`
+  width: 93%;
   display: flex;
+  margin: 0 auto;
   justify-self: center;
-  padding: 0.9rem;
 
-  border: none;
-  outline: 1px solid ${colors.grey};
-  border-radius: 4px;
-  &:focus-within {
-    outline: 1px solid ${colors.bahamaBlue};
-    border: none;
-  }
   @media ${device.Tablet} {
     margin: 0;
   }
 
   &.error {
-    outline: 1px solid #fecaca !important;
+    border: 1px solid #fecaca !important;
   }
   &:focus {
-    outline: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+    outline: 0 none;
+    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
   }
 `
 

@@ -7,10 +7,10 @@ import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
 import { Body } from '../../components/layout'
-import { Input, InputNumber } from '../../components/atoms/Forms'
 import { TextArea } from '../../components/molecules'
 import { Label, Button } from '../../components/atoms'
 import Modal from '../../components/organisms/Modal/Modal'
+import { Input, InputNumber } from '../../components/atoms/Forms/NewAds'
 import {
   Wrapper,
   MapText,
@@ -103,14 +103,13 @@ function CreateNewAd() {
       label: 'Título',
       name: 'title',
       required: true,
-      inputContainerClassName: 'style-input-create-new-ad',
+      className: 'style-input-create-new-ad',
     },
     {
       Component: TextArea,
       type: 'text',
       label: 'Descripción',
       name: 'description',
-      inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
       Component: Input,
@@ -119,7 +118,7 @@ function CreateNewAd() {
       name: 'city',
       required: true,
       icon: 'location_on',
-      inputContainerClassName: 'style-input-create-new-ad',
+      className: 'style-input-create-new-ad',
     },
     {
       Component: InputNumber,
@@ -127,7 +126,7 @@ function CreateNewAd() {
       label: 'Habitaciones',
       name: 'n_rooms',
       icon: 'Bed',
-      inputClassName: 'style-input-create-new-ad',
+      className: 'style-input-create-new-ad',
     },
     {
       Component: InputNumber,
@@ -136,7 +135,7 @@ function CreateNewAd() {
       name: 'price',
       required: true,
       icon: 'Euro',
-      inputClassName: 'style-input-create-new-ad',
+      className: 'style-input-create-new-ad',
     },
     {
       Component: InputNumber,
@@ -145,7 +144,7 @@ function CreateNewAd() {
       name: 'square_meters',
       required: true,
       icon: 'Home',
-      inputClassName: 'style-input-create-new-ad',
+      className: 'style-input-create-new-ad',
     },
     {
       Component: InputNumber,
@@ -153,7 +152,7 @@ function CreateNewAd() {
       label: 'Baños',
       name: 'n_bathrooms',
       icon: 'Bathtub',
-      inputClassName: 'style-input-create-new-ad',
+      className: 'style-input-create-new-ad',
     },
   ]
 
@@ -207,15 +206,7 @@ function CreateNewAd() {
         <Wrapper>
           <form onSubmit={handleSubmit(submitForm)} noValidate>
             {inputComponentData.map((data) => {
-              const {
-                Component,
-                label,
-                type,
-                name,
-                inputClassName,
-                icon,
-                inputContainerClassName,
-              } = data
+              const { Component, label, type, name, className, icon } = data
               return (
                 <div key={label}>
                   <Label label={label} htmlFor={name} />
@@ -224,9 +215,8 @@ function CreateNewAd() {
                     label={label}
                     type={type}
                     name={name}
-                    className={inputClassName}
+                    className={className}
                     icon={icon && icon}
-                    inputContainerClassName={inputContainerClassName}
                     register={register(`${name}`)}
                     error={errors[name]?.message}
                   />

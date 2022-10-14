@@ -1,26 +1,34 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { colors } from '../../../theme'
+import { colors } from '../../../../theme'
+import Icon from '../../Icon'
 
-const InputStyled = styled.input`
-  height: 40px;
-  width: 100%;
-  padding: 0rem 1rem;
-  margin: 5px 0px;
-  border-radius: 0.5rem;
-  border: 1px solid #b0b0b0;
-  font-size: 16px;
+const StyledContainer = styled.div`
+  display: flex;
+  padding: 0.5rem;
 
-  &:hover {
-    border: 1px solid ${colors.lightBlue};
-  }
-  &.error {
-    border: 1px solid #fecaca !important;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  border: none;
+  border-radius: 4px;
+  outline: 1px solid ${colors.grey};
+  &:focus-within {
+    outline: 1px solid ${colors.lightGrey};
+    border: none;
   }
   &:focus {
     outline: 0 none;
     border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+  }
+`
+
+const InputStyled = styled.input`
+  width: 100%;
+  font: normal normal normal 16px/32px Helvetica Neue;
+  border: none;
+  &:focus {
+    outline: 0 none;
   }
 `
 
@@ -31,6 +39,7 @@ function Input({
   onBlur,
   inputStyles,
   className,
+  inputContainerClassName,
   id,
   name,
   size,
@@ -41,9 +50,15 @@ function Input({
   onChange,
   ref,
   accept,
+  icon,
+  iconStyles,
+  textColor,
 }) {
   return (
-    <div>
+    <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
+      {icon && (
+        <Icon color={textColor} name={icon} fill={1} mr="0.5rem" style={{ ...iconStyles }} />
+      )}
       <InputStyled
         type={type}
         placeholder={placeholder}
@@ -62,7 +77,7 @@ function Input({
         accept={accept}
         {...(register && register)}
       />
-    </div>
+    </StyledContainer>
   )
 }
 
@@ -78,6 +93,7 @@ Input.propTypes = {
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   size: PropTypes.number,
   disabled: PropTypes.bool,
+  icon: PropTypes.node,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   success: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
@@ -86,6 +102,8 @@ Input.propTypes = {
   ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   accept: PropTypes.string,
+  iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  textColor: PropTypes.string,
 }
 
 export default styled(Input)``

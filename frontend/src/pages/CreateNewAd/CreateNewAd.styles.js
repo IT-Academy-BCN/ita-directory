@@ -4,6 +4,14 @@ import { device, colors } from '../../theme'
 export const Wrapper = styled.div`
   margin-top: 1.4rem;
 
+  .style-input-create-new-ad {
+    width: 18.6rem;
+    height: 2.6rem;
+    /* it must be deleted 👇: just design proposal */
+    /* background-color: chocolate; */
+    /* ******************************************** */
+  }
+
   form > div {
     display: flex;
     justify-content: start;
@@ -11,7 +19,7 @@ export const Wrapper = styled.div`
     align-items: flex-start;
     margin-bottom: 1rem;
 
-    /* just propose of design, it must be deleted 👇 */
+    /* it must be deleted 👇: just design proposal */
     /* background-color: beige;
     border: 2px solid green; */
     /* ******************************************** */
@@ -24,7 +32,7 @@ export const Wrapper = styled.div`
       text-align: start;
       font-weight: bold;
       letter-spacing: 0.1rem;
-      /* just propose of design, it must be deleted 👇 */
+      /* it must be deleted 👇: just design proposal */
       /* border: 2px solid powderblue;
       background-color: powderblue; */
       /* ******************************************** */
