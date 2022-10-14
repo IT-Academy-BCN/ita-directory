@@ -96,6 +96,7 @@ export const Wrapper = styled.div`
         width: 90%;
         text-align: center;
         font-weight: bold;
+        letter-spacing: 0.1rem;
 
         @media ${device.Tablet} {
           flex-basis: 150px;

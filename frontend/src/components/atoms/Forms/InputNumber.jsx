@@ -125,7 +125,7 @@ function InputNumber({
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
             <div className="styledIcon">
-              <Icon color={textColor} name={icon} mr="0.5rem" style={{ ...iconStyles }} />
+              <Icon color={textColor} name={icon} fill={1} mr="0.5rem" style={{ ...iconStyles }} />
             </div>
           )}
           <StyledInput

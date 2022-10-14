@@ -118,7 +118,7 @@ function CreateNewAd() {
       label: 'Ciudad',
       name: 'city',
       required: true,
-      icon: 'Map',
+      icon: 'location_on',
       inputContainerClassName: 'style-input-create-new-ad',
     },
     {

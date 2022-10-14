@@ -10,7 +10,7 @@ const InputStyled = styled.input`
   margin: 5px 0px;
   border-radius: 6px;
   border: 1px solid ${colors.grey};
-  font-size: 16px;
+  font-size: 1rem;
 
   &:hover {
     border-color: ${colors.darkGrey};
@@ -60,7 +60,6 @@ function Input({
   inputStyles,
   className,
   id,
-  icon,
   name,
   size,
   error,
@@ -70,6 +69,7 @@ function Input({
   onChange,
   ref,
   accept,
+  icon,
   iconStyles,
   textColor,
 }) {
@@ -78,7 +78,7 @@ function Input({
       <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
         {icon && (
           <div className="styledIcon">
-            <Icon color={textColor} name={icon} mr="0.5rem" style={{ ...iconStyles }} />
+            <Icon color={textColor} name={icon} fill={1} mr="0.5rem" style={{ ...iconStyles }} />
           </div>
         )}
         <InputStyled
