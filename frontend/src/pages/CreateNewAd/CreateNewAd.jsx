@@ -7,10 +7,9 @@ import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
 import { Body } from '../../components/layout'
-import { TextArea } from '../../components/molecules'
 import { Label, Button } from '../../components/atoms'
 import Modal from '../../components/organisms/Modal/Modal'
-import { Input, InputNumber } from '../../components/atoms/Forms/NewAds'
+import { Input, InputNumber, TextArea } from '../../components/atoms/Forms/NewAds'
 import {
   Wrapper,
   MapText,

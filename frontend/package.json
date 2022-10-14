@@ -7,7 +7,8 @@
     "build": "vite build",
     "dev": "vite serve",
     "test": "vitest",
-    "lint": "./node_modules/.bin/eslint \"**/*.{js,jsx}\" --max-warnings=0"
+    "lint": "./node_modules/.bin/eslint \"**/*.{js,jsx}\" --max-warnings=0",
+    "front": "cd .. && npm run frontend"
   },
   "browserslist": [
     ">0.2%",

@@ -3,7 +3,7 @@ import { device, colors } from '../../theme'
 
 export const Wrapper = styled.div`
   margin-top: 1.4rem;
-
+  width: 100%;
   .style-input-create-new-ad {
     width: 18.6rem;
     height: 2.6rem;
@@ -13,21 +13,25 @@ export const Wrapper = styled.div`
   }
 
   form > div {
-    display: flex;
-    justify-content: start;
-    text-align: start;
-    align-items: flex-start;
+    flex-direction: column;
     margin-bottom: 1rem;
+    color: ${colors.grey};
+
+    @media ${device.Tablet} {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      text-align: start;
+      margin-bottom: 1rem;
+    }
 
     /* it must be deleted 👇: just design proposal */
     /* background-color: beige;
     border: 2px solid green; */
     /* ******************************************** */
-
-    @media ${device.Tablet} {
-      flex-direction: row;
+    @media ${device.Mobile} {
     }
-
     label {
       text-align: start;
       font-weight: bold;
@@ -36,13 +40,6 @@ export const Wrapper = styled.div`
       /* border: 2px solid powderblue;
       background-color: powderblue; */
       /* ******************************************** */
-
-      @media ${device.Tablet} {
-        flex-basis: 150px;
-        color: ${colors.grey};
-        width: 10rem;
-        font-weight: bold;
-      }
     }
   }
 `

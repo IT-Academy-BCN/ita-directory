@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import { colors, device } from '../../../../theme'
 
 const TextAreaInput = styled.textarea`
-  width: 22rem;
+  width: 18.6rem;
   height: 8.8rem;
   padding: 0.9rem;
+  @media ${device.Tablet} {
+    width: 22rem;
+  }
 
   display: flex;
   justify-self: center;
