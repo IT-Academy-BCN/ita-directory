@@ -25,7 +25,7 @@ const StyledContainer = styled.div`
 
 const InputStyled = styled.input`
   width: 100%;
-  font: normal normal normal 16px/32px Helvetica Neue;
+  font: normal normal normal 16px/32px 'Helvetica Neue';
   border: none;
   &:focus {
     outline: 0 none;
@@ -39,7 +39,6 @@ function Input({
   onBlur,
   inputStyles,
   className,
-  inputContainerClassName,
   id,
   name,
   size,

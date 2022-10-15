@@ -13,7 +13,7 @@ export const Form = styled.form`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 10px;
   -webkit-border-radius: 10px;
-  box-shadow: 0 2px 7px ${colors.darkerShadow};
+  box-shadow: 0 2px 7px ${colors.lighterShadow};
 
   display: flex;
   flex-direction: column;

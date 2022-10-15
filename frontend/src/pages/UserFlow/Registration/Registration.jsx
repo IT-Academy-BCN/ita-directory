@@ -120,7 +120,6 @@ function Register() {
             placeholder="Contraseña"
             id="password"
             name="password"
-            className="w-full"
             error={errors.password?.message}
             register={register('password')}
           />

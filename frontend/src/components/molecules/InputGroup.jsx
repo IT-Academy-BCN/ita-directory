@@ -14,9 +14,13 @@ const InputGroupStyled = styled.div`
     }
   }
   input {
+    font-family: 'Helvetica Neue', Verdana, Geneva, Tahoma, sans-serif;
     color: ${colors.grey};
     &:focus {
       color: ${colors.black};
+    }
+    &::placeholder {
+      color: ${colors.lightGrey};
     }
   }
 `

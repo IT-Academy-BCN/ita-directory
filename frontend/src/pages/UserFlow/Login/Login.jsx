@@ -114,7 +114,6 @@ function Login() {
               placeholder="Introduce tu email"
               id="emailName"
               name="email"
-              className="w-full"
               error={errors.email?.message}
               register={register('email')}
             />

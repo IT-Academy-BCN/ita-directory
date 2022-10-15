@@ -28,7 +28,7 @@ export const CheckBoxContainer = styled.div`
 
 function CheckBox({ error, register }) {
   return (
-    <CheckBoxContainer className="check-box-container">
+    <CheckBoxContainer>
       <Input type="checkbox" className="input" register={register} />
       {error && <ErrorMessage text={error} />}
     </CheckBoxContainer>
