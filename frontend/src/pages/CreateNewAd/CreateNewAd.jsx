@@ -9,7 +9,9 @@ import { newNotification, NotificationTypes } from '../../store/notificationSlic
 import { Body } from '../../components/layout'
 import { Label, Button } from '../../components/atoms'
 import Modal from '../../components/organisms/Modal/Modal'
-import { Input, InputNumber, TextArea } from '../../components/atoms/Forms/NewAds'
+import inputComponentData from './inputComponentData'
+import { Input } from '../../components/atoms/Forms/NewAds'
+
 import {
   Wrapper,
   MapText,
@@ -95,66 +97,6 @@ function CreateNewAd() {
     setTimeout(() => setSubmittedData(''), 5000)
   }
 
-  const inputComponentData = [
-    {
-      Component: Input,
-      type: 'text',
-      label: 'Título',
-      name: 'title',
-      required: true,
-      className: 'style-input-create-new-ad',
-    },
-    {
-      Component: TextArea,
-      type: 'text',
-      label: 'Descripción',
-      name: 'description',
-    },
-    {
-      Component: Input,
-      type: 'text',
-      label: 'Ciudad',
-      name: 'city',
-      required: true,
-      icon: 'location_on',
-      className: 'style-input-create-new-ad',
-    },
-    {
-      Component: InputNumber,
-      type: 'number',
-      label: 'Habitaciones',
-      name: 'n_rooms',
-      icon: 'Bed',
-      className: 'style-input-create-new-ad',
-    },
-    {
-      Component: InputNumber,
-      type: 'number',
-      label: 'Precio',
-      name: 'price',
-      required: true,
-      icon: 'Euro',
-      className: 'style-input-create-new-ad',
-    },
-    {
-      Component: InputNumber,
-      type: 'number',
-      label: 'M\u00B2',
-      name: 'square_meters',
-      required: true,
-      icon: 'Home',
-      className: 'style-input-create-new-ad',
-    },
-    {
-      Component: InputNumber,
-      type: 'number',
-      label: 'Baños',
-      name: 'n_bathrooms',
-      icon: 'Bathtub',
-      className: 'style-input-create-new-ad',
-    },
-  ]
-
   const [openModal, setOpenModal] = useState(false)
   const [csvFile, setCsvFile] = useState(null)
   const [validCsv, setValidCsv] = useState(null)
@@ -208,17 +150,19 @@ function CreateNewAd() {
               const { Component, label, type, name, className, icon } = data
               return (
                 <div key={label}>
-                  <Label label={label} htmlFor={name} />
-                  <Component
-                    key={label}
-                    label={label}
-                    type={type}
-                    name={name}
-                    className={className}
-                    icon={icon && icon}
-                    register={register(`${name}`)}
-                    error={errors[name]?.message}
-                  />
+                  <div>
+                    <Label label={label} htmlFor={name} />
+                    <Component
+                      key={label}
+                      label={label}
+                      type={type}
+                      name={name}
+                      className={className}
+                      icon={icon && icon}
+                      register={register(`${name}`)}
+                      error={errors[name]?.message}
+                    />
+                  </div>
                 </div>
               )
             })}

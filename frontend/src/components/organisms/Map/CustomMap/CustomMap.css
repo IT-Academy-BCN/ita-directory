@@ -3,9 +3,13 @@
   height: 285px;
   z-index: 0;
 }
-@media (min-width: 600px) {
+.Mapa {
+  width: 400px;
+  height: 285px;
+}
+@media (min-width: 768px) {
   .Mapa {
-    width: 800px;
+    width: 600px;
     height: 285px;
   }
 }
