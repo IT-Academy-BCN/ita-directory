@@ -8,7 +8,7 @@ const InputGroupStyled = styled.div`
   padding: 0.1rem;
   margin-bottom: 1rem;
   & > div {
-    outline: 1px solid ${colors.lightGrey};
+    outline: 1px solid ${colors.lighterGrey};
     &:focus-within {
       outline: 1px solid ${colors.grey};
     }
