@@ -1,4 +1,4 @@
-import { Input, InputNumber, TextArea } from '../../components/atoms/Forms/NewAds'
+import { Input, InputNumber, TextArea } from '../../components/atoms/Forms'
 
 const data = [
   {

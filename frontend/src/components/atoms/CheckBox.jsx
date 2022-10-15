@@ -8,6 +8,13 @@ export const CheckBoxContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 
+  & > div {
+    outline: 0 none;
+    &:focus-within {
+      outline: 0 none;
+    }
+  }
+
   & input {
     width: 1rem;
     margin: 0;

@@ -1,102 +1,43 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { device, colors } from '../../../theme'
+import { colors } from '../../../theme'
 import Icon from '../Icon'
-
-const InputNumberStyled = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  @media ${device.Tablet} {
-    flex-direction: column;
-  }
-
-  label {
-    display: flex;
-    flex-direction: row;
-    padding: 3px 45px 0 0;
-    color: #999999;
-  }
-
-  .inputsContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-`
 
 const StyledContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  border-radius: 5px;
-  width: 18.6rem;
-  height: 2.6rem;
-  padding: 5px;
-
-  border-bottom: 1px solid ${colors.lightGray};
-
-  &:hover {
-    border-radius: 1rem;
-    border-bottom: 1px solid ${colors.redPink};
-  }
-  &.error {
-    border: 1px solid #fecaca !important;
-  }
-  &:focus {
-    outline: 0 none;
-    border-radius: 1rem;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-  }
-
-  /* &.error {
-		border: 1px solid ${colors.redColor};
-		color: #7d868b;
-	} */
-  &:focus-within {
-    /* outline: 0 none;
-		border: 2px solid #000 !important; */
-  }
-
-  &.error:focus-within {
-    border-color: red !important;
-  }
-
-  .styledIcon {
-    display: flex;
-    margin-right: 6px;
-    color: #999999;
-    flex-basis: 20px;
-  }
-`
-
-const StyledInput = styled.input`
-  width: 18.6rem;
-  height: 2rem;
   border: none;
-  display: flex;
-  font: normal normal normal 16px/32px Helvetica Neue;
-  font-size: 14px;
-  color: #393939;
-  padding: 0.75rem;
-  ::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  outline: 1px solid ${colors.grey};
+  border-radius: 4px;
+  &:focus-within {
+    outline: 1px solid ${colors.lightGrey};
+    border: none;
   }
   &[type='number'] {
     -moz-appearance: textfield;
   }
-  &:focus-within {
-    outline: 0 none;
-    border: none;
-  }
   &.error {
     border: none;
     outline: 0 none;
+  }
+`
+
+const StyledInput = styled.input`
+  width: 100%;
+  display: flex;
+  font: normal normal normal 16px/32px Helvetica Neue;
+  color: ${colors.lightGrey};
+
+  border: none;
+  &:focus {
+    outline: none;
+    color: ${colors.grey};
+  }
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `
 
@@ -129,46 +70,47 @@ function InputNumber({
   disabled,
   step,
   icon,
-  label,
   register,
   type,
   iconStyles,
   textColor,
 }) {
   return (
-    <InputNumberStyled>
-      <label htmlFor={id}>{label}</label>
-      <div className="inputsContainer">
-        <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
-          {icon && (
-            <div className="styledIcon">
-              <Icon color={textColor} name={icon} mr="0.5rem" style={{ ...iconStyles }} />
-            </div>
-          )}
-          <StyledInput
-            type={type}
-            placeholder={placeholder}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            className={`${className} ${error ? 'error' : ''}`}
-            id={id}
-            name={name}
-            min={min}
-            max={max}
-            disabled={disabled}
-            step={step}
-            textStyles={textStyles}
-            inputStyles={inputStyles}
-            labelStyles={labelStyles}
-            size={size}
-            errorStyles={errorStyles}
-            error={error}
-            {...(register && register)}
+    <div className={className}>
+      <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
+        {icon && (
+          <Icon
+            color={textColor}
+            name={icon}
+            fill={1}
+            mr="0.5rem"
+            ml="0.5rem"
+            style={{ ...iconStyles }}
           />
-        </StyledContainer>
-        <StyledError className={className}>{error}</StyledError>
-      </div>
-    </InputNumberStyled>
+        )}
+        <StyledInput
+          type={type}
+          placeholder={placeholder}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          className={`${className} ${error ? 'error' : ''}`}
+          id={id}
+          name={name}
+          min={min}
+          max={max}
+          disabled={disabled}
+          step={step}
+          textStyles={textStyles}
+          inputStyles={inputStyles}
+          labelStyles={labelStyles}
+          size={size}
+          errorStyles={errorStyles}
+          error={error}
+          {...(register && register)}
+        />
+      </StyledContainer>
+      <StyledError className={className}>{error}</StyledError>
+    </div>
   )
 }
 

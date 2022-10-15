@@ -10,7 +10,7 @@ import { Body } from '../../components/layout'
 import { Label, Button } from '../../components/atoms'
 import Modal from '../../components/organisms/Modal/Modal'
 import inputComponentData from './inputComponentData'
-import { Input } from '../../components/atoms/Forms/NewAds'
+import { Input } from '../../components/atoms/Forms'
 
 import {
   Wrapper,

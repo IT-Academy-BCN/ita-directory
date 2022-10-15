@@ -1,49 +1,31 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
 
-const TextAreaStyled = styled.div.attrs({
-  className: 'text-grey mt-4',
-})`
-  & {
-    &.textAreaCreateNewAd {
-      @media ${device.Tablet} {
-      }
-    }
+const TextAreaInput = styled.textarea`
+  width: 18.6rem;
+  height: 8.8rem;
+  padding: 0.9rem;
+  @media ${device.Tablet} {
+    width: 22rem;
   }
-`
 
-const TextAreaInput = styled.textarea.attrs((props) => ({
-  rows: 8,
-  className: `textarea
-				border
-				
-				rounded
-				block
-				text-xs
-				text-1x2
-				p-3
-				overflow-y-auto
-				resize-none
-				text-darkGray
-				`,
-}))`
-  width: 93%;
   display: flex;
-  margin: 0 auto;
   justify-self: center;
 
+  border: none;
+  outline: 1px solid ${colors.grey};
+  border-radius: 4px;
+  &:focus-within {
+    outline: 1px solid ${colors.lightGrey};
+    border: none;
+  }
   @media ${device.Tablet} {
     margin: 0;
   }
 
   &.error {
-    border: 1px solid #fecaca !important;
-  }
-  &:focus {
-    outline: 0 none;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+    outline: 1px solid #fecaca;
   }
 `
 
@@ -61,28 +43,25 @@ function TextArea({
   rows,
   cols,
   error,
-  inputContainerClassName,
   register,
 }) {
   return (
-    <TextAreaStyled className={inputContainerClassName}>
-      <TextAreaInput
-        placeholder={placeholder}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        className={`${className} ${error ? 'error' : ''}`}
-        id={id}
-        name={name}
-        disabled={disabled}
-        maxLength={maxLength}
-        minLength={minLength}
-        rows={rows}
-        cols={cols}
-        required={required}
-        error={error}
-        {...(register && register)}
-      />
-    </TextAreaStyled>
+    <TextAreaInput
+      placeholder={placeholder}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      className={`${className} ${error ? 'error' : ''}`}
+      id={id}
+      name={name}
+      disabled={disabled}
+      maxLength={maxLength}
+      minLength={minLength}
+      rows={rows}
+      cols={cols}
+      required={required}
+      error={error}
+      {...(register && register)}
+    />
   )
 }
 

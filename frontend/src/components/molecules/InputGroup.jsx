@@ -2,9 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ErrorMessage, Label, Input } from '../atoms'
+import { colors } from '../../theme'
 
 const InputGroupStyled = styled.div`
-  ${Label}
+  padding: 0.1rem;
+  margin-bottom: 1rem;
+  & > div {
+    outline: 1px solid ${colors.lightGrey};
+    &:focus-within {
+      outline: 1px solid ${colors.grey};
+    }
+  }
+  input {
+    color: ${colors.grey};
+    &:focus {
+      color: ${colors.black};
+    }
+  }
 `
 
 function InputGroup({

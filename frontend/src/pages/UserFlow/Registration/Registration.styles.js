@@ -49,6 +49,7 @@ export const StyleRedirect = styled.div`
 `
 export const ContainerCheckBox = styled.div`
   display: flex;
+  align-items: center;
 `
 export const SentenceCheckBox = styled.div`
   font-size: 0.8rem;

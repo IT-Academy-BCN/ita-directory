@@ -124,7 +124,7 @@ function Register() {
             error={errors.password?.message}
             register={register('password')}
           />
-          <ContainerCheckBox className="w-full mt-2">
+          <ContainerCheckBox className="ContainerCheckBox">
             <CheckBox
               id="privacy-policy"
               name="privacy-policy"
