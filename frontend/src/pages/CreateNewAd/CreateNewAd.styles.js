@@ -32,6 +32,18 @@ export const Wrapper = styled.div.attrs({ id: 'Wrapper' })`
       text-align: start;
       margin-bottom: 1rem;
     }
+    & > div {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          @media ${device.Tablet} {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: flex-start;
+            text-align: start;
+            margin-bottom: 1rem;
+          }
 
     /* it must be deleted 👇: just design proposal */
     /* background-color: beige;
@@ -52,8 +64,9 @@ export const Wrapper = styled.div.attrs({ id: 'Wrapper' })`
       background-color: powderblue; */
       /* ******************************************** */
     }
+
   }
-  form > div > div {
+  /* form > div > div {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -65,7 +78,7 @@ export const Wrapper = styled.div.attrs({ id: 'Wrapper' })`
       text-align: start;
       margin-bottom: 1rem;
     }
-  }
+  } */
 `
 
 export const MapText = styled.p`
