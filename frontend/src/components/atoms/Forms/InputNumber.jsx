@@ -38,33 +38,9 @@ const StyledContainer = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 5px;
-  width: 18.6rem;
-  height: 2.6rem;
   padding: 5px;
 
   border: 1px solid ${colors.lightGray};
-
-  /* &:hover {
-    border-radius: 1rem;
-    border-bottom: 1px solid ${colors.redPink};
-  }
-  &.error {
-    border: 1px solid #fecaca !important;
-  }
-  &:focus {
-    outline: 0 none;
-    border-radius: 1rem;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-  } */
-
-  /* &.error {
-		border: 1px solid ${colors.redColor};
-		color: #7d868b;
-	} */
-  &:focus-within {
-    /* outline: 0 none;
-		border: 2px solid #000 !important; */
-  }
 
   &.error:focus-within {
     border-color: red !important;

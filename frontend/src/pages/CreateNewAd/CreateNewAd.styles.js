@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device } from '../../theme'
+import { device, colors } from '../../theme'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
   padding-right: 0vw;
 
   padding: 0.1rem;
-  background-color: #f7f7f7;
   border-radius: 0.5em;
   margin-bottom: 2rem;
 
@@ -33,10 +32,10 @@ export const Wrapper = styled.div`
 
   form > div {
     display: flex;
-    justify-content: center;
-    text-align: start;
     flex-direction: column;
-    align-items: center;
+    text-align: start;
+    justify-content: start;
+    align-items: start;
     margin-bottom: 1rem;
 
     @media ${device.Tablet} {
@@ -58,37 +57,50 @@ export const Wrapper = styled.div`
       &:not(.form-label) > label {
       }
 
-      /* &:not(:first-of-type) {
-        width: 20rem;
-
-        input,
+      &:not(:first-of-type) {
+        width: 26rem;
         textarea {
-          border-color: #707070;
+          border-color: ${colors.lightGrey};
         }
-      } */
+      }
 
       &.form-label label {
-        flex-basis: 10px;
-        color: #707070;
-        width: 90%;
-        text-align: center;
+        color: ${colors.grey};
         font-weight: bold;
 
         @media ${device.Tablet} {
-          flex-basis: 150px;
-          color: #707070;
-          width: 10rem;
-          font-weight: bold;
+          color: ${colors.grey};
         }
+      }
+      & {
       }
     }
 
-    .inputsContainer {
+    .form-label {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+    .style-input-create-new-ad {
       width: 20rem;
+    }
+    .inputsContainer {
+      height: 2.6rem;
+      & > div {
+        width: 25rem;
+        margin-top: 1.5rem;
+      }
     }
 
     .input-container {
       margin-top: 0;
+    }
+    .textarea {
+      margin-left: 0.4rem;
+      border: 1px solid ${colors.lightGrey};
+      border-radius: 4px;
+      width: 30rem;
+      margin-bottom: 1rem;
     }
   }
 `

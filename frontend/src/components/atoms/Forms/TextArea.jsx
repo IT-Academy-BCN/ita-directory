@@ -6,6 +6,17 @@ import { colors, device } from '../../../theme'
 const TextAreaStyled = styled.div.attrs({
   className: 'text-grey mt-4',
 })`
+  label {
+    border: 0;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
   & {
     &.textAreaCreateNewAd {
       @media ${device.Tablet} {
@@ -54,6 +65,7 @@ function TextArea({
   className,
   id,
   name,
+  label,
   minLength,
   maxLength,
   disabled,
@@ -66,12 +78,14 @@ function TextArea({
 }) {
   return (
     <TextAreaStyled className={inputContainerClassName}>
+      <label htmlFor={id}>{label}</label>
       <TextAreaInput
         placeholder={placeholder}
         onFocus={onFocus}
         onBlur={onBlur}
         className={`${className} ${error ? 'error' : ''}`}
         id={id}
+        label={label}
         name={name}
         disabled={disabled}
         maxLength={maxLength}
@@ -92,6 +106,7 @@ TextArea.propTypes = {
   onBlur: PropTypes.func,
   required: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
+  label: PropTypes.string,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
