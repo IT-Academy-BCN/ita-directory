@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { device, colors } from '../../theme'
+import { device } from '../../theme'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,32 +16,6 @@ export const Wrapper = styled.div`
   border-radius: 0.5em;
   margin-bottom: 2rem;
 
-  .style-input-create-new-ad {
-    /* border: 1px solid #707070; */
-    border-radius: 0;
-    /* border-bottom: 1px solid ${colors.transparent}; */
-    border-bottom: 1px solid ${colors.lightGray};
-  }
-
-  input.style-input-create-new-ad {
-    border: none;
-    border-bottom: 1px solid ${colors.lightGray};
-    padding: 0.3rem 0.5rem;
-
-    &:hover {
-      border-radius: 1rem;
-      border-bottom: 1px solid ${colors.redPink};
-    }
-    &.error {
-      border-bottom: 1px solid #fecaca !important;
-    }
-    &:focus {
-      outline: 0 none;
-      border-radius: 1rem;
-      border-bottom: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-    }
-  }
-
   label {
     flex-basis: 50px;
     padding: 5px;
@@ -55,14 +29,6 @@ export const Wrapper = styled.div`
       flex-basis: 50px;
       padding: 5px;
     }
-  }
-
-  form div {
-    /* display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-self: center;
-		width: 98%; */
   }
 
   form > div {
@@ -79,22 +45,6 @@ export const Wrapper = styled.div`
 
     > div {
       min-width: 10rem;
-      /* border-bottom: 1px solid ${colors.lightGray};
-
-			&:hover {
-				border-radius: 1rem;
-				border-bottom: 1px solid ${colors.redPink};
-			}
-			&.error {
-				border: 1px solid #fecaca !important;
-			}
-			&:focus {
-				outline: 0 none;
-				border-radius: 1rem;
-				border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-			} */
-
-      /* width: 100%; */
 
       &:last-of-type {
         // mapa
@@ -109,17 +59,17 @@ export const Wrapper = styled.div`
       }
 
       &.form-label svg {
-        margin-right: 0.5rem;
+        /* margin-right: 0.5rem; */
       }
 
-      &:not(:first-of-type) {
+      /* &:not(:first-of-type) {
         width: 20rem;
 
         input,
         textarea {
           border-color: #707070;
         }
-      }
+      } */
 
       &.form-label label {
         flex-basis: 10px;
@@ -137,11 +87,9 @@ export const Wrapper = styled.div`
       }
     }
 
-    /* &.inputsContainer {
-			& div {
-				border: 1px solid #707070;
-			}
-		} */
+    .inputsContainer {
+      width: 20rem;
+    }
 
     .input-container {
       margin-top: 0;

@@ -42,9 +42,9 @@ const StyledContainer = styled.div`
   height: 2.6rem;
   padding: 5px;
 
-  border-bottom: 1px solid ${colors.lightGray};
+  border: 1px solid ${colors.lightGray};
 
-  &:hover {
+  /* &:hover {
     border-radius: 1rem;
     border-bottom: 1px solid ${colors.redPink};
   }
@@ -55,7 +55,7 @@ const StyledContainer = styled.div`
     outline: 0 none;
     border-radius: 1rem;
     border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-  }
+  } */
 
   /* &.error {
 		border: 1px solid ${colors.redColor};
