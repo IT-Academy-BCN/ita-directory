@@ -20,6 +20,7 @@ import {
 } from './CreateNewAd.styles'
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
+import { Label } from '../../components/atoms'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -266,11 +267,11 @@ function CreateNewAd() {
               return (
                 <div key={label}>
                   <div className="form-label">
-                    {/* @todo: fix label and import component Label */}
-                    <label htmlFor="sdasd">{label}</label>
+                    <Label label={label} htmlFor={name} />
                   </div>
                   <Component
                     key={label}
+                    label={label}
                     type={type}
                     name={name}
                     className={inputClassName}

@@ -106,7 +106,6 @@ export const Wrapper = styled.div`
       }
 
       &:not(.form-label) > label {
-        display: none;
       }
 
       &.form-label svg {
