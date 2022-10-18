@@ -58,10 +58,6 @@ export const Wrapper = styled.div`
       &:not(.form-label) > label {
       }
 
-      &.form-label svg {
-        /* margin-right: 0.5rem; */
-      }
-
       /* &:not(:first-of-type) {
         width: 20rem;
 
