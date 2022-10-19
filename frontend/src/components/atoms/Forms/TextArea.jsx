@@ -106,7 +106,7 @@ TextArea.propTypes = {
   onBlur: PropTypes.func,
   required: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

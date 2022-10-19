@@ -175,7 +175,7 @@ InputNumber.propTypes = {
   required: PropTypes.bool,
   error: PropTypes.bool,
   icon: PropTypes.node,
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   type: PropTypes.string,
   iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
