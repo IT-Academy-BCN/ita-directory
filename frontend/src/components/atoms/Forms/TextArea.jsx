@@ -7,15 +7,15 @@ const TextAreaStyled = styled.div.attrs({
   className: 'text-grey mt-4',
 })`
   label {
+    position: absolute;
+    padding: 0;
+    margin: -1px;
+    width: 1px;
+    height: 1px;
     border: 0;
+    overflow: hidden;
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
   }
   & {
     &.textAreaCreateNewAd {
