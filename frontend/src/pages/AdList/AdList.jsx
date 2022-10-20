@@ -72,17 +72,17 @@ function AdList() {
   const renderList = filteredAdList.map((e) => (
     <AdCard
       id={e.id}
-      userId={e.user_id}
+      userId={e.userId}
       title={e.title}
       description={e.description}
       city={e.city}
-      nRooms={e.n_rooms}
+      nRooms={e.nRooms}
       price={e.price}
-      squareMeters={e.square_meters}
-      nBathrooms={e.n_bathrooms}
-      mapLat={e.map_lat}
-      mapLon={e.map_lon}
-      adTypeId={e.ad_type_id}
+      squareMeters={e.squareMeters}
+      nBathrooms={e.nBathrooms}
+      mapLat={e.mapLat}
+      mapLon={e.mapLon}
+      adTypeId={e.adTypeId}
       key={e.id}
     />
   ))
