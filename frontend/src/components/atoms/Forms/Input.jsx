@@ -12,17 +12,6 @@ const InputStyled = styled.input`
   border: 1px solid #b0b0b0;
   font-size: 16px;
 
-  label {
-    border: 0;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
   &:hover {
     border: 1px solid ${colors.lightBlue};
   }
@@ -44,7 +33,6 @@ function Input({
   className,
   id,
   name,
-  label,
   size,
   error,
   disabled,
@@ -93,7 +81,6 @@ Input.propTypes = {
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   success: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
-  label: PropTypes.string.isRequired,
   required: PropTypes.bool,
   onChange: PropTypes.func,
   ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

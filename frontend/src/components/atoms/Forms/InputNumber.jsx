@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { device, colors } from '../../../theme'
 import Icon from '../Icon'
+import Label from './Label'
 
 const InputNumberStyled = styled.div`
   display: flex;
@@ -10,18 +11,6 @@ const InputNumberStyled = styled.div`
 
   @media ${device.Tablet} {
     flex-direction: column;
-  }
-
-  label {
-    border: 0;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
   }
 
   .inputsContainer {
@@ -93,6 +82,7 @@ const StyledError = styled.small`
 `
 
 function InputNumber({
+  label,
   placeholder,
   onFocus,
   onBlur,
@@ -110,7 +100,6 @@ function InputNumber({
   disabled,
   step,
   icon,
-  label,
   register,
   type,
   iconStyles,
@@ -118,7 +107,7 @@ function InputNumber({
 }) {
   return (
     <InputNumberStyled>
-      <label htmlFor={id}>{label}</label>
+      <Label label={label} htmlFor={id} hidden />
       <div className="inputsContainer">
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
@@ -154,6 +143,7 @@ function InputNumber({
 }
 
 InputNumber.propTypes = {
+  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
@@ -175,7 +165,6 @@ InputNumber.propTypes = {
   required: PropTypes.bool,
   error: PropTypes.bool,
   icon: PropTypes.node,
-  label: PropTypes.string.isRequired,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   type: PropTypes.string,
   iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
