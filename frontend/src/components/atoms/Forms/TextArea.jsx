@@ -6,14 +6,13 @@ import Label from './Label'
 
 const TextAreaStyled = styled.div``
 
-const TextAreaInput = styled.textarea.attrs((props) => ({
+const TextAreaInput = styled.textarea.attrs({
   className: `textarea`,
-}))`
+})`
   width: 93%;
   display: flex;
   margin: 0 auto;
   justify-self: center;
-  height: 10em;
 
   @media ${device.Tablet} {
     margin: 0;

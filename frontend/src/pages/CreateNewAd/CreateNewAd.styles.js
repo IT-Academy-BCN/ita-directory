@@ -60,6 +60,7 @@ export const Wrapper = styled.div`
       &:not(:first-of-type) {
         width: 26rem;
         textarea {
+          height: 10em;
           border-color: ${colors.lightGrey};
         }
       }
