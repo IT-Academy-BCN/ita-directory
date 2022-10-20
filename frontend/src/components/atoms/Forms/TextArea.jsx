@@ -2,21 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
+import Label from './Label'
 
 const TextAreaStyled = styled.div.attrs({
   className: 'text-grey mt-4',
 })`
-  label {
-    position: absolute;
-    padding: 0;
-    margin: -1px;
-    width: 1px;
-    height: 1px;
-    border: 0;
-    overflow: hidden;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px, 1px, 1px, 1px);
-  }
   & {
     &.textAreaCreateNewAd {
       @media ${device.Tablet} {
@@ -26,7 +16,6 @@ const TextAreaStyled = styled.div.attrs({
 `
 
 const TextAreaInput = styled.textarea.attrs((props) => ({
-  rows: 8,
   className: `textarea
 				border
 				
@@ -44,6 +33,7 @@ const TextAreaInput = styled.textarea.attrs((props) => ({
   display: flex;
   margin: 0 auto;
   justify-self: center;
+  height: 10em;
 
   @media ${device.Tablet} {
     margin: 0;
@@ -78,7 +68,7 @@ function TextArea({
 }) {
   return (
     <TextAreaStyled className={inputContainerClassName}>
-      <label htmlFor={id}>{label}</label>
+      <Label label={label} htmlFor={id} hidden />
       <TextAreaInput
         placeholder={placeholder}
         onFocus={onFocus}
