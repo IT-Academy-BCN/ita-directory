@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const LabelStyle = styled.div`
+const LabelStyle = styled.label.attrs(({ hidden }) => ({
+  className: `${hidden && 'hidden'}`,
+}))`
   .hidden {
     position: absolute;
     width: 1px;
@@ -17,10 +19,8 @@ const LabelStyle = styled.div`
 `
 function Label({ label, htmlFor, isError = false, hidden }) {
   return (
-    <LabelStyle>
-      <label className={hidden && 'hidden'} htmlFor={htmlFor}>
-        {label}
-      </label>
+    <LabelStyle htmlFor={htmlFor} hidden={hidden}>
+      {label}
     </LabelStyle>
   )
 }
