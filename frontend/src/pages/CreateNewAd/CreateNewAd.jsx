@@ -24,16 +24,16 @@ import { Label } from '../../components/atoms'
 
 function CreateNewAd() {
   const emptyForm = {
-    user_id: 1,
+    userId: 1,
     title: '',
     description: '',
     city: '',
-    n_rooms: '',
+    nRooms: '',
     price: '',
-    square_meters: '',
-    n_bathrooms: '',
-    map_lat: 0,
-    map_lon: 0,
+    squareMeters: '',
+    nBathrooms: '',
+    mapLat: 0,
+    mapLon: 0,
   }
   const [form, setForm] = useState(emptyForm)
   const [submittedData, setSubmittedData] = useState('') // @todo -> remove -probably unecessary
@@ -75,8 +75,8 @@ function CreateNewAd() {
   useEffect(() => {
     setForm({
       ...form,
-      map_lat: Number(coordinates[0]),
-      map_lon: Number(coordinates[1]),
+      mapLat: Number(coordinates[0]),
+      mapLon: Number(coordinates[1]),
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinates])
@@ -85,8 +85,8 @@ function CreateNewAd() {
     const formInfo = {
       ...form,
       ...data,
-      map_lat: Number(coordinates[0]),
-      map_lon: Number(coordinates[1]),
+      mapLat: Number(coordinates[0]),
+      mapLon: Number(coordinates[1]),
     }
     postAd(formInfo)
     setSubmittedData(JSON.stringify(formInfo, 0, 2))
@@ -125,7 +125,7 @@ function CreateNewAd() {
       Component: InputNumber,
       type: 'number',
       label: 'Habitaciones',
-      name: 'n_rooms',
+      name: 'nRooms',
       icon: 'bed',
       inputClassName: 'style-input-create-new-ad',
     },
@@ -142,7 +142,7 @@ function CreateNewAd() {
       Component: InputNumber,
       type: 'number',
       label: 'M\u00B2',
-      name: 'square_meters',
+      name: 'squareMeters',
       required: true,
       icon: 'home',
       inputClassName: 'style-input-create-new-ad',
@@ -151,7 +151,7 @@ function CreateNewAd() {
       Component: InputNumber,
       type: 'number',
       label: 'Baños',
-      name: 'n_bathrooms',
+      name: 'nBathrooms',
       icon: 'Bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
