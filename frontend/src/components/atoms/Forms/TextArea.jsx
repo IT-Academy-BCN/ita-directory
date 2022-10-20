@@ -4,30 +4,10 @@ import styled from 'styled-components'
 import { colors, device } from '../../../theme'
 import Label from './Label'
 
-const TextAreaStyled = styled.div.attrs({
-  className: 'text-grey mt-4',
-})`
-  & {
-    &.textAreaCreateNewAd {
-      @media ${device.Tablet} {
-      }
-    }
-  }
-`
+const TextAreaStyled = styled.div``
 
 const TextAreaInput = styled.textarea.attrs((props) => ({
-  className: `textarea
-				border
-				
-				rounded
-				block
-				text-xs
-				text-1x2
-				p-3
-				overflow-y-auto
-				resize-none
-				text-darkGray
-				`,
+  className: `textarea`,
 }))`
   width: 93%;
   display: flex;
