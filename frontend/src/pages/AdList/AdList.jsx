@@ -44,7 +44,7 @@ function AdList() {
 
   const bySize = (min, max) => (ad) => {
     if (min == null && max == null) return true
-    return min <= ad.square_meters && ad.square_meters <= max
+    return min <= ad.squareMeters && ad.squareMeters <= max
   }
 
   // const byIncludedExpenses = (included) => (ad) => {
