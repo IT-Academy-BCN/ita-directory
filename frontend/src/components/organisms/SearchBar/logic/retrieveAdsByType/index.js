@@ -16,7 +16,7 @@ export const retrieveAdsByType = async (type) => {
 
     if (type) {
       for (let i = 0; i < adData.length; i += 1) {
-        if (adData[i].n_rooms === type) {
+        if (adData[i].nRooms === type) {
           if (filteredArrayByQuery.includes(adData[i]) === false) {
             filteredArrayByQuery.push(adData[i])
           }
