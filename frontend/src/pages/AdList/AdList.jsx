@@ -89,7 +89,7 @@ function AdList() {
 
   return (
     <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
-      <AdsStyled>
+      <AdsStyled data-testid="adListStyled">
         <AdListFilter
           filter={setFilterParams}
           maxPriceValue={filterParams?.maxPrice}
