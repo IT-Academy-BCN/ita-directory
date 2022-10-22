@@ -87,7 +87,7 @@ function Ad() {
                     <Icon name="bed" />
                     <Text
                       as="span"
-                      text={`${ad.n_rooms} habitaciones`}
+                      text={`${ad.nRooms} habitaciones`}
                       className="ad__property-rooms"
                     />
                   </div>
