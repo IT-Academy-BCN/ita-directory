@@ -119,7 +119,7 @@ function CreateNewAd() {
       name: 'city',
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
-      icon: 'Map',
+      icon: 'location_on',
     },
     {
       Component: InputNumber,
