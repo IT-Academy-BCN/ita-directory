@@ -48,7 +48,12 @@ export const Wrapper = styled.div`
       &:last-of-type {
         // mapa
         width: 100%;
-
+        @media ${device.Tablet} {
+          width: 700px;
+        }
+        @media ${device.Desktop} {
+          width: 900px;
+        }
         & > div > div {
           background-color: white;
         }
