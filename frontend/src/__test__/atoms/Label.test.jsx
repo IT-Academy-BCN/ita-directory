@@ -19,7 +19,7 @@ describe('Label', async () => {
   })
 
   it('should render the label with hidden prop', () => {
-    render(<Label label="test label" htmlFor="email" hiddenLabel />)
+    render(<Label label="test label" htmlFor="email" hidden />)
     const label = screen.getByText('test label')
     expect(label.outerHTML.includes('hidden')).toBeTruthy()
   })

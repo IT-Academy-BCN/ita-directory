@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { device, colors } from '../../../theme'
 import Icon from '../Icon'
+import Label from './Label'
 
 const InputNumberStyled = styled.div`
   display: flex;
@@ -10,13 +11,6 @@ const InputNumberStyled = styled.div`
 
   @media ${device.Tablet} {
     flex-direction: column;
-  }
-
-  label {
-    display: flex;
-    flex-direction: row;
-    padding: 3px 45px 0 0;
-    color: #999999;
   }
 
   .inputsContainer {
@@ -33,33 +27,9 @@ const StyledContainer = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 5px;
-  width: 18.6rem;
-  height: 2.6rem;
   padding: 5px;
 
-  border-bottom: 1px solid ${colors.lightGray};
-
-  &:hover {
-    border-radius: 1rem;
-    border-bottom: 1px solid ${colors.redPink};
-  }
-  &.error {
-    border: 1px solid #fecaca !important;
-  }
-  &:focus {
-    outline: 0 none;
-    border-radius: 1rem;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-  }
-
-  /* &.error {
-		border: 1px solid ${colors.redColor};
-		color: #7d868b;
-	} */
-  &:focus-within {
-    /* outline: 0 none;
-		border: 2px solid #000 !important; */
-  }
+  border: 1px solid ${colors.lightGray};
 
   &.error:focus-within {
     border-color: red !important;
@@ -112,6 +82,7 @@ const StyledError = styled.small`
 `
 
 function InputNumber({
+  label,
   placeholder,
   onFocus,
   onBlur,
@@ -129,7 +100,6 @@ function InputNumber({
   disabled,
   step,
   icon,
-  label,
   register,
   type,
   iconStyles,
@@ -137,7 +107,7 @@ function InputNumber({
 }) {
   return (
     <InputNumberStyled>
-      <label htmlFor={id}>{label}</label>
+      <Label label={label} htmlFor={id} hidden />
       <div className="inputsContainer">
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
@@ -173,6 +143,7 @@ function InputNumber({
 }
 
 InputNumber.propTypes = {
+  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
@@ -194,7 +165,6 @@ InputNumber.propTypes = {
   required: PropTypes.bool,
   error: PropTypes.bool,
   icon: PropTypes.node,
-  label: PropTypes.string,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   type: PropTypes.string,
   iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
