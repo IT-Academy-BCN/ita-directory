@@ -106,7 +106,7 @@ export const Wrapper = styled.div`
       border: 1px solid ${colors.lightGrey};
       border-radius: 4px;
       width: 30rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.3rem;
     }
   }
 `
