@@ -47,7 +47,7 @@ function CreateNewAd() {
   } = useForm({
     resolver: yupResolver(newAdSchema),
   })
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   const postAd = async (formInfo) => {
     try {
@@ -238,19 +238,23 @@ function CreateNewAd() {
               text="Subir Archivo"
               type="normal"
               className="green-gradient"
-              onClick={() => submitCsv()}
+              onClick={() => {
+                submitCsv()
+                dispatch(
+                  newNotification({
+                    message:
+                      validCsvFile === false
+                        ? 'Tus anuncios no se han podido publicar.'
+                        : 'Tus anuncios han sido publicados con éxito',
+                    type:
+                      validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
+                  })
+                )
+              }}
             />
           </Modal>
 
-          {dispatch(
-            newNotification({
-              message:
-                validCsvFile === false
-                  ? 'Tus anuncios no se han podido publicar.'
-                  : 'Tus anuncios han sido publicados con éxito',
-              type: validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
-            })
-          )}
+          {}
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
             {inputComponentData.map((el, i) => {
