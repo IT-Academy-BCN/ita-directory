@@ -108,6 +108,7 @@ function CreateNewAd() {
     },
     {
       Component: TextArea,
+      type: 'textarea',
       label: 'Descripción',
       name: 'description',
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
@@ -152,7 +153,7 @@ function CreateNewAd() {
       type: 'number',
       label: 'Baños',
       name: 'n_bathrooms',
-      icon: 'Bathtub',
+      icon: 'bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
   ]

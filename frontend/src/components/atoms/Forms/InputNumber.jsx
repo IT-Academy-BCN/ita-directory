@@ -80,6 +80,7 @@ const StyledError = styled.small`
 
 function InputNumber({
   label,
+  name,
   placeholder,
   onFocus,
   onBlur,
@@ -88,7 +89,6 @@ function InputNumber({
   labelStyles,
   className,
   id,
-  name,
   min,
   max,
   size,
@@ -104,7 +104,7 @@ function InputNumber({
 }) {
   return (
     <InputNumberStyled>
-      <Label label={label} htmlFor={id} hiddenLabel />
+      <Label label={label} htmlFor={name} hiddenLabel />
       <div className="inputsContainer">
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
