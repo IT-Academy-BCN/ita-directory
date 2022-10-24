@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Text from '../Text'
 
-const LabelStyle = styled.label.attrs(({ hidden }) => ({
-  className: `${hidden && 'hidden'}`,
-}))`
+const LabelStyle = styled.span`
   .hidden {
     position: absolute;
     width: 1px;
@@ -17,10 +16,15 @@ const LabelStyle = styled.label.attrs(({ hidden }) => ({
     overflow: hidden;
   }
 `
-function Label({ label, htmlFor, isError = false, hidden }) {
+function Label({ label, htmlFor, isError = false, hiddenLabel }) {
   return (
-    <LabelStyle htmlFor={htmlFor} hidden={hidden}>
-      {label}
+    <LabelStyle>
+      <Text
+        as="label"
+        text={label}
+        htmlFor={htmlFor}
+        className={`${hiddenLabel ? 'hidden' : ''}`}
+      />
     </LabelStyle>
   )
 }
@@ -29,7 +33,7 @@ Label.propTypes = {
   label: PropTypes.string.isRequired,
   htmlFor: PropTypes.string.isRequired,
   isError: PropTypes.bool,
-  hidden: PropTypes.bool,
+  hiddenLabel: PropTypes.bool,
 }
 
 export default styled(Label)``
