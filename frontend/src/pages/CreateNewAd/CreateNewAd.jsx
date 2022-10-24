@@ -7,7 +7,7 @@ import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
 import Body from '../../components/layout/Body/Body'
 import InputNumber from '../../components/atoms/Forms/InputNumber'
-import TextArea from '../../components/molecules/TextAreaGroup'
+import TextArea from '../../components/atoms/Forms/TextArea'
 import Button from '../../components/atoms/Button'
 import Input from '../../components/atoms/Forms/Input'
 import Modal from '../../components/organisms/Modal/Modal'
@@ -20,6 +20,7 @@ import {
 } from './CreateNewAd.styles'
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
+import { Label } from '../../components/atoms'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -107,7 +108,6 @@ function CreateNewAd() {
     },
     {
       Component: TextArea,
-      type: 'text',
       label: 'Descripción',
       name: 'description',
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
@@ -266,11 +266,11 @@ function CreateNewAd() {
               return (
                 <div key={label}>
                   <div className="form-label">
-                    {/* @todo: fix label and import component Label */}
-                    <label htmlFor="sdasd">{label}</label>
+                    <Label label={label} htmlFor={name} />
                   </div>
                   <Component
                     key={label}
+                    label={label}
                     type={type}
                     name={name}
                     className={inputClassName}

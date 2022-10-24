@@ -2,33 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
+import Label from './Label'
 
-const TextAreaStyled = styled.div.attrs({
-  className: 'text-grey mt-4',
+const TextAreaStyled = styled.div``
+
+const TextAreaInput = styled.textarea.attrs({
+  className: `textarea`,
 })`
-  & {
-    &.textAreaCreateNewAd {
-      @media ${device.Tablet} {
-      }
-    }
-  }
-`
-
-const TextAreaInput = styled.textarea.attrs((props) => ({
-  rows: 8,
-  className: `textarea
-				border
-				
-				rounded
-				block
-				text-xs
-				text-1x2
-				p-3
-				overflow-y-auto
-				resize-none
-				text-darkGray
-				`,
-}))`
   width: 93%;
   display: flex;
   margin: 0 auto;
@@ -54,6 +34,7 @@ function TextArea({
   className,
   id,
   name,
+  label,
   minLength,
   maxLength,
   disabled,
@@ -66,12 +47,14 @@ function TextArea({
 }) {
   return (
     <TextAreaStyled className={inputContainerClassName}>
+      <Label label={label} htmlFor={id} hidden />
       <TextAreaInput
         placeholder={placeholder}
         onFocus={onFocus}
         onBlur={onBlur}
         className={`${className} ${error ? 'error' : ''}`}
         id={id}
+        label={label}
         name={name}
         disabled={disabled}
         maxLength={maxLength}
@@ -92,6 +75,7 @@ TextArea.propTypes = {
   onBlur: PropTypes.func,
   required: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
+  label: PropTypes.string.isRequired,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

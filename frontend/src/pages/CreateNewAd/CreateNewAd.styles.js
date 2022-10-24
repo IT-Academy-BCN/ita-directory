@@ -12,35 +12,8 @@ export const Wrapper = styled.div`
   padding-right: 0vw;
 
   padding: 0.1rem;
-  background-color: #f7f7f7;
   border-radius: 0.5em;
   margin-bottom: 2rem;
-
-  .style-input-create-new-ad {
-    /* border: 1px solid #707070; */
-    border-radius: 0;
-    /* border-bottom: 1px solid ${colors.transparent}; */
-    border-bottom: 1px solid ${colors.lightGray};
-  }
-
-  input.style-input-create-new-ad {
-    border: none;
-    border-bottom: 1px solid ${colors.lightGray};
-    padding: 0.3rem 0.5rem;
-
-    &:hover {
-      border-radius: 1rem;
-      border-bottom: 1px solid ${colors.redPink};
-    }
-    &.error {
-      border-bottom: 1px solid #fecaca !important;
-    }
-    &:focus {
-      outline: 0 none;
-      border-radius: 1rem;
-      border-bottom: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-    }
-  }
 
   label {
     flex-basis: 50px;
@@ -57,20 +30,12 @@ export const Wrapper = styled.div`
     }
   }
 
-  form div {
-    /* display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-self: center;
-		width: 98%; */
-  }
-
   form > div {
     display: flex;
-    justify-content: center;
-    text-align: start;
     flex-direction: column;
-    align-items: center;
+    text-align: start;
+    justify-content: start;
+    align-items: start;
     margin-bottom: 1rem;
 
     @media ${device.Tablet} {
@@ -79,22 +44,6 @@ export const Wrapper = styled.div`
 
     > div {
       min-width: 10rem;
-      /* border-bottom: 1px solid ${colors.lightGray};
-
-			&:hover {
-				border-radius: 1rem;
-				border-bottom: 1px solid ${colors.redPink};
-			}
-			&.error {
-				border: 1px solid #fecaca !important;
-			}
-			&:focus {
-				outline: 0 none;
-				border-radius: 1rem;
-				border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
-			} */
-
-      /* width: 100%; */
 
       &:last-of-type {
         // mapa
@@ -106,46 +55,53 @@ export const Wrapper = styled.div`
       }
 
       &:not(.form-label) > label {
-        display: none;
-      }
-
-      &.form-label svg {
-        margin-right: 0.5rem;
       }
 
       &:not(:first-of-type) {
-        width: 20rem;
-
-        input,
+        width: 26rem;
         textarea {
-          border-color: #707070;
+          height: 10em;
+          border-color: ${colors.lightGrey};
         }
       }
 
       &.form-label label {
-        flex-basis: 10px;
-        color: #707070;
-        width: 90%;
-        text-align: center;
+        color: ${colors.grey};
         font-weight: bold;
 
         @media ${device.Tablet} {
-          flex-basis: 150px;
-          color: #707070;
-          width: 10rem;
-          font-weight: bold;
+          color: ${colors.grey};
         }
+      }
+      & {
       }
     }
 
-    /* &.inputsContainer {
-			& div {
-				border: 1px solid #707070;
-			}
-		} */
+    .form-label {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+    .style-input-create-new-ad {
+      width: 20rem;
+    }
+    .inputsContainer {
+      height: 2.6rem;
+      & > div {
+        width: 25rem;
+        margin-top: 1.5rem;
+      }
+    }
 
     .input-container {
       margin-top: 0;
+    }
+    .textarea {
+      margin-left: 0.4rem;
+      border: 1px solid ${colors.lightGrey};
+      border-radius: 4px;
+      width: 30rem;
+      margin-bottom: 1rem;
     }
   }
 `
