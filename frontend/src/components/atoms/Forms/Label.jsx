@@ -30,7 +30,7 @@ function Label({ label, htmlFor, isError = false, hiddenLabel }) {
 
 Label.propTypes = {
   label: PropTypes.string.isRequired,
-  htmlFor: PropTypes.string.isRequired,
+  htmlFor: PropTypes.string,
   isError: PropTypes.bool,
   hiddenLabel: PropTypes.bool,
 }
