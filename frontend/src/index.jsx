@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import axios from 'axios'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import GlobalStyle from './theme/globalStyles'
 import store from './store/store'
 import 'modern-normalize/modern-normalize.css'
@@ -12,12 +13,14 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <GlobalStyle />
-        <App />
-      </Router>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <Router>
+          <GlobalStyle />
+          <App />
+        </Router>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
