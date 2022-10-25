@@ -27,3 +27,9 @@ yarn-error.log*
 
 # debug.log
 debug.log
+
+# schemas
+backend/app/schemas/MediaSchema.js
+backend/app/schemas/MediaTypeSchema.js
+backend/app/schemas/UserStatusSchema.js
+backend/db/schema-db.png
