@@ -19,7 +19,17 @@ export const Wrapper = styled.div`
     flex-basis: 50px;
     padding: 5px;
   }
-
+  .hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+  }
   @media ${device.Tablet} {
     padding-left: 5vw;
     padding-right: 5vw;
