@@ -106,7 +106,7 @@ export const RowTableStyle = styled.div`
 export const HeaderTableStyle = styled.div`
   color: ${(props) => props.color};
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   font-size: 0.85rem;
