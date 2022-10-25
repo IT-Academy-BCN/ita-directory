@@ -4,6 +4,7 @@ import { Banner } from '../../components/atoms'
 import { MapOfDistricts } from '../../components/organisms'
 import { Container, device } from '../../theme'
 import { Menu } from '../../components/molecules'
+import HelmetComponent from '../../components/organisms/HelmetComponent'
 
 const HomeContainer = styled(Container)`
   flex-direction: column;
@@ -42,6 +43,7 @@ const HomeContainer = styled(Container)`
 function Home() {
   return (
     <Body menu={<Menu />} justifyTitle="center">
+      <HelmetComponent text="Directorio" />
       <HomeContainer data-testid="homeContainerTest">
         <Banner />
         <MapOfDistricts />
