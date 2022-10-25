@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
-import Login from '../../pages/UserFlow/Login/Login'
-import store from '../../store/store'
+import Login from '../../../../pages/UserFlow/Login/Login'
+import store from '../../../../store/store'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
