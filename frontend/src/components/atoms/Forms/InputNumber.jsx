@@ -37,8 +37,6 @@ const StyledContainer = styled.div`
 
   .styledIcon {
     display: flex;
-    margin-right: 6px;
-    color: #999999;
     flex-basis: 20px;
   }
 `
@@ -48,9 +46,8 @@ const StyledInput = styled.input`
   height: 2rem;
   border: none;
   display: flex;
-  font: normal normal normal 16px/32px Helvetica Neue;
-  font-size: 14px;
-  color: #393939;
+  font-size: 0.8rem;
+  color: ${colors.darkGrey};
   padding: 0.75rem;
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
@@ -112,7 +109,7 @@ function InputNumber({
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
             <div className="styledIcon">
-              <Icon color={textColor} name={icon} mr="0.5rem" style={{ ...iconStyles }} />
+              <Icon color={textColor} name={icon} mr="0.5rem" fill={1} style={{ ...iconStyles }} />
             </div>
           )}
           <StyledInput

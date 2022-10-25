@@ -119,14 +119,14 @@ function CreateNewAd() {
       name: 'city',
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
-      icon: 'Map',
+      icon: 'location_on',
     },
     {
       Component: InputNumber,
       type: 'number',
       label: 'Habitaciones',
       name: 'n_rooms',
-      icon: 'Bed',
+      icon: 'bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -135,7 +135,7 @@ function CreateNewAd() {
       label: 'Precio',
       name: 'price',
       required: true,
-      icon: 'Euro',
+      icon: 'euro',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -144,7 +144,7 @@ function CreateNewAd() {
       label: 'M\u00B2',
       name: 'square_meters',
       required: true,
-      icon: 'Home',
+      icon: 'home',
       inputClassName: 'style-input-create-new-ad',
     },
     {
