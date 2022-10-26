@@ -126,7 +126,7 @@ function CreateNewAd() {
       type: 'number',
       label: 'Habitaciones',
       name: 'nRooms',
-      icon: 'bed',
+      icon: 'Bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
