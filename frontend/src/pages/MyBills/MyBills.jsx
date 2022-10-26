@@ -30,7 +30,7 @@ function MyBills() {
   const columns = useMemo(() => [
     {
       Header: (
-        <HeaderTableStyle color={colors.frenchBlue} style={{ textAlign: 'left' }}>
+        <HeaderTableStyle color={colors.frenchBlue} style={{ justifyContent: 'left' }}>
           N.Ref.
         </HeaderTableStyle>
       ),
@@ -44,7 +44,7 @@ function MyBills() {
     },
     {
       Header: (
-        <HeaderTableStyle color={colors.frenchBlue} style={{ textAlign: 'left' }}>
+        <HeaderTableStyle color={colors.frenchBlue} style={{ justifyContent: 'left' }}>
           Fecha
         </HeaderTableStyle>
       ),
@@ -98,11 +98,7 @@ function MyBills() {
       ),
     },
     {
-      Header: (
-        <HeaderTableStyle color={colors.frenchBlue} paddingL="0">
-          Total
-        </HeaderTableStyle>
-      ),
+      Header: <HeaderTableStyle color={colors.frenchBlue}>Total</HeaderTableStyle>,
       accessor: 'total',
       Cell: ({ row }) => (
         <RowTableStyle color={colors.grey}>
