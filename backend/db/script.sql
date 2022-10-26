@@ -157,6 +157,25 @@ USE `it_academy`;
     CONSTRAINT `fk_user_conversation_1` FOREIGN KEY (`conversation_id`) REFERENCES `it_academy`.`conversation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `fk_user_conversation_2` FOREIGN KEY (`user_id`) REFERENCES `it_academy`.`user` (`user_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
   ) ENGINE = InnoDB;
+  -- -----------------------------------------------------
+  -- Table `it_academy`.`invoices`
+  -- -----------------------------------------------------
+  CREATE TABLE IF NOT EXISTS `it_academy`.`invoices` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NULL,
+    `billing_address` VARCHAR(45) NULL,
+    `postal_code` VARCHAR(45) NULL,
+    `city` VARCHAR(45) NULL,
+    `state` VARCHAR(45) NULL,
+    `country` VARCHAR(45) NULL,
+    `vat_id` VARCHAR(45) NULL,
+    `vat_amount` INT NULL,
+    `second_tax` INT NULL,
+    `date` INT NULL,
+    `invoice_number` (unique) string. NUMBER (autoincrement) - YEAR. Example 1-2022, 2-2022.
+    `status` ENUM('PAID', 'PENDING', 'CANCELLED'),
+    PRIMARY KEY (`id`)
+  ) ENGINE = InnoDB;
 SET
   SQL_MODE = @OLD_SQL_MODE;
 SET
