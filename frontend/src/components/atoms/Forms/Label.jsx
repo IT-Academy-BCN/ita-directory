@@ -23,6 +23,7 @@ function Label({ label, htmlFor, isError = false, hiddenLabel }) {
       as="label"
       text={label}
       htmlFor={htmlFor}
+      isError
       className={`${hiddenLabel ? 'hidden' : ''}`}
     />
   )
