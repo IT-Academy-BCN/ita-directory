@@ -160,7 +160,7 @@ InputNumber.propTypes = {
   errorStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   step: PropTypes.number,
   required: PropTypes.bool,
-  error: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   icon: PropTypes.node,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   type: PropTypes.string,
