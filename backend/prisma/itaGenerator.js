@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const generatorHelper = require('@prisma/generator-helper')
-const fs = require('fs')
+const fs = require('fs').promises
 
 const writeTypeSpecificSchemas = (model) => {
   let out = ''
@@ -71,8 +71,9 @@ generatorHelper.generatorHandler({
   },
   onGenerate(options) {
     const outputDir = options.generator.output.value
+    console.log(outputDir)
     const { models } = options.dmmf.datamodel
-    models.forEach((m) => {
+    models.forEach(async (m) => {
       const zodSchemaName = `${m.name}Schema`
       let output = ''
       output += `const { z } = require('zod')\n`
@@ -85,13 +86,24 @@ generatorHelper.generatorHandler({
       })
       output += `})\n\n`
       output += `module.exports = ${zodSchemaName}\n`
+      // Check if schema is already created and if it has been changed
 
-      fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output, (err) => {
-        if (err) {
-          console.error(err)
+      await fs.access(`${outputDir}/${zodSchemaName}.js`).then(async () => {
+        const data = await fs.readFile(`${outputDir}/${zodSchemaName}.js`, { encoding: 'utf-8' })
+        //console.log(data.normalize('NFC'))
+        //console.log(output.normalize('NFC'))
+
+        if (data.normalize('NFC') != output.normalize('NFC')) {
+          fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output, (err) => {
+            if (err) {
+              console.error(err)
+            }
+            // file written successfully
+            console.log(`Generated ${zodSchemaName}.js`)
+          })
+        } else {
+          console.log('Already exist')
         }
-        // file written successfully
-        console.log(`Generated ${zodSchemaName}.js`)
       })
     })
   },
