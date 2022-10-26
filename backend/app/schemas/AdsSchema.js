@@ -5,7 +5,6 @@ const AdsSchema = z.object({
   userId: z.number().int(),
   title: z.string(),
   description: z.string(),
-  location: z.number().int(),
   nRooms: z.number().int(),
   price: z.number().int(),
   includedExpenses: z.boolean().optional(),
