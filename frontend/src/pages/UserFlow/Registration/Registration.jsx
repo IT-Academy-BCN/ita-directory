@@ -10,6 +10,7 @@ import { InputGroup } from '../../../components/molecules'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 import axiosInstance from '../../../utils/axiosInstance'
+import { urls } from '../../../utils'
 
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
@@ -40,7 +41,7 @@ function Register() {
 
   const registerUser = async (user) => {
     try {
-      const response = await axiosInstance.post('/register', user)
+      const response = await axiosInstance.post(urls.register, user)
       if (response.data.code === 'error') {
         dispatch(
           newNotification({

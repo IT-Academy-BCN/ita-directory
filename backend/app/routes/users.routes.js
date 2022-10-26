@@ -27,11 +27,10 @@ router.get(
  * @typedef {object} userRegistrationData
  * @property {string} email.required - Email of the user
  * @property {string} password.required - Pwd of the user
- * @property {boolean} privacy.required - Accept privacy from user
  */
 
 /**
- * POST /users
+ * POST /register
  * @summary Allows user to register
  * @tags Users
  * @param {userRegistrationData} request.body.required - The payload looks like this:
@@ -50,7 +49,7 @@ router.get(
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
 // Register
-router.post('/users', UsersController.registerUser)
+router.post('/register', UsersController.registerUser)
 
 /**
  * GET /users/
@@ -160,13 +159,16 @@ router.patch(
  * @tags Users
  * @param {userRecoverData} request.body.required - The payload looks like this:
  * @return {object} 200 - success response - application/json
+ * @return {object} 404 - Not found
  * @return {object} 400 - Bad request response
  * @example request - Payload example
  * { "email": "email@example.com"}
  * @example response - 200 - Example success response
  * { "status":"200", "message": "email sent successfully"}
- * @example response - 400 - Example error response
+ * @example response - 404 - Example error response
  * { "errCode":"errCode", "message":"email not found"}
+ * @example response - 400 - Example error response
+ * { "errCode":"errCode", "message":"some error"}
  */
 
 router.post('/recover-password', UsersController.receiveEmailGetToken)

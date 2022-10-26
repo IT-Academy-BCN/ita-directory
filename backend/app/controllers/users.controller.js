@@ -101,7 +101,7 @@ exports.getUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
   const { name, lastnames, email, password } = req.body
 
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/
+  const regex = new RegExp(process.env.PASSWORD_REGEX)
 
   if (!regex.test(password)) {
     return next({
@@ -302,15 +302,6 @@ exports.receiveEmailGetToken = async (req, res) => {
   const { email } = req.body
   const user = await prisma.user.findUnique({ where: { email } })
 
-  // Will store the password at password_recovery_log, then this log will be use to forbid the user from using old passwords.
-  // !This might not be the best place to call it.
-  await prisma.recover_password_log.create({
-    data: {
-      password: user.password,
-      userId: user.id,
-    },
-  })
-
   if (!user) {
     return res.status(404).json(
       apiResponse({
@@ -319,13 +310,28 @@ exports.receiveEmailGetToken = async (req, res) => {
       })
     )
   }
+
+  // Will store the password at password_recovery_log, then this log will be use to forbid the user from using old passwords.
+  // !This might not be the best place to call it.
+  await prisma.recoverPasswordLog.create({
+    data: {
+      password: user.password,
+      userId: user.id,
+    },
+  })
+
   const accessToken = signToken(user.id, '1h')
   mailOptions.to = email
   mailOptions.html = `${process.env.REACT_APP_URL}/change-password/${accessToken}`
 
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      res.status(500).json(error.message)
+      res.status(400).json(
+        apiResponse({
+          code: 'error',
+          message: error.message,
+        })
+      )
     } else {
       res.status(200).json({
         // id: info.messageId,
@@ -333,7 +339,7 @@ exports.receiveEmailGetToken = async (req, res) => {
       })
     }
   })
-  return res.sendStatus(204)
+  return res
 }
 
 // TODO: refactor controller method to use middleware auth
