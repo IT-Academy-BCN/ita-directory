@@ -43,6 +43,8 @@ export const ModalBlock = styled.div`
     opacity: 1;
 
     .modalBody {
+      padding: 1rem;
+      max-height: 60vh;
       overflow-y: auto;
       position: relative;
       font-family: Arial;
