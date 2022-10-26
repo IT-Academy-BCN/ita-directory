@@ -71,7 +71,6 @@ generatorHelper.generatorHandler({
   },
   onGenerate(options) {
     const outputDir = options.generator.output.value
-    console.log(outputDir)
     const { models } = options.dmmf.datamodel
     models.forEach(async (m) => {
       const zodSchemaName = `${m.name}Schema`
