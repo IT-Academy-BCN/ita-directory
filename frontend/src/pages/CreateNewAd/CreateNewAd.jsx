@@ -276,6 +276,7 @@ function CreateNewAd() {
                   <Component
                     key={label}
                     label={label}
+                    id={name}
                     type={type}
                     name={name}
                     className={inputClassName}
