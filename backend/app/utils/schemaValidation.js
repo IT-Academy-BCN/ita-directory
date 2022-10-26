@@ -15,17 +15,17 @@ const registerSchema = Joi.object({
 })
 
 const adsSchema = Joi.object({
-  user_id: Joi.number().required(),
+  userId: Joi.number().required(),
   title: Joi.string().required(),
   description: Joi.string().required(),
   city: Joi.string().required(),
-  n_rooms: Joi.number().required(),
+  nRooms: Joi.number().required(),
   price: Joi.number().required(),
-  square_meters: Joi.number().required(),
-  n_bathrooms: Joi.number().required(),
-  map_lat: Joi.number().required(),
-  map_lon: Joi.number().required(),
-  ad_type_id: Joi.number().required(),
+  squareMeters: Joi.number().required(),
+  nBathrooms: Joi.number().required(),
+  mapLat: Joi.number().required(),
+  mapLon: Joi.number().required(),
+  adTypeId: Joi.number().required(),
 })
 
 const patchAdSchema = Joi.object({
@@ -33,13 +33,13 @@ const patchAdSchema = Joi.object({
   title: Joi.string(),
   description: Joi.string(),
   city: Joi.string(),
-  n_rooms: Joi.number(),
+  nRooms: Joi.number(),
   price: Joi.number(),
-  square_meters: Joi.number(),
-  n_bathrooms: Joi.number(),
-  map_lat: Joi.number(),
-  map_lon: Joi.number(),
-  ad_type_id: Joi.number(),
+  squareMeters: Joi.number(),
+  nBathrooms: Joi.number(),
+  mapLat: Joi.number(),
+  mapLon: Joi.number(),
+  adTypeId: Joi.number(),
 })
 
 const getRegionByLocationSchema = Joi.string().required()
