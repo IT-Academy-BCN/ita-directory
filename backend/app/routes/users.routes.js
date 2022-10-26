@@ -30,7 +30,7 @@ router.get(
  */
 
 /**
- * POST /users
+ * POST /register
  * @summary Allows user to register
  * @tags Users
  * @param {userRegistrationData} request.body.required - The payload looks like this:
@@ -49,7 +49,7 @@ router.get(
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
 // Register
-router.post('/users', UsersController.registerUser)
+router.post('/register', UsersController.registerUser)
 
 /**
  * GET /users/
