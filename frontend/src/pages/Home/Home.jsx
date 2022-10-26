@@ -43,7 +43,7 @@ const HomeContainer = styled(Container)`
 function Home() {
   return (
     <Body menu={<Menu />} justifyTitle="center">
-      <HelmetComponent text="Directorio" />
+      <HelmetComponent text="El directorio" />
       <HomeContainer data-testid="homeContainerTest">
         <Banner />
         <MapOfDistricts />

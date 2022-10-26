@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Ad from './Ad/Ad'
+import HelmetComponent from '../../components/organisms/HelmetComponent'
 import Body from '../../components/layout/Body/Body'
 import { Container, colors } from '../../theme'
 import { Text } from '../../components/atoms'
@@ -84,6 +85,7 @@ function UserAds() {
 
   return (
     <Body title="Mis anuncios" isLoggedIn>
+      <HelmetComponent text="Mis anuncios" />
       <Container row>
         <StyledUserAds>
           {(fetchStatus === REQ_STATUS.INITIAL || fetchStatus === REQ_STATUS.LOADING) && (

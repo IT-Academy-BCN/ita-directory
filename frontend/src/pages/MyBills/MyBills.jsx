@@ -5,6 +5,7 @@
 import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTable } from 'react-table'
+import HelmetComponent from '../../components/organisms/HelmetComponent'
 import Body from '../../components/layout/Body/Body'
 import { colors } from '../../theme'
 import bills from './billsData.json'
@@ -150,6 +151,7 @@ function MyBills() {
       justifyTitle="flex-start"
       isLoggedIn="true"
     >
+      <HelmetComponent text="Mis Facturas" />
       <MyTableStyle className="MyTableStyle">
         <table {...getTableProps()}>
           <thead>

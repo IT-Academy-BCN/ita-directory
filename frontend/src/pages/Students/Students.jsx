@@ -7,7 +7,7 @@ import HelmetComponent from '../../components/organisms/HelmetComponent'
 function Students() {
   return (
     <Body menu={<Menu />}>
-      <HelmetComponent text="Alumnos" />
+      <HelmetComponent text="Para alumnos" />
       <Banner students />
     </Body>
   )

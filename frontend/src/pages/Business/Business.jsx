@@ -6,7 +6,7 @@ import HelmetComponent from '../../components/organisms/HelmetComponent'
 function Business() {
   return (
     <Body menu={<Menu />}>
-      <HelmetComponent text="Empresas" />
+      <HelmetComponent text="Para empresas" />
       <p>Empresas</p>
     </Body>
   )

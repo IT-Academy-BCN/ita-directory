@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
+import HelmetComponent from '../../../components/organisms/HelmetComponent'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Text } from '../../../components/atoms'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
@@ -102,6 +103,7 @@ function Login() {
 
   return (
     <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
+      <HelmetComponent text="Acceso" />
       <Container>
         {userLogged ? (
           <Text text="Ya estas logueado" />
