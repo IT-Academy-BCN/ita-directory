@@ -12,14 +12,14 @@ const {
 const { parseAdsFromCsvBuffer } = require('../utils/parseAdsFromCsvBuffer')
 
 async function createAd(req, res, next) {
-  const userId = { req }
+  const { userId } = req
   try {
     // fields -> userId, title, description, city, nRooms, price, squareMeters, nBathrooms, mapLat, mapLon
-    const { ...fields } = req.body
+    // const { ...fields } = req.body
     // @todo: userId might be removed from adsSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
-    await adsSchema.validateAsync(fields)
+    // await adsSchema.validateAsync(fields)
 
-    const ad = await prisma.ads.create({
+    const ad = await prisma.Ads.create({
       data: {
         user: {
           connect: {
@@ -29,16 +29,21 @@ async function createAd(req, res, next) {
         title: req.body.title,
         description: req.body.description,
         city: req.body.city,
-        nRooms: parseInt(req.body.nRooms, 10),
-        price: parseInt(req.body.price, 10),
-        squareMeters: parseInt(req.body.squareMeters, 10),
-        nBathrooms: parseInt(req.body.nBathrooms, 10),
-        mapLat: parseFloat(req.body.mapLat),
-        mapLon: parseFloat(req.body.mapLon),
+        nRooms: req.body.nRooms,
+        price: req.body.price,
+        squareMeters: req.body.squareMeters,
+        nBathrooms: req.body.nBathrooms,
+        mapLat: req.body.mapLat,
+        mapLon: req.body.mapLon,
         includedExpenses: req.body.includedExpenses === 'true',
         adType: {
           connect: {
-            id: parseInt(req.body.adTypeId, 10),
+            id: req.body.adTypeId,
+          },
+        },
+        adStatus: {
+          connect: {
+            id: req.body.adStatusId,
           },
         },
       },
@@ -56,7 +61,7 @@ async function createAd(req, res, next) {
       res.status(422).json(
         apiResponse({
           message: 'This value for userId does not exist in users table.',
-          errors: err.message,
+          errors: err,
           status: 422,
         })
       )
@@ -106,18 +111,28 @@ async function createAdsFromCSVBuffer(req, res, next) {
 }
 
 async function getUserAds(req, res) {
-  const { userId } = req
-  await getUserAdsSchema.validateAsync(userId)
-  const ads = await prisma.ads.findMany({
-    where: { userId },
-  })
-  return res.status(200).json(
-    apiResponse({
-      message: 'Data fetched correctly.',
-      data: ads,
-      status: 200,
+  const { userId } = req.params
+  try {
+    await getUserAdsSchema.validateAsync(userId)
+    const ads = await prisma.ads.findMany({
+      where: { userId: parseInt(userId, 10) },
     })
-  )
+    return res.status(200).json(
+      apiResponse({
+        message: 'Data fetched correctly.',
+        data: ads,
+        status: 200,
+      })
+    )
+  } catch (err) {
+    return res.status(400).json(
+      apiResponse({
+        message: err.message,
+        errors: err,
+        status: 400,
+      })
+    )
+  }
 }
 
 async function getAllAds(req, res) {

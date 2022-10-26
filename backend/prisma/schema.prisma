@@ -78,7 +78,6 @@ model RecoverPasswordLog {
     user      User     @relation(fields: [userId], references: [id])
     userId    Int      @map("user_id")
 
-
     @@map("recover_password_log")
 }
 
@@ -173,13 +172,11 @@ model AdStatus {
 }
 
 model Ads {
-
     id               Int      @id @default(autoincrement())
     user             User     @relation(fields: [userId], references: [id])
     userId           Int      @map("user_id")
     title            String
     description      String
-    location         Int
     nRooms           Int      @map("n_rooms")
     price            Int
     includedExpenses Boolean  @default(false) @map("included_expenses")
