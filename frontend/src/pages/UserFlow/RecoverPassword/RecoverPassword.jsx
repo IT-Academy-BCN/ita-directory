@@ -5,7 +5,6 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
-import HelmetComponent from '../../../components/organisms/HelmetComponent'
 import Body from '../../../components/layout/Body/Body'
 
 // Units Components
@@ -64,7 +63,6 @@ function RecoverPassword() {
 
   return (
     <Body title="Recuperar contraseña" justifyTitle="center">
-      <HelmetComponent text="Recuperar contraseña" />
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidation>
           <Text

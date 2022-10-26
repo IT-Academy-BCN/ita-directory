@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
-import HelmetComponent from '../../components/organisms/HelmetComponent'
 import Body from '../../components/layout/Body/Body'
 import InputNumber from '../../components/atoms/Forms/InputNumber'
 import TextArea from '../../components/atoms/Forms/TextArea'
@@ -204,7 +203,6 @@ function CreateNewAd() {
       isLoggedIn
       isTitleVisible="true"
     >
-      <HelmetComponent text="Publicar anuncio" />
       <Container>
         <Wrapper>
           <Button

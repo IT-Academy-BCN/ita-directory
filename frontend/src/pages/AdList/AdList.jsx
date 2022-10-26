@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import AdCard from './AdCard/AdCard'
-import HelmetComponent from '../../components/organisms/HelmetComponent'
 import Body from '../../components/layout/Body/Body'
 import { Button } from '../../components/atoms'
 import { colors, Container } from '../../theme'
@@ -90,7 +89,6 @@ function AdList() {
 
   return (
     <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
-      <HelmetComponent text="Mis anuncios" />
       <AdsStyled>
         <AdListFilter
           filter={setFilterParams}

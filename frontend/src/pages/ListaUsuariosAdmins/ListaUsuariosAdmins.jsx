@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import HelmetComponent from '../../components/organisms/HelmetComponent'
 import Body from '../../components/layout/Body/Body'
 import { Container, colors } from '../../theme'
 import ReactTable from '../../components/organisms/Table/ReactTable'
@@ -263,7 +262,6 @@ function ListaUsuariosAdmins() {
       paddingTitle2="73px"
       isLoggedIn
     >
-      <HelmetComponent text="Usuarios registrados" />
       <Container row>
         {(reqStatus === ReqStatus.INITIAL || reqStatus === ReqStatus.PENDING) && 'Loading...'}
         {reqStatus === ReqStatus.FAILURE && 'There was an error...'}

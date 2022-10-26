@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
-import HelmetComponent from '../../../components/organisms/HelmetComponent'
 import Body from '../../../components/layout/Body/Body'
 import { Button, CheckBox, Text } from '../../../components/atoms'
 import { Container, Form } from '../UserFlow.styles'
@@ -80,7 +79,6 @@ function Register() {
 
   return (
     <Body title="Registro" justifyTitle="center">
-      <HelmetComponent text="Registro" />
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
           <InputGroup

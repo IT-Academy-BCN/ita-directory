@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import HelmetComponent from '../../../components/organisms/HelmetComponent'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Input } from '../../../components/atoms'
 import Modal from '../../../components/organisms/Modal/Modal'
@@ -46,7 +45,6 @@ function Profile() {
 
   return (
     <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn>
-      <HelmetComponent text="Editar perfil" />
       <Container>
         <Modal
           hideModal={() => setShowUploadPhotoModal(false)}

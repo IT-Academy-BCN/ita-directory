@@ -8,6 +8,7 @@ import ContactModal from './ContactModal'
 import Map from './Map/Map/Map'
 import Pagination from './Pagination'
 import ProtectedRoute from './ProtectedRoute'
+import HelmetComponent from './HelmetComponent'
 
 export {
   AdCard,
@@ -22,4 +23,5 @@ export {
   PieChart,
   ProtectedRoute,
   UserStatus,
+  HelmetComponent,
 }
