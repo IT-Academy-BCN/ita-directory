@@ -20,7 +20,6 @@ function Profile() {
   const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
   const [firstLoad, setFirstLoad] = useState(null)
-  //   const dispatch = useDispatch()
 
   const submitUserInfo = () => {
     setLoggedinUserInfo((prev) => {
@@ -42,8 +41,6 @@ function Profile() {
     axiosInstance.post(urls.updateAvatar, f, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-    //   .then((r) => console.log(r))
-    //   .catch((e) => console.error(e))
   }
 
   return (

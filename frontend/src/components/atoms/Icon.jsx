@@ -1,7 +1,7 @@
-import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { space, typography } from 'styled-system'
+import { colors } from '../../theme'
 
 const IconStyled = styled.span`
   font-variation-settings: 'FILL' ${(props) => props.fill}, 'wght' ${(props) => props.wght},
@@ -15,7 +15,7 @@ const IconStyled = styled.span`
 function Icon({
   name,
   size = 24,
-  color = '#333',
+  color = colors.lightGrey,
   fill = 0,
   wght = 400,
   grad = 0,
@@ -25,7 +25,7 @@ function Icon({
 }) {
   return (
     <IconStyled
-      className={`material-symbols-rounded ${className}`}
+      className={`material-symbols-outlined ${className}`}
       fill={fill}
       wght={wght}
       grad={grad}
