@@ -87,14 +87,10 @@ generatorHelper.generatorHandler({
       output += `})\n\n`
       output += `module.exports = ${zodSchemaName}\n`
       // Check if schema is already created and if it has been changed
-
       await fs.access(`${outputDir}/${zodSchemaName}.js`).then(async () => {
         const data = await fs.readFile(`${outputDir}/${zodSchemaName}.js`, { encoding: 'utf-8' })
-        //console.log(data.normalize('NFC'))
-        //console.log(output.normalize('NFC'))
-
-        if (data.normalize('NFC') != output.normalize('NFC')) {
-          fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output, (err) => {
+        if (data.replace(/\s/g, '') != output.replace(/\s/g, '')) {
+          await fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output).then((err) => {
             if (err) {
               console.error(err)
             }
@@ -102,7 +98,7 @@ generatorHelper.generatorHandler({
             console.log(`Generated ${zodSchemaName}.js`)
           })
         } else {
-          console.log('Already exist')
+          console.log(`Already exist ${zodSchemaName}.js`)
         }
       })
     })
