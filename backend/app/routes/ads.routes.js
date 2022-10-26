@@ -45,7 +45,7 @@ const AdsSchema = require('../schemas/AdsSchema')
  * @return {object} 200 - Success response - application/json
  * @return {object} 400 - Bad request response - application/json
  * @example request - Correct ad payload
- * { "userId": 1, "title": "Apartment in Barcelona",
+ * { "title": "Apartment in Barcelona",
  * "description": "Apartment in sunny Barcelona close to Collserola", "city": "Barcelona",
  * "nRooms": 4, "price": 500000, "squareMeters": 100, "nBathrooms": 2, "mapLat": 41.418664, "mapLon": 2.133707,
  * "adTypeId": 1, "adStatusId": 1}
@@ -135,7 +135,12 @@ router.get('/ads', adsController.getAllAds)
         }
     ]}
  */
-router.get('/ads/user/:userId', authenticateToken, adsController.getUserAds)
+router.get(
+  '/ads/user/:userId',
+  authenticateToken,
+  // validate(AdsSchema.pick({ userId: true }),
+  adsController.getUserAds
+)
 
 /**
  * GET /ads/{adId}
