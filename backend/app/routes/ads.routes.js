@@ -135,12 +135,7 @@ router.get('/ads', adsController.getAllAds)
         }
     ]}
  */
-router.get(
-  '/ads/user/:userId',
-  authenticateToken,
-  // validate(AdsSchema.pick({ userId: true }),
-  adsController.getUserAds
-)
+router.get('/ads/user/:userId', authenticateToken, adsController.getUserAds)
 
 /**
  * GET /ads/{adId}

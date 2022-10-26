@@ -66,7 +66,6 @@ async function createAd(req, res, next) {
         })
       )
     } else {
-      console.log(err)
       next(err)
     }
   }
@@ -113,17 +112,26 @@ async function createAdsFromCSVBuffer(req, res, next) {
 
 async function getUserAds(req, res) {
   const { userId } = req.params
-
-  const ads = await prisma.ads.findMany({
-    where: { userId: parseInt(userId, 10) },
-  })
-  return res.status(200).json(
-    apiResponse({
-      message: 'Data fetched correctly.',
-      data: ads,
-      status: 200,
+  try {
+    const ads = await prisma.ads.findMany({
+      where: { userId: parseInt(userId, 10) },
     })
-  )
+    return res.status(200).json(
+      apiResponse({
+        message: 'Data fetched correctly.',
+        data: ads,
+        status: 200,
+      })
+    )
+  } catch (err) {
+    return res.status(400).json(
+      apiResponse({
+        message: err.message,
+        errors: err,
+        status: 400,
+      })
+    )
+  }
 }
 
 async function getAllAds(req, res) {
