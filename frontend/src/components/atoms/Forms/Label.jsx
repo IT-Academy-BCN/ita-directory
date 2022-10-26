@@ -17,7 +17,7 @@ const LabelStyled = styled(Text)`
   }
   ${(props) => props.isError && `color: ${colors.extraDarkRed} `}
 `
-function Label({ label, htmlFor, isError = false, hiddenLabel }) {
+function Label({ label, htmlFor, isError = false, hiddenLabel = false }) {
   return (
     <LabelStyled
       as="label"
