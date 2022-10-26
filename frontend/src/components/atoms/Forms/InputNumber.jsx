@@ -104,7 +104,7 @@ function InputNumber({
 }) {
   return (
     <InputNumberStyled>
-      <Label label={label} htmlFor={name} hiddenLabel />
+      <Label label={label} htmlFor={id} hiddenLabel />
       <div className="inputsContainer">
         <StyledContainer className={`${className} ${error ? 'error' : ''}`}>
           {icon && (
