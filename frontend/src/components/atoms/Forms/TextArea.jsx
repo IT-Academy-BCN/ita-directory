@@ -47,7 +47,7 @@ function TextArea({
 }) {
   return (
     <TextAreaStyled className={inputContainerClassName}>
-      <Label label={label} htmlFor={id} hidden />
+      <Label label={label} htmlFor={id} hiddenLabel />
       <TextAreaInput
         placeholder={placeholder}
         onFocus={onFocus}

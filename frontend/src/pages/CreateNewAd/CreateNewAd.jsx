@@ -47,7 +47,7 @@ function CreateNewAd() {
   } = useForm({
     resolver: yupResolver(newAdSchema),
   })
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   const postAd = async (formInfo) => {
     try {
@@ -103,13 +103,16 @@ function CreateNewAd() {
       type: 'text',
       label: 'Título',
       name: 'title',
+      id: 'title',
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
     },
     {
       Component: TextArea,
+      type: 'textarea',
       label: 'Descripción',
       name: 'description',
+      id: 'description',
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
@@ -117,6 +120,7 @@ function CreateNewAd() {
       type: 'text',
       label: 'Ciudad',
       name: 'city',
+      id: 'city',
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_on',
@@ -126,6 +130,7 @@ function CreateNewAd() {
       type: 'number',
       label: 'Habitaciones',
       name: 'n_rooms',
+      id: 'n_rooms',
       icon: 'bed',
       inputClassName: 'style-input-create-new-ad',
     },
@@ -134,6 +139,7 @@ function CreateNewAd() {
       type: 'number',
       label: 'Precio',
       name: 'price',
+      id: 'price',
       required: true,
       icon: 'euro',
       inputClassName: 'style-input-create-new-ad',
@@ -143,6 +149,7 @@ function CreateNewAd() {
       type: 'number',
       label: 'M\u00B2',
       name: 'square_meters',
+      id: 'square_meters',
       required: true,
       icon: 'home',
       inputClassName: 'style-input-create-new-ad',
@@ -152,7 +159,8 @@ function CreateNewAd() {
       type: 'number',
       label: 'Baños',
       name: 'n_bathrooms',
-      icon: 'Bathtub',
+      id: 'n_bathrooms',
+      icon: 'bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
   ]
@@ -238,19 +246,23 @@ function CreateNewAd() {
               text="Subir Archivo"
               type="normal"
               className="green-gradient"
-              onClick={() => submitCsv()}
+              onClick={() => {
+                submitCsv()
+                dispatch(
+                  newNotification({
+                    message:
+                      validCsvFile === false
+                        ? 'Tus anuncios no se han podido publicar.'
+                        : 'Tus anuncios han sido publicados con éxito',
+                    type:
+                      validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
+                  })
+                )
+              }}
             />
           </Modal>
 
-          {dispatch(
-            newNotification({
-              message:
-                validCsvFile === false
-                  ? 'Tus anuncios no se han podido publicar.'
-                  : 'Tus anuncios han sido publicados con éxito',
-              type: validCsvFile === false ? NotificationTypes.error : NotificationTypes.succes,
-            })
-          )}
+          {}
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
             {inputComponentData.map((el, i) => {
@@ -259,6 +271,7 @@ function CreateNewAd() {
                 label,
                 type,
                 name,
+                id,
                 inputClassName,
                 icon,
                 inputContainerClassName,
@@ -266,13 +279,14 @@ function CreateNewAd() {
               return (
                 <div key={label}>
                   <div className="form-label">
-                    <Label label={label} htmlFor={name} />
+                    <Label label={label} htmlFor={id} />
                   </div>
                   <Component
-                    key={label}
+                    id={id}
+                    key={id}
                     label={label}
-                    type={type}
                     name={name}
+                    type={type}
                     className={inputClassName}
                     icon={icon && icon}
                     inputContainerClassName={inputContainerClassName}
