@@ -131,7 +131,7 @@ function CreateNewAd() {
       label: 'Habitaciones',
       name: 'nRooms',
       id: 'nRooms',
-      icon: 'bed',
+      icon: 'Bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
@@ -160,7 +160,7 @@ function CreateNewAd() {
       label: 'Baños',
       name: 'nBathrooms',
       id: 'nBathrooms',
-      icon: 'bathtub',
+      icon: 'Bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
   ]
