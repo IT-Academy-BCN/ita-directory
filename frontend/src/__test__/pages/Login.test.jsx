@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Provider } from 'react-redux'
+import { HelmetProvider } from 'react-helmet-async'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
@@ -18,7 +19,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -33,7 +36,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -48,7 +53,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -63,7 +70,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -76,7 +85,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -92,7 +103,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -108,7 +121,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -124,7 +139,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
@@ -144,7 +161,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
