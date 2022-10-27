@@ -161,7 +161,9 @@ describe('Login', () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <Login />
+          <HelmetProvider>
+            <Login />
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     )
