@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const generatorHelper = require('@prisma/generator-helper')
-const fs = require('fs').promises
+const fs = require('fs')
 
 const writeTypeSpecificSchemas = (model) => {
   let out = ''
@@ -52,10 +52,6 @@ const getZodConstructor = (field, getRelatedModelName = (name) => name.toString(
   }
 
   if (field.isList) extraModifiers.push('array()')
-  // if (field.documentation) {
-  //   zodType = computeCustomSchema(field.documentation) ?? zodType
-  //   extraModifiers.push(...computeModifiers(field.documentation))
-  // }
   if (!field.isRequired && field.type !== 'Json') extraModifiers.push('nullish()')
   if (field.hasDefaultValue && !field.isId) extraModifiers.push('optional()')
 
@@ -72,7 +68,7 @@ generatorHelper.generatorHandler({
   onGenerate(options) {
     const outputDir = options.generator.output.value
     const { models } = options.dmmf.datamodel
-    models.forEach(async (m) => {
+    models.forEach((m) => {
       const zodSchemaName = `${m.name}Schema`
       let output = ''
       output += `const { z } = require('zod')\n`
@@ -85,36 +81,12 @@ generatorHelper.generatorHandler({
       })
       output += `})\n\n`
       output += `module.exports = ${zodSchemaName}\n`
-      // Check if schema is already created and if it has been changed
-      await fs.access(`${outputDir}/${zodSchemaName}.js`).then(async () => {
-        const data = await fs.readFile(`${outputDir}/${zodSchemaName}.js`, { encoding: 'utf-8' })
-        if (data.replace(/\s/g, '') != output.replace(/\s/g, '')) {
-          await fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output).then((err) => {
-            if (err) {
-              console.error(err)
-            }
-            // file written successfully
-            console.log(`Generated ${zodSchemaName}.js`)
-          })
-        } else {
-          console.log(`Already exist ${zodSchemaName}.js`)
-        }
-      })
+      try {
+        fs.writeFileSync(`${outputDir}/${zodSchemaName}.js`, output)
+        console.log(`Generated ${zodSchemaName}.js`)
+      } catch (error) {
+        throw new Error(error)
+      }
     })
   },
 })
-
-// Example of generated files content:
-
-// const { z } = require('zod')
-
-// const UserRoleSchema = z.object({
-//   id: z.string(),
-//   name: z.string(),
-//   admin: z.boolean(),
-//   developer: z.boolean(),
-//   manager: z.boolean(),
-//   registered: z.boolean(),
-// })
-
-// module.exports =  UserRoleSchema
