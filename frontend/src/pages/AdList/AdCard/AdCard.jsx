@@ -41,9 +41,11 @@ const AdCardStyled = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .ad-card__property-data span {
+      margin-right: 4px;
+    }
     .ad-card__price {
       color: ${colors.darkOrange};
-
       font-size: 18px;
     }
     .ad-card__description {
