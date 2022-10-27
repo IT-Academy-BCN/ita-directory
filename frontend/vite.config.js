@@ -15,7 +15,7 @@ export default ({ mode }) => {
       port: 3000,
       proxy: {
         '/public': {
-          target: `${process.env.VITE_API_URL}/`,
+          target: `http://localhost:10910/`,
           changeOrigin: true,
         },
       },
