@@ -224,3 +224,28 @@ model Message {
 
     @@map("message")
 }
+
+model Invoice {
+    id             Int          @id @default(autoincrement())
+    user           User         @relation(fields: [userId], references: [id])
+    userId         Int          @map("user_id")
+    billingAdress  String?      @map("billing_address")
+    postalCode     String?      @map("postal_code")
+    city           String       
+    state          String
+    country        String
+    vatId          String       @map("vat_id")
+    vatAmount      Int          @map("vat_amount")
+    secondTax      Int          @map("second_tax")
+    createdAt      DateTime     @default(now()) @map("created_at")
+    invoiceNumber  String       @unique @map("invoice_number")
+    status         Status       @default(PENDING)
+
+    @@map("invoice")
+}
+
+enum Status {
+    PAID
+    PENDING
+    CANCELLED
+}
