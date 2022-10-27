@@ -241,6 +241,7 @@ function ListaUsuariosAdmins() {
 
   const data = useMemo(
     () =>
+      dataUsers &&
       dataUsers.map((du) => ({
         id: du.id,
         media: du.avatar?.path,
@@ -261,6 +262,8 @@ function ListaUsuariosAdmins() {
       paddingTitle="0px"
       paddingTitle2="73px"
       isLoggedIn
+      userRole="1"
+      // when backend adds userRoleName property to users, change "1" for "ADMIN"
     >
       <Container row>
         {(reqStatus === ReqStatus.INITIAL || reqStatus === ReqStatus.PENDING) && 'Loading...'}

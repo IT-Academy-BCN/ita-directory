@@ -4,7 +4,10 @@ import styled from 'styled-components'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { device } from '../../../theme'
-import { Notifications } from '../../atoms'
+import { Notifications, Text } from '../../atoms'
+import useUser from '../../../hooks/useUser'
+
+import { rolePoints } from '../../../utils/constant'
 
 const StyledBody = styled.div`
   min-height: 100vh;
@@ -29,6 +32,13 @@ const Childrens = styled.div`
   }
 `
 
+const checkRole = (user, userRole) => {
+  if (!userRole) return true
+  if (user && rolePoints[user.userRoleId] >= rolePoints[userRole]) return true
+
+  return false
+}
+
 function Body({
   children,
   title,
@@ -39,25 +49,35 @@ function Body({
   hideFooter,
   dashboard,
   menu,
+  userRole,
 }) {
+  const user = useUser()
+  const isValidRole = checkRole(user, userRole)
+
   return (
-    <StyledBody className="styledBody">
-      {hideHeader && dashboard ? (
-        ''
+    <div>
+      {isValidRole ? (
+        <StyledBody className="styledBody">
+          {hideHeader && dashboard ? (
+            ''
+          ) : (
+            <Header
+              title={title}
+              menu={menu}
+              logoColor={logoColor}
+              isLoggedIn={isLoggedIn}
+              justifyTitle={justifyTitle}
+              isTitleVisible={false}
+            />
+          )}
+          <Childrens>{children}</Childrens>
+          {hideFooter ? '' : <Footer />}
+          <Notifications />
+        </StyledBody>
       ) : (
-        <Header
-          title={title}
-          menu={menu}
-          logoColor={logoColor}
-          isLoggedIn={isLoggedIn}
-          justifyTitle={justifyTitle}
-          isTitleVisible={false}
-        />
+        <Text text="You don't have persmissions to see this content." />
       )}
-      <Childrens>{children}</Childrens>
-      {hideFooter ? '' : <Footer />}
-      <Notifications />
-    </StyledBody>
+    </div>
   )
 }
 
@@ -71,6 +91,7 @@ Body.propTypes = {
   hideHeader: PropTypes.bool,
   hideFooter: PropTypes.bool,
   dashboard: PropTypes.bool,
+  userRole: PropTypes.string,
 }
 
 export default styled(Body)``
