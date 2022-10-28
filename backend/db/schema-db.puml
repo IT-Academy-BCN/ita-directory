@@ -2,6 +2,12 @@
 
 skinparam linetype ortho
 
+enum Status {
+  PAID
+  PENDING
+  CANCELLED
+}
+
 entity UserRole {
   * id: Int
   * name: String
@@ -43,6 +49,7 @@ entity User {
   developerData: Json?
   * messagesSent: Message[]
   * userConversations: UserConversation[]
+  * userInvoices: Invoice[]
 }
 
 entity AccesLog {
@@ -183,6 +190,23 @@ entity Message {
   * createdAt: DateTime
 }
 
+entity Invoice {
+  * id: Int
+  * user: User
+  * userId: Int
+  billingAdress: String?
+  postalCode: String?
+  * city: String
+  * state: String
+  * country: String
+  * vatId: String
+  * vatAmount: Int
+  * secondTax: Int
+  * createdAt: DateTime
+  * invoiceNumber: String
+  * status: Status
+}
+
 UserRole ||..|{ User
 UserStatus ||..|{ User
 UserRole ||..|{ User
@@ -199,5 +223,7 @@ User ||..|{ Ads
 Conversation ||..|{ Message
 User ||..|{ UserConversation
 User ||..|{ Message
+User ||..|{ Invoice
+Invoice ||..|| Status
 
 @enduml

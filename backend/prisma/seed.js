@@ -11,6 +11,7 @@ const ad_types = require('./seedFiles/ad_types')
 const ad_status = require('./seedFiles/ad_status')
 const levels = require('./seedFiles/levels')
 const level_types = require('./seedFiles/level_types')
+const invoices = require('./seedFiles/invoices')
 
 const user_roles = [
   {
@@ -213,53 +214,6 @@ const medias_metas = [
   },
 ]
 
-const invoices = [
-  {
-    userId: 1,
-    billingAdress: 'Carrer Diagonal 000',
-    postalCode: '08021',
-    city: 'Barcelona',
-    state: 'Catalonia',
-    country: 'Spain',
-    vatId: 'B00000000',
-    vatAmount: 0.21,
-    secondTax: 0.3,
-  },
-  {
-    userId: 2,
-    billingAdress: 'Carrer Muntaner 000',
-    postalCode: '08023',
-    city: 'Barcelona',
-    state: 'Catalonia',
-    country: 'Spain',
-    vatId: 'B00000001',
-    vatAmount: 0.21,
-    secondTax: 0.2,
-  },
-  {
-    userId: 1,
-    billingAdress: 'Carrer Diagonal 000',
-    postalCode: '08021',
-    city: 'Barcelona',
-    state: 'Catalonia',
-    country: 'Spain',
-    vatId: 'B00000000',
-    vatAmount: 0.21,
-    secondTax: 0.3,
-  },
-  {
-    userId: 3,
-    billingAdress: 'Gran Via 000',
-    postalCode: '28013',
-    city: 'Madrid',
-    state: 'Madrid',
-    country: 'Spain',
-    vatId: 'B00000002',
-    vatAmount: 0.21,
-    secondTax: 0.3,
-  },
-]
-
 async function main() {
   console.log('Seeding database ...')
 
@@ -382,20 +336,22 @@ async function main() {
     })
   }
 
+  // Add some invoices
+  for (let i = 0; i < invoices.length; i++) {
+    const invoice = invoices[i]
+    await prisma.invoice.upsert({
+      where: { id: i + 1 },
+      update: {},
+      create: {
+        ...invoice,
+      },
+    })
+  }
+
   // Add some avatarId to users
   for (let i = 0; i < users.length; i++) {
     if (medias[i]) {
       await prisma.user.update({
-        where: { id: i + 1 },
-        data: { avatarId: i + 1 },
-      })
-    }
-  }
-
-  // Add some invoices to users
-  for (let i = 0; i < invoices.length; i++) {
-    if (invoices[i]) {
-      await prisma.invoice.update({
         where: { id: i + 1 },
         data: { avatarId: i + 1 },
       })
