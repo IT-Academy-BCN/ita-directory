@@ -176,7 +176,9 @@ CREATE TABLE IF NOT EXISTS `it_academy`.`invoice` (
   `status` ENUM('PAID', 'PENDING', 'CANCELLED') NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `invoice_number_UNIQUE` (`invoice_number` ASC) VISIBLE,
-  INDEX `fk_invoice_1_idx` (`user_id` ASC) VISIBLE)
+  INDEX `fk_invoice_1_idx` (`user_id` ASC) VISIBLE),
+  CONSTRAINT `fk_user_invoice_1` FOREIGN KEY (`user_id`) REFERENCES `it_academy`.`user` (`user_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
 ENGINE = InnoDB;
 DELIMITER $$
 USE `it_academy`$$

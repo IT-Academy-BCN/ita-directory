@@ -57,6 +57,7 @@ model User {
     developerData     Json?                @map("developer_data") //Added developer data (not a jsonb?) 
     messagesSent      Message[]            @relation("sender")
     userConversations UserConversation[]   @relation("conv_user")
+    userInvoices      Invoice[]            
 
     @@map("user")
 }
