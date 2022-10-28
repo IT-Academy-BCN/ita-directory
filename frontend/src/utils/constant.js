@@ -20,7 +20,7 @@ const ReqStatus = {
   FAILURE: 'FAILURE',
 }
 
-const roles = {
+const Roles = {
   ADMIN: 'ADMIN',
   MANAGER: 'MANAGER',
   DEVELOPER: 'DEVELOPER',
@@ -29,10 +29,10 @@ const roles = {
 
 // when backend adds userRoleName property to users, change "1" for "ADMIN"
 
-const rolePoints = {
+const RolePoints = {
   1: 100,
   MANAGER: 50,
   DEVELOPER: 20,
   GUEST: 0,
 }
-export { allMonths, ReqStatus, roles, rolePoints }
+export { allMonths, ReqStatus, Roles, RolePoints }

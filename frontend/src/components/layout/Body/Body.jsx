@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Header from '../Header/Header'
@@ -6,8 +6,7 @@ import Footer from '../Footer/Footer'
 import { device } from '../../../theme'
 import { Notifications, Text } from '../../atoms'
 import useUser from '../../../hooks/useUser'
-
-import { rolePoints } from '../../../utils/constant'
+import checkRole from '../../../utils/checkRole'
 
 const StyledBody = styled.div`
   min-height: 100vh;
@@ -32,13 +31,6 @@ const Childrens = styled.div`
   }
 `
 
-const checkRole = (user, userRole) => {
-  if (!userRole) return true
-  if (user && rolePoints[user.userRoleId] >= rolePoints[userRole]) return true
-
-  return false
-}
-
 function Body({
   children,
   title,
@@ -52,32 +44,28 @@ function Body({
   userRole,
 }) {
   const user = useUser()
-  const isValidRole = checkRole(user, userRole)
+  const isValidRole = useMemo(() => checkRole(user, userRole), [user, userRole])
 
-  return (
-    <div>
-      {isValidRole ? (
-        <StyledBody className="styledBody">
-          {hideHeader && dashboard ? (
-            ''
-          ) : (
-            <Header
-              title={title}
-              menu={menu}
-              logoColor={logoColor}
-              isLoggedIn={isLoggedIn}
-              justifyTitle={justifyTitle}
-              isTitleVisible={false}
-            />
-          )}
-          <Childrens>{children}</Childrens>
-          {hideFooter ? '' : <Footer />}
-          <Notifications />
-        </StyledBody>
+  return isValidRole ? (
+    <StyledBody className="styledBody">
+      {hideHeader && dashboard ? (
+        ''
       ) : (
-        <Text text="You don't have persmissions to see this content." />
+        <Header
+          title={title}
+          menu={menu}
+          logoColor={logoColor}
+          isLoggedIn={isLoggedIn}
+          justifyTitle={justifyTitle}
+          isTitleVisible={false}
+        />
       )}
-    </div>
+      <Childrens>{children}</Childrens>
+      {hideFooter ? '' : <Footer />}
+      <Notifications />
+    </StyledBody>
+  ) : (
+    <Text text="You don't have persmissions to see this content." />
   )
 }
 
