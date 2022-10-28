@@ -9,15 +9,19 @@ import store from '../../../../store/store'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
+function TestComponent() {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AdListFilter />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
 describe('AdListFilter', () => {
   it('should render the AdListFilter', () => {
-    render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <AdListFilter />
-        </Provider>
-      </BrowserRouter>
-    )
+    render(<TestComponent />)
 
     const adListStyled = screen.getByText('Filtros')
     expect(adListStyled).toBeInTheDocument()

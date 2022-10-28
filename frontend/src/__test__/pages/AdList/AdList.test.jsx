@@ -9,6 +9,16 @@ import store from '../../../store/store'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
+function TestComponent() {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AdList />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
 describe('AdList', () => {
   beforeEach(() => {
     window.localStorage.clear()
@@ -17,13 +27,7 @@ describe('AdList', () => {
   it('should render the AdList', () => {
     window.localStorage.setItem('token', 'true')
     window.localStorage.setItem('refreshToken', 'false')
-    render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <AdList />
-        </Provider>
-      </BrowserRouter>
-    )
+    render(<TestComponent />)
 
     const adListStyled = screen.getByTestId('adListStyled')
     expect(adListStyled).toBeInTheDocument()
