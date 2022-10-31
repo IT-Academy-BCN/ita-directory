@@ -15,7 +15,7 @@ export default ({ mode }) => {
       port: 3000,
       proxy: {
         '/public': {
-          target: `http://localhost:10910/`,
+          target: `${process.env.VITE_BACKEND_URL}/`,
           changeOrigin: true,
         },
       },
