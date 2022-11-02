@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import { Button, CheckBox, Text } from '../../../components/atoms'
 import { Container, Form } from '../UserFlow.styles'
-import { InputGroup } from '../../../components/molecules'
+import { InputGroupNum } from '../../../components/molecules'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 import axiosInstance from '../../../utils/axiosInstance'
@@ -82,7 +82,7 @@ function Register() {
     <Body title="Registro" justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidate>
-          <InputGroup
+          <InputGroupNum
             label="text"
             hiddenLabel
             type="text"
@@ -93,7 +93,7 @@ function Register() {
             error={errors.name?.message}
             register={register('name')}
           />
-          <InputGroup
+          <InputGroupNum
             label="text"
             hiddenLabel
             type="text"
@@ -104,7 +104,7 @@ function Register() {
             error={errors.lastname?.message}
             register={register('lastname')}
           />
-          <InputGroup
+          <InputGroupNum
             label="email"
             hiddenLabel
             type="email"
@@ -114,7 +114,7 @@ function Register() {
             error={errors.email?.message}
             register={register('email')}
           />
-          <InputGroup
+          <InputGroupNum
             label="password"
             hiddenLabel
             type="password"
