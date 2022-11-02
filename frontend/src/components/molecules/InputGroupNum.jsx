@@ -7,6 +7,8 @@ import { InputNum } from '../atoms/Forms'
 
 const InputGroupStyled = styled.div`
   ${Label}
+  background-color: pink;
+  margin-bottom: 0.8rem;
 `
 const InputStyled = styled(InputNum)`
   height: 2rem;
@@ -27,11 +29,9 @@ const ContainerStyled = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 5px;
-  padding: 0.3rem;
+  padding: 0.5rem;
   border: 1px solid ${colors.lightGray};
-  & {
-    width: 20rem;
-  }
+  width: 100%;
 
   &.error:focus-within {
     border-color: ${colors.redColor};
