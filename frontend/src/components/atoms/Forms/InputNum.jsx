@@ -26,42 +26,18 @@ const InputStyled = styled.input`
   }
 `
 
-function Input({
-  type,
-  placeholder,
-  onFocus,
-  onBlur,
-  inputStyles,
-  className,
-  id,
-  name,
-  size,
-  error,
-  disabled,
-  required,
-  register,
-  onChange,
-  ref,
-  accept,
-}) {
+function Input({ ref, register, required, type, onChange, name, id, className, error, ...rest }) {
   return (
     <div>
       <InputStyled
+        ref={ref}
         type={type}
-        placeholder={placeholder}
-        onFocus={onFocus}
-        onBlur={onBlur}
         className={className}
         id={id}
         name={name}
-        disabled={disabled}
-        size={size}
         error={error}
         required={required}
-        style={inputStyles}
         onChange={onChange}
-        ref={ref}
-        accept={accept}
         {...(register && register)}
       />
     </div>

@@ -38,27 +38,20 @@ const ContainerStyled = styled.div`
   }
 `
 function InputGroupNum({
-  accept,
-  className,
-  disabled,
-  error,
-  hiddenLabel = true,
-  id,
-  inputStyles,
-  label,
-  name,
-  onBlur,
-  onChange,
-  onFocus,
-  placeholder,
   ref,
   register,
   required,
-  size,
   type,
+  onChange,
+  name,
+  id,
+  label,
+  hiddenLabel = true,
+  className,
+  error,
   icon,
   textColor,
-  iconStyles,
+  ...rest
 }) {
   return (
     <InputGroupStyled>
@@ -66,31 +59,17 @@ function InputGroupNum({
       <ContainerStyled className={`${className} ${error ? 'error' : ''}`}>
         {icon && (
           <div className="styledIcon">
-            <Icon
-              color={textColor}
-              name={icon}
-              mr="0.5rem"
-              ml="0.15rem"
-              fill={1}
-              style={{ ...iconStyles }}
-            />
+            <Icon color={textColor} name={icon} mr="0.5rem" ml="0.15rem" fill={1} />
           </div>
         )}
         <InputStyled
+          ref={ref}
           type={type}
-          placeholder={placeholder}
-          onFocus={onFocus}
-          onBlur={onBlur}
           id={id}
           name={name}
-          disabled={disabled}
-          size={size}
           error={error}
           required={required}
-          style={inputStyles}
           onChange={onChange}
-          ref={ref}
-          accept={accept}
           register={register}
         />
       </ContainerStyled>
