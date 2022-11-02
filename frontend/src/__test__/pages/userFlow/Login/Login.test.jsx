@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '../test-utils'
-import Login from '../../pages/UserFlow/Login/Login'
+import { render, screen, fireEvent } from '../../../test-utils'
+import Login from '../../../../pages/UserFlow/Login/Login'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
