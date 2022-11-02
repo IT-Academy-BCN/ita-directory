@@ -71,6 +71,7 @@ function InputGroupNum({
           required={required}
           onChange={onChange}
           register={register}
+          {...rest}
         />
       </ContainerStyled>
       {error && <ErrorMessage text={error} />}

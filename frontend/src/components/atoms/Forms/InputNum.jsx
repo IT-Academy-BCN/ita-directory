@@ -28,19 +28,18 @@ const InputStyled = styled.input`
 
 function Input({ ref, register, required, type, onChange, name, id, className, error, ...rest }) {
   return (
-    <div>
-      <InputStyled
-        ref={ref}
-        type={type}
-        className={className}
-        id={id}
-        name={name}
-        error={error}
-        required={required}
-        onChange={onChange}
-        {...(register && register)}
-      />
-    </div>
+    <InputStyled
+      ref={ref}
+      type={type}
+      className={className}
+      id={id}
+      name={name}
+      error={error}
+      required={required}
+      onChange={onChange}
+      {...(register && register)}
+      {...rest}
+    />
   )
 }
 
