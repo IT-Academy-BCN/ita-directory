@@ -27,7 +27,7 @@ const ContainerStyled = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   border-radius: 5px;
-  padding: 0.2rem;
+  padding: 0.3rem;
   border: 1px solid ${colors.lightGray};
   & {
     width: 20rem;
@@ -37,7 +37,7 @@ const ContainerStyled = styled.div`
     border-color: ${colors.redColor};
   }
 `
-function InputGroup({
+function InputGroupNum({
   accept,
   className,
   disabled,
@@ -66,7 +66,14 @@ function InputGroup({
       <ContainerStyled className={`${className} ${error ? 'error' : ''}`}>
         {icon && (
           <div className="styledIcon">
-            <Icon color={textColor} name={icon} mr="0.5rem" fill={1} style={{ ...iconStyles }} />
+            <Icon
+              color={textColor}
+              name={icon}
+              mr="0.5rem"
+              ml="0.15rem"
+              fill={1}
+              style={{ ...iconStyles }}
+            />
           </div>
         )}
         <InputStyled
@@ -92,7 +99,7 @@ function InputGroup({
   )
 }
 
-InputGroup.propTypes = {
+InputGroupNum.propTypes = {
   accept: PropTypes.string,
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -116,4 +123,4 @@ InputGroup.propTypes = {
   iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
-export default styled(InputGroup)``
+export default styled(InputGroupNum)``
