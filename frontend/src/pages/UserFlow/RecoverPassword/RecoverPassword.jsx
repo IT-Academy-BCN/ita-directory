@@ -62,7 +62,7 @@ function RecoverPassword() {
   }
 
   return (
-    <Body title="Cambiar contraseña" justifyTitle="center">
+    <Body title="Recuperar contraseña" justifyTitle="center">
       <Container>
         <Form onSubmit={handleSubmit(submitForm)} noValidation>
           <Text
