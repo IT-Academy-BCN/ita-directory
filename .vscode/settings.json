@@ -6,8 +6,12 @@
   },
   "[javascript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "eslint.workingDirectories": ["frontend", "backend", "e2e"],
+  "eslint.workingDirectories": [
+    "frontend",
+    "backend",
+    "e2e"
+  ],
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false
 }

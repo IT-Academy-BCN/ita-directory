@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
 import Body from '../../components/layout/Body/Body'
-import InputNumber from '../../components/atoms/Forms/InputNumber'
 import TextArea from '../../components/atoms/Forms/TextArea'
 import Button from '../../components/atoms/Button'
 import Input from '../../components/atoms/Forms/Input'
@@ -21,6 +20,7 @@ import {
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 import { Label } from '../../components/atoms'
+import { InputGroupNum } from '../../components/molecules'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -99,7 +99,7 @@ function CreateNewAd() {
 
   const inputComponentData = [
     {
-      Component: InputNumber,
+      Component: InputGroupNum,
       type: 'text',
       label: 'Título',
       name: 'title',
@@ -116,7 +116,7 @@ function CreateNewAd() {
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNum,
       type: 'text',
       label: 'Ciudad',
       name: 'city',
@@ -126,7 +126,7 @@ function CreateNewAd() {
       icon: 'location_on',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNum,
       type: 'number',
       label: 'Habitaciones',
       name: 'nRooms',
@@ -135,7 +135,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNum,
       type: 'number',
       label: 'Precio',
       name: 'price',
@@ -145,7 +145,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNum,
       type: 'number',
       label: 'M\u00B2',
       name: 'squareMeters',
@@ -155,7 +155,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNum,
       type: 'number',
       label: 'Baños',
       name: 'nBathrooms',
