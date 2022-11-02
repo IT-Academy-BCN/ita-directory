@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Input } from '../../../components/atoms'
 import Modal from '../../../components/organisms/Modal/Modal'
-import { ProfileWrapper, ProfileForm, ProfileImage, ProfileUploadPhoto } from './Profile.styles'
+import {
+  ProfileWrapper,
+  ProfileForm,
+  ProfileImageStyle,
+  ProfileUploadPhoto,
+} from './Profile.styles'
+import ProfileImage from '../../../components/atoms/ProfileImage'
 import { Container } from '../../../theme'
 import { msgs, validatePassword } from '../../../utils/userFlow'
 import useUser from '../../../hooks/useUser'
@@ -63,9 +69,9 @@ function Profile() {
         </Modal>
         <ProfileWrapper className="form-frame">
           <ProfileForm className="profile-photo">
-            <ProfileImage>
-              <img src={avatar || user?.avatar?.path} alt="Foto de perfil" />
-            </ProfileImage>
+            <ProfileImageStyle>
+              <ProfileImage imgSource={avatar || user?.avatar?.path} />
+            </ProfileImageStyle>
             <ProfileUploadPhoto>
               <div>
                 <p>Fotografía de perfil</p>

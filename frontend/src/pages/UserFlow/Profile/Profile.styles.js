@@ -130,7 +130,7 @@ export const ProfileForm = styled.form`
   }
 `
 
-export const ProfileImage = styled.div`
+export const ProfileImageStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
