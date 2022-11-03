@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ErrorMessage, Label, Icon } from '../atoms'
 import { colors } from '../../theme'
-import { InputNum } from '../atoms/Forms'
+import { InputNumber } from '../atoms/Forms'
 
 const InputGroupStyled = styled.div`
   ${Label}
   background-color: pink;
   margin-bottom: 0.8rem;
 `
-const InputStyled = styled(InputNum)`
+const InputStyled = styled(InputNumber)`
   height: 2rem;
   border: none;
   display: flex;
@@ -37,10 +37,9 @@ const ContainerStyled = styled.div`
     border-color: ${colors.redColor};
   }
 `
-function InputGroupNum({
+function InputGroupNumber({
   register,
   required,
-  type,
   name,
   id,
   label,
@@ -60,7 +59,6 @@ function InputGroupNum({
           </div>
         )}
         <InputStyled
-          type={type}
           id={id}
           name={name}
           error={error}
@@ -74,28 +72,19 @@ function InputGroupNum({
   )
 }
 
-InputGroupNum.propTypes = {
-  accept: PropTypes.string,
+InputGroupNumber.propTypes = {
   className: PropTypes.string,
-  disabled: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   hiddenLabel: PropTypes.bool,
   label: PropTypes.string.isRequired,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  placeholder: PropTypes.string,
-  ref: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   required: PropTypes.bool,
-  size: PropTypes.number,
-  type: PropTypes.string.isRequired,
   icon: PropTypes.node,
   textColor: PropTypes.string,
   iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
-export default styled(InputGroupNum)``
+export default styled(InputGroupNumber)``

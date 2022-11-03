@@ -20,7 +20,8 @@ import {
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 import { Label } from '../../components/atoms'
-import { InputGroupNum } from '../../components/molecules'
+import { InputGroupNumber } from '../../components/molecules'
+import InputGroupText from '../../components/molecules/InputGroupText'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -99,7 +100,7 @@ function CreateNewAd() {
 
   const inputComponentData = [
     {
-      Component: InputGroupNum,
+      Component: InputGroupText,
       type: 'text',
       label: 'Título',
       name: 'title',
@@ -116,8 +117,7 @@ function CreateNewAd() {
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
-      Component: InputGroupNum,
-      type: 'text',
+      Component: InputGroupText,
       label: 'Ciudad',
       name: 'city',
       id: 'city',
@@ -126,8 +126,7 @@ function CreateNewAd() {
       icon: 'location_on',
     },
     {
-      Component: InputGroupNum,
-      type: 'number',
+      Component: InputGroupNumber,
       label: 'Habitaciones',
       name: 'nRooms',
       id: 'nRooms',
@@ -135,8 +134,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputGroupNum,
-      type: 'number',
+      Component: InputGroupNumber,
       label: 'Precio',
       name: 'price',
       id: 'price',
@@ -145,8 +143,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputGroupNum,
-      type: 'number',
+      Component: InputGroupNumber,
       label: 'M\u00B2',
       name: 'squareMeters',
       id: 'squareMeters',
@@ -155,8 +152,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputGroupNum,
-      type: 'number',
+      Component: InputGroupNumber,
       label: 'Baños',
       name: 'nBathrooms',
       id: 'nBathrooms',
