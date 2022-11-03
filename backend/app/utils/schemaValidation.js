@@ -70,6 +70,36 @@ const logSchema = Joi.object().keys({
   level: Joi.string().valid('trace', 'debug', 'info', 'warn', 'error', 'fatal'),
 })
 
+const invoicesSchema = Joi.object({
+  user_id: Joi.number().required(),
+  billingAdress: Joi.string().required(),
+  postalCode: Joi.string().required(),
+  city: Joi.string().required(),
+  state: Joi.string().required(),
+  country: Joi.string().required(),
+  vatId: Joi.string().required(),
+  vatAmount: Joi.number().required(),
+  secondTax: Joi.number().required(),
+})
+
+const getUserInvoicesSchema = Joi.object({
+  user_id: Joi.number().required(),
+})
+
+const invoiceByIdParamSchema = Joi.number().required()
+
+const patchInvoiceSchema = Joi.object({
+  invoice_id: Joi.number().required(),
+  billingAdress: Joi.string(),
+  postalCode: Joi.string(),
+  city: Joi.string(),
+  state: Joi.string(),
+  country: Joi.string(),
+  vatId: Joi.string(),
+  vatAmount: Joi.number(),
+  secondTax: Joi.number(),
+})
+
 module.exports = {
   contactSchema,
   registerSchema,
@@ -84,4 +114,8 @@ module.exports = {
   conversationSchema,
   messageSchema,
   logSchema,
+  invoicesSchema,
+  getUserInvoicesSchema,
+  invoiceByIdParamSchema,
+  patchInvoiceSchema,
 }
