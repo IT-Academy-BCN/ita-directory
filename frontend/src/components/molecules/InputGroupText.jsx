@@ -37,6 +37,7 @@ const ContainerStyled = styled.div`
   }
 `
 function InputGroupText({
+  value,
   register,
   required,
   name,
@@ -58,6 +59,7 @@ function InputGroupText({
           </div>
         )}
         <InputStyled
+          value={value}
           id={id}
           name={name}
           error={error}
@@ -73,6 +75,7 @@ function InputGroupText({
 
 InputGroupText.propTypes = {
   className: PropTypes.string,
+  value: PropTypes.string,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),

@@ -38,6 +38,7 @@ const ContainerStyled = styled.div`
   }
 `
 function InputGroupNumber({
+  value,
   register,
   required,
   name,
@@ -64,6 +65,7 @@ function InputGroupNumber({
           error={error}
           required={required}
           register={register}
+          value={value}
           {...rest}
         />
       </ContainerStyled>
@@ -79,6 +81,7 @@ InputGroupNumber.propTypes = {
   inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   hiddenLabel: PropTypes.bool,
   label: PropTypes.string.isRequired,
+  value: PropTypes.string,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   required: PropTypes.bool,
