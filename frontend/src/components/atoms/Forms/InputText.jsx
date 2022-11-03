@@ -42,7 +42,7 @@ function Input({ register, required, value, name, id, className, error, ...rest 
 }
 
 Input.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  value: PropTypes.string,
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
