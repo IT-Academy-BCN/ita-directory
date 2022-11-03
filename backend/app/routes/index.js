@@ -6,6 +6,7 @@ const contactRoutes = require('./contact.routes')
 const locationRoutes = require('./location.routes')
 const logRoutes = require('./log.routes')
 const mediaRoutes = require('./media.routes')
+const invoicesRoutes = require('./invoices.routes')
 
 module.exports = {
   usersRoutes,
@@ -16,4 +17,5 @@ module.exports = {
   locationRoutes,
   logRoutes,
   mediaRoutes,
+  invoicesRoutes,
 }
