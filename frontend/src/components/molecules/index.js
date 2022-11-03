@@ -3,6 +3,6 @@ import SearchButton from './SearchButton'
 import TextAreaGroup from './TextAreaGroup'
 import { TextArea } from '../atoms'
 import Menu from './Menu'
-import InputGroupNum from './InputGroupNum'
+import InputGroupNumber from './InputGroupNumber'
 
-export { InputGroup, InputGroupNum, SearchButton, TextAreaGroup, TextArea, Menu }
+export { InputGroup, InputGroupNumber, SearchButton, TextAreaGroup, TextArea, Menu }
