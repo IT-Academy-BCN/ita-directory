@@ -4,6 +4,6 @@ import Label from './Label'
 import InputNumber from './InputNumber'
 import SelectUnit from './SelectUnit'
 import TextArea from './TextArea'
-import InputNum from './InputNum'
+import InputText from './InputText'
 
-export { Label, Input, ErrorMessage, InputNumber, InputNum, SelectUnit, TextArea }
+export { Label, Input, ErrorMessage, InputNumber, InputText, SelectUnit, TextArea }
