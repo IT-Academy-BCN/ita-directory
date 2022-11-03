@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Text } from '../../../components/atoms'
 import { Container, Form, RedirectStyled } from '../UserFlow.styles'
-import { InputGroupNum } from '../../../components/molecules'
+import { InputGroup } from '../../../components/molecules'
 import { login } from '../../../store/userSlice'
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
@@ -107,7 +107,7 @@ function Login() {
           <Text text="Ya estas logueado" />
         ) : (
           <Form onSubmit={handleSubmit(submitForm)} noValidate>
-            <InputGroupNum
+            <InputGroup
               label="Email"
               hiddenLabel
               type="email"
@@ -118,7 +118,7 @@ function Login() {
               error={errors.email?.message}
               register={register('email')}
             />
-            <InputGroupNum
+            <InputGroup
               label="Password"
               hiddenLabel
               type="password"
