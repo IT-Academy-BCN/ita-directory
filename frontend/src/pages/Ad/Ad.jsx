@@ -87,7 +87,7 @@ function Ad() {
                     <Icon name="bed" />
                     <Text
                       as="span"
-                      text={`${ad.n_rooms} habitaciones`}
+                      text={`${ad.nRooms} habitaciones`}
                       className="ad__property-rooms"
                     />
                   </div>
@@ -99,7 +99,7 @@ function Ad() {
                     <Icon name="home" />
                     <Text
                       as="span"
-                      text={`${ad.square_meters}m2`}
+                      text={`${ad.squareMeters}m2`}
                       className="ad__property-square-meters"
                     />
                   </div>
@@ -107,7 +107,7 @@ function Ad() {
                     <Icon name="bathtub" />
                     <Text
                       as="span"
-                      text={`${ad.n_bathrooms} Baños`}
+                      text={`${ad.nBathrooms} Baños`}
                       className="ad__property-bathrooms"
                     />
                   </div>
@@ -118,9 +118,9 @@ function Ad() {
                 <AdDescriptionText>
                   <Text as="p" text={`"${ad.description}"`} className="ad__description" />
                 </AdDescriptionText>
-                <Map lat={ad.map_lat} lng={ad.map_lon} />
+                <Map lat={ad.mapLat} lng={ad.mapLon} />
                 <StyledStreet>
-                  <a href={`http://www.google.com/maps/place/${ad.map_lat},${ad.map_lon}`}>
+                  <a href={`http://www.google.com/maps/place/${ad.mapLat},${ad.mapLon}`}>
                     Dirección: Carrer Trafalgar 4
                   </a>
                 </StyledStreet>

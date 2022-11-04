@@ -44,7 +44,7 @@ function AdList() {
 
   const bySize = (min, max) => (ad) => {
     if (min == null && max == null) return true
-    return min <= ad.square_meters && ad.square_meters <= max
+    return min <= ad.squareMeters && ad.squareMeters <= max
   }
 
   // const byIncludedExpenses = (included) => (ad) => {
@@ -72,24 +72,24 @@ function AdList() {
   const renderList = filteredAdList.map((e) => (
     <AdCard
       id={e.id}
-      userId={e.user_id}
+      userId={e.userId}
       title={e.title}
       description={e.description}
       city={e.city}
-      nRooms={e.n_rooms}
+      nRooms={e.nRooms}
       price={e.price}
-      squareMeters={e.square_meters}
-      nBathrooms={e.n_bathrooms}
-      mapLat={e.map_lat}
-      mapLon={e.map_lon}
-      adTypeId={e.ad_type_id}
+      squareMeters={e.squareMeters}
+      nBathrooms={e.nBathrooms}
+      mapLat={e.mapLat}
+      mapLon={e.mapLon}
+      adTypeId={e.adTypeId}
       key={e.id}
     />
   ))
 
   return (
     <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
-      <AdsStyled>
+      <AdsStyled data-testid="adListStyled">
         <AdListFilter
           filter={setFilterParams}
           maxPriceValue={filterParams?.maxPrice}

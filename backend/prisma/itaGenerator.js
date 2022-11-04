@@ -52,10 +52,6 @@ const getZodConstructor = (field, getRelatedModelName = (name) => name.toString(
   }
 
   if (field.isList) extraModifiers.push('array()')
-  // if (field.documentation) {
-  //   zodType = computeCustomSchema(field.documentation) ?? zodType
-  //   extraModifiers.push(...computeModifiers(field.documentation))
-  // }
   if (!field.isRequired && field.type !== 'Json') extraModifiers.push('nullish()')
   if (field.hasDefaultValue && !field.isId) extraModifiers.push('optional()')
 
@@ -85,29 +81,12 @@ generatorHelper.generatorHandler({
       })
       output += `})\n\n`
       output += `module.exports = ${zodSchemaName}\n`
-
-      fs.writeFile(`${outputDir}/${zodSchemaName}.js`, output, (err) => {
-        if (err) {
-          console.error(err)
-        }
-        // file written successfully
+      try {
+        fs.writeFileSync(`${outputDir}/${zodSchemaName}.js`, output)
         console.log(`Generated ${zodSchemaName}.js`)
-      })
+      } catch (error) {
+        throw new Error(error)
+      }
     })
   },
 })
-
-// Example of generated files content:
-
-// const { z } = require('zod')
-
-// const UserRoleSchema = z.object({
-//   id: z.string(),
-//   name: z.string(),
-//   admin: z.boolean(),
-//   developer: z.boolean(),
-//   manager: z.boolean(),
-//   registered: z.boolean(),
-// })
-
-// module.exports =  UserRoleSchema

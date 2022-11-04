@@ -143,7 +143,6 @@ entity Ads {
   * userId: Int
   * title: String
   * description: String
-  * location: Int
   * nRooms: Int
   * price: Int
   * includedExpenses: Boolean
