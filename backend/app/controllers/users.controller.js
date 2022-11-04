@@ -83,6 +83,7 @@ exports.getUser = async (req, res, next) => {
         avatar: true,
         userRole: {
           select: {
+            id: true,
             name: true,
           },
         },
