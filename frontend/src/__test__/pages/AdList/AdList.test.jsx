@@ -6,10 +6,6 @@ import AdList from '../../../pages/AdList/AdList'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-function TestComponent() {
-  return <AdList />
-}
-
 describe('AdList', () => {
   beforeEach(() => {
     window.localStorage.clear()
@@ -18,7 +14,7 @@ describe('AdList', () => {
   it('should render the AdList', () => {
     window.localStorage.setItem('token', 'true')
     window.localStorage.setItem('refreshToken', 'false')
-    render(<TestComponent />)
+    render(<AdList />)
 
     const adListStyled = screen.getByTestId('adListStyled')
     expect(adListStyled).toBeInTheDocument()
