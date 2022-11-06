@@ -11,6 +11,7 @@ export default function useUser() {
 
   const getUser = useCallback(async () => {
     const userData = await axiosInstance.get(urls.user).then((response) => response.data)
+
     if (userData) dispatch(login(userData))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

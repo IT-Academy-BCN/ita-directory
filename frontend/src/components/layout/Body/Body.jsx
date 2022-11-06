@@ -5,7 +5,7 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { device } from '../../../theme'
 import { Notifications, Text } from '../../atoms'
-import useUser from '../../../hooks/useUser'
+import useUser from '../../../hooks/useUserHook'
 import checkRole from '../../../utils/checkRole'
 
 const StyledBody = styled.div`
