@@ -11,20 +11,21 @@ const InputGroupStyled = styled.div`
   error:focus-within {
     border-color: ${({ error }) => (error ? colors.redColor : 'inherit')};
   }
-`
-const InputStyled = styled(InputText)`
-  height: 2rem;
-  border: none;
-  display: flex;
-  font-size: 0.8rem;
-  color: ${colors.darkGrey};
-  padding: 0.75rem;
-  ::-webkit-outer-spin-button,
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  .styledIcon {
+    position: absolute;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+    padding: 0;
   }
 `
+const InputStyled = styled(InputText)`
+  display: flex;
+  height: 3rem;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: ${colors.darkGrey};
+`
+
 // const ContainerStyled = styled.div`
 //   display: flex;
 //   justify-content: flex-start;
@@ -39,6 +40,7 @@ const InputStyled = styled(InputText)`
 //     border-color: ${colors.redColor};
 //   }
 // `
+
 function InputGroupText({
   value,
   name,
@@ -56,7 +58,7 @@ function InputGroupText({
       <FlexBox justifyContent="flex-start" alignItems="center" flexWrap="nowrap">
         {icon && (
           <div className="styledIcon">
-            <Icon name={icon} mr="0.5rem" ml="0.15rem" fill={1} />
+            <Icon name={icon} mr="0.5rem" fill={1} />
           </div>
         )}
         <InputStyled value={value} id={id} name={name} error={error} {...rest} />
