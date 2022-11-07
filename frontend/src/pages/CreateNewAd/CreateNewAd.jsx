@@ -104,6 +104,7 @@ function CreateNewAd() {
       name: 'title',
       Component: InputGroupText,
       label: 'Título',
+      hiddenLabel: true,
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
     },
@@ -113,6 +114,7 @@ function CreateNewAd() {
       Component: TextArea,
       type: 'textarea',
       label: 'Descripción',
+      hiddenLabel: false,
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
@@ -120,6 +122,7 @@ function CreateNewAd() {
       id: 'city',
       name: 'city',
       label: 'Ciudad',
+      hiddenLabel: true,
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_on',
@@ -263,6 +266,7 @@ function CreateNewAd() {
               const {
                 Component,
                 label,
+                hiddenLabel,
                 type,
                 name,
                 id,
@@ -279,6 +283,7 @@ function CreateNewAd() {
                     id={id}
                     key={id}
                     label={label}
+                    hiddenLabel={hiddenLabel}
                     name={name}
                     type={type}
                     className={inputClassName}
