@@ -22,7 +22,7 @@ const InputStyled = styled.input`
   }
 `
 
-function Input({ value, name, id, className, error, ...rest }) {
+function InputText({ value, name, id, className, error, ...rest }) {
   return (
     <InputStyled
       type="text"
@@ -36,7 +36,7 @@ function Input({ value, name, id, className, error, ...rest }) {
   )
 }
 
-Input.propTypes = {
+InputText.propTypes = {
   value: PropTypes.string,
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -45,4 +45,4 @@ Input.propTypes = {
   onChange: PropTypes.func,
 }
 
-export default styled(Input)``
+export default styled(InputText)``
