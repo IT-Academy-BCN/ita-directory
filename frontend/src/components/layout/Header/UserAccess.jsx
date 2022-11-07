@@ -6,7 +6,6 @@ import useUser from '../../../hooks/useUserHook'
 import { colors, device } from '../../../theme'
 import { paths } from '../../../utils'
 import { Button, Dropdown, Icon, Li, Text, Ul } from '../../atoms'
-import ProfileImage from '../../atoms/ProfileImage'
 
 const UserAccessStyled = styled.div`
   .not-logged-in {
@@ -83,14 +82,12 @@ const UserAccessStyled = styled.div`
     }
   }
 `
-
-const ImgStyle = styled.div`
-  img {
+const ImgStyled = styled.img`
     width: 32px;
     height: 32px;
     border-radius: 16px;
     object-fit: cover;
-    margin-right: 12px;
+    padding-right: 2px;
   }
 `
 
@@ -132,9 +129,7 @@ function UserAccess() {
             onClick={handleClick}
           >
             {user?.avatar ? (
-              <ImgStyle>
-                <ProfileImage imgSource={user?.avatar?.path} />
-              </ImgStyle>
+              <ImgStyled src={user?.avatar?.path} alt="Foto de Perfil" />
             ) : (
               <Icon name="account_circle" size={32} />
             )}

@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function ProfileImage({ imgSource }) {
-  return <img src={imgSource} alt="Foto de perfil" />
+function ProfileImage({ imgSource, alt }) {
+  return <img src={imgSource} alt={alt} />
 }
 
 ProfileImage.propTypes = {
   imgSource: PropTypes.node,
+  alt: PropTypes.string,
 }
+
+export default ProfileImage
