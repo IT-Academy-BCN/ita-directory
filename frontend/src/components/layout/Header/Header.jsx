@@ -100,7 +100,7 @@ export const ContainerMenu = styled.div`
   margin: 10px 0px;
 `
 
-function Header({ title, logoColor, menu }) {
+function Header({ title, logoColor, menu, hideTitle }) {
   return (
     <HeaderStyled logoColor={logoColor}>
       <Container>
@@ -119,7 +119,7 @@ function Header({ title, logoColor, menu }) {
           </Container>
         </StyledHeaderHome>
       )}
-      {title && (
+      {title && !hideTitle && (
         <StyledSubHeader>
           <Container>
             <Title text={title} order={1} />
@@ -134,6 +134,7 @@ Header.propTypes = {
   title: PropTypes.string,
   logoColor: PropTypes.string,
   menu: PropTypes.object,
+  hideTitle: PropTypes.bool,
 }
 
 export default Header

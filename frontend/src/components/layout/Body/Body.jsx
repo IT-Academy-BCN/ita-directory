@@ -42,6 +42,7 @@ function Body({
   hideFooter,
   dashboard,
   menu,
+  hideTitle,
   userRole,
 }) {
   const user = useUser()
@@ -59,7 +60,7 @@ function Body({
           logoColor={logoColor}
           isLoggedIn={isLoggedIn}
           justifyTitle={justifyTitle}
-          isTitleVisible={false}
+          hideTitle={hideTitle}
         />
       )}
       <Childrens>{children}</Childrens>
@@ -81,6 +82,7 @@ Body.propTypes = {
   hideHeader: PropTypes.bool,
   hideFooter: PropTypes.bool,
   dashboard: PropTypes.bool,
+  hideTitle: PropTypes.bool,
   userRole: PropTypes.string,
 }
 

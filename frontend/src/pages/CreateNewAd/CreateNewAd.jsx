@@ -209,7 +209,6 @@ function CreateNewAd() {
       paddingTitle="500px"
       paddingTitle2="15vw"
       isLoggedIn
-      isTitleVisible="true"
     >
       <Container>
         <Wrapper>
