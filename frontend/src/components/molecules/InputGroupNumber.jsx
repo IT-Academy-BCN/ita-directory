@@ -31,20 +31,7 @@ const InputNumberStyled = styled(InputNumber)`
     -webkit-appearance: none;
   }
 `
-// const ContainerStyled = styled.div`
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   flex-wrap: nowrap;
-//   border-radius: 5px;
-//   padding: 0.5rem;
-//   border: 1px solid ${colors.lightGray};
-//   width: 100%;
 
-//   &.error:focus-within {
-//     border-color: ${colors.redColor};
-//   }
-// `
 function InputGroupNumber({
   value,
   name,
