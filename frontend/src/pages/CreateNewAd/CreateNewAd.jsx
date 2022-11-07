@@ -100,9 +100,9 @@ function CreateNewAd() {
 
   const inputComponentData = [
     {
+      Component: InputGroupText,
       id: 'title',
       name: 'title',
-      Component: InputGroupText,
       label: 'Título',
       hiddenLabel: true,
       required: true,
@@ -128,9 +128,9 @@ function CreateNewAd() {
       icon: 'location_on',
     },
     {
+      Component: InputGroupNumber,
       id: 'nRooms',
       label: 'Habitaciones',
-      Component: InputGroupNumber,
       name: 'nRooms',
       icon: 'bed',
       inputClassName: 'style-input-create-new-ad',

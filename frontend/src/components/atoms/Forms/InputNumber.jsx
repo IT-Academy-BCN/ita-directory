@@ -1,35 +1,41 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { colors } from '../../../theme'
 
 const InputStyled = styled.input`
+  height: 40px;
   width: 100%;
-  border: none;
-
-  outline: 0 none;
-  border: none;
+  padding: 0rem 1rem;
+  margin: 5px;
+  border-radius: 0.5rem;
+  border: 1px solid ${colors.lightGray};
 
   &:hover {
-    outline: 0 none;
-    border: none;
+    border: 1px solid ${colors.lightBlue};
+  }
+  &.error {
+    border: 1px solid ${colors.paleRed};
   }
   &:focus {
     outline: 0 none;
-    border: none;
-  }
-  &:focus-within {
-    outline: 0 none;
-    border: none;
-  }
-  &[type='number'] {
-    -moz-appearance: textfield;
+    border: 1px solid ${({ error }) => (error ? colors.redColor : colors.darkBlue)};
   }
 `
 
-function Input({ register, required, value, name, id, className, error, ...rest }) {
+function Input({
+  register,
+  type = 'number',
+  required,
+  value,
+  name,
+  id,
+  className,
+  error,
+  ...rest
+}) {
   return (
     <InputStyled
-      type="number"
+      type={type}
       value={value}
       className={className}
       id={id}
@@ -45,6 +51,7 @@ function Input({ register, required, value, name, id, className, error, ...rest 
 Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   className: PropTypes.string,
+  type: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

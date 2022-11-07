@@ -4,39 +4,47 @@ import styled from 'styled-components'
 import { ErrorMessage, Label, Icon } from '../atoms'
 import { colors } from '../../theme'
 import { InputNumber } from '../atoms/Forms'
+import { FlexBox } from '../../theme/wrappers'
 
 const InputGroupStyled = styled.div`
   ${Label}
-  background-color: pink;
   margin-bottom: 0.8rem;
+  error:focus-within {
+    border-color: ${({ error }) => (error ? colors.redColor : 'inherit')};
+  }
+  .styledIcon {
+    position: absolute;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    padding: 0;
+  }
 `
-const InputStyled = styled(InputNumber)`
-  height: 2rem;
-  border: none;
+const InputNumberStyled = styled(InputNumber)`
   display: flex;
+  height: 2rem;
+  padding: 1.5rem;
+  padding-left: 2.5rem;
   font-size: 0.8rem;
   color: ${colors.darkGrey};
-  padding: 0.75rem;
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0;
   }
 `
-const ContainerStyled = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;
-  border-radius: 5px;
-  padding: 0.5rem;
-  border: 1px solid ${colors.lightGray};
-  width: 100%;
+// const ContainerStyled = styled.div`
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   flex-wrap: nowrap;
+//   border-radius: 5px;
+//   padding: 0.5rem;
+//   border: 1px solid ${colors.lightGray};
+//   width: 100%;
 
-  &.error:focus-within {
-    border-color: ${colors.redColor};
-  }
-`
+//   &.error:focus-within {
+//     border-color: ${colors.redColor};
+//   }
+// `
 function InputGroupNumber({
   value,
   register,
@@ -53,13 +61,13 @@ function InputGroupNumber({
   return (
     <InputGroupStyled>
       <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} />
-      <ContainerStyled className={`${className} ${error ? 'error' : ''}`}>
+      <FlexBox>
         {icon && (
           <div className="styledIcon">
-            <Icon name={icon} mr="0.5rem" ml="0.15rem" fill={1} />
+            <Icon name={icon} fill={1} />
           </div>
         )}
-        <InputStyled
+        <InputNumberStyled
           id={id}
           name={name}
           error={error}
@@ -68,7 +76,7 @@ function InputGroupNumber({
           value={value}
           {...rest}
         />
-      </ContainerStyled>
+      </FlexBox>
       {error && <ErrorMessage text={error} />}
     </InputGroupStyled>
   )
