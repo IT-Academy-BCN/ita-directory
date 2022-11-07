@@ -79,7 +79,15 @@ exports.getUser = async (req, res, next) => {
   } else {
     const user = await prisma.user.findUnique({
       where: { id: parseInt(req.userId, 10) },
-      include: { avatar: true },
+      include: {
+        avatar: true,
+        userRole: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
     })
     if (user === null) {
       next({

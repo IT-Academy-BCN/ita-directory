@@ -15,8 +15,8 @@ import {
   Profile,
   Bill,
   MyBills,
-  ListaUsuariosAdmins,
   Dashboard,
+  ListaUsuariosAdmins,
 } from './pages'
 import { paths } from './utils'
 

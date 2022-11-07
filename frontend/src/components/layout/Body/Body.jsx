@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { HelmetComponent } from '../../organisms/index'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { device } from '../../../theme'
-import { Notifications } from '../../atoms'
+import { Notifications, Text } from '../../atoms'
+import useUser from '../../../hooks/useUserHook'
+import checkRole from '../../../utils/checkRole'
 
 const StyledBody = styled.div`
   min-height: 100vh;
@@ -41,8 +43,12 @@ function Body({
   dashboard,
   menu,
   hideTitle,
+  userRole,
 }) {
-  return (
+  const user = useUser()
+  const isValidRole = useMemo(() => checkRole(user, userRole), [user, userRole])
+
+  return isValidRole ? (
     <StyledBody className="styledBody">
       <HelmetComponent text={title} />
       {hideHeader && dashboard ? (
@@ -61,6 +67,8 @@ function Body({
       {hideFooter ? '' : <Footer />}
       <Notifications />
     </StyledBody>
+  ) : (
+    <Text text="You don't have persmissions to see this content." />
   )
 }
 
@@ -75,6 +83,7 @@ Body.propTypes = {
   hideFooter: PropTypes.bool,
   dashboard: PropTypes.bool,
   hideTitle: PropTypes.bool,
+  userRole: PropTypes.string,
 }
 
 export default styled(Body)``
