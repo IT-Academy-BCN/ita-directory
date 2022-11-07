@@ -3,9 +3,8 @@ import Body from '../../components/layout/Body/Body'
 import { render, screen } from '../test-utils'
 
 const mockUser = {
-  userRoleId: 'GUEST',
+  userRole: { name: 'Registered' },
 }
-
 vi.mock('../../hooks/useUserHook', () => ({
   default: () => mockUser,
 }))
@@ -13,7 +12,7 @@ vi.mock('../../hooks/useUserHook', () => ({
 describe('Body', () => {
   it("render 'text' when user doesn't have access", () => {
     const userRoleProperty = {
-      userRole: 'ADMIN',
+      userRole: 'Admin',
     }
 
     render(<Body {...userRoleProperty} />)
@@ -24,7 +23,7 @@ describe('Body', () => {
 
   it('render the content of the page when user has access', () => {
     const userRoleProperty = {
-      userRole: 'GUEST',
+      userRole: 'Registered',
     }
     render(<Body title="Usuarios registrados" {...userRoleProperty} />)
 

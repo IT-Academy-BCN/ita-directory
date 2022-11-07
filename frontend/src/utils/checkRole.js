@@ -1,17 +1,9 @@
-// import { RolePoints } from './constant'
-
-const RolePoints = {
-  ADMIN: 100,
-  MANAGER: 50,
-  DEVELOPER: 20,
-  GUEST: 0,
-}
-// when backend adds userRoleName property to users, change constants for import constants
+import { RolePoints } from './constant'
 
 const checkRole = (user, userRole) => {
   if (!userRole) return true
 
-  if (RolePoints[user.userRoleId] >= RolePoints[userRole]) return true
+  if (user && RolePoints[user.userRole.name] >= RolePoints[userRole]) return true
 
   return false
 }
