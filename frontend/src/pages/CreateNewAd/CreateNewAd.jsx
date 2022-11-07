@@ -287,7 +287,7 @@ function CreateNewAd() {
                     name={name}
                     type={type}
                     className={inputClassName}
-                    icon={icon && icon}
+                    icon={icon}
                     inputContainerClassName={inputContainerClassName}
                     register={register(`${name}`)}
                     error={errors[name]?.message}
