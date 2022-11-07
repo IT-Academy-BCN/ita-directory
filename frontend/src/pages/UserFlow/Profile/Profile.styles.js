@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { device, colors } from '../../../theme'
+import { FlexBox } from '../../../theme/wrappers'
 
 export const ProfileWrapper = styled.div`
   display: flex;
@@ -130,17 +131,12 @@ export const ProfileForm = styled.form`
   }
 `
 
-export const ProfileImageStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const ProfileImageStyle = styled(FlexBox)`
   width: 10rem;
-  object-fit: cover;
   background-color: white;
   border-radius: 0.25rem;
   box-shadow: 0 2px 7px ${colors.darkerShadow};
   padding: 0.5rem;
-
   img {
     width: 100%;
   }

@@ -7,7 +7,7 @@ describe('ProfilePic', () => {
   it('Adds correct src attribute', () => {
     const alt = 'Foto de perfil'
     const src = '/img/mock/profilePic.png'
-    render(<ProfileImage imgSource={src} />)
+    render(<ProfileImage imgSource={src} alt={alt} />)
     const img = screen.getByAltText(alt)
     expect(img.getAttribute('src')).toBe(src)
   })
