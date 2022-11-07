@@ -142,7 +142,7 @@ function CreateNewAd() {
       name: 'price',
       label: 'Precio',
       hiddenLabel: true,
-      required: true,
+      required: 'merluza',
       icon: 'euro',
       inputClassName: 'style-input-create-new-ad',
     },
