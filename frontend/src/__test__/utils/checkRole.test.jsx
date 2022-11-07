@@ -1,18 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import checkRole from '../../utils/checkRole'
-import { Roles } from '../../utils/constant'
+import { Role } from '../../utils/constant'
 
 const userAdmin = {
-  userRoleId: 'ADMIN',
+  userRole: { name: 'Admin' },
 }
 const userManager = {
-  userRoleId: 'MANAGER',
+  userRole: { name: 'Manager' },
 }
 const userDeveloper = {
-  userRoleId: 'DEVELOPER',
+  userRole: { name: 'Developer' },
 }
-const userGuest = {
-  userRoleId: 'GUEST',
+const userRegistered = {
+  userRole: { name: 'Registered' },
 }
 
 describe('CheckRole', () => {
@@ -22,22 +22,22 @@ describe('CheckRole', () => {
   })
 
   it.each([
-    [userAdmin, Roles.ADMIN, true],
-    [userAdmin, Roles.MANAGER, true],
-    [userAdmin, Roles.DEVELOPER, true],
-    [userAdmin, Roles.GUEST, true],
-    [userManager, Roles.ADMIN, false],
-    [userManager, Roles.MANAGER, true],
-    [userManager, Roles.DEVELOPER, true],
-    [userManager, Roles.GUEST, true],
-    [userDeveloper, Roles.ADMIN, false],
-    [userDeveloper, Roles.MANAGER, false],
-    [userDeveloper, Roles.DEVELOPER, true],
-    [userDeveloper, Roles.GUEST, true],
-    [userGuest, Roles.ADMIN, false],
-    [userGuest, Roles.MANAGER, false],
-    [userGuest, Roles.DEVELOPER, false],
-    [userGuest, Roles.GUEST, true],
+    [userAdmin, Role.Admin, true],
+    [userAdmin, Role.Manager, true],
+    [userAdmin, Role.Developer, true],
+    [userAdmin, Role.Registered, true],
+    [userManager, Role.Admin, false],
+    [userManager, Role.Manager, true],
+    [userManager, Role.Developer, true],
+    [userManager, Role.Registered, true],
+    [userDeveloper, Role.Admin, false],
+    [userDeveloper, Role.Manager, false],
+    [userDeveloper, Role.Developer, true],
+    [userDeveloper, Role.Registered, true],
+    [userRegistered, Role.Admin, false],
+    [userRegistered, Role.Manager, false],
+    [userRegistered, Role.Developer, false],
+    [userRegistered, Role.Registered, true],
   ])('checkRole(user, userRole) -> true/false', (a, b, expected) => {
     expect(checkRole(a, b)).toBe(expected)
   })
