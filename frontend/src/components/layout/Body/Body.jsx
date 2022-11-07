@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { HelmetComponent } from '../../organisms/index'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { device } from '../../../theme'
@@ -48,6 +49,7 @@ function Body({
 
   return isValidRole ? (
     <StyledBody className="styledBody">
+      <HelmetComponent text={title} />
       {hideHeader && dashboard ? (
         ''
       ) : (

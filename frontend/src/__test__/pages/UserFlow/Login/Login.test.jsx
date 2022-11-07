@@ -7,7 +7,7 @@ import Login from '../../../../pages/UserFlow/Login/Login'
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 describe('Login', () => {
-  afterEach(() => {
+  beforeEach(() => {
     window.localStorage.clear()
   })
 
