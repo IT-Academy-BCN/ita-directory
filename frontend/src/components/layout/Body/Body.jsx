@@ -54,7 +54,6 @@ function Body({
           logoColor={logoColor}
           isLoggedIn={isLoggedIn}
           justifyTitle={justifyTitle}
-          isTitleVisible={false}
           hideTitle={hideTitle}
         />
       )}
