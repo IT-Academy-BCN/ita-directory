@@ -47,12 +47,10 @@ const InputNumberStyled = styled(InputNumber)`
 // `
 function InputGroupNumber({
   value,
-  register,
-  required,
   name,
   id,
   label,
-  hiddenLabel = true,
+  hiddenLabel = false,
   className,
   error,
   icon,
@@ -67,15 +65,7 @@ function InputGroupNumber({
             <Icon name={icon} fill={1} />
           </div>
         )}
-        <InputNumberStyled
-          id={id}
-          name={name}
-          error={error}
-          required={required}
-          register={register}
-          value={value}
-          {...rest}
-        />
+        <InputNumberStyled id={id} name={name} error={error} value={value} {...rest} />
       </FlexBox>
       {error && <ErrorMessage text={error} />}
     </InputGroupStyled>
@@ -84,18 +74,13 @@ function InputGroupNumber({
 
 InputGroupNumber.propTypes = {
   className: PropTypes.string,
+  value: PropTypes.string,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  inputStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   hiddenLabel: PropTypes.bool,
   label: PropTypes.string.isRequired,
-  value: PropTypes.string,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  required: PropTypes.bool,
   icon: PropTypes.node,
-  textColor: PropTypes.string,
-  iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 export default styled(InputGroupNumber)``
