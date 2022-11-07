@@ -25,12 +25,14 @@ const Role = {
   Manager: 'Manager',
   Developer: 'Developer',
   Registered: 'Registered',
+  Guest: 'Guest',
 }
 
 const RolePoints = {
   Admin: 100,
-  Manager: 50,
-  Developer: 20,
-  Registered: 0,
+  Manager: 75,
+  Developer: 50,
+  Registered: 25,
+  Guest: 0,
 }
 export { allMonths, ReqStatus, Role, RolePoints }
