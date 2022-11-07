@@ -31,6 +31,7 @@ function InputNumber({ register, type, value, name, id, className, error, ...res
       id={id}
       name={name}
       error={error}
+      {...register}
       {...rest}
     />
   )
