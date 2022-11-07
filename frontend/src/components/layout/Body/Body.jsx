@@ -40,6 +40,7 @@ function Body({
   hideFooter,
   dashboard,
   menu,
+  hideTitle,
 }) {
   return (
     <StyledBody className="styledBody">
@@ -54,6 +55,7 @@ function Body({
           isLoggedIn={isLoggedIn}
           justifyTitle={justifyTitle}
           isTitleVisible={false}
+          hideTitle={hideTitle}
         />
       )}
       <Childrens>{children}</Childrens>
@@ -73,6 +75,7 @@ Body.propTypes = {
   hideHeader: PropTypes.bool,
   hideFooter: PropTypes.bool,
   dashboard: PropTypes.bool,
+  hideTitle: PropTypes.bool,
 }
 
 export default styled(Body)``
