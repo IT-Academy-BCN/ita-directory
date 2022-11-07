@@ -17,12 +17,15 @@ const InputGroupStyled = styled.div`
     margin-top: 0.2rem;
     padding: 0;
   }
+  .paddingText {
+    padding-left: 2.5rem;
+  }
 `
-const InputStyled = styled(InputText)`
+const InputTextStyled = styled(InputText)`
   display: flex;
   height: 3rem;
   padding: 1rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: ${colors.darkGrey};
 `
 
@@ -43,10 +46,17 @@ function InputGroupText({
       <FlexBox justifyContent="flex-start" alignItems="center" flexWrap="nowrap">
         {icon && (
           <div className="styledIcon">
-            <Icon name={icon} mr="0.5rem" fill={1} />
+            <Icon name={icon} fill={1} />
           </div>
         )}
-        <InputStyled value={value} id={id} name={name} error={error} {...rest} />
+        <InputTextStyled
+          value={value}
+          id={id}
+          className={`${icon ? 'paddingText' : ''}`}
+          name={name}
+          error={error}
+          {...rest}
+        />
       </FlexBox>
       {error && <ErrorMessage text={error} />}
     </InputGroupStyled>
@@ -62,8 +72,6 @@ InputGroupText.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   icon: PropTypes.node,
-  textColor: PropTypes.string,
-  iconStyles: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 export default styled(InputGroupText)``
