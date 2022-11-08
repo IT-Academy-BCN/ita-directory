@@ -69,7 +69,7 @@ function Profile() {
         <ProfileWrapper className="form-frame">
           <ProfileForm className="profile-photo">
             <ProfileImageStyle>
-              <img src={avatar || user?.avatar?.path} alt="Foto de Perfil" />
+              <img src={avatar || user?.avatar?.path} alt="profilePic" />
             </ProfileImageStyle>
             <ProfileUploadPhoto>
               <div>
