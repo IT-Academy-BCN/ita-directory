@@ -194,7 +194,7 @@ entity Invoice {
   * id: Int
   * user: User
   * userId: Int
-  billingAdress: String?
+  billingaddress: String?
   postalCode: String?
   * city: String
   * state: String

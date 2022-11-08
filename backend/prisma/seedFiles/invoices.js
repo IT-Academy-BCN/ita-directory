@@ -1,7 +1,7 @@
 module.exports = [
   {
     userId: 1,
-    billingAdress: 'Carrer Diagonal 000',
+    billingaddress: 'Carrer Diagonal 000',
     postalCode: '08021',
     city: 'Barcelona',
     state: 'Catalonia',
@@ -9,11 +9,11 @@ module.exports = [
     vatId: 'B00000000',
     vatAmount: 21,
     secondTax: 30,
-    invoiceNumber: '1',
+    invoiceNumber: '1-2022',
   },
   {
     userId: 2,
-    billingAdress: 'Carrer Muntaner 000',
+    billingaddress: 'Carrer Muntaner 000',
     postalCode: '08023',
     city: 'Barcelona',
     state: 'Catalonia',
@@ -21,11 +21,11 @@ module.exports = [
     vatId: 'B00000001',
     vatAmount: 21,
     secondTax: 20,
-    invoiceNumber: '2',
+    invoiceNumber: '2-2022',
   },
   {
     userId: 1,
-    billingAdress: 'Carrer Diagonal 000',
+    billingaddress: 'Carrer Diagonal 000',
     postalCode: '08021',
     city: 'Barcelona',
     state: 'Catalonia',
@@ -33,11 +33,11 @@ module.exports = [
     vatId: 'B00000000',
     vatAmount: 21,
     secondTax: 30,
-    invoiceNumber: '3',
+    invoiceNumber: '3-2022',
   },
   {
     userId: 3,
-    billingAdress: 'Gran Via 000',
+    billingaddress: 'Gran Via 000',
     postalCode: '28013',
     city: 'Madrid',
     state: 'Madrid',
@@ -45,6 +45,6 @@ module.exports = [
     vatId: 'B00000002',
     vatAmount: 21,
     secondTax: 30,
-    invoiceNumber: '4',
+    invoiceNumber: '4-2022',
   },
 ]
