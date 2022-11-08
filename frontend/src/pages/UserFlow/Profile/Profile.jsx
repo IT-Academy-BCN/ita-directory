@@ -13,7 +13,7 @@ import {
 import ProfileImage from '../../../components/atoms/ProfileImage'
 import { Container } from '../../../theme'
 import { msgs, validatePassword } from '../../../utils/userFlow'
-import useUser from '../../../hooks/useUser'
+import useUser from '../../../hooks/useUserHook'
 import { FlexBox } from '../../../theme/wrappers'
 import urls from '../../../utils/urls'
 import axiosInstance from '../../../utils/axiosInstance'

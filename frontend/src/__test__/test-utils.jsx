@@ -2,6 +2,7 @@ import React from 'react'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import * as ReactRedux from 'react-redux'
 import PropTypes from 'prop-types'
 import store from '../store/store'
@@ -11,7 +12,9 @@ const { Provider } = ReactRedux
 function StoreProvider({ children }) {
   return (
     <Provider store={store}>
-      <BrowserRouter>{children}</BrowserRouter>
+      <BrowserRouter>
+        <HelmetProvider>{children}</HelmetProvider>
+      </BrowserRouter>
     </Provider>
   )
 }

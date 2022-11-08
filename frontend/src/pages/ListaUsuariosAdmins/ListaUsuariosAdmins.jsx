@@ -11,7 +11,7 @@ import { StyledTableWrapper, StyledImage, StyledCell } from './ListaUsuariosAdmi
 import { Icon } from '../../components/atoms'
 import axiosInstance from '../../utils/axiosInstance'
 import urls from '../../utils/urls'
-import { ReqStatus } from '../../utils/constant'
+import { ReqStatus, Role } from '../../utils/constant'
 
 function MediaCell({ path }) {
   return (
@@ -108,7 +108,6 @@ function ListaUsuariosAdmins() {
         setReqStatus(ReqStatus.FAILURE)
       }
     }
-
     fetchData()
   }, [])
 
@@ -241,6 +240,7 @@ function ListaUsuariosAdmins() {
 
   const data = useMemo(
     () =>
+      dataUsers &&
       dataUsers.map((du) => ({
         id: du.id,
         media: du.avatar?.path,
@@ -261,6 +261,7 @@ function ListaUsuariosAdmins() {
       paddingTitle="0px"
       paddingTitle2="73px"
       isLoggedIn
+      userRole={Role.Admin}
     >
       <Container row>
         {(reqStatus === ReqStatus.INITIAL || reqStatus === ReqStatus.PENDING) && 'Loading...'}

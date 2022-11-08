@@ -5,7 +5,7 @@ import { Menu } from '../../components/molecules'
 
 function Students() {
   return (
-    <Body menu={<Menu />}>
+    <Body title="Para alumnos" menu={<Menu />} hideTitle>
       <Banner students />
     </Body>
   )

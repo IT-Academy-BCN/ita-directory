@@ -21,27 +21,9 @@ const HomeContainer = styled(Container)`
   }
 `
 
-// const pages = [
-//   { title: 'Ad', route: '/ad' },
-//   { title: "Admin users' List", route: '/lista-usuarios-admins' },
-//   { title: 'Ads', route: '/ads' },
-//   { title: 'Bill', route: '/my-bill/:id' },
-//   { title: 'Dashboard', route: '/dashboard' },
-//   { title: 'Home', route: '/' },
-//   { title: 'Login', route: '/login' },
-//   { title: 'My Bills', route: '/my-bills' },
-//   { title: 'New Ad', route: '/new-ad' },
-//   { title: 'Profile', route: '/profile' },
-//   { title: 'Recover Password', route: '/recover-password' },
-//   { title: 'Register', route: '/register' },
-//   { title: 'Search', route: '/search' },
-//   { title: "User's Ads", route: '/user-ads' },
-//   { title: 'Change Password', route: '/change-password/:token' },
-// ]
-
 function Home() {
   return (
-    <Body menu={<Menu />} justifyTitle="center">
+    <Body menu={<Menu />} title="El directorio" justifyTitle="center" hideTitle>
       <HomeContainer data-testid="homeContainerTest">
         <Banner />
         <MapOfDistricts />

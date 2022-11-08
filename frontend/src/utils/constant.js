@@ -20,4 +20,19 @@ const ReqStatus = {
   FAILURE: 'FAILURE',
 }
 
-export { allMonths, ReqStatus }
+const Role = {
+  Admin: 'Admin',
+  Manager: 'Manager',
+  Developer: 'Developer',
+  Registered: 'Registered',
+  Guest: 'Guest',
+}
+
+const RolePoints = {
+  Admin: 100,
+  Manager: 75,
+  Developer: 50,
+  Registered: 25,
+  Guest: 0,
+}
+export { allMonths, ReqStatus, Role, RolePoints }
