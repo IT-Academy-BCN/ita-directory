@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
@@ -45,7 +45,7 @@ function CreateNewAd() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(newAdSchema),
+    resolver: zodResolver(newAdSchema),
   })
   const dispatch = useDispatch()
 

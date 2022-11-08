@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '../atoms'
 import Modal from './Modal/Modal'
 import Input from '../atoms/Forms/Input'
@@ -20,7 +20,7 @@ function ContactModal({ active, hideModal }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(contactSchema),
+    resolver: zodResolver(contactSchema),
   })
 
   const submitForm = (data) => {

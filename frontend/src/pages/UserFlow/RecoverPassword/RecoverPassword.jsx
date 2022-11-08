@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // Layout Components
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 
@@ -28,7 +28,7 @@ function RecoverPassword() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(recoverPasswordSchema),
+    resolver: zodResolver(recoverPasswordSchema),
   })
 
   const submitForm = (data) => {

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import { Button, CheckBox, Text } from '../../../components/atoms'
@@ -14,19 +14,18 @@ import { urls } from '../../../utils'
 
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
-const registerSchema = yup.object().shape({
-  name: yup.string().required('this field is required'),
-  lastname: yup.string().required('this field is required'),
-  email: yup.string().email('must be a valid email').required('email is required'),
-  password: yup
-    .string()
-    .required('No password provided.')
+const registerSchema = z.object({
+  name: z.string({ required_error: 'This field is required' }),
+  lastname: z.string({ required_error: 'This field is required' }),
+  email: z.string({ required_error: 'This field is required' }).email('must be a valid email'),
+  password: z
+    .string({ required_error: 'This field is required' })
     .min(6, 'Password is too short - should be 6 chars minimum.')
-    .matches(
+    .regex(
       regex,
       'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
     ),
-  privacy: yup.boolean().oneOf([true], 'You must accept the terms and conditions').required(),
+  privacy: z.boolean({ required_error: 'This field is required' }),
 })
 
 function Register() {
@@ -35,7 +34,7 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(registerSchema),
+    resolver: zodResolver(registerSchema),
   })
   const dispatch = useDispatch()
 

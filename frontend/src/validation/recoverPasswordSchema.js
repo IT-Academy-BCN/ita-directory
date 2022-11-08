@@ -1,7 +1,9 @@
-import * as yup from 'yup'
+import { z } from 'zod'
 
-const recoverPasswordSchema = yup.object().shape({
-  email: yup.string().email('must be a valid email').required('email is required'),
+const recoverPasswordSchema = z.object({
+  email: z
+    .string()
+    .email({ required_error: 'email is required', invalid_type_error: 'must be a valid email' }),
 })
 
 export default recoverPasswordSchema
