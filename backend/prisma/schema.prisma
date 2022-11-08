@@ -230,7 +230,7 @@ model Invoice {
     id             Int          @id @default(autoincrement())
     user           User         @relation(fields: [userId], references: [id])
     userId         Int          @map("user_id")
-    billingAdress  String?      @map("billing_address")
+    billingaddress  String?      @map("billing_address")
     postalCode     String?      @map("postal_code")
     city           String       
     state          String
