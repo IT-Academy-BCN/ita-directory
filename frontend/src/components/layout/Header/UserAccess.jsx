@@ -106,6 +106,7 @@ function UserAccess() {
   const handleClick = () => {
     setDropdownVisible(!dropdownVisible)
   }
+
   return (
     <UserAccessStyled>
       {!isLoggedIn ? (
@@ -129,7 +130,7 @@ function UserAccess() {
             onClick={handleClick}
           >
             {user?.avatar ? (
-              <ImgStyled src={user?.avatar?.path} alt="Foto de Perfil" />
+              <ImgStyled src={user?.avatar?.path} alt="profilePic" />
             ) : (
               <Icon name="account_circle" size={32} />
             )}
