@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Ad from './pages/Ad/Ad'
+import PageNotFound from './pages/PageNotFound/PageNotFound'
 import ProtectedRoute from './components/organisms/ProtectedRoute'
 import {
   Students,
@@ -31,6 +32,7 @@ function App() {
       <Route exact path={paths.recoverPassword} component={RecoverPassword} />
       <Route exact path="/students" component={Students} />
       <Route exact path="/business" component={Business} />
+      <Route exact path="*" component={PageNotFound} />
       <ProtectedRoute exact path={paths.profile} component={Profile} />
       <ProtectedRoute exact path="/ads" component={AdList} />
       <ProtectedRoute exact path={paths.userAdmin} component={ListaUsuariosAdmins} />
