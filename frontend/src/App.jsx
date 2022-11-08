@@ -32,7 +32,6 @@ function App() {
       <Route exact path={paths.recoverPassword} component={RecoverPassword} />
       <Route exact path="/students" component={Students} />
       <Route exact path="/business" component={Business} />
-      <Route exact path="*" component={PageNotFound} />
       <ProtectedRoute exact path={paths.profile} component={Profile} />
       <ProtectedRoute exact path="/ads" component={AdList} />
       <ProtectedRoute exact path={paths.userAdmin} component={ListaUsuariosAdmins} />
@@ -40,6 +39,7 @@ function App() {
       <ProtectedRoute exact path={paths.userAds} component={UserAds} />
       <ProtectedRoute exact path="/my-bills" component={MyBills} />
       <ProtectedRoute path="/my-bills/:id" component={Bill} />
+      <Route exact path="*" component={PageNotFound} />
     </Switch>
   )
 }
