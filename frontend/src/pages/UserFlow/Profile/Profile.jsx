@@ -10,7 +10,6 @@ import {
   ProfileImageStyle,
   ProfileUploadPhoto,
 } from './Profile.styles'
-import ProfileImage from '../../../components/atoms/ProfileImage'
 import { Container } from '../../../theme'
 import { msgs, validatePassword } from '../../../utils/userFlow'
 import useUser from '../../../hooks/useUserHook'
@@ -70,7 +69,7 @@ function Profile() {
         <ProfileWrapper className="form-frame">
           <ProfileForm className="profile-photo">
             <ProfileImageStyle>
-              <ProfileImage imgSource={avatar || user?.avatar?.path} alt="Foto de Perfil" />
+              <img src={avatar || user?.avatar?.path} alt="Foto de Perfil" />
             </ProfileImageStyle>
             <ProfileUploadPhoto>
               <div>
