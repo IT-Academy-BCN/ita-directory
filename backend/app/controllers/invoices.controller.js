@@ -22,7 +22,7 @@ async function createInvoice(req, res, next) {
             id: userId,
           },
         },
-        billingaddress: req.body.billingaddress,
+        billingAdress: req.body.billingAdress,
         postalCode: req.body.postalCode,
         city: req.body.city,
         state: req.body.state,
@@ -173,7 +173,7 @@ async function updateInvoice(req, res, next) {
           id: validatedFields.invoiceId,
         },
         data: {
-          billingaddress: req.body.billingaddress || undefined,
+          billingAdress: req.body.billingAdress || undefined,
           postalCode: req.body.postalCode || undefined,
           city: req.body.city || undefined,
           state: req.body.state || undefined,
