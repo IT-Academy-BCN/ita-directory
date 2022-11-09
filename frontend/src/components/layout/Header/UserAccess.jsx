@@ -51,14 +51,6 @@ const UserAccessStyled = styled.div`
       border-right: 0.3rem solid ${colors.redPink};
     }
 
-    .header__profile-image {
-      width: 32px;
-      height: 32px;
-      border-radius: 16px;
-      object-fit: cover;
-      margin-right: 12px;
-    }
-
     ${Icon} {
       margin-right: 8px;
     }
@@ -90,6 +82,15 @@ const UserAccessStyled = styled.div`
     }
   }
 `
+const ImgStyled = styled.img`
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    object-fit: cover;
+    padding-right: 2px;
+  }
+`
+
 function UserAccess() {
   const history = useHistory()
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
@@ -105,6 +106,7 @@ function UserAccess() {
   const handleClick = () => {
     setDropdownVisible(!dropdownVisible)
   }
+
   return (
     <UserAccessStyled>
       {!isLoggedIn ? (
@@ -128,7 +130,7 @@ function UserAccess() {
             onClick={handleClick}
           >
             {user?.avatar ? (
-              <img className="header__profile-image" src={user?.avatar?.path} alt="Profile" />
+              <ImgStyled src={user?.avatar?.path} alt="profilePic" />
             ) : (
               <Icon name="account_circle" size={32} />
             )}
