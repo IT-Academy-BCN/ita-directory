@@ -72,7 +72,7 @@ const logSchema = Joi.object().keys({
 
 const invoicesSchema = Joi.object({
   user_id: Joi.number().required(),
-  billingaddress: Joi.string().required(),
+  billingAdress: Joi.string().required(),
   postalCode: Joi.string().required(),
   city: Joi.string().required(),
   state: Joi.string().required(),
@@ -90,7 +90,7 @@ const invoiceByIdParamSchema = Joi.number().required()
 
 const patchInvoiceSchema = Joi.object({
   invoice_id: Joi.number().required(),
-  billingaddress: Joi.string(),
+  billingAdress: Joi.string(),
   postalCode: Joi.string(),
   city: Joi.string(),
   state: Joi.string(),
