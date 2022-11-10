@@ -14,8 +14,12 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
 
   const eliminar = 'ELIMINAR'
 
-  const errorEscritura = () => {
-    return name.length === 0 || name !== eliminar
+  const errorEscritura = () => name.length === 0 || name !== eliminar
+
+  const resetForm = () => {
+    resetName()
+    setError()
+    hideModal((prev) => !prev)
   }
 
   const handleSubmit = () => {
@@ -26,12 +30,6 @@ function DeleteModal({ currentUserName, columnSelect, updateDelete, active, hide
     updateDelete(columnSelect, currentUserName)
     hideModal()
     resetForm()
-  }
-
-  const resetForm = () => {
-    resetName()
-    setError()
-    hideModal((prev) => !prev)
   }
 
   return (

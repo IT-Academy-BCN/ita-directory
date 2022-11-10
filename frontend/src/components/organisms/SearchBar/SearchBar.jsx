@@ -12,18 +12,16 @@ function SearchBar({ setAdType, setAdRegion, getAds }) {
 
   const components = { DropdownIndicator: () => null, IndicatorSeparator: () => null }
 
-  const loadOptions = (inputValue) => {
-    return fetch(`${import.meta.env.VITE_API_URL}/location/relative/${inputValue}`)
-      .then((res) => {
-        return res.json()
-      })
+  const loadOptions = (inputValue) =>
+    fetch(`${import.meta.env.VITE_API_URL}/location/relative/${inputValue}`)
+      .then((res) => res.json())
       .then((data) => {
-        const newLocationList = data.data.map((element) => {
-          return { label: element.name, value: element.id }
-        })
+        const newLocationList = data.data.map((element) => ({
+          label: element.name,
+          value: element.id,
+        }))
         return newLocationList
       })
-  }
 
   const getTypes = async () => {
     const response = await axios.get(`${import.meta.env.VITE_API_URL}/ads/types`)

@@ -45,9 +45,7 @@ function Dropdown({ setDropdownVisible, children, parentId }) {
 
   return (
     <DropdownStyled ref={ref} position={position}>
-      {React.Children.map(children, (child) => {
-        return child
-      })}
+      {React.Children.map(children, (child) => child)}
     </DropdownStyled>
   )
 }

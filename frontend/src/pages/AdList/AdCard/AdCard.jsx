@@ -65,19 +65,7 @@ const AdCardStyled = styled.div`
   }
 `
 
-function AdCard({
-  title,
-  city,
-  mapLon,
-  mapLat,
-  userId,
-  price,
-  squareMeters,
-  description,
-  nRooms,
-  nBathrooms,
-  id,
-}) {
+function AdCard({ title, city, price, squareMeters, description, nRooms, id }) {
   const [active, setActive] = useState(false)
   const gastosIncluidos = true
   const history = useHistory()
@@ -126,14 +114,10 @@ function AdCard({
 AdCard.propTypes = {
   title: PropTypes.string.isRequired,
   city: PropTypes.string,
-  mapLon: PropTypes.string.isRequired,
-  mapLat: PropTypes.string.isRequired,
-  userId: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   squareMeters: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   nRooms: PropTypes.number.isRequired,
-  nBathrooms: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
 }
 

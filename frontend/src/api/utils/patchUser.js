@@ -2,8 +2,8 @@ import axios from 'axios'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-const patchUser = (user) => {
-  return fetch(`${import.meta.env.VITE_API_URL}/users`, {
+const patchUser = (user) =>
+  fetch(`${import.meta.env.VITE_API_URL}/users`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -18,6 +18,5 @@ const patchUser = (user) => {
       id: user.id,
     }),
   })
-}
 
 export default patchUser

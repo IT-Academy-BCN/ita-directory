@@ -20,7 +20,7 @@ function Marcador({ setCoordinates, setMarkers, currentIcon }) {
       if (layer) layer.removeFrom(map)
       layer = L.marker([lat, lng], { icon }).addTo(map)
       setMarkers([lat, lng])
-      setCoordinates((prev) => [lat, lng])
+      setCoordinates(() => [lat, lng])
       map.panTo(e.latlng)
     },
   })

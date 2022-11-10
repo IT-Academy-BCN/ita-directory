@@ -11,24 +11,6 @@ function BarChartWithD3({ data, active, selectedMonth }) {
 
   const chartMargin = { top: 20, bottom: 20, left: 40, right: 40 }
 
-  useEffect(() => {
-    setLabels(!(window.innerWidth < 992))
-    reloadChart()
-    // Resize chart
-    window.addEventListener('resize', () => reloadChart())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, active, chartWidth, chartHeight])
-
-  const reloadChart = () => {
-    const [width, height] = !active
-      ? returnChartSize([window.innerWidth, window.innerHeight])
-      : [window.innerWidth * 0.95, window.innerHeight * 0.6]
-    setChartWidth(width - chartMargin.left - chartMargin.right)
-    setChartHeight(height - chartMargin.top - chartMargin.bottom)
-    clearChart()
-    drawChart()
-  }
-
   const clearChart = () => {
     d3.selectAll('.bar-chart')
       .selectAll('*')
@@ -103,13 +85,11 @@ function BarChartWithD3({ data, active, selectedMonth }) {
       // Draw month data
       if (selectedMonth !== 'all') {
         // Create month data
-        const monthData = data.data.map((item, index) => {
-          return {
-            label: data.labels[index],
-            value: item[0],
-            color: barColors[index],
-          }
-        })
+        const monthData = data.data.map((item, index) => ({
+          label: data.labels[index],
+          value: item[0],
+          color: barColors[index],
+        }))
         // console.log("month", monthData)
 
         // Set domains
@@ -203,6 +183,24 @@ function BarChartWithD3({ data, active, selectedMonth }) {
       drawLegend(returnLegendData)
     }
   }
+
+  const reloadChart = () => {
+    const [width, height] = !active
+      ? returnChartSize([window.innerWidth, window.innerHeight])
+      : [window.innerWidth * 0.95, window.innerHeight * 0.6]
+    setChartWidth(width - chartMargin.left - chartMargin.right)
+    setChartHeight(height - chartMargin.top - chartMargin.bottom)
+    clearChart()
+    drawChart()
+  }
+
+  useEffect(() => {
+    setLabels(!(window.innerWidth < 992))
+    reloadChart()
+    // Resize chart
+    window.addEventListener('resize', () => reloadChart())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, active, chartWidth, chartHeight])
 
   return (
     <D3SvgChartContainer>

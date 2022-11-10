@@ -36,6 +36,10 @@ const NotificationIconStyled = styled.div`
 function Notification({ message, id, icon, colorIcon }) {
   const dispatch = useDispatch()
 
+  const closeNotification = () => {
+    dispatch(deleteNotification(id))
+  }
+
   useEffect(() => {
     const autoCloseFn = window.setTimeout(() => {
       closeNotification()
@@ -43,10 +47,6 @@ function Notification({ message, id, icon, colorIcon }) {
     return () => window.clearTimeout(autoCloseFn)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const closeNotification = () => {
-    dispatch(deleteNotification(id))
-  }
 
   return (
     <NotificationStyled>

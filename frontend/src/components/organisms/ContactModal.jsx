@@ -8,8 +8,21 @@ import Modal from './Modal/Modal'
 import Input from '../atoms/Forms/Input'
 import { TextArea } from '../molecules'
 import { colors } from '../../theme'
-
 import contactSchema from '../../validation/contactModalSchema'
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
+`
+
+const TextAreaStyled = styled(TextArea)`
+  width: 95%;
+  max-width: 95%;
+  min-width: 95%;
+  margin: 0;
+`
 
 function ContactModal({ active, hideModal }) {
   const [animatedState, setAnimatedState] = useState(false)
@@ -23,13 +36,6 @@ function ContactModal({ active, hideModal }) {
     resolver: yupResolver(contactSchema),
   })
 
-  const submitForm = (data) => {
-    const { name, email, message } = data
-    sendContact(name, email, message, (err) => {
-      // console.log(err)
-    })
-  }
-
   const sendContact = (name, email, message, callback) => {
     setAnimatedState(true)
     setIsDisabled(true)
@@ -41,6 +47,13 @@ function ContactModal({ active, hideModal }) {
       // console.log(`send contact => ${name}, ${email}, ${message}`)
       callback('The message could not be sent')
     }, 2000)
+  }
+
+  const submitForm = (data) => {
+    const { name, email, message } = data
+    sendContact(name, email, message, () => {
+      // console.log(err)
+    })
   }
 
   return (
@@ -136,20 +149,6 @@ ContactModal.propTypes = {
 }
 
 export default ContactModal
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid ${colors.lightGray};
-`
-
-const TextAreaStyled = styled(TextArea)`
-  width: 95%;
-  max-width: 95%;
-  min-width: 95%;
-  margin: 0;
-`
 
 // const Wrapper = styled.div`
 //   margin-bottom: 25px;

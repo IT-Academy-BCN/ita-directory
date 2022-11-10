@@ -31,10 +31,6 @@ function RecoverPassword() {
     resolver: yupResolver(recoverPasswordSchema),
   })
 
-  const submitForm = (data) => {
-    sendEmail(data)
-  }
-
   const sendEmail = async (data) => {
     setAnimatedState(true)
     setIsLoading(true)
@@ -59,6 +55,10 @@ function RecoverPassword() {
         })
       )
     }
+  }
+
+  const submitForm = (data) => {
+    sendEmail(data)
   }
 
   return (

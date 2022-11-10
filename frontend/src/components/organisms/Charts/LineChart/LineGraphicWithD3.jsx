@@ -31,9 +31,7 @@ function handleData(data, month, year) {
   /// data por dias segun mes y año seleccionado
   let dataMes = date.filter(daysInMonth)
 
-  dataMes = dataMes.map((day) => {
-    return day.total
-  })
+  dataMes = dataMes.map((day) => day.total)
   const d = dataMes
 
   let finalData = []
@@ -82,20 +80,6 @@ function LineGraphic({ data, active, size, month, year }) {
   const clearChart = () => {
     d3.selectAll('#container > *').remove()
   }
-
-  useEffect(() => {
-    clearChart()
-    setDataToPrint(handleData(data, month, year))
-    printChart()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month, year, size])
-
-  useEffect(() => {
-    clearChart()
-    printChart()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataToPrint])
-
   const printChart = () => {
     const xsDomain = dataToPrint.length
     const xaTicks = xsDomain
@@ -175,9 +159,7 @@ function LineGraphic({ data, active, size, month, year }) {
           locationY.push(yScale(d))
           return yScale(d)
         })
-        .attr('class', (d, i) => {
-          return `myCircle${i + 1}`
-        })
+        .attr('class', (d, i) => `myCircle${i + 1}`)
         .attr('r', 4)
         .attr('fill', 'white')
         .attr('stroke', `${colors.extraDarkBlue}`)
@@ -278,6 +260,18 @@ function LineGraphic({ data, active, size, month, year }) {
         })
     }
   }
+  useEffect(() => {
+    clearChart()
+    setDataToPrint(handleData(data, month, year))
+    printChart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [month, year, size])
+
+  useEffect(() => {
+    clearChart()
+    printChart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataToPrint])
 
   return (
     <div id="chartArea">

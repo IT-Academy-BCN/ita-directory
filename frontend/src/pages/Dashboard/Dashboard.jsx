@@ -24,7 +24,11 @@ function Dashboard() {
     const windowW = window.innerWidth
     const graphW = windowW - windowW * 0.1
     let graphH
-    active ? (graphH = windowH - windowH * 0.6) : (graphH = windowH - windowH * 0.6)
+    if (active) {
+      graphH = windowH - windowH * 0.6
+    } else {
+      graphH = windowH - windowH * 0.6
+    }
     setGraphSize([graphW, graphH]) // eslint-disable-next-line
   }, [active])
 

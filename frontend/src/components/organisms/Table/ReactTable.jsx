@@ -29,10 +29,10 @@ function ReactTable({ columns, data, customRowStyle }) {
           prepareRow(row)
           return (
             <tr style={customRowStyle(row)} {...row.getRowProps()}>
-              {row.cells.map((cell) => {
+              {row.cells.map((cell) => (
                 // debugger;
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-              })}
+                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+              ))}
             </tr>
           )
         })}

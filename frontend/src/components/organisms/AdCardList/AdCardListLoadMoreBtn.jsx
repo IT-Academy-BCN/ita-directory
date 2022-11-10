@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import Button from '../../atoms'
+import { Button } from '../../atoms'
 import AdCardItem from './AdCardItem'
 import { Grid } from '../../../theme'
 

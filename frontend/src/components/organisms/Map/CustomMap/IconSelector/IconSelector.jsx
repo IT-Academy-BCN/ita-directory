@@ -5,9 +5,9 @@ import { IconContainer } from './IconsSelector.styles'
 function IconSelector({ customIcons, handelOnClickIcon }) {
   return (
     <IconContainer>
-      {customIcons.map((icono) => {
-        return <CustomIcon key={icono.key} icono={icono} handelOnClickIcon={handelOnClickIcon} />
-      })}
+      {customIcons.map((icono) => (
+        <CustomIcon key={icono.key} icono={icono} handelOnClickIcon={handelOnClickIcon} />
+      ))}
     </IconContainer>
   )
 }

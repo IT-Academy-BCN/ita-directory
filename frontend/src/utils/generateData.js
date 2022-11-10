@@ -94,21 +94,15 @@ export const groupByType = (yearlyData) => {
   ]
 }
 
-export const groupByYear = (selectedYear, data) => {
-  return data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear, 10))
-}
+export const groupByYear = (selectedYear, data) =>
+  data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear, 10))
 
-export const getDaysInMonth = (month, year) => {
-  return new Date(year, parseInt(month, 10) + 1, 0).getDate()
-}
+export const getDaysInMonth = (month, year) => new Date(year, parseInt(month, 10) + 1, 0).getDate()
 
-export const groupByFilter = (selectedMonth, selectedYear, data) => {
-  return data
-    .map((e) => {
-      return `${e.day.getMonth()}, ${e.day.getDate()}, ${e.day.getFullYear()}`
-    })
+export const groupByFilter = (selectedMonth, selectedYear, data) =>
+  data
+    .map((e) => `${e.day.getMonth()}, ${e.day.getDate()}, ${e.day.getFullYear()}`)
     .indexOf(`${selectedMonth}, 1, ${selectedYear}`)
-}
 
 export const getByDays = (monthlyData) => {
   const days = []

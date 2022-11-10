@@ -7,7 +7,7 @@ import {
   startingCutPerMonth,
   startingCutPerYear,
 } from '../../../../utils/generalFilter'
-import useOptionSelectMonth from '../../../../hooks/useOptionSelectMonth'
+import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
 import options from './defaultOptions'
 import PieGraphicStyled from './PieChart.styles'
 import { Icon } from '../../../atoms'
@@ -78,6 +78,10 @@ function PieChart({ data, hideModal, active, year, month }) {
     }
   }, [curChart, selectedMonth, selectedYear, data])
 
+  const resizeChart = () => {
+    curChart.resize()
+  }
+
   // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (curChart !== undefined) {
@@ -88,10 +92,6 @@ function PieChart({ data, hideModal, active, year, month }) {
     }
     // eslint-disable-next-line
   }, [curChart, selectedYear])
-
-  const resizeChart = () => {
-    curChart.resize()
-  }
 
   // handlers
   const handleYearChange = (e) => {

@@ -5,13 +5,6 @@ import Button from '../../atoms/Button'
 import Modal from '../Modal/Modal'
 import { colors } from '../../../theme'
 
-// const UserStatusIdToName = {
-//   1: 'Active',
-//   2: 'Pending',
-//   3: 'Suspended',
-//   4: 'Deleted',
-// }
-
 const UserStatusNameToId = {
   Active: 1,
   Pending: 2,
@@ -94,14 +87,14 @@ function UserStatus({ name, userStatusId, active, hideModal, updateUserStatus })
     setSelectValue(val)
   }
 
+  const closeModal = () => {
+    hideModal()
+  }
+
   const handleClick = (val) => {
     setSelectValue(val)
     updateUserStatus(val)
     closeModal()
-  }
-
-  const closeModal = () => {
-    hideModal()
   }
 
   return (
@@ -144,7 +137,7 @@ function UserStatus({ name, userStatusId, active, hideModal, updateUserStatus })
             type="submit"
             className="darkBlue"
             buttonStyles={{ marginRight: 0 }}
-            onClick={(e) => handleClick(selectValue)}
+            onClick={() => handleClick(selectValue)}
           />
         </ButtonWrapper>
       }

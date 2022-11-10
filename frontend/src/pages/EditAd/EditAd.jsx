@@ -109,7 +109,7 @@ function EditAd(props) {
         <Container>
           <Wrapper>
             <form onSubmit={handleSubmit}>
-              {inputComponentData.map((el, i) => {
+              {inputComponentData.map((el) => {
                 const { Component } = el
                 return (
                   <Component

@@ -180,9 +180,7 @@ function ListaUsuariosAdmins() {
     setShowModalStatus((prev) => !prev)
   }, [])
 
-  const customRowStyle = () => {
-    return { borderTop: `0.9px solid ${colors.bahamaBlue}` }
-  }
+  const customRowStyle = () => ({ borderTop: `0.9px solid ${colors.bahamaBlue}` })
 
   const columns = useMemo(
     () => [

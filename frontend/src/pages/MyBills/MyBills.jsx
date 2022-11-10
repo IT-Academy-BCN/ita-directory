@@ -166,9 +166,9 @@ function MyBills() {
               prepareRow(row)
               return (
                 <tr {...row.getRowProps()} style={{ borderTop: `solid 1px ${colors.grey}` }}>
-                  {row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })}
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  ))}
                 </tr>
               )
             })}

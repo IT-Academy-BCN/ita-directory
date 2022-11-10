@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
           localStorage.removeItem('refreshToken')
           return null
         })
-        .catch((e) => {
+        .catch(() => {
           localStorage.removeItem('token')
           localStorage.removeItem('refreshToken')
           return null

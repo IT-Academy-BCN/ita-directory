@@ -27,12 +27,10 @@ function Profile() {
   const [firstLoad, setFirstLoad] = useState(null)
 
   const submitUserInfo = () => {
-    setLoggedinUserInfo((prev) => {
-      return {
-        ...prev,
-        password: newPassword === '' ? loggedinUserInfo.password : newPassword,
-      }
-    })
+    setLoggedinUserInfo((prev) => ({
+      ...prev,
+      password: newPassword === '' ? loggedinUserInfo.password : newPassword,
+    }))
   }
 
   const handlePhoto = (e) => {

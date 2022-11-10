@@ -4,7 +4,7 @@ import InputGroupNumber from '../../molecules/InputGroupNumber'
 import Button from '../../atoms/Button'
 import FilterListStyled from './FilterList.styles'
 
-function FilterList(props) {
+function FilterList() {
   const noFilters = {
     priceMin: '',
     priceMax: '',
