@@ -7,6 +7,28 @@ import useOnClickOutside from '../../hooks/useOnClickOutside'
 import useWindowSize from '../../hooks/useWindowSize'
 import getParentPosition from '../../utils/getParentPosition'
 
+const DropdownStyled = styled.div`
+  position: absolute;
+  padding: 0;
+  z-index: 1;
+  top: ${(props) => props.position.y + props.position.height}px;
+  left: ${(props) => props.position.x}px;
+  text-align: center;
+  background: transparent 0% 0% no-repeat padding-box;
+  border: 1px solid ${colors.lighterGrey};
+  border-radius: 10px;
+  opacity: 1;
+
+  a,
+  Link {
+    text-decoration: none;
+    color: ${colors.grey};
+    &:hover {
+      color: ${colors.redPink};
+    }
+  }
+`
+
 function Dropdown({ setDropdownVisible, children, parentId }) {
   const [width, height] = useWindowSize()
   const parentPosition = getParentPosition(parentId)
@@ -35,27 +57,5 @@ Dropdown.propTypes = {
   parentId: PropType.string.isRequired,
   setDropdownVisible: PropType.func.isRequired,
 }
-
-const DropdownStyled = styled.div`
-  position: absolute;
-  padding: 0;
-  z-index: 1;
-  top: ${(props) => props.position.y + props.position.height}px;
-  left: ${(props) => props.position.x}px;
-  text-align: center;
-  background: transparent 0% 0% no-repeat padding-box;
-  border: 1px solid ${colors.lighterGrey};
-  border-radius: 10px;
-  opacity: 1;
-
-  a,
-  Link {
-    text-decoration: none;
-    color: ${colors.grey};
-    &:hover {
-      color: ${colors.redPink};
-    }
-  }
-`
 
 export default Dropdown

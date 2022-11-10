@@ -19,7 +19,7 @@ function StoreProvider({ children }) {
   )
 }
 
-const customRender = (ui, options) => render(ui, { wrapper: StoreProvider })
+const customRender = (ui) => render(ui, { wrapper: StoreProvider })
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 export * from '@testing-library/react'
