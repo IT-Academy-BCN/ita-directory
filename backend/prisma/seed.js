@@ -11,6 +11,7 @@ const ad_types = require('./seedFiles/ad_types')
 const ad_status = require('./seedFiles/ad_status')
 const levels = require('./seedFiles/levels')
 const level_types = require('./seedFiles/level_types')
+const invoices = require('./seedFiles/invoices')
 
 const user_roles = [
   {
@@ -331,6 +332,18 @@ async function main() {
       update: {},
       create: {
         ...ad,
+      },
+    })
+  }
+
+  // Add some invoices
+  for (let i = 0; i < invoices.length; i++) {
+    const invoice = invoices[i]
+    await prisma.invoice.upsert({
+      where: { id: i + 1 },
+      update: {},
+      create: {
+        ...invoice,
       },
     })
   }

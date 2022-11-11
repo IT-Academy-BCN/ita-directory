@@ -157,6 +157,40 @@ USE `it_academy`;
     CONSTRAINT `fk_user_conversation_1` FOREIGN KEY (`conversation_id`) REFERENCES `it_academy`.`conversation` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `fk_user_conversation_2` FOREIGN KEY (`user_id`) REFERENCES `it_academy`.`user` (`user_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
   ) ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `it_academy`.`invoice`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `it_academy`.`invoice` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `billing_address` VARCHAR(45) NULL,
+  `postal_code` VARCHAR(45) NULL,
+  `city` VARCHAR(45) NULL,
+  `state` VARCHAR(45) NULL,
+  `country` VARCHAR(45) NULL,
+  `vat_id` VARCHAR(45) NULL,
+  `vat_amount` INT NULL,
+  `second_tax` INT NULL,
+  `date` DATE NULL,
+  `invoice_number` VARCHAR(45) NOT NULL,
+  `status` ENUM('PAID', 'PENDING', 'CANCELLED') NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `invoice_number_UNIQUE` (`invoice_number` ASC) VISIBLE,
+  INDEX `fk_invoice_1_idx` (`user_id` ASC) VISIBLE),
+  CONSTRAINT `fk_user_invoice_1` FOREIGN KEY (`user_id`) REFERENCES `it_academy`.`user` (`user_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+ENGINE = InnoDB;
+DELIMITER $$
+USE `it_academy`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `it_academy`.`invoice_BEFORE_INSERT` BEFORE INSERT ON `invoice` FOR EACH ROW
+BEGIN
+	 IF (YEAR(now()) = YEAR((SELECT date_created FROM invoice ORDER BY id DESC LIMIT 1))) THEN
+		SET NEW.invoice_number=concat(LEFT((SELECT invoice_number FROM invoice ORDER BY id DESC LIMIT 1),INSTR((SELECT invoice_number FROM invoice ORDER BY id DESC LIMIT 1), '-')-1)+1,'-',YEAR(now()));
+         ELSE 
+         SET NEW.invoice_number=concat(1,'-',YEAR(now()));
+	 END IF;
+END$$
+DELIMITER ;
 SET
   SQL_MODE = @OLD_SQL_MODE;
 SET

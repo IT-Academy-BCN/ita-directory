@@ -25,7 +25,7 @@ export default ({ mode }) => {
     test: {
       globals: true,
       environment: 'jsdom',
-      setupFiles: './src/__test__/setup.js',
+      setupFiles: './setupTests.js',
       include: ['./src/__test__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     },
   })
