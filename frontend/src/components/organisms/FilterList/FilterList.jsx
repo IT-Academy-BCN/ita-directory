@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react'
-import InputNumber from '../../atoms/Forms/InputNumber'
+import { useState } from 'react'
+import InputGroupNumber from '../../molecules/InputGroupNumber'
 import Button from '../../atoms/Button'
 import FilterListStyled from './FilterList.styles'
 
@@ -39,7 +39,7 @@ function FilterList(props) {
         <h3>Filtros</h3>
         <label htmlFor="priceMin">Precio</label>
         <div className="styledContainerInputs">
-          <InputNumber
+          <InputGroupNumber
             id="priceMin"
             name="priceMin"
             type="number"
@@ -48,7 +48,7 @@ function FilterList(props) {
             placeholder="Mín"
             className="styleFilterList styleFilter"
           />
-          <InputNumber
+          <InputGroupNumber
             name="priceMax"
             type="number"
             value={filters.priceMax}
@@ -59,7 +59,7 @@ function FilterList(props) {
         </div>
         <label>Tamaño</label>
         <div className="styledContainerInputs">
-          <InputNumber
+          <InputGroupNumber
             name="sizeMin"
             type="number"
             value={filters.sizeMin}
@@ -67,7 +67,7 @@ function FilterList(props) {
             placeholder="Mín"
             className="styleFilterList styleFilter"
           />
-          <InputNumber
+          <InputGroupNumber
             name="sizeMax"
             type="number"
             value={filters.sizeMax}

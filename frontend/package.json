@@ -7,7 +7,7 @@
     "build": "vite build",
     "dev": "vite serve",
     "test": "vitest",
-    "lint": "./node_modules/.bin/eslint \"**/*.{js,jsx}\" --max-warnings=0"
+    "lint": "./node_modules/.bin/eslint \"**/*.{js,jsx,ts,tsx}\" --max-warnings=0"
   },
   "browserslist": [
     ">0.2%",
