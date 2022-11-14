@@ -22,7 +22,7 @@ jobs:
         run: cd ./frontend && npm ci
 
       - name: lint
-        run: cd ./frontend && npm run lint
+        run: cd ./frontend && npx lint-staged
 
       - name: test
         run: cd ./frontend && npm run test

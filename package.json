@@ -42,6 +42,5 @@
   "devDependencies": {
     "eslint": "8.17.0",
     "husky": "6.0.0"
-  },
-  "dependencies": {}
+  }
 }

@@ -2,6 +2,7 @@ const router = require('express').Router()
 const authenticateToken = require('../middleware/verifyToken')
 const invoicesController = require('../controllers/invoices.controller')
 
+
 /**
  * POST /invoices
  * @summary Create new invoice

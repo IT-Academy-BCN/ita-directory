@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 import newAdSchema from '../../validation/createNewAdSchema'
 import { newNotification, NotificationTypes } from '../../store/notificationSlice'
 import Body from '../../components/layout/Body/Body'
-import InputNumber from '../../components/atoms/Forms/InputNumber'
 import TextArea from '../../components/atoms/Forms/TextArea'
 import Button from '../../components/atoms/Button'
 import Input from '../../components/atoms/Forms/Input'
@@ -21,6 +20,8 @@ import {
 import { Container } from '../../theme'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 import { Label } from '../../components/atoms'
+import { InputGroupNumber } from '../../components/molecules'
+import InputGroupText from '../../components/molecules/InputGroupText'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -99,67 +100,68 @@ function CreateNewAd() {
 
   const inputComponentData = [
     {
-      Component: InputNumber,
-      type: 'text',
-      label: 'Título',
-      name: 'title',
+      Component: InputGroupText,
       id: 'title',
+      name: 'title',
+      label: 'Título',
+      hiddenLabel: true,
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
     },
     {
+      id: 'description',
+      name: 'description',
       Component: TextArea,
       type: 'textarea',
       label: 'Descripción',
-      name: 'description',
-      id: 'description',
+      hiddenLabel: false,
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
-      Component: InputNumber,
-      type: 'text',
-      label: 'Ciudad',
-      name: 'city',
+      Component: InputGroupText,
       id: 'city',
+      name: 'city',
+      label: 'Ciudad',
+      hiddenLabel: true,
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_on',
     },
     {
-      Component: InputNumber,
-      type: 'number',
-      label: 'Habitaciones',
-      name: 'nRooms',
+      Component: InputGroupNumber,
       id: 'nRooms',
+      label: 'Habitaciones',
+      hiddenLabel: true,
+      name: 'nRooms',
       icon: 'bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
-      type: 'number',
-      label: 'Precio',
-      name: 'price',
+      Component: InputGroupNumber,
       id: 'price',
-      required: true,
+      name: 'price',
+      label: 'Precio',
+      hiddenLabel: true,
+      required: 'merluza',
       icon: 'euro',
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
-      type: 'number',
-      label: 'M\u00B2',
-      name: 'squareMeters',
+      Component: InputGroupNumber,
       id: 'squareMeters',
+      name: 'squareMeters',
+      label: 'M\u00B2',
+      hiddenLabel: true,
       required: true,
       icon: 'home',
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
-      type: 'number',
-      label: 'Baños',
-      name: 'nBathrooms',
+      Component: InputGroupNumber,
       id: 'nBathrooms',
+      name: 'nBathrooms',
+      label: 'Baños',
+      hiddenLabel: true,
       icon: 'bathtub',
       inputClassName: 'style-input-create-new-ad',
     },
@@ -268,6 +270,7 @@ function CreateNewAd() {
               const {
                 Component,
                 label,
+                hiddenLabel,
                 type,
                 name,
                 id,
@@ -284,10 +287,11 @@ function CreateNewAd() {
                     id={id}
                     key={id}
                     label={label}
+                    hiddenLabel={hiddenLabel}
                     name={name}
                     type={type}
                     className={inputClassName}
-                    icon={icon && icon}
+                    icon={icon}
                     inputContainerClassName={inputContainerClassName}
                     register={register(`${name}`)}
                     error={errors[name]?.message}

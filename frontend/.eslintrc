@@ -5,7 +5,7 @@
     "airbnb-typescript",
     "react-app",
     "react-app/jest",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "rules": {
     "react/require-default-props": ["off"],
@@ -14,7 +14,6 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
     "no-param-reassign": ["error", { "props": false }],
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

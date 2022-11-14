@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom'
 import Container from '../../theme/globalStyles'
 import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 import Button from '../../components/atoms/Button'
-import InputNumber from '../../components/atoms/Forms/InputNumber'
+import InputGroupNumber from '../../components/molecules/InputGroupNumber'
 import Input from '../../components/atoms/Forms/Input'
 import Body from '../../components/layout/Body/Body'
 import { Wrapper, MapText } from './EditAd.styles'
@@ -72,14 +72,14 @@ function EditAd(props) {
       icon: 'Map',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNumber,
       label: 'Habitaciones',
       name: 'numRooms',
       icon: 'Bed',
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNumber,
       label: 'Precio',
       name: 'monthlyRent',
       required: true,
@@ -87,7 +87,7 @@ function EditAd(props) {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNumber,
       label: 'M\u00B2',
       name: 'squareMeters',
       required: true,
@@ -95,7 +95,7 @@ function EditAd(props) {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputNumber,
+      Component: InputGroupNumber,
       label: 'Baños',
       name: 'numBaths',
       icon: 'Bathtub',
