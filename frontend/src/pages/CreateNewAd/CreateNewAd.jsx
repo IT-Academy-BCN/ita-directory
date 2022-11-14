@@ -39,7 +39,7 @@ function CreateNewAd() {
   const [submittedData, setSubmittedData] = useState('') // @todo -> remove -probably unecessary
   const [, setError] = useState(true)
   const [, setSuccessfulPost] = useState(false)
-  const [coordinates, setCoordinates] = useState([])
+  const [coordinates, setCoordinates] = useState([41.38879, 2.15899])
   const {
     register,
     handleSubmit,
@@ -72,6 +72,20 @@ function CreateNewAd() {
     }
   }
 
+  const [city, setCity] = useState('')
+  const [address, setAddress] = useState('')
+  const [listPlace, setListPlace] = useState(null)
+
+  /* useEffect(() => {
+    if (listPlace.length !== 0) {
+      setForm({
+        ...form,
+        mapLat: listPlace[0].lat,
+        mapLon: listPlace[0].lon,
+      })
+    }
+  }, [coordinates]) */
+
   useEffect(() => {
     setForm({
       ...form,
@@ -94,7 +108,7 @@ function CreateNewAd() {
     setForm(emptyForm)
     setError(() => false)
     setSuccessfulPost(() => false)
-    setTimeout(() => setSubmittedData(''), 5000)
+    /*  setTimeout(() => setSubmittedData(''), 5000) */
   }
 
   const inputComponentData = [
@@ -202,6 +216,39 @@ function CreateNewAd() {
     setOpenModal(false)
   }
 
+  const NOMINATIM_BASE_URL = 'https://nominatim.openstreetmap.org/search?'
+  let params = {
+    q: '',
+    format: 'json',
+    addressdetails: 'addressdetails',
+  }
+
+  const handleSearch = () => {
+    params = {
+      q: `${address}, ${city}, Barcelonés, Spain`,
+      format: 'json',
+      addressdetails: 1,
+      polygon_geojson: 0,
+    }
+    /*     console.log(params) */
+    const queryString = new URLSearchParams(params).toString()
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    }
+    fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        // console.log('result', JSON.parse(result))
+        setListPlace(JSON.parse(result))
+      })
+      .catch((err) => err)
+    listPlace && setCoordinates(() => [Number(listPlace[0].lat), Number(listPlace[0].lon)])
+    // console.log('1', coordinates)
+  }
+
+  // console.log('2 ', coordinates)
+
   return (
     <Body
       title="Publicar anuncio"
@@ -295,9 +342,26 @@ function CreateNewAd() {
                 </div>
               )
             })}
+            <input
+              value={address}
+              placeholder="Direccion"
+              onChange={(event) => {
+                setAddress(event.target.value)
+              }}
+            />
+            <input
+              value={city}
+              placeholder="Ciudad"
+              onChange={(event) => {
+                setCity(event.target.value)
+              }}
+            />
+            <button type="button" onClick={handleSearch}>
+              Buscar
+            </button>
             <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
             <MapBox>
-              <CustomMap setCoordinates={setCoordinates} />
+              <CustomMap setCoordinates={setCoordinates} coordinates={coordinates} />
             </MapBox>
             <Button
               buttonStyles={{
