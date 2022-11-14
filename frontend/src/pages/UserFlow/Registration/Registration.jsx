@@ -48,21 +48,22 @@ function Register() {
   const registerUser = async (user) => {
     try {
       const response = await axiosInstance.post(urls.register, user)
-      if (response.data.code === 'error') {
+      const { data } = response.response
+      if (data.code === 'error') {
         dispatch(
           newNotification({
-            message: response.data.code,
+            message: data.message,
             type: NotificationTypes.error,
           })
         )
-        throw response.data.message
+      } else {
+        dispatch(
+          newNotification({
+            message: 'Your account has been successfully created!',
+            type: NotificationTypes.succes,
+          })
+        )
       }
-      dispatch(
-        newNotification({
-          message: 'Your account has been successfully created!',
-          type: NotificationTypes.succes,
-        })
-      )
     } catch (error) {
       dispatch(
         newNotification({
