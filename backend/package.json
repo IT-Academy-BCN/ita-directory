@@ -34,26 +34,27 @@
     "pg": "8.6.0",
     "pino": "7.10.0",
     "redis": "4.0.1",
-    "socket.io": "4.1.2",
+    "socket.io": "^4.5.3",
     "zod": "3.17.3"
   },
   "devDependencies": {
     "@prisma/generator-helper": "3.15.1",
     "cross-env": "7.0.3",
-    "ejs": "3.1.6",
+    "ejs": "^3.1.8",
     "eslint": "8.14.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "lint-staged": "12.4.0",
-    "nodemon": "2.0.7",
+    "nodemon": "^2.0.20",
     "pino-pretty": "7.6.1",
     "prettier": "2.3.1",
     "prisma": "3.15.0",
     "prisma-uml": "1.1.17",
     "socket.io-client": "4.1.2",
     "supertest": "6.2.2",
-    "vite": "2.9.1",
+    "typescript": "^4.8.4",
+    "vite": "^2.9.15",
     "vitest": "0.9.2"
   }
 }
