@@ -13,6 +13,7 @@ import { login } from '../../../store/userSlice'
 import axiosInstance from '../../../utils/axiosInstance'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import { urls } from '../../../utils'
+import useUser from '../../../hooks/useUserHook'
 
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
@@ -32,6 +33,7 @@ function Login() {
   const [userLogged, setUserLogged] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
+  const user = useUser('login')
 
   useEffect(() => {
     const userIsLogin = window.localStorage.getItem('token')
@@ -53,7 +55,7 @@ function Login() {
     resolver: yupResolver(loginSchema),
   })
 
-  const loginUser = async (user) => {
+  const loginUser = async () => {
     try {
       const response = await axios.post(urls.login, user)
       dispatch(
@@ -103,7 +105,7 @@ function Login() {
   return (
     <Body title="Acceso" isLoggedIn={false} justifyTitle="center">
       <Container>
-        {userLogged ? (
+        {userLogged && user ? (
           <Text text="Ya estas logueado" />
         ) : (
           <Form onSubmit={handleSubmit(submitForm)} noValidate>

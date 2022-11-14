@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../store/userSlice'
 import axiosInstance from '../utils/axiosInstance'
 import urls from '../utils/urls'
+// import memoizeUser from '../utils/memoizeFunction'
 
-export default function useUser() {
+let isCalled = false
+// const useUser = memoizeUser(
+function useUser() {
   const dispatch = useDispatch()
   const user = useSelector((s) => s.user.value)
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
@@ -18,13 +21,18 @@ export default function useUser() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (!isLoggedIn && token) {
+    if (!isLoggedIn && token && !isCalled) {
+      isCalled = true
       getUser()
     }
   }, [getUser, isLoggedIn])
 
   if (user) {
+    // setUserObject(user)
     return user
   }
   return null
 }
+// )
+
+export default useUser

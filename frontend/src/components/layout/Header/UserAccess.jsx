@@ -94,7 +94,10 @@ const ImgStyled = styled.img`
 function UserAccess() {
   const history = useHistory()
   const isLoggedIn = useSelector((s) => s.user.isLoggedIn)
-  const user = useUser()
+  const user = useUser('userAccess')
+
+  // const user = memoUser()
+
   const children = [
     { path: paths.profile, text: 'Editar perfil' },
     { path: paths.bills, text: 'Mis facturas' },

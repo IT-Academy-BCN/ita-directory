@@ -12,15 +12,15 @@ import App from './App'
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <GlobalStyle />
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </Router>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <Router>
+      <GlobalStyle />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </Router>
+  </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 )

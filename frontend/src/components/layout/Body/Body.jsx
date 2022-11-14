@@ -45,7 +45,9 @@ function Body({
   hideTitle,
   userRole,
 }) {
-  const user = useUser()
+  const user = useUser('body')
+  // const user = memoUser()
+
   const isValidRole = useMemo(() => checkRole(user, userRole), [user, userRole])
 
   return isValidRole ? (

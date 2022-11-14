@@ -18,7 +18,10 @@ import urls from '../../../utils/urls'
 import axiosInstance from '../../../utils/axiosInstance'
 
 function Profile() {
-  const user = useUser()
+  const user = useUser('profile')
+
+  // const user = memoUser()
+
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
   const [avatar, setAvatar] = useState(null)
@@ -27,12 +30,10 @@ function Profile() {
   const [firstLoad, setFirstLoad] = useState(null)
 
   const submitUserInfo = () => {
-    setLoggedinUserInfo((prev) => {
-      return {
-        ...prev,
-        password: newPassword === '' ? loggedinUserInfo.password : newPassword,
-      }
-    })
+    setLoggedinUserInfo((prev) => ({
+      ...prev,
+      password: newPassword === '' ? loggedinUserInfo.password : newPassword,
+    }))
   }
 
   const handlePhoto = (e) => {
