@@ -1,8 +1,8 @@
 {
   "extends": [
     "airbnb",
-    // "airbnb/hooks",
-    // "airbnb-typescript",
+    "airbnb/hooks",
+    "airbnb-typescript",
     "react-app",
     "react-app/jest",
     "prettier"
@@ -15,7 +15,7 @@
     "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
     "no-param-reassign": ["error", { "props": false }],
   },
-  // "parser": "@typescript-eslint/parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   }
