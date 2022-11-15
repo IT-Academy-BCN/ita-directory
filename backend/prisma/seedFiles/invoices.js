@@ -1,7 +1,7 @@
 module.exports = [
   {
     userId: 1,
-    billingAdress: 'Carrer Diagonal 000',
+    billingAddress: 'Carrer Diagonal 000',
     postalCode: '08021',
     city: 'Barcelona',
     state: 'Catalonia',
@@ -13,7 +13,7 @@ module.exports = [
   },
   {
     userId: 2,
-    billingAdress: 'Carrer Muntaner 000',
+    billingAddress: 'Carrer Muntaner 000',
     postalCode: '08023',
     city: 'Barcelona',
     state: 'Catalonia',
@@ -25,7 +25,7 @@ module.exports = [
   },
   {
     userId: 1,
-    billingAdress: 'Carrer Diagonal 000',
+    billingAddress: 'Carrer Diagonal 000',
     postalCode: '08021',
     city: 'Barcelona',
     state: 'Catalonia',
@@ -37,7 +37,7 @@ module.exports = [
   },
   {
     userId: 3,
-    billingAdress: 'Gran Via 000',
+    billingAddress: 'Gran Via 000',
     postalCode: '28013',
     city: 'Madrid',
     state: 'Madrid',
