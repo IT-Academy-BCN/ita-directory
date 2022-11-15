@@ -22,7 +22,6 @@ import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
 import { Label } from '../../components/atoms'
 import { InputGroupNumber } from '../../components/molecules'
 import InputGroupText from '../../components/molecules/InputGroupText'
-import InputMap from '../../components/molecules/InputMap'
 
 function CreateNewAd() {
   const emptyForm = {
@@ -52,7 +51,7 @@ function CreateNewAd() {
   })
   const dispatch = useDispatch()
 
-  const postAd = async (formInfo) => {
+  const postAd = async () => {
     try {
       //   console.log(res)
       setSuccessfulPost(() => true)
@@ -166,7 +165,7 @@ function CreateNewAd() {
       inputClassName: 'style-input-create-new-ad',
     },
     {
-      Component: InputMap,
+      Component: InputGroupText,
       id: 'address',
       name: 'address',
       label: 'Dirección',
@@ -177,7 +176,7 @@ function CreateNewAd() {
       setLocation: setAddress,
     },
     {
-      Component: InputMap,
+      Component: InputGroupText,
       id: 'city',
       name: 'city',
       label: 'Ciudad',
@@ -213,7 +212,7 @@ function CreateNewAd() {
               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpdGFjYWRlbXkiLCJzdWIiOnsidXNlcl9pZCI6IjlSQUtkMk9iSk0ifSwiaWF0IjoxNjQ3NDIxMDE3LCJleHAiOjE2NDc0MjE5MTd9.bJvx65yQRxtHA3aaU42_juZ2I5Q04bok3zqwWR8bO_A',
           },
         })
-        .then((response) => {
+        .then(() => {
           setValidCsvFile(true)
         })
         .catch(() => {
@@ -316,7 +315,7 @@ function CreateNewAd() {
           {}
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
-            {inputComponentData.map((el, i) => {
+            {inputComponentData.map((el) => {
               const {
                 Component,
                 label,

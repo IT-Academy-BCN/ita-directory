@@ -38,6 +38,7 @@ function InputGroupText({
   className,
   error,
   icon,
+  setLocation,
   ...rest
 }) {
   return (
@@ -55,6 +56,9 @@ function InputGroupText({
           className={`${icon ? 'paddingText' : ''}`}
           name={name}
           error={error}
+          onChange={(event) => {
+            setLocation(event.target.value)
+          }}
           {...rest}
         />
       </FlexBox>
@@ -72,6 +76,7 @@ InputGroupText.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   icon: PropTypes.node,
+  setLocation: PropTypes.func,
 }
 
 export default styled(InputGroupText)``

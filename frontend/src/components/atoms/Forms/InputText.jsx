@@ -22,7 +22,7 @@ const InputStyled = styled.input`
   }
 `
 
-function InputText({ value, name, id, className, type, error, register, ...rest }) {
+function InputText({ value, name, id, className, type, error, register, setLocation, ...rest }) {
   return (
     <InputStyled
       type="text"
@@ -31,6 +31,7 @@ function InputText({ value, name, id, className, type, error, register, ...rest 
       id={id}
       name={name}
       error={error}
+      setLocation={setLocation}
       {...register}
       {...rest}
     />
@@ -44,7 +45,7 @@ InputText.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  onChange: PropTypes.func,
+  setLocation: PropTypes.func,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 }
 
