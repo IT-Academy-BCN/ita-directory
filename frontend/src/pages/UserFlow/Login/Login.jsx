@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
-import * as yup from 'yup'
+import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Text } from '../../../components/atoms'
@@ -16,14 +16,17 @@ import { urls } from '../../../utils'
 
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
-const loginSchema = yup.object().shape({
-  email: yup.string().email('must be a valid email').required('email is required'),
-  password: yup
-    .string()
-    .required('No password provided.')
-    .min(6, 'Password is too short - should be 6 chars minimum.')
-    .matches(
-      regex,
+const loginSchema = z.object({
+  email: z
+    .string({ required_error: 'Email is required' })
+    .min(1, { message: 'Email is required' })
+    .email({ message: 'Must be a valid email' }),
+  password: z
+    .string({ required_error: 'No password provided' })
+    .min(1, { message: 'No password provided' })
+    .min(6, { message: 'Password is too short, should be 6 chars minimum.' })
+    .regex(
+      new RegExp(regex),
       'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
     ),
 })
@@ -32,7 +35,6 @@ function Login() {
   const [userLogged, setUserLogged] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
-
   useEffect(() => {
     const userIsLogin = window.localStorage.getItem('token')
 
@@ -50,7 +52,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(loginSchema),
+    resolver: zodResolver(loginSchema),
   })
 
   const loginUser = async (user) => {

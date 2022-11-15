@@ -1,7 +1,10 @@
-import * as yup from 'yup'
+import { z } from 'zod'
 
-const recoverPasswordSchema = yup.object().shape({
-  email: yup.string().email('must be a valid email').required('email is required'),
+const recoverPasswordSchema = z.object({
+  email: z
+    .string({ required_error: 'Email is required' })
+    .min(1, { message: 'This field is required.' })
+    .email({ message: 'Must be a valid email' }),
 })
 
 export default recoverPasswordSchema
