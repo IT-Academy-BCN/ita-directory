@@ -17,12 +17,15 @@ import { urls } from '../../../utils'
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
 const loginSchema = z.object({
-  email: z.string({ required_error: 'Email is required' }).email('Must be a valid email'),
+  email: z
+    .string({ required_error: 'Email is required' })
+    .min(1, { message: 'This field is required.' })
+    .email({ message: 'Must be a valid email' }),
   password: z
     .string({ required_error: 'No password provided' })
-    .min(6, 'Password is too short - should be 6 chars minimum.')
+    .min(6, { message: 'Password is too short, 6 characters minimum.' })
     .regex(
-      regex,
+      new RegExp(regex),
       'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
     ),
 })
@@ -31,7 +34,6 @@ function Login() {
   const [userLogged, setUserLogged] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
-
   useEffect(() => {
     const userIsLogin = window.localStorage.getItem('token')
 

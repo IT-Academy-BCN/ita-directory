@@ -15,16 +15,23 @@ import { urls } from '../../../utils'
 const regex = import.meta.env.VITE_PASSWORD_REGEX
 
 const registerSchema = z.object({
-  name: z.string({ required_error: 'This field is required' }),
-  lastname: z.string({ required_error: 'This field is required' }),
-  email: z.string({ required_error: 'This field is required' }).email('must be a valid email'),
+  name: z
+    .string({ required_error: 'Name is required' })
+    .min(1, { message: 'This field is required.' }),
+  lastname: z
+    .string({ required_error: 'Last name is required' })
+    .min(1, { message: 'This field is required.' }),
+  email: z
+    .string({ required_error: 'Email is required' })
+    .min(1, { message: 'This field is required.' })
+    .email('Must be a valid email'),
   password: z
     .string({ required_error: 'This field is required' })
-    .min(6, 'Password is too short - should be 6 chars minimum.')
-    .regex(
-      regex,
-      'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
-    ),
+    .min(6, { message: 'Password is too short, 6 characters minimum.' })
+    .regex(new RegExp(regex), {
+      message:
+        'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.',
+    }),
   privacy: z.boolean({ required_error: 'This field is required' }),
 })
 
