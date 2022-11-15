@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { MapContainer, TileLayer, useMap, Marker } from 'react-leaflet'
 import L from 'leaflet'
@@ -43,71 +43,37 @@ const icon = L.icon({
   iconSize: [25, 41],
   iconAnchor: [10, 41],
   popupAnchor: [2, -40],
-  // specify the path here
   iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
   shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png',
 })
 
-function CustomMap({ setCoordinates, coordinates }) {
-  /*  const map = useMap()
-  const icon = L.marker([50, 10]).addTo(map) */
-  // @todo - update props in other components that use CustomMap to include setCoordinates
-
-  /*  const [iconSelection, setIconSelection] = useState(false)
-  const [iconState, setIconState] = useState(customIcons[1].url) */
-
-  /*   const [marker, setMarker] = useState([41.3879, 2.16992])
-  console.log('COORD3', coordinates)
-
-  useEffect(() => {
-    setMarker([coordinates[0], coordinates[1]])
-  }, [coordinates])
-
-  console.log('Maker', marker) */
-
-  function ChangeView({ center }) {
+function CustomMap({ listPlace }) {
+  function ChangeView({ center, zoom }) {
     const map = useMap()
-    map.setView(center)
+    map.setView(center, zoom)
     return null
   }
+  const [coordinates, setCoordinates] = useState([41.38879, 2.15899])
 
-  /*   const handelOnClickIcon = (icon) => {
-    setIconState(icon)
-  }
-  const handleOnClick = () => {
-    setIconSelection(!iconSelection)
-  } */
-
+  useEffect(() => {
+    listPlace.length !== 0 && setCoordinates([Number(listPlace[0].lat), Number(listPlace[0].lon)])
+  }, [listPlace])
   return (
     <div className="Mapa">
-      <MapContainer className="Container" center={coordinates} zoom={18} scrollWheelZoom={false}>
+      <MapContainer className="Container" center={coordinates} zoom={15} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={coordinates} icon={icon} />
-        <ChangeView center={coordinates} zoom={18} />
-
-        {/* <Marcador setCoordinates={setCoordinates} setMarkers={setMarkers} currentIcon={iconState} /> */}
+        <ChangeView center={coordinates} zoom={15} />
       </MapContainer>
-      {/*  <button className="ButtonIcons" type="button" onClick={handleOnClick}>
-        <img className="IconIMG" src={iconState} alt="" />
-      </button> */}
-
-      {/* {iconSelection ? (
-        <div>
-          <IconSelector customIcons={customIcons} handelOnClickIcon={handelOnClickIcon} />
-        </div>
-      ) : (
-        <div />
-      )} */}
     </div>
   )
 }
 
 CustomMap.propTypes = {
-  setCoordinates: PropTypes.func.isRequired,
-  coordinates: PropTypes.func.isRequired,
+  listPlace: PropTypes.array.isRequired,
 }
 
 export default CustomMap

@@ -4,6 +4,7 @@ const newAdSchema = yup.object().shape({
   title: yup.string().required('this field is required'),
   description: yup.string(),
   city: yup.string().required('this field is required'),
+  address: yup.string().required('this field is required'),
   nRooms: yup
     .number()
     .typeError('')
