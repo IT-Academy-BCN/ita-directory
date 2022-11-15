@@ -51,7 +51,7 @@ function CreateNewAd() {
   })
   const dispatch = useDispatch()
 
-  const postAd = async () => {
+  const postAd = async (formInfo) => {
     try {
       //   console.log(res)
       setSuccessfulPost(() => true)
