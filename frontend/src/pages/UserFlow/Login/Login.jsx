@@ -19,11 +19,12 @@ const regex = import.meta.env.VITE_PASSWORD_REGEX
 const loginSchema = z.object({
   email: z
     .string({ required_error: 'Email is required' })
-    .min(1, { message: 'This field is required.' })
+    .min(1, { message: 'Email is required' })
     .email({ message: 'Must be a valid email' }),
   password: z
     .string({ required_error: 'No password provided' })
-    .min(6, { message: 'Password is too short, 6 characters minimum.' })
+    .min(1, { message: 'No password provided' })
+    .min(6, { message: 'Password is too short, should be 6 chars minimum.' })
     .regex(
       new RegExp(regex),
       'Must contain a special character (@ $ ! % * # ? &), at least one number, one lowercase letter, and one uppercase letter.'
