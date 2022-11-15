@@ -29,8 +29,10 @@ function CheckBox({ error, register }) {
 }
 
 CheckBox.propTypes = {
-  error: PropTypes.bool,
+  error: PropTypes.bool | PropTypes.string,
   register: PropTypes.object,
+  id: PropTypes.string,
+  name: PropTypes.string,
 }
 
 export default CheckBox
