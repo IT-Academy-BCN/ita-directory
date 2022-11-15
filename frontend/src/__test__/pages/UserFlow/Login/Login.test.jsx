@@ -52,7 +52,7 @@ describe('Login', () => {
     fireEvent.change(emailInput, { target: { value: 'wrong email' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    expect(await screen.findByText('must be a valid email')).toBeInTheDocument()
+    expect(await screen.findByText('Must be a valid email')).toBeInTheDocument()
   })
 
   it('should show error message if no email is provided', async () => {
@@ -62,7 +62,7 @@ describe('Login', () => {
     fireEvent.change(emailInput, { target: { value: '' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    expect(await screen.findByText('email is required')).toBeInTheDocument()
+    expect(await screen.findByText('Email is required')).toBeInTheDocument()
   })
 
   it('should show error message if no password is provided', async () => {
@@ -72,7 +72,7 @@ describe('Login', () => {
     fireEvent.change(passwordInput, { target: { value: '' } })
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
-    expect(await screen.findByText('No password provided.')).toBeInTheDocument()
+    expect(await screen.findByText('No password provided')).toBeInTheDocument()
   })
 
   it('should show error message if password is too short', async () => {
@@ -83,7 +83,7 @@ describe('Login', () => {
     const loginButton = screen.queryByTestId('formLoginButton')
     fireEvent.click(loginButton)
     expect(
-      await screen.findByText('Password is too short - should be 6 chars minimum.')
+      await screen.findByText('Password is too short, should be 6 chars minimum.')
     ).toBeInTheDocument()
   })
 
