@@ -1,5 +1,6 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useDispatch } from 'react-redux'
@@ -11,8 +12,23 @@ import { newNotification, NotificationTypes } from '../../../store/notificationS
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 import axiosInstance from '../../../utils/axiosInstance'
 import { urls } from '../../../utils'
+import axios, { AxiosError } from 'axios'
 
-const regex = import.meta.env.VITE_PASSWORD_REGEX
+type TUserData = {
+  name: string
+  lastname: string
+  email: string
+  password: string
+  privacy: boolean
+}
+
+type TData = {
+  code: string
+  header: string
+  message: string
+}
+
+const regex: any = import.meta.env.VITE_PASSWORD_REGEX
 
 const registerSchema = z.object({
   name: z
@@ -40,41 +56,36 @@ function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TUserData>({
     resolver: zodResolver(registerSchema),
   })
   const dispatch = useDispatch()
 
-  const registerUser = async (user) => {
+  const registerUser = async (user: TUserData) => {
     try {
-      const response = await axiosInstance.post(urls.register, user)
-      const { data } = response.response
-      if (data.code === 'error') {
+      const response = await axiosInstance.post<TData>(urls.register, user)
+      dispatch(
+        newNotification({
+          message: 'Your account has been successfully created!',
+          type: NotificationTypes.succes,
+        })
+      )
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        const error = err as AxiosError<TData>
         dispatch(
           newNotification({
-            message: data.message,
+            message: `Sorry, connection failed: "${error.response?.data.message}". Please, try later.`,
             type: NotificationTypes.error,
           })
         )
       } else {
-        dispatch(
-          newNotification({
-            message: 'Your account has been successfully created!',
-            type: NotificationTypes.succes,
-          })
-        )
+        throw new Error(`${err}`)
       }
-    } catch (error) {
-      dispatch(
-        newNotification({
-          message: `Sorry, connection failed: "${error.message}". Please, try later.`,
-          type: NotificationTypes.error,
-        })
-      )
     }
   }
 
-  const submitForm = (data) => {
+  const submitForm: SubmitHandler<TUserData> = (data) => {
     const { name, lastname, email, password, privacy } = data
     registerUser({
       name,
