@@ -6,27 +6,29 @@ import { InputText } from '../atoms/Forms'
 import { FlexBox } from '../../theme/wrappers'
 
 const InputGroupStyled = styled.div`
-  ${Label}
-  margin-bottom: 0.8rem;
+  ${Label} {
+    margin-bottom: 0.8rem;
+  }
+
   error:focus-within {
     border-color: ${({ error }) => (error ? colors.redColor : 'inherit')};
   }
+
   .styledIcon {
     position: absolute;
     margin-left: 1rem;
     margin-top: 0.2rem;
     padding: 0;
   }
-  .paddingText {
-    padding-left: 2.5rem;
+
+  ${InputText} {
+    display: flex;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: ${colors.darkGrey};
+    padding-left: ${({ hasIcon }) => (hasIcon ? '2.5rem;' : '1rem')};
   }
-`
-const InputTextStyled = styled(InputText)`
-  display: flex;
-  height: 3rem;
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: ${colors.darkGrey};
 `
 
 function InputGroupText({
@@ -35,34 +37,23 @@ function InputGroupText({
   id,
   label,
   hiddenLabel = false,
-  className,
+  className = '',
   error,
   icon,
-  setLocation,
   ...rest
 }) {
   return (
-    <InputGroupStyled>
-      <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} />
+    <InputGroupStyled hasIcon={!!icon} className={className}>
+      <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} isError={!!error} />
       <FlexBox justifyContent="flex-start" alignItems="center" flexWrap="nowrap">
-        {icon && (
+        {!!icon && (
           <div className="styledIcon">
             <Icon name={icon} fill={1} />
           </div>
         )}
-        <InputTextStyled
-          value={value}
-          id={id}
-          className={`${icon ? 'paddingText' : ''}`}
-          name={name}
-          error={error}
-          onChange={(event) => {
-            setLocation(event.target.value)
-          }}
-          {...rest}
-        />
+        <InputText value={value} id={id} name={name} error={error} {...rest} />
       </FlexBox>
-      {error && <ErrorMessage text={error} />}
+      {!!error && <ErrorMessage text={error} />}
     </InputGroupStyled>
   )
 }
@@ -76,7 +67,6 @@ InputGroupText.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   icon: PropTypes.node,
-  setLocation: PropTypes.func,
 }
 
 export default styled(InputGroupText)``

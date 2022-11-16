@@ -51,9 +51,8 @@ function CreateNewAd() {
   })
   const dispatch = useDispatch()
 
-  const postAd = async (formInfo) => {
+  const postAd = async () => {
     try {
-      //   console.log(res)
       setSuccessfulPost(() => true)
       setTimeout(() => setSuccessfulPost(() => false), 3000)
       dispatch(
@@ -63,8 +62,6 @@ function CreateNewAd() {
         })
       )
     } catch (err) {
-      //   console.log(err)
-
       dispatch(
         newNotification({
           message: 'Ha habido un error. Vuelve ha intentar ahora o mas tarde',
@@ -97,7 +94,7 @@ function CreateNewAd() {
       mapLon: Number(listPlace[0].lon),
     }
 
-    postAd(formInfo)
+    postAd()
     setSubmittedData(JSON.stringify(formInfo, 0, 2))
 
     // variables reset
@@ -173,7 +170,7 @@ function CreateNewAd() {
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_on',
-      setLocation: setAddress,
+      onChange: setAddress,
     },
     {
       Component: InputGroupText,
@@ -184,7 +181,7 @@ function CreateNewAd() {
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_city',
-      setLocation: setCity,
+      onChange: setCity,
     },
   ]
 

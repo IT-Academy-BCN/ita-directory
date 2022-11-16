@@ -31,7 +31,6 @@ function InputText({ value, name, id, className, type, error, register, ...rest 
       id={id}
       name={name}
       error={error}
-      setLocation={setLocation}
       {...register}
       {...rest}
     />
