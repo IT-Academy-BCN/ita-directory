@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { device } from '../../../theme'
 import { Button, Card, Text, Title } from '../../../components/atoms'
-import InputMap from '../../../components/atoms/InputMap'
+import { InputText } from '../../../components/atoms/Forms'
 
 const AdListFilterStyled = styled(Card)`
   width: 30%;
@@ -60,16 +60,7 @@ const FilterHr = styled.hr`
   width: '100%';
 `
 
-function AdFilters({
-  filter,
-  maxPriceValue,
-  minPriceValue,
-  maxM2,
-  minM2,
-  className = '',
-  latitude,
-  longitude,
-}) {
+function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, className = '' }) {
   const [maxPrice, setMaxPrice] = useState('')
   const [maxSize, setMaxSize] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -138,7 +129,7 @@ function AdFilters({
       </CardSelectorWrapper>
       Ubicación
       <InputWrapper>
-        <InputMap
+        <InputText
           name="address"
           type="text"
           placeholder="Ingrese una dirección"
@@ -146,14 +137,14 @@ function AdFilters({
           onChange={(e) => setAddress(e.target.value)}
         />
         <CardSelectorWrapper>
-          <InputMap
+          <InputText
             name="latitude"
             type="text"
             placeholder="Latitud"
             value={lat}
             onChange={(e) => setLat(e.target.value)}
           />
-          <InputMap
+          <InputText
             name="longitude"
             type="text"
             placeholder="Longitud"
@@ -178,8 +169,6 @@ AdFilters.propTypes = {
   maxM2: PropTypes.string,
   minM2: PropTypes.string,
   className: PropTypes.string,
-  latitude: PropTypes.string,
-  longitude: PropTypes.string,
 }
 
 export default styled(AdFilters)``
