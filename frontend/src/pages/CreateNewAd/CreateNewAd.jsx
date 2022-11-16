@@ -42,7 +42,11 @@ function CreateNewAd() {
   const [, setError] = useState(true)
   const [, setSuccessfulPost] = useState(false)
 
-  const { handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(newAdSchema),
   })
   const dispatch = useDispatch()
@@ -309,14 +313,20 @@ function CreateNewAd() {
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
             {inputComponentData.map((el) => {
-              const { Component, label, id, ...props } = el
+              const { Component, label, id, name, ...props } = el
 
               return (
                 <div key={label}>
                   <div className="form-label">
                     <Label label={label} htmlFor={id} />
                   </div>
-                  <Component id={id} label={label} {...props} />
+                  <Component
+                    id={id}
+                    label={label}
+                    error={errors[name]?.message}
+                    register={register(`${name}`)}
+                    {...props}
+                  />
                 </div>
               )
             })}
