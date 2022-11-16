@@ -42,11 +42,7 @@ function CreateNewAd() {
   const [, setError] = useState(true)
   const [, setSuccessfulPost] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { handleSubmit } = useForm({
     resolver: zodResolver(newAdSchema),
   })
   const dispatch = useDispatch()
@@ -170,7 +166,7 @@ function CreateNewAd() {
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_on',
-      onChange: setAddress,
+      onChange: (e) => setAddress(e.target.value),
     },
     {
       Component: InputGroupText,
@@ -181,7 +177,7 @@ function CreateNewAd() {
       required: true,
       inputContainerClassName: 'style-input-create-new-ad',
       icon: 'location_city',
-      onChange: setCity,
+      onChange: (e) => setCity(e.target.value),
     },
   ]
 
@@ -313,40 +309,14 @@ function CreateNewAd() {
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
             {inputComponentData.map((el) => {
-              const {
-                Component,
-                label,
-                hiddenLabel,
-                type,
-                name,
-                id,
-                inputClassName,
-                icon,
-                inputContainerClassName,
-                value,
-                setLocation,
-              } = el
+              const { Component, label, id, ...props } = el
 
               return (
                 <div key={label}>
                   <div className="form-label">
                     <Label label={label} htmlFor={id} />
                   </div>
-                  <Component
-                    id={id}
-                    key={id}
-                    value={value}
-                    label={label}
-                    hiddenLabel={hiddenLabel}
-                    name={name}
-                    type={type}
-                    className={inputClassName}
-                    icon={icon}
-                    inputContainerClassName={inputContainerClassName}
-                    register={register(`${name}`)}
-                    error={errors[name]?.message}
-                    setLocation={setLocation}
-                  />
+                  <Component id={id} label={label} {...props} />
                 </div>
               )
             })}
