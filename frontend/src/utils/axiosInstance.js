@@ -17,9 +17,8 @@ axiosInstance.interceptors.request.use(
     req.headers.Authorization = `Bearer ${authToken}`
     return req
   },
-  (error) => {
-    Promise.reject(error)
-  }
+  async (error) => error
+  // Promise.reject(error)
 )
 
 axiosInstance.interceptors.response.use(
