@@ -1,8 +1,7 @@
 import { z } from 'zod'
 
 const numberValidation = (val, ctx) => {
-  // eslint-disable-next-line radix
-  const parsed = parseInt(val)
+  const parsed = parseInt(val, 10)
   if (parsed < 0) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
