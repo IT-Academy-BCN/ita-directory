@@ -28,19 +28,20 @@ function CreateNewAd() {
     userId: 1,
     title: '',
     description: '',
-    city: '',
     nRooms: '',
     price: '',
     squareMeters: '',
     nBathrooms: '',
+    city: '',
     mapLat: 0,
     mapLon: 0,
   }
   const [form, setForm] = useState(emptyForm)
+
   const [submittedData, setSubmittedData] = useState('') // @todo -> remove -probably unecessary
   const [, setError] = useState(true)
   const [, setSuccessfulPost] = useState(false)
-  const [coordinates, setCoordinates] = useState([])
+
   const {
     register,
     handleSubmit,
@@ -50,9 +51,8 @@ function CreateNewAd() {
   })
   const dispatch = useDispatch()
 
-  const postAd = async (formInfo) => {
+  const postAd = async () => {
     try {
-      //   console.log(res)
       setSuccessfulPost(() => true)
       setTimeout(() => setSuccessfulPost(() => false), 3000)
       dispatch(
@@ -62,8 +62,6 @@ function CreateNewAd() {
         })
       )
     } catch (err) {
-      //   console.log(err)
-
       dispatch(
         newNotification({
           message: 'Ha habido un error. Vuelve ha intentar ahora o mas tarde',
@@ -73,24 +71,32 @@ function CreateNewAd() {
     }
   }
 
+  const [city, setCity] = useState('')
+  const [address, setAddress] = useState('')
+  const [listPlace, setListPlace] = useState([])
+
   useEffect(() => {
-    setForm({
-      ...form,
-      mapLat: Number(coordinates[0]),
-      mapLon: Number(coordinates[1]),
-    })
+    if (listPlace.length !== 0) {
+      setForm({
+        ...form,
+        mapLat: Number(listPlace[0].lat),
+        mapLon: Number(listPlace[0].lon),
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coordinates])
+  }, [listPlace])
 
   const submitForm = (data) => {
     const formInfo = {
       ...form,
       ...data,
-      mapLat: Number(coordinates[0]),
-      mapLon: Number(coordinates[1]),
+      mapLat: Number(listPlace[0].lat),
+      mapLon: Number(listPlace[0].lon),
     }
-    postAd(formInfo)
+
+    postAd()
     setSubmittedData(JSON.stringify(formInfo, 0, 2))
+
     // variables reset
     setForm(emptyForm)
     setError(() => false)
@@ -118,16 +124,6 @@ function CreateNewAd() {
       inputContainerClassName: 'style-input-create-new-ad', // textAreaCreateNewAd
     },
     {
-      Component: InputGroupText,
-      id: 'city',
-      name: 'city',
-      label: 'Ciudad',
-      hiddenLabel: true,
-      required: true,
-      inputContainerClassName: 'style-input-create-new-ad',
-      icon: 'location_on',
-    },
-    {
       Component: InputGroupNumber,
       id: 'nRooms',
       label: 'Habitaciones',
@@ -142,7 +138,7 @@ function CreateNewAd() {
       name: 'price',
       label: 'Precio',
       hiddenLabel: true,
-      required: 'merluza',
+      required: 'true',
       icon: 'euro',
       inputClassName: 'style-input-create-new-ad',
     },
@@ -164,6 +160,28 @@ function CreateNewAd() {
       hiddenLabel: true,
       icon: 'bathtub',
       inputClassName: 'style-input-create-new-ad',
+    },
+    {
+      Component: InputGroupText,
+      id: 'address',
+      name: 'address',
+      label: 'Dirección',
+      hiddenLabel: true,
+      required: true,
+      inputContainerClassName: 'style-input-create-new-ad',
+      icon: 'location_on',
+      onChange: (e) => setAddress(e.target.value),
+    },
+    {
+      Component: InputGroupText,
+      id: 'city',
+      name: 'city',
+      label: 'Ciudad',
+      hiddenLabel: true,
+      required: true,
+      inputContainerClassName: 'style-input-create-new-ad',
+      icon: 'location_city',
+      onChange: (e) => setCity(e.target.value),
     },
   ]
 
@@ -191,18 +209,46 @@ function CreateNewAd() {
               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJpdGFjYWRlbXkiLCJzdWIiOnsidXNlcl9pZCI6IjlSQUtkMk9iSk0ifSwiaWF0IjoxNjQ3NDIxMDE3LCJleHAiOjE2NDc0MjE5MTd9.bJvx65yQRxtHA3aaU42_juZ2I5Q04bok3zqwWR8bO_A',
           },
         })
-        .then((response) => {
-          //   console.log(response.data)
+        .then(() => {
           setValidCsvFile(true)
         })
-        .catch((error) => {
-          //   console.log(error)
+        .catch(() => {
           setValidCsvFile(false)
         })
     }
     setValidCsv(null)
     setOpenModal(false)
   }
+
+  const NOMINATIM_BASE_URL = 'https://nominatim.openstreetmap.org/search?'
+  const [params, setParams] = useState({
+    q: '',
+    format: 'json',
+    addressdetails: 'addressdetails',
+  })
+
+  const handleSearch = () => {
+    setParams({
+      q: `${address}, ${city}, Spain`,
+      format: 'json',
+      addressdetails: 1,
+      polygon_geojson: 0,
+    })
+  }
+
+  useEffect(() => {
+    const queryString = new URLSearchParams(params).toString()
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    }
+    fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        setListPlace(JSON.parse(result))
+      })
+      .catch((err) => err)
+  }, [params])
 
   return (
     <Body
@@ -266,18 +312,9 @@ function CreateNewAd() {
           {}
 
           <form onSubmit={handleSubmit(submitForm)} noValidate>
-            {inputComponentData.map((el, i) => {
-              const {
-                Component,
-                label,
-                hiddenLabel,
-                type,
-                name,
-                id,
-                inputClassName,
-                icon,
-                inputContainerClassName,
-              } = el
+            {inputComponentData.map((el) => {
+              const { Component, label, id, name, ...props } = el
+
               return (
                 <div key={label}>
                   <div className="form-label">
@@ -285,23 +322,30 @@ function CreateNewAd() {
                   </div>
                   <Component
                     id={id}
-                    key={id}
                     label={label}
-                    hiddenLabel={hiddenLabel}
-                    name={name}
-                    type={type}
-                    className={inputClassName}
-                    icon={icon}
-                    inputContainerClassName={inputContainerClassName}
-                    register={register(`${name}`)}
                     error={errors[name]?.message}
+                    register={register(`${name}`)}
+                    {...props}
                   />
                 </div>
               )
             })}
-            <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
+
+            <Button
+              buttonStyles={{
+                width: '5rem',
+                height: '2.125rem',
+                margin: 'auto',
+              }}
+              text="Buscar"
+              type="button"
+              className="blue-gradient"
+              onClick={handleSearch}
+            />
+
+            <MapText>Indica la dirección de la propiedad haciendo click en Buscar</MapText>
             <MapBox>
-              <CustomMap setCoordinates={setCoordinates} />
+              <CustomMap listPlace={listPlace} />
             </MapBox>
             <Button
               buttonStyles={{

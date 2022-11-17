@@ -1,82 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Marker } from 'react-leaflet'
 import L from 'leaflet'
 import './CustomMap.css'
-import IconSelector from './IconSelector/IconSelector'
-import customIcons from './CustomMapIcons/CustomMapIcons'
 
-let layer
+const icon = L.icon({
+  iconSize: [25, 41],
+  iconAnchor: [10, 41],
+  popupAnchor: [2, -40],
+  iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png',
+})
 
-function Marcador({ setCoordinates, setMarkers, currentIcon }) {
-  const icon = L.icon({
-    iconAnchor: [10, 41],
-    popupAnchor: [2, -40],
-    iconUrl: currentIcon,
-  })
-  const map = useMapEvents({
-    click: (e) => {
-      const { lat, lng } = e.latlng
-      if (layer) layer.removeFrom(map)
-      layer = L.marker([lat, lng], { icon }).addTo(map)
-      setMarkers([lat, lng])
-      setCoordinates((prev) => [lat, lng])
-      map.panTo(e.latlng)
-    },
-  })
-  return null
-}
-
-function CustomMap({ setCoordinates }) {
-  // @todo - update props in other components that use CustomMap to include setCoordinates
-  const [markers, setMarkers] = useState([41.3879, 2.16992])
-  const [iconSelection, setIconSelection] = useState(false)
-  const [iconState, setIconState] = useState(customIcons[1].url)
-
-  const [lat, lng] = markers
-
-  const handelOnClickIcon = (icon) => {
-    setIconState(icon)
+function CustomMap({ listPlace }) {
+  function ChangeView({ center, zoom }) {
+    const map = useMap()
+    map.setView(center, zoom)
+    return null
   }
+  const [coordinates, setCoordinates] = useState([41.38879, 2.15899])
 
-  const handleOnClick = () => {
-    setIconSelection(!iconSelection)
-  }
+  useEffect(
+    () =>
+      listPlace.length !== 0 &&
+      setCoordinates([Number(listPlace[0].lat), Number(listPlace[0].lon)]),
+    [listPlace]
+  )
 
   return (
     <div className="Mapa">
-      <MapContainer
-        className="Container"
-        center={{
-          lat,
-          lng,
-        }}
-        zoom={18}
-        scrollWheelZoom={false}
-      >
+      <MapContainer className="Container" center={coordinates} zoom={15} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marcador setCoordinates={setCoordinates} setMarkers={setMarkers} currentIcon={iconState} />
+        <Marker position={coordinates} icon={icon} />
+        <ChangeView center={coordinates} zoom={15} />
       </MapContainer>
-      <button className="ButtonIcons" type="button" onClick={handleOnClick}>
-        <img className="IconIMG" src={iconState} alt="" />
-      </button>
-
-      {iconSelection ? (
-        <div>
-          <IconSelector customIcons={customIcons} handelOnClickIcon={handelOnClickIcon} />
-        </div>
-      ) : (
-        <div />
-      )}
     </div>
   )
 }
 
 CustomMap.propTypes = {
-  setCoordinates: PropTypes.func.isRequired,
+  listPlace: PropTypes.array.isRequired,
 }
 
 export default CustomMap

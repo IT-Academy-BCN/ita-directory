@@ -44,7 +44,6 @@ InputText.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  onChange: PropTypes.func,
   register: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 }
 

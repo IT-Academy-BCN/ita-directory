@@ -11,6 +11,9 @@ const newAdSchema = z.object({
       invalid_type_error: 'Can only contain letters',
     })
     .min(1, { message: 'This field is required.' }),
+   address: z
+    .string({ required_error: 'This field is required' })
+    .min(1, { message: 'This field is required.' }),
   nRooms: z.nullable(
     z
       .number({

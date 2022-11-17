@@ -41,6 +41,7 @@ function Input({
   onChange,
   ref,
   accept,
+  value,
 }) {
   return (
     <div>
@@ -58,6 +59,7 @@ function Input({
         required={required}
         style={inputStyles}
         onChange={onChange}
+        value={value}
         ref={ref}
         accept={accept}
         {...(register && register)}
