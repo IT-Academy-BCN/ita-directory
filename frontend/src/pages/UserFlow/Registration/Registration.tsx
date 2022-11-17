@@ -1,4 +1,5 @@
 import React from 'react'
+import axios, { AxiosError } from 'axios'
 import { Link } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
@@ -12,15 +13,8 @@ import { newNotification, NotificationTypes } from '../../../store/notificationS
 import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 import axiosInstance from '../../../utils/axiosInstance'
 import { urls } from '../../../utils'
-import axios, { AxiosError } from 'axios'
 
-type TUserData = {
-  name: string
-  lastname: string
-  email: string
-  password: string
-  privacy: boolean
-}
+type TUserData = z.infer<typeof registerSchema>
 
 type TData = {
   code: string
@@ -63,7 +57,7 @@ function Register() {
 
   const registerUser = async (user: TUserData) => {
     try {
-      const response = await axiosInstance.post<TData>(urls.register, user)
+      await axiosInstance.post<TData>(urls.register, user)
       dispatch(
         newNotification({
           message: 'Your account has been successfully created!',
