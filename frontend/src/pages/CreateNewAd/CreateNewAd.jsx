@@ -138,7 +138,7 @@ function CreateNewAd() {
       name: 'price',
       label: 'Precio',
       hiddenLabel: true,
-      required: 'true',
+      required: true,
       icon: 'euro',
       inputClassName: 'style-input-create-new-ad',
     },

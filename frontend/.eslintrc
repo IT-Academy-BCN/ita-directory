@@ -1,8 +1,8 @@
 {
   "extends": [
     "airbnb",
-    "airbnb/hooks",
-    "airbnb-typescript",
+    // "airbnb/hooks",
+    // "airbnb-typescript",
     "react-app",
     "react-app/jest",
     "prettier"
@@ -13,11 +13,11 @@
     "react/forbid-prop-types": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
-    "no-param-reassign": ["error", { "props": false }],
+    "no-param-reassign": ["error", { "props": false }]
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "frontend"
-  }
+  // "parser": "@typescript-eslint/parser",
+  // "parserOptions": {
+  //   "project": "tsconfig.json",
+  //   "tsconfigRootDir": "frontend"
+  // }
 }

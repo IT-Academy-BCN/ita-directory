@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { device } from '../../../theme'
 import { Button, Card, Text, Title } from '../../../components/atoms'
-import { InputText } from '../../../components/atoms/Forms'
 
 const AdListFilterStyled = styled(Card)`
   width: 30%;
@@ -49,13 +48,6 @@ const CardSelectorWrapper = styled.div`
   padding-top: 1rem;
 `
 
-const InputWrapper = styled.div`
-  display: block;
-  align-items: center;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-`
-
 const FilterHr = styled.hr`
   width: '100%';
 `
@@ -65,9 +57,6 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, classNa
   const [maxSize, setMaxSize] = useState('')
   const [minPrice, setMinPrice] = useState('')
   const [minSize, setMinSize] = useState('')
-  const [address, setAddress] = useState('')
-  const [lat, setLat] = useState('')
-  const [lon, setLon] = useState('')
   const [gastosInc, setGastosInc] = useState(false)
 
   function ClearFilter() {
@@ -75,9 +64,6 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, classNa
     setMaxSize('')
     setMinPrice('')
     setMinSize('')
-    setAddress('')
-    setLat('')
-    setLon('')
     setGastosInc(false)
     filter(undefined)
   }
@@ -127,36 +113,10 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, classNa
           onChange={(e) => setMaxSize(e.target.value)}
         />
       </CardSelectorWrapper>
-      Ubicación
-      <InputWrapper>
-        <InputText
-          name="address"
-          type="text"
-          placeholder="Ingrese una dirección"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <CardSelectorWrapper>
-          <InputText
-            name="latitude"
-            type="text"
-            placeholder="Latitud"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-          />
-          <InputText
-            name="longitude"
-            type="text"
-            placeholder="Longitud"
-            value={lon}
-            onChange={(e) => setLon(e.target.value)}
-          />
-        </CardSelectorWrapper>
-      </InputWrapper>
       <Button
         text="Filtrar"
         className="blue-gradient"
-        onClick={() => filter({ gastosInc, maxPrice, minPrice, maxSize, minSize, lat, lon })}
+        onClick={() => filter({ gastosInc, maxPrice, minPrice, maxSize, minSize })}
       />
     </AdListFilterStyled>
   )

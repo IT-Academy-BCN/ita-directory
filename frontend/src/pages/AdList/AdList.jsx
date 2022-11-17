@@ -47,19 +47,6 @@ function AdList() {
     return min <= ad.squareMeters && ad.squareMeters <= max
   }
 
-  // Added filters by Santiago
-
-  const byCoordinates = (lat, lon) => (ad) => {
-    if (lat == null && lon == null) return true
-    return lat === ad.mapLat && ad.mapLon === lon
-  }
-
-  // const byIncludedExpenses = (included) => (ad) => {
-  //   console.log('byIncludedExpenses', ad, included)
-  //   if (!included) return true
-  //   return ad.gastosIncluidos === included
-  // }
-
   useEffect(() => {
     const fetchAds = async () => {
       const result = await axiosInstance.get('/ads')
@@ -73,7 +60,7 @@ function AdList() {
     const filteredAds = adList
       .filter(byPrice(filterParams?.minPrice || 0, filterParams?.maxPrice || Infinity))
       .filter(bySize(filterParams?.minSize || 0, filterParams?.maxSize || Infinity))
-      .filter(byCoordinates(filterParams?.lat || null, filterParams?.lon || null))
+
     return filteredAds
   }, [filterParams, adList])
 
@@ -103,8 +90,6 @@ function AdList() {
           minPriceValue={filterParams?.minPrice}
           maxM2={filterParams?.maxSize}
           minM2={filterParams?.minSize}
-          latitude={filterParams?.lat}
-          longitude={filterParams?.lon}
         />
         {!loading ? (
           <AdListStyled flexDirection="column">
