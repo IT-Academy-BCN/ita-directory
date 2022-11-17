@@ -49,7 +49,7 @@ axiosInstance.interceptors.response.use(
           return null
         })
     }
-    return error
+    return Promise.reject(error)
   }
 )
 
