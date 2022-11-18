@@ -28,9 +28,12 @@ function MapPopup({ data }) {
             </Address>
             <Price>{Number(price.toFixed(2)).toLocaleString()} €/mes</Price>
             <div className="property-data-extra">
-              <Span>Gastos {includedExpenses ? 'incluidos' : 'no incluidos'}</Span>
-              <Span>{nRooms} habitaciones </Span>
-              <Span>{squareMeters} m2</Span>
+              <Span
+                fontSize={14}
+                text={`Gastos ${includedExpenses ? 'incuidos' : ' no incluidos'}`}
+              />
+              <Span fontSize={14} text={`${nRooms} habitaciones`} />
+              <Span fontSize={14} text={`${squareMeters} m2`} />
             </div>
           </PropertyData>
           <Button

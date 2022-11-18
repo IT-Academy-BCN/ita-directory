@@ -15,7 +15,11 @@ const buttonStyle = {
   outline: 'none',
 }
 
-const AdListStyled = styled(FlexBox)``
+type TPropsFlexBox = {
+  flexDirection: string
+}
+
+const AdListStyled = styled(FlexBox)<TPropsFlexBox>``
 
 const AdsStyled = styled(Container)`
   justify-content: flex-start;
@@ -30,19 +34,32 @@ const AdsStyled = styled(Container)`
   }
 `
 
+type TAdProps = {
+  price: number
+  squareMeters: number
+}
+type TFunctionFilter = (min: number, max: number) => (ad: TAdProps) => boolean
+
+type TFilterParms = {
+  minPrice?: number
+  maxPrice?: number
+  minSize?: number
+  maxSize?: number
+}
+
 function AdList() {
-  const [filterParams, setFilterParams] = useState()
+  const [filterParams, setFilterParams] = useState<TFilterParms | undefined>()
   const [mapView, setMapView] = useState(false)
   const [adList, setAdList] = useState([])
   const [loading, setLoading] = useState(true)
 
   // Added filters by Kevin
-  const byPrice = (min, max) => (ad) => {
+  const byPrice: TFunctionFilter = (min, max) => (ad) => {
     if (min == null && max == null) return true
     return min <= ad.price && ad.price <= max
   }
 
-  const bySize = (min, max) => (ad) => {
+  const bySize: TFunctionFilter = (min, max) => (ad) => {
     if (min == null && max == null) return true
     return min <= ad.squareMeters && ad.squareMeters <= max
   }
@@ -60,11 +77,24 @@ function AdList() {
     const filteredAds = adList
       .filter(byPrice(filterParams?.minPrice || 0, filterParams?.maxPrice || Infinity))
       .filter(bySize(filterParams?.minSize || 0, filterParams?.maxSize || Infinity))
-
     return filteredAds
   }, [filterParams, adList])
 
-  const renderList = filteredAdList.map((e) => (
+  type TAdCardProps = {
+    id: number
+    userId: number
+    title: string
+    description: string
+    city: string
+    nRooms: number
+    price: number
+    squareMeters: number
+    nBathrooms: number
+    mapLat: string
+    mapLon: string
+    key: string
+  }
+  const renderList = filteredAdList.map((e: TAdCardProps) => (
     <AdCard
       id={e.id}
       userId={e.userId}
@@ -77,14 +107,25 @@ function AdList() {
       nBathrooms={e.nBathrooms}
       mapLat={e.mapLat}
       mapLon={e.mapLon}
-      adTypeId={e.adTypeId}
       key={e.id}
     />
   ))
   return (
-    <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
+    <Body
+      title="Pisos en Alquiler en Madrid"
+      justifyTitle="flex-start"
+      logoColor=""
+      isLoggedIn=""
+      hideHeader={false}
+      hideFooter={false}
+      dashboard={false}
+      menu={false}
+      hideTitle={false}
+      userRole=""
+    >
       <AdsStyled data-testid="adListStyled">
         <AdListFilter
+          className=""
           filter={setFilterParams}
           maxPriceValue={filterParams?.maxPrice}
           minPriceValue={filterParams?.minPrice}

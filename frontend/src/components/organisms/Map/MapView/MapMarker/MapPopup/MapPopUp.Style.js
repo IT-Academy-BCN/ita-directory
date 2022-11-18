@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../../../../../theme'
+import { Text } from '../../../../../atoms'
 
 export const PopupStyled = styled.div`
   display: flex;
@@ -40,10 +41,8 @@ export const PropertyData = styled.div`
   }
 `
 
-export const Span = styled.div`
-  font-size: 14px;
-  font-weight: normal;
-  margin: 5px 10px 5px 0;
+export const Span = styled(Text)`
+  margin: 5px 10px 5px 0 !important;
 `
 
 export const Price = styled.div`
