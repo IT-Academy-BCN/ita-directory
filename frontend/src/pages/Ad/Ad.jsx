@@ -15,22 +15,6 @@ import {
 } from '../../assets/images'
 import { getAd } from '../../api/ads'
 
-// const LIST_ICONS = [
-// 	{name: ad.city, icon: faMapMarkerAlt},
-// 	{name: `${ad.numRooms} habitaciones`, icon: faBed},
-// 	{name: ad.monthlyRent, icon: faEuroSign}, //monthlyRent o precio del piso?
-// 	{name: ad.squareMeters, icon: faHome},
-// 	{name: `${ad.numBaths} baños`, icon: faBath},
-// ];
-
-// const LIST_ICONS = ad && [
-//   { name: ad.city, icon: faMapMarkerAlt },
-//   { name: `${ad.n_rooms} habitaciones`, icon: faBed },
-//   { name: ad.price, icon: faEuroSign },
-//   { name: ad.square_meters, icon: faHome },
-//   { name: `${ad.n_bathrooms} baños`, icon: faBath },
-// ]
-
 const AdStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -90,7 +74,7 @@ const AdPropertiesText = styled.div`
 
   @media only ${device.Tablet} {
     font-size: 16px;
-    text-align: left;
+
     line-height: 1.5;
     padding-bottom: 1rem;
   }
@@ -110,22 +94,13 @@ const AdTextWrapper = styled.div`
   flex-direction: column;
   padding: 1rem 2rem;
   font-size: 12px;
-
-  @media only ${device.Laptop} {
-    display: flex;
-    flex-direction: column;
-    align-items: space-between;
-    justify-content: right;
-    flex-wrap: wrap;
-    font-size: 16px;
-    width: 70%;
-    padding-right: 1.5rem;
-    margin-top: 1rem;
-  }
 `
 
 const StyledStreet = styled.p`
-  margin-left: 4rem;
+  a {
+    color: ${colors.black};
+    text-decoration: none;
+  }
 `
 
 function Ad() {
@@ -208,9 +183,6 @@ function Ad() {
                       className="ad__property-bathrooms"
                     />
                   </div>
-                  {/* <Text as="span" text={`${title} en ${city}`} className="ad-card__address">
-                    Description: {ad.description}
-                  </Text> */}
                 </AdPropertiesText>
                 <AdDescriptionText>
                   <Text as="p" text={`"${ad.description}"`} className="ad__description" />
