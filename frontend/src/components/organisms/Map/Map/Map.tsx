@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import './Map.css'
-import L from 'leaflet'
+import L, { LatLngExpression } from 'leaflet'
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -13,32 +12,40 @@ const icon = L.icon({
   shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png',
 })
 
-function ChangeView({ center, zoom }) {
+type TChangeViewProps = {
+  center: LatLngExpression
+  zoom: number
+}
+
+type TMapProps = {
+  lat: number
+  lng: number
+  coordinates: [number, number]
+}
+
+function ChangeView({ center, zoom }: TChangeViewProps) {
   const map = useMap()
+
   map.setView(center, zoom)
+  map.invalidateSize()
   return null
 }
 
-function Map({ lat, lng }) {
-  const marker = { lat, lng }
+function Map({ lat, lng, coordinates }: TMapProps) {
+  const center = coordinates || [lat, lng]
 
   return (
     <div className="Map">
-      <MapContainer className="Map-container" center={marker} zoom={15}>
+      <MapContainer className="Map-container">
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <ChangeView center={marker} zoom={15} />
-        <Marker position={[lat, lng]} icon={icon} />
+        <ChangeView zoom={15} center={center} />
+        <Marker position={center} icon={icon} />
       </MapContainer>
     </div>
   )
-}
-
-Map.propTypes = {
-  lat: PropTypes.string,
-  lng: PropTypes.string,
 }
 
 export default Map

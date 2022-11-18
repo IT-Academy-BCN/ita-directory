@@ -1,19 +1,18 @@
 .Map {
-	width: 100%;
-	height: 285px;
-	margin-top: 1%;
-	z-index: 0;
+  width: 600px;
+  height: 285px;
+  margin-top: 1%;
+  z-index: 0;
+  margin: auto;
 }
 
 .Map-container {
-	margin: auto;
-	width: 80%;
-	height: 100%;
-	z-index: -1;
-	background: none;
+  width: 100%;
+  height: 100%;
+  margin: auto;
 }
 
-
-
-
-
+.IconIMG {
+  width: 20px;
+  height: 20px;
+}
