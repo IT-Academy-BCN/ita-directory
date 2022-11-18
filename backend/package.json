@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "set NODE_ENV=development && nodemon --legacy-watch server.js",
     "test": "vitest",
-    "fmt": "npx prettier --write ./app"
+    "fmt": "npx prettier --write ./app",
+    "build": "npx tsc && cp .env ./dist/.env && cp ./prisma/schema.prisma ./dist/prisma/schema.prisma && cp package.json ./dist/package.json && cp package-lock.json ./dist/package-lock.json"
   },
   "keywords": [
     "node",
@@ -39,10 +40,12 @@
   },
   "devDependencies": {
     "@prisma/generator-helper": "3.15.1",
+    "@types/express": "^4.17.14",
     "cross-env": "7.0.3",
     "ejs": "3.1.6",
     "eslint": "8.14.0",
     "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "lint-staged": "12.4.0",

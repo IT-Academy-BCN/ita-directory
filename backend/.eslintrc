@@ -5,9 +5,9 @@
     "node": true
   },
   "extends": [
-    "airbnb-base",
-    "airbnb-typescript",
     "eslint:recommended",
+    "airbnb-base",
+    "airbnb-typescript/base",
     "prettier"
   ],
   "rules": {
