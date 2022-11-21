@@ -4,7 +4,7 @@ import { Popup } from 'react-leaflet'
 import { ContactModal } from '../../../..'
 import imgHouse from '../../../../../../assets/images/casaPiscinaAd2.jpg'
 // Styles
-import { PopupStyled, Content, Address, PropertyData, Span, Price } from './MapPopUp.Style'
+import { PopupStyled, Content, Address, Span, PropertyData, Price } from './MapPopUp.Style'
 import { colors } from '../../../../../../theme'
 import { Button } from '../../../../../atoms'
 
@@ -23,17 +23,12 @@ function MapPopup({ data }) {
         </PopupStyled>
         <Content>
           <PropertyData>
-            <Address>
-              <p>{`Piso en ${city}`}</p>
-            </Address>
-            <Price>{Number(price.toFixed(2)).toLocaleString()} €/mes</Price>
+            <Address text={`Piso en ${city}`} />
+            <Price text={`${Number(price.toFixed(2)).toLocaleString()} €/mes`} />
             <div className="property-data-extra">
-              <Span
-                fontSize={14}
-                text={`Gastos ${includedExpenses ? 'incuidos' : ' no incluidos'}`}
-              />
-              <Span fontSize={14} text={`${nRooms} habitaciones`} />
-              <Span fontSize={14} text={`${squareMeters} m2`} />
+              <Span text={`Gastos ${includedExpenses ? 'incuidos' : ' no incluidos'}`} />
+              <Span text={`${nRooms} habitaciones`} />
+              <Span text={`${squareMeters} m2`} />
             </div>
           </PropertyData>
           <Button

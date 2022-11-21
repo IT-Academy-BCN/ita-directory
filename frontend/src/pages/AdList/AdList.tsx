@@ -111,18 +111,7 @@ function AdList() {
     />
   ))
   return (
-    <Body
-      title="Pisos en Alquiler en Madrid"
-      justifyTitle="flex-start"
-      logoColor=""
-      isLoggedIn=""
-      hideHeader={false}
-      hideFooter={false}
-      dashboard={false}
-      menu={false}
-      hideTitle={false}
-      userRole=""
-    >
+    <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
       <AdsStyled data-testid="adListStyled">
         <AdListFilter
           className=""

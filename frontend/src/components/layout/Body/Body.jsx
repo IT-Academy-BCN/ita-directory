@@ -34,16 +34,16 @@ const Childrens = styled.div`
 
 function Body({
   children,
-  title,
-  logoColor,
-  isLoggedIn,
-  justifyTitle,
-  hideHeader,
-  hideFooter,
-  dashboard,
-  menu,
-  hideTitle,
-  userRole,
+  title = '',
+  logoColor = '',
+  isLoggedIn = true,
+  justifyTitle = '',
+  hideHeader = false,
+  hideFooter = false,
+  dashboard = false,
+  menu = undefined,
+  hideTitle = false,
+  userRole = '',
 }) {
   const user = useUser()
   const isValidRole = useMemo(() => checkRole(user, userRole), [user, userRole])

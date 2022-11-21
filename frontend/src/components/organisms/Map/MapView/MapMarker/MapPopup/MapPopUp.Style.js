@@ -20,12 +20,12 @@ export const Content = styled.div`
   flex-direction: column;
 `
 
-export const Address = styled.div`
+export const Address = styled(Text).attrs({
+  as: 'span',
+})`
   font-size: 16px;
   color: #666;
-  p {
-    margin: 5px 0;
-  }
+  margin: 10px 0;
 `
 
 export const PropertyData = styled.div`
@@ -41,11 +41,16 @@ export const PropertyData = styled.div`
   }
 `
 
-export const Span = styled(Text)`
-  margin: 5px 10px 5px 0 !important;
+export const Span = styled(Text).attrs({
+  as: 'span',
+})`
+  font-size: 14px;
+  margin: 5px 10px 5px 0;
 `
 
-export const Price = styled.div`
+export const Price = styled(Text).attrs({
+  as: 'span',
+})`
   color: ${colors.darkOrange};
   font-weight: bold;
   font-size: 16px;
