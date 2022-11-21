@@ -1,48 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
-import MapMarker from './MapMarker/MapMarker'
 import 'leaflet/dist/leaflet.css'
-import './MapView.css'
+import MapMarker from './MapMarker/MapMarker'
+
+const MapContainerStyled = styled(MapContainer)`
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25rem;
+
+  &.leaflet-container {
+    min-height: 400px;
+  }
+`
 
 function getMaxMin(ads) {
-  let minLat = 0
-  let maxLat = 0
-  let minLong = 0
-  let maxLong = 0
+  let minLat
+  let maxLat
+  let minLon
+  let maxLon
 
-  for (let i = 0; i < ads.length; i + 1) {
-    // set adLat and AdLong
-    const ad = ads[i]
-    const adLat = parseFloat(ad.map_lat)
-    const adLong = parseFloat(ad.map_lon)
-
-    if (minLat) {
-      minLat = minLat > adLat ? adLat : minLat
-    } else {
-      minLat = adLat
-    }
-
-    if (maxLat) {
-      maxLat = maxLat < adLat ? adLat : maxLat
-    } else {
-      maxLat = adLat
-    }
-
-    if (minLong) {
-      minLong = minLong > adLong ? adLong : minLong
-    } else {
-      minLong = adLong
-    }
-
-    if (maxLong) {
-      maxLong = maxLong < adLong ? adLong : maxLong
-    } else {
-      maxLong = adLong
-    }
+  if (ads.length > 0) {
+    minLat = ads.map((ad) => parseFloat(ad.mapLat)).reduce((a, b) => Math.min(a, b))
+    maxLat = ads.map((ad) => parseFloat(ad.mapLat)).reduce((a, b) => Math.max(a, b))
+    minLon = ads.map((ad) => parseFloat(ad.mapLon)).reduce((a, b) => Math.min(a, b))
+    maxLon = ads.map((ad) => parseFloat(ad.mapLon)).reduce((a, b) => Math.max(a, b))
   }
-
-  // console.log("minlat", minLat);
 
   if (ads.length === 0) {
     return {
@@ -51,49 +35,49 @@ function getMaxMin(ads) {
     }
   }
 
-  // // Latitud = horizontal, longitud = vertical
-  // console.log("MaxMinBounds", minLat, maxLong, maxLat, minLong)
   return {
-    topLeft: [minLat, maxLong],
-    bottomRight: [maxLat, minLong],
+    topLeft: [minLat, maxLon],
+    bottomRight: [maxLat, minLon],
   }
 }
 
-function SetBounds({ bounds }) {
-  const map = useMap()
-  map.fitBounds([bounds.topLeft, bounds.bottomRight])
-  return null
-}
-
-function MapView({ filteredAds, localizedAdId }) {
-  const maxMinBounds = getMaxMin(filteredAds)
-  const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(maxMinBounds)
+function MapView({ filteredAds }) {
+  const [fitBoundsCoordinates, setFitBoundsCoordinates] = useState(getMaxMin(filteredAds))
 
   useEffect(() => {
     setFitBoundsCoordinates(getMaxMin(filteredAds))
   }, [filteredAds])
 
+  function ChangeView({ bounds, zoom }) {
+    const map = useMap()
+    map.fitBounds(bounds, zoom)
+    return null
+  }
   return (
-    <MapContainer
+    <MapContainerStyled
       className="Container-View"
+      zoom={13}
       bounds={[fitBoundsCoordinates.topLeft, fitBoundsCoordinates.bottomRight]}
       boundsOptions={{ padding: [0, 0] }}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <SetBounds bounds={fitBoundsCoordinates} />
-      {filteredAds.map((ad, i) => (
-        <MapMarker key={ad.key} ad={ad} activePopup={localizedAdId === i} />
+
+      {filteredAds.map((ad) => (
+        <MapMarker key={ad.id} ad={ad} />
       ))}
-    </MapContainer>
+      <ChangeView
+        bounds={[fitBoundsCoordinates.topLeft, fitBoundsCoordinates.bottomRight]}
+        zoom={13}
+      />
+    </MapContainerStyled>
   )
 }
 
 MapView.propTypes = {
   filteredAds: PropTypes.array.isRequired,
-  localizedAdId: PropTypes.number.isRequired,
 }
 
 export default MapView

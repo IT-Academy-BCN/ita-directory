@@ -1,12 +1,10 @@
 import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Marker, useMap } from 'react-leaflet'
-
-// components
 import icon from './MapIcon/MapIcon'
 import MapPopup from './MapPopup/MapPopup'
 
-function MapMarker({ ad, activePopup }) {
+function MapMarker({ ad, activePopup = false }) {
   const map = useMap()
   const markerRef = useRef(null)
 
@@ -16,7 +14,7 @@ function MapMarker({ ad, activePopup }) {
   }, [activePopup, map])
 
   return (
-    <Marker position={[ad.map_lat, ad.map_lon]} icon={icon} ref={markerRef}>
+    <Marker position={[ad.mapLat, ad.mapLon]} icon={icon} ref={markerRef}>
       <MapPopup data={ad} />
     </Marker>
   )
@@ -24,7 +22,7 @@ function MapMarker({ ad, activePopup }) {
 
 MapMarker.propTypes = {
   ad: PropTypes.object.isRequired,
-  activePopup: PropTypes.bool.isRequired,
+  activePopup: PropTypes.bool,
 }
 
 export default MapMarker
