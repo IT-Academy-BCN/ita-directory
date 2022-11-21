@@ -14,8 +14,6 @@ import { ContainerCheckBox, SentenceCheckBox } from './Registration.styles'
 import axiosInstance from '../../../utils/axiosInstance'
 import { urls } from '../../../utils'
 
-type TUserData = z.infer<typeof registerSchema>
-
 type TData = {
   code: string
   header: string
@@ -44,6 +42,8 @@ const registerSchema = z.object({
     }),
   privacy: z.boolean({ required_error: 'This field is required' }),
 })
+
+type TUserData = z.infer<typeof registerSchema>
 
 function Register() {
   const {
