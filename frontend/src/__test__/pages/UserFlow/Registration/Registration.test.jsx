@@ -1,7 +1,7 @@
 import React from 'react'
 import { describe, it, expect, vi } from 'vitest'
 import userEvent from '@testing-library/user-event'
-import { render, screen } from '../../../test-utils'
+import { render, screen, waitFor } from '../../../test-utils'
 import Registration from '../../../../pages/UserFlow/Registration/Registration'
 
 describe('Registration', () => {
@@ -16,24 +16,24 @@ describe('Registration', () => {
     render(<Registration handleSubmit={handleSubmit} />)
 
     const firstName = screen.getByPlaceholderText(/nombre/i)
-    userEvent.type(firstName, 'Sergi')
+    await userEvent.type(firstName, 'Sergi')
 
     const lastName = screen.getByPlaceholderText(/apellido/i)
-    userEvent.type(lastName, 'Bosch')
+    await userEvent.type(lastName, 'Bosch')
 
     const email = screen.getByPlaceholderText(/email/i)
-    userEvent.type(email, 'email@email.com')
+    await userEvent.type(email, 'email@email.com')
 
     const password = screen.getByPlaceholderText(/contraseña/i)
-    userEvent.type(password, 'Hola12!')
+    await userEvent.type(password, 'Hola12!')
 
     const privacyCheck = screen.getByRole('checkbox')
-    userEvent.click(privacyCheck)
+    await userEvent.click(privacyCheck)
 
-    userEvent.click(screen.getByRole('button', { name: /Registrarme/i }))
+    await userEvent.click(screen.getByRole('button', { name: /Registrarme/i }))
 
-    // const successNotification = screen.getByText(/your account has been successfully created!/i)
-
-    // expect(handleSubmit).toHaveBeenCalled()
+    waitFor(() =>
+      expect(screen.getByText(/your account has been successfully created!/i)).toBeInTheDocument()
+    )
   })
 })
