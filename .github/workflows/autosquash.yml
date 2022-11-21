@@ -1,0 +1,22 @@
+name: autosquash
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronized
+      - reopened
+      - edited
+      - labeled
+      - unlabeled
+      - ready_for_review
+jobs:
+  autosquash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: markelliot/autosquash@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          squash-commit-title: "${{ github.event.pull_request.title }} (#${{ github.event.pull_request.number }})"
+          squash-commit-message: "${{ github.event.pull_request.body }}"
