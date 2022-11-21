@@ -18,7 +18,7 @@ import {
   CsvNotificationSuccess,
 } from './CreateNewAd.styles'
 import { Container } from '../../theme'
-import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
+import { Map } from '../../components/organisms'
 import { Label } from '../../components/atoms'
 import { InputGroupNumber } from '../../components/molecules'
 import InputGroupText from '../../components/molecules/InputGroupText'
@@ -74,6 +74,15 @@ function CreateNewAd() {
   const [city, setCity] = useState('')
   const [address, setAddress] = useState('')
   const [listPlace, setListPlace] = useState([])
+
+  const [coordinates, setCoordinates] = useState([41.38879, 2.15899])
+
+  useEffect(
+    () =>
+      listPlace.length !== 0 &&
+      setCoordinates([Number(listPlace[0].lat), Number(listPlace[0].lon)]),
+    [listPlace]
+  )
 
   useEffect(() => {
     if (listPlace.length !== 0) {
@@ -345,7 +354,7 @@ function CreateNewAd() {
 
             <MapText>Indica la dirección de la propiedad haciendo click en Buscar</MapText>
             <MapBox>
-              <CustomMap listPlace={listPlace} />
+              <Map coordinates={coordinates} />
             </MapBox>
             <Button
               buttonStyles={{
