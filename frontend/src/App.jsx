@@ -21,7 +21,7 @@ import {
   ListaUsuariosAdmins,
 } from './pages'
 import { paths } from './utils'
-import Contributors from './components/molecules/Contributors'
+import Contributors from './components/atoms/Contributors'
 
 function App() {
   return (
