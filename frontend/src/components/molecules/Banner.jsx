@@ -3,7 +3,7 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { colors } from '../../theme'
-import Students from '../atoms/Contributors/Students'
+import BannerStudents from '../atoms/Contributors/BannerStudents'
 import BannerBcn from '../atoms/Contributors/BannerBcn'
 
 const Section = styled.section`
@@ -20,7 +20,7 @@ const Section = styled.section`
 `
 
 function Banner({ students }) {
-  return <Section>{students ? <Students /> : <BannerBcn />}</Section>
+  return <Section>{students ? <BannerStudents /> : <BannerBcn />}</Section>
 }
 
 Banner.propTypes = {
