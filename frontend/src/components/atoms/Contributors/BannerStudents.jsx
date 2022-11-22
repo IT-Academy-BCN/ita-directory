@@ -20,7 +20,7 @@ const TextAlign = styled.div`
   text-align: center;
 `
 
-function Students() {
+function BannerStudents() {
   return (
     <>
       <Img src={ColaboradoresBanner} alt="body-banner" />
@@ -39,4 +39,4 @@ function Students() {
   )
 }
 
-export default Students
+export default BannerStudents
