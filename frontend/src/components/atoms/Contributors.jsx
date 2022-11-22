@@ -4,8 +4,11 @@ import { useGetContributorsQuery } from '../../store/services/githubApi'
 
 const Container = styled.div`
   --width-height: 62px;
-  & > ul {
-    background-color: pink;
+  margin: 0;
+  padding: 0 3rem 0 3rem;
+  > ul {
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

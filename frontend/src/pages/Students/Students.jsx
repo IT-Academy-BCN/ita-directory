@@ -1,4 +1,5 @@
-import React from 'react'
+// @ts-nocheck
+
 import { Banner } from '../../components/atoms'
 import Body from '../../components/layout/Body/Body'
 import { Menu } from '../../components/molecules'

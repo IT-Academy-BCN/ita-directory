@@ -1,9 +1,17 @@
+// @ts-nocheck
+
 import styled from 'styled-components'
+import { space } from 'styled-system'
 import PropTypes from 'prop-types'
 import BarcelonaBanner from '../../assets/logos/barcelona-banner.jpg'
 import { colors } from '../../theme'
 import ColaboradoresBanner from '../../assets/logos/Colaboradores-Banner.jpg'
-import Text from './Text'
+import Text from '../atoms/Text'
+import Contributors from '../atoms/Contributors'
+
+const Divider = styled.div`
+  ${space}
+`
 
 const Section = styled.section`
   display: flex;
@@ -16,7 +24,6 @@ const Section = styled.section`
     line-height: 2rem; /* 32px */
     font-weight: bold;
     color: ${colors.redPink};
-    margin: 25rem auto 2rem auto;
   }
 `
 
@@ -45,19 +52,23 @@ function Banner({ students }) {
     <Section className="banner">
       {students ? (
         <div>
-          <BannerStudents src={ColaboradoresBanner} alt="body-banner" className="banner__image" />
+          <BannerStudents src={ColaboradoresBanner} alt="body-banner" />
           <ContainerText>
-            <Text className="banner__title" text="Colaboradores" />
+            <Divider my="25rem" />
+            <Text text="Colaboradores" />
             <Text text="Usuarios de github.com que han contribuido" as="span" />
+            <Divider my="2.2rem" />
+            <Contributors />
+            <Divider my="1rem" />
+            <Text text="Perfiles" />
+            <Text text="ReactJS y Node Juniors Developers en Barcelona" as="span" />
+            <Divider my="10rem" />
           </ContainerText>
         </div>
       ) : (
         <div>
-          <BannerBcn src={BarcelonaBanner} alt="body-banner" className="banner__image" />
-          <Text
-            className="banner__title"
-            text="Un directorio abierto desarrollado por los alumnos de Barcelona Activa"
-          />
+          <BannerBcn src={BarcelonaBanner} alt="body-banner" />
+          <Text text="Un directorio abierto desarrollado por los alumnos de Barcelona Activa" />
         </div>
       )}
     </Section>
