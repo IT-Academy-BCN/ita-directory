@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createLogger } from 'redux-logger'
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './userSlice'
