@@ -12,6 +12,7 @@ const Avatar = styled.img`
 function Contributors() {
 
   const { data, isError } = useGetContributorsQuery()
+  // eslint-disable-next-line no-console
   console.log('error', isError)
 
   return (
