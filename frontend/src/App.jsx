@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Ad from './pages/Ad/Ad'
@@ -20,10 +21,12 @@ import {
   ListaUsuariosAdmins,
 } from './pages'
 import { paths } from './utils'
+import Contributors from './components/molecules/Contributors'
 
 function App() {
   return (
     <Switch>
+      <Route exact path="/contributors" component={Contributors} />
       <Route exact path="/" component={Home} />
       <Route exact path="/ad/:id" component={Ad} />
       <Route exact path="/new-ad" component={CreateNewAd} />
