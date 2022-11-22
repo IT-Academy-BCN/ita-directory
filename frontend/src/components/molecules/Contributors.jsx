@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../store/services/githubApi'
 
@@ -8,7 +9,7 @@ const Avatar = styled.img`
   border-radius: 50%;
 `
 
-const Contributors = () => {
+function Contributors() {
 
   const { data, isError } = useGetContributorsQuery()
   console.log('error', isError)
