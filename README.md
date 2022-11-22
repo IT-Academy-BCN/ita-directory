@@ -121,6 +121,16 @@ To get a local copy up and running follow these simple steps.
 2. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
 3. Install dependencies with: `npm run install-deps` _It installs the dependencies of the front, the back and the main directory_
 4. Make sure that you have docker installed and running, and from the main folder launch up: `npm run up`(to initialize the local project in docker)
+5. Create a .vscode folder in the root directory. It won't be shared on git as it is ignored.
+6. Create a settings.json inside the .vscode file with the following content:
+
+```
+{
+    "eslint.workingDirectories": ["frontend", "backend"]
+}
+```
+_The code above allows the ESLint VSCode extension to properly find each ESLint project configuration file._
+
 
 The up command will:
 
