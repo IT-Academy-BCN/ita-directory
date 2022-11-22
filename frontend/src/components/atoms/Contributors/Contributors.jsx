@@ -1,6 +1,6 @@
 // @ts-nocheck
 import styled from 'styled-components'
-import { useGetContributorsQuery } from '../../store/services/githubApi'
+import { useGetContributorsQuery } from '../../../store/services/githubApi'
 
 const Container = styled.div`
   --width-height: 62px;
