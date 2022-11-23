@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     text-align: start;
     justify-content: start;
-    align-items: start;
+    align-items: baseline;
     margin-bottom: 1rem;
 
     @media ${device.Tablet} {
@@ -86,6 +86,7 @@ export const Wrapper = styled.div`
       display: flex;
       flex-direction: column;
       align-items: start;
+      /* margin: 5px; */
     }
     .style-input-create-new-ad {
       width: 20rem;
