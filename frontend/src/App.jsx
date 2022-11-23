@@ -21,16 +21,10 @@ import {
   ListaUsuariosAdmins,
 } from './pages'
 import { paths } from './utils'
-import Contributors from './components/atoms/Contributors/Contributors'
-import { Banner } from './components/atoms'
 
 function App() {
   return (
     <Switch>
-      {/* testing components */}
-      <Route exact path="/contributors" component={Contributors} />
-      <Route exact path="/banner" component={Banner} />
-      {/* END testing components */}
       <Route exact path="/" component={Home} />
       <Route exact path="/ad/:id" component={Ad} />
       <Route exact path="/new-ad" component={CreateNewAd} />
