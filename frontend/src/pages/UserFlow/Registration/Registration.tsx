@@ -57,10 +57,12 @@ function Register() {
 
   const registerUser = async (user: TUserData) => {
     try {
-      await axiosInstance.post<TData>(urls.register, user)
+      const { data } = await axiosInstance.post<TData>(urls.register, user)
+
       dispatch(
         newNotification({
-          message: 'Your account has been successfully created!',
+          // message: 'Your account has been successfully created!',
+          message: data.message,
           type: NotificationTypes.succes,
         })
       )

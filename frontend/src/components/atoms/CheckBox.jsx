@@ -1,5 +1,6 @@
 // Components
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 import { Input, ErrorMessage } from './Forms'
 
@@ -19,6 +20,7 @@ export const CheckBoxContainer = styled.div`
   }
 `
 
+// @ts-ignore
 function CheckBox({ error, register }) {
   return (
     <CheckBoxContainer className="check-box-container">
@@ -29,7 +31,8 @@ function CheckBox({ error, register }) {
 }
 
 CheckBox.propTypes = {
-  error: PropTypes.bool | PropTypes.string,
+  // @ts-ignore
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   register: PropTypes.object,
   id: PropTypes.string,
   name: PropTypes.string,
