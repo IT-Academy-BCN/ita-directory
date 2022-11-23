@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../../store/services/githubApi'
 import Loading from './Loading'
+import Profile from './Profile'
 
 const Container = styled.div`
   --width-height: 62px;
@@ -26,25 +27,6 @@ const Avatar = styled.img`
     box-shadow: 0px 10px 13px -7px #0000004b, 5px -16px 0px -10px rgba(0, 0, 0, 0);
   }
 `
-const Link = styled.a`
-  transition: transform 0.2s ease-in-out, filter 0.1s ease;
-  &:hover {
-    transform: scale(1.1);
-    filter: saturate(1.3) brightness(1.2);
-  }
-  &:active {
-    transform: scale(0.95);
-  }
-`
-
-// eslint-disable-next-line react/prop-types
-function Profile({ children, url, title }) {
-  return (
-    <Link href={url} target="_blank" rel="noreferrer" title={title}>
-      {children}
-    </Link>
-  )
-}
 
 function Contributors() {
   const { data, isLoading } = useGetContributorsQuery()
