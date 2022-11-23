@@ -118,11 +118,10 @@ Here's a blank template to get started:
 To get a local copy up and running follow these simple steps.
 
 1. Clone the repository: `git clone https://github.com/it-academyproject/ita-directory.git`
-2. **TEMPORARY STEP**: Copy the .env.development file to a new .env in the _root directory_ and .env in the _./backend_ directory.
-3. Install dependencies with: `npm run install-deps` _It installs the dependencies of the front, the back and the main directory_
-4. Make sure that you have docker installed and running, and from the main folder launch up: `npm run up`(to initialize the local project in docker)
-5. Create a .vscode folder in the root directory. It won't be shared on git as it is ignored.
-6. Create a settings.json inside the .vscode file with the following content:
+2. Install dependencies with: `npm run install-deps` _It installs the dependencies of the front, the back and the main directory_
+3. Make sure that you have docker installed and running, and from the main folder launch up: `npm run up`(to initialize the local project in docker)
+4. Create a .vscode folder in the root directory. It won't be shared on git as it is ignored.
+5. Create a settings.json inside the .vscode file with the following content:
 
 ```
 {
@@ -139,17 +138,17 @@ The up command will:
 - Generate PRISMA migrations
 - Seed the Postgres database
 
-5. Once all of it is up and running launch the backend, to enable the API
+6. Once all of it is up and running launch the backend, to enable the API
    `npm run backend`
 
-6. Open another terminal and launch the frontend with the command:
+7. Open another terminal and launch the frontend with the command:
    `npm run frontend`
 
 <img src="readme-step6.jpg" alt="run-frontend">
 
-7. Now the project is setup and running on local enviroment.
+8. Now the project is setup and running on local enviroment.
 
-8. In order to start contributing to the project and solvieng issues you must create and change to new branch for the issue number (#id) and the issue name, never work on main branch.
+9. In order to start contributing to the project and solvieng issues you must create and change to new branch for the issue number (#id) and the issue name, never work on main branch.
    `git checkout -b issueNumber-name-of-issue`
 
 ### Prerequisites
