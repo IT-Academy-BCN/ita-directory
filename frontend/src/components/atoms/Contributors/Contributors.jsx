@@ -1,6 +1,7 @@
 // @ts-nocheck
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../../store/services/githubApi'
+import Loading from './Loading'
 
 const Container = styled.div`
   --width-height: 62px;
@@ -20,18 +21,42 @@ const Avatar = styled.img`
   height: var(--width-height);
   margin: 0.64rem;
   border-radius: 50%;
+  transition: box-shadow 0.1s ease;
+  &:hover {
+    box-shadow: 0px 10px 13px -7px #0000004b, 5px -16px 0px -10px rgba(0, 0, 0, 0);
+  }
+`
+const Link = styled.a`
+  transition: transform 0.2s ease-in-out, filter 0.1s ease;
+  &:hover {
+    transform: scale(1.1);
+    filter: saturate(1.3) brightness(1.2);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
 `
 
+// eslint-disable-next-line react/prop-types
+function Profile({ children, url, title }) {
+  return (
+    <Link href={url} target="_blank" rel="noreferrer" title={title}>
+      {children}
+    </Link>
+  )
+}
+
 function Contributors() {
-  const { data, isFetching, isError } = useGetContributorsQuery()
-  // eslint-disable-next-line no-console
-  console.log('fetching:', isFetching, 'error:', isError)
+  const { data, isLoading } = useGetContributorsQuery()
+  if (isLoading) return <Loading />
 
   return (
     <Container>
       <ul>
         {data?.map((d) => (
-          <Avatar key={d.id} src={d.avatar_url} alt={d.login} />
+          <Profile key={d.id} url={d.html_url} title={d.login}>
+            <Avatar src={d.avatar_url} alt={d.login} />
+          </Profile>
         ))}
       </ul>
     </Container>
