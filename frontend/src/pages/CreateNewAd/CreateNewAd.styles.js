@@ -86,7 +86,6 @@ export const Wrapper = styled.div`
       display: flex;
       flex-direction: column;
       align-items: start;
-      /* margin: 5px; */
     }
     .style-input-create-new-ad {
       width: 20rem;
