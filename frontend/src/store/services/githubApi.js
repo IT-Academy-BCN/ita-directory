@@ -8,7 +8,6 @@ export const githubApi = createApi({
     baseUrl: 'https://api.github.com/repos/IT-Academy-BCN/ita-directory',
     prepareHeaders: (headers) => {
       headers.set('content-type', 'application/json')
-      headers.set('Authorization', import.meta.env.VITE_GITHUB_TOKEN)
       return headers
     },
   }),
