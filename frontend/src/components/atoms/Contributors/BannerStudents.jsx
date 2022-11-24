@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { space } from 'styled-system'
 import ColaboradoresBanner from '../../../assets/logos/Colaboradores-Banner.jpg'
 import Text from '../Text'
-import Contributors from './Contributors'
+import Contributors from '../../organisms/Contributors'
 
 const Divider = styled.div`
   ${space}
