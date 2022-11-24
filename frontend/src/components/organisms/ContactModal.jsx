@@ -145,10 +145,12 @@ const ButtonWrapper = styled.div`
 `
 
 const TextAreaStyled = styled(TextArea)`
-  width: 95%;
-  max-width: 95%;
-  min-width: 95%;
-  margin: 0;
+  width: 100%;
+  padding: 0.5em 1rem;
+  margin: 5px 0px;
+  border-radius: 0.5rem;
+  border: 1px solid #b0b0b0;
+  font-size: 16px;
 `
 
 // const Wrapper = styled.div`
