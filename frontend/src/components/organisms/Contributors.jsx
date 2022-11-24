@@ -1,10 +1,10 @@
 // @ts-nocheck
 import styled from 'styled-components'
-import { useGetContributorsQuery } from '../../../store/services/githubApi'
-import Loading from './Loading'
-import Profile from './Profile'
+import { useGetContributorsQuery } from '../../store/services/githubApi'
+import Loading from '../atoms/Contributors/Loading'
+import Profile from '../atoms/Contributors/Profile'
 
-const Container = styled.div`
+const ContributorsStyled = styled.div`
   --width-height: 62px;
   margin: 0;
   padding: 0 3rem 0 3rem;
@@ -33,7 +33,7 @@ function Contributors() {
   if (isLoading) return <Loading />
 
   return (
-    <Container>
+    <ContributorsStyled>
       <ul>
         {data?.map((d) => (
           <Profile key={d.id} url={d.html_url} title={d.login}>
@@ -41,8 +41,8 @@ function Contributors() {
           </Profile>
         ))}
       </ul>
-    </Container>
+    </ContributorsStyled>
   )
 }
 
-export default Contributors
+export default styled(Contributors)``

@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 import { colors } from '../../../theme'
 
-const Container = styled.div`
+const LoadingStyled = styled.div`
   display: inline-block;
   width: 80px;
   height: 80px;
@@ -30,7 +30,7 @@ const Container = styled.div`
 `
 
 function Loading() {
-  return <Container />
+  return <LoadingStyled />
 }
 
-export default Loading
+export default styled(Loading)``

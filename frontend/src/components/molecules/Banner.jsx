@@ -2,10 +2,9 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { colors, device } from '../../theme'
-import BannerStudents from '../atoms/Contributors/BannerStudents'
-import BannerBcn from '../atoms/Contributors/BannerBcn'
+import { BannerStudents, BannerBcn } from '../atoms/Contributors'
 
-const Section = styled.section`
+const BannerStyled = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,11 +28,11 @@ const Section = styled.section`
 `
 
 function Banner({ students }) {
-  return <Section>{students ? <BannerStudents /> : <BannerBcn />}</Section>
+  return <BannerStyled>{students ? <BannerStudents /> : <BannerBcn />}</BannerStyled>
 }
 
 Banner.propTypes = {
   students: PropTypes.bool,
 }
 
-export default Banner
+export default styled(Banner)``
