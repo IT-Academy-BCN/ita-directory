@@ -21,6 +21,7 @@ const newAdSchema = z.object({
     })
     .transform((val, ctx) => {
       numberValidation(val, ctx)
+      return val
     }),
   price: z
     .string({
@@ -28,6 +29,7 @@ const newAdSchema = z.object({
     })
     .transform((val, ctx) => {
       numberValidation(val, ctx)
+      return val
     }),
   squareMeters: z
     .string({
@@ -35,6 +37,7 @@ const newAdSchema = z.object({
     })
     .transform((val, ctx) => {
       numberValidation(val, ctx)
+      return val
     }),
   nBathrooms: z
     .string({
@@ -42,6 +45,7 @@ const newAdSchema = z.object({
     })
     .transform((val, ctx) => {
       numberValidation(val, ctx)
+      return val
     }),
 })
 
