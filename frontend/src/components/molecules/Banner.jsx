@@ -5,7 +5,6 @@ import { colors, device } from '../../theme'
 import ColaboradoresBanner from '../../assets/logos/Colaboradores-Banner.jpg'
 import BarcelonaBanner from '../../assets/logos/barcelona-banner.jpg'
 import Contributors from '../organisms/Contributors'
-// eslint-disable-next-line import/no-cycle
 import { Text } from '../atoms'
 
 const BannerStyled = styled.section`
