@@ -1,7 +1,6 @@
 import CheckBox from './CheckBox'
 import Icon from './Icon'
 import Text from './Text'
-import Banner from '../molecules/Banner'
 import Button from './Button'
 import ImageButton from './ImageButton'
 import Title from './Title'
@@ -14,7 +13,6 @@ import { TableStyle, THead, Th, TBody, Tr, Td } from './Table'
 
 export {
   Dropdown,
-  Banner,
   Icon,
   Card,
   Text,
