@@ -1,6 +1,5 @@
 // @ts-nocheck
-import BannerStudents from './BannerStudents'
-import BannerBcn from './BannerBcn'
-import BannerBarcelona from './BannerBarcelona'
+import Loading from './Loading'
+import Profile from './Profile'
 
-export { BannerStudents, BannerBcn, BannerBarcelona }
+export { Loading, Profile }

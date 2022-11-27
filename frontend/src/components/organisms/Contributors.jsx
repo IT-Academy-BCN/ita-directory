@@ -2,9 +2,9 @@
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../store/services/githubApi'
 import Loading from '../atoms/Contributors/Loading'
-import Profile from '../atoms/Contributors/Profile'
+import { Profile } from '../atoms/Contributors'
 
-const ContributorsStyled = styled.div`
+const ContributorsStyled = styled.div.attrs({ className: 'contributors-avatar' })`
   --width-height: 62px;
   margin: 0;
   padding: 0 3rem 0 3rem;
