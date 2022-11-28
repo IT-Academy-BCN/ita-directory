@@ -16,10 +16,18 @@ function Footer() {
           </div>
           <Credits>
             <p>
-              Diseñado por <span>Kevin Mamaqui</span>
+              Diseñado por{' '}
+              <span>
+                <a href="https://www.linkedin.com/in/kevinmamaqi/">Kevin Mamaqi Kapllani</a>
+              </span>
             </p>
             <p>
-              para <span>ITAcademy de Barcelona Activa</span>
+              para{' '}
+              <span>
+                <a href="https://www.barcelonactiva.cat/es/itacademy">
+                  ITAcademy de Barcelona Activa
+                </a>
+              </span>
             </p>
           </Credits>
         </Logo>
