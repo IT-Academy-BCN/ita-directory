@@ -4,6 +4,7 @@ const adsController = require('../controllers/ads.controller')
 const { uploadAdCSV } = require('../middleware/uploadAdsCSV')
 const validate = require('../middleware/zodValidation')
 const AdsSchema = require('../schemas/AdsSchema')
+const AdTypeSchema = require('../schemas/AdTypeSchema')
 
 /**
  * Ad data
@@ -62,7 +63,12 @@ const AdsSchema = require('../schemas/AdsSchema')
     "errors": "\"title\" is required"
 }
  */
-router.post('/ads', authenticateToken, validate(AdsSchema.partial()), adsController.createAd)
+router.post(
+  '/ads',
+  authenticateToken,
+  validate(AdsSchema.omit({ adId: true })),
+  adsController.createAd
+)
 
 /**
  * GET /ads
@@ -134,8 +140,63 @@ router.get('/ads', adsController.getAllAds)
             "adTypeId": 1
         }
     ]}
+    */
+router.get(
+  '/ads/user/:userId',
+  authenticateToken,
+  validate(AdsSchema.pick({ userId: true })),
+  adsController.getUserAds
+)
+
+/**
+    * GET /ads/types
+    * @summary Gets all ad type names.
+    * @tags Ads
+    * @return {object} 200 - Success response - application/json
+    * @example response - 200 - Example success response
+   *  {
+       "message": "Types fetched correctly.",
+       "data": [
+           "house",
+           "room",
+           "garage",
+           "storage",
+           "office",
+           "warehouse",
+           "building",
+           "newBuilding"
+       ]
+   }
+    */
+router.get('/ads/types', adsController.getAdTypes)
+
+/**
+ * GET /ads/type/{type}
+ * @summary Gets all ads filtered according to their type name.
+ * @tags Ads
+ * @return {object} 200 - Success response - application/json
+ * @example response - 200 - Example success response
+*  {
+    "message": "Ad fetched correctly.",
+    "data": [
+        {
+            "id": 11,
+            "userId": 1,
+            "title": "ad11",
+            "description": "ad room 1",
+            "city": "Tampa",
+            "nRooms": 1,
+            "price": 300,
+            "squareMeters": 20,
+            "nBathrooms": 1,
+            "mapLat": 27.950575,
+            "mapLon": -82.457176,
+            "adTypeId": 2
+        }
+    ]
+}
  */
-router.get('/ads/user/:userId', authenticateToken, adsController.getUserAds)
+router.get('/ads/type/:type', validate(AdTypeSchema.pick({ id: true })), adsController.getAdsByType)
 
 /**
  * GET /ads/{adId}
@@ -174,57 +235,7 @@ router.get('/ads/user/:userId', authenticateToken, adsController.getUserAds)
     "errors": []
 }
 */
-router.get('/ads/:adId', adsController.getAdById)
-
-/**
- * GET /ads/type/{type}
- * @summary Gets all ads filtered according to their type name.
- * @tags Ads
- * @return {object} 200 - Success response - application/json
- * @example response - 200 - Example success response
-*  {
-    "message": "Ad fetched correctly.",
-    "data": [
-        {
-            "id": 11,
-            "userId": 1,
-            "title": "ad11",
-            "description": "ad room 1",
-            "city": "Tampa",
-            "nRooms": 1,
-            "price": 300,
-            "squareMeters": 20,
-            "nBathrooms": 1,
-            "mapLat": 27.950575,
-            "mapLon": -82.457176,
-            "adTypeId": 2
-        }
-    ]
-}
- */
-router.get('/ads/type/:type', adsController.getAdsByType)
-
-/**
- * GET /ads/types
- * @summary Gets all ad type names.
- * @tags Ads
- * @return {object} 200 - Success response - application/json
- * @example response - 200 - Example success response
-*  {
-    "message": "Types fetched correctly.",
-    "data": [
-        "house",
-        "room",
-        "garage",
-        "storage",
-        "office",
-        "warehouse",
-        "building",
-        "newBuilding"
-    ]
-}
- */
-router.get('/ads/types', adsController.getAdTypes)
+router.get('/ads/:adId', validate(AdsSchema.pick({ adId: true })), adsController.getAdById)
 
 /**
  * GET /ads/{location}/{type} 
@@ -334,7 +345,12 @@ router.get('/ads/location/:location', adsController.getAdsByLocation)
     "errors": []
 }
 */
-router.delete('/ads/:adId', authenticateToken, adsController.deleteById)
+router.delete(
+  '/ads/:adId',
+  authenticateToken,
+  validate(AdsSchema.pick({ adId: true })),
+  adsController.deleteById
+)
 
 /**
  * PATCH /ads/{adId}
@@ -361,7 +377,13 @@ router.delete('/ads/:adId', authenticateToken, adsController.deleteById)
     "errors": []
 }
 */
-router.patch('/ads/:adId', authenticateToken, adsController.updateAd)
+router.patch(
+  '/ads/:adId',
+  authenticateToken,
+  validate(AdsSchema.pick({ adId: true })),
+  validate(AdsSchema.partial()),
+  adsController.updateAd
+)
 
 // TODO: swagger doc
 router.post(

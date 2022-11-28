@@ -2,13 +2,6 @@ const prisma = require('../../prisma/indexPrisma')
 const { typeSw } = require('../utils/CONSTANTS')
 const { formatLocation } = require('../utils/formatLocation')
 const { apiResponse } = require('../utils/utils')
-const {
-  adsSchema,
-  AdByIdParamSchema,
-  getAdsByTypeSchema,
-  getUserAdsSchema,
-  patchAdSchema,
-} = require('../utils/schemaValidation')
 const { parseAdsFromCsvBuffer } = require('../utils/parseAdsFromCsvBuffer')
 
 async function createAd(req, res, next) {
@@ -17,7 +10,6 @@ async function createAd(req, res, next) {
     // fields -> userId, title, description, city, nRooms, price, squareMeters, nBathrooms, mapLat, mapLon
     // const { ...fields } = req.body
     // @todo: userId might be removed from adsSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
-    // await adsSchema.validateAsync(fields)
 
     const ad = await prisma.Ads.create({
       data: {
@@ -79,11 +71,8 @@ async function createAdsFromCSVBuffer(req, res, next) {
     // Append userId to each ad entry
     const adsArrayWithUserId = adsArray.map((ad) => ({ ...ad, userId: userId.toString() }))
 
-    const promiseArray = adsArrayWithUserId.map((ad) => adsSchema.validateAsync(ad))
-    const validatedAdsArray = await Promise.all(promiseArray)
-
     const createMany = await prisma.ads.createMany({
-      data: validatedAdsArray,
+      data: adsArrayWithUserId,
       skipDuplicates: true,
     })
 
@@ -91,7 +80,7 @@ async function createAdsFromCSVBuffer(req, res, next) {
       apiResponse({
         message: `${createMany.count} records have been created successfully`,
         // createMany does not return created records. As a workaround, validatedAdsArray is returned. https://github.com/prisma/prisma/issues/8131
-        data: validatedAdsArray,
+        data: adsArrayWithUserId,
         status: 200,
       })
     )
@@ -113,7 +102,6 @@ async function createAdsFromCSVBuffer(req, res, next) {
 async function getUserAds(req, res) {
   const { userId } = req.params
   try {
-    await getUserAdsSchema.validateAsync(userId)
     const ads = await prisma.ads.findMany({
       where: { userId: parseInt(userId, 10) },
     })
@@ -135,7 +123,7 @@ async function getUserAds(req, res) {
   }
 }
 
-async function getAllAds(req, res) {
+async function getAllAds(req, res, next) {
   const ads = await prisma.ads.findMany()
   res.status(200).json(
     apiResponse({
@@ -144,13 +132,11 @@ async function getAllAds(req, res) {
       status: 200,
     })
   )
+  next()
 }
 
 async function getAdById(req, res) {
   const adId = parseInt(req.params.adId, 10)
-
-  // Validates if integer.
-  await AdByIdParamSchema.validateAsync(adId)
 
   const ad = await prisma.ads.findUnique({
     where: {
@@ -176,7 +162,6 @@ async function getAdById(req, res) {
 
 async function getAdsByType(req, res) {
   const { type } = req.params
-  await getAdsByTypeSchema.validateAsync(type)
   const typeId = typeSw(type)
 
   if (typeId === 0) {
@@ -221,7 +206,6 @@ async function getAdTypes(req, res) {
 async function getAdsByTypeAndLocation(req, res) {
   const { location, type } = req.params
   const formattedLocation = formatLocation(location)
-  await getAdsByTypeSchema.validateAsync(type)
   const typeId = typeSw(type)
 
   if (typeId === 0) {
@@ -268,9 +252,6 @@ async function deleteById(req, res, next) {
   try {
     const adId = parseInt(req.params.adId, 10)
 
-    // Validates if integer.
-    await AdByIdParamSchema.validateAsync(adId)
-
     const deletedAd = await prisma.ads.delete({
       where: {
         id: adId,
@@ -304,14 +285,12 @@ async function updateAd(req, res, next) {
     const userId = { req }
 
     const { adId } = req.params
-    const { ...fields } = req.body
-    const validatedFields = await patchAdSchema.validateAsync({ adId, ...fields })
 
     // This extra query is the only way I found to check that the ad intended to be updated belongs to the user that is attempting to update it. Might me improved.
     const result = await prisma.ads.findMany({
       where: {
         userId,
-        id: validatedFields.adId,
+        id: adId,
       },
     })
 
@@ -326,7 +305,7 @@ async function updateAd(req, res, next) {
     } else {
       const updatedAd = await prisma.ads.update({
         where: {
-          id: validatedFields.adId,
+          id: adId,
         },
         data: {
           title: req.body.title || undefined,

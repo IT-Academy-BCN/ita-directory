@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const authenticateToken = require('../middleware/verifyToken')
 const invoicesController = require('../controllers/invoices.controller')
-
+const validate = require('../middleware/zodValidation')
+const InvoiceSchema = require('../schemas/InvoiceSchema')
 
 /**
  * POST /invoices
@@ -28,7 +29,12 @@ const invoicesController = require('../controllers/invoices.controller')
     "errors": "\"user_id\" is required"
 }
  */
-router.post('/invoices', authenticateToken, invoicesController.createInvoice)
+router.post(
+  '/invoices',
+  authenticateToken,
+  validate(InvoiceSchema.omit({ id: true, invoiceNumber: true, createdAt: true })),
+  invoicesController.createInvoice
+)
 
 /**
  * GET /invoices
@@ -144,7 +150,12 @@ router.get('/invoices', invoicesController.getAllInvoices)
     "errors": []
 }
  */
-router.get('/invoices/user/:userId', authenticateToken, invoicesController.getUserInvoices)
+router.get(
+  '/invoices/user/:userId',
+  authenticateToken,
+  validate(InvoiceSchema.pick({ userId: true })),
+  invoicesController.getUserInvoices
+)
 
 /**
  * DELETE /invoices/{invoiceId}
@@ -170,7 +181,11 @@ router.get('/invoices/user/:userId', authenticateToken, invoicesController.getUs
     "errors": []
 }
 */
-router.get('/invoices/:invoiceId', invoicesController.getInvoiceById)
+router.get(
+  '/invoices/:invoiceId',
+  validate(InvoiceSchema.pick({ invoiceNumber: true })),
+  invoicesController.getInvoiceById
+)
 
 /**
  * PATCH /invoices/{invoiceId}
@@ -199,7 +214,12 @@ router.get('/invoices/:invoiceId', invoicesController.getInvoiceById)
     "errors": []
 }
 */
-router.delete('/invoices/:invoiceId', authenticateToken, invoicesController.deleteInvoiceById)
+router.delete(
+  '/invoices/:invoiceId',
+  authenticateToken,
+  validate(InvoiceSchema.pick({ invoiceNumber: true })),
+  invoicesController.deleteInvoiceById
+)
 
 /**
  * PATCH /invoices/{invoiceId}
@@ -228,6 +248,12 @@ router.delete('/invoices/:invoiceId', authenticateToken, invoicesController.dele
     "errors": []
 }
 */
-router.patch('/invoices/:invoiceId', authenticateToken, invoicesController.updateInvoice)
+router.patch(
+  '/invoices/:invoiceId',
+  authenticateToken,
+  validate(InvoiceSchema.pick({ invoiceNumber: true })),
+  validate(InvoiceSchema.partial()),
+  invoicesController.updateInvoice
+)
 
 module.exports = router

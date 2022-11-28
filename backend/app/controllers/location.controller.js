@@ -1,11 +1,9 @@
 const prisma = require('../../prisma/indexPrisma')
 const { apiResponse } = require('../utils/utils')
-const { getRegionByLocationSchema } = require('../utils/schemaValidation')
 const { formatLocation } = require('../utils/formatLocation')
 
 async function getRegion(req, res) {
   const { name } = req.params
-  await getRegionByLocationSchema.validateAsync(name)
   const formattedName = formatLocation(name)
   const data = []
   const location = await prisma.level.findMany({
@@ -53,7 +51,6 @@ async function getRegion(req, res) {
 
 async function getParentChild(req, res) {
   const { name } = req.params
-  await getRegionByLocationSchema.validateAsync(name)
   const formattedName = formatLocation(name)
   const data = []
   const location = await prisma.level.findMany({

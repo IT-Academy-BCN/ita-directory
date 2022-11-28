@@ -1,6 +1,10 @@
 const router = require('express').Router()
 // const authenticateToken = require('../middleware/verifyToken')
 const locationController = require('../controllers/location.controller')
+const validate = require('../middleware/zodValidation')
+const LocationSchema = require('../schemas/LocationSchema')
+
+router.use(validate(LocationSchema))
 
 /**
  * Location data

@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const MediaControllers = require('../controllers/media.controller')
 const uploadFile = require('../middleware/uploadFile')
+const validate = require('../middleware/zodValidation')
+const MediaSchema = require('../schemas/MediaSchema')
 
 /**
  * Registration data
@@ -24,7 +26,12 @@ const uploadFile = require('../middleware/uploadFile')
  * { "errCode":"errCode", "msg": "File/userId error"}
  */
 
-router.post('/media', uploadFile, MediaControllers.uploadMedia)
+router.post(
+  '/media',
+  validate(MediaSchema.omit({ id: true })),
+  uploadFile,
+  MediaControllers.uploadMedia
+)
 
 /**
  * DELETE /media

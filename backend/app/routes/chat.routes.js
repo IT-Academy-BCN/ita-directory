@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const chatController = require('../controllers/chat.controller')
+const validate = require('../middleware/zodValidation')
+const ConversationSchema = require('../schemas/ConversationSchema')
 
 /**
  * POST /chat/conversations
@@ -11,7 +13,7 @@ const chatController = require('../controllers/chat.controller')
  * @return {object} 400 - Bad request response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.post('/chat/conversations', chatController.createConversation)
+router.post('/chat/conversations', validate(ConversationSchema), chatController.createConversation)
 
 /**
  * GET /chat/conversations
@@ -34,7 +36,11 @@ router.get('/chat/conversations', chatController.getConversations)
  * @return {object} 404 - Not Found response - application/json
  * @return {object} 500 - Internal Server Error response - application/json
  */
-router.get('/chat/conversations/:id', chatController.getConversationById)
+router.get(
+  '/chat/conversations/:userId/:id',
+  validate(ConversationSchema),
+  chatController.getConversationById
+)
 
 /**
  * GET /chat/messages
