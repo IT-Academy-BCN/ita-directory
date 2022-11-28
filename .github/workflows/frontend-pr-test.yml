@@ -1,8 +1,9 @@
-name: frontend
+name: Frontend on Pull Request
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches:
+      - main
     paths:
       - "frontend/**"
 
