@@ -10,7 +10,7 @@ cp $ENV_FILE $(git_root)/frontend/.env
 # Build the frontend
 cd $(git_root)/frontend
 npm install
-npm run buildc
+npm run build
 
 # Deploy
 rm -rf $PATH_FRONTEND_DEV
