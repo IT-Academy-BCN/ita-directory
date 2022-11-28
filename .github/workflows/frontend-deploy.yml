@@ -10,10 +10,11 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
       - name: build and deploy
-      - uses: actions/checkout@v3
-      — run: | 
+        uses: actions/checkout@v3
+        run: |
           pwd
           cd scripts
           bash dev.deploy.sh
