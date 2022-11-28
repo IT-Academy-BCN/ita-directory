@@ -13,8 +13,6 @@ npm install
 npm run build
 
 # Deploy
-echo "PATH_FRONTEND_DEV"
-echo $PATH_FRONTEND_DEV
-rm -rf $(PATH_FRONTEND_DEV)
-mkdir -p $(PATH_FRONTEND_DEV)
-cp $(git_root)/frontend/dist $(PATH_FRONTEND_DEV) -r
+rm -rf $PATH_FRONT_DEV
+mkdir -p $PATH_FRONT_DEV
+cp $(git_root)/frontend/dist $PATH_FRONT_DEV -r
