@@ -14,4 +14,5 @@ npm run build
 
 # Deploy
 rm -rf $PATH_FRONTEND_DEV
+mkdir -p $PATH_FRONTEND_DEV
 cp $(git_root)/frontend/dist $PATH_FRONTEND_DEV -r
