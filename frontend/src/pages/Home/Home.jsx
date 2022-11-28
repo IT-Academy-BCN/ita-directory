@@ -1,10 +1,10 @@
+// @ts-nocheck
 import React from 'react'
 import styled from 'styled-components'
 import Body from '../../components/layout/Body/Body'
-import { Banner } from '../../components/atoms'
 import { MapOfDistricts } from '../../components/organisms'
 import { Container, device } from '../../theme'
-import { Menu } from '../../components/molecules'
+import { Menu, Banner } from '../../components/molecules'
 
 const HomeContainer = styled(Container)`
   flex-direction: column;

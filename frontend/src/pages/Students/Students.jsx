@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import { Banner } from '../../components/atoms'
 import Body from '../../components/layout/Body/Body'
-import { Menu } from '../../components/molecules'
+import { Menu, Banner } from '../../components/molecules'
 
 function Students() {
   return (
