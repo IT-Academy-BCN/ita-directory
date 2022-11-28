@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const logController = require('../controllers/log.controller')
+const validate = require('../middleware/zodValidation')
+const LogSchema = require('../schemas/LogSchema')
 
+router.use(validate(LogSchema))
 /**
  * Log data
  * @typedef {object} log

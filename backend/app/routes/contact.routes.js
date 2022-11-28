@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { contactController } = require('../controllers/contact.controller')
-const { contactSchema } = require('../utils/schemaValidation')
-const validation = require('../middleware/validation')
+const validate = require('../middleware/zodValidation')
+const ContactSchema = require('../schemas/ContactSchema')
 
 /**
  * Contact data
@@ -29,6 +29,6 @@ const validation = require('../middleware/validation')
  * @example response - 400 - Example error response
  * { "message":"error"}
  */
-router.post('/contact', validation(contactSchema), contactController)
+router.post('/contact', validate(ContactSchema.pick({ email: true })), contactController)
 
 module.exports = router

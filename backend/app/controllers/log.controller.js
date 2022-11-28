@@ -1,10 +1,8 @@
 const logger = require('../../logger')
-const { logSchema } = require('../utils/schemaValidation')
 const { apiResponse } = require('../utils/utils')
 
 async function createLog(req, res) {
   const { msg, level } = req.body
-  await logSchema.validateAsync({ msg, level })
 
   switch (level) {
     case 'trace':

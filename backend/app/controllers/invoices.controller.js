@@ -1,20 +1,10 @@
 const prisma = require('../../prisma/indexPrisma')
 const { apiResponse } = require('../utils/utils')
-const {
-  invoicesSchema,
-  invoiceByIdParamSchema,
-  patchInvoiceSchema,
-  getUserInvoicesSchema,
-} = require('../utils/schemaValidation')
 
 async function createInvoice(req, res, next) {
   const userId = { req }
   try {
-    // fields -> userId, title, description, city, nRooms, price, squareMeters, nBathrooms, mapLat, mapLon
-    const { ...fields } = req.body
     // @todo: userId might be removed from invoicesSchema and docs, for it is taken from the authenticateToken middleware and not sent by the client
-    await invoicesSchema.validateAsync(fields)
-
     const invoice = await prisma.invoice.create({
       data: {
         user: {
@@ -57,7 +47,6 @@ async function createInvoice(req, res, next) {
 
 async function getUserInvoices(req, res) {
   const { userId } = req
-  await getUserInvoicesSchema.validateAsync(userId)
   const invoices = await prisma.invoice.findMany({
     where: { userId },
   })
@@ -83,8 +72,6 @@ async function getAllInvoices(req, res) {
 
 async function getInvoiceById(req, res) {
   const invoiceId = parseInt(req.params.invoiceId, 10)
-  // Validates if integer.
-  await invoiceByIdParamSchema.validateAsync(invoiceId)
 
   const invoice = await prisma.invoice.findUnique({
     where: {
@@ -111,9 +98,6 @@ async function getInvoiceById(req, res) {
 async function deleteInvoiceById(req, res, next) {
   try {
     const invoiceId = parseInt(req.params.invoiceId, 10)
-
-    // Validates if integer.
-    await invoiceByIdParamSchema.validateAsync(invoiceId)
 
     const deletedInvoice = await prisma.invoice.delete({
       where: {
@@ -146,16 +130,12 @@ async function deleteInvoiceById(req, res, next) {
 async function updateInvoice(req, res, next) {
   try {
     const userId = { req }
-
     const { invoiceId } = req.params
-    const { ...fields } = req.body
-    const validatedFields = await patchInvoiceSchema.validateAsync({ invoiceId, ...fields })
-
     // This extra query is the only way I found to check that the invoice intended to be updated belongs to the user that is attempting to update it. Might me improved.
     const result = await prisma.invoice.findMany({
       where: {
         userId,
-        id: validatedFields.invoiceId,
+        id: invoiceId,
       },
     })
 
@@ -170,7 +150,7 @@ async function updateInvoice(req, res, next) {
     } else {
       const updatedInvoice = await prisma.invoice.update({
         where: {
-          id: validatedFields.invoiceId,
+          id: invoiceId,
         },
         data: {
           billingAddress: req.body.billingAddress || undefined,

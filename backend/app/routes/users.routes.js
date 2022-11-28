@@ -7,6 +7,7 @@ const userSchema = require('../schemas/UserSchema')
 const { roleValues } = require('../utils/CONSTANTS')
 const uploadFile = require('../middleware/uploadFile')
 
+router.use(validate(userSchema.partial()))
 /**
  * GET /user
  * @summary Get user data
@@ -49,7 +50,11 @@ router.get(
  * { "errCode":"errCode", "message":"Failed to register the user"}
  */
 // Register
-router.post('/register', UsersController.registerUser)
+router.post(
+  '/register',
+  validate(userSchema.pick({ name: true, lastnames: true, email: true, password: true })),
+  UsersController.registerUser
+)
 
 /**
  * GET /users/
@@ -110,7 +115,11 @@ router.get('/refresh-token', UsersController.getRefreshToken)
  * @example response - 400 - Example error response
  * { "errCode":"errCode", "message":"login failed"}
  */
-router.post('/login', UsersController.login)
+router.post(
+  '/login',
+  validate(userSchema.pick({ email: true, password: true })),
+  UsersController.login
+)
 
 /**
  * Update data

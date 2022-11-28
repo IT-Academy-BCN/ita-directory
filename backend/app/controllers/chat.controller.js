@@ -2,12 +2,8 @@ const prisma = require('../../prisma/indexPrisma')
 const logger = require('../../logger')
 const { apiResponse, tokenUser } = require('../utils/utils')
 const client = require('../utils/initRedis')
-const {
-  conversationUsersSchema,
-  conversationSchema,
-  conversationUserSchema,
-  messageSchema,
-} = require('../utils/schemaValidation')
+const validate = require('../middleware/zodValidation')
+const MessageSchema = require('../schemas/MessageSchema')
 
 async function createConversation(req, res) {
   try {
@@ -15,8 +11,6 @@ async function createConversation(req, res) {
     const user1Id = userId
     const { user } = req.body
     const user2Id = user
-
-    await conversationUsersSchema.validateAsync({ user1Id, user2Id })
 
     if (user1Id === user2Id) {
       // We want not to talk to ourself
@@ -89,7 +83,6 @@ async function createConversation(req, res) {
 async function getConversations(req, res) {
   // try {
   const { userId } = req
-  await conversationUserSchema.validateAsync({ userId })
 
   const conversations = await prisma.conversation.findMany({
     select: {
@@ -126,7 +119,6 @@ async function getConversationById(req, res) {
   try {
     const { userId } = req
     const conversationId = parseInt(req.params.id, 10)
-    await conversationSchema.validateAsync({ userId, conversationId })
 
     const conversation = await prisma.conversation.findUnique({
       where: {
@@ -194,7 +186,6 @@ async function getMessages(req, res) {
   try {
     const { userId } = req
     const conversationId = req.body.conversation
-    await conversationSchema.validateAsync({ userId, conversationId })
 
     const conversation = await prisma.conversation.findUnique({
       where: {
@@ -287,14 +278,20 @@ async function chatSocket(io, socket) {
     logger.info(`user ${validUser} is typing on ${conversationId}`)
     io.to(conversationId).emit('is_typing_response', `user ${validUser} typing`)
   })
+
   socket.on('is_not_typing', (conversationId) => {
     logger.info(`user ${validUser} stop typing on ${conversationId}`)
     io.to(conversationId).emit('is_not_typing_response', `user ${validUser} stop typing`)
   })
 
+  // middleware socket validation
+  socket.use((next) => {
+    validate(MessageSchema.pick({ text: true }))
+    next()
+  })
+
   socket.on('new_message', async (message) => {
     try {
-      await messageSchema.validateAsync(message)
       await prisma.message.create({
         data: {
           conversation: {
