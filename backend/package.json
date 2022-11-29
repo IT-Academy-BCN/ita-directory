@@ -1,6 +1,6 @@
 {
   "name": "be_ita_directory",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Backend ITAcademy Directory project (react + node tracks)",
   "main": "server.js",
   "scripts": {
