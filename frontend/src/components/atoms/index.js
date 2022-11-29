@@ -10,8 +10,10 @@ import { Notification, Notifications } from './Notifications'
 import Dropdown from './Dropdown'
 import { Li, Lists, Ol, Dl, Dt, Dd, Ul } from './List'
 import { TableStyle, THead, Th, TBody, Tr, Td } from './Table'
+import Loading from './Loading'
 
 export {
+  Loading,
   Dropdown,
   Icon,
   Card,
