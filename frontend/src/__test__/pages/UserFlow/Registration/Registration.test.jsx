@@ -11,7 +11,7 @@ describe('Registration', () => {
     expect(registerBtn).toBeInTheDocument()
   })
 
-  it.only('should render the success notification when valid inputs are provided', async () => {
+  it('should render the success notification when valid inputs are provided', async () => {
     render(<Registration />)
 
     const firstName = screen.getByPlaceholderText(/nombre/i)
