@@ -9,6 +9,8 @@ import Map from './Map/Map/Map'
 import Pagination from './Pagination'
 import ProtectedRoute from './ProtectedRoute'
 import HelmetComponent from './HelmetComponent'
+import Profile from './Profile'
+import Contributors from './Contributors'
 
 export {
   AdCard,
@@ -24,4 +26,6 @@ export {
   ProtectedRoute,
   UserStatus,
   HelmetComponent,
+  Contributors,
+  Profile,
 }

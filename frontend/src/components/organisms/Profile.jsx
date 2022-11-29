@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { colors } from '../../../theme'
-import { useGetUserQuery } from '../../../store/services/githubApi'
+import { colors } from '../../theme'
+import { useGetUserQuery } from '../../store/services/githubApi'
 
 const Link = styled.a`
   position: relative;
@@ -59,11 +59,10 @@ const Link = styled.a`
 function Profile({ children, url, title }) {
   const [skip, setSkip] = useState(true)
   const { data, isSuccess } = useGetUserQuery(title, { skip })
-  const handleOver = () => {
-    setSkip(false)
-  }
+  const handleGetUserOnMouseOver = () => setSkip(false)
+
   return (
-    <Link href={url} target="_blank" rel="noreferrer" onMouseOver={handleOver}>
+    <Link href={url} target="_blank" rel="noreferrer" onMouseOver={handleGetUserOnMouseOver}>
       {children}
       <span>{isSuccess ? data.name || title : '...'}</span>
     </Link>
