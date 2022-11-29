@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { colors, device } from '../../../theme'
 import { Button, ImageButton, Text } from '../../../components/atoms'
-import { ContactModal } from '../../../components/organisms'
 import adImage from '../../../assets/images/casaPiscinaAd2.jpg'
 
 const AdCardStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid ${colors.grey};
   margin-bottom: 1.5rem;
   overflow: hidden;
+  padding: 0 10px;
+
+  &:last-child {
+    border: none;
+  }
 
   .ad-card__content {
     display: flex;
@@ -65,8 +68,7 @@ const AdCardStyled = styled.div`
   }
 `
 
-function AdCard({ title, city, price, squareMeters, description, nRooms, id }) {
-  const [active, setActive] = useState(false)
+function UserAdsCard({ title, city, price, squareMeters, description, nRooms, id, onClick }) {
   const gastosIncluidos = true
   const history = useHistory()
 
@@ -95,23 +97,26 @@ function AdCard({ title, city, price, squareMeters, description, nRooms, id }) {
           <Text as="span" text={`Gastos ${gastosIncluidos ? ' incluidos' : ' no incluidos'}`} />
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
-        <Button
-          text="Contactar"
-          icon="chat"
-          textColor={colors.strongBlue}
-          iconPosition="left"
-          onClick={() => setActive(true)}
-          tabIndex={id + 10}
-          buttonStyles={{ padding: 0 }}
-          className="transparent"
-        />
+        <div style={{ display: 'flex', gap: '5px' }}>
+          <Button
+            text="Ver Anuncio"
+            onClick={handleClick}
+            tabIndex={id + 10}
+            className="blue-gradient w-36"
+          />
+          <Button
+            text="Editar"
+            onClick={onClick}
+            tabIndex={id + 10}
+            className="orange-gradient w-36"
+          />
+        </div>
       </div>
-      <ContactModal active={active} hideModal={() => setActive(false)} />
     </AdCardStyled>
   )
 }
 
-AdCard.propTypes = {
+UserAdsCard.propTypes = {
   title: PropTypes.string.isRequired,
   city: PropTypes.string,
   price: PropTypes.number.isRequired,
@@ -119,6 +124,7 @@ AdCard.propTypes = {
   description: PropTypes.string.isRequired,
   nRooms: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  onClick: PropTypes.func,
 }
 
-export default AdCard
+export default UserAdsCard

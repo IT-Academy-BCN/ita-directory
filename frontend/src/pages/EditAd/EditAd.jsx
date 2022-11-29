@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 
 // Styles
 import Container from '../../theme/globalStyles'
-import CustomMap from '../../components/organisms/Map/CustomMap/CustomMap'
+import { Map } from '../../components/organisms'
 import Button from '../../components/atoms/Button'
 import InputGroupNumber from '../../components/molecules/InputGroupNumber'
 import Input from '../../components/atoms/Forms/Input'
@@ -109,7 +109,7 @@ function EditAd(props) {
         <Container>
           <Wrapper>
             <form onSubmit={handleSubmit}>
-              {inputComponentData.map((el, i) => {
+              {inputComponentData.map((el) => {
                 const { Component } = el
                 return (
                   <Component
@@ -127,7 +127,7 @@ function EditAd(props) {
                 )
               })}
               <MapText>Índica la dirección de la propiedad pinchando sobre el mapa.</MapText>
-              <CustomMap geometry={position} onClick={handleMapClick} />
+              <Map geometry={position} onClick={handleMapClick} />
               <Button
                 buttonStyles={{ width: '7.25rem', height: '2.125rem' }}
                 text="Editar"

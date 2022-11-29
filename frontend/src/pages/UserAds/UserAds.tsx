@@ -1,19 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
-import AdCard from './AdCard/AdCard'
+import { useHistory } from 'react-router-dom'
+import UserAdsCard from './UserAdsCard/UserAdsCard'
 import Body from '../../components/layout/Body/Body'
-import { Button } from '../../components/atoms'
-import { colors, Container } from '../../theme'
-import MapView from '../../components/organisms/Map/MapView/MapView'
-import AdListFilter from './AdListFilter/AdListFilter'
+import { Container } from '../../theme'
+import AdListFilter from '../AdList/AdListFilter/AdListFilter'
 import axiosInstance from '../../utils/axiosInstance'
 import { FlexBox } from '../../theme/wrappers'
-
-const buttonStyle = {
-  background: 'transparent',
-  boxShadow: 'none',
-  outline: 'none',
-}
+import useUser from '../../hooks/useUserHook'
 
 type TPropsFlexBox = {
   flexDirection: string
@@ -47,11 +41,13 @@ type TFilterParms = {
   maxSize?: number
 }
 
-function AdList() {
+function UserAds() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filterParams, setFilterParams] = useState<TFilterParms | undefined>()
-  const [mapView, setMapView] = useState(false)
   const [adList, setAdList] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const history = useHistory()
 
   // Added filters by Kevin
   const byPrice: TFunctionFilter = (min, max) => (ad) => {
@@ -63,15 +59,16 @@ function AdList() {
     if (min == null && max == null) return true
     return min <= ad.squareMeters && ad.squareMeters <= max
   }
+  const user = useUser()
 
   useEffect(() => {
     const fetchAds = async () => {
-      const result = await axiosInstance.get('/ads')
+      const result = await axiosInstance.get(`/ads/user/${user.id}`)
       setAdList(result.data.data)
       setLoading(false)
     }
     fetchAds()
-  }, [])
+  }, [user])
 
   const filteredAdList = useMemo(() => {
     const filteredAds = adList
@@ -82,7 +79,7 @@ function AdList() {
 
   type TAdCardProps = {
     id: number
-    userId: any
+    userId: number
     title: string
     description: string
     city: string
@@ -95,7 +92,7 @@ function AdList() {
     key: string
   }
   const renderList = filteredAdList.map((e: TAdCardProps) => (
-    <AdCard
+    <UserAdsCard
       id={e.id}
       title={e.title}
       description={e.description}
@@ -104,56 +101,14 @@ function AdList() {
       price={e.price}
       squareMeters={e.squareMeters}
       key={e.id}
+      onClick={() => history.push(`/edit-ad/${e.id}`)}
     />
   ))
   return (
-    <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
+    <Body title="Mis Anuncios" justifyTitle="flex-start">
       <AdsStyled data-testid="adListStyled">
-        <AdListFilter
-          className=""
-          filter={setFilterParams}
-          maxPriceValue={filterParams?.maxPrice}
-          minPriceValue={filterParams?.minPrice}
-          maxM2={filterParams?.maxSize}
-          minM2={filterParams?.minSize}
-        />
         {!loading ? (
-          <AdListStyled flexDirection="column">
-            <div className="tree-search">Madrid - Alquiler</div>
-            <div className="h3">Mapa de pisos</div>
-            <div className="rowWrapper">
-              {mapView ? (
-                <Button
-                  type="button"
-                  text="Vista de detalles"
-                  textColor={colors.lightGray}
-                  icon="search"
-                  iconPosition="left"
-                  iconStyles={{
-                    marginRight: 5,
-                    paddingLeft: 0,
-                  }}
-                  onClick={() => setMapView(!mapView)}
-                  buttonStyles={buttonStyle}
-                />
-              ) : (
-                <Button
-                  type="button"
-                  text="Vista de mapa"
-                  textColor={colors.lightGray}
-                  icon="map"
-                  iconPosition="left"
-                  iconStyles={{
-                    marginRight: 5,
-                    paddingLeft: 0,
-                  }}
-                  onClick={() => setMapView(!mapView)}
-                  buttonStyles={buttonStyle}
-                />
-              )}
-            </div>
-            {mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
-          </AdListStyled>
+          <AdListStyled flexDirection="column">{renderList}</AdListStyled>
         ) : (
           <p>Loading...</p>
         )}
@@ -161,4 +116,4 @@ function AdList() {
     </Body>
   )
 }
-export default AdList
+export default UserAds

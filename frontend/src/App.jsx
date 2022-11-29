@@ -13,14 +13,15 @@ import {
   CreateNewAd,
   RecoverPassword,
   AdList,
-  UserAds,
   Profile,
+  UserAds,
   Bill,
   MyBills,
   Dashboard,
   ListaUsuariosAdmins,
 } from './pages'
 import { paths } from './utils'
+import EditAd from './pages/EditAd/EditAd'
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
       <ProtectedRoute exact path={paths.profile} component={Profile} />
       <ProtectedRoute exact path={paths.userAdmin} component={ListaUsuariosAdmins} />
       <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-      <ProtectedRoute exact path={paths.userAds} component={UserAds} />
+      <ProtectedRoute exact path="/my-ads" component={UserAds} />
+      <ProtectedRoute exact path="/edit-ad/:id" component={EditAd} />
       <ProtectedRoute exact path="/my-bills" component={MyBills} />
       <ProtectedRoute path="/my-bills/:id" component={Bill} />
       <Route exact path="*" component={PageNotFound} />

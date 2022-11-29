@@ -11,6 +11,22 @@ import { colors } from '../../theme'
 
 import contactSchema from '../../validation/contactModalSchema'
 
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
+`
+
+const TextAreaStyled = styled(TextArea)`
+  width: 100%;
+  padding: 0.5em 1rem;
+  margin: 5px 0px;
+  border-radius: 0.5rem;
+  border: 1px solid #b0b0b0;
+  font-size: 16px;
+`
+
 function ContactModal({ active, hideModal }) {
   const [animatedState, setAnimatedState] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
@@ -23,13 +39,6 @@ function ContactModal({ active, hideModal }) {
     resolver: zodResolver(contactSchema),
   })
 
-  const submitForm = (data) => {
-    const { name, email, message } = data
-    sendContact(name, email, message, (err) => {
-      // console.log(err)
-    })
-  }
-
   const sendContact = (name, email, message, callback) => {
     setAnimatedState(true)
     setIsDisabled(true)
@@ -41,6 +50,11 @@ function ContactModal({ active, hideModal }) {
       // console.log(`send contact => ${name}, ${email}, ${message}`)
       callback('The message could not be sent')
     }, 2000)
+  }
+
+  const submitForm = (data) => {
+    const { name, email, message } = data
+    sendContact(name, email, message, () => {})
   }
 
   return (
@@ -131,50 +145,8 @@ function ContactModal({ active, hideModal }) {
 }
 
 ContactModal.propTypes = {
-  active: PropTypes.bool.isRequired,
-  hideModal: PropTypes.func.isRequired,
+  active: PropTypes.bool,
+  hideModal: PropTypes.func,
 }
 
 export default ContactModal
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid ${colors.lightGray};
-`
-
-const TextAreaStyled = styled(TextArea)`
-  width: 100%;
-  padding: 0.5em 1rem;
-  margin: 5px 0px;
-  border-radius: 0.5rem;
-  border: 1px solid #b0b0b0;
-  font-size: 16px;
-`
-
-// const Wrapper = styled.div`
-//   margin-bottom: 25px;
-//   p {
-//     color: ${colors.grey};
-//     font-size: 0.95rem;
-//     font-family: 'Arial';
-//     width: auto;
-//     letter-spacing: 0px;
-//     opacity: 1;
-//     width: auto;
-//   }
-
-//   .input-container {
-//     width: 100%;
-//   }
-
-//   label {
-//     padding-right: 0;
-//     width: auto;
-//   }
-// `
-
-// const StyledSmall = styled.small`
-//   color: ${colors.redColor};
-// `
