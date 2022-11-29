@@ -61,7 +61,6 @@ function Register() {
 
       dispatch(
         newNotification({
-          // message: 'Your account has been successfully created!',
           message: data.message,
           type: NotificationTypes.succes,
         })
