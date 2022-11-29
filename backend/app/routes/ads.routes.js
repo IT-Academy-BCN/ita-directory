@@ -66,7 +66,7 @@ const AdTypeSchema = require('../schemas/AdTypeSchema')
 router.post(
   '/ads',
   authenticateToken,
-  validate(AdsSchema.omit({ adId: true })),
+  validate(AdsSchema.omit({ adId: true, adStatusId: true, createdAt: true, updatedAt: true })),
   adsController.createAd
 )
 
@@ -396,4 +396,4 @@ router.post(
 // TODO: swagger doc
 router.get('/ads/chart-data', adsController.activeAdsByLocationAndDate)
 
-module.exports = router
+module.exports = { router }

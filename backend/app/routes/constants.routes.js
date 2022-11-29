@@ -9,4 +9,4 @@ const constantsController = require('../controllers/constants.controller')
  */
 router.get('/constants', constantsController.getConstantsRoute)
 
-module.exports = router
+module.exports = { router }

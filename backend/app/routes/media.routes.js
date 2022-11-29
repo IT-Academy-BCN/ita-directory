@@ -50,4 +50,4 @@ router.post(
  */
 router.delete('/media', MediaControllers.deleteMedia)
 
-module.exports = router
+module.exports = { router }

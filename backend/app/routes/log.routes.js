@@ -22,4 +22,4 @@ router.use(validate(LogSchema))
  */
 router.post('/log', logController.createLog)
 
-module.exports = router
+module.exports = { router }

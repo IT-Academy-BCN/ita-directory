@@ -55,4 +55,4 @@ router.get(
  */
 router.get('/chat/messages', chatController.getMessages)
 
-module.exports = router
+module.exports = { router }
