@@ -11,28 +11,31 @@ const Link = styled.a`
   display: inline-block;
 
   > span {
-    position: absolute;
-    bottom: 100%;
-    margin-left: calc(-100% / 2);
-    padding: 0.2rem;
-    left: 50%;
     visibility: hidden;
-    width: 100%;
-    background-color: ${colors.redPink};
-    color: ${colors.white};
-    text-align: center;
+    position: absolute;
+    left: 45px;
+    bottom: 100%;
+    transform: translateX(-60%);
+
+    padding: 0.3rem 0.7rem;
+    min-width: 10ch;
+
     border-radius: 6px;
-    padding: 5px 0;
     z-index: 1;
     opacity: 0;
     transition: opacity 0.3s;
+
     font-size: 0.6rem;
+    background-color: ${colors.redPink};
+    color: ${colors.white};
+    text-align: center;
 
     &::after {
       content: '';
       position: absolute;
       top: 97%;
       left: 50%;
+
       margin-left: -5px;
       border-width: 5px;
       border-style: solid;
@@ -64,7 +67,7 @@ function Profile({ children, url, title }) {
   return (
     <Link href={url} target="_blank" rel="noreferrer" onMouseOver={handleGetUserOnMouseOver}>
       {children}
-      <span>{isSuccess ? data.name || title : '...'}</span>
+      <span>{isSuccess ? data.name || title : 'ᓚᘏᗢ'}</span>
     </Link>
   )
 }
