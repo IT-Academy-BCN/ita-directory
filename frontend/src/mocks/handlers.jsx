@@ -1,20 +1,19 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { rest } from 'msw'
 import { urls } from '../utils'
 
 const baseURL = `${import.meta.env.VITE_API_URL}${urls.register}`
+
+// response from Register (preview)
 const mockRegisterRes = [
   {
-    status: '200',
     message: 'User registered correctly',
   },
 ]
+
+// requested handlers
 const handlers = [
-  // eslint-disable-next-line arrow-body-style
-  rest.post(baseURL, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(mockRegisterRes))
-  }),
+  // post request     request, response, context
+  rest.post(baseURL, (req, res, ctx) => res(ctx.status(200), ctx.json(mockRegisterRes))),
 ]
 
 export default handlers
