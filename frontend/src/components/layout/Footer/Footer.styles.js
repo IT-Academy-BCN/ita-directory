@@ -98,13 +98,16 @@ export const Information = styled.div`
 export const Credits = styled(Information)`
   padding: 0.3rem 0;
 
-  & p {
+  p {
     color: ${colors.black};
     text-align: left;
     margin: 0;
   }
-  & span {
+
+  span,
+  a {
     color: ${colors.redPink};
+    text-decoration: none;
   }
 `
 

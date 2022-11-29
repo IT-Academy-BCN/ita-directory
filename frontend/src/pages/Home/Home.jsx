@@ -1,10 +1,10 @@
+import React from 'react'
 import styled from 'styled-components'
 import Body from '../../components/layout/Body/Body'
 import { Banner } from '../../components/atoms'
 import { MapOfDistricts } from '../../components/organisms'
 import { Container, device } from '../../theme'
 import { Menu } from '../../components/molecules'
-import Test from './Test'
 
 const HomeContainer = styled(Container)`
   flex-direction: column;
@@ -27,10 +27,7 @@ function Home() {
     <Body menu={<Menu />} title="El directorio" justifyTitle="center" hideTitle>
       <HomeContainer data-testid="homeContainerTest">
         <Banner />
-        <Test />
-
         <MapOfDistricts />
-        <Test />
       </HomeContainer>
     </Body>
   )

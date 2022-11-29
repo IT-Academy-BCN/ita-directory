@@ -1,11 +1,11 @@
-name: Frontend Deploy
+name: BE Deploy
 
 on:
   push:
     branches:
       - main
     paths:
-      - "frontend/**"
+      - "backend/**"
 
 jobs:
   deploy:
@@ -17,4 +17,4 @@ jobs:
       - name: Build and deploy
         run: |
           cd scripts
-          bash dev.deploy.fr.sh
+          bash dev.deploy.be.sh
