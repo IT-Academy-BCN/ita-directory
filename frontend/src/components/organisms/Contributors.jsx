@@ -1,7 +1,7 @@
 // @ts-nocheck
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../store/services/githubApi'
-import Loading from '../atoms/Contributors/Loading'
+import { Loading } from '../atoms'
 import Profile from './Profile'
 
 const ContributorsStyled = styled.div.attrs({ className: 'contributors-avatar' })`

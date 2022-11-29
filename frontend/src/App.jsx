@@ -21,10 +21,12 @@ import {
   ListaUsuariosAdmins,
 } from './pages'
 import { paths } from './utils'
+import { Loading } from './components/atoms'
 
 function App() {
   return (
     <Switch>
+      <Route exact path="/loading" component={Loading} />
       <Route exact path="/" component={Home} />
       <Route exact path="/ad/:id" component={Ad} />
       <Route exact path="/new-ad" component={CreateNewAd} />
