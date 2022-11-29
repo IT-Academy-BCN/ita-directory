@@ -31,4 +31,4 @@ const ContactSchema = require('../schemas/ContactSchema')
  */
 router.post('/contact', validate(ContactSchema.pick({ email: true })), contactController)
 
-module.exports = router
+module.exports = { router }

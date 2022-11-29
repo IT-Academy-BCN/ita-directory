@@ -256,4 +256,4 @@ router.patch(
   invoicesController.updateInvoice
 )
 
-module.exports = router
+module.exports = { router }

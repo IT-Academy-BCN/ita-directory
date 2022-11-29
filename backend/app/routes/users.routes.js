@@ -225,4 +225,4 @@ router.delete('/users', UsersController.deleteUser)
 // TODO: Swagger doc
 router.patch('/users/update-avatar', authenticateToken, uploadFile, UsersController.updateAvatar)
 
-module.exports = router
+module.exports = { router }

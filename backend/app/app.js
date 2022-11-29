@@ -42,11 +42,11 @@ app.get('/', (req, res) => {
 })
 
 // Initialize routes
-Object.values(routes).forEach((r, i) => {
+Object.values(routes).forEach(({ router }, i) => {
   // eslint-disable-next-line no-console
   console.log(`${Object.keys(routes)[i]} has been initialized`)
-  app.use(process.env.PREFIX, r)
-  app.use(r, logger)
+  app.use(process.env.PREFIX, router)
+  app.use(router, logger)
 })
 
 module.exports = app

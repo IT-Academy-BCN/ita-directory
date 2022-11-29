@@ -124,4 +124,4 @@ router.get('/locations/region/:name', locationController.getRegion)
  */
 router.get('/locations/relative/:name', locationController.getParentChild)
 
-module.exports = router
+module.exports = { router }
