@@ -29,8 +29,11 @@ const Avatar = styled.img`
 `
 
 function Contributors() {
-  const { data, isLoading } = useGetContributorsQuery()
+  const { data, isLoading, isFetching, isError, isUninitialized } = useGetContributorsQuery()
+  if (isUninitialized) return <p>getting started...</p>
   if (isLoading) return <Loading />
+  if (isFetching) return <p>fetching data...</p>
+  if (isError) return <p>No contributors to display :-( </p>
 
   return (
     <ContributorsStyled>
