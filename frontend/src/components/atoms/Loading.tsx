@@ -7,13 +7,9 @@ import { colors } from '../../theme'
 type Props = {
   size: number
 }
-// const shouldForwardProp = <CustomProps extends Record<string, unknown>>(
-//   props: Array<keyof CustomProps>,
-//   prop: PropertyKey,
-// ): boolean => !props.includes(prop as string);
 
 const LoadingStyled = styled.div.withConfig({
-  // shouldForwardProp: (prop, defaultProps) => !['size'].includes(prop) && defaultProps(prop),
+  shouldForwardProp: (prop, defaultProps) => !['size'].includes(prop) && defaultProps(prop),
 })`
   --width-height: ${({ size }: Props) => (size < 50 ? 50 : size)}px;
   --width-height-after: calc(var(--width-height) - 16px);
