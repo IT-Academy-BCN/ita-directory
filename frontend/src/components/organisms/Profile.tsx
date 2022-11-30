@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
-// @ts-nocheck
-import { useState } from 'react'
+// _@ts-nocheck
+import React, { ReactNode, useState } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { colors } from '../../theme'
 import { useGetUserQuery } from '../../store/services/githubApi'
+
+type Props = {
+  children: ReactNode
+  url: string
+  title: string
+}
 
 const Link = styled.a`
   position: relative;
@@ -59,7 +64,7 @@ const Link = styled.a`
   }
 `
 
-function Profile({ children, url, title }) {
+function Profile({ children, url, title }: Props) {
   const [skip, setSkip] = useState(true)
   const { data, isSuccess } = useGetUserQuery(title, { skip })
   const handleGetUserOnMouseOver = () => setSkip(false)
@@ -70,12 +75,6 @@ function Profile({ children, url, title }) {
       <span>{isSuccess ? data.name || title : 'ᓚᘏᗢ'}</span>
     </Link>
   )
-}
-
-Profile.prototype = {
-  children: PropTypes.node.isRequired,
-  url: PropTypes.string.isRequired,
-  title: PropTypes.string,
 }
 
 export default Profile
