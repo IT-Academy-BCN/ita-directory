@@ -52,16 +52,12 @@ function UserAds() {
 
   type TAdCardProps = {
     id: number
-    userId: number
     title: string
     description: string
     city: string
     nRooms: number
     price: number
     squareMeters: number
-    nBathrooms: number
-    mapLat: string
-    mapLon: string
     key: string
   }
   const renderList = adList.map((e: TAdCardProps) => (
@@ -74,7 +70,7 @@ function UserAds() {
       price={e.price}
       squareMeters={e.squareMeters}
       key={e.id}
-      onClick={() => history.push(`/edit-ad/${e.id}`)}
+      onClick={() => history.push(`/my-ads/${e.id}`)}
     />
   ))
   return (
