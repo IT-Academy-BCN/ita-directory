@@ -13,7 +13,7 @@ type Props = {
 // ): boolean => !props.includes(prop as string);
 
 const LoadingStyled = styled.div.withConfig({
-  shouldForwardProp: (prop, defaultProps) => !['size'].includes(prop) && defaultProps(prop),
+  // shouldForwardProp: (prop, defaultProps) => !['size'].includes(prop) && defaultProps(prop),
 })`
   --width-height: ${({ size }: Props) => (size < 50 ? 50 : size)}px;
   --width-height-after: calc(var(--width-height) - 16px);

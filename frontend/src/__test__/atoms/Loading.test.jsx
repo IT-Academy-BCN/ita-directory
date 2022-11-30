@@ -5,7 +5,7 @@ import { describe, it, expect } from 'vitest'
 import { Loading } from '../../components/atoms'
 
 describe('Loading', () => {
-  afterEach(cleanup)
+  beforeEach(cleanup)
 
   it('shoud render a loading', () => {
     render(<Loading />)
@@ -13,15 +13,16 @@ describe('Loading', () => {
     expect(loading).toBeEmptyDOMElement()
   })
 
-  it.only('shoud pass props', () => {
+  it('shoud pass props', () => {
     render(<Loading size={80} />)
     const loading = screen.getByTestId('loading')
     expect(loading).toHaveAttribute('size', '80')
   })
 
-  it('shoud have width props in the style', () => {
-    render(<Loading size={80} />)
+  it('shoud pass prop and render a style with that prop', () => {
+    render(<Loading size={111} />)
     const loading = screen.getByTestId('loading')
-    expect(loading).toHaveStyleRule('width', '80px;')
+    const styles = getComputedStyle(loading)
+    expect(styles.getPropertyValue('--width-height')).toBe('111px')
   })
 })
