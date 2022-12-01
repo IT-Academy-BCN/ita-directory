@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-// _@ts-nocheck
 import React, { ReactNode, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../../theme'
@@ -9,6 +7,12 @@ type Props = {
   children: ReactNode
   url: string
   title: string
+}
+export type TUser = {
+  id: React.Key
+  html_url: string
+  login: string
+  avatar_url: string
 }
 
 const Link = styled.a`

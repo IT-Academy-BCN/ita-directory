@@ -12,7 +12,7 @@ export const githubApi = createApi({
   }),
   endpoints: (builder) => ({
     getContributors: builder.query({
-      query: () => '/repos/IT-Academy-BCN/ita-directory/contributors',
+      query: () => `/repos/IT-Academy-BCN/ita-directory/contributors`,
     }),
     getUser: builder.query({
       query: (user) => `/users/${user}`,
