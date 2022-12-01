@@ -1,8 +1,9 @@
-// @ts-nocheck
+// _@ts-nocheck
+import React from 'react'
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../store/services/githubApi'
 import { Loading } from '../atoms'
-import Profile from './Profile'
+import Profile, { TUser } from './Profile'
 
 const ContributorsStyled = styled.div.attrs({ className: 'contributors-avatar' })`
   --width-height: 62px;
@@ -29,18 +30,18 @@ const Avatar = styled.img`
 `
 
 function Contributors() {
-  const { data, isLoading, isFetching, isError, isUninitialized } = useGetContributorsQuery()
+  const { data, isLoading, isFetching, isError, isUninitialized } = useGetContributorsQuery(null)
   if (isUninitialized) return <p>getting started...</p>
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading size={100} />
   if (isFetching) return <p>fetching data...</p>
   if (isError) return <p>No contributors to display :-( </p>
 
   return (
     <ContributorsStyled>
       <ul>
-        {data?.map((d) => (
-          <Profile key={d.id} url={d.html_url} title={d.login}>
-            <Avatar src={d.avatar_url} alt={d.login} />
+        {data?.map((user: TUser) => (
+          <Profile key={user.id} url={user.html_url} title={user.login}>
+            <Avatar src={user.avatar_url} alt={user.login} />
           </Profile>
         ))}
       </ul>
