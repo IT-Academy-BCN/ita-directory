@@ -31,7 +31,7 @@ describe('Registration', () => {
 
     await userEvent.click(await screen.findByText('Registrarme'))
 
-    await waitFor(() => screen.findByText('check_circle'), { timeout: 2000 })
+    await waitFor(() => screen.findByText('check_circle'))
   })
 
   it('pass invalid email to test input value', async () => {
