@@ -1,4 +1,3 @@
-// _@ts-nocheck
 import React from 'react'
 import styled from 'styled-components'
 import { useGetContributorsQuery } from '../../store/services/githubApi'
