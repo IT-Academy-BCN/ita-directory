@@ -53,4 +53,4 @@ describe('Registration', () => {
       expect(screen.getByText(/must be a valid email/i)).toBeInTheDocument()
     })
   })
-})
+}, 30_000)
