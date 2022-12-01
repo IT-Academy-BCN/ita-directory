@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import { deleteNotification } from '../../../store/notificationSlice'
-import Button from '../Button'
 import Icon from '../Icon'
 import Text from '../Text'
 
@@ -53,11 +52,11 @@ function Notification({ message, id, icon, colorIcon }) {
       <NotificationIconStyled>
         <Icon name={icon} color={colorIcon} />
       </NotificationIconStyled>
-      <Button
-        type="close"
-        text={<Icon name="close" size={20} />}
+      <Icon
+        name="close"
+        size={20}
         onClick={closeNotification}
-        buttonStyles={{
+        style={{
           position: 'relative',
           background: 'none',
           bottom: '22px',
@@ -65,6 +64,7 @@ function Notification({ message, id, icon, colorIcon }) {
           alignSelf: 'flex-start',
         }}
       />
+
       <Text text={message} style={{ marginLeft: '-45px' }} />
     </NotificationStyled>
   )
