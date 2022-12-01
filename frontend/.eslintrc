@@ -7,6 +7,7 @@
     "react-app/jest",
     "prettier"
   ],
+  "plugins": ["vitest"],
   "rules": {
     "react/require-default-props": ["off"],
     "react/react-in-jsx-scope": ["off"],
@@ -14,7 +15,8 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
     "no-param-reassign": ["error", { "props": false }],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "vitest/no-focused-tests": "error"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
