@@ -58,7 +58,7 @@ function Register() {
   const registerUser = async (user: TUserData) => {
     try {
       const { data } = await axiosInstance.post<TData>(urls.register, user)
-
+      // console.log(data.message)
       dispatch(
         newNotification({
           message: data.message,

@@ -11,25 +11,25 @@ describe('Registration', () => {
     expect(registerBtn).toBeInTheDocument()
   })
 
-  it('should render the success notification when valid inputs are provided', async () => {
+  it.only('should render the success notification when valid inputs are provided', async () => {
     render(<Registration />)
 
     const firstName = screen.getByPlaceholderText(/nombre/i)
-    await userEvent.type(firstName, 'Sergi')
+    await userEvent.type(await firstName, 'Sergi')
 
     const lastName = screen.getByPlaceholderText(/apellido/i)
-    await userEvent.type(lastName, 'Bosch')
+    await userEvent.type(await lastName, 'Bosch')
 
     const email = screen.getByPlaceholderText(/email/i)
-    await userEvent.type(email, 'email@email.com')
+    await userEvent.type(await email, 'email@email.com')
 
     const password = screen.getByLabelText(/password/i)
-    await userEvent.type(password, 'Hola12!')
+    await userEvent.type(await password, 'Hola12!')
 
     const privacyCheck = screen.getByRole('checkbox')
-    await userEvent.click(privacyCheck)
+    await userEvent.click(await privacyCheck)
 
-    await userEvent.click(screen.getByText('Registrarme'))
+    await userEvent.click(await screen.findByText('Registrarme'))
 
     await waitFor(() => screen.findByText('check_circle'))
   })

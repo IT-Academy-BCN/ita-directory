@@ -1,7 +1,6 @@
 import { rest } from 'msw'
-import { urls } from '../utils'
 
-const baseURL = `${import.meta.env.VITE_API_URL}${urls.register}`
+const baseURL = `http://localhost:10910/api/v1/register`
 
 const mockRegisterRes = [
   {
