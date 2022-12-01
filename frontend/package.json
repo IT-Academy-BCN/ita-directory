@@ -6,7 +6,7 @@
     "start": "vite --config vite.config.js",
     "build": "vite build",
     "dev": "vite serve",
-    "test": "vitest --no-threads",
+    "test": "vitest",
     "lint": "./node_modules/.bin/eslint \"**/*.{js,jsx,ts,tsx}\" --max-warnings=0"
   },
   "browserslist": [
