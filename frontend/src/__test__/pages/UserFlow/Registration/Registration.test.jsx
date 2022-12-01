@@ -35,7 +35,7 @@ describe('Registration', () => {
     await waitFor(() => {
       expect(screen.getByText('check_circle')).toBeInTheDocument()
     })
-  }, 10_000)
+  }, 20_000)
 
   it('pass invalid email to test input value', async () => {
     render(<Registration />)
