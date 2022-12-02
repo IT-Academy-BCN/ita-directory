@@ -6,12 +6,9 @@ import ColaboradoresBanner from '../../assets/logos/Colaboradores-Banner.jpg'
 import BarcelonaBanner from '../../assets/logos/barcelona-banner.jpg'
 import Contributors from '../organisms/Contributors'
 import { Text } from '../atoms'
+import { FlexBox } from '../../theme/wrappers'
 
-const BannerStyled = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+const BannerStyled = styled(FlexBox)`
   @media ${device.Desktop} {
     padding: 0 11rem 0 11rem;
   }
@@ -55,7 +52,7 @@ function Banner({ students }) {
   const srcImg = students ? ColaboradoresBanner : BarcelonaBanner
 
   return (
-    <BannerStyled alignItems="center">
+    <BannerStyled flexDirection="column" alignItems="center">
       <Img src={srcImg} alt="banner image" />
       {students ? (
         <>
