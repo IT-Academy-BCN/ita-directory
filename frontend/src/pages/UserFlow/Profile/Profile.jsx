@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Input } from '../../../components/atoms'
 import Modal from '../../../components/organisms/Modal/Modal'
@@ -15,25 +17,52 @@ import { msgs, validatePassword } from '../../../utils/userFlow'
 import useUser from '../../../hooks/useUserHook'
 import { FlexBox } from '../../../theme/wrappers'
 import urls from '../../../utils/urls'
+import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import axiosInstance from '../../../utils/axiosInstance'
 
 function Profile() {
   const user = useUser()
+  const dispatch = useDispatch()
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
   const [avatar, setAvatar] = useState(null)
-  const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
+  // const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
-  const [firstLoad, setFirstLoad] = useState(null)
+  // const [firstLoad, setFirstLoad] = useState(null)
+  // const [disabled, setDisabled] = useState(false)
 
-  const submitUserInfo = () => {
-    setLoggedinUserInfo((prev) => {
-      return {
-        ...prev,
-        password: newPassword === '' ? loggedinUserInfo.password : newPassword,
-      }
-    })
+  const submitUserInfo = async () => {
+    try {
+      const response = await axios.post(urls.changePassword, {
+        password1: newPassword,
+        password2: newPasswordRepeated,
+      })
+      dispatch(
+        newNotification({
+          message: response.data.message,
+          type: NotificationTypes.succes,
+        })
+      )
+    } catch (error) {
+      dispatch(
+        newNotification({
+          message: `Sorry, connection failed: "${error.message}". Please, try later.`,
+          type: NotificationTypes.error,
+        })
+      )
+    }
   }
+
+  // const submitUserInfo = () => {
+  // setLoggedinUserInfo((prev) => {
+  //   console.log(user)
+  //   console.log(newPasswordRepeated, newPassword)
+  //   return {
+  //     ...prev,
+  //     password: newPassword === '' ? loggedinUserInfo.password : newPassword,
+  //   }
+  // })
+  // }
 
   const handlePhoto = (e) => {
     const image = URL.createObjectURL(e.target.files[0])
@@ -47,6 +76,15 @@ function Profile() {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   }
+
+  // useEffect(() => {
+  //   const userData = {
+  //     name: user.name,
+  //     email: user.email,
+  //     password: user.password,
+  //   }
+  //   setLoggedinUserInfo(userData)
+  // }, [user])
 
   return (
     <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn>
@@ -102,7 +140,7 @@ function Profile() {
                   type="text"
                   id="username"
                   name="username"
-                  placeholder={loggedinUserInfo.name}
+                  placeholder={user && user.name}
                   disabled
                   minMarginTop
                 />
@@ -114,7 +152,7 @@ function Profile() {
                   type="email"
                   id="email"
                   name="email"
-                  placeholder={loggedinUserInfo.email}
+                  placeholder={user && user.email}
                   disabled
                   minMarginTop
                 />
@@ -162,10 +200,11 @@ function Profile() {
                 text="Guardar"
                 loadingText="Guardando"
                 type="button"
-                onClick={() => {
-                  if (firstLoad) setFirstLoad(false)
-                  submitUserInfo()
-                }}
+                // onClick={() => {
+                //   if (firstLoad) setFirstLoad(false)
+                //   submitUserInfo()
+                // }}
+                onClick={submitUserInfo}
                 className="green-gradient"
                 disabled={
                   !avatar &&
