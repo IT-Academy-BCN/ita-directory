@@ -201,7 +201,7 @@ router.post('/recover-password', UsersController.receiveEmailGetToken)
 }
  */
 // TODO: refactor controller method to use middleware auth
-router.post('/change-password/:token', UsersController.changePassword)
+router.post('/change-password', UsersController.changePassword)
 
 /**
  * DELETE /users/{userId}

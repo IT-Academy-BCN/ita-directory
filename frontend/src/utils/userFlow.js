@@ -1,11 +1,5 @@
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-// const IMPORT_ENV = import.meta.env.VITE_PASSWORD_REGEX
-// var regex = new RegExp('ReGeX' + IMPORT_ENV + 'ReGeX')
-// const regex = new RegExp(`ReGeX${IMPORT_ENV}ReGeX`)
-// const regex = new RegExp("^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[-+!@$%&*?])\S*$)
-// const PASSWORD_REGEX = /IMPORT_ENV/
-// const PASSWORD_REGEX = /(import.meta.env.VITE_PASSWORD_REGEX)/
 const PASSWORD_REGEX = /^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[-+!@$%&*?])\S*$/i
 const NAME_REGEX = /^[a-z ,.'-]+$/i
 
