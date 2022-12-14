@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Input } from '../../../components/atoms'
@@ -26,17 +25,18 @@ function Profile() {
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
   const [avatar, setAvatar] = useState(null)
-  // const [loggedinUserInfo, setLoggedinUserInfo] = useState({})
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
-  // const [firstLoad, setFirstLoad] = useState(null)
-  // const [disabled, setDisabled] = useState(false)
 
   const submitUserInfo = async () => {
+    // const token = localStorage.getItem('token')
+
+    const passwordObj = {
+      password1: newPassword,
+      password2: newPasswordRepeated,
+    }
+    // `${urls.changePassword}/${token}`
     try {
-      const response = await axios.post(urls.changePassword, {
-        password1: newPassword,
-        password2: newPasswordRepeated,
-      })
+      const response = await axiosInstance.post(urls.changePassword, passwordObj)
       dispatch(
         newNotification({
           message: response.data.message,
@@ -76,15 +76,6 @@ function Profile() {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   }
-
-  // useEffect(() => {
-  //   const userData = {
-  //     name: user.name,
-  //     email: user.email,
-  //     password: user.password,
-  //   }
-  //   setLoggedinUserInfo(userData)
-  // }, [user])
 
   return (
     <Body title="Editar perfil" justifyTitle="flex-start" isLoggedIn>
@@ -200,10 +191,6 @@ function Profile() {
                 text="Guardar"
                 loadingText="Guardando"
                 type="button"
-                // onClick={() => {
-                //   if (firstLoad) setFirstLoad(false)
-                //   submitUserInfo()
-                // }}
                 onClick={submitUserInfo}
                 className="green-gradient"
                 disabled={

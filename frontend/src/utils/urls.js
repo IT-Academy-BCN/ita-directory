@@ -6,7 +6,7 @@ const urls = {
   users: '/users',
   userAds: '/ads/users',
   refreshToken: '/refresh-token',
-  changePassword: '/change-password',
+  changePassword: '/change-password/',
 }
 
 export default urls
