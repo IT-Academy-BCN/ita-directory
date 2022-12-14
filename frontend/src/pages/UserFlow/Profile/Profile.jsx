@@ -28,15 +28,14 @@ function Profile() {
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
 
   const submitUserInfo = async () => {
-    // const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
 
-    const passwordObj = {
-      password1: newPassword,
-      password2: newPasswordRepeated,
-    }
-    // `${urls.changePassword}/${token}`
     try {
-      const response = await axiosInstance.post(urls.changePassword, passwordObj)
+      const response = await axiosInstance.post(urls.changePassword, {
+        token,
+        password1: newPassword,
+        password2: newPasswordRepeated,
+      })
       dispatch(
         newNotification({
           message: response.data.message,
