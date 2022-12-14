@@ -352,8 +352,7 @@ exports.receiveEmailGetToken = async (req, res) => {
 
 // TODO: refactor controller method to use middleware auth
 exports.changePassword = async (req, res, next) => {
-  const { password1, password2 } = req.body
-  const { token } = req.params
+  const { password1, password2, token } = req.body
   const regex = new RegExp(process.env.PASSWORD_REGEX)
 
   if (password1 !== password2) {
@@ -365,6 +364,7 @@ exports.changePassword = async (req, res, next) => {
     )
   }
 
+  console.log('password1', password1)
   if (!regex.test(password1)) {
     return next({
       code: 'error',
@@ -384,6 +384,7 @@ exports.changePassword = async (req, res, next) => {
 
   // @todo: This verification should be implemented using middleware
   // eslint-disable-next-line consistent-return
+  console.log('token', token)
   JWT.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       return res.status(200).json({
