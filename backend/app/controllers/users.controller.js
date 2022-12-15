@@ -364,7 +364,6 @@ exports.changePassword = async (req, res, next) => {
     )
   }
 
-  console.log('password1', password1)
   if (!regex.test(password1)) {
     return next({
       code: 'error',
