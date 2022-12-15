@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Body from '../../../components/layout/Body/Body'
@@ -51,17 +51,6 @@ function Profile() {
       )
     }
   }
-
-  // const submitUserInfo = () => {
-  // setLoggedinUserInfo((prev) => {
-  //   console.log(user)
-  //   console.log(newPasswordRepeated, newPassword)
-  //   return {
-  //     ...prev,
-  //     password: newPassword === '' ? loggedinUserInfo.password : newPassword,
-  //   }
-  // })
-  // }
 
   const handlePhoto = (e) => {
     const image = URL.createObjectURL(e.target.files[0])
