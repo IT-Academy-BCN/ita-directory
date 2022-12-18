@@ -40,13 +40,13 @@ describe('Banner', () => {
     expect(await screen.findByTitle('profiles')).toBeInTheDocument()
     expect(await screen.findByTitle('footer')).toBeInTheDocument()
   })
-  // it('should render Contributors', async () => {
-  //   render(
-  //     <Provider store={store}>
-  //       <Banner students />
-  //     </Provider>
-  //   )
-  //   const contributors = screen.getByTestId('contributors')
-  //   expect(contributors).toBeInTheDocument()
-  // })
+  it('should render Contributors', async () => {
+    render(
+      <Provider store={store}>
+        <Banner students />
+      </Provider>
+    )
+    const contributors = screen.getByTestId('loading')
+    expect(contributors).toBeInTheDocument()
+  })
 })
