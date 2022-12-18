@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../../theme'
 import { useGetUserQuery } from '../../store/services/githubApi'
@@ -71,7 +71,7 @@ const Link = styled.a`
 function Profile({ children, url, title }: Props) {
   const [skip, setSkip] = useState(true)
   const { data, isSuccess } = useGetUserQuery(title, { skip })
-  const handleGetUserOnMouseOver = () => setSkip(false)
+  const handleGetUserOnMouseOver = useCallback(() => setSkip(false), [])
 
   return (
     <Link href={url} target="_blank" rel="noreferrer" onMouseOver={handleGetUserOnMouseOver}>
