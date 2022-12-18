@@ -40,7 +40,7 @@ function Contributors() {
       <ul>
         {data?.map((user: TUser) => (
           <Profile key={user.id} url={user.html_url} title={user.login}>
-            <Avatar src={user.avatar_url} alt={user.login} />
+            <Avatar src={user.avatar_url} alt={user.login} role="avatar" />
           </Profile>
         ))}
       </ul>
