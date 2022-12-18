@@ -81,4 +81,4 @@ function Profile({ children, url, title }: Props) {
   )
 }
 
-export default Profile
+export default styled(Profile)``

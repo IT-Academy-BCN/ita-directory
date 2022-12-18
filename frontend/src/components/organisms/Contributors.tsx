@@ -36,7 +36,7 @@ function Contributors() {
   if (isError) return <p>No contributors to display :-( </p>
 
   return (
-    <ContributorsStyled>
+    <ContributorsStyled data-testid="contributors">
       <ul>
         {data?.map((user: TUser) => (
           <Profile key={user.id} url={user.html_url} title={user.login}>
