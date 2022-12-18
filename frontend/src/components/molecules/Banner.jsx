@@ -53,18 +53,23 @@ function Banner({ students }) {
 
   return (
     <BannerStyled flexDirection="column" alignItems="center">
-      <Img src={srcImg} alt="banner image" />
+      <Img src={srcImg} alt="image banner" />
       {students ? (
         <>
-          <Text as="h4" className="colaboradores-text" text="Colaboradores" />
-          <Text text="Usuarios de github.com que han contribuido" />
+          <Text as="h4" className="colaboradores-text" title="contributors" text="Colaboradores" />
+          <Text title="description" text="Usuarios de github.com que han contribuido" />
           <Contributors />
-          <Text as="h4" text="Perfiles" />
-          <Text className="footer" text="ReactJS y Node Juniors Developers en Barcelona" />
+          <Text as="h4" title="profiles" text="Perfiles" />
+          <Text
+            className="footer"
+            title="footer"
+            text="ReactJS y Node Juniors Developers en Barcelona"
+          />
         </>
       ) : (
         <Text
           as="h4"
+          title="directory"
           className="directorio"
           text="Un directorio abierto desarrollado por los alumnos de Barcelona Activa"
         />
