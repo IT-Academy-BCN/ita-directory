@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Input } from '../../../components/atoms'
 import Modal from '../../../components/organisms/Modal/Modal'
@@ -19,12 +19,6 @@ import { FlexBox } from '../../../theme/wrappers'
 import urls from '../../../utils/urls'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import axiosInstance from '../../../utils/axiosInstance'
-
-type TData = {
-  code: string
-  header: string
-  message: string
-}
 
 function Profile() {
   const user = useUser()
@@ -51,10 +45,9 @@ function Profile() {
       )
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        const error = err as AxiosError<TData>
         dispatch(
           newNotification({
-            message: `Sorry, connection failed: "${error.response?.data.message}". Please, try later.`,
+            message: `Sorry, connection failed: "${err.response?.data.message}". Please, try later.`,
             type: NotificationTypes.error,
           })
         )
@@ -64,8 +57,7 @@ function Profile() {
     }
   }
 
-  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return
+  const handlePhoto = (e) => {
     const image = URL.createObjectURL(e.target?.files[0])
     setAvatar(image)
   }
@@ -159,9 +151,7 @@ function Profile() {
                   type="password"
                   value={newPassword}
                   placeholder="Introducir contraseña"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setNewPassword(e.target.value)
-                  }
+                  onChange={(e) => setNewPassword(e.target.value)}
                   id="passName"
                   name="password"
                   success={newPassword !== '' && validatePassword(newPassword)}
@@ -175,9 +165,7 @@ function Profile() {
                   type="password"
                   value={newPasswordRepeated}
                   placeholder="Confirma tu contraseña"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setNewPasswordRepeated(e.target.value)
-                  }
+                  onChange={(e) => setNewPasswordRepeated(e.target.value)}
                   id="confirmPassName"
                   name="confirmPassName"
                   error={newPasswordRepeated !== '' && newPassword !== newPasswordRepeated}
