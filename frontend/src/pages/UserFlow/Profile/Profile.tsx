@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import axios, { AxiosError } from 'axios'
 import Body from '../../../components/layout/Body/Body'
 import { Button, Input } from '../../../components/atoms'
 import Modal from '../../../components/organisms/Modal/Modal'
@@ -19,12 +20,18 @@ import urls from '../../../utils/urls'
 import { newNotification, NotificationTypes } from '../../../store/notificationSlice'
 import axiosInstance from '../../../utils/axiosInstance'
 
+type TData = {
+  code: string
+  header: string
+  message: string
+}
+
 function Profile() {
   const user = useUser()
   const dispatch = useDispatch()
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordRepeated, setNewPasswordRepeated] = useState('')
-  const [avatar, setAvatar] = useState(null)
+  const [avatar, setAvatar] = useState('')
   const [showUploadPhotoModal, setShowUploadPhotoModal] = useState(false)
 
   const submitUserInfo = async () => {
@@ -42,18 +49,24 @@ function Profile() {
           type: NotificationTypes.succes,
         })
       )
-    } catch (error) {
-      dispatch(
-        newNotification({
-          message: `Sorry, connection failed: "${error.message}". Please, try later.`,
-          type: NotificationTypes.error,
-        })
-      )
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        const error = err as AxiosError<TData>
+        dispatch(
+          newNotification({
+            message: `Sorry, connection failed: "${error.response?.data.message}". Please, try later.`,
+            type: NotificationTypes.error,
+          })
+        )
+      } else {
+        throw new Error(`${err}`)
+      }
     }
   }
 
-  const handlePhoto = (e) => {
-    const image = URL.createObjectURL(e.target.files[0])
+  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return
+    const image = URL.createObjectURL(e.target?.files[0])
     setAvatar(image)
   }
 
@@ -121,7 +134,6 @@ function Profile() {
                   name="username"
                   placeholder={user && user.name}
                   disabled
-                  minMarginTop
                 />
                 <p>El nombre de usuario no se puede modificar</p>
               </div>
@@ -133,7 +145,6 @@ function Profile() {
                   name="email"
                   placeholder={user && user.email}
                   disabled
-                  minMarginTop
                 />
                 <p>
                   El email no se puede modificar. Ponte en
@@ -148,10 +159,11 @@ function Profile() {
                   type="password"
                   value={newPassword}
                   placeholder="Introducir contraseña"
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setNewPassword(e.target.value)
+                  }
                   id="passName"
                   name="password"
-                  minMarginTop
                   success={newPassword !== '' && validatePassword(newPassword)}
                   error={newPassword !== '' && !validatePassword(newPassword)}
                   errorText={msgs.passwordError}
@@ -163,14 +175,15 @@ function Profile() {
                   type="password"
                   value={newPasswordRepeated}
                   placeholder="Confirma tu contraseña"
-                  onChange={(e) => setNewPasswordRepeated(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setNewPasswordRepeated(e.target.value)
+                  }
                   id="confirmPassName"
                   name="confirmPassName"
                   error={newPasswordRepeated !== '' && newPassword !== newPasswordRepeated}
                   errorText="Las 2 contraseñas tienen que ser iguales"
                   success={newPasswordRepeated !== '' && newPassword === newPasswordRepeated}
                   disabled={!validatePassword(newPassword)}
-                  minMarginTop
                 />
               </div>
             </div>

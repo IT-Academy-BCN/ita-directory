@@ -20,7 +20,7 @@ const InputStyled = styled.input`
   }
   &:focus {
     outline: 0 none;
-    border: 1px solid ${(props) => (props.error ? 'red' : colors.darkBlue)} !important;
+    border: 1px solid ${({ error }) => (error ? 'red' : colors.darkBlue)} !important;
   }
 `
 
@@ -81,6 +81,7 @@ Input.propTypes = {
   size: PropTypes.number,
   disabled: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  errorText: PropTypes.string,
   success: PropTypes.bool,
   inputContainerClassName: PropTypes.string,
   required: PropTypes.bool,

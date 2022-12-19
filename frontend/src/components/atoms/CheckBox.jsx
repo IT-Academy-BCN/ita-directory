@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
-import { Input, ErrorMessage } from './Forms'
+import { Input, ErrorMessage, Label } from './Forms'
 
 export const CheckBoxContainer = styled.div`
   display: flex;
@@ -21,17 +21,17 @@ export const CheckBoxContainer = styled.div`
 `
 
 // @ts-ignore
-function CheckBox({ error, register }) {
+function CheckBox({ error, register, id, name }) {
   return (
     <CheckBoxContainer className="check-box-container">
-      <Input type="checkbox" className="input" register={register} />
+      <Label htmlFor={id} label="text" hiddenLabel />
+      <Input type="checkbox" className="input" register={register} id={id} name={name} />
       {error && <ErrorMessage text={error} />}
     </CheckBoxContainer>
   )
 }
 
 CheckBox.propTypes = {
-  // @ts-ignore
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   register: PropTypes.object,
   id: PropTypes.string,
