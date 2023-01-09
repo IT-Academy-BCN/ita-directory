@@ -4,7 +4,7 @@ import SelectArrow from '../../../../assets/images/select-arrow.svg'
 
 const PieGraphicStyled = styled.div`
   width: 100%;
-  min-height: calc(90vh - 10rem - 120px);
+  min-height: calc(90vh - 10rem - 100px);
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -28,8 +28,9 @@ const PieGraphicStyled = styled.div`
 
     h2 {
       font-weight: 400;
-      margin: 1rem;
       color: white;
+      font-size: 20px;
+      margin: 0px 5px;
     }
 
     .selectorWrapper {
@@ -75,7 +76,11 @@ const PieGraphicStyled = styled.div`
 
   .cardBody {
     width: 100%;
-    height: 51.75vh;
+    height: 45vh;
+  }
+  .cardBodyModal {
+    width: 100%;
+    height: 85vh;
   }
 
   .chart {

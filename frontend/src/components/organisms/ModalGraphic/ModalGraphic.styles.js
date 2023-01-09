@@ -36,6 +36,6 @@ export const ModalGraphicStyled = styled.div`
     font-family: Arial;
     font-size: 1rem;
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
   }
 `

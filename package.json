@@ -41,6 +41,7 @@
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
     "eslint": "8.17.0",
+    "eslint-plugin-vitest": "^0.0.25",
     "husky": "6.0.0"
   }
 }
