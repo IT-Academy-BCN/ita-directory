@@ -69,7 +69,7 @@ function GlobalFilters({ onYearChange, onMonthChange }) {
   const endYear = 2016
   const yearDifference = endYear - startYear
   const optionsSelectYear = []
-  for (let i = 0; i < yearDifference + 1; i + 1) {
+  for (let i = 0; i < yearDifference + 1; i += 1) {
     const curYear = startYear + i
     optionsSelectYear.push(
       <option value={curYear} key={curYear}>

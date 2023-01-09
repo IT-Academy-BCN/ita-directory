@@ -4,8 +4,9 @@ import { device, colors } from '../../../../theme'
 
 export const BarGraphicStyled = styled.div`
   min-width: 100%;
+  height: 100%;
   margin: auto;
-  min-height: calc(90vh - 10rem - 120px);
+  min-height: calc(90vh - 10rem - 100px);
   box-shadow: 0 3px 6px #00000029;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -29,6 +30,8 @@ export const BarGraphicStyled = styled.div`
     h2 {
       font-weight: 400;
       color: white;
+      font-size: 20px;
+      margin: 10px 5px;
     }
 
     .selectorWrapper {
@@ -87,6 +90,7 @@ export const StyledSvg = styled.svg`
   .bar-label {
     animation: fadeIn ease-in 1s;
     fill: black;
+    font-size: 5px;
   }
 
   .chart {
@@ -99,6 +103,7 @@ export const StyledSvg = styled.svg`
     animation: fadeIn 2s;
     display: block;
     height: 50px;
+    color: black;
   }
 
   @keyframes fadeIn {
@@ -121,11 +126,11 @@ export const StyledSvg = styled.svg`
     }
   }
   text {
-    font-size: small;
+    font-size: 10px;
     color: ${colors.lightGrey};
 
     @media ${device.Tablet} {
-      font-size: large;
+      font-size: 10px;
     }
   }
 `
@@ -144,6 +149,7 @@ export const ChartLegend = styled.div`
     display: inline-block;
     vertical-align: center;
     color: gray;
+    font-size: 1px;
   }
 
   @keyframes fadeIn {

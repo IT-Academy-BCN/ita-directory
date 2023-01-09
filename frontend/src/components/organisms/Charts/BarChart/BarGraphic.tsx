@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PropType from 'prop-types'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
 import { groupByTypeYear, groupByTypeMonth, daysBetween } from '../../../../utils/generateData'
 import {
@@ -11,15 +10,30 @@ import { allMonths } from '../../../../utils/constant'
 import { returnMonthsData, dataLabels } from './barGraphicConst'
 
 // Font awesome icons
-
 import { BarGraphicStyled } from './BarGraphic.styles'
 import BarChartWithD3 from './BarChartWithD3'
 import { Icon } from '../../../atoms'
 
-function BarGraphic({ data, hideModal, active, size, year, month }) {
+type TPropertyData = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+}
+
+type TPropsBarGraphic = {
+  data: Array<TPropertyData>
+  hideModal: () => void | boolean
+  active: boolean
+  year: string
+  month: string
+}
+
+function BarGraphic({ data, hideModal, active, year, month }: TPropsBarGraphic) {
   const [selectedYear, setSelectedYear] = useState(year)
   const [selectedMonth, setSelectedMonth] = useState(month)
-  const [customData, setCustomData] = useState()
+  const [customData, setCustomData] = useState<TCustomOptions>()
 
   useEffect(() => {
     setSelectedYear(year)
@@ -27,73 +41,73 @@ function BarGraphic({ data, hideModal, active, size, year, month }) {
     // eslint-disable-next-line
   }, [year, month])
 
-  const returnOptionsSelectYear = (startYear, lastYear) => {
+  const returnOptionsSelectYear = (startYear: number, lastYear: number) => {
     const years = []
     const yearsDifference = lastYear - startYear + 1
 
-    for (let i = 0; i < yearsDifference; i + 1) {
-      years.push(
-        <option key={parseInt(startYear, 10) + i} value={parseInt(startYear, 10) + i}>
-          {parseInt(startYear, 10) + i}
-        </option>
-      )
+    for (let i = 0; i < yearsDifference; i += 1) {
+      years.push(startYear + i)
     }
     return years
   }
 
-  const optionsSelectYear = returnOptionsSelectYear(
-    data[0].day.getFullYear(),
-    data[data.length - 1].day.getFullYear()
-  )
+  const startYearSelect = data[0].day.getFullYear()
+  const lastYearSelect = data[data.length - 1].day.getFullYear()
+  const optionsSelectYear = returnOptionsSelectYear(startYearSelect, lastYearSelect)
 
+  type TCustomOptions = {
+    data: number[][]
+    xAxis: string[]
+    labels: string[]
+  }
   // Set graph options and data based on filters
   useEffect(() => {
-    const customOptions = {
+    const customOptions: TCustomOptions = {
       data: [],
       xAxis: [],
       labels: [],
     }
 
     const yearToFilterLength = daysBetween(`${selectedYear}-01-01`, `${selectedYear}-12-31`)
-    const startingCut = startingCutPerYear(data[0].day, parseInt(selectedYear, 10))
+    const startingCut = startingCutPerYear(data[0].day, selectedYear)
 
-    const yearToFilterData = data.slice(
-      parseInt(startingCut, 10),
-      parseInt(startingCut, 10) + parseInt(yearToFilterLength, 10)
-    )
+    const yearToFilterData = data.slice(startingCut, startingCut + yearToFilterLength)
 
     const monthToFilterLength = getMonthLength(selectedYear, selectedMonth)
-    const corteInicialMes = startingCutPerMonth(
-      parseInt(selectedYear, 10),
-      parseInt(selectedMonth, 10)
-    )
+
+    const corteInicialMes = startingCutPerMonth(selectedYear, selectedMonth)
+
     const monthToFilterData = yearToFilterData.slice(
-      parseInt(corteInicialMes, 10),
-      parseInt(corteInicialMes, 10) + parseInt(monthToFilterLength, 10)
+      corteInicialMes,
+      corteInicialMes + monthToFilterLength
     )
 
-    const newData =
+    type TData = { data: number[] }
+    const newData: Record<number, TData> =
       selectedMonth === 'all'
         ? groupByTypeYear(yearToFilterData)
         : groupByTypeMonth(monthToFilterData)
-    newData.forEach((item) => customOptions.data.push(item.data))
 
-    customOptions.xAxis =
+    if (Array.isArray(newData))
+      newData.forEach((item: { data: number[] }) => customOptions.data.push(item.data))
+
+    const customOptionsxAxis =
       selectedMonth === 'all'
         ? returnMonthsData(allMonths, 'shortName')
-        : [returnMonthsData(allMonths, 'name')[selectedMonth]]
+        : [returnMonthsData(allMonths, 'name')[selectedMonth as unknown as number]]
 
+    customOptions.xAxis = customOptionsxAxis
     customOptions.labels = dataLabels
 
     setCustomData(customOptions)
   }, [selectedMonth, selectedYear, data])
 
   // handlers
-  const handleYearChange = (e) => {
+  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedYear(e.target.value)
   }
 
-  const handleMonthChange = (e) => {
+  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedMonth(e.target.value)
   }
 
@@ -107,25 +121,20 @@ function BarGraphic({ data, hideModal, active, size, year, month }) {
             {useOptionSelectMonth()}
           </select>
           <select value={selectedYear} onChange={handleYearChange}>
-            {optionsSelectYear}
+            {optionsSelectYear.map((yearOfSelect) => (
+              <option key={yearOfSelect} value={yearOfSelect}>
+                {yearOfSelect}
+              </option>
+            ))}
           </select>
           <button type="button" onClick={hideModal}>
-            <Icon className={active ? 'close' : 'drive_folder_upload'} />
+            <Icon name={active ? 'close' : 'open_in_new'} color="#e22e2e" />
           </button>
         </div>
       </div>
-      <BarChartWithD3 active={active} data={customData} size={size} selectedMonth={selectedMonth} />
+      <BarChartWithD3 active={active} data={customData} selectedMonth={selectedMonth} />
     </BarGraphicStyled>
   )
-}
-
-BarGraphic.propTypes = {
-  data: PropType.arrayOf(PropType.object).isRequired,
-  hideModal: PropType.func.isRequired,
-  active: PropType.bool.isRequired,
-  size: PropType.string.isRequired,
-  year: PropType.number.isRequired,
-  month: PropType.number.isRequired,
 }
 
 export default BarGraphic

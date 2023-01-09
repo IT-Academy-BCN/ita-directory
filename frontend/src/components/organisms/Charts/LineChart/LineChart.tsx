@@ -1,27 +1,40 @@
-import { useState } from 'react'
-import PropType from 'prop-types'
-import PieGraphicWithD3 from './PieGraphicWithD3'
+import React, { useState } from 'react'
 import ModalGraphic from '../../ModalGraphic/ModalGraphic'
+import LineGraphic from './LineGraphic'
 
-function PieChart({ data, size, year, month }) {
+type TPropsLineChart = {
+  data: Array<TPropertyDate>
+  year: string
+  month: string
+  size: number[]
+}
+
+type TPropertyDate = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+  total?: number
+}
+function LineChart({ data, size, month, year }: TPropsLineChart) {
   const [active, setActive] = useState(false)
   const hideModal = () => setActive(!active)
-
   return (
     <div>
-      <PieGraphicWithD3
+      <LineGraphic
         data={data}
-        size={size}
         active={active}
         hideModal={() => hideModal()}
-        year={year}
+        size={size}
         month={month}
+        year={year}
       />
       <ModalGraphic active={active} hideModal={hideModal}>
-        <PieGraphicWithD3
+        <LineGraphic
           data={data}
-          size={size}
           active={active}
+          size={size}
           hideModal={() => hideModal()}
           year={year}
           month={month}
@@ -31,11 +44,4 @@ function PieChart({ data, size, year, month }) {
   )
 }
 
-PieChart.propTypes = {
-  data: PropType.object,
-  size: PropType.number,
-  year: PropType.number,
-  month: PropType.number,
-}
-
-export default PieChart
+export default LineChart

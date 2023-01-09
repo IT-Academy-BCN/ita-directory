@@ -7,7 +7,7 @@ const options = {
     formatter: tooltipFormatter,
   },
   legend: {
-    data: ['Pisos', 'Garages', 'Locales', 'Chalets'],
+    data: ['Pisos', 'Garajes', 'Locales', 'Chalets'],
   },
 
   toolbox: {
@@ -29,7 +29,7 @@ const options = {
       center: ['50%', '50%'],
       data: [
         { value: 1048, name: 'Pisos' },
-        { value: 735, name: 'Garages' },
+        { value: 735, name: 'Garajes' },
         { value: 580, name: 'Locales' },
         { value: 300, name: 'Chalets' },
       ],

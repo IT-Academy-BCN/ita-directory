@@ -1,11 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import * as d3 from 'd3'
 import PieGraphicStyled from './PieChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
 import { Icon } from '../../../atoms'
 
-function PieChart({ data, hideModal, active, year, month }) {
+type TPropertyData = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+}
+
+type TPropsPieGraphic = {
+  data: Array<TPropertyData>
+  hideModal: () => void | boolean
+  active: boolean
+  year: string
+  month: string
+}
+function PieChart({ data, hideModal, active, year, month }: TPropsPieGraphic) {
   const [selectedYear, setSelectedYear] = useState(year)
   const [selectedMonth, setSelectedMonth] = useState(month)
 
@@ -21,13 +35,9 @@ function PieChart({ data, hideModal, active, year, month }) {
   const endYear = 2016
   const yearDifference = endYear - startYear
   const optionsSelectYear = []
-  for (let i = 0; i < yearDifference + 1; i + 1) {
+  for (let i = 0; i <= yearDifference; i += 1) {
     const curYear = startYear + i
-    optionsSelectYear.push(
-      <option value={curYear} key={curYear}>
-        {curYear}
-      </option>
-    )
+    optionsSelectYear.push(curYear)
   }
 
   let filterDataByDate
@@ -44,55 +54,54 @@ function PieChart({ data, hideModal, active, year, month }) {
 
   const totalPisos = filterDataByDate.reduce((prev, curr) => prev + curr.pisos, 0)
   const totalChalets = filterDataByDate.reduce((prev, curr) => prev + curr.chalets, 0)
-  const totalGarages = filterDataByDate.reduce((prev, curr) => prev + curr.garages, 0)
+  const totalGarages = filterDataByDate.reduce((prev, curr) => prev + curr.garajes, 0)
   const totalLocales = filterDataByDate.reduce((prev, curr) => prev + curr.locales, 0)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const chartData = [
-    { type: 'Pisos', total: totalPisos },
-    { type: 'Garages', total: totalGarages },
-    { type: 'Locales', total: totalLocales },
-    { type: 'Chalets', total: totalChalets },
-  ]
 
   useEffect(() => {
+    const chartData: any = [
+      { type: 'Pisos', total: totalPisos },
+      { type: 'Garajes', total: totalGarages },
+      { type: 'Locales', total: totalLocales },
+      { type: 'Chalets', total: totalChalets },
+    ]
     if (data && d3Container.current) {
-      const svgWidth = 80
-      const svgHeight = 80
+      const svgWidth = 60
+      const svgHeight = 60
       const radius = Math.min(svgWidth, svgHeight) / 2
       const svg = d3.select(d3Container.current)
-      // .attr("width", svgWidth)
-      // .attr("height", svgHeight);
+
       const update = svg.append('g').attr('transform', `translate(50, 50)`)
 
       const color = d3.scaleOrdinal(d3.schemeAccent)
 
-      const pie = d3.pie().value((d) => d.total)
+      const pie = d3.pie().value((d: any) => d.total)
 
       const arc = update.selectAll('arc').data(pie(chartData)).enter().append('g') // Do we really need this??
-      const path = d3.arc().outerRadius(radius).innerRadius(0)
+      const path: any = d3.arc().outerRadius(radius).innerRadius(0)
 
       arc
         .append('path')
         .attr('d', path)
-        .attr('fill', (d) => color(d.data.total))
+        .attr('fill', (d: any) => color(d.data.total))
 
       const label = d3.arc().outerRadius(radius).innerRadius(0)
 
       arc
         .append('text')
-        .attr('transform', (d) => `translate( ${label.centroid(d)})`)
+        .attr('transform', (d: any) => `translate( ${label.centroid(d)})`)
         .attr('text-anchor', 'middle')
         .attr('font-size', '2.8')
-        .text((d) => `${d.data.type}: ${new Intl.NumberFormat('es-ES').format(d.data.total)}`)
+        .text((d: any) => `${d.data.type}: ${new Intl.NumberFormat('es-ES').format(d.data.total)}`)
     }
-  }, [chartData, data])
+  }, [data, totalChalets, totalGarages, totalLocales, totalPisos])
 
   // handlers
-  const handleYearChange = (e) => {
+  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedYear(e.target.value)
   }
-  const handleMonthChange = (e) => {
+  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedMonth(e.target.value)
   }
 
@@ -106,29 +115,25 @@ function PieChart({ data, hideModal, active, year, month }) {
             {useOptionSelectMonth()}
           </select>
           <select value={selectedYear} onChange={handleYearChange}>
-            {optionsSelectYear}
+            {optionsSelectYear.map((yearOfSelect) => (
+              <option value={yearOfSelect} key={yearOfSelect}>
+                {yearOfSelect}
+              </option>
+            ))}
           </select>
           <button type="button" onClick={hideModal}>
-            <Icon className={active ? 'close' : 'drive_folder_upload'} />
+            <Icon name={active ? 'close' : 'open_in_new'} color="#e22e2e" />
           </button>
         </div>
       </div>
 
-      <div className="cardBody">
+      <div className={active ? 'cardBodyModal' : 'cardBody'}>
         <div className="chart">
           <svg ref={d3Container} viewBox="0 0 100 100" className="pie-chart-d3" />
         </div>
       </div>
     </PieGraphicStyled>
   )
-}
-
-PieChart.propTypes = {
-  data: PropTypes.array,
-  hideModal: PropTypes.func,
-  active: PropTypes.bool,
-  year: PropTypes.number,
-  month: PropTypes.number,
 }
 
 export default PieChart

@@ -1,70 +1,74 @@
 import React, { useEffect, useState, useRef } from 'react'
-import PropType from 'prop-types'
 import * as d3 from 'd3'
 import { MySvg } from './Styled'
 import { colors } from '../../../../theme'
 
 const mesesVentas = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-function daysInMonth(date, month) {
-  return date.day.getMonth() === parseInt(month, 10)
+type TPropertyData = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+  total?: number
 }
 
-function dateMonthFilter(date) {
-  const d = date.day.getMonth()
-  // eslint-disable-next-line no-multi-assign
-  mesesVentas[d] = mesesVentas[d] += date.total
-  return mesesVentas
+type TPropsLineGraphic = {
+  data: TPropertyData[]
+  active: boolean
+  year: string
+  month: string
+  size: number[]
 }
 
-function dateYearFilter(date, year) {
-  return date.day.getFullYear() === parseInt(year, 10)
-}
+const meses = [
+  0,
+  'Ene',
+  'Feb',
+  'Mar',
+  'Abr',
+  'May',
+  'Jun',
+  'Jul',
+  'Ago',
+  'Set',
+  'Oct',
+  'Nov',
+  'Dec',
+]
 
-function handleData(data, month, year) {
-  const date = data.filter(dateYearFilter)
-
-  date.filter(dateMonthFilter)
-
-  const p = dateMonthFilter(date, year)
-
-  /// data por dias segun mes y año seleccionado
-  let dataMes = date.filter(daysInMonth)
-
-  dataMes = dataMes.map((day) => {
-    return day.total
+function groupByMonth(data: TPropertyData[]) {
+  const byMonths = [...mesesVentas]
+  data.forEach((date) => {
+    const d = date.day.getMonth()
+    // eslint-disable-next-line no-multi-assign
+    byMonths[d] = byMonths[d] += date.total!
   })
-  const d = dataMes
-
-  let finalData = []
-  if (date) {
-    if (month !== 'all') {
-      finalData = d
-    } else {
-      finalData = p
-    }
-  }
-  return finalData
+  return byMonths
 }
 
-function LineGraphic({ data, active, size, month, year }) {
-  const meses = [
-    0,
-    'Ene',
-    'Feb',
-    'Mar',
-    'Abr',
-    'May',
-    'Jun',
-    'Jul',
-    'Ago',
-    'Set',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
-  const [dataToPrint, setDataToPrint] = useState([])
-  const svgRef = useRef()
+function dateYearFilter(date: TPropertyData['day'], year: string) {
+  return date.getFullYear() === parseInt(year, 10)
+}
+
+function handleData(data: TPropertyData[], month: string, year: string) {
+  const dataFilteredByYear = data.filter((d) => dateYearFilter(d.day, year))
+  const dataGroupedByMonth = groupByMonth(dataFilteredByYear)
+
+  const dataGroupedByDayAndMonth = dataFilteredByYear.filter(
+    (item) => item.day.getMonth() === parseInt(month, 10)
+  )
+  const dataGroupedByDay = dataGroupedByDayAndMonth.map((day) => day.total)
+
+  if (month !== 'all') {
+    return dataGroupedByDay
+  }
+  return dataGroupedByMonth
+}
+
+function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
+  const [dataToPrint, setDataToPrint] = useState<(number | undefined)[]>([])
+  const svgRef: any = useRef()
 
   const [anchura, setAnchura] = useState(0)
   const [altura, setAltura] = useState(0)
@@ -73,9 +77,13 @@ function LineGraphic({ data, active, size, month, year }) {
     const m = 350
     let z = svgRef.current.parentNode.clientWidth
     z = z > 400 ? z - m : z
+    const width = active ? window.innerWidth - 200 : z + 230
+    const height = active ? window.innerHeight - 200 : z + 100
+    setAnchura(width)
+    setAltura(height)
+
     setDataToPrint(handleData(data, month, year))
-    setAnchura(active ? window.innerWidth - 200 : z - 150)
-    setAltura(active ? window.innerHeight - 200 : z)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -86,12 +94,14 @@ function LineGraphic({ data, active, size, month, year }) {
   useEffect(() => {
     clearChart()
     setDataToPrint(handleData(data, month, year))
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     printChart()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month, year, size])
+  }, [month, year, size, active])
 
   useEffect(() => {
     clearChart()
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     printChart()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataToPrint])
@@ -121,11 +131,12 @@ function LineGraphic({ data, active, size, month, year }) {
         .attr('viewBox', `0, 0, ${anchura}, ${altura}`)
         .attr('style', `max-width: 100%; height: 100%; height: intrinsic;`)
         .style('overflow', 'visible')
-        .style('padding', '5% 10%')
+        .style('padding', '8% 8% 8% 13%')
         .classed('svg-content-responsive', true)
 
       const xScale = d3.scaleLinear().domain([0, xsDomain]).range([0, anchura])
-      const yScale = d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
+      const yScale: any = d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
+
       const generateScaledLine = d3
         .line()
         .x((d, i) => xScale(i + 1))
@@ -134,7 +145,7 @@ function LineGraphic({ data, active, size, month, year }) {
       const xAxis = d3
         .axisBottom(xScale)
         .ticks(xaTicks + 1)
-        .tickFormat((i) => {
+        .tickFormat((i: any): any => {
           if (meses[i] !== 0) {
             return meses[i]
           }
@@ -154,13 +165,13 @@ function LineGraphic({ data, active, size, month, year }) {
         .data([dataToPrint])
         .join('path')
         .classed('myPath', true)
-        .attr('d', (d) => generateScaledLine(d))
+        .attr('d', (d: any) => generateScaledLine(d))
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')
         .style('animation', 'fadeIn ease-in 1s')
 
-      const locationX = []
-      const locationY = []
+      const locationX: any = []
+      const locationY: any = []
       const indexLocations = [{}]
       svg
         .selectAll('.circle')
@@ -175,16 +186,14 @@ function LineGraphic({ data, active, size, month, year }) {
           locationY.push(yScale(d))
           return yScale(d)
         })
-        .attr('class', (d, i) => {
-          return `myCircle${i + 1}`
-        })
-        .attr('r', 4)
+        .attr('class', (d, i) => `myCircle${i + 1}`)
+        .attr('r', 3)
         .attr('fill', 'white')
         .attr('stroke', `${colors.extraDarkBlue}`)
 
       svg
         .selectAll('circle')
-        .on('mouseover', (e, d) => {
+        .on('mouseover', (e, d: any) => {
           const date = dataToPrint.indexOf(d)
           tooldiv.style('visibility', 'visible').text(`${meses[date + 1]} ${year} ${d}`)
         })
@@ -216,7 +225,7 @@ function LineGraphic({ data, active, size, month, year }) {
         .classed('svg-content-responsive', true)
 
       const xScale = d3.scaleLinear().domain([0, xsDomain]).range([0, anchura])
-      const yScale = d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
+      const yScale: any = d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
       const generateScaledLine = d3
         .line()
         .x((d, i) => xScale(i + 1))
@@ -226,7 +235,7 @@ function LineGraphic({ data, active, size, month, year }) {
       const xAxis = d3
         .axisBottom(xScale)
         .ticks(xaTicks + 1)
-        .tickFormat((i) => {
+        .tickFormat((i: any) => {
           if (i !== 0 && i % 2 !== 0) {
             return i
           }
@@ -246,7 +255,7 @@ function LineGraphic({ data, active, size, month, year }) {
         .selectAll('.line')
         .data([dataToPrint])
         .join('path')
-        .attr('d', (d) => generateScaledLine(d))
+        .attr('d', (d: any) => generateScaledLine(d))
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')
         .style('animation', 'fadeIn ease-in 1s')
@@ -263,7 +272,7 @@ function LineGraphic({ data, active, size, month, year }) {
         .attr('stroke', `${colors.extraDarkBlue}`)
       svg
         .selectAll('circle')
-        .on('mouseover', (e, d) => {
+        .on('mouseover', (e, d: any) => {
           const day = dataToPrint.indexOf(d)
           tooldiv
             .style('visibility', 'visible')
@@ -284,14 +293,6 @@ function LineGraphic({ data, active, size, month, year }) {
       <MySvg ref={svgRef} className="lineChart" id="container" />
     </div>
   )
-}
-
-LineGraphic.propTypes = {
-  data: PropType.object,
-  active: PropType.bool,
-  size: PropType.number,
-  year: PropType.number,
-  month: PropType.number,
 }
 
 export default LineGraphic

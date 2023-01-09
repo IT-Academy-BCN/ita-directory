@@ -1,18 +1,30 @@
-import { useState } from 'react'
-import PropType from 'prop-types'
+import React, { useState } from 'react'
 import BarGraphic from './BarGraphic'
 import ModalGraphic from '../../ModalGraphic/ModalGraphic'
 
-function BarChart({ data, size, year, month }) {
-  const [active, setActive] = useState(false)
-  const hideModal = () => setActive(!active)
+type TPropsBarChart = {
+  data: Array<TPropertyDate>
+  year: string
+  month: string
+}
+type TPropertyDate = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+}
+
+type THideModal = () => void | boolean
+function BarChart({ data, year, month }: TPropsBarChart) {
+  const [active, setActive] = useState<boolean>(false)
+  const hideModal: THideModal = () => setActive(!active)
 
   return (
     <div>
       <BarGraphic
         data={data}
         active={active}
-        size={size}
         hideModal={() => hideModal()}
         year={year}
         month={month}
@@ -21,7 +33,6 @@ function BarChart({ data, size, year, month }) {
         <BarGraphic
           data={data}
           active={active}
-          size={size}
           hideModal={() => hideModal()}
           year={year}
           month={month}
@@ -29,13 +40,6 @@ function BarChart({ data, size, year, month }) {
       </ModalGraphic>
     </div>
   )
-}
-
-BarChart.propTypes = {
-  data: PropType.object,
-  size: PropType.number,
-  year: PropType.number,
-  month: PropType.number,
 }
 
 export default BarChart
