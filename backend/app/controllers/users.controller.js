@@ -383,7 +383,6 @@ exports.changePassword = async (req, res, next) => {
 
   // @todo: This verification should be implemented using middleware
   // eslint-disable-next-line consistent-return
-  console.log('token', token)
   JWT.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       return res.status(200).json({
