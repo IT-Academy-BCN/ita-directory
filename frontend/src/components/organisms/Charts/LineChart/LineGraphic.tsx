@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import LineGraphicWithD3 from './LineGraphicWithD3'
 import LineGraphicStyled from './LineChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
-import { Icon } from '../../../atoms'
+import { Button } from '../../../atoms'
 
 type TPropertyData = {
   day: Date
@@ -57,10 +57,12 @@ function LineGraphic({ data, active, hideModal, size, month, year }: TPropsLineG
                 </option>
               ))}
             </select>
-            {/* todo: Substitute with Button component and remove FontAwesome */}
-            <button type="button" onClick={hideModal}>
-              <Icon name={active ? 'close' : 'open_in_new'} color="#e22e2e" />
-            </button>
+            <Button
+              onClick={hideModal}
+              iconPosition="right"
+              icon={active ? 'close' : 'open_in_new'}
+              textColor="#e22e2e"
+            />
           </div>
         </div>
         <LineGraphicWithD3

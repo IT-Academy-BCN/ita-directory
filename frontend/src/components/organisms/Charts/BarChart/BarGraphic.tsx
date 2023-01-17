@@ -12,7 +12,7 @@ import { returnMonthsData, dataLabels } from './barGraphicConst'
 // Font awesome icons
 import { BarGraphicStyled } from './BarGraphic.styles'
 import BarChartWithD3 from './BarChartWithD3'
-import { Icon } from '../../../atoms'
+import { Button } from '../../../atoms'
 
 type TPropertyData = {
   day: Date
@@ -127,9 +127,12 @@ function BarGraphic({ data, hideModal, active, year, month }: TPropsBarGraphic) 
               </option>
             ))}
           </select>
-          <button type="button" onClick={hideModal}>
-            <Icon name={active ? 'close' : 'open_in_new'} color="#e22e2e" />
-          </button>
+          <Button
+            onClick={hideModal}
+            iconPosition="right"
+            icon={active ? 'close' : 'open_in_new'}
+            textColor="#e22e2e"
+          />
         </div>
       </div>
       <BarChartWithD3 active={active} data={customData} selectedMonth={selectedMonth} />

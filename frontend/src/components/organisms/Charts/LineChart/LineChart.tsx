@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import ModalGraphic from '../../ModalGraphic/ModalGraphic'
 import LineGraphic from './LineGraphic'
 
@@ -19,13 +19,16 @@ type TPropertyDate = {
 }
 function LineChart({ data, size, month, year }: TPropsLineChart) {
   const [active, setActive] = useState(false)
-  const hideModal = () => setActive(!active)
+  const hideModal = useCallback(() => {
+    setActive(!active)
+  }, [active])
+
   return (
     <div>
       <LineGraphic
         data={data}
         active={active}
-        hideModal={() => hideModal()}
+        hideModal={hideModal}
         size={size}
         month={month}
         year={year}
@@ -35,7 +38,7 @@ function LineChart({ data, size, month, year }: TPropsLineChart) {
           data={data}
           active={active}
           size={size}
-          hideModal={() => hideModal()}
+          hideModal={hideModal}
           year={year}
           month={month}
         />

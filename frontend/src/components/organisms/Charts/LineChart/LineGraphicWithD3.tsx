@@ -58,6 +58,7 @@ function handleData(data: TPropertyData[], month: string, year: string) {
   const dataGroupedByDayAndMonth = dataFilteredByYear.filter(
     (item) => item.day.getMonth() === parseInt(month, 10)
   )
+
   const dataGroupedByDay = dataGroupedByDayAndMonth.map((day) => day.total)
 
   if (month !== 'all') {
@@ -122,27 +123,27 @@ function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
       .style('border', '1px solid black')
       .style('border-radius', '5px')
 
-    if (month === 'all') {
-      yHeight = 8000
+    const svg = d3
+      .select(svgRef.current)
+      .style('background', 'white')
+      .attr('viewBox', `0, 0, ${anchura}, ${altura}`)
+      .attr('style', `max-width: 100%; height: 100%; height: intrinsic;`)
+      .style('overflow', 'visible')
+      .style('padding', '8% 8% 8% 13%')
+      .classed('svg-content-responsive', true)
 
-      const svg = d3
-        .select(svgRef.current)
-        .style('background', 'white')
-        .attr('viewBox', `0, 0, ${anchura}, ${altura}`)
-        .attr('style', `max-width: 100%; height: 100%; height: intrinsic;`)
-        .style('overflow', 'visible')
-        .style('padding', '8% 8% 8% 13%')
-        .classed('svg-content-responsive', true)
+    const xScaleFunction = () => d3.scaleLinear().domain([0, xsDomain]).range([0, anchura])
+    const yScaleFunction = () => d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
 
-      const xScale = d3.scaleLinear().domain([0, xsDomain]).range([0, anchura])
-      const yScale: any = d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
-
-      const generateScaledLine = d3
+    const scaledLineFunction = (xScale: any, yScale: any) =>
+      d3
         .line()
         .x((d, i) => xScale(i + 1))
         .y(yScale)
         .curve(d3.curveCardinal)
-      const xAxis = d3
+
+    const xAxisFunction = (xScale: any) =>
+      d3
         .axisBottom(xScale)
         .ticks(xaTicks + 1)
         .tickFormat((i: any): any => {
@@ -151,7 +152,10 @@ function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
           }
           return null
         })
-      const yAxis = d3.axisLeft(yScale).ticks(yaTicks)
+
+    const yAxisFunction = (yScale: any) => d3.axisLeft(yScale).ticks(yaTicks)
+
+    const drawElementG = (xAxis: any, yAxis: any) => {
       svg.append('g').call(xAxis).attr('transform', `translate(0, ${altura})`)
       svg
         .append('g')
@@ -159,11 +163,32 @@ function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
         .call((g) => g.select('.domain').remove())
         .call((g) => g.selectAll('.tick line').clone().attr('x2', anchura))
         .call((g) => g.append('text').attr('x', -10).attr('y', 10).attr('fill', 'currentColor'))
+    }
 
-      svg
-        .selectAll('.line')
-        .data([dataToPrint])
-        .join('path')
+    const selectAllLineFunction = () => svg.selectAll('.line').data([dataToPrint]).join('path')
+
+    if (month === 'all') {
+      yHeight = 8000
+
+      const xScale = xScaleFunction()
+      const yScale: any = yScaleFunction()
+
+      const generateScaledLine = scaledLineFunction(xScale, yScale)
+
+      const xAxis = xAxisFunction(xScale)
+      xAxis.tickFormat((i: any): any => {
+        if (meses[i] !== 0) {
+          return meses[i]
+        }
+        return null
+      })
+
+      const yAxis = yAxisFunction(yScale)
+
+      drawElementG(xAxis, yAxis)
+
+      const selectAllLine = selectAllLineFunction()
+      selectAllLine
         .classed('myPath', true)
         .attr('d', (d: any) => generateScaledLine(d))
         .attr('fill', 'none')
@@ -172,7 +197,7 @@ function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
 
       const locationX: any = []
       const locationY: any = []
-      const indexLocations = [{}]
+
       svg
         .selectAll('.circle')
         .data(dataToPrint)
@@ -203,58 +228,28 @@ function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
         .on('mouseout', () => {
           tooldiv.style('visibility', 'hidden')
         })
-
-      for (let i = 0; i <= locationX.length - 1; i += 1) {
-        indexLocations[i] = {
-          x: locationX[i],
-          y: locationY[i],
-          index: i,
-        }
-      }
     } else {
       yHeight = 300
 
-      const svg = d3
-        .select(svgRef.current)
-        .style('background', 'white')
-        .attr('viewBox', `0, 0, ${anchura}, ${altura}`)
-        .attr('style', `width: 90%`)
-        .style('overflow', 'visible')
-        .style('padding', '5% 10%')
-        .style('margin', '0 auto')
-        .classed('svg-content-responsive', true)
+      const xScale = xScaleFunction()
+      const yScale: any = yScaleFunction()
 
-      const xScale = d3.scaleLinear().domain([0, xsDomain]).range([0, anchura])
-      const yScale: any = d3.scaleLinear().domain([0, yHeight]).range([altura, 0])
-      const generateScaledLine = d3
-        .line()
-        .x((d, i) => xScale(i + 1))
-        .y(yScale)
-        .curve(d3.curveCardinal)
+      const generateScaledLine = scaledLineFunction(xScale, yScale)
 
-      const xAxis = d3
-        .axisBottom(xScale)
-        .ticks(xaTicks + 1)
-        .tickFormat((i: any) => {
-          if (i !== 0 && i % 2 !== 0) {
-            return i
-          }
-          return null
-        })
+      const xAxis = xAxisFunction(xScale)
+      xAxis.tickFormat((i: any) => {
+        if (i !== 0 && i % 2 !== 0) {
+          return i
+        }
+        return null
+      })
 
-      const yAxis = d3.axisLeft(yScale).ticks(yaTicks)
-      svg.append('g').call(xAxis).attr('transform', `translate(0, ${altura})`)
-      svg
-        .append('g')
-        .call(yAxis)
-        .call((g) => g.select('.domain').remove())
-        .call((g) => g.selectAll('.tick line').clone().attr('x2', anchura))
-        .call((g) => g.append('text').attr('x', -10).attr('y', 10).attr('fill', 'currentColor'))
+      const yAxis = yAxisFunction(yScale)
 
-      svg
-        .selectAll('.line')
-        .data([dataToPrint])
-        .join('path')
+      drawElementG(xAxis, yAxis)
+
+      const selectAllLine = selectAllLineFunction()
+      selectAllLine
         .attr('d', (d: any) => generateScaledLine(d))
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')

@@ -40,7 +40,7 @@ export default function BarChartWithD3({ data, active, selectedMonth }: TPropsBa
   }
 
   useEffect(() => {
-    setLabels(!(window.innerWidth < 992))
+    setLabels(window.innerWidth >= 992)
     reloadChart()
     // Resize chart
     window.addEventListener('resize', () => reloadChart())
@@ -104,127 +104,123 @@ export default function BarChartWithD3({ data, active, selectedMonth }: TPropsBa
   }
 
   const drawChart = () => {
-    if (data) {
-      const ChartContainer = d3
-        .selectAll('.bar-chart')
-        .attr('width', chartWidth + chartMargin.left + chartMargin.left)
-        .attr('height', chartHeight + chartMargin.top + chartMargin.bottom)
-        .classed('chart', true)
+    const ChartContainer = d3
+      .selectAll('.bar-chart')
+      .attr('width', chartWidth + chartMargin.left + chartMargin.left)
+      .attr('height', chartHeight + chartMargin.top + chartMargin.bottom)
+      .classed('chart', true)
 
-      const chart = ChartContainer.append('g')
-        .attr('x', chartMargin.left)
-        .attr('y', chartMargin.top)
-        .attr('transform', `translate(${chartMargin.left},${chartMargin.top})`)
+    const chart = ChartContainer.append('g')
+      .attr('x', chartMargin.left)
+      .attr('y', chartMargin.top)
+      .attr('transform', `translate(${chartMargin.left},${chartMargin.top})`)
 
-      // Define chart ranges
+    // Define chart ranges
 
-      const x: any = d3.scaleBand().rangeRound([0, chartWidth]).padding(0.1)
-      const y = d3.scaleLinear().range([chartHeight, 0])
-      // Draw month data
-      type TMonthData = {
-        label: string
-        value: number
-        color: string
-      }[]
-      if (selectedMonth !== 'all') {
-        // Create month data
-        const monthData: TMonthData = data.data.map((item, index) => ({
-          label: data.labels[index],
-          value: item[0],
-          color: barColors[index],
-        }))
+    const x: any = d3.scaleBand().rangeRound([0, chartWidth]).padding(0.1)
+    const y = d3.scaleLinear().range([chartHeight, 0])
+    // Draw month data
+    type TMonthData = {
+      label: string
+      value: number
+      color: string
+    }[]
 
-        // Set domains
-        x.domain(data.labels)
-        y.domain([0, d3.max(monthData, (d) => d.value)! + 200])
-        // Draw chart data
+    if (data && selectedMonth !== 'all') {
+      // Create month data
+      const monthData: TMonthData = data.data.map((item, index) => ({
+        label: data.labels[index],
+        value: item[0],
+        color: barColors[index],
+      }))
 
+      // Set domains
+      x.domain(data.labels)
+      y.domain([0, d3.max(monthData, (d) => d.value)! + 200])
+      // Draw chart data
+
+      chart
+        .selectAll('.bar')
+        .data(monthData)
+        .enter()
+        .append('rect')
+        .attr('width', x.bandwidth())
+        .attr('height', (d) => chartHeight - y(d.value))
+        .attr('y', (d) => y(d.value))
+        .attr('x', (d) => x(d.label)!)
+        .attr('fill', (d) => d.color)
+        .classed('bar', true)
+
+      // Draw bar labels
+      displayLabels &&
         chart
-          .selectAll('.bar')
+          .selectAll('.bar-label')
           .data(monthData)
           .enter()
-          .append('rect')
-          .attr('width', x.bandwidth())
-          .attr('height', (d) => chartHeight - y(d.value))
-          .attr('y', (d) => y(d.value))
-          .attr('x', (d) => x(d.label)!)
-          .attr('fill', (d) => d.color)
-          .classed('bar', true)
+          .append('text')
+          .text((d) => `${d.value} ${d.label}`)
+          .attr('x', (d) => x(d.label)! + x.bandwidth() / 2)
+          .attr('y', (d) => y(d.value / 2))
+          .attr('text-anchor', 'middle')
+          .classed('bar-label', true)
+    }
 
-        // Draw bar labels
-        if (displayLabels) {
-          chart
-            .selectAll('.bar-label')
-            .data(monthData)
-            .enter()
-            .append('text')
-            .text((d) => `${d.value} ${d.label}`)
-            .attr('x', (d) => x(d.label)! + x.bandwidth() / 2)
-            .attr('y', (d) => y(d.value / 2))
-            .attr('text-anchor', 'middle')
-            .classed('bar-label', true)
-        }
-      }
+    // Draw year data
+    else if (data && selectedMonth === 'all') {
+      // Create year data to display
+      const yearData: TMonthData = []
 
-      // Draw year data
-      else {
-        // Create year data to display
-        const yearData = []
-
-        for (let i = 0; i < data.data[0].length; i += 1) {
-          for (let j = 0; j < data.data.length; j += 1) {
-            const item = {
-              label: data.labels[j],
-              value: data.data[j][i],
-              color: barColors[j],
-            }
-
-            yearData.push(item)
+      data.data[0].map((el, i) =>
+        data.data.map((element, j) => {
+          const item = {
+            label: data.labels[j],
+            value: data.data[j][i],
+            color: barColors[j],
           }
-        }
+          return yearData.push(item)
+        })
+      )
 
-        // Set domains
-        x.domain(yearData)
-        y.domain([0, d3.max(data.data.map((item) => d3.max(item)!))! + 200])
+      // Set domains
+      x.domain(yearData)
+      y.domain([0, d3.max(data.data.map((item) => d3.max(item)!))! + 200])
 
-        // Draw chart data
+      // Draw chart data
+      chart
+        .selectAll('.bar')
+        .data(yearData)
+        .enter()
+        .append('rect')
+        .attr('width', x.bandwidth())
+        .attr('height', (d) => chartHeight - y(d.value))
+        .attr('y', (d) => y(d.value))
+        .attr('x', (d) => x(d))
+        .attr('fill', (d) => d.color)
+        .attr('rx', '0.25rem')
+        .classed('bar', true)
+
+      // Draw bar labels
+      displayLabels &&
         chart
-          .selectAll('.bar')
+          .selectAll('.bar-label')
           .data(yearData)
           .enter()
-          .append('rect')
-          .attr('width', x.bandwidth())
-          .attr('height', (d) => chartHeight - y(d.value))
-          .attr('y', (d) => y(d.value))
-          .attr('x', (d) => x(d))
-          .attr('fill', (d) => d.color)
-          .attr('rx', '0.25rem')
-          .classed('bar', true)
+          .append('text')
+          .text((d) => `${d.value} ${d.label}`)
+          .attr('transform', 'rotate(-90)')
+          .attr('x', -chartHeight / 2)
+          .attr('y', (d) => x(d) + x.bandwidth() - x.bandwidth() / 4)
+          .attr('font-size', 12)
+          .attr('text-anchor', 'middle')
+          .classed('bar-label', true)
 
-        // Draw bar labels
-        if (displayLabels) {
-          chart
-            .selectAll('.bar-label')
-            .data(yearData)
-            .enter()
-            .append('text')
-            .text((d) => `${d.value} ${d.label}`)
-            .attr('transform', 'rotate(-90)')
-            .attr('x', -chartHeight / 2)
-            .attr('y', (d) => x(d) + x.bandwidth() - x.bandwidth() / 4)
-            .attr('font-size', 12)
-            .attr('text-anchor', 'middle')
-            .classed('bar-label', true)
-        }
-
-        // Change domain to render xAxis
-        x.domain(data.xAxis)
-      }
-
-      drawXaxis(chart, x)
-      drawYaxis(chart, y)
-      drawLegend(returnLegendData)
+      // Change domain to render xAxis
+      x.domain(data.xAxis)
     }
+
+    drawXaxis(chart, x)
+    drawYaxis(chart, y)
+    drawLegend(returnLegendData)
   }
 
   return (

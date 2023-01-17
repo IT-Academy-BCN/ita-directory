@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import PieGraphicWithD3 from './PieGraphicWithD3'
 import ModalGraphic from '../../ModalGraphic/ModalGraphic'
 
@@ -18,14 +18,16 @@ type TPropertyDate = {
 
 function PieChart({ data, year, month }: TPropsPieChart) {
   const [active, setActive] = useState(false)
-  const hideModal = () => setActive(!active)
+  const hideModal = useCallback(() => {
+    setActive(!active)
+  }, [active])
 
   return (
     <div>
       <PieGraphicWithD3
         data={data}
         active={active}
-        hideModal={() => hideModal()}
+        hideModal={hideModal}
         year={year}
         month={month}
       />
@@ -33,7 +35,7 @@ function PieChart({ data, year, month }: TPropsPieChart) {
         <PieGraphicWithD3
           data={data}
           active={active}
-          hideModal={() => hideModal()}
+          hideModal={hideModal}
           year={year}
           month={month}
         />

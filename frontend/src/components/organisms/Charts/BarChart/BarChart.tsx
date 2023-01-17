@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import BarGraphic from './BarGraphic'
 import ModalGraphic from '../../ModalGraphic/ModalGraphic'
 
@@ -18,25 +18,15 @@ type TPropertyDate = {
 type THideModal = () => void | boolean
 function BarChart({ data, year, month }: TPropsBarChart) {
   const [active, setActive] = useState<boolean>(false)
-  const hideModal: THideModal = () => setActive(!active)
+  const hideModal: THideModal = useCallback(() => {
+    setActive(!active)
+  }, [active])
 
   return (
     <div>
-      <BarGraphic
-        data={data}
-        active={active}
-        hideModal={() => hideModal()}
-        year={year}
-        month={month}
-      />
+      <BarGraphic data={data} active={active} hideModal={hideModal} year={year} month={month} />
       <ModalGraphic active={active} hideModal={hideModal}>
-        <BarGraphic
-          data={data}
-          active={active}
-          hideModal={() => hideModal()}
-          year={year}
-          month={month}
-        />
+        <BarGraphic data={data} active={active} hideModal={hideModal} year={year} month={month} />
       </ModalGraphic>
     </div>
   )

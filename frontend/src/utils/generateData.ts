@@ -26,7 +26,6 @@ export const generateData: TGenerateData = (startDay, days, valueRange) => {
   const data = []
 
   for (let i = 0; i < days; i += 1) {
-    // 24 * 60 * 60 * 1000 -> día en milisegundos
     const day = new Date(startDay.getTime() + 24 * 60 * 60 * 1000 * i)
     const option = {
       day,
@@ -63,52 +62,6 @@ type TMonths = {
   [key: number]: { pisos: number; locales: number; garajes: number; chalets: number }
 }
 
-export const groupByType = (yearlyData: TData[]) => {
-  const months: TMonths = {
-    0: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    1: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    2: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    3: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    4: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    5: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    6: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    7: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    8: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    9: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    10: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-    11: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
-  }
-
-  for (let i = 0; i < yearlyData.length; i += 1) {
-    const el = yearlyData[i]
-    const curMonth = el.day.getMonth()
-
-    months[curMonth].pisos = months[curMonth].pisos += el.pisos
-    months[curMonth].locales = months[curMonth].locales += el.locales
-    months[curMonth].garajes = months[curMonth].garajes += el.garajes
-    months[curMonth].chalets = months[curMonth].chalets += el.chalets
-  }
-
-  const totalpisos = []
-  const totallocales = []
-  const totalgarajes = []
-  const totalchalets = []
-
-  for (const month in months) {
-    totalpisos.push(months[month].pisos)
-    totallocales.push(months[month].locales)
-    totalgarajes.push(months[month].garajes)
-    totalchalets.push(months[month].chalets)
-  }
-
-  return [
-    { data: totalpisos },
-    { data: totallocales },
-    { data: totalgarajes },
-    { data: totalchalets },
-  ]
-}
-
 export const groupByYear = (selectedYear: string, data: TData[]) =>
   data.map((e) => e.day.getFullYear()).indexOf(parseInt(selectedYear, 10))
 
@@ -123,8 +76,7 @@ export const groupByFilter = (selectedMonth: string, selectedYear: string, data:
 export const getByDays = (monthlyData: TData[]) => {
   const days = []
 
-  for (let i = 0; i < monthlyData.length; i += 1) {
-    const el = monthlyData[i]
+  for (const el of monthlyData) {
     days.push(el.total)
   }
   return days
@@ -135,13 +87,14 @@ export const groupByTypeMonth = (monthData: TData[]) => {
   let totallocales = 0
   let totalgarajes = 0
   let totalchalets = 0
-  for (let i = 0; i < monthData.length; i += 1) {
-    const el = monthData[i]
+
+  for (const el of monthData) {
     totalpisos += el.pisos
     totallocales += el.locales
     totalgarajes += el.garajes
     totalchalets += el.chalets
   }
+
   return [
     { data: [totalpisos] },
     { data: [totallocales] },
@@ -155,8 +108,7 @@ export const groupByTypePie = (yearlyData: TData[]) => {
   let totallocales = 0
   let totalgarajes = 0
   let totalchalets = 0
-  for (let i = 0; i < yearlyData.length; i += 1) {
-    const el = yearlyData[i]
+  for (const el of yearlyData) {
     totalpisos += el.pisos
     totallocales += el.locales
     totalgarajes += el.garajes
@@ -186,8 +138,7 @@ export const groupByTypeYear = (yearlyData: TData[]) => {
     11: { pisos: 0, locales: 0, garajes: 0, chalets: 0 },
   }
 
-  for (let i = 0; i < yearlyData.length; i += 1) {
-    const el = yearlyData[i]
+  for (const el of yearlyData) {
     const curMonth = el.day.getMonth()
 
     months[curMonth].pisos = months[curMonth].pisos += el.pisos
@@ -236,8 +187,7 @@ export const groupByMonth = (yearlyData: TData[]) => {
     11: 0,
   }
 
-  for (let i = 0; i < yearlyData.length; i += 1) {
-    const el = yearlyData[i]
+  for (const el of yearlyData) {
     const curMonth = el.day.getMonth()
     months[curMonth] = months[curMonth] += el.total!
   }

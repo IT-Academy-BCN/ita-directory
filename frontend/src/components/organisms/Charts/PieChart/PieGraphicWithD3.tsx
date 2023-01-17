@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import * as d3 from 'd3'
 import PieGraphicStyled from './PieChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
-import { Icon } from '../../../atoms'
+import { Button } from '../../../atoms'
 
 type TPropertyData = {
   day: Date
@@ -121,9 +121,12 @@ function PieChart({ data, hideModal, active, year, month }: TPropsPieGraphic) {
               </option>
             ))}
           </select>
-          <button type="button" onClick={hideModal}>
-            <Icon name={active ? 'close' : 'open_in_new'} color="#e22e2e" />
-          </button>
+          <Button
+            onClick={hideModal}
+            iconPosition="right"
+            icon={active ? 'close' : 'open_in_new'}
+            textColor="#e22e2e"
+          />
         </div>
       </div>
 
