@@ -58,7 +58,6 @@ function handleData(data: TPropertyData[], month: string, year: string) {
   const dataGroupedByDayAndMonth = dataFilteredByYear.filter(
     (item) => item.day.getMonth() === parseInt(month, 10)
   )
-
   const dataGroupedByDay = dataGroupedByDayAndMonth.map((day) => day.total)
 
   if (month !== 'all') {
@@ -197,7 +196,6 @@ function LineGraphic({ data, active, size, month, year }: TPropsLineGraphic) {
 
       const locationX: any = []
       const locationY: any = []
-
       svg
         .selectAll('.circle')
         .data(dataToPrint)

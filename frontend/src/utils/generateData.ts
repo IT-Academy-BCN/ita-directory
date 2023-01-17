@@ -94,7 +94,6 @@ export const groupByTypeMonth = (monthData: TData[]) => {
     totalgarajes += el.garajes
     totalchalets += el.chalets
   }
-
   return [
     { data: [totalpisos] },
     { data: [totallocales] },
