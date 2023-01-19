@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import PropType from 'prop-types'
 import LineGraphicWithD3 from './LineGraphicWithD3'
 import LineGraphicStyled from './LineChart.styles'
 import { useOptionSelectMonth } from '../../../../hooks/useOptionSelectMonth'
-import { Icon } from '../../../atoms'
+import { Button } from '../../../atoms'
 
-function LineGraphic({ data, active, hideModal, size, month, year }) {
+type TPropertyData = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+  total?: number
+}
+
+type TPropsLineGraphic = {
+  data: Array<TPropertyData>
+  hideModal: () => void | boolean
+  size: number[]
+  active: boolean
+  year: string
+  month: string
+}
+
+function LineGraphic({ data, active, hideModal, size, month, year }: TPropsLineGraphic) {
   const [selectedYear, setSelectedYear] = useState(year)
   const [detail, setDetail] = useState(month)
 
@@ -15,11 +32,7 @@ function LineGraphic({ data, active, hideModal, size, month, year }) {
   const optionsSelectYear = []
   for (let i = 0; i < yearDifference + 1; i += 1) {
     const curYear = startYear + i
-    optionsSelectYear.push(
-      <option value={curYear} key={curYear}>
-        {curYear}
-      </option>
-    )
+    optionsSelectYear.push(curYear)
   }
 
   useEffect(() => {
@@ -38,18 +51,23 @@ function LineGraphic({ data, active, hideModal, size, month, year }) {
               {useOptionSelectMonth()}
             </select>
             <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
-              {optionsSelectYear}
+              {optionsSelectYear.map((yearOfSelect) => (
+                <option value={yearOfSelect} key={yearOfSelect}>
+                  {yearOfSelect}
+                </option>
+              ))}
             </select>
-            {/* todo: Substitute with Button component and remove FontAwesome */}
-            <button type="button" onClick={hideModal}>
-              <Icon className={active ? 'close' : 'drive_folder_upload'} color="#e22e2e" />
-            </button>
+            <Button
+              onClick={hideModal}
+              iconPosition="right"
+              icon={active ? 'close' : 'open_in_new'}
+              textColor="#e22e2e"
+            />
           </div>
         </div>
         <LineGraphicWithD3
           data={data}
           active={active}
-          hideModal={() => hideModal()}
           size={size}
           month={detail}
           year={selectedYear}
@@ -57,15 +75,6 @@ function LineGraphic({ data, active, hideModal, size, month, year }) {
       </LineGraphicStyled>
     </div>
   )
-}
-
-LineGraphic.propTypes = {
-  data: PropType.object,
-  size: PropType.number,
-  year: PropType.number,
-  month: PropType.number,
-  active: PropType.bool,
-  hideModal: PropType.bool,
 }
 
 export default LineGraphic

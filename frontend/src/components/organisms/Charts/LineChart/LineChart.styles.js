@@ -27,8 +27,9 @@ const LineGraphicStyled = styled.div`
 
     h2 {
       font-weight: 400;
-      margin: 1rem;
       color: white;
+      font-size: 20px;
+      margin: 0px 5px;
     }
 
     .selectorWrapper {

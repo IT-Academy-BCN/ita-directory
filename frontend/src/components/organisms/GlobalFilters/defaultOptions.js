@@ -30,7 +30,7 @@ export const options = {
     },
   },
   legend: {
-    data: ['Pisos', 'Garages', 'Locales', 'Chalets'],
+    data: ['Pisos', 'Garajes', 'Locales', 'Chalets'],
   },
   toolbox: {
     show: false,
@@ -68,7 +68,7 @@ export const options = {
       data: [320, 332, 301, 334, 390],
     },
     {
-      name: 'Garages',
+      name: 'Garajes',
       type: 'bar',
       label: labelOption,
       emphasis: {

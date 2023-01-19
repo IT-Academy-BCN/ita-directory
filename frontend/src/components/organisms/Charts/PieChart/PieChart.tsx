@@ -1,41 +1,47 @@
-import { useState } from 'react'
-import PropType from 'prop-types'
+import React, { useState, useCallback } from 'react'
 import PieGraphicWithD3 from './PieGraphicWithD3'
 import ModalGraphic from '../../ModalGraphic/ModalGraphic'
 
-function PieChart({ data, size, year, month }) {
+type TPropsPieChart = {
+  data: Array<TPropertyDate>
+  year: string
+  month: string
+}
+
+type TPropertyDate = {
+  day: Date
+  pisos: number
+  garajes: number
+  locales: number
+  chalets: number
+}
+
+function PieChart({ data, year, month }: TPropsPieChart) {
   const [active, setActive] = useState(false)
-  const hideModal = () => setActive(!active)
+  const hideModal = useCallback(() => {
+    setActive(!active)
+  }, [active])
 
   return (
     <div>
       <PieGraphicWithD3
         data={data}
-        size={size}
         active={active}
-        hideModal={() => hideModal()}
+        hideModal={hideModal}
         year={year}
         month={month}
       />
       <ModalGraphic active={active} hideModal={hideModal}>
         <PieGraphicWithD3
           data={data}
-          size={size}
           active={active}
-          hideModal={() => hideModal()}
+          hideModal={hideModal}
           year={year}
           month={month}
         />
       </ModalGraphic>
     </div>
   )
-}
-
-PieChart.propTypes = {
-  data: PropType.object,
-  size: PropType.number,
-  year: PropType.number,
-  month: PropType.number,
 }
 
 export default PieChart
