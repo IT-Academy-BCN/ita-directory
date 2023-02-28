@@ -33,8 +33,8 @@ function App() {
       <Route exact path={paths.recoverPassword} component={RecoverPassword} />
       <Route exact path="/students" component={Students} />
       <Route exact path="/business" component={Business} />
+      <Route exact path="/ads" component={AdList} />
       <ProtectedRoute exact path={paths.profile} component={Profile} />
-      <ProtectedRoute exact path="/ads" component={AdList} />
       <ProtectedRoute exact path={paths.userAdmin} component={ListaUsuariosAdmins} />
       <ProtectedRoute exact path="/dashboard" component={Dashboard} />
       <ProtectedRoute exact path={paths.userAds} component={UserAds} />
