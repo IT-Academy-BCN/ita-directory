@@ -106,7 +106,7 @@ Here's a blank template to get started:
 1. When new features or fixes are required we create a new issue.
 2. Issues are assigned to one person.
 3. The number of the issue is created as a new branch name following git branch naming conventions: https://deepsource.io/blog/git-branch-naming-conventions/
-4. Once the issue is resolved, a new pull-request from your branch to development is required.
+4. Once the issue is resolved, a new pull-request from your branch to main is required.
 
 ### Project files:
 
