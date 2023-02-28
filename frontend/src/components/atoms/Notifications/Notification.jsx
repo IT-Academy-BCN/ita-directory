@@ -27,6 +27,10 @@ const NotificationStyled = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  ${Text} {
+    margin-left: -15px;
+  }
 `
 const NotificationIconStyled = styled.div`
   display: flex;
@@ -66,7 +70,7 @@ function Notification({ message, id, icon, colorIcon }) {
         }}
       />
 
-      <Text text={message} style={{ marginLeft: '-15px' }} />
+      <Text text={message} />
     </NotificationStyled>
   )
 }
