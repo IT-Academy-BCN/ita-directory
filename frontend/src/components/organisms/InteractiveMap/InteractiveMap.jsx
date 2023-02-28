@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+// @ts-nocheck
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import MapContext from './store/context'
 import { MAP_ACTIONS } from './store/reducer'
@@ -47,6 +48,7 @@ const SvgStyled = styled.svg`
   #Group_309 > text > tspan {
     display: none;
     @media ${device.Tablet} {
+      pointer-events: none;
       display: block;
     }
   }
