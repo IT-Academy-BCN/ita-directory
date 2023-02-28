@@ -1,3 +1,4 @@
+// @ts-nocheck
 import PropType from 'prop-types'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -59,13 +60,13 @@ function Notification({ message, id, icon, colorIcon }) {
         style={{
           position: 'relative',
           background: 'none',
-          bottom: '22px',
-          left: '290px',
+          left: '295px',
           alignSelf: 'flex-start',
+          cursor: 'pointer',
         }}
       />
 
-      <Text text={message} style={{ marginLeft: '-45px' }} />
+      <Text text={message} style={{ marginLeft: '-15px' }} />
     </NotificationStyled>
   )
 }
