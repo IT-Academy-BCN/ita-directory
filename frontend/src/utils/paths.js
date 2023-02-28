@@ -6,7 +6,7 @@ const paths = {
   newAd: '/new-ad',
   profile: '/profile',
   register: '/register',
-  userAds: '/ads',
+  userAds: '/user-ads',
   userAdmin: '/lista-usuarios-admins',
   recoverPassword: '/recover-password',
 }
