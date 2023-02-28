@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
@@ -18,31 +19,33 @@ const menu = [
     to: '/business',
     name: 'Para empresas',
   },
+  {
+    to: '/ads',
+    name: 'Anuncios',
+  },
 ]
-function Menu() {
-  const location = useLocation()
-  return (
-    <Container>
-      {menu.map((item, index) => {
-        return (
-          <Link to={item.to} key={item.to}>
-            <Text
-              as="span"
-              text={item.name}
-              style={{ color: location.pathname === item.to ? colors.redPink : colors.black }}
-              pr={index === menu.length - 1 ? '0px' : '15px'}
-            />
-          </Link>
-        )
-      })}
-    </Container>
-  )
-}
-
 const Container = styled.div`
   a {
     text-decoration: none;
   }
 `
+
+function Menu() {
+  const location = useLocation()
+  return (
+    <Container>
+      {menu.map((item, index) => (
+        <Link to={item.to} key={item.to}>
+          <Text
+            as="span"
+            text={item.name}
+            style={{ color: location.pathname === item.to ? colors.redPink : colors.black }}
+            pr={index === menu.length - 1 ? '0px' : '15px'}
+          />
+        </Link>
+      ))}
+    </Container>
+  )
+}
 
 export default Menu
