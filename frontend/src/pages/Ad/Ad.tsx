@@ -42,7 +42,7 @@ const AdStyled = styled.div`
       align-items: space-between;
       justify-content: space-between;
       flex-wrap: wrap;
-      font-size: 160px;
+      font-size: 16px;
       padding-right: 1.5rem;
       margin-top: 1rem;
 

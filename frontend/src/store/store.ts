@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { createLogger } from 'redux-logger'
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './userSlice'
@@ -23,3 +22,5 @@ export default configureStore({
     return getDefaultMiddleware().concat(githubApi.middleware)
   },
 })
+
+export type RootState = ReturnType<typeof configureStore.reducer>
