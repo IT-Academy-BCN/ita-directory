@@ -29,7 +29,7 @@ const AdsStyled = styled(Container)`
   }
 
   ${AdListStyled} {
-    width: 70%;
+    width: 50%;
     flex-grow: 1;
   }
 `
@@ -37,6 +37,7 @@ const AdsStyled = styled(Container)`
 type TAdProps = {
   price: number
   squareMeters: number
+  includedExpenses: boolean
 }
 type TFunctionFilter = (min: number, max: number) => (ad: TAdProps) => boolean
 
@@ -45,6 +46,7 @@ type TFilterParms = {
   maxPrice?: number
   minSize?: number
   maxSize?: number
+  gastosInc?: boolean
 }
 
 function AdList() {
@@ -55,6 +57,7 @@ function AdList() {
 
   // Added filters by Kevin
   const byPrice: TFunctionFilter = (min, max) => (ad) => {
+    console.log('ad', ad)
     if (min == null && max == null) return true
     return min <= ad.price && ad.price <= max
   }
@@ -64,6 +67,11 @@ function AdList() {
     return min <= ad.squareMeters && ad.squareMeters <= max
   }
 
+  // Added filters by Naza
+  const byGastosInc: TFunctionFilter = (gastosInc) => (ad) => {
+    if (!gastosInc) return true
+    return ad.includedExpenses
+  }
   useEffect(() => {
     const fetchAds = async () => {
       const result = await axiosInstance.get('/ads')
@@ -77,6 +85,7 @@ function AdList() {
     const filteredAds = adList
       .filter(byPrice(filterParams?.minPrice || 0, filterParams?.maxPrice || Infinity))
       .filter(bySize(filterParams?.minSize || 0, filterParams?.maxSize || Infinity))
+      .filter(byGastosInc(filterParams?.gastosInc))
     return filteredAds
   }, [filterParams, adList])
 
