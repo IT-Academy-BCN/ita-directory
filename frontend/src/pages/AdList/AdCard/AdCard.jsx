@@ -1,10 +1,10 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { colors, device } from '../../../theme'
 import { Button, ImageButton, Text } from '../../../components/atoms'
-import { ContactModal } from '../../../components/organisms'
 import adImage from '../../../assets/images/casaPiscinaAd2.jpg'
 
 const AdCardStyled = styled.div`
@@ -107,18 +107,19 @@ function AdCard({
           <Text as="span" text={`Gastos ${gastosIncluidos ? ' incluidos' : ' no incluidos'}`} />
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
-        <Button
-          text="Contactar"
-          icon="chat"
-          textColor={colors.strongBlue}
-          iconPosition="left"
-          onClick={() => setActive(true)}
-          tabIndex={id + 10}
-          buttonStyles={{ padding: 0 }}
-          className="transparent"
-        />
+        <Link to="/edit-ad" style={{ textDecoration: 'none' }}>
+          <Button
+            text="Editar"
+            icon="edit_square"
+            textColor={colors.strongBlue}
+            iconPosition="left"
+            tabIndex={id + 10}
+            buttonStyles={{ padding: 0 }}
+            textStyles={{ marginLeft: 7, marginTop: 5 }}
+            className="transparent"
+          />
+        </Link>
       </div>
-      <ContactModal active={active} hideModal={() => setActive(false)} />
     </AdCardStyled>
   )
 }

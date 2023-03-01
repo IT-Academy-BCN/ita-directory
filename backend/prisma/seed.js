@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 // TODO: Refactor code to pass eslint checks!!!
 
 /* eslint-disable no-console */

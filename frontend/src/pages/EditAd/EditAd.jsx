@@ -1,7 +1,7 @@
 /* eslint-disable prefer-object-spread */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // Styles
