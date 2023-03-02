@@ -112,7 +112,7 @@ function AdCard({
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
 
-        {userId === currentUser.id ? (
+        {currentUser && userId === currentUser.id ? (
           <Link to="/edit-ad" style={{ textDecoration: 'none' }}>
             <Button
               text="Editar"
