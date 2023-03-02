@@ -72,7 +72,7 @@ function Input({
     <div>
       <Label label={label} htmlFor={id} hiddenLabel />
       <InputStyled
-        {...(register && register)}
+        {...register}
         accept={accept}
         className={`${className} ${error ? 'error' : ''}`}
         disabled={disabled}

@@ -79,7 +79,7 @@ function TextArea({
         cols={cols}
         required={required}
         error={error}
-        {...(register && register)}
+        {...register}
       />
     </>
   )
