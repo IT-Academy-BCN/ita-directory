@@ -32,7 +32,7 @@ interface TextAreaProps {
   disabled?: boolean
   error?: boolean
   id?: string
-  label?: string
+  label: string
   maxLength?: number
   minLength?: number
   name?: string

@@ -34,7 +34,7 @@ interface InputProps {
   error?: boolean
   id?: string
   inputStyles?: React.CSSProperties
-  label?: string
+  label: string
   name?: string
   onBlur?: () => void
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void

@@ -105,7 +105,7 @@ function ContactModal({ active, hideModal }: ContactModalProps) {
 
         <TextAreaStyled
           name="message"
-          label=""
+          label="Mensaje"
           id="message"
           placeholder="Escribe aquí tu mensaje"
           className="contact-modal__textarea"
