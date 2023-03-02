@@ -19,6 +19,7 @@ import {
   MyBills,
   Dashboard,
   ListaUsuariosAdmins,
+  EditAd,
 } from './pages'
 import { paths } from './utils'
 
@@ -35,6 +36,8 @@ function App() {
       <Route exact path="/business" component={Business} />
       <Route exact path="/ads" component={AdList} />
       <ProtectedRoute exact path={paths.profile} component={Profile} />
+      <ProtectedRoute exact path="/ads" component={AdList} />
+      <ProtectedRoute exact path="/edit-ad" component={EditAd} />
       <ProtectedRoute exact path={paths.userAdmin} component={ListaUsuariosAdmins} />
       <ProtectedRoute exact path="/dashboard" component={Dashboard} />
       <ProtectedRoute exact path={paths.userAds} component={UserAds} />

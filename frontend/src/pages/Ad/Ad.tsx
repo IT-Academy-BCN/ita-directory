@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
@@ -228,6 +230,7 @@ function Ad() {
                   type="button"
                   onClick={() => setActive(true)}
                 />
+
                 <ContactModal active={active} hideModal={() => setActive(false)} />
               </AdTextWrapper>
             </AdStyled>
