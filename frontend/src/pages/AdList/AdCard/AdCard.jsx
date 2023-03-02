@@ -7,6 +7,7 @@ import { colors, device } from '../../../theme'
 import { Button, ImageButton, Text } from '../../../components/atoms'
 import adImage from '../../../assets/images/casaPiscinaAd2.jpg'
 import { ContactModal } from '../../../components/organisms'
+import useUser from '../../../hooks/useUserHook'
 
 const AdCardStyled = styled.div`
   display: flex;
@@ -65,13 +66,6 @@ const AdCardStyled = styled.div`
     }
   }
 `
-// OJO
-const REQ_STATUS = {
-  INITIAL: 'INITIAL',
-  LOADING: 'LOADING',
-  SUCCESS: 'SUCCESS',
-  FAILURE: 'FAILURE',
-}
 
 function AdCard({
   title,
@@ -89,6 +83,7 @@ function AdCard({
   const [active, setActive] = useState(false)
   const gastosIncluidos = true
   const history = useHistory()
+  const currentUser = useUser()
 
   const handleClick = () => {
     history.push(`ad/${id}`)
@@ -98,6 +93,7 @@ function AdCard({
       handleClick()
     }
   }
+
   return (
     <AdCardStyled>
       <ImageButton
@@ -116,7 +112,7 @@ function AdCard({
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
 
-        {userId ? (
+        {userId === currentUser.id ? (
           <Link to="/edit-ad" style={{ textDecoration: 'none' }}>
             <Button
               text="Editar"
@@ -133,13 +129,13 @@ function AdCard({
           <>
             <Button
               text="Contactar"
-              icon="edit_square"
+              icon="chat"
               textColor={colors.strongBlue}
               iconPosition="left"
               onClick={() => setActive(true)}
               tabIndex={id + 10}
               buttonStyles={{ padding: 1 }}
-              textStyles={{ marginLeft: 7, marginTop: 5 }}
+              textStyles={{ marginLeft: 7 }}
               className="transparent"
             />
             <ContactModal active={active} hideModal={() => setActive(false)} />
