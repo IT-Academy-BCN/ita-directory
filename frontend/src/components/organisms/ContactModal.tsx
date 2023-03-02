@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '../atoms'
 import Modal from './Modal/Modal'
@@ -11,7 +10,40 @@ import { colors } from '../../theme'
 
 import contactSchema from '../../validation/contactModalSchema'
 
-function ContactModal({ active, hideModal }) {
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid ${colors.lightGray};
+`
+
+const TextAreaStyled = styled(TextArea)`
+  width: 100%;
+  padding: 0.5em 1rem;
+  margin: 5px 0px;
+  border-radius: 0.5rem;
+  border: 1px solid #b0b0b0;
+  font-size: 16px;
+`
+
+interface ContactModalProps {
+  active: boolean
+  hideModal: Function
+}
+
+interface DataProps {
+  name: string
+  email: string
+  message: string
+}
+
+interface ContactProps {
+  name: string
+  email: string
+  message: string
+}
+
+function ContactModal({ active, hideModal }: ContactModalProps) {
   const [animatedState, setAnimatedState] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -23,14 +55,19 @@ function ContactModal({ active, hideModal }) {
     resolver: zodResolver(contactSchema),
   })
 
-  const submitForm = (data) => {
-    const { name, email, message } = data
-    sendContact(name, email, message, (err) => {
-      // console.log(err)
+  const submitForm = (data: FieldValues) => {
+    const { name, email, message } = data as DataProps
+    sendContact({ name, email, message }, (err: any) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+      }
     })
   }
 
-  const sendContact = (name, email, message, callback) => {
+  const sendContact = (contact: ContactProps, callback: (err: Error | null) => void) => {
+    const { name, email, message } = contact
+
     setAnimatedState(true)
     setIsDisabled(true)
     setIsLoading(true)
@@ -38,37 +75,38 @@ function ContactModal({ active, hideModal }) {
       setAnimatedState(false)
       setIsDisabled(false)
       setIsLoading(false)
-      // console.log(`send contact => ${name}, ${email}, ${message}`)
-      callback('The message could not be sent')
+      // eslint-disable-next-line no-console
+      console.log(`send contact => ${name}, ${email}, ${message}`)
+      callback(new Error('The message could not be sent'))
     }, 2000)
   }
 
   return (
-    <Modal active={active} hideModal={hideModal} title="Contactar">
+    <Modal active={active} hideModal={() => hideModal()} title="Contactar">
       <form onSubmit={handleSubmit(submitForm)}>
         <Input
           type="text"
           name="name"
           placeholder="Nombre"
           label="Nombre"
-          inputContainerClassName="input-container"
           register={register('name')}
-          error={errors.name?.message}
+          error={errors.email?.message}
+          className="contact-modal__textarea"
         />
-
         <Input
           type="text"
           name="email"
           placeholder="Email"
           label="Email"
-          inputContainerClassName="input-container"
           register={register('email')}
           error={errors.email?.message}
+          className="contact-modal__textarea"
         />
 
         <TextAreaStyled
           name="message"
-          label="Mensaje"
+          label=""
+          id="message"
           placeholder="Escribe aquí tu mensaje"
           className="contact-modal__textarea"
           register={register('message')}
@@ -130,51 +168,4 @@ function ContactModal({ active, hideModal }) {
   )
 }
 
-ContactModal.propTypes = {
-  active: PropTypes.bool.isRequired,
-  hideModal: PropTypes.func.isRequired,
-}
-
 export default ContactModal
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid ${colors.lightGray};
-`
-
-const TextAreaStyled = styled(TextArea)`
-  width: 100%;
-  padding: 0.5em 1rem;
-  margin: 5px 0px;
-  border-radius: 0.5rem;
-  border: 1px solid #b0b0b0;
-  font-size: 16px;
-`
-
-// const Wrapper = styled.div`
-//   margin-bottom: 25px;
-//   p {
-//     color: ${colors.grey};
-//     font-size: 0.95rem;
-//     font-family: 'Arial';
-//     width: auto;
-//     letter-spacing: 0px;
-//     opacity: 1;
-//     width: auto;
-//   }
-
-//   .input-container {
-//     width: 100%;
-//   }
-
-//   label {
-//     padding-right: 0;
-//     width: auto;
-//   }
-// `
-
-// const StyledSmall = styled.small`
-//   color: ${colors.redColor};
-// `
