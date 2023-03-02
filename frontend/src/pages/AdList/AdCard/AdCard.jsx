@@ -1,11 +1,13 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { colors, device } from '../../../theme'
 import { Button, ImageButton, Text } from '../../../components/atoms'
-import { ContactModal } from '../../../components/organisms'
 import adImage from '../../../assets/images/casaPiscinaAd2.jpg'
+import { ContactModal } from '../../../components/organisms'
+import useUser from '../../../hooks/useUserHook'
 
 const AdCardStyled = styled.div`
   display: flex;
@@ -81,6 +83,7 @@ function AdCard({
   const [active, setActive] = useState(false)
   const gastosIncluidos = true
   const history = useHistory()
+  const currentUser = useUser()
 
   const handleClick = () => {
     history.push(`ad/${id}`)
@@ -90,6 +93,7 @@ function AdCard({
       handleClick()
     }
   }
+
   return (
     <AdCardStyled>
       <ImageButton
@@ -107,18 +111,37 @@ function AdCard({
           <Text as="span" text={`Gastos ${gastosIncluidos ? ' incluidos' : ' no incluidos'}`} />
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
-        <Button
-          text="Contactar"
-          icon="chat"
-          textColor={colors.strongBlue}
-          iconPosition="left"
-          onClick={() => setActive(true)}
-          tabIndex={id + 10}
-          buttonStyles={{ padding: 0 }}
-          className="transparent"
-        />
+
+        {currentUser && userId === currentUser.id ? (
+          <Link to="/edit-ad" style={{ textDecoration: 'none' }}>
+            <Button
+              text="Editar"
+              icon="edit_square"
+              textColor={colors.strongBlue}
+              iconPosition="left"
+              tabIndex={id + 10}
+              buttonStyles={{ padding: 0 }}
+              textStyles={{ marginLeft: 7, marginTop: 5 }}
+              className="transparent"
+            />
+          </Link>
+        ) : (
+          <>
+            <Button
+              text="Contactar"
+              icon="chat"
+              textColor={colors.strongBlue}
+              iconPosition="left"
+              onClick={() => setActive(true)}
+              tabIndex={id + 10}
+              buttonStyles={{ padding: 1 }}
+              textStyles={{ marginLeft: 7 }}
+              className="transparent"
+            />
+            <ContactModal active={active} hideModal={() => setActive(false)} />
+          </>
+        )}
       </div>
-      <ContactModal active={active} hideModal={() => setActive(false)} />
     </AdCardStyled>
   )
 }
