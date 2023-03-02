@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
@@ -18,7 +20,7 @@ import { getAd } from '../../api/ads'
 const AdStyled = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
 
   @media only ${device.Tablet} {
     display: flex;
@@ -103,10 +105,34 @@ const StyledStreet = styled.p`
   }
 `
 
-function Ad() {
-  const { id } = useParams()
+interface AdProps {
+  id: string
+  title: string
+}
 
-  const [ad, setAd] = useState(null)
+interface Props {
+  adStatusId: number
+  adTypeId: number
+  city: string
+  createdAt: string
+  description: string
+  id: number
+  includedExpenses: true
+  mapLat: number
+  mapLon: number
+  nBathrooms: number
+  nRooms: number
+  price: number
+  squareMeters: number
+  title: string
+  updatedAt: string
+  userId: number
+}
+
+function Ad() {
+  const { id }: AdProps = useParams()
+
+  const [ad, setAd] = useState<Props | null>(null)
   const [active, setActive] = useState(false)
 
   useEffect(() => {
@@ -140,13 +166,13 @@ function Ad() {
         <Body
           title="Anuncio"
           justifyTitle="flex-start"
-          paddingTitle="0px"
-          paddingTitle2="15vw"
+          // paddingTitle="0px"
+          // paddingTitle2="15vw"
           isLoggedIn
         >
           <div>
             <AdStyled>
-              <Text text={`${ad.title}`} className="ad__title" />
+              <Text text={ad.title} className="ad__title" />
               <Gallery images={images} />
 
               <AdTextWrapper>
@@ -187,7 +213,7 @@ function Ad() {
                 <AdDescriptionText>
                   <Text as="p" text={`"${ad.description}"`} className="ad__description" />
                 </AdDescriptionText>
-                <Map lat={ad.mapLat} lng={ad.mapLon} />
+                <Map lat={ad.mapLat} lng={ad.mapLon} coordinates={[ad.mapLat, ad.mapLon]} />
                 <StyledStreet>
                   <a href={`http://www.google.com/maps/place/${ad.mapLat},${ad.mapLon}`}>
                     Dirección: Carrer Trafalgar 4
@@ -204,6 +230,7 @@ function Ad() {
                   type="button"
                   onClick={() => setActive(true)}
                 />
+
                 <ContactModal active={active} hideModal={() => setActive(false)} />
               </AdTextWrapper>
             </AdStyled>

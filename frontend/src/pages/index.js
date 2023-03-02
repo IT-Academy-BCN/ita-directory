@@ -13,6 +13,7 @@ import Login from './UserFlow/Login/Login'
 import Registration from './UserFlow/Registration/Registration'
 import Profile from './UserFlow/Profile/Profile'
 import RecoverPassword from './UserFlow/RecoverPassword/RecoverPassword'
+import EditAd from './EditAd/EditAd'
 
 export {
   AdList,
@@ -30,4 +31,5 @@ export {
   Registration,
   RecoverPassword,
   Profile,
+  EditAd,
 }
