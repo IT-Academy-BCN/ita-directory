@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { device } from '../../../theme'
+import { colors, device } from '../../../theme'
 import { Button, Card, Text, Title, Label } from '../../../components/atoms'
-// import FilterListStyled from '../../../components/organisms/FilterList/FilterList.styles'
 
 const AdListFilterStyled = styled(Card)`
   width: 30%;
@@ -17,6 +16,11 @@ const AdListFilterStyled = styled(Card)`
   padding: 0.7rem 0.7rem;
   margin-right: 0.9rem;
 
+  .styedTitle {
+    font-weight: bold;
+    color: ${colors.darkGrey};
+  }
+
   @media ${device.Tablet} {
     width: 35%;
   }
@@ -24,6 +28,20 @@ const AdListFilterStyled = styled(Card)`
   @media ${device.Laptop} {
     width: 100%;
     justify-content: space-between;
+  }
+  .styledContainerCheckbox {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    .styledCheckbox {
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border: 1px solid #707070;
+      opacity: 1;
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
   }
 `
 
@@ -35,21 +53,17 @@ const CardInput = styled.input`
   margin-right: 0.3rem;
   padding-left: 0.5rem;
   width: 100%;
-  // width: 90px;
-  // height: 30px;
   height: 40px;
-  // box-shadow: 0 3px 6px #00000029;
-  border: 1px solid black;
-  // border-radius: 4px;
+  border: 1px solid #707070;
   color: #e22e2e;
 `
 
 const CardSelectorWrapper = styled.div`
-  // border: 2px solid red;
   display: flex;
   align-items: center;
   padding-bottom: 1rem;
   padding-top: 1rem;
+  gap: 0.5rem;
 `
 
 const FilterHr = styled.hr`
@@ -75,8 +89,6 @@ function AdFilters({ filter, className = '' }) {
     filter(undefined)
   }
 
-  console.log('gastos', gastosInc)
-
   return (
     <AdListFilterStyled className={className}>
       <Button
@@ -85,9 +97,9 @@ function AdFilters({ filter, className = '' }) {
         text="Limpiar busqueda"
         onClick={() => ClearFilter()}
       />
-      Filtros
+      <Text text="Filtros" margin="0px" className="styedTitle" />
       <FilterHr style={{ width: '100%' }} />
-      Precio
+      <Text text="Precio" margin="0" />
       <CardSelectorWrapper>
         <CardInput
           type="number"
@@ -102,7 +114,7 @@ function AdFilters({ filter, className = '' }) {
           onChange={(e) => setMaxPrice(e.target.value)}
         />
       </CardSelectorWrapper>
-      Tamaño
+      <Text text="Tamaño" margin="0px" />
       <CardSelectorWrapper>
         <CardInput
           type="number"
@@ -126,7 +138,7 @@ function AdFilters({ filter, className = '' }) {
           onChange={(e) => setGastosInc(e.target.checked)}
           name="billsIncluded"
         />
-        <StyledLabel htmlFor="check" label="hola hola" />
+        <StyledLabel htmlFor="check" label="Gastos incluidos" />
       </div>
       <Button
         text="Filtrar"

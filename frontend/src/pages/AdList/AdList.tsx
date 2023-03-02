@@ -2,17 +2,19 @@ import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
-import { Button } from '../../components/atoms'
-import { colors, Container } from '../../theme'
+import { Button, Text } from '../../components/atoms'
+import { colors, Container, font } from '../../theme'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 import AdListFilter from './AdListFilter/AdListFilter'
 import axiosInstance from '../../utils/axiosInstance'
 import { FlexBox } from '../../theme/wrappers'
 
 const buttonStyle = {
+  color: colors.lightBlue,
   background: 'transparent',
-  boxShadow: 'none',
-  outline: 'none',
+  fontSize: '1.1rem',
+  width: 'auto',
+  paddingRight: 0,
 }
 
 type TPropsFlexBox = {
@@ -57,7 +59,6 @@ function AdList() {
 
   // Added filters by Kevin
   const byPrice: TFunctionFilter = (min, max) => (ad) => {
-    console.log('ad', ad)
     if (min == null && max == null) return true
     return min <= ad.price && ad.price <= max
   }
@@ -67,7 +68,7 @@ function AdList() {
     return min <= ad.squareMeters && ad.squareMeters <= max
   }
 
-  // Added filters by Naza
+  // Added filter by Naza
   const byGastosInc: TFunctionFilter = (gastosInc) => (ad) => {
     if (!gastosInc) return true
     return ad.includedExpenses
@@ -132,39 +133,48 @@ function AdList() {
         />
         {!loading ? (
           <AdListStyled flexDirection="column">
-            <div className="tree-search">Madrid - Alquiler</div>
-            <div className="h3">Mapa de pisos</div>
-            <div className="rowWrapper">
-              {mapView ? (
-                <Button
-                  type="button"
-                  text="Vista de detalles"
-                  textColor={colors.lightGray}
-                  icon="search"
-                  iconPosition="left"
-                  iconStyles={{
-                    marginRight: 5,
-                    paddingLeft: 0,
-                  }}
-                  onClick={() => setMapView(!mapView)}
-                  buttonStyles={buttonStyle}
+            <FlexBox flexDirection="row" justifyContent="space-between" alignItems="end">
+              <FlexBox flexDirection="column">
+                <Text text="Madrid > Alquiler" fontStyle="italic" />
+                <Text
+                  text="Listado de Pisos"
+                  marginTop="0px"
+                  color={colors.darkOrange}
+                  fontSize={font.md}
                 />
-              ) : (
-                <Button
-                  type="button"
-                  text="Vista de mapa"
-                  textColor={colors.lightGray}
-                  icon="map"
-                  iconPosition="left"
-                  iconStyles={{
-                    marginRight: 5,
-                    paddingLeft: 0,
-                  }}
-                  onClick={() => setMapView(!mapView)}
-                  buttonStyles={buttonStyle}
-                />
-              )}
-            </div>
+              </FlexBox>
+              <div className="rowWrapper">
+                {mapView ? (
+                  <Button
+                    type="button"
+                    text="Vista de detalles"
+                    textColor={colors.grey}
+                    icon="search"
+                    iconPosition="left"
+                    iconStyles={{
+                      marginRight: 5,
+                      paddingLeft: 0,
+                    }}
+                    onClick={() => setMapView(!mapView)}
+                    buttonStyles={buttonStyle}
+                  />
+                ) : (
+                  <Button
+                    type="button"
+                    text="Vista de mapa"
+                    textColor={colors.grey}
+                    icon="location_on"
+                    iconPosition="left"
+                    iconStyles={{
+                      marginRight: 5,
+                      paddingLeft: 0,
+                    }}
+                    onClick={() => setMapView(!mapView)}
+                    buttonStyles={buttonStyle}
+                  />
+                )}
+              </div>
+            </FlexBox>
             {mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
           </AdListStyled>
         ) : (
