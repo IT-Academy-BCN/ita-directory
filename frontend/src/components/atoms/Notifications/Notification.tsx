@@ -5,7 +5,7 @@ import { deleteNotification } from '../../../store/notificationSlice'
 import Icon from '../Icon'
 import Text from '../Text'
 
-interface NotificationProps {
+type TNotification = {
   message: string
   id: number
   icon: string
@@ -42,7 +42,7 @@ const NotificationIconStyled = styled.div`
   align-items: center;
 `
 
-function Notification({ message, id, icon, colorIcon }: NotificationProps) {
+function Notification({ message, id, icon, colorIcon }: TNotification) {
   const dispatch = useDispatch()
 
   const closeNotification = () => {
