@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { colors } from '../../../theme'
 import Label from './Label'
 
-interface InputStyledProps {
+type TInputStyled = {
   error?: boolean
 }
 
-const InputStyled = styled.input<InputStyledProps>`
+const InputStyled = styled.input<TInputStyled>`
   height: 40px;
   width: 100%;
   padding: 0rem 1rem;
@@ -27,7 +27,7 @@ const InputStyled = styled.input<InputStyledProps>`
     border: 1px solid ${({ error }) => (error ? 'red' : colors.darkBlue)} !important;
   }
 `
-interface InputProps {
+type TInput = {
   accept?: string
   className?: string
   disabled?: boolean
@@ -67,12 +67,11 @@ function Input({
   size,
   type,
   value,
-}: InputProps) {
+}: TInput) {
   return (
     <div>
       <Label label={label} htmlFor={id} hiddenLabel />
       <InputStyled
-        {...register}
         accept={accept}
         className={`${className} ${error ? 'error' : ''}`}
         disabled={disabled}
@@ -89,6 +88,7 @@ function Input({
         style={inputStyles}
         type={type}
         value={value}
+        {...register}
       />
     </div>
   )

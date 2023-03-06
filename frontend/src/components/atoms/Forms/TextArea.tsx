@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
-import Label from './Label'
 
 interface TextAreaProps {
   error?: boolean
@@ -62,26 +61,23 @@ function TextArea({
   rows,
 }: TextAreaProps) {
   return (
-    <>
-      <Label label={label} htmlFor={id} hiddenLabel />
-      <TextAreaStyled
-        placeholder={placeholder}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        className={`${className} ${error ? 'error' : ''}`}
-        id={id}
-        label={label}
-        name={name}
-        disabled={disabled}
-        maxLength={maxLength}
-        minLength={minLength}
-        rows={rows}
-        cols={cols}
-        required={required}
-        error={error}
-        {...register}
-      />
-    </>
+    <TextAreaStyled
+      placeholder={placeholder}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      className={`${className} ${error ? 'error' : ''}`}
+      id={id}
+      label={label}
+      name={name}
+      disabled={disabled}
+      maxLength={maxLength}
+      minLength={minLength}
+      rows={rows}
+      cols={cols}
+      required={required}
+      error={error}
+      {...register}
+    />
   )
 }
 

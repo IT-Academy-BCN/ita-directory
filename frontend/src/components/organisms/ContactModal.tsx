@@ -26,24 +26,24 @@ const TextAreaStyled = styled(TextArea)`
   font-size: 16px;
 `
 
-interface ContactModalProps {
+type TContactModal = {
   active: boolean
   hideModal: Function
 }
 
-interface DataProps {
+type TData = {
   name: string
   email: string
   message: string
 }
 
-interface ContactProps {
+type TContact = {
   name: string
   email: string
   message: string
 }
 
-function ContactModal({ active, hideModal }: ContactModalProps) {
+function ContactModal({ active, hideModal }: TContactModal) {
   const [animatedState, setAnimatedState] = useState(false)
   const [disabled, setIsDisabled] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -56,7 +56,7 @@ function ContactModal({ active, hideModal }: ContactModalProps) {
   })
 
   const submitForm = (data: FieldValues) => {
-    const { name, email, message } = data as DataProps
+    const { name, email, message } = data as TData
     sendContact({ name, email, message }, (err: any) => {
       if (err) {
         // eslint-disable-next-line no-console
@@ -65,7 +65,7 @@ function ContactModal({ active, hideModal }: ContactModalProps) {
     })
   }
 
-  const sendContact = (contact: ContactProps, callback: (err: Error | null) => void) => {
+  const sendContact = (contact: TContact, callback: (err: Error | null) => void) => {
     const { name, email, message } = contact
 
     setAnimatedState(true)
