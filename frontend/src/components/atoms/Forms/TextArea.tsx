@@ -35,8 +35,6 @@ interface TextAreaProps {
   maxLength?: number
   minLength?: number
   name?: string
-  onBlur?: () => void
-  onFocus?: () => void
   placeholder?: string
   register?: object
   required?: boolean
@@ -53,18 +51,15 @@ function TextArea({
   maxLength,
   minLength,
   name,
-  onBlur,
-  onFocus,
   placeholder,
   register,
   required = false,
   rows,
+  ...rest
 }: TextAreaProps) {
   return (
     <TextAreaStyled
       placeholder={placeholder}
-      onFocus={onFocus}
-      onBlur={onBlur}
       className={`${className} ${error ? 'error' : ''}`}
       id={id}
       label={label}
@@ -76,6 +71,7 @@ function TextArea({
       cols={cols}
       required={required}
       error={error}
+      {...rest}
       {...register}
     />
   )

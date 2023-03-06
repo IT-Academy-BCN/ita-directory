@@ -36,16 +36,13 @@ type TInput = {
   inputStyles?: React.CSSProperties
   label: string
   name?: string
-  onBlur?: () => void
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onFocus?: () => void
   placeholder?: string
   ref?: React.RefObject<HTMLInputElement>
   register?: object
   required?: boolean
   size?: number
   type: string
-  value?: string | number
 }
 
 function Input({
@@ -57,16 +54,14 @@ function Input({
   inputStyles,
   label,
   name,
-  onBlur,
   onChange,
-  onFocus,
   placeholder,
   ref,
   register,
   required,
   size,
   type,
-  value,
+  ...rest
 }: TInput) {
   return (
     <div>
@@ -78,16 +73,14 @@ function Input({
         error={error}
         id={id}
         name={name}
-        onBlur={onBlur}
         onChange={onChange}
-        onFocus={onFocus}
         placeholder={placeholder}
         ref={ref}
         required={required}
         size={size}
         style={inputStyles}
         type={type}
-        value={value}
+        {...rest}
         {...register}
       />
     </div>
