@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { colors } from '../../../theme'
-import Label from './Label'
 
 type TInputStyled = {
   error?: boolean
@@ -34,7 +33,6 @@ type TInput = {
   error?: boolean
   id?: string
   inputStyles?: React.CSSProperties
-  label: string
   name?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
@@ -52,7 +50,6 @@ function Input({
   error,
   id,
   inputStyles,
-  label,
   name,
   onChange,
   placeholder,
@@ -65,7 +62,6 @@ function Input({
 }: TInput) {
   return (
     <div>
-      <Label label={label} htmlFor={id} hiddenLabel />
       <InputStyled
         accept={accept}
         className={`${className} ${error ? 'error' : ''}`}
