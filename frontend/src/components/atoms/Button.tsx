@@ -1,26 +1,20 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { colors, font } from '../../theme'
 import Icon from './Icon'
 import Text from './Text'
 
-type MouseEventHandler<T extends HTMLElement> = (event: React.MouseEvent<T, MouseEvent>) => void
-
-type TButtonProps = {
-  type?: 'submit' | 'button' | 'reset'
+type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   text?: string
   textColor?: string
   loadingText?: string
   iconPosition?: 'left' | 'right'
   isLoading?: boolean
-  disabled?: boolean
   icon?: string
-  className?: string
   buttonStyles?: object
   textStyles?: object
   iconStyles?: object
   animated?: boolean
-  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 const StyledButton = styled.button<{
@@ -88,28 +82,25 @@ const StyledButton = styled.button<{
 
 function Button({
   type = 'submit',
-  text = undefined,
+  text = '',
   textColor = 'white',
   iconPosition = 'left',
-  loadingText = undefined,
+  loadingText = '',
   isLoading = false,
   disabled = false,
   icon = undefined,
-  className = undefined,
+  className = '',
   buttonStyles = undefined,
-  textStyles = undefined,
+  textStyles = {},
   iconStyles = undefined,
   animated = false,
-  onClick,
   ...props
 }: TButtonProps) {
   return (
     <StyledButton
       type={type}
-      disabled={disabled}
       className={`${className} ${animated ? 'animated' : ''} ${disabled ? 'disabled' : ''}`}
       style={{ ...buttonStyles }}
-      onClick={onClick}
       iconPosition={iconPosition}
       {...props}
     >
