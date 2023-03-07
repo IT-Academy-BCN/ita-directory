@@ -1,4 +1,5 @@
-import { useState } from 'react'
+// @ts-nocheck
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -83,12 +84,11 @@ const UserAccessStyled = styled.div`
   }
 `
 const ImgStyled = styled.img`
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-    object-fit: cover;
-    padding-right: 2px;
-  }
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  object-fit: cover;
+  padding-right: 2px;
 `
 
 function UserAccess() {
@@ -100,7 +100,6 @@ function UserAccess() {
     { path: paths.bills, text: 'Mis facturas' },
     { path: paths.userAds, text: 'Mis Anuncios' },
     { path: paths.newAd, text: 'Publicar Anuncio' },
-    { path: paths.ads, text: 'Anuncios' },
   ]
   const [dropdownVisible, setDropdownVisible] = useState(false)
   const handleClick = () => {

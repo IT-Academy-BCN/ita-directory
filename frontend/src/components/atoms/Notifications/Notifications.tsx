@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Notification from './Notification'
+import { RootState } from '../../../store/store'
 
 const NotificationsStyled = styled.div`
   box-sizing: border-box;
@@ -14,7 +15,7 @@ const NotificationsStyled = styled.div`
 `
 
 function Notifications() {
-  const notifications = useSelector((s) => s.notification.notifications)
+  const notifications = useSelector<RootState, boolean>((s) => s.notification.notifications)
   return (
     <NotificationsStyled>
       {Object.values(notifications).map((n) => (
