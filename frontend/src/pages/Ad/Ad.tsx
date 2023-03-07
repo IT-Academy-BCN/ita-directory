@@ -15,7 +15,6 @@ import {
   adThumbnail2,
   adThumbnail3,
 } from '../../assets/images'
-import { getAd } from '../../api/ads'
 
 const AdStyled = styled.div`
   display: flex;
@@ -136,7 +135,12 @@ function Ad() {
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    getAd(id).then((data) => setAd(data))
+    try {
+      const response = await axiosInstance.get(`/ads/${id}`)
+      setAd(response.data.data)
+    } catch (e) {
+      throw new Error(`${e}`)
+    }
   }, [id])
 
   const images = [
