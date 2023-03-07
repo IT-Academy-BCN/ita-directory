@@ -1,19 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, MouseEventHandler } from 'react'
 import styled from 'styled-components'
 import AdCard from './AdCard/AdCard'
 import Body from '../../components/layout/Body/Body'
-import { Button } from '../../components/atoms'
-import { colors, Container } from '../../theme'
+import { Button, Text } from '../../components/atoms'
+import { colors, Container, font } from '../../theme'
 import MapView from '../../components/organisms/Map/MapView/MapView'
 import AdListFilter from './AdListFilter/AdListFilter'
 import axiosInstance from '../../utils/axiosInstance'
 import { FlexBox } from '../../theme/wrappers'
-
-const buttonStyle = {
-  background: 'transparent',
-  boxShadow: 'none',
-  outline: 'none',
-}
 
 type TPropsFlexBox = {
   flexDirection: string
@@ -29,7 +23,7 @@ const AdsStyled = styled(Container)`
   }
 
   ${AdListStyled} {
-    width: 70%;
+    width: 50%;
     flex-grow: 1;
   }
 `
@@ -37,14 +31,56 @@ const AdsStyled = styled(Container)`
 type TAdProps = {
   price: number
   squareMeters: number
+  includedExpenses: boolean
 }
 type TFunctionFilter = (min: number, max: number) => (ad: TAdProps) => boolean
+
+type TChekboxFunctionFilter = (gastosInc: boolean) => (ad: TAdProps) => boolean
 
 type TFilterParms = {
   minPrice?: number
   maxPrice?: number
   minSize?: number
   maxSize?: number
+  gastosInc?: boolean
+}
+type TToggleButton = {
+  text?: string
+  icon?: string
+  onClick: () => MouseEventHandler<HTMLButtonElement>
+}
+function ToggleButton({ text, icon, onClick }: TToggleButton) {
+  return (
+    <Button
+      type="button"
+      textColor={colors.grey}
+      text={text}
+      icon={icon}
+      iconPosition="left"
+      onClick={onClick}
+      iconStyles={{
+        marginRight: 5,
+        paddingLeft: 0,
+      }}
+      buttonStyles={{
+        color: colors.lightBlue,
+        background: 'transparent',
+        fontSize: '1.1rem',
+        width: 'auto',
+        paddingRight: 0,
+      }}
+    />
+  )
+}
+type TToggleButtons = {
+  onClick: () => MouseEventHandler<HTMLButtonElement>
+}
+function MapButton({ onClick }: TToggleButtons) {
+  return <ToggleButton text="Vista de detalles" icon="search" onClick={onClick} />
+}
+
+function DetailsButton({ onClick }: TToggleButtons) {
+  return <ToggleButton text="Vista de mapa" icon="location_on" onClick={onClick} />
 }
 
 function AdList() {
@@ -52,6 +88,8 @@ function AdList() {
   const [mapView, setMapView] = useState(false)
   const [adList, setAdList] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const toggleMapView = () => setMapView(!mapView)
 
   // Added filters by Kevin
   const byPrice: TFunctionFilter = (min, max) => (ad) => {
@@ -64,6 +102,10 @@ function AdList() {
     return min <= ad.squareMeters && ad.squareMeters <= max
   }
 
+  const byGastosInc: TChekboxFunctionFilter = (gastosInc) => (ad) => {
+    if (!gastosInc) return true
+    return ad.includedExpenses
+  }
   useEffect(() => {
     const fetchAds = async () => {
       const result = await axiosInstance.get('/ads')
@@ -77,6 +119,7 @@ function AdList() {
     const filteredAds = adList
       .filter(byPrice(filterParams?.minPrice || 0, filterParams?.maxPrice || Infinity))
       .filter(bySize(filterParams?.minSize || 0, filterParams?.maxSize || Infinity))
+      .filter(byGastosInc(filterParams?.gastosInc || false))
     return filteredAds
   }, [filterParams, adList])
 
@@ -110,6 +153,7 @@ function AdList() {
       key={e.id}
     />
   ))
+
   return (
     <Body title="Pisos en Alquiler en Madrid" justifyTitle="flex-start">
       <AdsStyled data-testid="adListStyled">
@@ -123,39 +167,24 @@ function AdList() {
         />
         {!loading ? (
           <AdListStyled flexDirection="column">
-            <div className="tree-search">Madrid - Alquiler</div>
-            <div className="h3">Mapa de pisos</div>
-            <div className="rowWrapper">
-              {mapView ? (
-                <Button
-                  type="button"
-                  text="Vista de detalles"
-                  textColor={colors.lightGray}
-                  icon="search"
-                  iconPosition="left"
-                  iconStyles={{
-                    marginRight: 5,
-                    paddingLeft: 0,
-                  }}
-                  onClick={() => setMapView(!mapView)}
-                  buttonStyles={buttonStyle}
+            <FlexBox justifyContent="space-between" alignItems="end">
+              <FlexBox flexDirection="column">
+                <Text text="Madrid > Alquiler" fontStyle="italic" />
+                <Text
+                  text="Listado de Pisos"
+                  marginTop="0px"
+                  color={colors.darkOrange}
+                  fontSize={font.md}
                 />
-              ) : (
-                <Button
-                  type="button"
-                  text="Vista de mapa"
-                  textColor={colors.lightGray}
-                  icon="map"
-                  iconPosition="left"
-                  iconStyles={{
-                    marginRight: 5,
-                    paddingLeft: 0,
-                  }}
-                  onClick={() => setMapView(!mapView)}
-                  buttonStyles={buttonStyle}
-                />
-              )}
-            </div>
+              </FlexBox>
+              <div className="rowWrapper">
+                {mapView ? (
+                  <MapButton onClick={toggleMapView} />
+                ) : (
+                  <DetailsButton onClick={toggleMapView} />
+                )}
+              </div>
+            </FlexBox>
             {mapView ? <MapView filteredAds={filteredAdList} /> : renderList}
           </AdListStyled>
         ) : (

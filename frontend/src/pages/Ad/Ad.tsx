@@ -15,7 +15,6 @@ import {
   adThumbnail2,
   adThumbnail3,
 } from '../../assets/images'
-import { getAd } from '../../api/ads'
 
 const AdStyled = styled.div`
   display: flex;
@@ -129,9 +128,17 @@ interface Props {
   userId: number
 }
 
+const getAd = async (id: string) => {
+  try {
+    const response = await axiosInstance.get(`/ads/${id}`)
+    setAd(response.data.data)
+  } catch (e) {
+    throw new Error(`${e}`)
+  }
+}
+
 function Ad() {
   const { id }: AdProps = useParams()
-
   const [ad, setAd] = useState<Props | null>(null)
   const [active, setActive] = useState(false)
 

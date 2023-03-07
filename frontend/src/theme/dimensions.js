@@ -2,4 +2,11 @@ const dimensions = {
   borderRadius: 6,
 }
 
-export default dimensions
+const imageSize = {
+  thumbnail: {
+    width: "190px",
+    height: "190px",
+  }
+}
+
+export { dimensions, imageSize }

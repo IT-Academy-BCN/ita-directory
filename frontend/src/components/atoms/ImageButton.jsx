@@ -1,7 +1,29 @@
+// @ts-nocheck
 import PropTypes from 'prop-types'
+import React from 'react'
 import Styled from 'styled-components'
+import { dimensions, imageSize } from '../../theme'
 
 function ImageButton({ adImage, title, handleClick, handleKeyPress }) {
+  const ImageButtonStyled = Styled.button`
+  background: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  
+  & img {
+    width: ${imageSize.thumbnail.width};
+    height: ${imageSize.thumbnail.height};
+    object-fit: cover;
+    border-radius: ${dimensions.borderRadius}px;
+    
+  }
+  &:focus img { 
+    border: 2px solid #000;
+  }
+  `
+
   return (
     <ImageButtonStyled
       type="button"
@@ -13,31 +35,10 @@ function ImageButton({ adImage, title, handleClick, handleKeyPress }) {
   )
 }
 
-const ImageButtonStyled = Styled.button`
-  background: none;
-  outline: none;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-
-  & img {
-    width: 170px;      
-    height: 170px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 6px;
-    border: 2px solid #fff;
-  }
-  &:focus img { 
-    border: 2px solid #000;
-  }
-`
-
 ImageButton.propTypes = {
   adImage: PropTypes.string.isRequired,
   title: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
   handleKeyPress: PropTypes.func.isRequired,
 }
-
 export default ImageButton

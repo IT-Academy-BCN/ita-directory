@@ -77,7 +77,7 @@ const AdCardStyled = styled.div`
       text-overflow: ellipsis;
     }
     .ad-card__property-data span {
-      margin-right: 4px;
+      margin-right: 2rem;
     }
     .ad-card__price {
       color: ${colors.darkOrange};
@@ -86,6 +86,12 @@ const AdCardStyled = styled.div`
     .ad-card__description {
       font-size: 14px;
       color: ${colors.grey};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
   }
 

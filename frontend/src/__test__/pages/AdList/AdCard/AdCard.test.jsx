@@ -10,7 +10,7 @@ describe('AdListCard', () => {
   it('should render the AdCard', () => {
     render(<AdCard />)
 
-    const contactButtonText = screen.queryByText('Contactar')
+    const contactButtonText = screen.getByText('Contactar')
     expect(contactButtonText).toBeInTheDocument()
   })
 })
