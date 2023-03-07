@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import Body from '../../components/layout/Body/Body'
 import { Button, Text, Icon } from '../../components/atoms'
-import { device, colors } from '../../theme'
+import { device, colors, font } from '../../theme'
 import { Gallery, ContactModal, Map } from '../../components/organisms'
 import {
   adImage1,
@@ -19,7 +19,7 @@ import {
 const AdStyled = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
 
   @media only ${device.Tablet} {
     display: flex;
@@ -29,10 +29,8 @@ const AdStyled = styled.div`
 
   .ad__title {
     color: ${colors.darkRed};
-    /* padding-top: 0.5rem;
-    padding-bottom: 1.5rem; */
     font-weight: bold;
-    font-size: 36px;
+    font-size: ${font.xl};
     text-align: center;
 
     .Bottom {
@@ -43,7 +41,7 @@ const AdStyled = styled.div`
       align-items: space-between;
       justify-content: space-between;
       flex-wrap: wrap;
-      font-size: 16px;
+      font-size: ${font.base};
       padding-right: 1.5rem;
       margin-top: 1rem;
 
@@ -61,7 +59,7 @@ const AdPropertiesText = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  font-size: 12px;
+  font-size: ${font.xss};
   text-align: left;
   line-height: 1.5;
   padding-bottom: 1rem;
@@ -80,7 +78,7 @@ const AdPropertiesText = styled.div`
   }
 
   @media only ${device.Tablet} {
-    font-size: 16px;
+    font-size: ${font.base};
     line-height: 1.5;
     padding-bottom: 1rem;
   }
@@ -89,7 +87,7 @@ const AdPropertiesText = styled.div`
 const AdDescriptionText = styled.div`
   display: flex;
   gap: 1rem;
-  font-size: 16px;
+  font-size: ${font.base};
   text-align: left;
   line-height: 1.5;
   color: ${colors.grey};
@@ -105,7 +103,7 @@ const ButtonContainer = styled.div`
 const AdTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 12px;
+  font-size: ${font.xss};
   padding: 3rem;
 
   @media ${device.Laptop} {
@@ -196,13 +194,7 @@ function Ad() {
   return (
     <div>
       {ad && (
-        <Body
-          title="Anuncio"
-          justifyTitle="flex-start"
-          // paddingTitle="0px"
-          // paddingTitle2="15vw"
-          isLoggedIn
-        >
+        <Body title="Anuncio" justifyTitle="flex-start" isLoggedIn>
           <AdStyled>
             <Text text={ad.title} className="ad__title" />
             <Gallery images={images} />
