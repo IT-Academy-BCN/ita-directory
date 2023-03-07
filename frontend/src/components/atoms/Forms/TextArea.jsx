@@ -9,7 +9,8 @@ const TextAreaStyled = styled.div``
 const TextAreaInput = styled.textarea.attrs({
   className: `textarea`,
 })`
-  width: 93%;
+  width: 100%;
+  height: 125px;
   display: flex;
   margin: 0 auto;
   justify-self: center;
@@ -47,7 +48,7 @@ function TextArea({
 }) {
   return (
     <TextAreaStyled className={inputContainerClassName}>
-      <Label label={label} htmlFor={id} hiddenLabel />
+      <Label label={label} htmlFor={id} />
       <TextAreaInput
         placeholder={placeholder}
         onFocus={onFocus}

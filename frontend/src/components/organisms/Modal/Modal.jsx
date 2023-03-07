@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ModalBlock } from './Modal.styles'
@@ -26,7 +27,7 @@ function Modal({ title, footer, children, active, hideModal, color, fontSize, ic
 Modal.propTypes = {
   title: PropTypes.string,
   color: PropTypes.string,
-  fontSize: PropTypes.number,
+  fontSize: PropTypes.string,
   iconClose: PropTypes.bool,
   footer: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
