@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
@@ -15,6 +13,7 @@ import {
   adThumbnail2,
   adThumbnail3,
 } from '../../assets/images'
+import axiosInstance from '../../utils/axiosInstance'
 
 const AdStyled = styled.div`
   display: flex;
@@ -128,22 +127,21 @@ interface Props {
   userId: number
 }
 
-const getAd = async (id: string) => {
-  try {
-    const response = await axiosInstance.get(`/ads/${id}`)
-    setAd(response.data.data)
-  } catch (e) {
-    throw new Error(`${e}`)
-  }
-}
-
 function Ad() {
   const { id }: AdProps = useParams()
   const [ad, setAd] = useState<Props | null>(null)
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    getAd(id).then((data) => setAd(data))
+    const getAd = async () => {
+      try {
+        const response = await axiosInstance.get(`/ads/${id}`)
+        setAd(response.data.data)
+      } catch (error) {
+        throw new Error(`${error}`)
+      }
+    }
+    getAd()
   }, [id])
 
   const images = [
