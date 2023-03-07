@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { device } from '../../../theme'
-import { Button, Card, Text, Title } from '../../../components/atoms'
+import { colors, device } from '../../../theme'
+import { Button, Card, Text, Label } from '../../../components/atoms'
 
 const AdListFilterStyled = styled(Card)`
   width: 30%;
@@ -16,6 +16,11 @@ const AdListFilterStyled = styled(Card)`
   padding: 0.7rem 0.7rem;
   margin-right: 0.9rem;
 
+  .styedTitle {
+    font-weight: bold;
+    color: ${colors.darkGrey};
+  }
+
   @media ${device.Tablet} {
     width: 35%;
   }
@@ -23,6 +28,20 @@ const AdListFilterStyled = styled(Card)`
   @media ${device.Laptop} {
     width: 100%;
     justify-content: space-between;
+  }
+  .styledContainerCheckbox {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    .styledCheckbox {
+      background: #ffffff 0% 0% no-repeat padding-box;
+      border: 1px solid #707070;
+      opacity: 1;
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
   }
 `
 
@@ -33,11 +52,9 @@ const CardInput = styled.input`
   appearance: none;
   margin-right: 0.3rem;
   padding-left: 0.5rem;
-  width: 90px;
-  height: 30px;
-  box-shadow: 0 3px 6px #00000029;
-  border: none;
-  border-radius: 4px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #707070;
   color: #e22e2e;
 `
 
@@ -46,13 +63,17 @@ const CardSelectorWrapper = styled.div`
   align-items: center;
   padding-bottom: 1rem;
   padding-top: 1rem;
+  gap: 0.5rem;
 `
 
 const FilterHr = styled.hr`
   width: '100%';
 `
+const StyledLabel = styled(Label)`
+  padding: 20px;
+`
 
-function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, className = '' }) {
+function AdFilters({ filter, className = '' }) {
   const [maxPrice, setMaxPrice] = useState('')
   const [maxSize, setMaxSize] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -67,23 +88,18 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, classNa
     setGastosInc(false)
     filter(undefined)
   }
+
   return (
     <AdListFilterStyled className={className}>
-      <Title order={3} text="Filtros" mt={0} />
       <Button
         type="button"
         className="blue-gradient"
         text="Limpiar busqueda"
         onClick={() => ClearFilter()}
       />
-      <Text
-        fontSize={12}
-        text={`Precio mín y máx: ${minPriceValue || ''} ${maxPriceValue || ''}`}
-        mb={0}
-      />
-      <Text fontSize={12} text={`Tamaño mín y máx: ${minM2 || ''} ${maxM2 || ''}`} />
+      <Text text="Filtros" margin="0px" className="styedTitle" />
       <FilterHr style={{ width: '100%' }} />
-      Precio
+      <Text text="Precio" margin="0px" />
       <CardSelectorWrapper>
         <CardInput
           type="number"
@@ -98,7 +114,7 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, classNa
           onChange={(e) => setMaxPrice(e.target.value)}
         />
       </CardSelectorWrapper>
-      Tamaño
+      <Text text="Tamaño" margin="0px" />
       <CardSelectorWrapper>
         <CardInput
           type="number"
@@ -113,6 +129,18 @@ function AdFilters({ filter, maxPriceValue, minPriceValue, maxM2, minM2, classNa
           onChange={(e) => setMaxSize(e.target.value)}
         />
       </CardSelectorWrapper>
+
+      <div className="styledContainerCheckbox">
+        <input
+          className="styledCheckbox"
+          type="checkbox"
+          id="check"
+          checked={gastosInc}
+          onChange={(e) => setGastosInc(e.target.checked)}
+          name="billsIncluded"
+        />
+        <StyledLabel htmlFor="check" label="Gastos incluidos" />
+      </div>
       <Button
         text="Filtrar"
         className="blue-gradient"
@@ -128,6 +156,7 @@ AdFilters.propTypes = {
   minPriceValue: PropTypes.string,
   maxM2: PropTypes.string,
   minM2: PropTypes.string,
+  gastosIncValue: PropTypes.bool,
   className: PropTypes.string,
 }
 

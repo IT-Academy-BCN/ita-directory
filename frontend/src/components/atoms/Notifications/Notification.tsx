@@ -1,11 +1,16 @@
-// @ts-nocheck
-import PropType from 'prop-types'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import { deleteNotification } from '../../../store/notificationSlice'
 import Icon from '../Icon'
 import Text from '../Text'
+
+type TNotification = {
+  message: string
+  id: number
+  icon: string
+  colorIcon: string
+}
 
 const InRight = keyframes`
     from {
@@ -37,7 +42,7 @@ const NotificationIconStyled = styled.div`
   align-items: center;
 `
 
-function Notification({ message, id, icon, colorIcon }) {
+function Notification({ message, id, icon, colorIcon }: TNotification) {
   const dispatch = useDispatch()
 
   const closeNotification = () => {
@@ -73,13 +78,6 @@ function Notification({ message, id, icon, colorIcon }) {
       <Text text={message} />
     </NotificationStyled>
   )
-}
-
-Notification.propTypes = {
-  message: PropType.string.isRequired,
-  id: PropType.number.isRequired,
-  icon: PropType.string.isRequired,
-  colorIcon: PropType.string.isRequired,
 }
 
 export default React.memo(Notification)

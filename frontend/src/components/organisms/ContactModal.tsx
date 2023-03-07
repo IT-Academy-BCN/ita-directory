@@ -157,6 +157,7 @@ function ContactModal({ active, hideModal }: TContactModal) {
           disabled={disabled}
           buttonStyles={{
             // position: 'absolute',
+            position: 'absolute',
             bottom: '0',
             right: '0',
             width: 'auto',
