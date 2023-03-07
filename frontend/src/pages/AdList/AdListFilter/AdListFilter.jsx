@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
-import { Button, Card, Text, Title, Label } from '../../../components/atoms'
+import { Button, Card, Text, Label } from '../../../components/atoms'
 
 const AdListFilterStyled = styled(Card)`
   width: 30%;
@@ -99,7 +99,7 @@ function AdFilters({ filter, className = '' }) {
       />
       <Text text="Filtros" margin="0px" className="styedTitle" />
       <FilterHr style={{ width: '100%' }} />
-      <Text text="Precio" margin="0" />
+      <Text text="Precio" margin="0px" />
       <CardSelectorWrapper>
         <CardInput
           type="number"
@@ -129,6 +129,7 @@ function AdFilters({ filter, className = '' }) {
           onChange={(e) => setMaxSize(e.target.value)}
         />
       </CardSelectorWrapper>
+
       <div className="styledContainerCheckbox">
         <input
           className="styledCheckbox"
@@ -155,7 +156,7 @@ AdFilters.propTypes = {
   minPriceValue: PropTypes.string,
   maxM2: PropTypes.string,
   minM2: PropTypes.string,
-  // gastosIncValue: PropTypes.bool,
+  gastosIncValue: PropTypes.bool,
   className: PropTypes.string,
 }
 

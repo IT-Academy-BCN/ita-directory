@@ -1,21 +1,22 @@
+// @ts-nocheck
 import PropTypes from 'prop-types'
 import React from 'react'
 import Styled from 'styled-components'
+import { dimensions, imageSize } from '../../theme'
 
 function ImageButton({ adImage, title, handleClick, handleKeyPress }) {
   const ImageButtonStyled = Styled.button`
   background: none;
-  // outline: none;
+  outline: none;
   cursor: pointer;
   border: none;
   padding: 0;
   
   & img {
-    width: 190px;      
-    height: 190px;
+    width: ${imageSize.thumbnail.width};
+    height: ${imageSize.thumbnail.height};
     object-fit: cover;
-    object-position:;
-    border-radius: 6px;
+    border-radius: ${dimensions.borderRadius}px;
     
   }
   &:focus img { 
