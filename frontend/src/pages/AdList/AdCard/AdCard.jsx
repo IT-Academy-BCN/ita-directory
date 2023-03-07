@@ -150,16 +150,6 @@ function AdCard({
           <Text as="span" text={`Gastos ${gastosIncluidos ? ' incluidos' : ' no incluidos'}`} />
         </div>
         <div className="ad-card__description">&quot;{description}&quot;</div>
-        <Button
-          text="Contactar"
-          icon="forum"
-          textColor={colors.strongBlue}
-          iconPosition="left"
-          onClick={() => setActive(true)}
-          tabIndex={id + 10}
-          buttonStyles={{ padding: 0 }}
-          className="transparent"
-        />
         {currentUser && userId === currentUser.id ? (
           <EditButton />
         ) : (
