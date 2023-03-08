@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+// @ts-ignore
 import { fadeIn } from 'react-animations'
 import { colors } from '../../../theme'
 
@@ -43,7 +44,7 @@ export const ModalBlock = styled.div`
     opacity: 1;
 
     .modalBody {
-      padding: 1rem;
+      padding-top: 1rem;
       max-height: 60vh;
       overflow-y: auto;
       position: relative;
