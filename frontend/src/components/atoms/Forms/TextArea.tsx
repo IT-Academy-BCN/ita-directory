@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { colors, device } from '../../../theme'
+import Label from './Label'
 
 interface TextAreaProps {
   error?: boolean
@@ -30,8 +31,10 @@ interface TextAreaProps {
   cols?: number
   disabled?: boolean
   error?: boolean
+  hiddenLabel?: boolean
   id?: string
   label: string
+  labelStyles?: object | string
   maxLength?: number
   minLength?: number
   name?: string
@@ -46,6 +49,8 @@ function TextArea({
   cols,
   disabled,
   error,
+  hiddenLabel = false,
+  labelStyles,
   id,
   label,
   maxLength,
@@ -58,22 +63,25 @@ function TextArea({
   ...rest
 }: TextAreaProps) {
   return (
-    <TextAreaStyled
-      placeholder={placeholder}
-      className={`${className} ${error ? 'error' : ''}`}
-      id={id}
-      label={label}
-      name={name}
-      disabled={disabled}
-      maxLength={maxLength}
-      minLength={minLength}
-      rows={rows}
-      cols={cols}
-      required={required}
-      error={error}
-      {...rest}
-      {...register}
-    />
+    <>
+      <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} labelStyles={labelStyles} />
+      <TextAreaStyled
+        placeholder={placeholder}
+        className={`${className} ${error ? 'error' : ''}`}
+        id={id}
+        label={label}
+        name={name}
+        disabled={disabled}
+        maxLength={maxLength}
+        minLength={minLength}
+        rows={rows}
+        cols={cols}
+        required={required}
+        error={error}
+        {...rest}
+        {...register}
+      />
+    </>
   )
 }
 

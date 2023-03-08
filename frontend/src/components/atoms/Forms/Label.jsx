@@ -1,9 +1,14 @@
+// @ts-nocheck
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { colors } from '../../../theme'
+import { colors, font } from '../../../theme'
 import Text from '../Text'
 
 const LabelStyled = styled(Text)`
+  color: ${colors.lightGrey};
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: ${font.fontFamily};
   &.hidden {
     position: absolute;
     width: 1px;
@@ -17,7 +22,7 @@ const LabelStyled = styled(Text)`
   }
   ${(props) => props.isError && `color: ${colors.extraDarkRed} `}
 `
-function Label({ label, htmlFor, isError = false, hiddenLabel = false }) {
+function Label({ label, htmlFor, isError = false, hiddenLabel = false, labelStyles }) {
   return (
     <LabelStyled
       as="label"
@@ -25,6 +30,7 @@ function Label({ label, htmlFor, isError = false, hiddenLabel = false }) {
       htmlFor={htmlFor}
       isError={isError}
       className={`${hiddenLabel ? 'hidden' : ''}`}
+      style={{ ...labelStyles }}
     />
   )
 }
@@ -34,6 +40,7 @@ Label.propTypes = {
   htmlFor: PropTypes.string.isRequired,
   isError: PropTypes.bool,
   hiddenLabel: PropTypes.bool,
+  labelStyles: PropTypes.object,
 }
 
 export default styled(Label)``

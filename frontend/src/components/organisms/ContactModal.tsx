@@ -3,19 +3,19 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Label } from '../atoms'
+import { Button } from '../atoms'
 import Modal from './Modal/Modal'
-// import Input from '../atoms/Forms/Input'
 import { InputGroup, TextArea } from '../molecules'
 import { colors, font } from '../../theme'
 
 import contactSchema from '../../validation/contactModalSchema'
 
-const ButtonWrapper = styled.div`
+const ButtonWrapperStyled = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid ${colors.lightGray};
+  border-top: 2px solid ${colors.lighterGrey};
+  margin-top: 1.5rem;
 `
 
 const TextAreaStyled = styled(TextArea)`
@@ -91,88 +91,104 @@ function ContactModal({ active, hideModal }: TContactModal) {
       fontSize={font.sm}
     >
       <form onSubmit={handleSubmit(submitForm)}>
-        <Label text="Nombre" htmlFor="name" />
         <InputGroup
           type="text"
           name="name"
-          // placeholder="Nombre"
           label="Nombre"
           register={register('name')}
-          error={errors.email?.message}
-          className="contact-modal__textarea"
+          error={errors.name?.message}
+          inputStyle={{
+            color: colors.lightGrey,
+            backgroundColor: 'lime',
+            fontSize: '0.80rem',
+            fontWeight: 'bold',
+            fontFamily: font.fontFamily,
+          }}
+          labelStyles={{
+            color: colors.lightGrey,
+            fontSize: '0.80rem',
+            fontWeight: 'bold',
+            fontFamily: font.fontFamily,
+          }}
         />
         <InputGroup
           type="text"
           name="email"
-          // placeholder="Email"
           label="Email"
           register={register('email')}
           error={errors.email?.message}
-          className="contact-modal__textarea"
+          labelStyles={{
+            color: colors.lightGrey,
+            fontSize: '0.80rem',
+            fontWeight: 'bold',
+            fontFamily: font.fontFamily,
+          }}
         />
 
         <TextAreaStyled
           name="message"
           label="Mensaje"
           id="message"
-          // placeholder="Escribe aquí tu mensaje"
-          className="contact-modal__textarea"
           register={register('message')}
           error={errors.message?.message}
+          labelStyles={{
+            color: colors.lightGrey,
+            fontSize: '0.80rem',
+            fontWeight: 'bold',
+            fontFamily: font.fontFamily,
+          }}
         />
+        <ButtonWrapperStyled>
+          <Button
+            text="Cancelar"
+            iconPosition="left"
+            type="submit"
+            onClick={() => hideModal()}
+            icon="cancel"
+            textColor={colors.lightGray}
+            buttonStyles={{
+              color: colors.darkBlue,
+              backgroundColor: 'transparent',
+              boxShadow: 'none',
+              fontSize: '0.95rem',
+              fontFamily: 'Arial',
+              width: 'auto',
+              paddingLeft: 0,
+              gap: '1rem',
+              height: '30px',
+            }}
+            iconStyles={{
+              padding: '0px 15px 0px 0px',
+              width: '1rem',
+            }}
+            textStyles={{
+              fontSize: '0.8rem',
+            }}
+          />
+          <Button
+            text="Enviar"
+            loadingText="Enviando"
+            iconPosition="left"
+            type="submit"
+            className="darkBlue"
+            isLoading={isLoading}
+            animated={animatedState}
+            disabled={disabled}
+            buttonStyles={{
+              bottom: '0',
+              right: '0',
+              width: 'auto',
+              minWidth: '110px',
+              marginRight: 0,
+              paddingRight: '15px',
+              paddingLeft: '15px',
+              backgroundColor: colors.extraDarkBlue,
+              height: '30px',
+              fontSize: font.xs,
+            }}
+          />
+        </ButtonWrapperStyled>
       </form>
-
-      <ButtonWrapper>
-        <Button
-          text="Cancelar"
-          iconPosition="left"
-          type="submit"
-          onClick={() => hideModal()}
-          icon="cancel"
-          buttonStyles={{
-            color: colors.darkBlue,
-            cursor: 'pointer',
-            // background: 'transparent',
-            boxShadow: 'none',
-            fontSize: '0.95rem',
-            fontFamily: 'Arial',
-            width: 'auto',
-            paddingLeft: 0,
-          }}
-          iconStyles={{
-            paddingRight: '5px',
-            paddingLeft: '0px',
-            width: '1rem',
-            height: '1rem',
-          }}
-        />
-        <Button
-          text="Enviar"
-          loadingText="Enviando"
-          iconPosition="left"
-          type="submit"
-          className="darkBlue"
-          isLoading={isLoading}
-          animated={animatedState}
-          disabled={disabled}
-          buttonStyles={{
-            // position: 'absolute',
-            position: 'absolute',
-            bottom: '0',
-            right: '0',
-            width: 'auto',
-            minWidth: '110px',
-            marginRight: 0,
-            paddingRight: '15px',
-            paddingLeft: '15px',
-            backgroundColor: colors.extraDarkBlue,
-          }}
-          iconStyles={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        />
-      </ButtonWrapper>
     </Modal>
   )
 }
