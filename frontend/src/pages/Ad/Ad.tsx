@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import Body from '../../components/layout/Body/Body'
 import { Button, Text, Icon } from '../../components/atoms'
-import { device, colors } from '../../theme'
+import { device, colors, font } from '../../theme'
 import { Gallery, ContactModal, Map } from '../../components/organisms'
 import {
   adImage1,
@@ -19,7 +19,7 @@ import {
 const AdStyled = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  width: 100%;
 
   @media only ${device.Tablet} {
     display: flex;
@@ -29,10 +29,8 @@ const AdStyled = styled.div`
 
   .ad__title {
     color: ${colors.darkRed};
-    padding-top: 0.5rem;
-    padding-bottom: 1.5rem;
     font-weight: bold;
-    font-size: 36px;
+    font-size: ${font.xl};
     text-align: center;
 
     .Bottom {
@@ -43,7 +41,7 @@ const AdStyled = styled.div`
       align-items: space-between;
       justify-content: space-between;
       flex-wrap: wrap;
-      font-size: 16px;
+      font-size: ${font.base};
       padding-right: 1.5rem;
       margin-top: 1rem;
 
@@ -59,8 +57,9 @@ const AdStyled = styled.div`
 
 const AdPropertiesText = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  font-size: 14px;
+  font-size: ${font.xss};
   text-align: left;
   line-height: 1.5;
   padding-bottom: 1rem;
@@ -73,28 +72,53 @@ const AdPropertiesText = styled.div`
     gap: 5px;
   }
 
-  @media only ${device.Tablet} {
-    font-size: 16px;
+  @media ${device.Laptop} {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
 
+  @media only ${device.Tablet} {
+    font-size: ${font.base};
     line-height: 1.5;
     padding-bottom: 1rem;
   }
 `
+
 const AdDescriptionText = styled.div`
   display: flex;
   gap: 1rem;
-  font-size: 16px;
+  font-size: ${font.base};
   text-align: left;
   line-height: 1.5;
   color: ${colors.grey};
   font-weight: bold;
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  align-self: start;
+  padding-top: 2rem;
+`
+
 const AdTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-  font-size: 12px;
+  font-size: ${font.xss};
+  padding: 3rem;
+
+  @media ${device.Laptop} {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    padding: 5rem;
+  }
+`
+const GridColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`
+const EmptyColumn = styled(GridColumn)`
+  grid-column: 1 / 2;
 `
 
 const StyledStreet = styled.p`
@@ -170,19 +194,13 @@ function Ad() {
   return (
     <div>
       {ad && (
-        <Body
-          title="Anuncio"
-          justifyTitle="flex-start"
-          // paddingTitle="0px"
-          // paddingTitle2="15vw"
-          isLoggedIn
-        >
-          <div>
-            <AdStyled>
-              <Text text={ad.title} className="ad__title" />
-              <Gallery images={images} />
-
-              <AdTextWrapper>
+        <Body title="Anuncio" justifyTitle="flex-start" isLoggedIn>
+          <AdStyled>
+            <Text text={ad.title} className="ad__title" />
+            <Gallery images={images} />
+            <AdTextWrapper>
+              <EmptyColumn />
+              <GridColumn>
                 <AdPropertiesText>
                   <div>
                     <Icon name="pin_drop" />
@@ -226,22 +244,23 @@ function Ad() {
                     Dirección: Carrer Trafalgar 4
                   </a>
                 </StyledStreet>
-                <Button
-                  buttonStyles={{
-                    width: '7.5rem',
-                    fontsize: '12px',
-                    margin: 'auto',
-                  }}
-                  text="Contacto"
-                  className="blue-gradient"
-                  type="button"
-                  onClick={() => setActive(true)}
-                />
-
-                <ContactModal active={active} hideModal={() => setActive(false)} />
-              </AdTextWrapper>
-            </AdStyled>
-          </div>
+                <ButtonContainer>
+                  <Button
+                    buttonStyles={{
+                      width: '7.5rem',
+                      fontsize: '12px',
+                      margin: 'auto',
+                    }}
+                    text="Contacto"
+                    className="blue-gradient"
+                    type="button"
+                    onClick={() => setActive(true)}
+                  />
+                </ButtonContainer>
+              </GridColumn>
+              <ContactModal active={active} hideModal={() => setActive(false)} />
+            </AdTextWrapper>
+          </AdStyled>
         </Body>
       )}
     </div>
