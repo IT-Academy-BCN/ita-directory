@@ -17,6 +17,7 @@
   "author": "Kevin Mamaqi Kapllani",
   "license": "ISC",
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "1.4.1",
     "@prisma/client": "3.15.0",
     "argon2": "0.28.2",
     "cors": "2.8.5",

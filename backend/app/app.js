@@ -14,6 +14,9 @@ const { loadConstants } = require('./utils/CONSTANTS')
 // Check the connection with the DB
 loadConstants()
 
+// Generate ZodToOpenAPI Swagger File
+require('./utils/generateZodSwaggerFile')
+
 // Initiate the app
 const app = express()
 
