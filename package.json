@@ -15,6 +15,7 @@
     "prisma-migrate": "cd ./backend && npx prisma migrate dev",
     "prisma-seed": "node ./backend/prisma/seed.js",
     "start-prisma": "npm run prisma-migrate && npm run prisma-seed",
+    "prisma-studio": "cd backend/prisma && npx prisma studio",
     "up": "cp .env.development ./backend/.env && npm run start-server && npm run start-prisma && npm run uml",
     "down": "cd ./scripts && bash down.sh",
     "postinstall": "husky install",
