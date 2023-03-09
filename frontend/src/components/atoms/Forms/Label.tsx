@@ -1,10 +1,16 @@
-// @ts-nocheck
-import PropTypes from 'prop-types'
+import React, { LabelHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { colors, font } from '../../../theme'
 import Text from '../Text'
 
-const LabelStyled = styled(Text)`
+type TLabel = LabelHTMLAttributes<HTMLLabelElement> & {
+  label: string
+  isError?: boolean | string
+  hiddenLabel?: boolean
+  labelStyles?: object
+}
+
+const LabelStyled = styled(Text)<TLabel>`
   color: ${colors.lightGrey};
   font-size: 0.8rem;
   font-weight: bold;
@@ -20,12 +26,13 @@ const LabelStyled = styled(Text)`
     clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;
   }
-  ${(props) => props.isError && `color: ${colors.extraDarkRed} `}
+  ${({ isError }) => isError && `color: ${colors.extraDarkRed} `}
 `
-function Label({ label, htmlFor, isError = false, hiddenLabel = false, labelStyles }) {
+function Label({ label, htmlFor, isError = false, hiddenLabel = false, labelStyles }: TLabel) {
   return (
     <LabelStyled
       as="label"
+      label={label}
       text={label}
       htmlFor={htmlFor}
       isError={isError}
@@ -33,14 +40,6 @@ function Label({ label, htmlFor, isError = false, hiddenLabel = false, labelStyl
       style={{ ...labelStyles }}
     />
   )
-}
-
-Label.propTypes = {
-  label: PropTypes.string.isRequired,
-  htmlFor: PropTypes.string.isRequired,
-  isError: PropTypes.bool,
-  hiddenLabel: PropTypes.bool,
-  labelStyles: PropTypes.object,
 }
 
 export default styled(Label)``
