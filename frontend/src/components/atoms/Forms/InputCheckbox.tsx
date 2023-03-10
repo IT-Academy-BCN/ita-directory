@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
-import { colors } from '../../../theme'
+import { colors, dimensions, font } from '../../../theme'
 
 type TInputCheckbox = InputHTMLAttributes<HTMLInputElement> & {
   error?: boolean | string
@@ -12,11 +12,11 @@ type TInputCheckbox = InputHTMLAttributes<HTMLInputElement> & {
 const InputStyled = styled.input<TInputCheckbox>`
   height: 40px;
   width: 100%;
-  padding: 0rem 1rem;
-  margin: 5px 0px;
-  border-radius: 0.5rem;
+  padding: ${dimensions.spacing.none} ${dimensions.spacing.base};
+  margin: 5px ${dimensions.spacing.none};
+  border-radius: ${dimensions.borderRadius};
   border: 1px solid #b0b0b0;
-  font-size: 16px;
+  font-size: ${font.base};
 
   &:hover {
     border: 1px solid ${colors.lightBlue};
