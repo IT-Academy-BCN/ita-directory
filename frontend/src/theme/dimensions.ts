@@ -11,6 +11,7 @@ const dimensions = {
   },
   borderRadius: {
     base: '0.5rem',
+    sm: '0.625rem',
   },
 }
 

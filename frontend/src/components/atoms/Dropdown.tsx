@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { colors } from '../../theme'
+import { colors, dimensions } from '../../theme'
 
 import useOnClickOutside from '../../hooks/useOnClickOutside'
 import useWindowSize from '../../hooks/useWindowSize'
@@ -24,14 +24,14 @@ type TDropdownStyled = {
 
 const DropdownStyled = styled.div<TDropdownStyled>`
   position: absolute;
-  padding: 0;
+  padding: ${dimensions.spacing.none};
   z-index: 1;
   top: ${({ position }) => position.y + position.height}px;
   left: ${({ position }) => position.x}px;
   text-align: center;
   background: transparent 0% 0% no-repeat padding-box;
   border: 1px solid ${colors.lighterGrey};
-  border-radius: 10px;
+  border-radius: ${dimensions.borderRadius.sm};
   opacity: 1;
 
   a,
