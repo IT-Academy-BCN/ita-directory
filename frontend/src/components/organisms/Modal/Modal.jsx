@@ -16,6 +16,10 @@ const FlexBoxStyled = styled(FlexBox)`
   font-family: ${font.fontFamily};
 `
 
+const IconStyled = styled(Icon)`
+  cursor: pointer;
+`
+
 function Modal({ title, footer, children, active, hideModal, color, fontSize, iconClose }) {
   return (
     active && (
@@ -25,7 +29,7 @@ function Modal({ title, footer, children, active, hideModal, color, fontSize, ic
         <div className="modalContainer">
           <FlexBoxStyled alignItems="center" justifyContent="space-between">
             <Title order={3} text={title} color={color} fontSize={fontSize} />
-            {!iconClose && <Icon name="close" onClick={hideModal} />}
+            {!iconClose && <IconStyled name="close" onClick={hideModal} />}
           </FlexBoxStyled>
           <div className="modalBody">{children}</div>
           <div className="modalFooter">{footer}</div>
