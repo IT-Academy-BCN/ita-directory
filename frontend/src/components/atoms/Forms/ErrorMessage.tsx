@@ -1,7 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, font } from '../../../theme'
+
+interface ErrorMessageProps {
+  text: boolean | string
+}
 
 const ErrorStyled = styled.p`
   margin: 0px 0px 8px 10px;
@@ -9,16 +12,12 @@ const ErrorStyled = styled.p`
   font-style: oblique;
   color: ${colors.bloodRed};
 `
-function ErrorMessage({ text }) {
+function ErrorMessage({ text }: ErrorMessageProps) {
   return (
     <ErrorStyled as="span" data-testid="error">
       {text}
     </ErrorStyled>
   )
-}
-
-ErrorMessage.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 }
 
 export default styled(ErrorMessage)``
