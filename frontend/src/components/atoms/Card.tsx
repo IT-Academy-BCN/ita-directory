@@ -1,8 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { colors, dimensions } from '../../theme'
 import { FlexBox } from '../../theme/wrappers'
+
+type TCard = {
+  children?: React.ReactNode
+  className?: string
+}
 
 const CardStyled = styled(FlexBox)`
   background: white;
@@ -12,12 +16,8 @@ const CardStyled = styled(FlexBox)`
   padding: 1rem;
 `
 
-function Card({ children, className = '' }) {
+function Card({ children, className = '' }: TCard) {
   return <CardStyled className={className}>{children}</CardStyled>
-}
-Card.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
 }
 
 export default styled(Card)``
