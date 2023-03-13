@@ -8,13 +8,13 @@ import { device } from '../../../../theme'
 const MapStyled = styled.div`
   z-index: 0;
   margin: auto;
-  width: 300px;
+  width: 100%;
   height: 285px;
 
-  @media ${device.Laptop} {
+  /* @media ${device.Laptop} {
     width: 600px;
     height: 285px;
-  }
+  } */
 `
 
 const MapContainerStyled = styled(MapContainer)`
