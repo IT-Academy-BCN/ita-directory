@@ -3,18 +3,12 @@ import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import L, { LatLngExpression } from 'leaflet'
 import styled from 'styled-components'
-import { device } from '../../../../theme'
 
 const MapStyled = styled.div`
   z-index: 0;
   margin: auto;
   width: 100%;
   height: 285px;
-
-  /* @media ${device.Laptop} {
-    width: 600px;
-    height: 285px;
-  } */
 `
 
 const MapContainerStyled = styled(MapContainer)`
