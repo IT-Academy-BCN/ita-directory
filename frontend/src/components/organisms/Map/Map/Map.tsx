@@ -1,8 +1,21 @@
 import React from 'react'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
-import './Map.css'
 import L, { LatLngExpression } from 'leaflet'
+import styled from 'styled-components'
+
+const MapStyled = styled.div`
+  z-index: 0;
+  margin: auto;
+  width: 100%;
+  height: 285px;
+`
+
+const MapContainerStyled = styled(MapContainer)`
+  width: 100%;
+  height: 100%;
+  margin: auto;
+`
 
 const icon = L.icon({
   iconSize: [25, 41],
@@ -35,16 +48,16 @@ function Map({ lat, lng, coordinates }: TMapProps) {
   const center = coordinates || [lat, lng]
 
   return (
-    <div className="Map">
-      <MapContainer className="Map-container">
+    <MapStyled>
+      <MapContainerStyled>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <ChangeView zoom={15} center={center} />
         <Marker position={center} icon={icon} />
-      </MapContainer>
-    </div>
+      </MapContainerStyled>
+    </MapStyled>
   )
 }
 
