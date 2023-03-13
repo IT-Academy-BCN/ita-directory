@@ -104,6 +104,7 @@ const AdTextWrapper = styled.div`
   flex-direction: column;
   font-size: ${font.xss};
   padding: 3rem;
+  width: 100%;
 
   @media ${device.Laptop} {
     display: grid;
