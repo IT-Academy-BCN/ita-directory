@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { colors, font } from '../../../theme'
 
-interface ErrorMessageProps {
-  text: boolean | string
+type TErrorMessage = {
+  text?: boolean | string
 }
 
 const ErrorStyled = styled.p`
@@ -12,7 +12,7 @@ const ErrorStyled = styled.p`
   font-style: oblique;
   color: ${colors.bloodRed};
 `
-function ErrorMessage({ text }: ErrorMessageProps) {
+function ErrorMessage({ text }: TErrorMessage) {
   return (
     <ErrorStyled as="span" data-testid="error">
       {text}
