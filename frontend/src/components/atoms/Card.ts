@@ -6,7 +6,7 @@ const Card = styled(FlexBox)`
   background: white;
   box-shadow: ${boxShadow.base};
   border: 1px solid ${colors.extraLightGrey};
-  border-radius: ${dimensions.borderRadius}px;
+  border-radius: ${dimensions.borderRadius.base};
   padding: ${dimensions.spacing.base};
 `
 
