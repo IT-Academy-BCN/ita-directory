@@ -45,7 +45,7 @@ function InputGroup({
         accept={accept}
         register={register}
       />
-      {error && <ErrorMessage text={error} />}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </InputGroupStyled>
   )
 }
