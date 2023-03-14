@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { colors } from '../../../theme'
 
 type TInput = InputHTMLAttributes<HTMLInputElement> & {
-  error?: boolean
+  error?: boolean | string
   register?: object
 }
 

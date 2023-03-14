@@ -6,7 +6,7 @@ import { InputText } from '../atoms/Forms'
 import { FlexBox } from '../../theme/wrappers'
 
 type TInputGroupStyled = {
-  error?: boolean
+  error?: boolean | string
   hasIcon?: boolean
 }
 
@@ -36,8 +36,9 @@ const InputGroupStyled = styled.div<TInputGroupStyled>`
   }
 `
 type TInputGroupText = InputHTMLAttributes<HTMLInputElement> & {
+  id: string
   label: string
-  error?: boolean
+  error?: boolean | string
   hiddenLabel?: boolean
   labelStyles?: object
   hasIcon?: boolean
