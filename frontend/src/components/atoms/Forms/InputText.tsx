@@ -1,8 +1,8 @@
-import React, { HTMLAttributes } from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { colors } from '../../../theme'
 
-type TInput = HTMLAttributes<HTMLInputElement> & {
+type TInput = InputHTMLAttributes<HTMLInputElement> & {
   error?: boolean
   register?: object
 }

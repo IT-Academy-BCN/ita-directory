@@ -1,35 +1,48 @@
-import PropTypes from 'prop-types'
+import React, { InputHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import { ErrorMessage, Label, Icon } from '../atoms'
-import { colors } from '../../theme'
+import { colors, dimensions, font } from '../../theme'
 import { InputText } from '../atoms/Forms'
 import { FlexBox } from '../../theme/wrappers'
 
-const InputGroupStyled = styled.div`
+type TInputGroupStyled = {
+  error?: boolean
+  hasIcon?: boolean
+}
+
+const InputGroupStyled = styled.div<TInputGroupStyled>`
   ${Label} {
-    margin-bottom: 0.8rem;
+    margin-bottom: ${dimensions.spacing.xs};
   }
 
-  error:focus-within {
+  .error:focus-within {
     border-color: ${({ error }) => (error ? colors.redColor : 'inherit')};
   }
 
   .styledIcon {
     position: absolute;
-    margin-left: 1rem;
+    margin-left: ${dimensions.spacing.base};
     margin-top: 0.2rem;
-    padding: 0;
+    padding: ${dimensions.spacing.none};
   }
 
   ${InputText} {
     display: flex;
-    height: 3rem;
-    padding: 1rem;
-    font-size: 0.9rem;
+    height: ${dimensions.spacing.xxl};
+    padding: ${dimensions.spacing.base};
+    font-size: ${font.xs};
     color: ${colors.darkGrey};
-    padding-left: ${({ hasIcon }) => (hasIcon ? '2.5rem;' : '1rem')};
+    padding-left: ${({ hasIcon }) => (hasIcon ? dimensions.spacing.xxl : dimensions.spacing.base)};
   }
 `
+type TInputGroupText = InputHTMLAttributes<HTMLInputElement> & {
+  label: string
+  error?: boolean
+  hiddenLabel?: boolean
+  labelStyles?: object
+  hasIcon?: boolean
+  icon?: string
+}
 
 function InputGroupText({
   value,
@@ -41,7 +54,7 @@ function InputGroupText({
   error,
   icon,
   ...rest
-}) {
+}: TInputGroupText): JSX.Element {
   return (
     <InputGroupStyled hasIcon={!!icon} className={className}>
       <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} isError={!!error} />
@@ -56,17 +69,6 @@ function InputGroupText({
       {!!error && <ErrorMessage text={error} />}
     </InputGroupStyled>
   )
-}
-
-InputGroupText.propTypes = {
-  className: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  hiddenLabel: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  icon: PropTypes.node,
 }
 
 export default styled(InputGroupText)``

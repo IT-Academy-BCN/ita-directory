@@ -8,6 +8,7 @@ const dimensions = {
     md: '1.5rem',
     lg: '2rem',
     xl: '2.5rem',
+    xxl: '3rem',
   },
   borderRadius: {
     base: '0.5rem',
