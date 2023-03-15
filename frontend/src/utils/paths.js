@@ -1,6 +1,7 @@
 const paths = {
   ads: '/ads',
   bills: '/my-bills',
+  dashboard: '/dashboard',
   home: '/',
   login: '/login',
   newAd: '/new-ad',
