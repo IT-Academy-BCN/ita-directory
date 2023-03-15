@@ -1,33 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { colors, dimensions } from '../../theme'
 
 import useOnClickOutside from '../../hooks/useOnClickOutside'
-import useWindowSize from '../../hooks/useWindowSize'
-import getParentPosition from '../../utils/getParentPosition'
 
 type TDropdown = {
-  children: object
-  parentId: string
+  children: React.ReactNode
   setDropdownVisible: (value: boolean) => void
 }
 
-type TPosition = {
-  x: number
-  y: number
-  height: number
-}
-
-type TDropdownStyled = {
-  position: TPosition
-}
-
-const DropdownStyled = styled.div<TDropdownStyled>`
+const DropdownStyled = styled.div`
   position: absolute;
   padding: ${dimensions.spacing.none};
   z-index: 1;
-  top: ${({ position }) => position.y + position.height}px;
-  left: ${({ position }) => position.x}px;
   text-align: center;
   background: transparent 0% 0% no-repeat padding-box;
   border: 1px solid ${colors.lighterGrey};
@@ -44,25 +29,11 @@ const DropdownStyled = styled.div<TDropdownStyled>`
   }
 `
 
-function Dropdown({ setDropdownVisible, children, parentId }: TDropdown) {
-  const [width, height] = useWindowSize()
-  const parentPosition = getParentPosition(parentId)
-  const [position, setPosition] = useState(parentPosition)
-
+function Dropdown({ setDropdownVisible, children }: TDropdown) {
   const ref = useRef(null)
   useOnClickOutside(ref, () => setDropdownVisible(false))
 
-  useEffect(() => {
-    if (parentPosition.x !== position.x || parentPosition.y !== position.y) {
-      setPosition(parentPosition)
-    }
-  }, [width, height, parentId, parentPosition, position])
-
-  return (
-    <DropdownStyled ref={ref} position={position}>
-      {React.Children.map(children, (child) => child)}
-    </DropdownStyled>
-  )
+  return <DropdownStyled ref={ref}>{children}</DropdownStyled>
 }
 
 export default Dropdown
