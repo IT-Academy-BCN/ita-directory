@@ -1,4 +1,4 @@
-// @ts-nocheck
+import React from 'react'
 import '@testing-library/jest-dom'
 import { Provider } from 'react-redux'
 import { render, screen } from '@testing-library/react'
@@ -14,7 +14,8 @@ describe('Banner', () => {
     render(<Banner />)
     const srcImg = BarcelonaBanner
     const img = screen.getByAltText('image banner')
-    expect(img).toBeInTheDocument().toHaveAttribute('src', srcImg)
+    expect(img).toBeInTheDocument()
+    expect(img).toHaveAttribute('src', srcImg)
     expect(await screen.findByTitle('directory')).toBeInTheDocument()
   })
   it('should have a Contributions Banner', () => {
@@ -25,7 +26,8 @@ describe('Banner', () => {
     )
     const srcImg = ColaboradoresBanner
     const img = screen.getByAltText('image banner')
-    expect(img).toBeInTheDocument().toHaveAttribute('src', srcImg)
+    expect(img).toBeInTheDocument()
+    expect(img).toHaveAttribute('src', srcImg)
   })
   it('should render a text', async () => {
     render(
