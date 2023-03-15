@@ -58,6 +58,7 @@ function InputGroupText({
   return (
     <InputGroupStyled hasIcon={!!icon} className={className}>
       <Label htmlFor={id} label={label} hiddenLabel={hiddenLabel} isError={!!error} />
+      {/* @ts-ignore, TODO: Fix when FlexBox.js is migrated to ts */}
       <FlexBox justifyContent="flex-start" alignItems="center" flexWrap="nowrap">
         {!!icon && (
           <div className="styledIcon">
@@ -66,7 +67,7 @@ function InputGroupText({
         )}
         <InputText id={id} name={name} error={error} {...rest} />
       </FlexBox>
-      {!!error && <ErrorMessage text={error} />}
+      {!!error && <ErrorMessage>{error}</ErrorMessage>}
     </InputGroupStyled>
   )
 }
