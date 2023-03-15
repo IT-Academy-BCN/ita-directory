@@ -36,7 +36,6 @@ const InputGroupStyled = styled.div<TInputGroupStyled>`
   }
 `
 type TInputGroupText = InputHTMLAttributes<HTMLInputElement> & {
-  id: string
   label: string
   error?: boolean | string
   hiddenLabel?: boolean
