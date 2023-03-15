@@ -6,6 +6,7 @@ const MediaSchema = z.object({
   mimeType: z.string(),
   fileSize: z.string(),
   userId: z.number().int(),
+  adId: z.number().int().nullish(),
 })
 
 module.exports = MediaSchema

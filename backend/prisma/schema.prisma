@@ -4,7 +4,7 @@ datasource db {
 }
 
 generator itaGenerator {
-  provider = "node ./prisma/itaGenerator.js"
+  provider = "node /Users/ivanlegranbizarro/Documents/ita-directory/backend/prisma/itaGenerator.js"
 }
 
 generator client {

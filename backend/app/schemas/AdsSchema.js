@@ -17,18 +17,6 @@ const AdsSchema = z.object({
   adStatusId: z.number().int(),
   createdAt: z.date().optional(),
   updatedAt: z.date(),
-  media: z
-    .array(
-      z.object({
-        id: z.number().int(),
-        path: z.string(),
-        mimeType: z.string(),
-        fileSize: z.string(),
-        userId: z.number().int(),
-        adId: z.number().int().optional(),
-      })
-    )
-    .optional(),
 })
 
 module.exports = AdsSchema
