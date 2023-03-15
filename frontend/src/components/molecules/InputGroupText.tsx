@@ -40,12 +40,12 @@ type TInputGroupText = InputHTMLAttributes<HTMLInputElement> & {
   error?: boolean | string
   hiddenLabel?: boolean
   labelStyles?: object
-  hasIcon?: boolean
   icon?: string
+  id: string
+  name: string
 }
 
 function InputGroupText({
-  value,
   name,
   id,
   label,
@@ -64,7 +64,7 @@ function InputGroupText({
             <Icon name={icon} fill={1} />
           </div>
         )}
-        <InputText value={value} id={id} name={name} error={error} {...rest} />
+        <InputText id={id} name={name} error={error} {...rest} />
       </FlexBox>
       {!!error && <ErrorMessage text={error} />}
     </InputGroupStyled>

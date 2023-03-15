@@ -3,23 +3,26 @@ import { render, screen } from '@testing-library/react'
 import InputGroupText from '../../components/molecules/InputGroupText'
 
 describe('InputGroupText', () => {
-  it('renders an input element', () => {
-    render(<InputGroupText label="label" />)
-    expect(screen.getByRole('textbox')).toBeInTheDocument()
+  it('renders correctly', () => {
+    render(<InputGroupText label="label" id="testid" name="testname" placeholder="text input" />)
+
+    const label = screen.getByText('label')
+    const input = screen.getByPlaceholderText('text input')
+
+    expect(label).toBeInTheDocument()
+    expect(input).toBeInTheDocument()
+    expect(label).toHaveAttribute('for', 'testid')
+    expect(input).toHaveAttribute('id', 'testid')
+    expect(input).toHaveAttribute('name', 'testname')
   })
 
-  it('should render a label element', () => {
-    render(<InputGroupText label="test" />)
-    expect(screen.getByText('test').tagName).toBe('LABEL')
-  })
-
-  it('renders the placeholder', () => {
-    render(<InputGroupText label="label" placeholder="test" />)
-    expect(screen.getByPlaceholderText('test')).toBeInTheDocument()
+  it('renders the error message', () => {
+    render(<InputGroupText label="label" error="error message" id="testid" name="testid" />)
+    expect(screen.getByText('error message')).toBeInTheDocument()
   })
 
   it('displays the error message correctly', () => {
-    render(<InputGroupText label="test" error="This is an error message" />)
-    expect(screen.getByText('This is an error message')).toBeInTheDocument()
+    render(<InputGroupText label="test" id="testid" name="testid" icon="user" />)
+    expect(screen.getByText('user')).toBeInTheDocument()
   })
 })
