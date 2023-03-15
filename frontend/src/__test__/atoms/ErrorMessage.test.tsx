@@ -6,14 +6,16 @@ import { ErrorMessage } from '../../components/atoms'
 import { font, colors } from '../../theme'
 
 describe('ErrorMessage', () => {
-  it('should render the correct style for error message', () => {
-    render(<ErrorMessage data-testid="error-message" />)
-    const errorMessage = screen.getByTestId('error-message')
+  it('should render correctly', () => {
+    render(<ErrorMessage data-testid="error-message">Test text</ErrorMessage>)
 
+    expect(screen.getByText('Test text')).toBeInTheDocument()
+
+    const errorMessage = screen.getByTestId('error-message')
     expect(errorMessage).toBeInTheDocument()
     expect(errorMessage).toHaveStyle(`font-size: ${font.xss}`)
     expect(errorMessage).toHaveStyle(`color: ${colors.bloodRed}`)
     expect(errorMessage).toHaveStyle('margin: 0px 0px 8px 10px')
-    expect(errorMessage).toHaveStyle('font-style: oblique')
+    expect(errorMessage).toHaveStyle('font-style: italic')
   })
 })
