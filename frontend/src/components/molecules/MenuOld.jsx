@@ -32,6 +32,7 @@ const Container = styled.div`
 
 function Menu() {
   const location = useLocation()
+  console.log('location', location)
   return (
     <Container>
       {menu.map((item, index) => (

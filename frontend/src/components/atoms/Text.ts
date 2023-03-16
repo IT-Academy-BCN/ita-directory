@@ -5,6 +5,8 @@ import { colors, font } from '../../theme'
 interface TText {
   text?: string
   fontSize?: string
+  as?: string
+  pr?: string
 }
 
 const Text = styled.p.attrs((props: TText) => ({
