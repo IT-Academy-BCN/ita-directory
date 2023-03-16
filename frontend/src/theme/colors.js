@@ -4,7 +4,7 @@ const colors = {
   mainColor: 'orange',
   bloodRed: '#DC2626',
   paleRed: '#FECACA',
-  redColor: 'rgba(193, 12, 12, 1)',
+  redColor: 'rgba(193,12,12,1)',
   redPink: '#DB2C7F',
   transparentBlue: '#e6f2f2',
   palerBlue: '#b5dddd',
@@ -30,12 +30,12 @@ const colors = {
   bahamaBlue: '#005593',
   prussianBlue: '#00324c',
   maroon: '#b0b0b0',
-  darkerShadow: 'rgba(0, 0, 0, 0.3)',
-  shadow: 'rgba(0, 0, 0, 0.2)',
-  lighterShadow: 'rgba(0, 0, 0, 0.19)',
+  darkerShadow: 'rgba(0,0,0,0.3)',
+  shadow: 'rgba(0,0,0,0.2)',
+  lighterShadow: 'rgba(0,0,0,0.19)',
   lightBeige: '#EFEEEA',
   violet: '#8A82AF',
-  transparent: 'rgba(0, 0, 0, 0)',
+  transparent: 'rgba(0,0,0,0)',
 }
 
 export default colors
