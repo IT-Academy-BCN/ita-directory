@@ -76,7 +76,9 @@ entity Media {
   * user: User
   * userId: Int
   avatar: User?
-  * mediaMeta: MediaMeta[]
+  ad: Ads?
+  adId: Int?
+  * MediaMeta: MediaMeta[]
 }
 
 entity MediaMeta {
@@ -164,6 +166,7 @@ entity Ads {
   * adStatusId: Int
   * createdAt: DateTime
   * updatedAt: DateTime
+  * media: Media[]
 }
 
 entity Conversation {

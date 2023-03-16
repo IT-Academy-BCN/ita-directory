@@ -4,7 +4,7 @@ datasource db {
 }
 
 generator itaGenerator {
-  provider = "node /Users/ivanlegranbizarro/Documents/ita-directory/backend/prisma/itaGenerator.js" //TODO Por qué no funciona con el path relativo?
+  provider = "node /Users/ivanlegranbizarro/Documents/ita-directory/backend/prisma/itaGenerator.js" // Por qué no funciona con el path relativo?
 }
 
 generator client {

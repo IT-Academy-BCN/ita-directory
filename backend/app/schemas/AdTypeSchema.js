@@ -1,4 +1,5 @@
 const { z } = require('zod')
+const AdsSchema = require('./AdsSchema')
 
 const AdTypeSchema = z.object({
   id: z.number().int(),
@@ -11,6 +12,7 @@ const AdTypeSchema = z.object({
   warehouse: z.number().int(),
   building: z.number().int(),
   newBuilding: z.number().int(),
+  ads: AdsSchema.array(),
 })
 
 module.exports = AdTypeSchema

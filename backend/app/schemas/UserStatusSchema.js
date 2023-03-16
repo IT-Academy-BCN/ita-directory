@@ -1,4 +1,5 @@
 const { z } = require('zod')
+const UserSchema = require('./UserSchema')
 
 const UserStatusSchema = z.object({
   id: z.number().int(),
@@ -7,6 +8,7 @@ const UserStatusSchema = z.object({
   pending: z.boolean().optional(),
   suspended: z.boolean().optional(),
   deleted: z.boolean().optional(),
+  user: UserSchema.array(),
 })
 
 module.exports = UserStatusSchema

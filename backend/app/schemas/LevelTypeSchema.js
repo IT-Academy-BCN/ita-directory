@@ -1,4 +1,5 @@
 const { z } = require('zod')
+const LevelSchema = require('./LevelSchema')
 
 const LevelTypeSchema = z.object({
   id: z.number().int(),
@@ -9,6 +10,7 @@ const LevelTypeSchema = z.object({
   town: z.number().int(),
   district: z.number().int(),
   neighborhood: z.number().int(),
+  level: LevelSchema.array(),
 })
 
 module.exports = LevelTypeSchema

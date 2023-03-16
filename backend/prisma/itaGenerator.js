@@ -58,6 +58,23 @@ const getZodConstructor = (field, getRelatedModelName = (name) => name.toString(
   return `${zodType}${extraModifiers.join('.')}`
 }
 
+const getRelatedModelImports = (model, models) => {
+  const relatedModels = new Set()
+  model.fields.forEach((field) => {
+    if (field.kind === 'object') {
+      relatedModels.add(field.type)
+    }
+  })
+
+  let imports = ''
+  relatedModels.forEach((relatedModelName) => {
+    const schemaName = `${relatedModelName}Schema`
+    imports += `const ${schemaName} = require('./${schemaName}')\n`
+  })
+
+  return imports
+}
+
 generatorHelper.generatorHandler({
   onManifest() {
     return {
@@ -72,21 +89,18 @@ generatorHelper.generatorHandler({
       const zodSchemaName = `${m.name}Schema`
       let output = ''
       output += `const { z } = require('zod')\n`
+      output += getRelatedModelImports(m, models)
       output += writeTypeSpecificSchemas(m)
       output += `const ${zodSchemaName} = z.object({\n`
       m.fields.forEach((f) => {
-        if (f.kind === 'scalar') {
-          output += `  ${f.name}: ${getZodConstructor(f)},\n`
-        }
-      })
+        output += `  ${f.name}: ${getZodConstructor(f, (name) => `${name}Schema`)},\n`
+      } )
       output += `})\n\n`
       output += `module.exports = ${zodSchemaName}\n`
-      try {
-        fs.writeFileSync(`${outputDir}/${zodSchemaName}.js`, output)
-        console.log(`Generated ${zodSchemaName}.js`)
-      } catch (error) {
-        throw new Error(error)
-      }
+
+      const outputPath = `${outputDir}/${zodSchemaName}.js`
+      fs.writeFileSync(outputPath, output)
     })
   },
 })
+
