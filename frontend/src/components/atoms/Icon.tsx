@@ -1,9 +1,19 @@
+import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { space, typography } from 'styled-system'
 import { colors } from '../../theme'
 
-const IconStyled = styled.span`
+type TIconStyled = {
+  size: number
+  color: string
+  fill: number
+  wght: number
+  grad: number
+  opsz: number
+  className: string
+}
+
+const IconStyled = styled.span<TIconStyled>`
   font-variation-settings: 'FILL' ${(props) => props.fill}, 'wght' ${(props) => props.wght},
     'GRAD' ${(props) => props.grad}, 'opsz' ${(props) => props.opsz};
   color: ${(props) => props.color};
@@ -11,6 +21,9 @@ const IconStyled = styled.span`
   ${space}
   ${typography}
 `
+type TIcon = {
+  name: string
+} & Partial<TIconStyled>
 
 function Icon({
   name,
@@ -22,7 +35,7 @@ function Icon({
   opsz = 48,
   className = '',
   ...props
-}) {
+}: TIcon) {
   return (
     <IconStyled
       className={`material-symbols-outlined ${className}`}
@@ -37,17 +50,6 @@ function Icon({
       {name}
     </IconStyled>
   )
-}
-
-Icon.propTypes = {
-  name: PropTypes.string.isRequired,
-  size: PropTypes.number,
-  color: PropTypes.string,
-  fill: PropTypes.number,
-  wght: PropTypes.number,
-  grad: PropTypes.number,
-  opsz: PropTypes.number,
-  className: PropTypes.string,
 }
 
 export default styled(Icon)``
