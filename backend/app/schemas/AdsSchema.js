@@ -1,4 +1,5 @@
 const { z } = require('zod')
+const MediaSchema = require('./MediaSchema')
 
 const AdsSchema = z.object({
   id: z.number().int(),
@@ -17,6 +18,7 @@ const AdsSchema = z.object({
   adStatusId: z.number().int(),
   createdAt: z.date().optional(),
   updatedAt: z.date(),
+  media: z.array(MediaSchema).optional(),
 })
 
 module.exports = AdsSchema
