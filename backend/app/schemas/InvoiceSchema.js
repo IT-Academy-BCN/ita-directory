@@ -1,7 +1,10 @@
+const { Status } = require('@prisma/client')
 const { z } = require('zod')
+const UserSchema = require('./UserSchema')
 
 const InvoiceSchema = z.object({
   id: z.number().int(),
+  user: UserSchema,
   userId: z.number().int(),
   billingAddress: z.string().nullish(),
   postalCode: z.string().nullish(),
@@ -13,6 +16,7 @@ const InvoiceSchema = z.object({
   secondTax: z.number().int(),
   createdAt: z.date().optional(),
   invoiceNumber: z.string(),
+  status: z.nativeEnum(Status).optional(),
 })
 
 module.exports = InvoiceSchema
