@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import useUser from '../../../hooks/useUserHook'
-import { colors, device } from '../../../theme'
+import { boxShadow, colors, device, dimensions, font } from '../../../theme'
 import { paths } from '../../../utils'
 import { Button, Dropdown, Icon, Li, Text, Ul } from '../../atoms'
 
@@ -12,7 +12,7 @@ const UserAccessStyled = styled.div`
   .not-logged-in {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: ${font.xs};
 
     .login-link {
       color: #777;
@@ -21,10 +21,10 @@ const UserAccessStyled = styled.div`
 
     ${Button} {
       margin-left: 1rem;
-      font-size: 14px;
-      height: 32px;
-      margin-top: 0;
-      margin-bottom: 0;
+      font-size: ${font.xs};
+      height: ${dimensions.spacing.lg};
+      margin-top: ${dimensions.spacing.none};
+      margin-bottom: ${dimensions.spacing.none};
     }
   }
 
@@ -33,13 +33,13 @@ const UserAccessStyled = styled.div`
     align-items: center;
     justify-content: center;
     background-color: white;
-    box-shadow: 0 2px 4px ${colors.darkerShadow};
-    border: 0;
-    border-radius: 0.5rem;
-    padding: 0.3rem 0.5rem;
+    box-shadow: ${boxShadow.darker};
+    border: ${dimensions.spacing.none};
+    border-radius: ${dimensions.borderRadius.base};
+    padding: 0.3rem ${dimensions.spacing.xxxs};
     position: relative;
     color: ${colors.grey};
-    margin-top: 1rem;
+    margin-top: ${dimensions.spacing.base};
 
     @media ${device.Tablet} {
       margin-top: 0;
@@ -53,7 +53,7 @@ const UserAccessStyled = styled.div`
     }
 
     ${Icon} {
-      margin-right: 8px;
+      margin-right: ${dimensions.spacing.xxxs};
     }
 
     .header__profile-title {
@@ -69,13 +69,13 @@ const UserAccessStyled = styled.div`
 
   .header__profile-dropdown {
     position: absolute;
-    padding: 0;
+    padding: ${dimensions.spacing.none};
     z-index: 1;
     top: 103px;
     text-align: center;
     background: transparent 0% 0% no-repeat padding-box;
     border: 1px solid ${colors.lighterGrey};
-    border-radius: 10px;
+    border-radius: ${dimensions.borderRadius.sm};
     opacity: 1;
 
     @media ${device.Tablet} {
@@ -84,9 +84,9 @@ const UserAccessStyled = styled.div`
   }
 `
 const ImgStyled = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
+  width: ${dimensions.spacing.lg};
+  height: ${dimensions.spacing.lg};
+  border-radius: ${dimensions.borderRadius.md};
   object-fit: cover;
   padding-right: 2px;
 `
@@ -100,6 +100,7 @@ function UserAccess() {
     { path: paths.bills, text: 'Mis facturas' },
     { path: paths.userAds, text: 'Mis Anuncios' },
     { path: paths.newAd, text: 'Publicar Anuncio' },
+    { path: paths.dashboard, text: 'Estadísticas' },
   ]
   const [dropdownVisible, setDropdownVisible] = useState(false)
   const handleClick = () => {
