@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/it-academyproject/ita-directory-frontend#readme",
   "devDependencies": {
+    "@types/styled-system": "^5.1.16",
     "eslint": "8.17.0",
     "eslint-plugin-vitest": "^0.0.25",
     "husky": "6.0.0"
