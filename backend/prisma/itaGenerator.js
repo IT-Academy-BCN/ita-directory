@@ -81,9 +81,13 @@ const getRelatedModelImports = (model, models, enums) => {
     imports += `const ${schemaName} = require('./${schemaName}')\n`
   })
 
-  relatedEnums.forEach((relatedEnumName) => {
-    imports += `const ${relatedEnumName} = require('../enums/${relatedEnumName}.js')\n`
-  })
+  if (relatedEnums.size > 0) {
+    imports += `const { `;
+    relatedEnums.forEach((relatedEnumName, index) => {
+      imports += `${relatedEnumName}${index < relatedEnums.size - 1 ? ', ' : ''}`;
+    });
+    imports += ` } = require('@prisma/client')\n`;
+  }
 
   return imports
 }

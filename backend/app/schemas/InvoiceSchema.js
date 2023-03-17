@@ -1,5 +1,5 @@
-const { Status } = require('@prisma/client')
 const { z } = require('zod')
+const { Status } = require('@prisma/client')
 const UserSchema = require('./UserSchema')
 
 const InvoiceSchema = z.object({
