@@ -10,8 +10,8 @@ const MediaSchema = z.object({
   fileSize: z.string(),
   user: UserSchema,
   userId: z.number().int(),
-  avatar: UserSchema.nullish(),
-  ad: AdsSchema.nullish(),
+  avatar: UserSchema.optional(),
+  ad: AdsSchema.optional(),
   adId: z.number().int().nullish(),
   MediaMeta: MediaMetaSchema.array(),
 })

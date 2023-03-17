@@ -29,7 +29,7 @@ const UserSchema = z.object({
   recoverPassword: RecoverPasswordLogSchema.array(),
   media: MediaSchema.array(),
   ads: AdsSchema.array(),
-  avatar: MediaSchema.nullish(),
+  avatar: MediaSchema.optional(),
   avatarId: z.number().int().nullish(),
   developerData: jsonSchema,
   messagesSent: MessageSchema.array(),

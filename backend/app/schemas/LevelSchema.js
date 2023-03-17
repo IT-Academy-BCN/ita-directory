@@ -4,9 +4,9 @@ const LevelTypeSchema = require('./LevelTypeSchema')
 const LevelSchema = z.object({
   id: z.number().int(),
   name: z.string(),
-  parent: z.lazy(() => LevelSchema).nullish(),
+  parent: z.lazy(() => LevelSchema).optional(),
   parentId: z.number().int().nullish(),
-  child: z.array(z.lazy(() => LevelSchema)),
+  child: z.lazy(() => LevelSchema).array(),
   levelType: LevelTypeSchema,
   levelTypeId: z.number().int(),
 })
