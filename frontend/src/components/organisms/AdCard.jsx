@@ -5,7 +5,7 @@ import { device, colors, font } from '../../theme'
 import { Text, Title, Card } from '../atoms'
 
 const Img = styled.img`
-  width: 100%;
+  width: 10%;
   max-width: 300px;
   height: auto;
   object-fit: cover;
